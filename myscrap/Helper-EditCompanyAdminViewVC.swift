@@ -304,9 +304,11 @@ extension EditCompanyAdminViewVC: UICollectionViewDelegate, UICollectionViewData
 
     func callCompanyDKImagePickerController() {
         
-//        var selectMaximumSelectableCount = 10
+        var selectMaximumSelectableCount = 10
         
-//        if company
+        if self.companyProfileImagesArray.count > 0 {
+            selectMaximumSelectableCount = selectMaximumSelectableCount - self.companyProfileImagesArray.count
+        }
         self.companyPhotosPickerController = DKImagePickerController()
         self.companyPhotosPickerController.assetType = .allPhotos
         self.companyPhotosPickerController.maxSelectableCount=10;
@@ -414,7 +416,13 @@ extension EditCompanyAdminViewVC : CloseCellButtonDelegate, AddMoreButtonDelegat
             }
         }
         else if view.contentBackgroundView.tag == 22 {
-            self.callCommodityDKImagePickerController()
+            if self.commodityProfileImagesArray.count < 10 {
+                self.callCommodityDKImagePickerController()
+            }
+            else {
+                self.showAlert(message: "Cannot select more than 10 images")
+            }
+
         }
         
     }
