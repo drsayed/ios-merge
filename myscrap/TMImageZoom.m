@@ -14,11 +14,10 @@ static  TMImageZoom* tmImageZoom;
     BOOL isAnimatingReset;
     CGPoint firstCenterPoint;
     CGRect startingRect;
-    
     BOOL isHandlingGesture;
 }
 
-#pragma mark - Methods
+#pragma mark - Methods to accept gesture
 -(void) gestureStateChanged:(id)gesture withZoomImageView:(UIImageView*)imageView {
     
     // Insure user is passing correct UIPinchGestureRecognizer class.

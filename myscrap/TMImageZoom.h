@@ -11,9 +11,7 @@
 #define TMImageZoom_Ended_Zoom_Notification @"TMImageZoom_Ended_Zoom_Notification"
 
 @interface TMImageZoom : NSObject
-
 @property (readonly) BOOL isHandlingGesture;
-
 -(void) gestureStateChanged:(id)gesture withZoomImageView:(UIImageView*)imageView;
 -(void) resetImageZoom;
 
