@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="NoCompanyCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="337" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="337" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHn-wW-wgp">
+                        <rect key="frame" x="0.0" y="0.0" width="337" height="100"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vaj-if-oQg">
+                                <rect key="frame" x="149.5" y="11" width="38" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="4qL-4D-ODP"/>
+                                    <constraint firstAttribute="width" constant="38" id="YwX-Ts-wVA"/>
+                                </constraints>
+                                <state key="normal" image="company"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYr-Cg-cHL" customClass="CorneredButton" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="25.5" y="62" width="286" height="30"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BVe-1q-0Rf"/>
+                                    <constraint firstAttribute="width" constant="286" id="u7f-Me-OCr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <state key="normal" title="Not in the list, create your company">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Vaj-if-oQg" firstAttribute="top" secondItem="PHn-wW-wgp" secondAttribute="top" constant="11" id="8jW-sx-nTz"/>
+                            <constraint firstAttribute="bottom" secondItem="bYr-Cg-cHL" secondAttribute="bottom" constant="8" id="JZa-rI-Naf"/>
+                            <constraint firstItem="bYr-Cg-cHL" firstAttribute="top" secondItem="Vaj-if-oQg" secondAttribute="bottom" constant="11" id="Tny-0V-X1u"/>
+                            <constraint firstItem="bYr-Cg-cHL" firstAttribute="centerX" secondItem="PHn-wW-wgp" secondAttribute="centerX" id="fsc-nf-7lQ"/>
+                            <constraint firstItem="Vaj-if-oQg" firstAttribute="centerX" secondItem="PHn-wW-wgp" secondAttribute="centerX" id="zgF-I7-0a6"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="PHn-wW-wgp" secondAttribute="bottom" id="74d-FX-yz9"/>
+                    <constraint firstItem="PHn-wW-wgp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="AHR-DU-eNE"/>
+                    <constraint firstItem="PHn-wW-wgp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ksu-Fu-MPt"/>
+                    <constraint firstAttribute="trailing" secondItem="PHn-wW-wgp" secondAttribute="trailing" id="aTO-ww-ips"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="148.55072463768118" y="120.53571428571428"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="company" width="380" height="400"/>
+    </resources>
+</document>

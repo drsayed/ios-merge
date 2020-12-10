@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CompanyCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="292" height="140"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="292" height="140"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2IU-gl-vx3">
+                        <rect key="frame" x="0.0" y="0.0" width="292" height="140"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company" translatesAutoresizingMaskIntoConstraints="NO" id="kL9-f0-wCi" customClass="CircularImageView" customModule="myscrap" customModuleProvider="target">
+                        <rect key="frame" x="8" y="40" width="57" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="V3y-a8-MR8"/>
+                            <constraint firstAttribute="width" secondItem="kL9-f0-wCi" secondAttribute="height" multiplier="19:20" id="dFJ-xD-RK2"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ATI-WW-euV">
+                        <rect key="frame" x="81" y="34.5" width="203" height="71.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMW-sF-ZOp">
+                                <rect key="frame" x="0.0" y="0.0" width="203" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qap-wj-P5E">
+                                <rect key="frame" x="0.0" y="25.5" width="203" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bi-rV-dkN">
+                                <rect key="frame" x="0.0" y="51" width="203" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3e-rf-g0P">
+                        <rect key="frame" x="0.0" y="139" width="292" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="bOr-x7-Ou8"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="d3e-rf-g0P" secondAttribute="bottom" id="2vm-YP-9KP"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="2IU-gl-vx3" secondAttribute="trailing" id="4nM-TR-2Mr"/>
+                <constraint firstItem="2IU-gl-vx3" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="Fx3-iS-g9H"/>
+                <constraint firstItem="kL9-f0-wCi" firstAttribute="width" secondItem="kL9-f0-wCi" secondAttribute="height" multiplier="19:20" id="Gj5-Sc-eQw"/>
+                <constraint firstItem="d3e-rf-g0P" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="IWG-5r-KoB"/>
+                <constraint firstItem="kL9-f0-wCi" firstAttribute="centerY" secondItem="2IU-gl-vx3" secondAttribute="centerY" id="JOg-Vb-JBI"/>
+                <constraint firstItem="2IU-gl-vx3" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="LAP-80-oVf"/>
+                <constraint firstItem="ATI-WW-euV" firstAttribute="centerY" secondItem="kL9-f0-wCi" secondAttribute="centerY" id="SRS-qm-10z"/>
+                <constraint firstItem="kL9-f0-wCi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="dYN-MK-7SY"/>
+                <constraint firstAttribute="trailing" secondItem="d3e-rf-g0P" secondAttribute="trailing" id="gCw-bA-4LQ"/>
+                <constraint firstItem="ATI-WW-euV" firstAttribute="leading" secondItem="kL9-f0-wCi" secondAttribute="trailing" constant="16" id="i1H-Id-q0w"/>
+                <constraint firstAttribute="trailing" secondItem="ATI-WW-euV" secondAttribute="trailing" constant="8" id="pJ8-Yl-dVd"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="2IU-gl-vx3" secondAttribute="bottom" id="sGC-ga-YSV"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="292" height="140"/>
+            <connections>
+                <outlet property="countryLbl" destination="6bi-rV-dkN" id="e12-mg-1Bp"/>
+                <outlet property="imageView" destination="kL9-f0-wCi" id="5DL-h6-akU"/>
+                <outlet property="nameLbl" destination="YMW-sF-ZOp" id="SKB-4L-zqC"/>
+                <outlet property="typeLbl" destination="Qap-wj-P5E" id="bC6-FU-b7r"/>
+            </connections>
+            <point key="canvasLocation" x="50" y="34"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="company" width="380" height="400"/>
+    </resources>
+</document>

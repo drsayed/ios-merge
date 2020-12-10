@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuInviteFriendCellTableViewCell" rowHeight="49" id="RpQ-15-Cdu" customClass="MenuInviteFriendCellTableViewCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RpQ-15-Cdu" id="ild-5m-Gbe">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdt-Es-Rfj">
+                        <rect key="frame" x="20" y="15.5" width="82.5" height="18"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxR-5z-PXi">
+                        <rect key="frame" x="20" y="47" width="335" height="0.5"/>
+                        <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="J79-Tf-zDz"/>
+                            <constraint firstAttribute="width" constant="335" id="jVh-sg-det"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PhU-fM-JA5">
+                        <rect key="frame" x="340" y="17" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="3GY-D8-LR2"/>
+                            <constraint firstAttribute="height" constant="15" id="MDl-tP-xKh"/>
+                        </constraints>
+                        <state key="normal" image="arrow_icon"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="lxR-5z-PXi" firstAttribute="leading" secondItem="ild-5m-Gbe" secondAttribute="leading" constant="20" id="0u4-Fs-iT3"/>
+                    <constraint firstAttribute="trailing" secondItem="PhU-fM-JA5" secondAttribute="trailing" constant="20" id="501-dh-VMF"/>
+                    <constraint firstItem="Fdt-Es-Rfj" firstAttribute="leading" secondItem="ild-5m-Gbe" secondAttribute="leading" constant="20" id="Bql-nL-EZM"/>
+                    <constraint firstItem="PhU-fM-JA5" firstAttribute="centerY" secondItem="ild-5m-Gbe" secondAttribute="centerY" id="Ph4-eQ-Tte"/>
+                    <constraint firstItem="Fdt-Es-Rfj" firstAttribute="centerY" secondItem="ild-5m-Gbe" secondAttribute="centerY" id="QCL-UB-oiz"/>
+                    <constraint firstAttribute="trailing" secondItem="lxR-5z-PXi" secondAttribute="trailing" constant="20" id="ZZ3-xy-k5w"/>
+                    <constraint firstAttribute="bottom" secondItem="lxR-5z-PXi" secondAttribute="bottom" constant="1" id="juq-6m-8H8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="inviteLbl" destination="Fdt-Es-Rfj" id="hCz-FQ-jWo"/>
+            </connections>
+            <point key="canvasLocation" x="64" y="47"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow_icon" width="22" height="22"/>
+    </resources>
+</document>

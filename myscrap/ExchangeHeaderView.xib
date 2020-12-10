@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="27" id="KGk-i7-Jjw" customClass="ExchangeHeaderView" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="27"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="26.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJP-I2-mYY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="26.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lOA-oO-64x">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="26.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJh-vE-6KV">
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3M" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyt-NX-qsF">
+                                        <rect key="frame" x="82" y="0.0" width="74" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="415-Vk-Wc2">
+                                        <rect key="frame" x="164" y="0.0" width="74" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inventory" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6m6-UH-NMR">
+                                        <rect key="frame" x="246" y="0.0" width="74" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lOA-oO-64x" firstAttribute="centerY" secondItem="AJP-I2-mYY" secondAttribute="centerY" id="813-BJ-edJ"/>
+                            <constraint firstAttribute="bottom" secondItem="lOA-oO-64x" secondAttribute="bottom" id="Ric-ud-dQn"/>
+                            <constraint firstItem="lOA-oO-64x" firstAttribute="leading" secondItem="AJP-I2-mYY" secondAttribute="leading" id="YAB-ZS-LJk"/>
+                            <constraint firstItem="lOA-oO-64x" firstAttribute="centerX" secondItem="AJP-I2-mYY" secondAttribute="centerX" id="qUb-Co-IRZ"/>
+                            <constraint firstItem="lOA-oO-64x" firstAttribute="top" secondItem="AJP-I2-mYY" secondAttribute="top" id="sMK-0Q-2BW"/>
+                            <constraint firstAttribute="trailing" secondItem="lOA-oO-64x" secondAttribute="trailing" id="zcF-Ma-oi1"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.42745098039215684" green="0.42745098039215684" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="AJP-I2-mYY" secondAttribute="bottom" id="2PV-5R-Htq"/>
+                    <constraint firstAttribute="trailing" secondItem="AJP-I2-mYY" secondAttribute="trailing" id="ClA-3d-xFo"/>
+                    <constraint firstItem="AJP-I2-mYY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="L6e-ad-CFZ"/>
+                    <constraint firstItem="AJP-I2-mYY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ngG-om-VZ5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="lbl1" destination="gJh-vE-6KV" id="J9G-Ya-KNb"/>
+                <outlet property="lbl2" destination="hyt-NX-qsF" id="sAM-SD-X3M"/>
+                <outlet property="lbl3" destination="415-Vk-Wc2" id="c2b-S8-iwy"/>
+                <outlet property="lbl4" destination="6m6-UH-NMR" id="mj7-Rd-szD"/>
+            </connections>
+            <point key="canvasLocation" x="101" y="-14.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Application does not run in background'</key>
+	<string>NO</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>MyScrap</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.sayedmetal.myscrap</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.sayedmetal.myscrap</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>iOSMyScrapApp</string>
+				<string>fb300296193885707</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.605563401441-tetrqh6580rnlbjidmdesqftkrbnrli0</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>300296193885707</string>
+	<key>FacebookDisplayName</key>
+	<string>MyScrap</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbauth2</string>
+		<string>whatsapp</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>http://216.172.171.51/~papiunit</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>MyScrap would like to access your camera to capture/share photos among myscrap members.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>MyScrap would like to access your location ALWAYS to see MyScrap members near you.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>MyScrap would like to access your location while using our APP to see MyScrap members near you.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>MyScrap would like to access your microphone access for uploading videos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Myscrap would like access the PhotoLibrary to download the Photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>MyScrap Would like to access your PhotoLibrary to share photos among myscrap members.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-Black.ttf</string>
+		<string>Roboto-BlackItalic.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-LightItalic.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-MediumItalic.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Thin.ttf</string>
+		<string>Roboto-ThinItalic.ttf</string>
+		<string>Roboto-Italic.ttf</string>
+		<string>Roboto-BoldItalic.ttf</string>
+		<string>Roboto-Light.ttf</string>
+		<string>fa-regular-400.ttf</string>
+		<string>fa-solid-900.ttf</string>
+		<string>fa-brands-400.ttf</string>
+		<string>Font Awesome 5 Free-Solid-900.ttf</string>
+		<string>Font Awesome 5 Free-Solid-900.ttf</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
+</dict>
+</plist>

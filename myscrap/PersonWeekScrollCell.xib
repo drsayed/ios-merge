@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0A6-RL-cPM" customClass="PersonWeekScrollCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="290"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="290"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFN-cV-af8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vv9-1U-hBl" customClass="CircleView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="8" y="10" width="50" height="50"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="1vl-D2-mk6">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="1vl-D2-mk6" secondAttribute="bottom" id="4QQ-AT-pLo"/>
+                                    <constraint firstAttribute="trailing" secondItem="1vl-D2-mk6" secondAttribute="trailing" id="Mkg-lN-Ai1"/>
+                                    <constraint firstAttribute="width" constant="50" id="g4Z-UQ-7yo"/>
+                                    <constraint firstItem="1vl-D2-mk6" firstAttribute="top" secondItem="vv9-1U-hBl" secondAttribute="top" id="h8c-3P-wgg"/>
+                                    <constraint firstAttribute="height" constant="50" id="tdz-VE-vPL"/>
+                                    <constraint firstItem="1vl-D2-mk6" firstAttribute="leading" secondItem="vv9-1U-hBl" secondAttribute="leading" id="xyo-6T-v4j"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Person of the month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8u-rM-O28">
+                                <rect key="frame" x="74" y="24.5" width="156.5" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9MS-VY-3u2">
+                                <rect key="frame" x="307" y="19" width="60" height="32"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="View All">
+                                    <color key="titleColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="viewAllBtnTapped:" destination="0A6-RL-cPM" eventType="touchUpInside" id="8Sl-OH-w5p"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="o8u-rM-O28" firstAttribute="centerY" secondItem="cFN-cV-af8" secondAttribute="centerY" id="1Bu-ht-Wdw"/>
+                            <constraint firstAttribute="trailing" secondItem="9MS-VY-3u2" secondAttribute="trailing" constant="8" id="1I3-fd-UGv"/>
+                            <constraint firstItem="9MS-VY-3u2" firstAttribute="centerY" secondItem="cFN-cV-af8" secondAttribute="centerY" id="9xt-VP-KBD"/>
+                            <constraint firstItem="vv9-1U-hBl" firstAttribute="leading" secondItem="cFN-cV-af8" secondAttribute="leading" constant="8" id="IG8-TM-Ofb"/>
+                            <constraint firstItem="o8u-rM-O28" firstAttribute="leading" secondItem="vv9-1U-hBl" secondAttribute="trailing" constant="16" id="mtr-HW-mxf"/>
+                            <constraint firstItem="vv9-1U-hBl" firstAttribute="centerY" secondItem="cFN-cV-af8" secondAttribute="centerY" id="sMs-Y0-V5J"/>
+                            <constraint firstAttribute="height" constant="70" id="vGd-sK-bba"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaG-qW-tht">
+                        <rect key="frame" x="0.0" y="65" width="375" height="225"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dxi-ip-Rdj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Tu6-gf-8IJ">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dxi-ip-Rdj" firstAttribute="leading" secondItem="PaG-qW-tht" secondAttribute="leading" id="fWz-au-h4Q"/>
+                            <constraint firstItem="dxi-ip-Rdj" firstAttribute="top" secondItem="PaG-qW-tht" secondAttribute="top" id="gdv-8j-OlG"/>
+                            <constraint firstAttribute="trailing" secondItem="dxi-ip-Rdj" secondAttribute="trailing" id="kyF-4T-AwO"/>
+                            <constraint firstAttribute="bottom" secondItem="dxi-ip-Rdj" secondAttribute="bottom" id="tSe-wE-BEe"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="cFN-cV-af8" secondAttribute="trailing" id="BO8-pF-t0u"/>
+                <constraint firstItem="PaG-qW-tht" firstAttribute="leading" secondItem="0A6-RL-cPM" secondAttribute="leading" id="EFz-qG-Um2"/>
+                <constraint firstAttribute="trailing" secondItem="PaG-qW-tht" secondAttribute="trailing" id="Url-YD-odG"/>
+                <constraint firstAttribute="bottom" secondItem="PaG-qW-tht" secondAttribute="bottom" id="aV2-sC-3lU"/>
+                <constraint firstItem="PaG-qW-tht" firstAttribute="top" secondItem="cFN-cV-af8" secondAttribute="bottom" constant="-5" id="ari-YS-3PM"/>
+                <constraint firstItem="cFN-cV-af8" firstAttribute="top" secondItem="0A6-RL-cPM" secondAttribute="top" id="wbQ-jo-vPf"/>
+                <constraint firstItem="cFN-cV-af8" firstAttribute="leading" secondItem="0A6-RL-cPM" secondAttribute="leading" id="zAK-CA-8K6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SpD-af-O2H"/>
+            <size key="customSize" width="375" height="115"/>
+            <connections>
+                <outlet property="collectionView" destination="dxi-ip-Rdj" id="vLY-xV-aIh"/>
+                <outlet property="insideView" destination="PaG-qW-tht" id="U4B-yd-BFq"/>
+                <outlet property="topView" destination="cFN-cV-af8" id="Kbp-pm-9xP"/>
+                <outlet property="viewAllBtn" destination="9MS-VY-3u2" id="cfL-Sr-W0d"/>
+            </connections>
+            <point key="canvasLocation" x="-215" y="108"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="login_screen_logo" width="144" height="144"/>
+    </resources>
+</document>

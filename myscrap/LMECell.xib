@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="91" id="KGk-i7-Jjw" customClass="LMECell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="409" height="91"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="409" height="90.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f1g-YT-PS9">
+                        <rect key="frame" x="0.0" y="0.0" width="409" height="90.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tw3-nY-jjg" customClass="PricesLabel" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="96.5" height="90.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afe-J5-hfW" customClass="PricesLabel" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="104.5" y="0.0" width="96" height="90.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SB-vf-B7p" customClass="PricesLabel" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="208.5" y="0.0" width="96.5" height="90.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIQ-EU-rrx" customClass="PricesLabel" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="313" y="0.0" width="96" height="90.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="f1g-YT-PS9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4UU-NW-s8t"/>
+                    <constraint firstAttribute="trailing" secondItem="f1g-YT-PS9" secondAttribute="trailing" id="cxd-Ab-mm7"/>
+                    <constraint firstItem="f1g-YT-PS9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dCC-47-ZyT"/>
+                    <constraint firstAttribute="bottom" secondItem="f1g-YT-PS9" secondAttribute="bottom" id="gUw-ZH-ijw"/>
+                    <constraint firstItem="f1g-YT-PS9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rGc-yI-QDU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="lbl1" destination="Tw3-nY-jjg" id="oKV-OK-55Z"/>
+                <outlet property="lbl2" destination="afe-J5-hfW" id="Sn8-gE-nzp"/>
+                <outlet property="lbl3" destination="5SB-vf-B7p" id="VVt-fK-Tbj"/>
+                <outlet property="lbl4" destination="cIQ-EU-rrx" id="UQq-HU-iwF"/>
+            </connections>
+            <point key="canvasLocation" x="-209" y="60"/>
+        </tableViewCell>
+    </objects>
+</document>

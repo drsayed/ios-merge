@@ -1,0 +1,1346 @@
+[
+      {
+         "InternetCode": "af",
+         "CountryCode": "+93",
+         "Capital": "Kabul",
+         "CountryName": "Afghanistan"
+      },
+      {
+         "InternetCode": "al",
+         "CountryCode": "+355",
+         "Capital": "Tirana",
+         "CountryName": "Albania"
+      },
+      {
+         "InternetCode": "dz",
+         "CountryCode": "+213",
+         "Capital": "Algiers",
+         "CountryName": "Algeria"
+      },
+      {
+         "InternetCode": "as",
+         "CountryCode": "+684",
+         "Capital": "Pago Pago",
+         "CountryName": "American Samoa"
+      },
+      {
+         "InternetCode": "ad",
+         "CountryCode": "+376",
+         "Capital": "Andorra",
+         "CountryName": "Andorra"
+      },
+      {
+         "InternetCode": "ao",
+         "CountryCode": "+244",
+         "Capital": "Luanda",
+         "CountryName": "Angola"
+      },
+      {
+         "InternetCode": "ai",
+         "CountryCode": "+1264",
+         "Capital": "The Valley",
+         "CountryName": "Anguilla"
+      },
+      {
+         "InternetCode": "ag",
+         "CountryCode": "+1268",
+         "Capital": "St. Johns",
+         "CountryName": "Antigua and Barbuda"
+      },
+      {
+         "InternetCode": "ar",
+         "CountryCode": "+54",
+         "Capital": "Buenos Aires",
+         "CountryName": "Argentina"
+      },
+      {
+         "InternetCode": "am",
+         "CountryCode": "+374",
+         "Capital": "Yerevan",
+         "CountryName": "Armenia"
+      },
+      {
+         "InternetCode": "aw",
+         "CountryCode": "+297",
+         "Capital": "Oranjestad",
+         "CountryName": "Aruba"
+      },
+      {
+         "InternetCode": "au",
+         "CountryCode": "+61",
+         "Capital": "Canberra",
+         "CountryName": "Australia"
+      },
+      {
+         "InternetCode": "at",
+         "CountryCode": "+43",
+         "Capital": "Vienna",
+         "CountryName": "Austria"
+      },
+      {
+         "InternetCode": "az",
+         "CountryCode": "+994",
+         "Capital": "Baku",
+         "CountryName": "Azerbaijan"
+      },
+      {
+         "InternetCode": "bs",
+         "CountryCode": "+1-242",
+         "Capital": "Nassau",
+         "CountryName": "Bahamas"
+      },
+      {
+         "InternetCode": "bh",
+         "CountryCode": "+973",
+         "Capital": "Al-Manamah",
+         "CountryName": "Bahrain"
+      },
+      {
+         "InternetCode": "bd",
+         "CountryCode": "+880",
+         "Capital": "Dhaka",
+         "CountryName": "Bangladesh"
+      },
+      {
+         "InternetCode": "bb",
+         "CountryCode": "+1-246",
+         "Capital": "Bridgetown",
+         "CountryName": "Barbados"
+      },
+      {
+         "InternetCode": "by",
+         "CountryCode": "+375",
+         "Capital": "Minsk",
+         "CountryName": "Belarus"
+      },
+      {
+         "InternetCode": "be",
+         "CountryCode": "+32",
+         "Capital": "Brussels",
+         "CountryName": "Belgium"
+      },
+      {
+         "InternetCode": "bz",
+         "CountryCode": "+501",
+         "Capital": "Belmopan",
+         "CountryName": "Belize"
+      },
+      {
+         "InternetCode": "bj",
+         "CountryCode": "+229",
+         "Capital": "Porto-Novo",
+         "CountryName": "Benin"
+      },
+      {
+         "InternetCode": "bm",
+         "CountryCode": "+1-441",
+         "Capital": "Hamilton",
+         "CountryName": "Bermuda"
+      },
+      {
+         "InternetCode": "bt",
+         "CountryCode": "+975",
+         "Capital": "Thimphu",
+         "CountryName": "Bhutan"
+      },
+      {
+         "InternetCode": "bo",
+         "CountryCode": "+591",
+         "Capital": "La Paz",
+         "CountryName": "Bolivia"
+      },
+      {
+         "InternetCode": "ba",
+         "CountryCode": "+387",
+         "Capital": "Sarajevo",
+         "CountryName": "Bosnia-Herzegovina"
+      },
+      {
+         "InternetCode": "bw",
+         "CountryCode": "+267",
+         "Capital": "Gaborone",
+         "CountryName": "Botswana"
+      },
+      {
+         "InternetCode": "br",
+         "CountryCode": "+55",
+         "Capital": "Brasilia",
+         "CountryName": "Brazil"
+      },
+      {
+         "InternetCode": "bn",
+         "CountryCode": "+673",
+         "Capital": "Bandar Seri Begawan",
+         "CountryName": "Brunei Darussalam"
+      },
+      {
+         "InternetCode": "bg",
+         "CountryCode": "+359",
+         "Capital": "Sofia",
+         "CountryName": "Bulgaria"
+      },
+      {
+         "InternetCode": "bf",
+         "CountryCode": "+226",
+         "Capital": "Ouagadougou",
+         "CountryName": "Burkina Faso"
+      },
+      {
+         "InternetCode": "bi",
+         "CountryCode": "+257",
+         "Capital": "Bujumbura",
+         "CountryName": "Burundi"
+      },
+      {
+         "InternetCode": "kh",
+         "CountryCode": "+855",
+         "Capital": "Phnom Penh",
+         "CountryName": "Cambodia"
+      },
+      {
+         "InternetCode": "cm",
+         "CountryCode": "+237",
+         "Capital": "Yaounde",
+         "CountryName": "Cameroon"
+      },
+      {
+         "InternetCode": "ca",
+         "CountryCode": "+1",
+         "Capital": "Ottawa",
+         "CountryName": "Canada"
+      },
+      {
+         "InternetCode": "cv",
+         "CountryCode": "+238",
+         "Capital": "Praia",
+         "CountryName": "Cape Verde"
+      },
+      {
+         "InternetCode": "ky",
+         "CountryCode": "+1-345",
+         "Capital": "Georgetown",
+         "CountryName": "Cayman Islands"
+      },
+      {
+         "InternetCode": "cf",
+         "CountryCode": "+236",
+         "Capital": "Bangui",
+         "CountryName": "Central African Republic"
+      },
+      {
+         "InternetCode": "td",
+         "CountryCode": "+235",
+         "Capital": "N'Djamena",
+         "CountryName": "Chad"
+      },
+      {
+         "InternetCode": "cl",
+         "CountryCode": "+56",
+         "Capital": "Santiago",
+         "CountryName": "Chile"
+      },
+      {
+         "InternetCode": "cn",
+         "CountryCode": "+86",
+         "Capital": "Beijing",
+         "CountryName": "China"
+      },
+      {
+         "InternetCode": "co",
+         "CountryCode": "+57",
+         "Capital": "Bogota",
+         "CountryName": "Colombia"
+      },
+      {
+         "InternetCode": "km",
+         "CountryCode": "+269",
+         "Capital": "Moroni",
+         "CountryName": "Comoros"
+      },
+      {
+         "InternetCode": "cg",
+         "CountryCode": "+242",
+         "Capital": "Brazzaville",
+         "CountryName": "Congo"
+      },
+      {
+         "InternetCode": "cd",
+         "CountryCode": "+243",
+         "Capital": "Kinshasa",
+         "CountryName": "Congo, Dem. Republic"
+      },
+      {
+         "InternetCode": "ck",
+         "CountryCode": "+682",
+         "Capital": "Avarua",
+         "CountryName": "Cook Islands"
+      },
+      {
+         "InternetCode": "cr",
+         "CountryCode": "+506",
+         "Capital": "San Jose",
+         "CountryName": "Costa Rica"
+      },
+      {
+         "InternetCode": "hr",
+         "CountryCode": "+385",
+         "Capital": "Zagreb",
+         "CountryName": "Croatia"
+      },
+      {
+         "InternetCode": "cu",
+         "CountryCode": "+53",
+         "Capital": "Havana",
+         "CountryName": "Cuba"
+      },
+      {
+         "InternetCode": "cy",
+         "CountryCode": "+357",
+         "Capital": "Nicosia",
+         "CountryName": "Cyprus"
+      },
+      {
+         "InternetCode": "cz",
+         "CountryCode": "+420",
+         "Capital": "Prague",
+         "CountryName": "Czech Rep."
+      },
+      {
+         "InternetCode": "dk",
+         "CountryCode": "+45",
+         "Capital": "Copenhagen",
+         "CountryName": "Denmark"
+      },
+      {
+         "InternetCode": "dj",
+         "CountryCode": "+253",
+         "Capital": "Djibouti",
+         "CountryName": "Djibouti"
+      },
+      {
+         "InternetCode": "dm",
+         "CountryCode": "+1-767",
+         "Capital": "Roseau",
+         "CountryName": "Dominica"
+      },
+      {
+         "InternetCode": "do",
+         "CountryCode": "+809",
+         "Capital": "Santo Domingo",
+         "CountryName": "Dominican Republic"
+      },
+      {
+         "InternetCode": "ec",
+         "CountryCode": "+593",
+         "Capital": "Quito",
+         "CountryName": "Ecuador"
+      },
+      {
+         "InternetCode": "eg",
+         "CountryCode": "+20",
+         "Capital": "Cairo",
+         "CountryName": "Egypt"
+      },
+      {
+         "InternetCode": "sv",
+         "CountryCode": "+503",
+         "Capital": "San Salvador",
+         "CountryName": "El Salvador"
+      },
+      {
+         "InternetCode": "gq",
+         "CountryCode": "+240",
+         "Capital": "Malabo",
+         "CountryName": "Equatorial Guinea"
+      },
+      {
+         "InternetCode": "er",
+         "CountryCode": "+291",
+         "Capital": "Asmara",
+         "CountryName": "Eritrea"
+      },
+      {
+         "InternetCode": "ee",
+         "CountryCode": "+372",
+         "Capital": "Tallinn",
+         "CountryName": "Estonia"
+      },
+      {
+         "InternetCode": "et",
+         "CountryCode": "+251",
+         "Capital": "Addis Ababa",
+         "CountryName": "Ethiopia"
+      },
+      {
+         "InternetCode": "fk",
+         "CountryCode": "+500",
+         "Capital": "Stanley",
+         "CountryName": "Falkland Islands (Malvinas)"
+      },
+      {
+         "InternetCode": "fo",
+         "CountryCode": "+298",
+         "Capital": "Torshavn",
+         "CountryName": "Faroe Islands"
+      },
+      {
+         "InternetCode": "fj",
+         "CountryCode": "+679",
+         "Capital": "Suva",
+         "CountryName": "Fiji"
+      },
+      {
+         "InternetCode": "fi",
+         "CountryCode": "+358",
+         "Capital": "Helsinki",
+         "CountryName": "Finland"
+      },
+      {
+         "InternetCode": "fr",
+         "CountryCode": "+33",
+         "Capital": "Paris",
+         "CountryName": "France"
+      },
+      {
+         "InternetCode": "gf",
+         "CountryCode": "+594",
+         "Capital": "Cayenne",
+         "CountryName": "French Guiana"
+      },
+      {
+         "InternetCode": "ga",
+         "CountryCode": "+241",
+         "Capital": "Libreville",
+         "CountryName": "Gabon"
+      },
+      {
+         "InternetCode": "gm",
+         "CountryCode": "+220",
+         "Capital": "Banjul",
+         "CountryName": "Gambia"
+      },
+      {
+         "InternetCode": "ge",
+         "CountryCode": "+995",
+         "Capital": "Tbilisi",
+         "CountryName": "Georgia"
+      },
+      {
+         "InternetCode": "de",
+         "CountryCode": "+49",
+         "Capital": "Berlin",
+         "CountryName": "Germany"
+      },
+      {
+         "InternetCode": "gh",
+         "CountryCode": "+233",
+         "Capital": "Accra",
+         "CountryName": "Ghana"
+      },
+      {
+         "InternetCode": "gi",
+         "CountryCode": "+350",
+         "Capital": "Gibraltar",
+         "CountryName": "Gibraltar"
+      },
+      {
+         "InternetCode": "gb",
+         "CountryCode": "+44",
+         "Capital": "London",
+         "CountryName": "Great Britain"
+      },
+      {
+         "InternetCode": "gr",
+         "CountryCode": "+30",
+         "Capital": "Athens",
+         "CountryName": "Greece"
+      },
+      {
+         "InternetCode": "gl",
+         "CountryCode": "+299",
+         "Capital": "Godthab",
+         "CountryName": "Greenland"
+      },
+      {
+         "InternetCode": "gd",
+         "CountryCode": "+1-473",
+         "Capital": "St. George's",
+         "CountryName": "Grenada"
+      },
+      {
+         "InternetCode": "gp",
+         "CountryCode": "+590",
+         "Capital": "Basse-Terre",
+         "CountryName": "Guadeloupe (French)"
+      },
+      {
+         "InternetCode": "gu",
+         "CountryCode": "+1-671",
+         "Capital": "Agana",
+         "CountryName": "Guam (USA)"
+      },
+      {
+         "InternetCode": "gt",
+         "CountryCode": "+502",
+         "Capital": "Guatemala City",
+         "CountryName": "Guatemala"
+      },
+      {
+         "InternetCode": "gn",
+         "CountryCode": "+224",
+         "Capital": "Conakry",
+         "CountryName": "Guinea"
+      },
+      {
+         "InternetCode": "gw",
+         "CountryCode": "+245",
+         "Capital": "Bissau",
+         "CountryName": "Guinea Bissau"
+      },
+      {
+         "InternetCode": "gy",
+         "CountryCode": "+592",
+         "Capital": "Georgetown",
+         "CountryName": "Guyana"
+      },
+      {
+         "InternetCode": "ht",
+         "CountryCode": "+509",
+         "Capital": "Port-au-Prince",
+         "CountryName": "Haiti"
+      },
+      {
+         "InternetCode": "hn",
+         "CountryCode": "+504",
+         "Capital": "Tegucigalpa",
+         "CountryName": "Honduras"
+      },
+      {
+         "InternetCode": "hk",
+         "CountryCode": "+852",
+         "Capital": "Victoria",
+         "CountryName": "Hong Kong"
+      },
+      {
+         "InternetCode": "hu",
+         "CountryCode": "+36",
+         "Capital": "Budapest",
+         "CountryName": "Hungary"
+      },
+      {
+         "InternetCode": "is",
+         "CountryCode": "+354",
+         "Capital": "Reykjavik",
+         "CountryName": "Iceland"
+      },
+      {
+         "InternetCode": "in",
+         "CountryCode": "+91",
+         "Capital": "New Delhi",
+         "CountryName": "India"
+      },
+      {
+         "InternetCode": "id",
+         "CountryCode": "+62",
+         "Capital": "Jakarta",
+         "CountryName": "Indonesia"
+      },
+      {
+         "InternetCode": "ir",
+         "CountryCode": "+98",
+         "Capital": "Tehran",
+         "CountryName": "Iran"
+      },
+      {
+         "InternetCode": "iq",
+         "CountryCode": "+964",
+         "Capital": "Baghdad",
+         "CountryName": "Iraq"
+      },
+      {
+         "InternetCode": "ie",
+         "CountryCode": "+353",
+         "Capital": "Dublin",
+         "CountryName": "Ireland"
+      },
+      {
+         "InternetCode": "il",
+         "CountryCode": "+972",
+         "Capital": "Jerusalem",
+         "CountryName": "Israel"
+      },
+      {
+         "InternetCode": "it",
+         "CountryCode": "+39",
+         "Capital": "Rome",
+         "CountryName": "Italy"
+      },
+      {
+         "InternetCode": "ci",
+         "CountryCode": "+225",
+         "Capital": "Abidjan",
+         "CountryName": "Ivory Coast"
+      },
+      {
+         "InternetCode": "jm",
+         "CountryCode": "+1-876",
+         "Capital": "Kingston",
+         "CountryName": "Jamaica"
+      },
+      {
+         "InternetCode": "jp",
+         "CountryCode": "+81",
+         "Capital": "Tokyo",
+         "CountryName": "Japan"
+      },
+      {
+         "InternetCode": "jo",
+         "CountryCode": "+962",
+         "Capital": "Amman",
+         "CountryName": "Jordan"
+      },
+      {
+         "InternetCode": "kz",
+         "CountryCode": "+7",
+         "Capital": "Astana",
+         "CountryName": "Kazakhstan"
+      },
+      {
+         "InternetCode": "ke",
+         "CountryCode": "+254",
+         "Capital": "Nairobi",
+         "CountryName": "Kenya"
+      },
+      {
+         "InternetCode": "ki",
+         "CountryCode": "+686",
+         "Capital": "Tarawa",
+         "CountryName": "Kiribati"
+      },
+      {
+         "InternetCode": "kp",
+         "CountryCode": "+850",
+         "Capital": "Pyongyang",
+         "CountryName": "Korea-North"
+      },
+      {
+         "InternetCode": "kr",
+         "CountryCode": "+82",
+         "Capital": "Seoul",
+         "CountryName": "Korea-South"
+      },
+      {
+         "InternetCode": "kw",
+         "CountryCode": "+965",
+         "Capital": "Kuwait City",
+         "CountryName": "Kuwait"
+      },
+      {
+         "InternetCode": "kg",
+         "CountryCode": "+996",
+         "Capital": "Bishkek",
+         "CountryName": "Kyrgyzstan"
+      },
+      {
+         "InternetCode": "la",
+         "CountryCode": "+856",
+         "Capital": "Vientiane",
+         "CountryName": "Laos"
+      },
+      {
+         "InternetCode": "lv",
+         "CountryCode": "+371",
+         "Capital": "Riga",
+         "CountryName": "Latvia"
+      },
+      {
+         "InternetCode": "lb",
+         "CountryCode": "+961",
+         "Capital": "Beirut",
+         "CountryName": "Lebanon"
+      },
+      {
+         "InternetCode": "ls",
+         "CountryCode": "+266",
+         "Capital": "Maseru",
+         "CountryName": "Lesotho"
+      },
+      {
+         "InternetCode": "lr",
+         "CountryCode": "+231",
+         "Capital": "Monrovia",
+         "CountryName": "Liberia"
+      },
+      {
+         "InternetCode": "ly",
+         "CountryCode": "+218",
+         "Capital": "Tripoli",
+         "CountryName": "Libya"
+      },
+      {
+         "InternetCode": "li",
+         "CountryCode": "+423",
+         "Capital": "Vaduz",
+         "CountryName": "Liechtenstein"
+      },
+      {
+         "InternetCode": "lt",
+         "CountryCode": "+370",
+         "Capital": "Vilnius",
+         "CountryName": "Lithuania"
+      },
+      {
+         "InternetCode": "lu",
+         "CountryCode": "+352",
+         "Capital": "Luxembourg",
+         "CountryName": "Luxembourg"
+      },
+      {
+         "InternetCode": "mo",
+         "CountryCode": "+853",
+         "Capital": "Macau",
+         "CountryName": "Macau"
+      },
+      {
+         "InternetCode": "mk",
+         "CountryCode": "+389",
+         "Capital": "Skopje",
+         "CountryName": "Macedonia"
+      },
+      {
+         "InternetCode": "mg",
+         "CountryCode": "+261",
+         "Capital": "Antananarivo",
+         "CountryName": "Madagascar"
+      },
+      {
+         "InternetCode": "mw",
+         "CountryCode": "+265",
+         "Capital": "Lilongwe",
+         "CountryName": "Malawi"
+      },
+      {
+         "InternetCode": "my",
+         "CountryCode": "+60",
+         "Capital": "Kuala Lumpur",
+         "CountryName": "Malaysia"
+      },
+      {
+         "InternetCode": "mv",
+         "CountryCode": "+960",
+         "Capital": "Male",
+         "CountryName": "Maldives"
+      },
+      {
+         "InternetCode": "ml",
+         "CountryCode": "+223",
+         "Capital": "Bamako",
+         "CountryName": "Mali"
+      },
+      {
+         "InternetCode": "mt",
+         "CountryCode": "+356",
+         "Capital": "Valletta",
+         "CountryName": "Malta"
+      },
+      {
+         "InternetCode": "mh",
+         "CountryCode": "+692",
+         "Capital": "Majuro",
+         "CountryName": "Marshall Islands"
+      },
+      {
+         "InternetCode": "mq",
+         "CountryCode": "+596",
+         "Capital": "Fort-de-France",
+         "CountryName": "Martinique (French)"
+      },
+      {
+         "InternetCode": "mr",
+         "CountryCode": "+222",
+         "Capital": "Nouakchott",
+         "CountryName": "Mauritania"
+      },
+      {
+         "InternetCode": "mu",
+         "CountryCode": "+230",
+         "Capital": "Port Louis",
+         "CountryName": "Mauritius"
+      },
+      {
+         "InternetCode": "mx",
+         "CountryCode": "+52",
+         "Capital": "Mexico City",
+         "CountryName": "Mexico"
+      },
+      {
+         "InternetCode": "fm",
+         "CountryCode": "+691",
+         "Capital": "Palikir",
+         "CountryName": "Micronesia"
+      },
+      {
+         "InternetCode": "md",
+         "CountryCode": "+373",
+         "Capital": "Kishinev",
+         "CountryName": "Moldova"
+      },
+      {
+         "InternetCode": "mc",
+         "CountryCode": "+377",
+         "Capital": "Monaco",
+         "CountryName": "Monaco"
+      },
+      {
+         "InternetCode": "mn",
+         "CountryCode": "+976",
+         "Capital": "Ulan Bator",
+         "CountryName": "Mongolia"
+      },
+      {
+         "InternetCode": "me",
+         "CountryCode": "+382",
+         "Capital": "Podgorica",
+         "CountryName": "Montenegro"
+      },
+      {
+         "InternetCode": "ms",
+         "CountryCode": "+1-664",
+         "Capital": "Plymouth",
+         "CountryName": "Montserrat"
+      },
+      {
+         "InternetCode": "ma",
+         "CountryCode": "+212",
+         "Capital": "Rabat",
+         "CountryName": "Morocco"
+      },
+      {
+         "InternetCode": "mz",
+         "CountryCode": "+258",
+         "Capital": "Maputo",
+         "CountryName": "Mozambique"
+      },
+      {
+         "InternetCode": "mm",
+         "CountryCode": "+95",
+         "Capital": "Naypyidaw",
+         "CountryName": "Myanmar"
+      },
+      {
+         "InternetCode": "na",
+         "CountryCode": "+264",
+         "Capital": "Windhoek",
+         "CountryName": "Namibia"
+      },
+      {
+         "InternetCode": "nr",
+         "CountryCode": "+674",
+         "Capital": "Yaren",
+         "CountryName": "Nauru"
+      },
+      {
+         "InternetCode": "np",
+         "CountryCode": "+977",
+         "Capital": "Kathmandu",
+         "CountryName": "Nepal"
+      },
+      {
+         "InternetCode": "nl",
+         "CountryCode": "+31",
+         "Capital": "Amsterdam",
+         "CountryName": "Netherlands"
+      },
+      {
+         "InternetCode": "nc",
+         "CountryCode": "+687",
+         "Capital": "Noumea",
+         "CountryName": "New Caledonia (French)"
+      },
+      {
+         "InternetCode": "nz",
+         "CountryCode": "+64",
+         "Capital": "Wellington",
+         "CountryName": "New Zealand"
+      },
+      {
+         "InternetCode": "ni",
+         "CountryCode": "+505",
+         "Capital": "Managua",
+         "CountryName": "Nicaragua"
+      },
+      {
+         "InternetCode": "ne",
+         "CountryCode": "+227",
+         "Capital": "Niamey",
+         "CountryName": "Niger"
+      },
+      {
+         "InternetCode": "ng",
+         "CountryCode": "+234",
+         "Capital": "Lagos",
+         "CountryName": "Nigeria"
+      },
+      {
+         "InternetCode": "nu",
+         "CountryCode": "+683",
+         "Capital": "Alofi",
+         "CountryName": "Niue"
+      },
+      {
+         "InternetCode": "nf",
+         "CountryCode": "+672",
+         "Capital": "Kingston",
+         "CountryName": "Norfolk Island"
+      },
+      {
+         "InternetCode": "mp",
+         "CountryCode": "+670",
+         "Capital": "Saipan",
+         "CountryName": "Northern Mariana Islands"
+      },
+      {
+         "InternetCode": "no",
+         "CountryCode": "+47",
+         "Capital": "Oslo",
+         "CountryName": "Norway"
+      },
+      {
+         "InternetCode": "om",
+         "CountryCode": "+968",
+         "Capital": "Muscat",
+         "CountryName": "Oman"
+      },
+      {
+         "InternetCode": "pk",
+         "CountryCode": "+92",
+         "Capital": "Islamabad",
+         "CountryName": "Pakistan"
+      },
+      {
+         "InternetCode": "pw",
+         "CountryCode": "+680",
+         "Capital": "Koror",
+         "CountryName": "Palau"
+      },
+      {
+         "InternetCode": "pa",
+         "CountryCode": "+507",
+         "Capital": "Panama City",
+         "CountryName": "Panama"
+      },
+      {
+         "InternetCode": "pg",
+         "CountryCode": "+675",
+         "Capital": "Port Moresby",
+         "CountryName": "Papua New Guinea"
+      },
+      {
+         "InternetCode": "py",
+         "CountryCode": "+595",
+         "Capital": "Asuncion",
+         "CountryName": "Paraguay"
+      },
+      {
+         "InternetCode": "pe",
+         "CountryCode": "+51",
+         "Capital": "Lima",
+         "CountryName": "Peru"
+      },
+      {
+         "InternetCode": "ph",
+         "CountryCode": "+63",
+         "Capital": "Manila",
+         "CountryName": "Philippines"
+      },
+      {
+         "InternetCode": "pl",
+         "CountryCode": "+48",
+         "Capital": "Warsaw",
+         "CountryName": "Poland"
+      },
+      {
+         "InternetCode": "pf",
+         "CountryCode": "+689",
+         "Capital": "Papeete",
+         "CountryName": "Polynesia (French)"
+      },
+      {
+         "InternetCode": "pt",
+         "CountryCode": "+351",
+         "Capital": "Lisbon",
+         "CountryName": "Portugal"
+      },
+      {
+         "InternetCode": "pr",
+         "CountryCode": "+1-787",
+         "Capital": "San Juan",
+         "CountryName": "Puerto Rico"
+      },
+      {
+         "InternetCode": "qa",
+         "CountryCode": "+974",
+         "Capital": "Doha",
+         "CountryName": "Qatar"
+      },
+      {
+         "InternetCode": "re",
+         "CountryCode": "+262",
+         "Capital": "Saint-Denis",
+         "CountryName": "Reunion (French)"
+      },
+      {
+         "InternetCode": "ro",
+         "CountryCode": "+40",
+         "Capital": "Bucharest",
+         "CountryName": "Romania"
+      },
+      {
+         "InternetCode": "ru",
+         "CountryCode": "+7",
+         "Capital": "Moscow",
+         "CountryName": "Russia"
+      },
+      {
+         "InternetCode": "rw",
+         "CountryCode": "+250",
+         "Capital": "Kigali",
+         "CountryName": "Rwanda"
+      },
+      {
+         "InternetCode": "sh",
+         "CountryCode": "+290",
+         "Capital": "Jamestown",
+         "CountryName": "Saint Helena"
+      },
+      {
+         "InternetCode": "kn",
+         "CountryCode": "+1-869",
+         "Capital": "Basseterre",
+         "CountryName": "Saint Kitts & Nevis Anguilla"
+      },
+      {
+         "InternetCode": "lc",
+         "CountryCode": "+1-758",
+         "Capital": "Castries",
+         "CountryName": "Saint Lucia"
+      },
+      {
+         "InternetCode": "pm",
+         "CountryCode": "+508",
+         "Capital": "St. Pierre",
+         "CountryName": "Saint Pierre and Miquelon"
+      },
+      {
+         "InternetCode": "vc",
+         "CountryCode": "+1-784",
+         "Capital": "Kingstown",
+         "CountryName": "Saint Vincent & Grenadines"
+      },
+      {
+         "InternetCode": "ws",
+         "CountryCode": "+684",
+         "Capital": "Apia",
+         "CountryName": "Samoa"
+      },
+      {
+         "InternetCode": "sm",
+         "CountryCode": "+378",
+         "Capital": "San Marino",
+         "CountryName": "San Marino"
+      },
+      {
+         "InternetCode": "st",
+         "CountryCode": "+239",
+         "Capital": "Sao Tome",
+         "CountryName": "Sao Tome and Principe"
+      },
+      {
+         "InternetCode": "sa",
+         "CountryCode": "+966",
+         "Capital": "Riyadh",
+         "CountryName": "Saudi Arabia"
+      },
+      {
+         "InternetCode": "sn",
+         "CountryCode": "+221",
+         "Capital": "Dakar",
+         "CountryName": "Senegal"
+      },
+      {
+         "InternetCode": "rs",
+         "CountryCode": "+381",
+         "Capital": "Belgrade",
+         "CountryName": "Serbia"
+      },
+      {
+         "InternetCode": "sc",
+         "CountryCode": "+248",
+         "Capital": "Victoria",
+         "CountryName": "Seychelles"
+      },
+      {
+         "InternetCode": "sl",
+         "CountryCode": "+232",
+         "Capital": "Freetown",
+         "CountryName": "Sierra Leone"
+      },
+      {
+         "InternetCode": "sg",
+         "CountryCode": "+65",
+         "Capital": "Singapore",
+         "CountryName": "Singapore"
+      },
+      {
+         "InternetCode": "sk",
+         "CountryCode": "+421",
+         "Capital": "Bratislava",
+         "CountryName": "Slovakia"
+      },
+      {
+         "InternetCode": "si",
+         "CountryCode": "+386",
+         "Capital": "Ljubljana",
+         "CountryName": "Slovenia"
+      },
+      {
+         "InternetCode": "sb",
+         "CountryCode": "+677",
+         "Capital": "Honiara",
+         "CountryName": "Solomon Islands"
+      },
+      {
+         "InternetCode": "so",
+         "CountryCode": "+252",
+         "Capital": "Mogadishu",
+         "CountryName": "Somalia"
+      },
+      {
+         "InternetCode": "za",
+         "CountryCode": "+27",
+         "Capital": "Pretoria",
+         "CountryName": "South Africa"
+      },
+      {
+         "InternetCode": "es",
+         "CountryCode": "+34",
+         "Capital": "Madrid",
+         "CountryName": "Spain"
+      },
+      {
+         "InternetCode": "lk",
+         "CountryCode": "+94",
+         "Capital": "Colombo",
+         "CountryName": "Sri Lanka"
+      },
+      {
+         "InternetCode": "sd",
+         "CountryCode": "+249",
+         "Capital": "Khartoum",
+         "CountryName": "Sudan"
+      },
+      {
+         "InternetCode": "sr",
+         "CountryCode": "+597",
+         "Capital": "Paramaribo",
+         "CountryName": "Suriname"
+      },
+      {
+         "InternetCode": "sz",
+         "CountryCode": "+268",
+         "Capital": "Mbabane",
+         "CountryName": "Swaziland"
+      },
+      {
+         "InternetCode": "se",
+         "CountryCode": "+46",
+         "Capital": "Stockholm",
+         "CountryName": "Sweden"
+      },
+      {
+         "InternetCode": "ch",
+         "CountryCode": "+41",
+         "Capital": "Bern",
+         "CountryName": "Switzerland"
+      },
+      {
+         "InternetCode": "sy",
+         "CountryCode": "+963",
+         "Capital": "Damascus",
+         "CountryName": "Syria"
+      },
+      {
+         "InternetCode": "tw",
+         "CountryCode": "+886",
+         "Capital": "Taipei",
+         "CountryName": "Taiwan"
+      },
+      {
+         "InternetCode": "tj",
+         "CountryCode": "+992",
+         "Capital": "Dushanbe",
+         "CountryName": "Tajikistan"
+      },
+      {
+         "InternetCode": "tz",
+         "CountryCode": "+255",
+         "Capital": "Dodoma",
+         "CountryName": "Tanzania"
+      },
+      {
+         "InternetCode": "th",
+         "CountryCode": "+66",
+         "Capital": "Bangkok",
+         "CountryName": "Thailand"
+      },
+      {
+         "InternetCode": "tg",
+         "CountryCode": "+228",
+         "Capital": "Lome",
+         "CountryName": "Togo"
+      },
+      {
+         "InternetCode": "tk",
+         "CountryCode": "+690",
+         "Capital": "None",
+         "CountryName": "Tokelau"
+      },
+      {
+         "InternetCode": "to",
+         "CountryCode": "+676",
+         "Capital": "Nuku'alofa",
+         "CountryName": "Tonga"
+      },
+      {
+         "InternetCode": "tt",
+         "CountryCode": "+1-868",
+         "Capital": "Port of Spain",
+         "CountryName": "Trinidad and Tobago"
+      },
+      {
+         "InternetCode": "tn",
+         "CountryCode": "+216",
+         "Capital": "Tunis",
+         "CountryName": "Tunisia"
+      },
+      {
+         "InternetCode": "tr",
+         "CountryCode": "+90",
+         "Capital": "Ankara",
+         "CountryName": "Turkey"
+      },
+      {
+         "InternetCode": "tm",
+         "CountryCode": "+993",
+         "Capital": "Ashgabat",
+         "CountryName": "Turkmenistan"
+      },
+      {
+         "InternetCode": "tc",
+         "CountryCode": "+1-649",
+         "Capital": "Grand Turk",
+         "CountryName": "Turks and Caicos Islands"
+      },
+      {
+         "InternetCode": "tv",
+         "CountryCode": "+688",
+         "Capital": "Funafuti",
+         "CountryName": "Tuvalu"
+      },
+      {
+         "InternetCode": "us",
+         "CountryCode": "+1",
+         "Capital": "Washington",
+         "CountryName": "USA"
+      },
+      {
+         "InternetCode": "ug",
+         "CountryCode": "+256",
+         "Capital": "Kampala",
+         "CountryName": "Uganda"
+      },
+      {
+         "InternetCode": "ua",
+         "CountryCode": "+380",
+         "Capital": "Kiev",
+         "CountryName": "Ukraine"
+      },
+      {
+         "InternetCode": "ae",
+         "CountryCode": "+971",
+         "Capital": "Abu Dhabi",
+         "CountryName": "United Arab Emirates"
+      },
+      {
+         "InternetCode": "uy",
+         "CountryCode": "+598",
+         "Capital": "Montevideo",
+         "CountryName": "Uruguay"
+      },
+      {
+         "InternetCode": "uz",
+         "CountryCode": "+998",
+         "Capital": "Tashkent",
+         "CountryName": "Uzbekistan"
+      },
+      {
+         "InternetCode": "vu",
+         "CountryCode": "+678",
+         "Capital": "Port Vila",
+         "CountryName": "Vanuatu"
+      },
+      {
+         "InternetCode": "va",
+         "CountryCode": "+39",
+         "Capital": "Vatican City",
+         "CountryName": "Vatican"
+      },
+      {
+         "InternetCode": "ve",
+         "CountryCode": "+58",
+         "Capital": "Caracas",
+         "CountryName": "Venezuela"
+      },
+      {
+         "InternetCode": "vn",
+         "CountryCode": "+84",
+         "Capital": "Hanoi",
+         "CountryName": "Vietnam"
+      },
+      {
+         "InternetCode": "vg",
+         "CountryCode": "+1-284",
+         "Capital": "Road Town",
+         "CountryName": "Virgin Islands (British)"
+      },
+      {
+         "InternetCode": "vi",
+         "CountryCode": "+1-340",
+         "Capital": "Charlotte Amalie",
+         "CountryName": "Virgin Islands (USA)"
+      },
+      {
+         "InternetCode": "wf",
+         "CountryCode": "+681",
+         "Capital": "Mata-Utu",
+         "CountryName": "Wallis and Futuna Islands"
+      },
+      {
+         "InternetCode": "ye",
+         "CountryCode": "+967",
+         "Capital": "San'a",
+         "CountryName": "Yemen"
+      },
+      {
+         "InternetCode": "zm",
+         "CountryCode": "+260",
+         "Capital": "Lusaka",
+         "CountryName": "Zambia"
+      },
+      {
+         "InternetCode": "zw",
+         "CountryCode": "+263",
+         "Capital": "Harare",
+         "CountryName": "Zimbabwe"
+      }
+   ]

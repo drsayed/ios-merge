@@ -1,0 +1,380 @@
+PODS:
+  - ADCountryPicker (2.1.0)
+  - Alamofire (4.7.3)
+  - ALCameraViewController (3.1)
+  - AnimatedBlurLabel (1.5.0)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
+  - BTNavigationDropdownMenu (0.5)
+  - Cluster (2.1.0)
+  - CocoaAsyncSocket (7.6.2)
+  - CocoaLumberjack (3.4.1):
+    - CocoaLumberjack/Default (= 3.4.1)
+    - CocoaLumberjack/Extensions (= 3.4.1)
+  - CocoaLumberjack/Default (3.4.1)
+  - CocoaLumberjack/Extensions (3.4.1):
+    - CocoaLumberjack/Default
+  - Cosmos (19.0.3)
+  - CropViewController (2.5.4)
+  - DKCamera (1.6.7)
+  - DKImagePickerController (4.3.2):
+    - DKImagePickerController/Camera (= 4.3.2)
+    - DKImagePickerController/Core (= 4.3.2)
+    - DKImagePickerController/ImageDataManager (= 4.3.2)
+    - DKImagePickerController/InlineCamera (= 4.3.2)
+    - DKImagePickerController/PhotoEditor (= 4.3.2)
+    - DKImagePickerController/PhotoGallery (= 4.3.2)
+    - DKImagePickerController/Resource (= 4.3.2)
+  - DKImagePickerController/Camera (4.3.2):
+    - DKCamera
+    - DKImagePickerController/Core
+  - DKImagePickerController/Core (4.3.2):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.2)
+  - DKImagePickerController/InlineCamera (4.3.2):
+    - DKCamera
+    - DKImagePickerController/Core
+  - DKImagePickerController/PhotoEditor (4.3.2):
+    - CropViewController (~> 2.5)
+    - DKImagePickerController/Core
+  - DKImagePickerController/PhotoGallery (4.3.2):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.2)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DLRadioButton (1.4.12)
+  - DropDownMenuKit (0.8.4)
+  - FacebookCore (0.3.2):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.35)
+  - FacebookLogin (0.3.2):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3.2)
+    - FBSDKCoreKit (~> 4.35)
+    - FBSDKLoginKit (~> 4.35)
+  - FBSDKCoreKit (4.35.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.35.0):
+    - FBSDKCoreKit
+  - Firebase/Analytics (7.1.0):
+    - Firebase/Core
+  - Firebase/Auth (7.1.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 7.1.0)
+  - Firebase/Core (7.1.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 7.1.0)
+  - Firebase/CoreOnly (7.1.0):
+    - FirebaseCore (= 7.1.0)
+  - Firebase/Messaging (7.1.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 7.1.0)
+  - FirebaseAnalytics (7.1.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleAppMeasurement (= 7.1.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30906.0)
+  - FirebaseAuth (7.1.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GTMSessionFetcher/Core (~> 1.4)
+  - FirebaseCore (7.1.0):
+    - FirebaseCoreDiagnostics (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+  - FirebaseCoreDiagnostics (7.1.0):
+    - GoogleDataTransport (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+    - nanopb (~> 2.30906.0)
+  - FirebaseInstallations (7.1.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstanceID (7.1.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+  - FirebaseMessaging (7.1.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstanceID (~> 7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Reachability (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+  - FlagPhoneNumber (0.7.2):
+    - libPhoneNumber-iOS
+  - FontAwesome.swift (1.4.8)
+  - Gallery (2.2.0)
+  - GoogleAppMeasurement (7.1.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30906.0)
+  - GoogleDataTransport (8.0.1):
+    - nanopb (~> 2.30906.0)
+  - GooglePlacesSearchController (0.1.7)
+  - GoogleSignIn (4.4.0):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+  - GoogleToolboxForMac/Defines (2.2.0)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.0)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.0)
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
+  - GoogleUtilities/AppDelegateSwizzler (7.1.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.1.1):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (7.1.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.1.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.1.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.1.1)"
+  - GoogleUtilities/Reachability (7.1.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.1.1):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.5.0)
+  - IQKeyboardManagerSwift (5.0.6)
+  - JTAppleCalendar (7.1.4)
+  - KissXML (5.2.2)
+  - libPhoneNumber-iOS (0.9.13)
+  - MarqueeLabel/Swift (3.1.6)
+  - nanopb (2.30906.0):
+    - nanopb/decode (= 2.30906.0)
+    - nanopb/encode (= 2.30906.0)
+  - nanopb/decode (2.30906.0)
+  - nanopb/encode (2.30906.0)
+  - NotificationBannerSwift (1.6.3):
+    - MarqueeLabel/Swift
+    - SnapKit (~> 4.0)
+  - PromisesObjC (1.2.11)
+  - ReachabilitySwift (4.3.0)
+  - ReadMoreTextView (3.0.1)
+  - Realm (3.20.0):
+    - Realm/Headers (= 3.20.0)
+  - Realm/Headers (3.20.0)
+  - RealmSwift (3.20.0):
+    - Realm (= 3.20.0)
+  - SDWebImage (4.4.8):
+    - SDWebImage/Core (= 4.4.8)
+  - SDWebImage/Core (4.4.8)
+  - SnapKit (4.2.0)
+  - SwiftLinkPreview (3.0.1)
+  - SwiftSVG (2.2.0)
+  - SwiftyGif (5.3.0)
+  - TLPhotoPicker (1.8.9)
+  - VegaScrollFlowLayout (1.1)
+  - XMPPFramework (3.7.0):
+    - CocoaAsyncSocket (~> 7.6.0)
+    - CocoaLumberjack
+    - KissXML (~> 5.2.0)
+
+DEPENDENCIES:
+  - ADCountryPicker (~> 2.1.0)
+  - Alamofire
+  - ALCameraViewController
+  - AnimatedBlurLabel
+  - BTNavigationDropdownMenu
+  - Cluster
+  - Cosmos
+  - DKImagePickerController
+  - DLRadioButton (~> 1.4)
+  - DropDownMenuKit
+  - FacebookCore
+  - FacebookLogin (~> 0.3.2)
+  - FBSDKCoreKit (~> 4.35.0)
+  - FBSDKLoginKit (~> 4.35.0)
+  - Firebase/Analytics
+  - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Messaging
+  - FlagPhoneNumber
+  - FontAwesome.swift
+  - Gallery (~> 2.2.0)
+  - GooglePlacesSearchController
+  - GoogleSignIn
+  - IQKeyboardManagerSwift
+  - JTAppleCalendar (~> 7.0)
+  - MarqueeLabel/Swift (= 3.1.6)
+  - NotificationBannerSwift (= 1.6.3)
+  - ReachabilitySwift
+  - ReadMoreTextView
+  - RealmSwift (~> 3.20.0)
+  - SDWebImage (~> 4.0)
+  - SwiftLinkPreview (~> 3.0.0)
+  - SwiftSVG
+  - TLPhotoPicker (~> 1.8.3)
+  - VegaScrollFlowLayout
+  - XMPPFramework
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - ADCountryPicker
+    - Alamofire
+    - ALCameraViewController
+    - AnimatedBlurLabel
+    - Bolts
+    - BTNavigationDropdownMenu
+    - Cluster
+    - CocoaAsyncSocket
+    - CocoaLumberjack
+    - Cosmos
+    - CropViewController
+    - DKCamera
+    - DKImagePickerController
+    - DKPhotoGallery
+    - DLRadioButton
+    - DropDownMenuKit
+    - FacebookCore
+    - FacebookLogin
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseInstallations
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - FlagPhoneNumber
+    - FontAwesome.swift
+    - Gallery
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GooglePlacesSearchController
+    - GoogleSignIn
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - IQKeyboardManagerSwift
+    - JTAppleCalendar
+    - KissXML
+    - libPhoneNumber-iOS
+    - MarqueeLabel
+    - nanopb
+    - NotificationBannerSwift
+    - PromisesObjC
+    - ReachabilitySwift
+    - ReadMoreTextView
+    - Realm
+    - RealmSwift
+    - SDWebImage
+    - SnapKit
+    - SwiftLinkPreview
+    - SwiftSVG
+    - SwiftyGif
+    - TLPhotoPicker
+    - VegaScrollFlowLayout
+    - XMPPFramework
+
+SPEC CHECKSUMS:
+  ADCountryPicker: 502cee76a30ea1c3834eb0df170ce635691655c9
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  ALCameraViewController: 144dea45fd749a623aafd8cb7b10cea88499fcc3
+  AnimatedBlurLabel: d1c68bfa657a56347b150c9f58a151fd101099eb
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  BTNavigationDropdownMenu: ba3a26fdb6a56c4721c31df8a0875106c259663a
+  Cluster: b1b363bb4b6991c73f5da2f4ab175fc7424f9900
+  CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
+  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
+  Cosmos: a6fb17284281fa12cf4c85c2efecd440a215ec44
+  CropViewController: 980df34ffc499db89755b2f307f20eca00cd40c6
+  DKCamera: a902b66921fca14b7a75266feb8c7568aa7caa71
+  DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
+  DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
+  DropDownMenuKit: 3800deee46883bb09725376d987900768532f588
+  FacebookCore: fe93222bb70346730ef33b061d493e9e7a7cb1f5
+  FacebookLogin: a4e225974791c82836765a294582b4778baffc07
+  FBSDKCoreKit: 1a5b2e3ceb5ca827a53c54aa5f4a3480efff80d2
+  FBSDKLoginKit: 00a3d65d1226852f9d76dcddff01981e5e6d9c38
+  Firebase: 78e8dd2e39d653de6270432ad84fe8b59f7bf4e8
+  FirebaseAnalytics: 7f165a56dea86ddd5b8ce02af3bee982c683405c
+  FirebaseAuth: f82c2cfcc1c107bb0a97735cdbce4eb2a601f710
+  FirebaseCore: 20046127eef0fcb8fa25df7fc12f7b97d4e48611
+  FirebaseCoreDiagnostics: 872cdb9b749b23346dddd5c1014d1babd2257de3
+  FirebaseInstallations: 3de38553e86171b5f81d83cdeef63473d37bfdb0
+  FirebaseInstanceID: 61e8d10a4192a582c6239378169d10e504ca8d91
+  FirebaseMessaging: 076054895c9260f82c7304cc7709dbf19b8f3e4a
+  FlagPhoneNumber: 86194d414c7e3b2f38c16136c4f8a5d34e3ee8b7
+  FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
+  Gallery: 3f4c780c4b22906d6b0a5e55d12167cdc4b4fc5b
+  GoogleAppMeasurement: 89e1a64593f968713b0506ba1b53b38a154bf9a5
+  GoogleDataTransport: e4085e6762f36a6141738f46b0153473ce57fb18
+  GooglePlacesSearchController: 0ac4fedf1582d2e44329c417a6eed80ccf62d716
+  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
+  GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
+  GoogleUtilities: 3dc4ff0d5e4840e2fa8eef0889620e8c33d4218c
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
+  JTAppleCalendar: aaeee95e939e0b0a381fb51eb77738bd26bb10f6
+  KissXML: 4418f32138aec43797891845d682b00fc8cd4677
+  libPhoneNumber-iOS: e444379ac18bbfbdefad571da735b2cd7e096caa
+  MarqueeLabel: 0c41f08ef5773e29c0f71064a8fa788a2fd8b365
+  nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
+  NotificationBannerSwift: b231e4c3244848ef300e1c53ce027b9756b9b06f
+  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  ReadMoreTextView: 19147adf93abce6d7271e14031a00303fe28720d
+  Realm: 8b2ca5bc6479a91f379b6b42b5922e396cd5ba5a
+  RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
+  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftLinkPreview: 7524438c43bf63a5041615713777c3d8f19a9a31
+  SwiftSVG: 19bc4e434dcf236ece45ddf75f5ee1d3ef8061e6
+  SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
+  TLPhotoPicker: 9bf255c116129bc5d709b4cc8b42b3542e89e841
+  VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
+  XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
+
+PODFILE CHECKSUM: 3523e50060bb74460eeae0728a73f239de74d448
+
+COCOAPODS: 1.8.4

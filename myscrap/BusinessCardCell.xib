@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="8ZU-Nu-Ruz" customClass="BusinessCardCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JuN-cz-FQ5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="zAQ-90-wTh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="zAQ-90-wTh" secondAttribute="bottom" id="I5Z-Sx-G93"/>
+                            <constraint firstItem="zAQ-90-wTh" firstAttribute="top" secondItem="JuN-cz-FQ5" secondAttribute="top" id="L7N-vp-7e6"/>
+                            <constraint firstItem="zAQ-90-wTh" firstAttribute="leading" secondItem="JuN-cz-FQ5" secondAttribute="leading" id="Vc2-XG-GqJ"/>
+                            <constraint firstAttribute="trailing" secondItem="zAQ-90-wTh" secondAttribute="trailing" id="b2c-Jg-mTX"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="GK7-sU-gW4"/>
+            <constraints>
+                <constraint firstItem="JuN-cz-FQ5" firstAttribute="top" secondItem="8ZU-Nu-Ruz" secondAttribute="top" id="0TZ-wW-RWG"/>
+                <constraint firstAttribute="bottom" secondItem="JuN-cz-FQ5" secondAttribute="bottom" id="1fp-w1-8mz"/>
+                <constraint firstItem="JuN-cz-FQ5" firstAttribute="leading" secondItem="8ZU-Nu-Ruz" secondAttribute="leading" id="YtJ-3u-wJK"/>
+                <constraint firstAttribute="trailing" secondItem="JuN-cz-FQ5" secondAttribute="trailing" id="oo1-BW-EbT"/>
+            </constraints>
+            <size key="customSize" width="151" height="317"/>
+            <connections>
+                <outlet property="companyImageView" destination="zAQ-90-wTh" id="mpX-kD-mqA"/>
+            </connections>
+            <point key="canvasLocation" x="-63.200000000000003" y="69.265367316341838"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="no-image" width="397" height="397"/>
+    </resources>
+</document>

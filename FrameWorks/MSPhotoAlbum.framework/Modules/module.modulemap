@@ -1,0 +1,11 @@
+framework module MSPhotoAlbum {
+  umbrella header "MSPhotoAlbum.h"
+
+  export *
+  module * { export * }
+}
+
+module MSPhotoAlbum.Swift {
+    header "MSPhotoAlbum-Swift.h"
+    requires objc
+}

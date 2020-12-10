@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="60" id="ZVy-5s-Vj4" customClass="SubMenuProfileCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZVy-5s-Vj4" id="ks9-yQ-8NT">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yo6-Id-sfy">
+                        <rect key="frame" x="76" y="10" width="67" height="40"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AG7-it-ot1">
+                        <rect key="frame" x="340" y="22.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="5Fd-aA-MMv"/>
+                            <constraint firstAttribute="width" constant="15" id="nGh-AH-ew6"/>
+                        </constraints>
+                        <state key="normal" image="arrow_icon"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZrC-51-d5u">
+                        <rect key="frame" x="20" y="58" width="335" height="0.5"/>
+                        <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="335" id="XCf-gS-xCk"/>
+                            <constraint firstAttribute="height" constant="0.5" id="iE0-nD-BYR"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klT-f9-r2R" customClass="CircularButton" customModule="myscrap" customModuleProvider="target">
+                        <rect key="frame" x="20" y="10" width="40" height="40"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="I0a-fn-WWD"/>
+                            <constraint firstAttribute="height" constant="40" id="p1x-tG-OIZ"/>
+                        </constraints>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="klT-f9-r2R" firstAttribute="leading" secondItem="ks9-yQ-8NT" secondAttribute="leading" constant="20" id="2os-aU-rOG"/>
+                    <constraint firstItem="yo6-Id-sfy" firstAttribute="top" secondItem="klT-f9-r2R" secondAttribute="top" id="7hn-bO-Udp"/>
+                    <constraint firstItem="klT-f9-r2R" firstAttribute="top" secondItem="ks9-yQ-8NT" secondAttribute="top" constant="10" id="BMz-St-wmX"/>
+                    <constraint firstItem="yo6-Id-sfy" firstAttribute="leading" secondItem="klT-f9-r2R" secondAttribute="trailing" constant="16" id="CBv-nU-28e"/>
+                    <constraint firstAttribute="bottom" secondItem="klT-f9-r2R" secondAttribute="bottom" constant="9.5" id="DMl-dE-jua"/>
+                    <constraint firstItem="yo6-Id-sfy" firstAttribute="bottom" secondItem="klT-f9-r2R" secondAttribute="bottom" id="GOC-S1-euI"/>
+                    <constraint firstItem="AG7-it-ot1" firstAttribute="centerY" secondItem="ks9-yQ-8NT" secondAttribute="centerY" id="I8s-0W-3Ru"/>
+                    <constraint firstAttribute="trailing" secondItem="ZrC-51-d5u" secondAttribute="trailing" constant="20" id="TOJ-uA-BGq"/>
+                    <constraint firstItem="ZrC-51-d5u" firstAttribute="leading" secondItem="ks9-yQ-8NT" secondAttribute="leading" constant="20" id="gtL-f3-kb9"/>
+                    <constraint firstAttribute="trailing" secondItem="AG7-it-ot1" secondAttribute="trailing" constant="20" id="hFD-FJ-PIK"/>
+                    <constraint firstAttribute="bottom" secondItem="ZrC-51-d5u" secondAttribute="bottom" constant="1" id="phH-yq-sFL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="Mpm-KX-G8M"/>
+            <connections>
+                <outlet property="profileBtn" destination="klT-f9-r2R" id="Cks-8g-URX"/>
+                <outlet property="profileLbl" destination="yo6-Id-sfy" id="Rod-Bl-cFL"/>
+            </connections>
+            <point key="canvasLocation" x="116.66666666666667" y="68.303571428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow_icon" width="22" height="22"/>
+    </resources>
+</document>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationCell" rowHeight="48" id="xca-Jw-Im4" customClass="SubMenuNotificationCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xca-Jw-Im4" id="zCy-qt-u9H">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="93b-Ty-NZl">
+                        <rect key="frame" x="20" y="59" width="335" height="0.5"/>
+                        <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="2CL-d8-DfK"/>
+                            <constraint firstAttribute="width" constant="335" id="dGo-lM-bAU"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fS-fE-Xml" customClass="CircularButton" customModule="myscrap" customModuleProvider="target">
+                        <rect key="frame" x="20" y="9" width="40" height="40"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="4OZ-ks-lpx"/>
+                            <constraint firstAttribute="height" constant="40" id="hsJ-VJ-VxG"/>
+                        </constraints>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yd5-qe-NXS">
+                        <rect key="frame" x="76" y="9" width="76.5" height="40"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gND-ow-AIi">
+                        <rect key="frame" x="340" y="22" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="feb-2m-18Q"/>
+                            <constraint firstAttribute="height" constant="15" id="kJy-K9-RNs"/>
+                        </constraints>
+                        <state key="normal" image="arrow_icon"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Yd5-qe-NXS" firstAttribute="leading" secondItem="4fS-fE-Xml" secondAttribute="trailing" constant="16" id="1D6-Cg-eTo"/>
+                    <constraint firstItem="gND-ow-AIi" firstAttribute="centerY" secondItem="Yd5-qe-NXS" secondAttribute="centerY" constant="0.5" id="2eJ-pw-vbl"/>
+                    <constraint firstItem="4fS-fE-Xml" firstAttribute="leading" secondItem="zCy-qt-u9H" secondAttribute="leading" constant="20" id="4u5-Wz-STC"/>
+                    <constraint firstAttribute="bottom" secondItem="93b-Ty-NZl" secondAttribute="bottom" id="8QI-cT-new"/>
+                    <constraint firstItem="Yd5-qe-NXS" firstAttribute="bottom" secondItem="4fS-fE-Xml" secondAttribute="bottom" id="Ffw-h0-tIp"/>
+                    <constraint firstItem="Yd5-qe-NXS" firstAttribute="top" secondItem="4fS-fE-Xml" secondAttribute="top" id="M7Q-uf-5xl"/>
+                    <constraint firstAttribute="trailing" secondItem="gND-ow-AIi" secondAttribute="trailing" constant="20" id="WKw-Kx-01d"/>
+                    <constraint firstItem="4fS-fE-Xml" firstAttribute="top" secondItem="zCy-qt-u9H" secondAttribute="top" constant="9" id="f0D-Hy-07B"/>
+                    <constraint firstItem="93b-Ty-NZl" firstAttribute="leading" secondItem="zCy-qt-u9H" secondAttribute="leading" constant="20" id="hDJ-xi-LXk"/>
+                    <constraint firstAttribute="trailing" secondItem="93b-Ty-NZl" secondAttribute="trailing" constant="20" id="mbB-rm-F0H"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="uhU-MG-1be"/>
+            <connections>
+                <outlet property="notifBtn" destination="4fS-fE-Xml" id="yKt-RI-eNl"/>
+                <outlet property="notifLbl" destination="Yd5-qe-NXS" id="nTn-oe-UGH"/>
+            </connections>
+            <point key="canvasLocation" x="103.62318840579711" y="2.0089285714285712"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow_icon" width="22" height="22"/>
+    </resources>
+</document>

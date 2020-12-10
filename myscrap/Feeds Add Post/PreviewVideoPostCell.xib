@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PreviewVideoPostCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="382"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="370" height="382"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcV-vj-ZI7">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="382"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ba-CV-df1">
+                        <rect key="frame" x="155" y="161" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="Dqg-dg-Ixc"/>
+                            <constraint firstAttribute="width" constant="60" id="Qhr-me-W2x"/>
+                        </constraints>
+                        <state key="normal" image="play"/>
+                        <connections>
+                            <action selector="playBtnTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Mzg-Hn-ar8"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9l-CT-d99">
+                        <rect key="frame" x="320" y="20" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="K4c-7J-X5Y"/>
+                            <constraint firstAttribute="width" constant="30" id="RGz-hj-Yfw"/>
+                        </constraints>
+                        <state key="normal" image="closeButton"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jc6-FE-fQB">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="382"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgD-vD-rSP">
+                                <rect key="frame" x="0.0" y="0.0" width="370" height="382"/>
+                                <inset key="imageEdgeInsets" minX="100" minY="106" maxX="100" maxY="106"/>
+                                <state key="normal" image="add_new">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="LgD-vD-rSP" secondAttribute="trailing" id="6Fb-x1-oWQ"/>
+                            <constraint firstAttribute="bottom" secondItem="LgD-vD-rSP" secondAttribute="bottom" id="Iq0-tZ-edA"/>
+                            <constraint firstItem="LgD-vD-rSP" firstAttribute="leading" secondItem="jc6-FE-fQB" secondAttribute="leading" id="Qpg-8q-1FL"/>
+                            <constraint firstItem="LgD-vD-rSP" firstAttribute="top" secondItem="jc6-FE-fQB" secondAttribute="top" id="atr-BP-78J"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="J9l-CT-d99" secondAttribute="trailing" constant="20" id="2Xv-xe-fyr"/>
+                <constraint firstItem="jc6-FE-fQB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2rI-eF-T7f"/>
+                <constraint firstAttribute="bottom" secondItem="jc6-FE-fQB" secondAttribute="bottom" id="D0y-yq-0GN"/>
+                <constraint firstItem="3Ba-CV-df1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="DD5-Ce-dtD"/>
+                <constraint firstAttribute="trailing" secondItem="jc6-FE-fQB" secondAttribute="trailing" id="Gxm-pP-Xfd"/>
+                <constraint firstItem="3Ba-CV-df1" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="NAw-jf-WU8"/>
+                <constraint firstItem="NcV-vj-ZI7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="OZ2-54-4vO"/>
+                <constraint firstItem="J9l-CT-d99" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="RuW-QY-PbY"/>
+                <constraint firstItem="NcV-vj-ZI7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bwF-KM-5gP"/>
+                <constraint firstItem="jc6-FE-fQB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kka-g7-wBB"/>
+                <constraint firstAttribute="trailing" secondItem="NcV-vj-ZI7" secondAttribute="trailing" id="tkp-fY-kmR"/>
+                <constraint firstAttribute="bottom" secondItem="NcV-vj-ZI7" secondAttribute="bottom" id="wj7-qu-Vgg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="addMorePhotos" destination="jc6-FE-fQB" id="tJp-Xa-ox1"/>
+                <outlet property="addMorePhotosButton" destination="LgD-vD-rSP" id="6Wn-Kd-uIp"/>
+                <outlet property="deleteImage" destination="J9l-CT-d99" id="Ea0-8x-Wlg"/>
+                <outlet property="playPauseBtn" destination="3Ba-CV-df1" id="jUB-AR-wWi"/>
+                <outlet property="videoView" destination="NcV-vj-ZI7" id="qqM-vu-oKy"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="81.696428571428569"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="add_new" width="512" height="512"/>
+        <image name="closeButton" width="44" height="44"/>
+        <image name="play" width="64" height="64"/>
+    </resources>
+</document>

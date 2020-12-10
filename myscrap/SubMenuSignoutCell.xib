@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Font Awesome 5 Free-Regular-400.otf">
+            <string>FontAwesome5FreeRegular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SignoutCell" rowHeight="60" id="KGk-i7-Jjw" customClass="SubMenuSignoutCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9U2-wI-XTc">
+                        <rect key="frame" x="0.0" y="60" width="375" height="10"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="Iei-Bk-Y0j"/>
+                            <constraint firstAttribute="width" constant="375" id="re8-DA-3fH"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s0s-9k-hpj">
+                        <rect key="frame" x="140.5" y="13.5" width="94" height="32"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nc9-2N-xaJ">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="32"/>
+                                <fontDescription key="fontDescription" name="FontAwesome5FreeRegular" family="Font Awesome 5 Free" pointSize="17"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="signoutBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TJn-Kl-R5t"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kL-VD-xSi">
+                                <rect key="frame" x="35" y="0.0" width="59" height="32"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3kL-VD-xSi" firstAttribute="top" secondItem="Nc9-2N-xaJ" secondAttribute="top" id="1xP-Xz-Wbj"/>
+                            <constraint firstAttribute="bottom" secondItem="3kL-VD-xSi" secondAttribute="bottom" id="HbW-Yi-TW8"/>
+                            <constraint firstItem="Nc9-2N-xaJ" firstAttribute="top" secondItem="s0s-9k-hpj" secondAttribute="top" id="OSY-A8-ndv"/>
+                            <constraint firstItem="3kL-VD-xSi" firstAttribute="top" secondItem="s0s-9k-hpj" secondAttribute="top" id="Oxc-jn-K82"/>
+                            <constraint firstItem="3kL-VD-xSi" firstAttribute="leading" secondItem="Nc9-2N-xaJ" secondAttribute="trailing" constant="5" id="PN2-i4-DLf"/>
+                            <constraint firstAttribute="trailing" secondItem="3kL-VD-xSi" secondAttribute="trailing" id="V14-9j-OWu"/>
+                            <constraint firstAttribute="bottom" secondItem="Nc9-2N-xaJ" secondAttribute="bottom" id="evJ-lM-rc6"/>
+                            <constraint firstItem="Nc9-2N-xaJ" firstAttribute="leading" secondItem="s0s-9k-hpj" secondAttribute="leading" id="vEA-hM-XJA"/>
+                            <constraint firstItem="3kL-VD-xSi" firstAttribute="bottom" secondItem="Nc9-2N-xaJ" secondAttribute="bottom" id="xED-EF-lzC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="9U2-wI-XTc" secondAttribute="bottom" constant="-0.5" id="6wV-Ee-J0C"/>
+                    <constraint firstItem="s0s-9k-hpj" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="F18-TI-3Di"/>
+                    <constraint firstItem="9U2-wI-XTc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IuW-8i-LBZ"/>
+                    <constraint firstAttribute="trailing" secondItem="9U2-wI-XTc" secondAttribute="trailing" id="gB5-yO-MRv"/>
+                    <constraint firstItem="s0s-9k-hpj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-5.25" id="jhd-oJ-SJW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="signoutBtn" destination="Nc9-2N-xaJ" id="trJ-Jt-aXW"/>
+            </connections>
+            <point key="canvasLocation" x="-123.91304347826087" y="25.446428571428569"/>
+        </tableViewCell>
+    </objects>
+</document>

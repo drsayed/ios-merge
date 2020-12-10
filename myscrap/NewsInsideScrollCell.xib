@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="8ZU-Nu-Ruz" customClass="NewsInsideScrollCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="151" height="284"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="151" height="284"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JuN-cz-FQ5">
+                        <rect key="frame" x="8" y="0.0" width="143" height="276"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDx-f0-xJl">
+                                <rect key="frame" x="0.0" y="0.0" width="143" height="235"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="zAQ-90-wTh">
+                                        <rect key="frame" x="0.0" y="0.0" width="143" height="151"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="143" id="PUL-0h-tot"/>
+                                            <constraint firstAttribute="height" constant="151" id="cgH-Pw-u9Z"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ESI-XQ-UwR">
+                                        <rect key="frame" x="0.0" y="159" width="143" height="68"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waste Management donates $100,000 to National Geographic" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6f-1Z-2sX">
+                                                <rect key="frame" x="8" y="8" width="135" height="58"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="b6f-1Z-2sX" secondAttribute="bottom" constant="2" id="8JH-Uh-fQU"/>
+                                            <constraint firstAttribute="trailing" secondItem="b6f-1Z-2sX" secondAttribute="trailing" id="EyH-id-Kz0"/>
+                                            <constraint firstItem="b6f-1Z-2sX" firstAttribute="leading" secondItem="ESI-XQ-UwR" secondAttribute="leading" constant="8" id="WRB-JV-StW"/>
+                                            <constraint firstAttribute="bottom" secondItem="b6f-1Z-2sX" secondAttribute="bottom" constant="2" id="cpN-aY-zzS"/>
+                                            <constraint firstAttribute="trailing" secondItem="b6f-1Z-2sX" secondAttribute="trailing" id="hkY-JZ-1Qu"/>
+                                            <constraint firstItem="b6f-1Z-2sX" firstAttribute="top" secondItem="ESI-XQ-UwR" secondAttribute="top" constant="8" id="q21-Xn-UVf"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEWS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeY-PP-8Gu">
+                                        <rect key="frame" x="8" y="133" width="135" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="135" id="5l9-px-AeF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zAQ-90-wTh" firstAttribute="leading" secondItem="fDx-f0-xJl" secondAttribute="leading" id="1nC-Z2-Y4W"/>
+                                    <constraint firstItem="zAQ-90-wTh" firstAttribute="top" secondItem="fDx-f0-xJl" secondAttribute="top" id="3fm-4n-zMc"/>
+                                    <constraint firstAttribute="bottom" secondItem="ESI-XQ-UwR" secondAttribute="bottom" constant="8" id="9SE-ng-do6"/>
+                                    <constraint firstItem="oeY-PP-8Gu" firstAttribute="leading" secondItem="fDx-f0-xJl" secondAttribute="leading" constant="8" id="C4u-E3-eQf"/>
+                                    <constraint firstItem="ESI-XQ-UwR" firstAttribute="top" secondItem="zAQ-90-wTh" secondAttribute="bottom" constant="8" id="FI8-EE-rKt"/>
+                                    <constraint firstAttribute="width" constant="143" id="Ojw-Nb-UlE"/>
+                                    <constraint firstAttribute="trailing" secondItem="zAQ-90-wTh" secondAttribute="trailing" id="PEr-Mu-yqG"/>
+                                    <constraint firstAttribute="trailing" secondItem="oeY-PP-8Gu" secondAttribute="trailing" id="TT8-tO-g7Q"/>
+                                    <constraint firstAttribute="height" constant="235" id="dEX-VX-sDc"/>
+                                    <constraint firstItem="ESI-XQ-UwR" firstAttribute="leading" secondItem="fDx-f0-xJl" secondAttribute="leading" id="gEt-YQ-pYg"/>
+                                    <constraint firstAttribute="trailing" secondItem="ESI-XQ-UwR" secondAttribute="trailing" id="mOY-6A-CPf"/>
+                                    <constraint firstItem="ESI-XQ-UwR" firstAttribute="top" secondItem="oeY-PP-8Gu" secondAttribute="bottom" constant="8" id="vaG-Qm-43f"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- RECYCLER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxn-eA-bMh">
+                                <rect key="frame" x="52" y="243" width="83" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="UcB-Gt-4IT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Nxn-eA-bMh" secondAttribute="trailing" constant="8" id="16C-xj-nUB"/>
+                            <constraint firstItem="Nxn-eA-bMh" firstAttribute="top" secondItem="fDx-f0-xJl" secondAttribute="bottom" constant="8" id="GDu-e6-u3W"/>
+                            <constraint firstItem="fDx-f0-xJl" firstAttribute="top" secondItem="JuN-cz-FQ5" secondAttribute="top" id="Szh-aa-FRf"/>
+                            <constraint firstAttribute="bottom" secondItem="Nxn-eA-bMh" secondAttribute="bottom" constant="11" id="h0M-G0-IRd"/>
+                            <constraint firstAttribute="trailing" secondItem="fDx-f0-xJl" secondAttribute="trailing" id="jqE-8z-YOV"/>
+                            <constraint firstItem="fDx-f0-xJl" firstAttribute="leading" secondItem="JuN-cz-FQ5" secondAttribute="leading" id="tTL-bs-1cP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="JuN-cz-FQ5" firstAttribute="top" secondItem="8ZU-Nu-Ruz" secondAttribute="top" id="3fZ-it-8zb"/>
+                <constraint firstAttribute="trailing" secondItem="JuN-cz-FQ5" secondAttribute="trailing" id="aWr-sc-l7Z"/>
+                <constraint firstItem="JuN-cz-FQ5" firstAttribute="leading" secondItem="8ZU-Nu-Ruz" secondAttribute="leading" constant="8" id="ezu-qM-Wja"/>
+                <constraint firstAttribute="bottom" secondItem="JuN-cz-FQ5" secondAttribute="bottom" constant="8" id="yxx-e4-bOr"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="GK7-sU-gW4"/>
+            <size key="customSize" width="151" height="225"/>
+            <connections>
+                <outlet property="curveView" destination="JuN-cz-FQ5" id="jgc-kk-wVF"/>
+                <outlet property="newsDescripLbl" destination="b6f-1Z-2sX" id="geg-99-nF1"/>
+                <outlet property="newsImageView" destination="zAQ-90-wTh" id="k8f-9G-6ea"/>
+                <outlet property="newsPostedByLbl" destination="Nxn-eA-bMh" id="wnI-Wh-fP6"/>
+                <outlet property="newsTitleLbl" destination="oeY-PP-8Gu" id="g2O-Rt-FUs"/>
+            </connections>
+            <point key="canvasLocation" x="-63.200000000000003" y="136.73163418290855"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="no-image" width="635.20001220703125" height="635.20001220703125"/>
+    </resources>
+</document>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CompaniesCell" rowHeight="49" id="q1n-sf-wyz" customClass="MenuCompaniesCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q1n-sf-wyz" id="lbg-5g-vSp">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Companies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKL-4I-RFM">
+                        <rect key="frame" x="20" y="15.5" width="76.5" height="18"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQk-oP-NrO">
+                        <rect key="frame" x="20" y="48" width="335" height="0.5"/>
+                        <color key="backgroundColor" red="0.74509803919999995" green="0.76470588240000004" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="335" id="PJi-Cq-A3X"/>
+                            <constraint firstAttribute="height" constant="0.5" id="eeI-MN-gjT"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh9-h5-Xdz">
+                        <rect key="frame" x="340" y="17" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="893-BA-J93"/>
+                            <constraint firstAttribute="width" constant="15" id="iAA-q5-QSP"/>
+                        </constraints>
+                        <state key="normal" image="arrow_icon"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Jh9-h5-Xdz" secondAttribute="trailing" constant="20" id="7Id-U9-7tA"/>
+                    <constraint firstAttribute="trailing" secondItem="MQk-oP-NrO" secondAttribute="trailing" constant="20" id="U0C-er-3Bx"/>
+                    <constraint firstItem="MQk-oP-NrO" firstAttribute="leading" secondItem="lbg-5g-vSp" secondAttribute="leading" constant="20" id="Vbn-bJ-D6N"/>
+                    <constraint firstItem="YKL-4I-RFM" firstAttribute="centerY" secondItem="lbg-5g-vSp" secondAttribute="centerY" id="dNm-E8-MKY"/>
+                    <constraint firstItem="YKL-4I-RFM" firstAttribute="leading" secondItem="lbg-5g-vSp" secondAttribute="leading" constant="20" id="mGb-1u-9Eo"/>
+                    <constraint firstAttribute="bottom" secondItem="MQk-oP-NrO" secondAttribute="bottom" id="qbg-G6-I8e"/>
+                    <constraint firstItem="Jh9-h5-Xdz" firstAttribute="centerY" secondItem="lbg-5g-vSp" secondAttribute="centerY" id="vVy-lu-tCE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="companiesLbl" destination="YKL-4I-RFM" id="FpY-eZ-PBO"/>
+            </connections>
+            <point key="canvasLocation" x="139.85507246376812" y="-24.441964285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow_icon" width="22" height="22"/>
+    </resources>
+</document>

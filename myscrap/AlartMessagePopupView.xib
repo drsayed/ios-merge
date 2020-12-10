@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LMEBlurView" customModule="myscrap" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AlartMessagePopupView" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuK-5p-sOD">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMd-RA-xEs">
+                    <rect key="frame" x="40" y="354" width="334" height="188"/>
+                    <subviews>
+                        <button opaque="NO" tag="500" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHY-3l-Fh8">
+                            <rect key="frame" x="98" y="123" width="144" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.12941176469999999" green="0.42352941179999998" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="Edit Profile"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" tag="400" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To continue, Please complete your profile photo, Mobile number and email address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XV-qm-RSn">
+                            <rect key="frame" x="13" y="35" width="308" height="82"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" tag="300" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfS-dp-c3w">
+                            <rect key="frame" x="301" y="8" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="HBI-26-sPl"/>
+                                <constraint firstAttribute="height" constant="25" id="Wfa-67-1Nc"/>
+                            </constraints>
+                            <state key="normal" image="close_btn_15x15"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="kMd-RA-xEs" secondAttribute="height" multiplier="187:128" constant="59.34375" id="D0p-2l-4Rh"/>
+                        <constraint firstItem="RfS-dp-c3w" firstAttribute="top" secondItem="kMd-RA-xEs" secondAttribute="top" constant="8" id="F7x-Mr-0bz"/>
+                        <constraint firstAttribute="width" constant="334" id="b7W-iY-ytW"/>
+                        <constraint firstAttribute="trailing" secondItem="RfS-dp-c3w" secondAttribute="trailing" constant="8" id="mil-i9-T7N"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="kMd-RA-xEs" firstAttribute="centerY" secondItem="KuK-5p-sOD" secondAttribute="centerY" id="BG6-6G-gDb"/>
+                <constraint firstItem="KuK-5p-sOD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Jdl-Kc-NnM"/>
+                <constraint firstItem="KuK-5p-sOD" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="ZyI-V3-9sd"/>
+                <constraint firstItem="KuK-5p-sOD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="df7-VI-J5K"/>
+                <constraint firstAttribute="bottom" secondItem="KuK-5p-sOD" secondAttribute="bottom" id="e2t-kT-fko"/>
+                <constraint firstItem="kMd-RA-xEs" firstAttribute="centerX" secondItem="KuK-5p-sOD" secondAttribute="centerX" id="faI-Io-eDh"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="137.68115942028987" y="97.767857142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close_btn_15x15" width="30" height="30"/>
+    </resources>
+</document>

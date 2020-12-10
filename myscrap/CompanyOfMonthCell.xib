@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qOS-I2-ivH" customClass="CompanyOfMonthCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="484" height="750"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="484" height="750"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZD-nL-iBB" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="484" height="716"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcE-ek-RrG">
+                                <rect key="frame" x="8" y="8" width="60" height="60"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="BJ0-lC-MIS">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="BJ0-lC-MIS" secondAttribute="bottom" id="56a-zo-xn8"/>
+                                    <constraint firstItem="BJ0-lC-MIS" firstAttribute="leading" secondItem="tcE-ek-RrG" secondAttribute="leading" id="9fC-gJ-ilE"/>
+                                    <constraint firstItem="BJ0-lC-MIS" firstAttribute="top" secondItem="tcE-ek-RrG" secondAttribute="top" id="FYl-op-Xfa"/>
+                                    <constraint firstAttribute="height" constant="60" id="H5q-aV-bQf"/>
+                                    <constraint firstAttribute="width" constant="60" id="njN-TR-jKx"/>
+                                    <constraint firstAttribute="trailing" secondItem="BJ0-lC-MIS" secondAttribute="trailing" id="tP6-Au-zML"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Za1-ry-jdm">
+                                <rect key="frame" x="76" y="16" width="362" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company of the Month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBt-gC-cNA">
+                                        <rect key="frame" x="0.0" y="0.0" width="175" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                        <color key="textColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="26/06/2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hid-2V-Ylg">
+                                        <rect key="frame" x="0.0" y="28.5" width="51.5" height="15.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DdB-o4-pWZ">
+                                <rect key="frame" x="446" y="23" width="30" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTK-N4-kHM" customClass="FavouriteButton" customModule="myscrap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="awz-6N-SXv"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="favBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="00F-LP-fM0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="1gk-BE-RO9"/>
+                                    <constraint firstAttribute="bottom" secondItem="DTK-N4-kHM" secondAttribute="bottom" id="Q4U-BK-TVp"/>
+                                    <constraint firstAttribute="trailing" secondItem="DTK-N4-kHM" secondAttribute="trailing" id="cq0-oo-jXg"/>
+                                    <constraint firstItem="DTK-N4-kHM" firstAttribute="leading" secondItem="DdB-o4-pWZ" secondAttribute="leading" id="ecH-0B-nT6"/>
+                                    <constraint firstAttribute="height" constant="30" id="sKQ-IG-AT9"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo-Copex-2013-RVB" translatesAutoresizingMaskIntoConstraints="NO" id="L9S-sM-LcB">
+                                <rect key="frame" x="8" y="125" width="468" height="119"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="L9S-sM-LcB" secondAttribute="height" multiplier="39:8" constant="-112.125" id="Mwr-MI-wbI"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCS-pk-egz" customClass="UserTagTextView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="8" y="270" width="468" height="307"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">weekly shipments of few hundred tons ,
+Mixed electric motors scrap
+Origin Europe
+-searching for reliable motor scrap processor to collaborate on long term
+ 
+We have also many other non ferrous scrap grades
+ 
+Any interest please contact us
+ 
+ 
+Franck
+whatsapp +85260669186
+wechat +8613923192733
+powerstepmetalhk@gmail.com
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">www.powerstep.hk
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Copex from UK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ete-dr-wbW">
+                                <rect key="frame" x="8" y="87" width="468" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Qw5-oT-Tau"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="ekc-wW-fd3">
+                                <rect key="frame" x="8" y="625" width="468" height="79"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="qfL-Zl-9J9" userLabel="LikeCountStack">
+                                        <rect key="frame" x="0.0" y="0.0" width="468" height="35"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="8kD-oQ-GeI">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="59s-aU-hac">
+                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVP-GT-wCi" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="35" id="AbJ-0u-XcA"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                                <state key="normal" title="5 Likes"/>
+                                                                <connections>
+                                                                    <action selector="likeCountTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="p2e-Yi-I3v"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMt-k8-WW5" customClass="CommentCountBtn" customModule="myscrap" customModuleProvider="target">
+                                                                <rect key="frame" x="40" y="0.0" width="56" height="35"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                                <state key="normal" title="1 comment"/>
+                                                                <connections>
+                                                                    <action selector="commentBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="c3e-C0-LLm"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.066666666669999999" green="0.55294117649999996" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="gVP-GT-wCi" firstAttribute="height" secondItem="HMt-k8-WW5" secondAttribute="height" id="J28-9R-eVm"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="35" id="swx-N4-czD"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tRz-t9-RZY">
+                                        <rect key="frame" x="0.0" y="44" width="468" height="35"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hdk-Bx-Zrp">
+                                                <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u45-PC-eIi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
+                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="vf2-1F-XeH"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="HMY-L4-l1k"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="FAd-ai-Pzx">
+                                                <rect key="frame" x="0.0" y="6" width="468" height="29"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nSD-OX-vCw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="29"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="moa-Rh-h6r">
+                                                                <rect key="frame" x="0.0" y="0.0" width="61" height="29"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1C-sv-CPu" customClass="LikeImageButton" customModule="myscrap" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="SD4-Y4-BRx"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <state key="normal" image="button:z1C-sv-CPu:image">
+                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="likeBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="DxL-Tw-Djv"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCx-dO-7IN" customClass="LikeButton" customModule="myscrap" customModuleProvider="target">
+                                                                        <rect key="frame" x="30" y="0.0" width="31" height="29"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                                        <state key="normal" title="LIKE">
+                                                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="likeBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="aKe-dw-coz"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5S2-tI-f36">
+                                                                <rect key="frame" x="174" y="0.0" width="103" height="29"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXR-nd-mUa" customClass="CommentImageButton" customModule="myscrap" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="p1s-gu-zqr"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <state key="normal" image="button:sXR-nd-mUa:image"/>
+                                                                        <connections>
+                                                                            <action selector="commentBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="mhn-IT-Y4E"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toe-DN-G2E" customClass="LikeButton" customModule="myscrap" customModuleProvider="target">
+                                                                        <rect key="frame" x="30" y="0.0" width="73" height="29"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                                        <state key="normal" title="COMMENT">
+                                                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="commentBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="bai-4L-IPS"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUH-VB-bic">
+                                                                <rect key="frame" x="390" y="0.0" width="78" height="29"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q67-4x-NkT">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="l3L-vE-HDw"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <state key="normal" image="share24"/>
+                                                                        <connections>
+                                                                            <action selector="shareBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="N8Z-fd-gC3"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1k-kN-7WB" customClass="LikeButton" customModule="myscrap" customModuleProvider="target">
+                                                                        <rect key="frame" x="30" y="0.0" width="48" height="29"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                                        <state key="normal" title="SHARE">
+                                                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="shareBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="YpP-Hv-ckp"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="nSD-OX-vCw" secondAttribute="bottom" id="NzK-aF-tAK"/>
+                                                    <constraint firstAttribute="trailing" secondItem="nSD-OX-vCw" secondAttribute="trailing" id="Tym-jq-wd3"/>
+                                                    <constraint firstItem="nSD-OX-vCw" firstAttribute="top" secondItem="FAd-ai-Pzx" secondAttribute="top" id="m5m-0I-03d"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="FAd-ai-Pzx" firstAttribute="leading" secondItem="Hdk-Bx-Zrp" secondAttribute="leading" id="0xu-ZM-eew"/>
+                                            <constraint firstAttribute="height" constant="35" id="OuY-OC-3iS"/>
+                                            <constraint firstItem="FAd-ai-Pzx" firstAttribute="trailing" secondItem="Hdk-Bx-Zrp" secondAttribute="trailing" id="PKj-Pt-eoQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hdk-Bx-Zrp" secondAttribute="trailing" id="ZIX-Y2-Dtm"/>
+                                            <constraint firstItem="Hdk-Bx-Zrp" firstAttribute="leading" secondItem="tRz-t9-RZY" secondAttribute="leading" id="uQi-V2-vA5"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tRz-t9-RZY" secondAttribute="trailing" id="SWe-u7-MqH"/>
+                                    <constraint firstItem="tRz-t9-RZY" firstAttribute="leading" secondItem="ekc-wW-fd3" secondAttribute="leading" id="p0N-4N-jcf"/>
+                                    <constraint firstAttribute="bottom" secondItem="tRz-t9-RZY" secondAttribute="bottom" id="yXf-gi-3LH"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHq-Wa-7u7">
+                                <rect key="frame" x="8" y="585" width="30" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="zju-ID-FsD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="readMoreBtnTapped:" destination="qOS-I2-ivH" eventType="touchUpInside" id="7w9-ke-sUQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DdB-o4-pWZ" firstAttribute="centerY" secondItem="Za1-ry-jdm" secondAttribute="centerY" id="0sb-Nr-GAP"/>
+                            <constraint firstAttribute="trailing" secondItem="L9S-sM-LcB" secondAttribute="trailing" constant="8" id="30e-oa-AyQ"/>
+                            <constraint firstItem="tcE-ek-RrG" firstAttribute="bottom" secondItem="Za1-ry-jdm" secondAttribute="bottom" constant="8" id="ArX-hV-vi2"/>
+                            <constraint firstItem="wCS-pk-egz" firstAttribute="leading" secondItem="tcE-ek-RrG" secondAttribute="leading" id="CDI-mf-SG5"/>
+                            <constraint firstItem="ekc-wW-fd3" firstAttribute="leading" secondItem="wCS-pk-egz" secondAttribute="leading" id="OyV-SF-IUT"/>
+                            <constraint firstItem="ekc-wW-fd3" firstAttribute="top" secondItem="BHq-Wa-7u7" secondAttribute="bottom" constant="8" id="PD0-jq-3xH"/>
+                            <constraint firstAttribute="trailing" secondItem="wCS-pk-egz" secondAttribute="trailing" constant="8" id="QCN-d4-T2f"/>
+                            <constraint firstAttribute="bottom" secondItem="ekc-wW-fd3" secondAttribute="bottom" constant="12" id="TRy-lp-2ex"/>
+                            <constraint firstItem="BHq-Wa-7u7" firstAttribute="leading" secondItem="hZD-nL-iBB" secondAttribute="leading" constant="8" id="UOC-ko-gBR"/>
+                            <constraint firstItem="tcE-ek-RrG" firstAttribute="leading" secondItem="hZD-nL-iBB" secondAttribute="leading" constant="8" id="UdB-jq-ayd"/>
+                            <constraint firstItem="L9S-sM-LcB" firstAttribute="trailing" secondItem="Ete-dr-wbW" secondAttribute="trailing" id="YJP-Tm-J3O"/>
+                            <constraint firstItem="Ete-dr-wbW" firstAttribute="top" secondItem="tcE-ek-RrG" secondAttribute="bottom" constant="19" id="c6l-Lf-1RD"/>
+                            <constraint firstItem="DdB-o4-pWZ" firstAttribute="leading" secondItem="Za1-ry-jdm" secondAttribute="trailing" constant="8" id="cMZ-qI-Uvl"/>
+                            <constraint firstItem="ekc-wW-fd3" firstAttribute="leading" secondItem="hZD-nL-iBB" secondAttribute="leading" constant="8" id="cTh-3m-P2C"/>
+                            <constraint firstAttribute="trailing" secondItem="ekc-wW-fd3" secondAttribute="trailing" constant="8" id="chQ-un-XIf"/>
+                            <constraint firstItem="ekc-wW-fd3" firstAttribute="trailing" secondItem="wCS-pk-egz" secondAttribute="trailing" id="cmc-DU-ZGn"/>
+                            <constraint firstItem="Za1-ry-jdm" firstAttribute="centerY" secondItem="tcE-ek-RrG" secondAttribute="centerY" id="dvj-M6-7XP"/>
+                            <constraint firstItem="L9S-sM-LcB" firstAttribute="top" secondItem="Ete-dr-wbW" secondAttribute="bottom" constant="18" id="ehA-Vi-2Bd"/>
+                            <constraint firstItem="wCS-pk-egz" firstAttribute="leading" secondItem="hZD-nL-iBB" secondAttribute="leading" constant="8" id="fCb-3C-e9f"/>
+                            <constraint firstAttribute="trailing" secondItem="DdB-o4-pWZ" secondAttribute="trailing" constant="8" id="heV-O7-2vd"/>
+                            <constraint firstItem="tcE-ek-RrG" firstAttribute="top" secondItem="hZD-nL-iBB" secondAttribute="top" constant="8" id="kCs-w7-1SX"/>
+                            <constraint firstItem="Za1-ry-jdm" firstAttribute="leading" secondItem="tcE-ek-RrG" secondAttribute="trailing" constant="8" id="luu-ch-1uJ"/>
+                            <constraint firstItem="BHq-Wa-7u7" firstAttribute="top" secondItem="wCS-pk-egz" secondAttribute="bottom" constant="8" id="nbI-lU-AYh"/>
+                            <constraint firstItem="Ete-dr-wbW" firstAttribute="leading" secondItem="hZD-nL-iBB" secondAttribute="leading" constant="8" id="pjJ-cc-0HZ"/>
+                            <constraint firstItem="tcE-ek-RrG" firstAttribute="top" secondItem="Za1-ry-jdm" secondAttribute="top" constant="-8" id="r9W-Bf-bDm"/>
+                            <constraint firstAttribute="trailing" secondItem="Ete-dr-wbW" secondAttribute="trailing" constant="8" id="shk-lF-Xre"/>
+                            <constraint firstItem="L9S-sM-LcB" firstAttribute="leading" secondItem="Ete-dr-wbW" secondAttribute="leading" id="tCJ-tH-dIU"/>
+                            <constraint firstItem="L9S-sM-LcB" firstAttribute="leading" secondItem="hZD-nL-iBB" secondAttribute="leading" constant="8" id="w2v-Un-AyW"/>
+                            <constraint firstItem="wCS-pk-egz" firstAttribute="trailing" secondItem="DdB-o4-pWZ" secondAttribute="trailing" id="xaM-OE-X7l"/>
+                            <constraint firstItem="wCS-pk-egz" firstAttribute="top" secondItem="L9S-sM-LcB" secondAttribute="bottom" constant="26" id="yFC-8d-efz"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="hZD-nL-iBB" firstAttribute="leading" secondItem="qOS-I2-ivH" secondAttribute="leading" id="9KS-ud-hCU"/>
+                <constraint firstItem="rw9-70-tNk" firstAttribute="trailing" secondItem="hZD-nL-iBB" secondAttribute="trailing" id="X7v-6t-Lz6"/>
+                <constraint firstItem="rw9-70-tNk" firstAttribute="bottom" secondItem="hZD-nL-iBB" secondAttribute="bottom" id="aZ4-h7-IOP"/>
+                <constraint firstItem="hZD-nL-iBB" firstAttribute="top" secondItem="qOS-I2-ivH" secondAttribute="top" id="sdZ-cA-g9D"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="rw9-70-tNk"/>
+            <size key="customSize" width="442" height="442"/>
+            <connections>
+                <outlet property="bannerTitleLbl" destination="Ete-dr-wbW" id="WF8-Gs-x4q"/>
+                <outlet property="commentImg" destination="sXR-nd-mUa" id="vPs-9X-3Bf"/>
+                <outlet property="compDescriptionTextView" destination="wCS-pk-egz" id="BBp-mH-Fiy"/>
+                <outlet property="companyImageView" destination="L9S-sM-LcB" id="CzT-bR-Qas"/>
+                <outlet property="dateLbl" destination="hid-2V-Ylg" id="A51-KN-Zqx"/>
+                <outlet property="favBtn" destination="DTK-N4-kHM" id="3pi-2n-mK2"/>
+                <outlet property="likeImage" destination="z1C-sv-CPu" id="Cha-59-074"/>
+                <outlet property="logoImageView" destination="BJ0-lC-MIS" id="fNI-MI-2n0"/>
+                <outlet property="logoView" destination="tcE-ek-RrG" id="ahb-G4-w0c"/>
+                <outlet property="readMoreBtn" destination="BHq-Wa-7u7" id="sfL-Wq-dyo"/>
+                <outlet property="titleLbl" destination="XBt-gC-cNA" id="kUW-nS-yd1"/>
+                <outlet property="totalComments" destination="HMt-k8-WW5" id="Phb-fe-hvO"/>
+                <outlet property="totalLikes" destination="gVP-GT-wCi" id="R2K-g1-D8p"/>
+            </connections>
+            <point key="canvasLocation" x="-115.94202898550725" y="8.0357142857142847"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Logo-Copex-2013-RVB" width="730" height="160"/>
+        <image name="button:sXR-nd-mUa:image" width="20" height="20">
+            <mutableData key="keyedArchiveRepresentation">
+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
+AAREZXNFUwAAACYAAAQedGhUSAAAACQAAARsdHJUUgAAACIAAASQZmlGSQAAACgAAASyaHJIUgAAACgA
+AATacGxQTAAAACwAAAUCcnVSVQAAACIAAAUuYXJFRwAAACYAAAVQZW5VUwAAACYAAAV2AFYBYQBlAG8A
+YgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAZQBsACAAUgBHAEIALQBiAGUA
+cwBrAHIAaQB2AGUAbABzAGUAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBuAOgAcgBpAGMAQx6lAHUA
+IABoAOwAbgBoACAAUgBHAEIAIABDAGgAdQBuAGcAUABlAHIAZgBpAGwAIABSAEcAQgAgAEcAZQBuAOkA
+cgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABSAEcAQgBQAHIAbwBmAGkA
+bAAgAGcA6QBuAOkAcgBpAHEAdQBlACAAUgBWAEIAwQBsAHQAYQBsAOEAbgBvAHMAIABSAEcAQgAgAHAA
+cgBvAGYAaQBskBp1KAAgAFIARwBCACCCcl9pY8+P8ABHAGUAbgBlAHIAaQBzAGsAIABSAEcAQgAtAHAA
+cgBvAGYAaQBsAE8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbAXkBegF1QXkBdkF3AAgAFIA
+RwBCACAF2wXcBdwF2QBQAHIAbwBmAGkAbABvACAAUgBHAEIAIABnAGUAbgBlAHIAaQBjAG8AUAByAG8A
+ZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAAUgBHAEIA
+LQBQAHIAbwBmAGkAbMd8vBgAIABSAEcAQgAg1QS4XNMMx3xmbpAaACAAUgBHAEIAIGPPj/Blh072TgCC
+LAAgAFIARwBCACAw1zDtMNUwoTCkMOsDkwO1A70DuQO6A8wAIAPAA8EDvwPGA68DuwAgAFIARwBCAFAA
+ZQByAGYAaQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBsAGcAZQBtAGUAZQBuACAAUgBHAEIA
+LQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAgDhcOMQ5IDicORA4bAEcAZQBuAGUA
+bAAgAFIARwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBuACAAUgBHAEIALQBwAHIAbwBmAGkA
+aQBsAGkARwBlAG4AZQByAGkBDQBrAGkAIABSAEcAQgAgAHAAcgBvAGYAaQBsAFUAbgBpAHcAZQByAHMA
+YQBsAG4AeQAgAHAAcgBvAGYAaQBsACAAUgBHAEIEHgQxBEkEOAQ5ACAEPwRABD4ERAQ4BDsETAAgAFIA
+RwBCBkUGRAZBACAGKgY5BjEGSgZBACAAUgBHAEIAIAYnBkQGOQYnBkUARwBlAG4AZQByAGkAYwAgAFIA
+RwBCACAAUAByAG8AZgBpAGwAZXRleHQAAAAAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJp
+Z2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9YWVogAAAAAAAAdE0AAD3uAAAD0FhZWiAA
+AAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZjdXJ2AAAAAAAAAAEBzQAAc2YzMgAAAAAA
+AQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGzSJSYnKFokY2xhc3NuYW1lWCRjbGFzc2Vz
+XxAQTlNCaXRtYXBJbWFnZVJlcKMnKSpaTlNJbWFnZVJlcFhOU09iamVjdNIlJiwtV05TQXJyYXmiLCrS
+JSYvMF5OU011dGFibGVBcnJheaMvLCrTMjMKNDU2V05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQA4AM
+0iUmODlXTlNDb2xvcqI4KtIlJjs8V05TSW1hZ2WiOypfEA9OU0tleWVkQXJjaGl2ZXLRP0BUcm9vdIAB
+AAgAEQAaACMALQAyADcARgBMAFcAXgBlAHIAeQCBAIMAhQCKAIwAjgCXAJwApwCpAKsArQCyALUAtwC5
+ALsAvQDCANkA2wDdD9cP3A/nD/AQAxAHEBIQGxAgECgQKxAwED8QQxBKEFIQXxBkEGYQaBBtEHUQeBB9
+EIUQiBCaEJ0QogAAAAAAAAIBAAAAAAAAAEEAAAAAAAAAAAAAAAAAABCkA
+</mutableData>
+        </image>
+        <image name="button:z1C-sv-CPu:image" width="20" height="20">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwAAAgAOAC1h7MjAsIDIwfdIVChYYWk5TLm9iamVjdHOhF4AEgArSFQoaHaIb
+HIAFgAaACRAA0iAKISJfEBROU1RJRkZSZXByZXNlbnRhdGlvboAHgAhPEQ72TU0AKgAABkgAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoKChUoKChLLy8v
+XCAgIDwEBAQJAAAAAAAAAAAEBAQJICAgPS8vL1woKChLCgoKFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAsLCxUc3Nz1oyMjP+Ojo7/h4eH/WRkZLsaGhozGhoaNGRkZLuHh4f9jo6O/4yMjP9zc3PWLCws
+VAAAAAAAAAAAAAAAAAAAAAAAAAAAJycnS4aGhvV4eHjgPz8/eDAwMFpNTU2Rg4OD9Hx8fOZ8fHzmg4OD
+9E1NTZEwMDBaPz8/d3h4eOCFhYX1JycnSwAAAAAAAAAAAAAAAAYGBg1paWnFfX196BgYGDAAAAAAAAAA
+AAAAAAAoKChOgoKC84KCgvMoKChNAAAAAAAAAAAAAAAAGBgYL35+fuhpaWnFBgYGDQAAAAAAAAAAGxsb
+NYaGhvtRUVGYAAAAAAAAAAAAAAAAAAAAAAAAAAAcHBw2HBwcNgAAAAAAAAAAAAAAAAAAAAAAAAAAUVFR
+mIaGhvsbGxs1AAAAAAAAAAAgICA8i4uL/0lJSYkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAABJSUmJi4uL/yAgIDwAAAAAAAAAAA8PDxx5eXnjaGhowgMDAwYAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMDBmhoaMJ5eXnjDw8PHAAAAAAAAAAAAAAA
+AEpKSo2MjIz/LS0tVwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAtLS1XjIyM
+/0pKSo0AAAAAAAAAAAAAAAAAAAAAEBAQIHZ2dt16enrjFxcXLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAFxcXLHp6euN2dnbdEBAQIAAAAAAAAAAAAAAAAAAAAAAAAAAAJycnTIeHh/dubm7MEBAQ
+IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQECBubm7Mh4eH9ycnJ0wAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAODg4aYuLi/5ra2vGEBAQIQAAAAAAAAAAAAAAAAAAAAAQEBAha2trxouLi/43NzdpAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOjo6cIuLi/5ubm7MFRUVKQAAAAAAAAAAFRUV
+KW5ubsyLi4v+Ojo6cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANjY2
+Z4eHh/h0dHTXGRkZMRkZGTF0dHTXh4eH+DY2NmcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAALy8vWIKCgvF6enrkenp65IKCgvEvLy9YAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJycnS39/f+t/f3/rJycn
+SwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAICAgPCAgIDwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAADAAAAAQAUAAABAQADAAAAAQAUAAAB
+AgADAAAABAAABw4BAwADAAAAAQABAAABBgADAAAAAQACAAABCgADAAAAAQABAAABEQAEAAAAAQAAAAgB
+EgADAAAAAQABAAABFQADAAAAAQAEAAABFgADAAAAAQAUAAABFwAEAAAAAQAABkABHAADAAAAAQABAAAB
+KAADAAAAAQACAAABUgADAAAAAQABAAABUwADAAAABAAABxaHcwAHAAAH2AAABx4AAAAAAAgACAAIAAgA
+AQABAAEAAQAAB9hhcHBsAiAAAG1udHJSR0IgWFlaIAfZAAIAGQALABoAC2Fjc3BBUFBMAAAAAGFwcGwA
+AAAAAAAAAAAAAAAAAAAAAAD21gABAAAAANMtYXBwbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAC2Rlc2MAAAEIAAAAb2RzY20AAAF4AAAFnGNwcnQAAAcUAAAAOHd0cHQA
+AAdMAAAAFHJYWVoAAAdgAAAAFGdYWVoAAAd0AAAAFGJYWVoAAAeIAAAAFHJUUkMAAAecAAAADmNoYWQA
+AAesAAAALGJUUkMAAAecAAAADmdUUkMAAAecAAAADmRlc2MAAAAAAAAAFEdlbmVyaWMgUkdCIFByb2Zp
+bGUAAAAAAAAAAAAAABRHZW5lcmljIFJHQiBQcm9maWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtbHVjAAAAAAAAAB8AAAAMc2tTSwAAACgAAAGEZGFESwAAAC4A
+AAGsY2FFUwAAACQAAAHadmlWTgAAACQAAAH+cHRCUgAAACYAAAIidWtVQQAAACoAAAJIZnJGVQAAACgA
+AAJyaHVIVQAAACgAAAKaemhUVwAAABYAAALCbmJOTwAAACYAAALYY3NDWgAAACIAAAL+aGVJTAAAAB4A
+AAMgaXRJVAAAACgAAAM+cm9STwAAACQAAANmZGVERQAAACwAAAOKa29LUgAAABYAAAO2c3ZTRQAAACYA
+AALYemhDTgAAABYAAAPMamFKUAAAABoAAAPiZWxHUgAAACIAAAP8cHRQTwAAACYAAAQebmxOTAAAACgA
+AAREZXNFUwAAACYAAAQedGhUSAAAACQAAARsdHJUUgAAACIAAASQZmlGSQAAACgAAASyaHJIUgAAACgA
+AATacGxQTAAAACwAAAUCcnVSVQAAACIAAAUuYXJFRwAAACYAAAVQZW5VUwAAACYAAAV2AFYBYQBlAG8A
+YgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAZQBsACAAUgBHAEIALQBiAGUA
+cwBrAHIAaQB2AGUAbABzAGUAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBuAOgAcgBpAGMAQx6lAHUA
+IABoAOwAbgBoACAAUgBHAEIAIABDAGgAdQBuAGcAUABlAHIAZgBpAGwAIABSAEcAQgAgAEcAZQBuAOkA
+cgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABSAEcAQgBQAHIAbwBmAGkA
+bAAgAGcA6QBuAOkAcgBpAHEAdQBlACAAUgBWAEIAwQBsAHQAYQBsAOEAbgBvAHMAIABSAEcAQgAgAHAA
+cgBvAGYAaQBskBp1KAAgAFIARwBCACCCcl9pY8+P8ABHAGUAbgBlAHIAaQBzAGsAIABSAEcAQgAtAHAA
+cgBvAGYAaQBsAE8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbAXkBegF1QXkBdkF3AAgAFIA
+RwBCACAF2wXcBdwF2QBQAHIAbwBmAGkAbABvACAAUgBHAEIAIABnAGUAbgBlAHIAaQBjAG8AUAByAG8A
+ZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAAUgBHAEIA
+LQBQAHIAbwBmAGkAbMd8vBgAIABSAEcAQgAg1QS4XNMMx3xmbpAaACAAUgBHAEIAIGPPj/Blh072TgCC
+LAAgAFIARwBCACAw1zDtMNUwoTCkMOsDkwO1A70DuQO6A8wAIAPAA8EDvwPGA68DuwAgAFIARwBCAFAA
+ZQByAGYAaQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBsAGcAZQBtAGUAZQBuACAAUgBHAEIA
+LQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAgDhcOMQ5IDicORA4bAEcAZQBuAGUA
+bAAgAFIARwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBuACAAUgBHAEIALQBwAHIAbwBmAGkA
+aQBsAGkARwBlAG4AZQByAGkBDQBrAGkAIABSAEcAQgAgAHAAcgBvAGYAaQBsAFUAbgBpAHcAZQByAHMA
+YQBsAG4AeQAgAHAAcgBvAGYAaQBsACAAUgBHAEIEHgQxBEkEOAQ5ACAEPwRABD4ERAQ4BDsETAAgAFIA
+RwBCBkUGRAZBACAGKgY5BjEGSgZBACAAUgBHAEIAIAYnBkQGOQYnBkUARwBlAG4AZQByAGkAYwAgAFIA
+RwBCACAAUAByAG8AZgBpAGwAZXRleHQAAAAAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJp
+Z2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9YWVogAAAAAAAAdE0AAD3uAAAD0FhZWiAA
+AAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZjdXJ2AAAAAAAAAAEBzQAAc2YzMgAAAAAA
+AQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGzSJSYnKFokY2xhc3NuYW1lWCRjbGFzc2Vz
+XxAQTlNCaXRtYXBJbWFnZVJlcKMnKSpaTlNJbWFnZVJlcFhOU09iamVjdNIlJiwtV05TQXJyYXmiLCrS
+JSYvMF5OU011dGFibGVBcnJheaMvLCrTMjMKNDU2V05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQA4AM
+0iUmODlXTlNDb2xvcqI4KtIlJjs8V05TSW1hZ2WiOypfEA9OU0tleWVkQXJjaGl2ZXLRP0BUcm9vdIAB
+AAgAEQAaACMALQAyADcARgBMAFcAXgBlAHIAeQCBAIMAhQCKAIwAjgCXAJwApwCpAKsArQCyALUAtwC5
+ALsAvQDCANkA2wDdD9cP3A/nD/AQAxAHEBIQGxAgECgQKxAwED8QQxBKEFIQXxBkEGYQaBBtEHUQeBB9
+EIUQiBCaEJ0QogAAAAAAAAIBAAAAAAAAAEEAAAAAAAAAAAAAAAAAABCkA
+</mutableData>
+        </image>
+        <image name="login_screen_logo" width="144" height="144"/>
+        <image name="share24" width="24" height="24"/>
+    </resources>
+</document>

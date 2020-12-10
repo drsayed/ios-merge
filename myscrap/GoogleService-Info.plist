@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>605563401441-tetrqh6580rnlbjidmdesqftkrbnrli0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.605563401441-tetrqh6580rnlbjidmdesqftkrbnrli0</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>605563401441-fsjebpbsh9n88lhsm1aq2sh3aoa8aqns.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDMy0eZmmPCnWFo4JlW3kQbcZvyPNT3nBA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>605563401441</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sayedmetal.myscrap</string>
+	<key>PROJECT_ID</key>
+	<string>myscrap-1479538067818</string>
+	<key>STORAGE_BUCKET</key>
+	<string>myscrap-1479538067818.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:605563401441:ios:054176315031db30</string>
+	<key>DATABASE_URL</key>
+	<string>https://myscrap-1479538067818.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FeedListingCell" customModule="myscrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="757" height="690"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="757" height="690"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANH-94-Zvn" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="20" width="757" height="670"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Listing ID 0001" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5h-ZY-VG8">
+                                <rect key="frame" x="8" y="8" width="128" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="Jfv-bH-Gcz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a76-Ke-SXi" customClass="SeperatorView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="31" width="757" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="SEf-r7-fKd"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfc-nN-lDH" customClass="ProfileView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="8" y="40" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="0D9-T2-4KT"/>
+                                    <constraint firstAttribute="height" constant="60" id="0NU-NJ-lJh"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="I5u-Jh-lqL">
+                                <rect key="frame" x="76" y="44.5" width="673" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNp-l4-bKu" customClass="DesignationLabel" customModule="myscrap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="673" height="20"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="100 MT - ">
+                                                <attributes>
+                                                    <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="Sell Offer">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Berry - Product Wire No.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bu-Ix-JIJ">
+                                        <rect key="frame" x="0.0" y="20" width="673" height="19"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 hr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdq-Ez-KY0" customClass="TimeLabel" customModule="myscrap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="39" width="673" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Offer Subject to unsold" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4xA-Gd-1Pe" customClass="UserTagTextView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="8" y="105" width="741" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0tG-Cg-dbK">
+                                <rect key="frame" x="0.0" y="143" width="757" height="426"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="426" id="4C9-ks-PIo"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jh4-OS-bpe" customClass="ListingFeedViewMoreButton" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="641" y="577" width="100" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="viewMorePressed:" destination="gTV-IL-0wX" eventType="touchUpInside" id="JHW-qX-lWX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="18 Views" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvz-Un-Iyf">
+                                <rect key="frame" x="8" y="584" width="56" height="16.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BC9-zv-wwx" customClass="SeperatorView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="8" y="615" width="733" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="qpz-xI-wtY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mvz-Un-Iyf" firstAttribute="centerY" secondItem="jh4-OS-bpe" secondAttribute="centerY" id="0xT-su-8Le"/>
+                            <constraint firstItem="0tG-Cg-dbK" firstAttribute="top" secondItem="4xA-Gd-1Pe" secondAttribute="bottom" constant="5" id="5BL-qQ-Xct"/>
+                            <constraint firstItem="0tG-Cg-dbK" firstAttribute="leading" secondItem="ANH-94-Zvn" secondAttribute="leading" id="5v5-5u-s5w"/>
+                            <constraint firstAttribute="trailing" secondItem="a76-Ke-SXi" secondAttribute="trailing" id="8c5-az-LKi"/>
+                            <constraint firstItem="a76-Ke-SXi" firstAttribute="leading" secondItem="ANH-94-Zvn" secondAttribute="leading" id="9Mt-7Q-aYe"/>
+                            <constraint firstAttribute="height" constant="670" id="9k1-Lp-ndb"/>
+                            <constraint firstItem="I5u-Jh-lqL" firstAttribute="centerY" secondItem="Hfc-nN-lDH" secondAttribute="centerY" id="Ho7-5S-14g"/>
+                            <constraint firstItem="4xA-Gd-1Pe" firstAttribute="top" secondItem="Hfc-nN-lDH" secondAttribute="bottom" constant="5" id="Jxh-lH-pCr"/>
+                            <constraint firstItem="BC9-zv-wwx" firstAttribute="top" secondItem="jh4-OS-bpe" secondAttribute="bottom" constant="8" id="MtA-eE-IoH"/>
+                            <constraint firstItem="4xA-Gd-1Pe" firstAttribute="trailing" secondItem="I5u-Jh-lqL" secondAttribute="trailing" id="Zaj-qt-ldn"/>
+                            <constraint firstAttribute="trailing" secondItem="jh4-OS-bpe" secondAttribute="trailing" constant="16" id="bOC-CB-LaA"/>
+                            <constraint firstItem="BC9-zv-wwx" firstAttribute="leading" secondItem="mvz-Un-Iyf" secondAttribute="leading" id="hbE-Aw-ZvG"/>
+                            <constraint firstItem="mvz-Un-Iyf" firstAttribute="leading" secondItem="ANH-94-Zvn" secondAttribute="leading" constant="8" id="iLi-Qb-0Rf"/>
+                            <constraint firstItem="jh4-OS-bpe" firstAttribute="top" secondItem="0tG-Cg-dbK" secondAttribute="bottom" constant="8" id="iSe-xa-5H0"/>
+                            <constraint firstItem="Hfc-nN-lDH" firstAttribute="top" secondItem="a76-Ke-SXi" secondAttribute="bottom" constant="8" id="ioh-tC-0za"/>
+                            <constraint firstItem="a76-Ke-SXi" firstAttribute="top" secondItem="W5h-ZY-VG8" secondAttribute="bottom" constant="8" id="jHc-7X-jRr"/>
+                            <constraint firstItem="W5h-ZY-VG8" firstAttribute="top" secondItem="ANH-94-Zvn" secondAttribute="top" constant="8" id="jp8-hL-L1r"/>
+                            <constraint firstItem="W5h-ZY-VG8" firstAttribute="leading" secondItem="ANH-94-Zvn" secondAttribute="leading" constant="8" id="k8k-LA-sSq"/>
+                            <constraint firstAttribute="trailing" secondItem="0tG-Cg-dbK" secondAttribute="trailing" id="kQf-Ol-of2"/>
+                            <constraint firstAttribute="trailing" secondItem="I5u-Jh-lqL" secondAttribute="trailing" constant="8" id="kjL-0p-WTL"/>
+                            <constraint firstItem="4xA-Gd-1Pe" firstAttribute="leading" secondItem="Hfc-nN-lDH" secondAttribute="leading" id="lKR-Ev-JTY"/>
+                            <constraint firstItem="I5u-Jh-lqL" firstAttribute="leading" secondItem="Hfc-nN-lDH" secondAttribute="trailing" constant="8" id="ls7-2h-0gE"/>
+                            <constraint firstItem="Hfc-nN-lDH" firstAttribute="leading" secondItem="ANH-94-Zvn" secondAttribute="leading" constant="8" id="oYj-yK-H7H"/>
+                            <constraint firstItem="BC9-zv-wwx" firstAttribute="trailing" secondItem="jh4-OS-bpe" secondAttribute="trailing" id="y1K-e6-aYk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="ANH-94-Zvn" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="LWi-BV-Rpc"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="ANH-94-Zvn" secondAttribute="trailing" id="nj0-p6-5kR"/>
+                <constraint firstItem="ANH-94-Zvn" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="pCC-CB-ELF"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="ANH-94-Zvn" secondAttribute="bottom" id="w3r-DJ-bAV"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="757" height="690"/>
+            <connections>
+                <outlet property="imageView" destination="0tG-Cg-dbK" id="dp0-Ba-Lz6"/>
+                <outlet property="imageViewHeight" destination="4C9-ks-PIo" id="qQc-X5-EgT"/>
+                <outlet property="listingIdLabel" destination="W5h-ZY-VG8" id="QLY-W3-WDd"/>
+                <outlet property="offerLabel" destination="nNp-l4-bKu" id="GCr-Js-DH6"/>
+                <outlet property="profileView" destination="Hfc-nN-lDH" id="Xfn-Qc-To0"/>
+                <outlet property="textView" destination="4xA-Gd-1Pe" id="ng6-2x-E4Q"/>
+                <outlet property="timeLabel" destination="pdq-Ez-KY0" id="Wgq-Sl-fz0"/>
+                <outlet property="titleLabel" destination="3bu-Ix-JIJ" id="To5-Oz-S85"/>
+                <outlet property="viewLabel" destination="mvz-Un-Iyf" id="Xnv-Gw-QB2"/>
+            </connections>
+            <point key="canvasLocation" x="-240.5" y="288"/>
+        </collectionViewCell>
+    </objects>
+</document>
