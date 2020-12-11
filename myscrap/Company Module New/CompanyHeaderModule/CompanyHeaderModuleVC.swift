@@ -55,7 +55,8 @@ class CompanyHeaderModuleVC: UIViewController {
     @IBOutlet weak var affliationBtn: CorneredButton!
     @IBOutlet weak var isriBtn: CorneredButton!
     @IBOutlet weak var ownCompBtn: UIButton! //CorneredButton!
-
+    @IBOutlet weak var reportCompanyButton : UIButton!
+    
 //    @IBOutlet weak var commoImgOverView: CorneredView!
 //    @IBOutlet weak var commImgView: UIImageView!
 //    @IBOutlet weak var commoCount: UILabel!
@@ -96,8 +97,8 @@ class CompanyHeaderModuleVC: UIViewController {
     @IBOutlet weak var directionBtn: UIButton!
         
     var ownthisCompanyStr = "   Own this company   "
-    var reportStr = "   Report   "
-    var reportedStr = "   Reported   "
+    var reportStr = "Report"//"   Report   "
+    var reportedStr = "Reported" //"   Reported   "
     var requestedStr = "   Requested   "
 
     var editButton : UIButton!
@@ -156,6 +157,15 @@ class CompanyHeaderModuleVC: UIViewController {
         self.ownCompBtn.layer.cornerRadius = 10
         self.ownCompBtn.layer.masksToBounds = true
         self.ownCompBtn.addTarget(self, action: #selector(ownCompanyBtnAction), for: .touchUpInside)
+        
+        //reportCompanyButton
+        self.reportCompanyButton.isHidden = true
+        self.reportCompanyButton.setImage(UIImage(named: "icReport"), for: .normal)
+        self.reportCompanyButton.setTitle("Report", for: .normal)
+        self.reportCompanyButton.setTitleColor(UIColor.gray, for: .normal)
+        self.reportCompanyButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 14)
+        self.reportCompanyButton.alignTextUnderImage(imgsize: CGSize(width: 25, height: 25), spacing: 2)
+        self.reportCompanyButton.addTarget(self, action: #selector(reportCompanyButtonAction), for: .touchUpInside)
         
 //        self.commoImgOverView.isHidden = true
 //        self.commoImgOverView.layer.cornerRadius = 3
@@ -248,12 +258,48 @@ class CompanyHeaderModuleVC: UIViewController {
     }
     @objc func ownCompanyBtnAction(sender : UIButton) {
                         
+//        let isAdminAvailable = self.companyData.last!.isAdminAvailable
+//
+//        if isAdminAvailable {
+//
+//            self.reportCompanyDropDown.anchorView = sender
+//            self.reportCompanyDropDown.bottomOffset = CGPoint(x: self.ownCompBtn.frame.origin.x, y:(self.reportCompanyDropDown.anchorView?.plainView.bounds.height)!)
+//            self.reportCompanyDropDown.dataSource = ["Report Inappropriate company"]
+//            self.reportCompanyDropDown.cellHeight = 45.0
+//
+//            self.reportCompanyDropDown.direction = .bottom
+//
+//            self.reportCompanyDropDown.dropDownWidth = 230
+//            self.reportCompanyDropDown.setupCornerRadius(3)
+//            self.reportCompanyDropDown.backgroundColor = UIColor.white
+//
+//            self.reportCompanyDropDown.show()
+//            self.reportCompanyDropDown.selectionAction = {[unowned self] (index: Int, item: String) in
+//
+//                self.reportCompanyAlertView()
+//            }
+//        }
+//        else {
+            let vc = OwnThisCompanyVC()
+            vc.viewDelegate = self
+
+            if self.companyData.count > 0 {
+                vc.getCompanyItems = self.companyData.last!
+            }
+
+            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+    }
+    
+    @objc func reportCompanyButtonAction(sender : UIButton) {
+        
         let isAdminAvailable = self.companyData.last!.isAdminAvailable
 
         if isAdminAvailable {
+            print(self.reportCompanyButton.frame.origin.x)
             
             self.reportCompanyDropDown.anchorView = sender
-            self.reportCompanyDropDown.bottomOffset = CGPoint(x: self.ownCompBtn.frame.origin.x, y:(self.reportCompanyDropDown.anchorView?.plainView.bounds.height)!)
+            self.reportCompanyDropDown.bottomOffset = CGPoint(x: self.reportCompanyButton.frame.origin.x, y:(self.reportCompanyDropDown.anchorView?.plainView.bounds.height)!)
             self.reportCompanyDropDown.dataSource = ["Report Inappropriate company"]
             self.reportCompanyDropDown.cellHeight = 45.0
             
@@ -268,16 +314,6 @@ class CompanyHeaderModuleVC: UIViewController {
 
                 self.reportCompanyAlertView()
             }
-        }
-        else {
-            let vc = OwnThisCompanyVC()
-            vc.viewDelegate = self
-
-            if self.companyData.count > 0 {
-                vc.getCompanyItems = self.companyData.last!
-            }
-
-            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -380,8 +416,8 @@ class CompanyHeaderModuleVC: UIViewController {
                     if isSuccess! {
                         reportView.doCloseAnimation()
 
-                        self.ownCompBtn.setTitle(self.reportedStr, for: .normal)
-                        self.ownCompBtn.isEnabled = false
+                        self.reportCompanyButton.setTitle(self.reportedStr, for: .normal)
+                        self.reportCompanyButton.isEnabled = false
                     }
                     else {
                         reportView.doCloseAnimation()
@@ -1072,7 +1108,8 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
                     self.editButton.isHidden = false
                 }
                 else if isAdminAvailable! { // Need to check
-                    self.ownCompBtn.isHidden = false
+                    self.ownCompBtn.isHidden = true//false
+                    self.reportCompanyButton.isHidden = false
                     
                     if reportedStatusOfCompany == "Reported" {
                         buttonTitleStr = self.reportedStr
@@ -1081,18 +1118,23 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
                         buttonTitleStr = self.reportStr
                     }
                     
-                    self.ownCompBtn.layer.cornerRadius = 3
-                    self.ownCompBtn.layer.masksToBounds = true
+                    self.reportCompanyButton.setTitle(buttonTitleStr, for: .normal)
+                     
+//                    self.ownCompBtn.layer.cornerRadius = 3
+//                    self.ownCompBtn.layer.masksToBounds = true
                 }
             }
             else {
                 
                 if reportedStatusOfCompany == "Reported" {
                     buttonTitleStr = self.reportedStr
-                    self.ownCompBtn.isHidden = false
-                    self.ownCompBtn.isEnabled = false
-                    self.ownCompBtn.layer.cornerRadius = 3
-                    self.ownCompBtn.layer.masksToBounds = true
+                    self.ownCompBtn.isHidden = true
+                    self.reportCompanyButton.isHidden = false
+//                    self.ownCompBtn.isHidden = false
+//                    self.ownCompBtn.isEnabled = false
+//                    self.ownCompBtn.layer.cornerRadius = 3
+//                    self.ownCompBtn.layer.masksToBounds = true
+                    self.reportCompanyButton.setTitle(buttonTitleStr, for: .normal)
                 }
                 else if getOwnCompanyRequest == "Requested" {
                     buttonTitleStr = self.requestedStr
@@ -1107,13 +1149,12 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
                    self.ownCompBtn.layer.cornerRadius = 10
                    self.ownCompBtn.layer.masksToBounds = true
 
-                buttonTitleStr = self.ownthisCompanyStr
+                   buttonTitleStr = self.ownthisCompanyStr
                }
             }
             
             if buttonTitleStr != "" {
                 self.ownCompBtn.setTitle(buttonTitleStr, for: .normal)
-//                self.ownCompBtn.setTitle(String(format: "%@%@%@", self.commonSpaceStr,buttonTitleStr,self.commonSpaceStr), for: .normal)
             }
 
             self.photoCV.reloadData()
@@ -1133,11 +1174,11 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
 public extension UIButton
 {
 
-    func alignTextUnderImage(imgsize:CGSize, spacing: CGFloat = 6.0)
+  func alignTextUnderImage(imgsize:CGSize, spacing: CGFloat = 6.0)
   {
       if let image = self.imageView?.image
       {
-          let imageSize: CGSize = imgsize//image.size
+          let imageSize: CGSize = image.size
           self.titleEdgeInsets = UIEdgeInsets(top: spacing, left: -imageSize.width, bottom: -(imageSize.height), right: 0.0)
           let labelString = NSString(string: self.titleLabel!.text!)
           let titleSize = labelString.size(withAttributes: [NSAttributedString.Key.font: self.titleLabel!.font])

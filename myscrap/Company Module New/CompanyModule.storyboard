@@ -150,6 +150,17 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rO-Af-r1i">
+                                                <rect key="frame" x="328" y="47" width="70" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="9NS-Ob-x7z"/>
+                                                    <constraint firstAttribute="height" constant="45" id="q4j-7v-H0Y"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -158,12 +169,14 @@
                                             <constraint firstItem="Ggc-qc-ZVg" firstAttribute="leading" secondItem="Mi7-RI-g66" secondAttribute="leading" constant="16" id="58x-mh-ces"/>
                                             <constraint firstItem="jLx-9s-ZA1" firstAttribute="top" secondItem="Pbv-H8-gU9" secondAttribute="bottom" constant="8" id="7VX-en-WWJ"/>
                                             <constraint firstItem="ebp-AB-pUe" firstAttribute="leading" secondItem="24K-b9-eHc" secondAttribute="trailing" constant="8" id="7ZH-h0-M5x"/>
+                                            <constraint firstItem="1rO-Af-r1i" firstAttribute="top" secondItem="VQC-Dy-2Vi" secondAttribute="top" id="9EV-XB-uyR"/>
                                             <constraint firstAttribute="trailing" secondItem="Pbv-H8-gU9" secondAttribute="trailing" constant="16" id="9hG-UK-Pm6"/>
                                             <constraint firstAttribute="height" constant="118" id="BnL-SH-wsd"/>
                                             <constraint firstItem="24K-b9-eHc" firstAttribute="leading" secondItem="Ggc-qc-ZVg" secondAttribute="trailing" id="EaQ-9T-Du5"/>
                                             <constraint firstItem="Ggc-qc-ZVg" firstAttribute="centerY" secondItem="24K-b9-eHc" secondAttribute="centerY" id="FZd-aH-TVJ"/>
                                             <constraint firstItem="VQC-Dy-2Vi" firstAttribute="top" secondItem="Pbv-H8-gU9" secondAttribute="bottom" constant="5" id="Lb2-bm-YDS"/>
                                             <constraint firstItem="Pbv-H8-gU9" firstAttribute="top" secondItem="Mi7-RI-g66" secondAttribute="top" constant="16" id="VvG-QS-jKo"/>
+                                            <constraint firstAttribute="trailing" secondItem="1rO-Af-r1i" secondAttribute="trailing" constant="16" id="biI-YX-iXx"/>
                                             <constraint firstItem="Pbv-H8-gU9" firstAttribute="leading" secondItem="Mi7-RI-g66" secondAttribute="leading" constant="16" id="dQo-ph-ylh"/>
                                             <constraint firstItem="jLx-9s-ZA1" firstAttribute="centerY" secondItem="Puu-5w-CuF" secondAttribute="centerY" id="dx5-PT-pBf"/>
                                             <constraint firstItem="jLx-9s-ZA1" firstAttribute="leading" secondItem="Mi7-RI-g66" secondAttribute="leading" constant="16" id="lKz-7W-l1i"/>
@@ -337,6 +350,7 @@
                         <outlet property="isriBtn" destination="ebp-AB-pUe" id="ka9-NN-3xc"/>
                         <outlet property="ownCompBtn" destination="VQC-Dy-2Vi" id="csZ-N1-hud"/>
                         <outlet property="photoCV" destination="SL3-we-yDa" id="Pjo-j1-8WZ"/>
+                        <outlet property="reportCompanyButton" destination="1rO-Af-r1i" id="XUY-mT-rqo"/>
                         <outlet property="stickyHeaderView" destination="vNo-IO-KQJ" id="NHl-wF-Lux"/>
                         <outlet property="tabBarCollectionView" destination="Q7l-Vv-6SU" id="Fhp-Kn-r20"/>
                         <outlet property="webBtn" destination="HdP-zk-vCs" id="J3E-DN-vHa"/>
