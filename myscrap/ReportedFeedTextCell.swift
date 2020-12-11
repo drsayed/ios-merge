@@ -34,7 +34,7 @@ class ReportedFeedTextCell: FeedNewUserCell {
     override func configCell(withItem item: FeedV2Item) {
         super.configCell(withItem: item)
         reportedView.isHidden = true
-        favBtn.isFavourite = item.isPostFavourited
+//        favBtn.isFavourite = item.isPostFavourited
         setupAPIViews(item: item)
         let attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: "Reported By • ", attributes: [NSAttributedString.Key.foregroundColor : UIColor.BLACK_ALPHA, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 11)!]))

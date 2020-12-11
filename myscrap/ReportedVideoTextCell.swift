@@ -10,8 +10,11 @@ import UIKit
 import AVKit
 import AVFoundation
 import Photos
+
+
 protocol VideoTextsOnReportPlayerDelegate : class {
     func playReportedTextVedio(url: String)
+    func PortraitTextVideoChanged()
 }
 class ReportedVideoTextCell: BaseCell {
     var visibleCellIndex = IndexPath()
@@ -91,6 +94,20 @@ class ReportedVideoTextCell: BaseCell {
         } else {
             offlineBtnAction?()
         }
+    }
+    func UpdateLable()  {
+        if let countLable  = self.viewWithTag(1001) as? UILabel {
+    countLable.text = "\(Int((self.videosCollection.contentOffset.x / self.videosCollection.contentSize.width) * CGFloat((self.newItem?.videoURL.count ?? 0) as Int))+1)/\(self.newItem!.videoURL.count as Int)"
+          
+    }
+    }
+    @objc func pauseVisibleVideos()  {
+        
+       for videoCell in self.videosCollection.visibleCells  as [PortraitVideoCell]    {
+                    print("You can stop play the video from here")
+                        videoCell.pause()
+
+                }
     }
     @objc  func playButtonPresssed(sender: UIButton!){
        //...
@@ -230,7 +247,7 @@ class ReportedVideoTextCell: BaseCell {
    
         
         profileTypeView?.checkType = (isAdmin:false,isMod: item.moderator == "1", isNew:item.newJoined, rank:item.rank, isLevel: item.isLevel, level: item.level)
-        
+        descriptionText?.attributedText = item.descriptionStatus
      //   setupThumbnail(videoUrl: URL(string: item.videoThumbnail)!)
     }
     
@@ -524,10 +541,7 @@ extension ReportedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
                     videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                 }
             videoCell.pause()
-            videoCell.videoView.isHidden = true
-            videoCell.spinner.isHidden =  true
-            videoCell.thumbnailImg.isHidden = false
-            videoCell.playBtn.isHidden = false
+         
 //                videoCell.player.actionAtItemEnd = .none
 //
 //                NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
@@ -593,7 +607,7 @@ extension ReportedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
                       // cell.updatedDelegate = self
              //cell.indexPath = indexPath.row
          //      cell.newItem = self.newItem
-        cell.inDetailView = inDetailView
+        cell.inDetailView = false //inDetailView
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
@@ -605,11 +619,13 @@ extension ReportedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
         cell.playBtn.addTarget(self, action:#selector(self.playButtonPresssed), for: .touchUpInside)
       //  cell.playBtnAction
          
-        cell.videoView.isHidden = true
-          cell.thumbnailImg.isHidden = false
-          cell.playBtn.isHidden = false
+        cell.videoView.isHidden = false
+          cell.thumbnailImg.isHidden = true
+        
+          cell.playBtn.isHidden = true
            cell.layoutIfNeeded()
                cell.layoutSubviews()
+        cell.pause()
         cell.updateConstraintsIfNeeded()
         
                return cell
@@ -623,11 +639,11 @@ extension ReportedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
         
              if   item.videoType == "landscape" {
               //   return CGSize(width:self.videosCollection.frame.size.width, height: 300)
-return CGSize(width:screenWidth, height: 400)
+return CGSize(width:screenWidth, height: 250)
              }
         else
              {
-                return CGSize(width:screenWidth, height:400)
+                return CGSize(width:screenWidth, height:250)
 
         }
     }
@@ -650,6 +666,8 @@ return CGSize(width:screenWidth, height: 400)
         let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
     let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
     
+        self.pauseVisibleVideos()
+        videoPlayerDelegate?.PortraitTextVideoChanged()
 //        var visibleRect = CGRect()
 //                visibleRect.origin = scrollView.contentOffset
 //                visibleRect.size = scrollView.bounds.size
@@ -681,39 +699,39 @@ return CGSize(width:screenWidth, height: 400)
 //        }
        
 
-        if visibleCellIndex.item != 0 && visibleCellIndex.item != ((self.newItem?.videoURL.count)!-1) {
-            let indexPathPre = IndexPath(row: visibleCellIndex.item-1, section: visibleCellIndex.section)
-            let indexPathNext = IndexPath(row: visibleCellIndex.item+1, section: visibleCellIndex.section)
-
-            let muteImg = #imageLiteral(resourceName: "mute-60x60")
-            let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-
-            let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-            let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-
-            if let videoCell = self.videosCollection.cellForItem(at: indexPathPre) as? PortraitVideoCell {
-                videoCell.videoView.isHidden = false
-                videoCell.playerView.isMuted = true
-                if  videoCell.playerView.isMuted {
-                    videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                } else {
-                    videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                }
-            videoCell.pause()
-            }
-            
-            if let videoCell1 = self.videosCollection.cellForItem(at: indexPathNext) as? PortraitVideoCell {
-                videoCell1.videoView.isHidden = false
-                videoCell1.playerView.isMuted = true
-                if  videoCell1.playerView.isMuted {
-                    videoCell1.muteBtn.setImage(tintMuteImg, for: .normal)
-                } else {
-                    videoCell1.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                }
-                videoCell1.pause()
-            }
-            
-        }
+//        if visibleCellIndex.item != 0 && visibleCellIndex.item != ((self.newItem?.videoURL.count)!-1) {
+//            let indexPathPre = IndexPath(row: visibleCellIndex.item-1, section: visibleCellIndex.section)
+//            let indexPathNext = IndexPath(row: visibleCellIndex.item+1, section: visibleCellIndex.section)
+//
+//            let muteImg = #imageLiteral(resourceName: "mute-60x60")
+//            let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+//
+//            let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
+//            let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+//
+//            if let videoCell = self.videosCollection.cellForItem(at: indexPathPre) as? PortraitVideoCell {
+//                videoCell.videoView.isHidden = false
+//                videoCell.playerView.isMuted = true
+//                if  videoCell.playerView.isMuted {
+//                    videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//                } else {
+//                    videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//                }
+//            videoCell.pause()
+//            }
+//
+//            if let videoCell1 = self.videosCollection.cellForItem(at: indexPathNext) as? PortraitVideoCell {
+//                videoCell1.videoView.isHidden = false
+//                videoCell1.playerView.isMuted = true
+//                if  videoCell1.playerView.isMuted {
+//                    videoCell1.muteBtn.setImage(tintMuteImg, for: .normal)
+//                } else {
+//                    videoCell1.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//                }
+//                videoCell1.pause()
+//            }
+//
+//        }
 //
 //}
 //        }

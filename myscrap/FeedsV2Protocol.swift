@@ -483,7 +483,7 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
             //let j = i + 1
             
             feedsV2DataSource.remove(at: i)
-            let indexPath = IndexPath(item: i, section: 0)
+            let indexPath = IndexPath(item: i, section: 1)
             feedCollectionView.deleteItems(at: [indexPath])
         }, completion: nil)
     }

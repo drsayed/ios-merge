@@ -19,6 +19,9 @@ final class ReportedVC: BaseRevealVC {
         cv.register(ReportedFeedImageTextCell.Nib, forCellWithReuseIdentifier: ReportedFeedImageTextCell.identifier)
         cv.register(ReportedVideoCell.Nib, forCellWithReuseIdentifier: ReportedVideoCell.identifier)
         cv.register(ReportedVideoTextCell.Nib, forCellWithReuseIdentifier: ReportedVideoTextCell.identifier)
+        cv.register(ReportCompanyAdminCollectionViewCell.Nib, forCellWithReuseIdentifier: ReportCompanyAdminCollectionViewCell.identifier)
+
+        
         cv.backgroundColor = UIColor(hexString: "EFEFEF")
         cv.delegate = self
         cv.dataSource = self
@@ -83,20 +86,41 @@ final class ReportedVC: BaseRevealVC {
                 }, completion: nil)
             }
         })*/
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("SharedOpen"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("SharedClosed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
+
+       
         modelV2.getReportedPosts(completion: { (members, companyItems) in
             DispatchQueue.main.async {
                 self.dataSourceV2 = members
                 self.companyDataArray = companyItems
 
                 self.activityIndicator.stopAnimating()
-                self.collectionView.performBatchUpdates({
-                    let indexSet = IndexSet(integer: 0)
-                    self.collectionView.reloadSections(indexSet)
-                }, completion: nil)
+                self.collectionView.reloadData()
+//                self.collectionView.performBatchUpdates({
+//                    let indexSet = IndexSet(integer: 0)
+//                 //   self.collectionView.reloadSections(indexSet)
+//                }, completion: nil)
             }
         })
         collectionView.addSubview(refreshControll)
     }
+    @objc func feed_image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
     // MARK:- VIEW WILL APPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -108,6 +132,7 @@ final class ReportedVC: BaseRevealVC {
     //MARK:- VIEW WILL DISAPPEAR
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.pauseVisibleVideos()
     }
     
     //MARK:- SETUP COLLECTIONVIEW
@@ -206,13 +231,23 @@ extension ReportedVC: UICollectionViewDataSource{
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedFeedTextCell.identifier, for: indexPath) as? ReportedFeedTextCell else { return UICollectionViewCell() }
                 cell.newItem = data
                 cell.updatedDelegate = self
-                cell.reportBtn.tag = 1
+              //  cell.reportBtn.tag = 1
                 return cell
             case .feedImageCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedFeedImageCell.identifier, for: indexPath) as? ReportedFeedImageCell else { return UICollectionViewCell() }
-                cell.newItem = data
                 cell.updatedDelegate = self
-                cell.reportBtn.tag = 1
+                cell.newItem = data
+                cell.refreshImagesCollection()
+                cell.SetLikeCountButton()
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                    for imageCell in cell.feedImages.visibleCells   {
+                       let image = imageCell as! CompanyImageslCell
+                        UIImageWriteToSavedPhotosAlbum(image.companyImageView.image!, self, #selector(self.feed_image(_:didFinishSavingWithError:contextInfo:)), nil)
+                        cell.dwnldBtn.isEnabled = true
+                        }
+                   
+                }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
@@ -220,9 +255,18 @@ extension ReportedVC: UICollectionViewDataSource{
             case .feedImageTextCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedFeedImageTextCell.identifier, for: indexPath) as?
                     ReportedFeedImageTextCell else { return UICollectionViewCell() }
-                cell.newItem = data
                 cell.updatedDelegate = self
-                cell.reportBtn.tag = 1
+                cell.newItem = data
+                cell.refreshImagesCollection()
+                cell.SetLikeCountButton()
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                    for imageCell in cell.feedImages.visibleCells   {
+                       let image = imageCell as! CompanyImageslCell
+                        UIImageWriteToSavedPhotosAlbum(image.companyImageView.image!, self, #selector(self.feed_image(_:didFinishSavingWithError:contextInfo:)), nil)
+                        cell.dwnldBtn.isEnabled = true
+                        }
+                }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
@@ -368,6 +412,50 @@ extension ReportedVC: UICollectionViewDataSource{
         }
 
     }
+    @objc func pauseVisibleVideos()  {
+        
+        for videoParentCell in collectionView.visibleCells   {
+            
+            var indexPathNotVisible = collectionView.indexPath(for: videoParentCell)
+            
+            if let videoParentwithoutTextCell = videoParentCell as? EmplPortraitVideoCell
+            {
+                for videoCell in videoParentwithoutTextCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
+                    print("You can stop play the video from here")
+                        videoCell.pause()
+
+                }
+            }
+            if let videoParentTextCell = videoParentCell as? EmplPortrVideoTextCell
+            {
+                for videoCell in videoParentTextCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
+                    print("You can stop play the video from here")
+                        videoCell.pause()
+                    
+
+                }
+            }
+            if let videoParentTextCell = videoParentCell as? LandScapVideoCell
+            {
+                for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
+                    print("You can stop play the video from here")
+                        videoCell.pause()
+                    
+
+                }
+            }
+            if let videoParentTextCell = videoParentCell as? LandScapVideoTextCell
+            {
+                for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
+                    print("You can stop play the video from here")
+                        videoCell.pause()
+                    
+
+                }
+            }
+            }
+        
+    }
     func pauseAllVideos(indexPath : IndexPath)  {
         
         for videoParentCell in collectionView.visibleCells   {
@@ -395,71 +483,123 @@ extension ReportedVC: UICollectionViewDataSource{
         }
     }
     @objc func scrollViewDidEndScrolling() {
-
-             let centerPoint = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
-             let collectionViewCenterPoint = self.view.convert(centerPoint, to: collectionView)
-
-        let muteImg = #imageLiteral(resourceName: "mute-60x60")
-        let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         
-        let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-        let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        let centerPoint = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+        let collectionViewCenterPoint = self.view.convert(centerPoint, to: collectionView)
+
+   let muteImg = #imageLiteral(resourceName: "mute-60x60")
+   let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+   
+   let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
+   let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
 var muteVideo : Bool = false
-        
-             if let indexPath = collectionView.indexPathForItem(at: collectionViewCenterPoint) {
-                 if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? ReportedVideoCell
-                 {
-                    for videoCell in collectionViewCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
-                    
+   
+        if let indexPath = collectionView.indexPathForItem(at: collectionViewCenterPoint) {
+            
+            
+            
+            if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? ReportedVideoCell
+            {
+                
 
-                        let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
-                        if muteValue == "1"
-                        {
-                         muteVideo =  false
-                        }
-                         else
-                        {
-                         muteVideo =  true
-                        }
-                        videoCell.playerView.isMuted = muteVideo
-                        if  videoCell.playerView.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                            videoCell.resume()
+               for videoCell in collectionViewCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
+               
+              //  videoCell.backgroundColor = .red
 
+                   let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
+                   if muteValue == "1"
+                   {
+                    muteVideo =  false
+                   }
+                    else
+                   {
+                    muteVideo =  true
+                   }
+                   videoCell.playerView.isMuted = muteVideo
+                   if  videoCell.playerView.isMuted {
+                       videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+                   } else {
+                       videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+                   }
+             
+                    var point = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.center, to: self.view)
+                    let buttonAbsoluteFrame = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.bounds, to: self.view)
+
+                   
+                    if ( buttonAbsoluteFrame.contains(centerPoint) ) {
+                        // Point lies inside the bounds.
+                        videoCell.resume()
                     }
-                    self.pauseAllVideos(indexPath: indexPath)
-                 }
-               else if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? ReportedVideoTextCell
-               {
-                  for videoCell in collectionViewCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
-                  
-                    let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
-                    if muteValue == "1"
+                    else
                     {
-                     muteVideo =  false
+                        videoCell.pause()
                     }
-                     else
-                    {
-                     muteVideo =  true
-                    }
-                    videoCell.playerView.isMuted = muteVideo
-                    if  videoCell.playerView.isMuted {
-                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                    } else {
-                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                    }
-
-                          videoCell.resume()
-
-                  }
+    
                 self.pauseAllVideos(indexPath: indexPath)
-
                }
-        }
-    }
+                collectionViewCell.UpdateLable()
+            }
+          else if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? ReportedVideoTextCell
+          {
+             for videoCell in collectionViewCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
+              //  videoCell.backgroundColor = .red
+               let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
+               if muteValue == "1"
+               {
+                muteVideo =  false
+               }
+                else
+               {
+                muteVideo =  true
+               }
+               videoCell.playerView.isMuted = muteVideo
+               if  videoCell.playerView.isMuted {
+                   videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+               } else {
+                   videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+               }
+
+//                var visibleRect = CGRect()
+//                visibleRect.origin = collectionViewCell.videosCollection.contentOffset
+//                   visibleRect.size = collectionViewCell.videosCollection.bounds.size
+//
+//                   let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+//
+//                   guard let indexPathVisible = collectionViewCell.videosCollection.indexPathForItem(at: visiblePoint) else { return }
+//
+//                guard let indexPathCurrent = collectionViewCell.videosCollection.indexPath(for: videoCell) else { return }
+//                if indexPathVisible != indexPathCurrent {
+//                    videoCell.pause()
+//                }
+//                else
+//                {
+//                    videoCell.resume()
+//                }
+                   print(indexPath)
+
+                    var point = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.center, to: self.view)
+                    let buttonAbsoluteFrame = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.bounds, to: self.view)
+
+
+                    if ( buttonAbsoluteFrame.contains(centerPoint) ) {
+                        // Point lies inside the bounds.
+                        videoCell.resume()
+                    }
+                    else
+                    {
+                        videoCell.pause()
+                    }
+//
+               
+           
+                self.pauseAllVideos(indexPath: indexPath)
+             }
+            collectionViewCell.UpdateLable()
+          }
+        
+          
+   }
+}
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.scrollViewDidEndScrolling()
         
@@ -546,6 +686,11 @@ var muteVideo : Bool = false
 
 extension ReportedVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if  indexPath.section == 0 {
+           
+            return  CGSize(width:  self.view.frame.width, height: 480)
+        }
+        else{
         let width = self.view.frame.width
         let item = dataSourceV2[indexPath.item]
         var height : CGFloat = 37
@@ -594,7 +739,7 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
             return CGSize(width: width, height: height)
         case .feedImageTextCell:
             height += FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-            return CGSize(width: width, height: height)
+            return CGSize(width: width, height: height-30)
         case .feedVideoCell:
             height += FeedsHeight.heightForVideoCellV2(item: item, width: width)
             return CGSize(width: width, height: height + 30)
@@ -654,6 +799,7 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
                 height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
                 return CGSize(width: width, height: height + 55)    //height + 30
+        }
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -926,6 +1072,11 @@ extension ReportedVC : UpdatedFeedsDelegate {
 }
 
 extension ReportedVC: VideoTextsOnReportPlayerDelegate{
+    func PortraitTextVideoChanged() {
+        pauseVisibleVideos()
+        self.scrollViewDidEndScrolling()
+    }
+    
     
     func playReportedTextVedio(url: String) {
              let urlString = url
@@ -940,7 +1091,10 @@ extension ReportedVC: VideoTextsOnReportPlayerDelegate{
     
 }
 extension ReportedVC: VideoOnReportedPlayerDelegate{
-    
+    func PortraitVideoChanged() {
+        pauseVisibleVideos()
+        self.scrollViewDidEndScrolling()
+    }
     func playReportedVedio(url: String) {
              let urlString = url
                    let videoURL = URL(string: urlString)

@@ -1,48 +1,43 @@
 //
-//  ReportedFeedImageTextCell.swift
+//  FeedImageTextCell.swift
 //  myscrap
 //
-//  Created by MS1 on 10/10/17.
+//  Created by MS1 on 10/15/17.
 //  Copyright © 2017 MyScrap. All rights reserved.
 //
 
 import UIKit
-
 class ReportedFeedImageTextCell: ReportedFeedImageCell {
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+    /*override func setupAPIViews(item: FeedItem) {
+        super.setupAPIViews(item: item)
+        statusTextView?.attributedText = item.description
+    }*/
     
-    override func setupAPIViews(item:FeedV2Item){
+    override func configCell(withItem item: FeedV2Item){
+        super.configCell(withItem: item)
+        //Download StackView hide for only FeedText
+        dwnldStackView.isHidden = false
+    }
+    override func setupAPIViews(item: FeedV2Item) {
         super.setupAPIViews(item: item)
         descriptionText?.attributedText = item.descriptionStatus
     }
     
-    override func configCell(withItem item: FeedV2Item) {
-        super.configCell(withItem: item)
-        self.setupAPIViews(item: item)
-        reportedView.isHidden = true
-        
-        
-        let attributedString = NSMutableAttributedString()
-        attributedString.append(NSAttributedString(string: "Reported By • ", attributes: [NSAttributedString.Key.foregroundColor : UIColor.BLACK_ALPHA, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 11)!]))
-        attributedString.append(NSAttributedString(string: item.reportBy, attributes: [NSAttributedString.Key.foregroundColor : UIColor.GREEN_PRIMARY, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 11)!]))
-        reportedLbl.attributedText = attributedString
-    }
-    
     override func setupTap(){
-        if network.reachability.isReachable == true {
-            descriptionText?.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(DidTappedTextView(_:)))
-            tap.numberOfTapsRequired = 1
-            descriptionText?.addGestureRecognizer(tap)
-        } else {
-            offlineBtnAction?()
-        }
+        descriptionText?.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DidTappedTextView(_:)))
+        tap.numberOfTapsRequired = 1
+        descriptionText?.addGestureRecognizer(tap)
     }
-    
-    
-
+//    override  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//          
+//            guard let item = newItem else { return }
+//            updatedDelegate?.didTapImageViewV2(atIndex: indexPath.item, item: item)
+//    }
 }
+
