@@ -302,14 +302,17 @@ extension EditCompanyAdminViewVC: UICollectionViewDelegate, UICollectionViewData
         
     }
 
+    //MARK:- Call Image Picker Controller
     func callCompanyDKImagePickerController() {
         
-//        var selectMaximumSelectableCount = 10
+        var selectMaximumSelectableCount = 10
         
-//        if company
+        if self.companyProfileImagesArray.count > 0 {
+            selectMaximumSelectableCount = selectMaximumSelectableCount - self.companyProfileImagesArray.count
+        }
         self.companyPhotosPickerController = DKImagePickerController()
         self.companyPhotosPickerController.assetType = .allPhotos
-        self.companyPhotosPickerController.maxSelectableCount=10;
+        self.companyPhotosPickerController.maxSelectableCount=selectMaximumSelectableCount;
         self.companyPhotosPickerController.showsCancelButton = true;
         self.companyPhotosPickerController.showsEmptyAlbums = false;
         self.companyPhotosPickerController.allowMultipleTypes = false;
@@ -339,10 +342,15 @@ extension EditCompanyAdminViewVC: UICollectionViewDelegate, UICollectionViewData
     
     
     func callCommodityDKImagePickerController() {
+        var selectMaximumSelectableCount = 10
         
+        if self.commodityProfileImagesArray.count > 0 {
+            selectMaximumSelectableCount = selectMaximumSelectableCount - self.commodityProfileImagesArray.count
+        }
+
         self.commodityPhotosPickerController = DKImagePickerController()
         self.commodityPhotosPickerController.assetType = .allPhotos
-        self.commodityPhotosPickerController.maxSelectableCount=10;
+        self.commodityPhotosPickerController.maxSelectableCount = selectMaximumSelectableCount;
         self.commodityPhotosPickerController.showsCancelButton = true;
         self.commodityPhotosPickerController.showsEmptyAlbums = false;
         self.commodityPhotosPickerController.allowMultipleTypes = false;
@@ -414,7 +422,13 @@ extension EditCompanyAdminViewVC : CloseCellButtonDelegate, AddMoreButtonDelegat
             }
         }
         else if view.contentBackgroundView.tag == 22 {
-            self.callCommodityDKImagePickerController()
+            if self.commodityProfileImagesArray.count < 10 {
+                self.callCommodityDKImagePickerController()
+            }
+            else {
+                self.showAlert(message: "Cannot select more than 10 images")
+            }
+
         }
         
     }
