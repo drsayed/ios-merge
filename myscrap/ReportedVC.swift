@@ -955,6 +955,13 @@ extension ReportedVC {
 extension ReportedVC : UpdatedFeedsDelegate {
     func didTapForFriendView(id: String) {
         print("not using")
+        if let vc = FriendVC.storyBoardInstance(){
+            vc.friendId = id
+            vc.notificationId = ""
+            vc.isfromCardNoti = ""
+            UserDefaults.standard.set(id, forKey: "friendId")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     //#2#7api after count

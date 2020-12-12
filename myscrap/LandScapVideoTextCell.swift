@@ -87,6 +87,7 @@ class LandScapVideoTextCell: BaseCell {
                guard let item = newItem else { return }
                
                configCell(withItem: item)
+            self.refreshTable()
            }
        }
        

@@ -69,22 +69,52 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Czv-Eo-Gt9">
-                                <rect key="frame" x="76" y="42.5" width="239" height="61.5"/>
+                                <rect key="frame" x="76" y="42.5" width="239" height="61"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLl-Lf-Dw1">
-                                        <rect key="frame" x="0.0" y="0.0" width="239" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5U9-vz-uYb">
+                                        <rect key="frame" x="0.0" y="0.0" width="239" height="20"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enB-sk-EbH">
+                                                <rect key="frame" x="0.0" y="0.0" width="239" height="20"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grf-aQ-jGy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="20"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWe-te-dao">
+                                                        <rect key="frame" x="51.5" y="0.0" width="0.0" height="20"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="grf-aQ-jGy" secondAttribute="bottom" id="8G9-ip-yUx"/>
+                                                    <constraint firstItem="nWe-te-dao" firstAttribute="leading" secondItem="grf-aQ-jGy" secondAttribute="trailing" constant="10" id="8XU-kp-cQj"/>
+                                                    <constraint firstItem="nWe-te-dao" firstAttribute="top" secondItem="enB-sk-EbH" secondAttribute="top" id="AnN-5i-LVc"/>
+                                                    <constraint firstAttribute="bottom" secondItem="nWe-te-dao" secondAttribute="bottom" id="HF8-er-OpS"/>
+                                                    <constraint firstItem="grf-aQ-jGy" firstAttribute="leading" secondItem="enB-sk-EbH" secondAttribute="leading" id="gtm-nE-dQF"/>
+                                                    <constraint firstItem="grf-aQ-jGy" firstAttribute="top" secondItem="enB-sk-EbH" secondAttribute="top" id="kRZ-qm-0Fo"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="9eR-lT-ap2"/>
+                                            <constraint firstAttribute="bottom" secondItem="enB-sk-EbH" secondAttribute="bottom" id="bui-kU-wBI"/>
+                                            <constraint firstItem="enB-sk-EbH" firstAttribute="top" secondItem="5U9-vz-uYb" secondAttribute="top" id="jsX-hu-VhK"/>
+                                        </constraints>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prY-9t-OBP" customClass="DesignationLabel" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20.5" width="239" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20" width="239" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwP-Ju-n1w" customClass="TimeLabel" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="41" width="239" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="239" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -279,16 +309,30 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aY5-0u-AK0">
-                                                                <rect key="frame" x="284" y="18.5" width="61" height="17"/>
+                                                                <rect key="frame" x="284" y="0.0" width="61" height="54"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbR-nW-Jre" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="22.5" y="0.0" width="16" height="17"/>
+                                                                        <rect key="frame" x="18" y="0.0" width="25" height="25"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="25" id="78m-yI-2Iy"/>
+                                                                            <constraint firstAttribute="width" constant="25" id="S5L-kb-B0v"/>
+                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                                        <state key="normal" image="ellipsis">
+                                                                        <state key="normal" image="reportFeed">
                                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
                                                                         <connections>
                                                                             <action selector="reportBtnTapped:" destination="eZi-id-Ozl" eventType="touchUpInside" id="6Fq-ID-sNZ"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRb-1U-D8o">
+                                                                        <rect key="frame" x="9" y="25" width="43" height="29"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                                        <state key="normal" title="Report">
+                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="reportBtnTapped:" destination="eZi-id-Ozl" eventType="touchUpInside" id="ItS-gU-NlO"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -454,7 +498,7 @@
                 <outlet property="likeBtn" destination="Sor-G6-0dA" id="Y9T-aO-UGB"/>
                 <outlet property="likeCountBtn" destination="zgY-mi-zzw" id="yTd-1X-5Ae"/>
                 <outlet property="likeImage" destination="3BR-we-Lm4" id="t3F-jh-Ejg"/>
-                <outlet property="nameLbl" destination="iLl-Lf-Dw1" id="78b-PY-igA"/>
+                <outlet property="nameLbl" destination="grf-aQ-jGy" id="76b-yv-mZW"/>
                 <outlet property="pageController" destination="PgK-HE-2lh" id="toE-JZ-vMi"/>
                 <outlet property="playBtn" destination="Vba-hW-4UD" id="Qvt-hf-HfJ"/>
                 <outlet property="profileTypeView" destination="Fiw-M2-LMh" id="nP9-Tw-7Ar"/>
@@ -467,6 +511,7 @@
                 <outlet property="thumbnailImg" destination="Sdt-Z1-4Wg" id="5ey-2d-vRb"/>
                 <outlet property="timeLbl" destination="MwP-Ju-n1w" id="qGA-Df-q89"/>
                 <outlet property="unReportBtn" destination="Q42-C5-9ZZ" id="yAh-b4-6sO"/>
+                <outlet property="updatedProfileText" destination="nWe-te-dao" id="Zyj-cq-9Cl"/>
                 <outlet property="videosCollection" destination="v0x-qU-x27" id="ZNH-oB-ptp"/>
                 <outlet property="videosCountView" destination="GAd-ac-kqU" id="X05-f2-Hai"/>
                 <outlet property="videosCoutLable" destination="QFf-5G-ifh" id="7ce-bd-hoc"/>
@@ -500,9 +545,9 @@
     </designables>
     <resources>
         <image name="circle_play_btn" width="352" height="352"/>
-        <image name="ellipsis" width="16" height="16"/>
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
+        <image name="reportFeed" width="16" height="16"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

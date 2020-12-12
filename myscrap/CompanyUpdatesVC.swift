@@ -741,7 +741,7 @@ extension CompanyUpdatesVC : UICollectionViewDelegate , UICollectionViewDataSour
                       self.visibleCellIndex = indexPath
             cell.delegateVideoChange = self
             cell.editButton.isHidden = true
-                       cell.refreshTable()
+                    cell.refreshTable()
             cell.dwnldBtnAction = {
     cell.dwnldBtn.isEnabled = false
    for imageCell in cell.videosCollection.visibleCells   {

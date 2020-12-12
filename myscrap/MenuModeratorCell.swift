@@ -36,6 +36,9 @@ class MenuModeratorCell: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(moderatorChanged(_:)), name: .moderatorChanged, object: nil)
     }
     @objc private func moderatorChanged(_ notification: Notification){
+        self.setBadge()
+    }
+    func setBadge()  {
         let modCount = NotificationService.instance.moderatorCount!
         if modCount == 0 {
             badgeLbl.isHidden = true
@@ -48,6 +51,7 @@ class MenuModeratorCell: UITableViewCell {
         let id = "ModeratorCell"
         tableView.register(UINib(nibName: "MenuModeratorCell", bundle: Bundle.main), forCellReuseIdentifier: id)
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as! MenuModeratorCell
+        cell.setBadge()
         return cell
     }
     deinit {

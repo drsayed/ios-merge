@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,6 +26,50 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7h-9c-VsQ" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="651" height="460"/>
                         <subviews>
+                            <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGd-s2-Hye" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="651" height="460"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFP-J4-rNJ" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
+                                        <rect key="frame" x="605" y="414" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="PdW-Ds-bpR"/>
+                                            <constraint firstAttribute="height" constant="30" id="eIU-9C-DPg"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="report"/>
+                                        <connections>
+                                            <action selector="unreportBtnPressed:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="1W9-sW-UU9"/>
+                                            <action selector="unreportBtnTapped:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="5g5-iI-YAK"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1PA-9z-H6a">
+                                        <rect key="frame" x="181.5" y="207.5" width="288.5" height="45"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="qdJ-LP-MkM">
+                                                <rect key="frame" x="134" y="0.0" width="20" height="20"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="BcG-Ft-5ly"/>
+                                                    <constraint firstAttribute="height" constant="20" id="cl9-0j-Bco"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This post is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7N5-ej-rpl">
+                                                <rect key="frame" x="0.0" y="25" width="288.5" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="1PA-9z-H6a" firstAttribute="centerY" secondItem="pGd-s2-Hye" secondAttribute="centerY" id="b8Z-vD-H1h"/>
+                                    <constraint firstAttribute="bottom" secondItem="hFP-J4-rNJ" secondAttribute="bottom" constant="16" id="iNc-Rh-rEH"/>
+                                    <constraint firstItem="1PA-9z-H6a" firstAttribute="centerX" secondItem="pGd-s2-Hye" secondAttribute="centerX" id="q9H-BQ-Xmz"/>
+                                    <constraint firstAttribute="trailing" secondItem="hFP-J4-rNJ" secondAttribute="trailing" constant="16" id="zJn-Rh-Blj"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQa-2A-ogs">
                                 <rect key="frame" x="0.0" y="0.0" width="651" height="35"/>
                                 <subviews>
@@ -68,29 +113,59 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FaK-1o-0Do">
-                                <rect key="frame" x="76" y="42.5" width="529" height="61.5"/>
+                                <rect key="frame" x="76" y="42.5" width="529" height="61"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIR-44-IRY">
-                                        <rect key="frame" x="0.0" y="0.0" width="529" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bO0-49-Itt">
+                                        <rect key="frame" x="0.0" y="0.0" width="529" height="20"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpM-Pv-Vir">
+                                                <rect key="frame" x="0.0" y="0.0" width="529" height="20"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIR-44-IRY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="20"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bob-1h-50S">
+                                                        <rect key="frame" x="51.5" y="0.0" width="0.0" height="20"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="Bob-1h-50S" secondAttribute="bottom" id="CKo-rP-JQg"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aIR-44-IRY" secondAttribute="bottom" id="h5F-DK-UL8"/>
+                                                    <constraint firstAttribute="height" constant="20" id="hkr-pd-Oz4"/>
+                                                    <constraint firstItem="aIR-44-IRY" firstAttribute="leading" secondItem="jpM-Pv-Vir" secondAttribute="leading" id="iV9-S7-GvF"/>
+                                                    <constraint firstItem="aIR-44-IRY" firstAttribute="top" secondItem="jpM-Pv-Vir" secondAttribute="top" id="nO0-NB-FJe"/>
+                                                    <constraint firstItem="Bob-1h-50S" firstAttribute="leading" secondItem="aIR-44-IRY" secondAttribute="trailing" constant="10" id="uCF-vC-Khi"/>
+                                                    <constraint firstItem="Bob-1h-50S" firstAttribute="top" secondItem="jpM-Pv-Vir" secondAttribute="top" id="xMr-qa-QFc"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="jpM-Pv-Vir" firstAttribute="top" secondItem="bO0-49-Itt" secondAttribute="top" id="0kF-Vp-2cV"/>
+                                            <constraint firstAttribute="bottom" secondItem="jpM-Pv-Vir" secondAttribute="bottom" id="z3i-6W-Nbi"/>
+                                        </constraints>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTd-7D-0th" customClass="DesignationLabel" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20.5" width="529" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20" width="529" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hha-8L-xsF" customClass="TimeLabel" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="41" width="529" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="529" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90C-tk-e9z">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90C-tk-e9z">
                                 <rect key="frame" x="613" y="43" width="30" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Egn-vZ-iL3" customClass="EditButton" customModule="myscrap" customModuleProvider="target">
@@ -261,10 +336,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSe-IV-DT9">
-                                <rect key="frame" x="607" y="423.5" width="26" height="32"/>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSe-IV-DT9" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="552" y="423.5" width="81" height="32"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                <state key="normal" image="ellipsis"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Report" image="reportFeed">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="reportBtnPressed:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="JIP-Kb-GBj"/>
                                 </connections>
@@ -275,50 +353,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGd-s2-Hye" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="651" height="460"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFP-J4-rNJ" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="605" y="414" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="PdW-Ds-bpR"/>
-                                            <constraint firstAttribute="height" constant="30" id="eIU-9C-DPg"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="report"/>
-                                        <connections>
-                                            <action selector="unreportBtnPressed:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="1W9-sW-UU9"/>
-                                            <action selector="unreportBtnTapped:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="5g5-iI-YAK"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1PA-9z-H6a">
-                                        <rect key="frame" x="181.5" y="207.5" width="288.5" height="45"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="qdJ-LP-MkM">
-                                                <rect key="frame" x="134" y="0.0" width="20" height="20"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="BcG-Ft-5ly"/>
-                                                    <constraint firstAttribute="height" constant="20" id="cl9-0j-Bco"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This post is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7N5-ej-rpl">
-                                                <rect key="frame" x="0.0" y="25" width="288.5" height="20"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="1PA-9z-H6a" firstAttribute="centerY" secondItem="pGd-s2-Hye" secondAttribute="centerY" id="b8Z-vD-H1h"/>
-                                    <constraint firstAttribute="bottom" secondItem="hFP-J4-rNJ" secondAttribute="bottom" constant="16" id="iNc-Rh-rEH"/>
-                                    <constraint firstItem="1PA-9z-H6a" firstAttribute="centerX" secondItem="pGd-s2-Hye" secondAttribute="centerX" id="q9H-BQ-Xmz"/>
-                                    <constraint firstAttribute="trailing" secondItem="hFP-J4-rNJ" secondAttribute="trailing" constant="16" id="zJn-Rh-Blj"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -376,13 +410,17 @@
                 <outlet property="reportedView" destination="pGd-s2-Hye" id="mf2-VE-kUh"/>
                 <outlet property="timeLbl" destination="hha-8L-xsF" id="RYW-bY-XT5"/>
                 <outlet property="unReportBtn" destination="hFP-J4-rNJ" id="auI-MW-vOU"/>
+                <outlet property="updatedProfileText" destination="Bob-1h-50S" id="aeM-6A-nzb"/>
             </connections>
-            <point key="canvasLocation" x="-59.5" y="-372"/>
+            <point key="canvasLocation" x="-60" y="-372.41379310344831"/>
         </collectionViewCell>
     </objects>
     <designables>
         <designable name="1Rb-Ke-6Rt">
             <size key="intrinsicContentSize" width="35" height="25"/>
+        </designable>
+        <designable name="DSe-IV-DT9">
+            <size key="intrinsicContentSize" width="81" height="32"/>
         </designable>
         <designable name="XYn-TY-adM">
             <size key="intrinsicContentSize" width="20" height="22"/>
@@ -556,11 +594,14 @@ NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
 0AAAAAAAAAIBAAAAAAAAAEMAAAAAAAAAAAAAAAAAABDTA
 </mutableData>
         </image>
-        <image name="ellipsis" width="16" height="16"/>
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
+        <image name="reportFeed" width="16" height="16"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

@@ -15,6 +15,7 @@ class ReportedFeedTextCell: FeedNewUserCell {
     @IBOutlet weak var editBtn: EditButton!
     @IBOutlet weak var favBtn: FavouriteButton!
     
+    @IBOutlet weak var updatedProfileText: UILabel!
     override var newItem : FeedV2Item? {
         didSet{
             guard let item = newItem else { return }
@@ -44,11 +45,18 @@ class ReportedFeedTextCell: FeedNewUserCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(reportedByTap(_:)))
         tap.numberOfTapsRequired = 1
         reportedLbl?.addGestureRecognizer(tap)
+        if item.postType == .friendProfilePost {
+            updatedProfileText.text = "Updated profile picture."
+        }
+        else
+        {
+            updatedProfileText.text = ""
+        }
         
     }
     
     @objc func reportedByTap(_ sender: UITapGestureRecognizer){
-        guard let item = item else { return }
+        guard let item = newItem else { return }
         updatedDelegate?.didTapForFriendView(id: item.reportedUserId)
     }
     

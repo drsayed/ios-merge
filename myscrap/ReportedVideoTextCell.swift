@@ -24,7 +24,8 @@ class ReportedVideoTextCell: BaseCell {
     @IBOutlet weak var pageController: UIPageControl!
  @IBOutlet weak var videosCollection: UICollectionView!
     weak var videoPlayerDelegate : VideoTextsOnReportPlayerDelegate?
-    
+    @IBOutlet weak var updatedProfileText: UILabel!
+
     @IBOutlet weak var reportedLbl: UILabel!
     @IBOutlet weak var descriptionText: UserTagTextView!
     @IBOutlet weak var editButton: EditButton!
@@ -151,6 +152,13 @@ class ReportedVideoTextCell: BaseCell {
         
         reportedView.isHidden = true
         
+        if item.postType == .friendProfilePost {
+            updatedProfileText.text = "Updated profile picture."
+        }
+        else
+        {
+            updatedProfileText.text = ""
+        }
         
         let attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: "Reported By • ", attributes: [NSAttributedString.Key.foregroundColor : UIColor.BLACK_ALPHA, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 11)!]))

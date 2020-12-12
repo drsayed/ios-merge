@@ -89,6 +89,7 @@ class EmplPortraitVideoCell: BaseCell {
                guard let item = newItem else { return }
                
                configCell(withItem: item)
+            self.refreshTable()
            }
        }
     func SetLikeCountButton()  {

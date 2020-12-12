@@ -68,23 +68,52 @@
                                     <constraint firstAttribute="height" constant="20" id="yWg-XY-jMJ"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EhK-Ug-EFi">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EhK-Ug-EFi">
                                 <rect key="frame" x="76" y="43" width="362" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDY-YV-zpR">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Cz4-f4-gcS">
+                                        <rect key="frame" x="0.0" y="0.0" width="362" height="16.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiz-Dh-c8h">
+                                                <rect key="frame" x="0.0" y="0.0" width="362" height="16.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8j-fr-Bfv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="16.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jN-w3-RCD">
+                                                        <rect key="frame" x="51.5" y="0.0" width="0.0" height="16.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="6jN-w3-RCD" firstAttribute="leading" secondItem="w8j-fr-Bfv" secondAttribute="trailing" constant="10" id="5Yr-fh-H6J"/>
+                                                    <constraint firstAttribute="bottom" secondItem="6jN-w3-RCD" secondAttribute="bottom" id="Fiu-av-tpp"/>
+                                                    <constraint firstAttribute="bottom" secondItem="w8j-fr-Bfv" secondAttribute="bottom" id="RcW-W1-5fy"/>
+                                                    <constraint firstItem="6jN-w3-RCD" firstAttribute="top" secondItem="kiz-Dh-c8h" secondAttribute="top" id="eyQ-wK-4dK"/>
+                                                    <constraint firstItem="w8j-fr-Bfv" firstAttribute="top" secondItem="kiz-Dh-c8h" secondAttribute="top" id="gXS-e4-NpE"/>
+                                                    <constraint firstItem="w8j-fr-Bfv" firstAttribute="leading" secondItem="kiz-Dh-c8h" secondAttribute="leading" id="lgB-fE-iSj"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="kiz-Dh-c8h" secondAttribute="bottom" id="T4m-E8-Sc8"/>
+                                            <constraint firstItem="kiz-Dh-c8h" firstAttribute="top" secondItem="Cz4-f4-gcS" secondAttribute="top" id="byv-3R-Ou7"/>
+                                        </constraints>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JT-tT-XtU" customClass="DesignationLabel" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="22" width="41.5" height="17.5"/>
+                                        <rect key="frame" x="0.0" y="21.5" width="41.5" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2T-wA-ctc" customClass="TimeLabel" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="41.5" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="43.5" width="41.5" height="16.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -467,14 +496,28 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4vo-UF-nR0">
-                                                                <rect key="frame" x="382.5" y="11" width="85.5" height="32"/>
+                                                                <rect key="frame" x="382.5" y="0.0" width="85.5" height="54"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w52-sc-Rb9">
-                                                                        <rect key="frame" x="29.5" y="0.0" width="26" height="32"/>
+                                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w52-sc-Rb9" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
+                                                                        <rect key="frame" x="30" y="0.0" width="25" height="25"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="25" id="4xo-dG-jgU"/>
+                                                                            <constraint firstAttribute="height" constant="25" id="RcI-9I-THs"/>
+                                                                        </constraints>
                                                                         <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                                         <state key="normal" image="ellipsis"/>
                                                                         <connections>
                                                                             <action selector="reportBtnPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="3aQ-u8-yrw"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6El-nd-9wB">
+                                                                        <rect key="frame" x="21" y="25" width="43" height="29"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                                        <state key="normal" title="Report">
+                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="reportBtnPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="Ukx-L9-NIR"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -649,7 +692,7 @@
                 <outlet property="likeBtn" destination="F9e-KS-VjR" id="KTS-so-xfI"/>
                 <outlet property="likeCountBtn" destination="67k-zt-3nZ" id="AYD-XL-tFN"/>
                 <outlet property="likeImage" destination="yxs-jl-Zwd" id="mRK-mH-yNY"/>
-                <outlet property="nameLbl" destination="vDY-YV-zpR" id="ZV6-Vq-ddG"/>
+                <outlet property="nameLbl" destination="w8j-fr-Bfv" id="tN6-xY-Yh6"/>
                 <outlet property="pageControll" destination="DBO-FZ-0Tx" id="IEs-7y-BHb"/>
                 <outlet property="profileTypeView" destination="xme-gV-lC8" id="EaH-Jh-ver"/>
                 <outlet property="profileView" destination="ygn-Kx-aWW" id="fSQ-rm-6nN"/>
@@ -659,6 +702,7 @@
                 <outlet property="shareImgBtn" destination="PlH-hR-m2Z" id="77G-hz-7pe"/>
                 <outlet property="timeLbl" destination="y2T-wA-ctc" id="sjJ-l6-F8u"/>
                 <outlet property="unReportBtn" destination="nhY-Oc-1Az" id="b5P-pi-Kpd"/>
+                <outlet property="updatedProfileText" destination="6jN-w3-RCD" id="bwO-IR-DXt"/>
             </connections>
             <point key="canvasLocation" x="9.5999999999999996" y="287.85607196401799"/>
         </collectionViewCell>
@@ -690,6 +734,9 @@
         </designable>
         <designable name="sEH-5F-kaE">
             <size key="intrinsicContentSize" width="30" height="34"/>
+        </designable>
+        <designable name="w52-sc-Rb9">
+            <size key="intrinsicContentSize" width="26" height="32"/>
         </designable>
         <designable name="y2T-wA-ctc">
             <size key="intrinsicContentSize" width="41.5" height="20.5"/>

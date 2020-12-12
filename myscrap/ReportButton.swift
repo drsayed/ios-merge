@@ -26,7 +26,7 @@ class ReportButton: UIButton {
     }
     
     private func setupViews(){
-        contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         //withRenderingMode(.alwaysTemplate)withRenderingMode(.alwaysTemplate)
         setImage(#imageLiteral(resourceName: "report_72x72"), for: .normal)
         tintColor = UIColor.BLACK_ALPHA

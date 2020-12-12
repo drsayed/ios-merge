@@ -143,7 +143,7 @@ struct Endpoints {
     static let CALENDAR_EVENTS_URL  = "\(BASE_URL)msEvents"
     static let CALENDAR_INVITES_URL =  "\(BASE_URL)msEventInvites"
     static let MS_CONNECTED_URL = "\(BASE_URL)msConnected"
-    static let NOTIFICATION_COUNT_URL = "\(BASE_URL)msNotificationCounts"
+    static let NOTIFICATION_COUNT_URL = "\(BASE_URL_Common)msNotificationCounts"
     static let LOGOUT_USER = "\(BASE_URL)msLogout"
     static let VOIP_MESSAGES_URL = "\(Endpoints.BASE_URL)msChatRoomMessages"
     static let CLEAR_NOTIFICATION_URL = "\(BASE_URL)msClearNotifications"

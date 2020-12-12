@@ -1477,7 +1477,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-v3-sMR">
-                                                <rect key="frame" x="53.999999999999986" y="50.000000000000014" width="183.66666666666663" height="182.66666666666666"/>
+                                                <rect key="frame" x="53.999999999999986" y="50.000000000000014" width="183.66666666666663" height="182.33333333333334"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZBw-rp-m3B">
                                                         <rect key="frame" x="0.0" y="0.0" width="183.66666666666666" height="20.333333333333332"/>
@@ -1503,7 +1503,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aDX-wV-EnJ">
-                                                        <rect key="frame" x="0.0" y="27.333333333333329" width="183.66666666666666" height="20"/>
+                                                        <rect key="frame" x="0.0" y="27.333333333333336" width="183.66666666666666" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thursday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGZ-UU-FuQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="20"/>
@@ -1523,7 +1523,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iNr-Rc-PIn">
-                                                        <rect key="frame" x="0.0" y="54.666666666666657" width="183.66666666666666" height="20"/>
+                                                        <rect key="frame" x="0.0" y="54.333333333333343" width="183.66666666666666" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Friday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rl-iE-Pnq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="117.33333333333333" height="20"/>
@@ -1540,7 +1540,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qo9-NU-IMv">
-                                                        <rect key="frame" x="0.0" y="81.666666666666657" width="183.66666666666666" height="20"/>
+                                                        <rect key="frame" x="0.0" y="81.333333333333314" width="183.66666666666666" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saturday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQc-yV-9dN">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="20"/>
@@ -1560,7 +1560,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ACu-Kx-6eY">
-                                                        <rect key="frame" x="0.0" y="108.66666666666666" width="183.66666666666666" height="20"/>
+                                                        <rect key="frame" x="0.0" y="108.33333333333331" width="183.66666666666666" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Sunday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kc-x6-Kxv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="20"/>
@@ -1580,7 +1580,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hHD-RS-Mlj">
-                                                        <rect key="frame" x="0.0" y="135.66666666666666" width="183.66666666666666" height="20"/>
+                                                        <rect key="frame" x="0.0" y="135.33333333333331" width="183.66666666666666" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzi-8t-KEE">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="20"/>
@@ -1600,7 +1600,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eoq-Dt-pzD">
-                                                        <rect key="frame" x="0.0" y="162.66666666666666" width="183.66666666666666" height="20"/>
+                                                        <rect key="frame" x="0.0" y="162.33333333333331" width="183.66666666666666" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tuesday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raa-FE-7b6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="20"/>
@@ -2450,7 +2450,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-CT-nDR" customClass="CosmosView" customModule="Cosmos">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-CT-nDR" customClass="CosmosView" customModule="Cosmos">
                                                     <rect key="frame" x="28" y="90" width="96" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -2468,7 +2468,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqK-5s-gOl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqK-5s-gOl">
                                                     <rect key="frame" x="131" y="90" width="37" height="17.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -7581,52 +7581,73 @@
     </scenes>
     <designables>
         <designable name="1tY-K5-wI4">
-            <size key="intrinsicContentSize" width="109" height="19.333333333333332"/>
+            <size key="intrinsicContentSize" width="114" height="19.333333333333332"/>
         </designable>
         <designable name="2S8-S4-2Oi">
-            <size key="intrinsicContentSize" width="34.666666666666664" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="39.666666666666664" height="18.666666666666668"/>
+        </designable>
+        <designable name="5ZB-Jw-zdv">
+            <size key="intrinsicContentSize" width="85" height="17"/>
         </designable>
         <designable name="6Ra-z6-9xB">
-            <size key="intrinsicContentSize" width="4" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="9" height="18.666666666666668"/>
+        </designable>
+        <designable name="6pe-pV-XQd">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="72z-Bl-8Gs">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="88w-5a-5cJ">
+            <size key="intrinsicContentSize" width="320" height="60"/>
         </designable>
         <designable name="EoO-9q-aIP">
-            <size key="intrinsicContentSize" width="4" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="9" height="18.666666666666668"/>
         </designable>
         <designable name="ExR-2c-2PD">
-            <size key="intrinsicContentSize" width="94.333333333333329" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="99.333333333333329" height="18.666666666666668"/>
         </designable>
         <designable name="FaH-EM-RXI">
-            <size key="intrinsicContentSize" width="53.666666666666664" height="19.333333333333332"/>
+            <size key="intrinsicContentSize" width="58.666666666666664" height="19.333333333333332"/>
         </designable>
         <designable name="MNI-pU-oxg">
-            <size key="intrinsicContentSize" width="94" height="19.333333333333332"/>
+            <size key="intrinsicContentSize" width="99" height="19.333333333333332"/>
         </designable>
         <designable name="Ndv-Yj-Gtk">
-            <size key="intrinsicContentSize" width="100.66666666666667" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="105.66666666666667" height="18.666666666666668"/>
         </designable>
         <designable name="Ol3-Oq-l2a">
             <size key="intrinsicContentSize" width="380" height="400"/>
         </designable>
+        <designable name="PQS-Np-ITD">
+            <size key="intrinsicContentSize" width="245" height="45"/>
+        </designable>
+        <designable name="TXV-Sn-6B9">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
         <designable name="X3d-dK-AN6">
-            <size key="intrinsicContentSize" width="4" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="9" height="18.666666666666668"/>
         </designable>
         <designable name="Ymf-L4-bXX">
-            <size key="intrinsicContentSize" width="100.66666666666667" height="19.333333333333332"/>
+            <size key="intrinsicContentSize" width="105.66666666666667" height="19.333333333333332"/>
+        </designable>
+        <designable name="YyB-CT-nDR">
+            <size key="intrinsicContentSize" width="96" height="20"/>
         </designable>
         <designable name="c2e-63-W05">
-            <size key="intrinsicContentSize" width="4" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="9" height="18.666666666666668"/>
         </designable>
         <designable name="gpc-Qq-UnW">
-            <size key="intrinsicContentSize" width="53.666666666666664" height="19.333333333333332"/>
+            <size key="intrinsicContentSize" width="58.666666666666664" height="19.333333333333332"/>
         </designable>
         <designable name="lJH-P5-fse">
-            <size key="intrinsicContentSize" width="43.333333333333336" height="19.333333333333332"/>
+            <size key="intrinsicContentSize" width="48.333333333333336" height="19.333333333333332"/>
         </designable>
         <designable name="q4S-AO-OSn">
-            <size key="intrinsicContentSize" width="117.33333333333333" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="122.33333333333333" height="18.666666666666668"/>
         </designable>
         <designable name="sTH-cf-Xk8">
-            <size key="intrinsicContentSize" width="53" height="18.666666666666668"/>
+            <size key="intrinsicContentSize" width="58" height="18.666666666666668"/>
         </designable>
     </designables>
     <resources>
@@ -7634,7 +7655,7 @@
         <image name="add_photo_company" width="64" height="64"/>
         <image name="call-40" width="40" height="40"/>
         <image name="call_40x40" width="40" height="40"/>
-        <image name="camera" width="40" height="40"/>
+        <image name="camera" width="76" height="55"/>
         <image name="comment" width="36" height="36"/>
         <image name="comp-location-40" width="40" height="40"/>
         <image name="company" width="380" height="400"/>
