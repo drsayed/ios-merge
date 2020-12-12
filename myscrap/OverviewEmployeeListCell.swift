@@ -13,11 +13,11 @@ class OverviewEmployeeListCell: UITableViewCell {
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var compDesigLbl: UILabel!
-//    @IBOutlet weak var adminBtn: CorneredButton!
-//    @IBOutlet weak var adminWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var adminBtn: UIButton! //CorneredButton!
+    @IBOutlet weak var adminLabel: UILabel!
+
+    @IBOutlet weak var makeAsAdminBtn: UIButton!
     @IBOutlet weak var reportBtn : UIButton!
-    @IBOutlet weak var adminWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var makeAsAdminWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var reportBtnWidthConstraint : NSLayoutConstraint!
 

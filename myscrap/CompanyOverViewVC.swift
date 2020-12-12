@@ -429,19 +429,19 @@ class CompanyOverViewVC: UIViewController , FriendControllerDelegate, MKMapViewD
         let isEmplView = dataSource.last!.employees[indexPath.row].isEmployeeView
         if isAdminView {
                 if isAdmin {
-                    cell.adminBtn.setTitle("Admin", for: .normal)
+                    cell.makeAsAdminBtn.setTitle("Admin", for: .normal)
                 } else {
-                    cell.adminWidthConstraint.constant = 120
-                    cell.adminBtn.setTitle("Make as Admin", for: .normal)
+                    cell.makeAsAdminWidthConstraint.constant = 120
+                    cell.makeAsAdminBtn.setTitle("Make as Admin", for: .normal)
                 }
             //tableView.reloadData()
         } else {
             if isEmplView {
                 if isAdmin {
-                    cell.adminWidthConstraint.constant = 80
-                    cell.adminBtn.setTitle("Admin", for: .normal)
+                    cell.makeAsAdminWidthConstraint.constant = 80
+                    cell.makeAsAdminBtn.setTitle("Admin", for: .normal)
                 } else {
-                    cell.adminBtn.isHidden = true
+                    cell.makeAsAdminBtn.isHidden = true
                 }
             }
             //tableView.reloadData()
