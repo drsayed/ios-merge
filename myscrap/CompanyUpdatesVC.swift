@@ -648,7 +648,7 @@ extension CompanyUpdatesVC : UICollectionViewDelegate , UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageCell.identifier, for: indexPath) as? FeedImageCell else { return UICollectionViewCell()}
             cell.updatedDelegate = self
             cell.newItem = data
-            cell.refreshTable()
+            cell.refreshImagesCollection()
             cell.editButton.isHidden = true
            /* if data.rank == "MOD" {
                 cell.profileTypeView.label.text = data.rank
@@ -693,7 +693,7 @@ extension CompanyUpdatesVC : UICollectionViewDelegate , UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageTextCell.identifier, for: indexPath) as? FeedImageTextCell else { return UICollectionViewCell()}
             cell.updatedDelegate = self
             cell.newItem = data
-               cell.refreshTable()
+            cell.refreshImagesCollection()
             cell.editButton.isHidden = true
             cell.dwnldBtnAction = {
                 cell.dwnldBtn.isEnabled = false

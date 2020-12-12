@@ -44,8 +44,8 @@ class FeedImageCell: FeedTextCell {
         super.layoutSubviews()
         self.layoutIfNeeded()
     }
-    func refreshTable()  {
-        
+ /*   func refreshTable()  {
+
         self.feedImages.register(CompanyImageslCell.Nib, forCellWithReuseIdentifier: CompanyImageslCell.identifier)
           // self.totalImagesCountVieew.layer.cornerRadius = 10
         if self.newItem != nil && self.newItem!.pictureURL.count as Int > 0 {
@@ -69,12 +69,12 @@ class FeedImageCell: FeedTextCell {
                 if let countView : UIView = self.viewWithTag(1000) {
                                         countView.isHidden = false
                                     }
-                   
+
             }
                   self.feedImages.reloadData()
         }
-      
-    }
+
+    } */
 //    override func configCell(withItem item: FeedItem){
 //        super.configCell(withItem: item)
 //    }
@@ -83,46 +83,40 @@ class FeedImageCell: FeedTextCell {
         super.configCell(withItem: item)
         //Download StackView hide for only FeedText
         dwnldStackView.isHidden = false
-       
-
     }
 
-    func refreshImagesCollection() {//refreshTable()  {
+    func refreshImagesCollection() {
         self.feedImages.register(CompanyImageslCell.Nib, forCellWithReuseIdentifier: CompanyImageslCell.identifier)
-          // self.totalImagesCountVieew.layer.cornerRadius = 10
+
         if self.newItem != nil && self.newItem!.pictureURL.count as Int > 0 {
             self.feedImages.delegate = self
-                    self.feedImages.dataSource = self
-             self.pageControll.numberOfPages = self.newItem!.pictureURL.count as Int
+            self.feedImages.dataSource = self
+            self.pageControll.numberOfPages = self.newItem!.pictureURL.count as Int
             if let countLable = self.viewWithTag(1001) as?  UILabel  {
                countLable.text = "1/\(self.newItem!.pictureURL.count as Int)"
-                }
-          //  self.imageCountLable.text = "1/\(self.newItem!.pictureURL.count as Int)"
-                //  self.totalImages = item?.pictureURL
+            }
             if self.newItem!.pictureURL.count as Int == 1 {
                 self.pageControll.isHidden = true
-                 if let countView : UIView = self.viewWithTag(1000) {
-                         countView.isHidden = true
-                     }
+                if let countView : UIView = self.viewWithTag(1000) {
+                    countView.isHidden = true
+                 }
             }
             else
             {
                 self.pageControll.isHidden = false
                 if let countView : UIView = self.viewWithTag(1000) {
-                                        countView.isHidden = false
-                                    }
-                   
+                    countView.isHidden = false
+                }
             }
+            
             self.feedImages.reloadData()
             
             let viewWidth = UIScreen.main.bounds.width
             self.fancyViewWidthConstraint.constant = viewWidth
             self.feedImagesCollectionViewHeightConstraint.constant = viewWidth
         }
-      
     }
-   
-    
+
     /*override func setupAPIViews(item:FeedItem){
         
         if let imageString = item.pictureURL.last?.images{
