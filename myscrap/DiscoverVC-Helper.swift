@@ -128,7 +128,13 @@ extension DiscoverVC: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 
+        /*
         if let annotationView = view as? DiscoverAnnotationView, let annotation = annotationView.annotation as? DiscoverAnnotaion, let id = annotation.companyId, let vc = CompanyDetailVC.storyBoardInstance() {
+            vc.companyId = id
+            UserDefaults.standard.set(vc.companyId, forKey: "companyId")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }*/
+        if let annotationView = view as? DiscoverAnnotationView, let annotation = annotationView.annotation as? DiscoverAnnotaion, let id = annotation.companyId, let vc = CompanyHeaderModuleVC.storyBoardInstance() {
             vc.companyId = id
             UserDefaults.standard.set(vc.companyId, forKey: "companyId")
             self.navigationController?.pushViewController(vc, animated: true)

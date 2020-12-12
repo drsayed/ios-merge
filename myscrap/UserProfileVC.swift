@@ -2065,9 +2065,16 @@ extension UserProfileVC{
             vc.companyId = profile.companyId
             self.navigationController?.pushViewController(vc, animated: true)
         }*/
-        if  let vc = CompanyDetailVC.storyBoardInstance() {
+      /*  if  let vc = CompanyDetailVC.storyBoardInstance() {
             
             vc.companyId = profile.companyId
+            UserDefaults.standard.set(vc.companyId, forKey: "companyId")
+            self.navigationController?.pushViewController(vc, animated: true)
+        } */
+        if  let vc = CompanyHeaderModuleVC.storyBoardInstance() {
+            vc.title = profile.companyName
+            vc.companyId = profile.companyId
+            UserDefaults.standard.set(vc.title, forKey: "companyName")
             UserDefaults.standard.set(vc.companyId, forKey: "companyId")
             self.navigationController?.pushViewController(vc, animated: true)
         }
