@@ -1095,6 +1095,14 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
             //Checking Admin is Available for this comapny
             let isAdminAvailable = self.companyData.last?.isAdminAvailable
 
+            //editButton
+            let companyOwnerId = self.companyData.last!.companyOwnerId
+            if companyOwnerId != "" {
+                if companyOwnerId == AuthService.instance.userId && isAdminAvailable! {
+                    self.editButton.isHidden = false
+                }
+            }
+
             let getOwnCompanyRequest = self.companyData.last?.ownCompanyRequest
 //            let adminReport = self.companyData.last?.adminReport
             let reportedStatusOfCompany = self.companyData.last?.reportedStatusOfCompany

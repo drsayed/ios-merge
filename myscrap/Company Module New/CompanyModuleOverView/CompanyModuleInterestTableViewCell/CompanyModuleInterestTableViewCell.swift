@@ -49,6 +49,11 @@ class CompanyModuleInterestTableViewCell: UITableViewCell {
         self.collectionViewHeightConstraint.isActive = true
 
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutIfNeeded()
+    }
 }
 
 

@@ -763,7 +763,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
            
         case .company:
-            if  let id = companyId, let vc = CompanyDetailVC.storyBoardInstance() {
+            if  let id = companyId, let vc = CompanyHeaderModuleVC.storyBoardInstance() { //CompanyDetailVC.storyBoardInstance() {
                 vc.companyId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
 

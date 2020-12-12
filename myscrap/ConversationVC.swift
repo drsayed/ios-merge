@@ -540,7 +540,7 @@ class ConversationVC: UIViewController, FriendControllerDelegate  , UIImagePicke
         } else {
             print("no company id")
         }
-        if  let id = companyId, id != "", id != "0", let vc = CompanyDetailVC.storyBoardInstance() {
+        if  let id = companyId, id != "", id != "0", let vc = CompanyHeaderModuleVC.storyBoardInstance() { //let vc = CompanyDetailVC.storyBoardInstance() {
             vc.companyId = id
             UserDefaults.standard.set(vc.companyId, forKey: "companyId")
             self.navigationController?.pushViewController(vc, animated: true)

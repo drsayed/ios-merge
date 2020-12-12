@@ -228,14 +228,14 @@ final class CommudityDetailsVC: UIViewController {
     }
     @IBAction func CompnayDetailBtnPressed(_ sender: UIButton) {
            
-             let data = companyPrice[sender.tag]
-             if  let vc = CompanyDetailVC.storyBoardInstance() {
-                    vc.title = data.name
-                    vc.companyId = data.companyid
-                    UserDefaults.standard.set(vc.title, forKey: "companyName")
-                    UserDefaults.standard.set(vc.companyId, forKey: "companyId")
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+        let data = companyPrice[sender.tag]
+        if  let vc = CompanyHeaderModuleVC.storyBoardInstance() {//CompanyDetailVC.storyBoardInstance() {
+            vc.title = data.name
+            vc.companyId = data.companyid
+            UserDefaults.standard.set(vc.title, forKey: "companyName")
+            UserDefaults.standard.set(vc.companyId, forKey: "companyId")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
        }
 }
 extension CommudityDetailsVC : UITableViewDelegate , UITableViewDataSource {

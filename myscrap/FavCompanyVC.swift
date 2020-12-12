@@ -79,7 +79,7 @@ extension FavCompanyVC: UICollectionViewDelegateFlowLayout{
             vc.companyId = datasource[indexPath.item].id
             self.navigationController?.pushViewController(vc, animated: true)
         }*/
-        if  let vc = CompanyDetailVC.storyBoardInstance() {
+        if  let vc = CompanyHeaderModuleVC.storyBoardInstance() {//CompanyDetailVC.storyBoardInstance() {
             
             vc.companyId = datasource[indexPath.item].id
             UserDefaults.standard.set(vc.companyId, forKey: "companyId")
