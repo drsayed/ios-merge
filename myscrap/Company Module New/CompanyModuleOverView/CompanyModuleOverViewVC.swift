@@ -63,9 +63,9 @@ class CompanyModuleOverViewVC: UIViewController, FriendControllerDelegate {
     var company_long = 0.0
 
     var adminText = "   Admin   "
-    var makeAsAdminText = "   Make As Admin   "
-    var reportText = "   Report   "
-    var reportedText = "   Reported   "
+    var makeAsAdminText = "Make As Admin"
+    var reportText = "Report"
+    var reportedText = "Reported"
 
     var isCurrentUserAsAdmin = false
     
@@ -565,17 +565,34 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                         cell.nameLbl.text = name
                         cell.compDesigLbl.text = designation + " • " + company.capitalized
                         
+                        cell.adminLabel.isHidden = true
+                        cell.adminLabel.backgroundColor = UIColor.GREEN_PRIMARY
+                        cell.adminLabel.text = "  Admin  "
+                        cell.adminLabel.layer.cornerRadius = 9.0
+                        cell.adminLabel.textColor = UIColor.white
+                        cell.adminLabel.layer.masksToBounds = true
+                        
                         cell.profileView.isUserInteractionEnabled = true
                         
-                        cell.adminBtn.layer.cornerRadius = 3.0
-                        cell.adminBtn.layer.borderWidth = 1.0
-                        cell.adminBtn.layer.borderColor = UIColor.GREEN_PRIMARY.cgColor
-                        cell.adminBtn.tag = indexPath.row
-                        cell.adminBtn.addTarget(self, action: #selector(makeAsAdminButtonAction), for: .touchUpInside)
+                        //makeAsAdminBtn
+                        cell.makeAsAdminBtn.isHidden = true
+                        cell.makeAsAdminBtn.layer.cornerRadius = 3.0
+                        cell.makeAsAdminBtn.layer.borderWidth = 1.0
+                        cell.makeAsAdminBtn.layer.borderColor = UIColor.GREEN_PRIMARY.cgColor
+                        cell.makeAsAdminBtn.tag = indexPath.row
+                        cell.makeAsAdminBtn.addTarget(self, action: #selector(makeAsAdminButtonAction), for: .touchUpInside)
 
-                        cell.reportBtn.layer.cornerRadius = 3.0
+                        //reportCompanyButton
+                        cell.reportBtn.isHidden = true
+                        cell.reportBtn.setImage(UIImage(named: "icReport"), for: .normal)
+                        cell.reportBtn.setTitle("Report", for: .normal)
+                        cell.reportBtn.setTitleColor(UIColor.gray, for: .normal)
+                        cell.reportBtn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 14)
+                        cell.reportBtn.alignTextUnderImage(imgsize: CGSize(width: 25, height: 25), spacing: 2)
+//                        cell.reportBtn.layer.cornerRadius = 3.0
                         cell.reportBtn.tag = indexPath.row
                         cell.reportBtn.addTarget(self, action: #selector(reportButtonAction), for: .touchUpInside)
+                        
                         let profilePic = dict.profilePic
                         let colorCode = dict.colorcode
                         
@@ -594,10 +611,12 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                                 cell.reportBtnWidthConstraint.constant = 0
                                 self.isCurrentUserAsAdmin = true
                                 if isAdmin {
-                                    cell.adminBtn.setTitle(self.adminText, for: .normal)
+                                    cell.adminLabel.isHidden = false
                                 }
                                 else {
-                                    cell.adminBtn.setTitle(self.makeAsAdminText, for: .normal)
+                                    cell.makeAsAdminBtn.isHidden = false
+                                    cell.makeAsAdminBtn.setTitle(self.makeAsAdminText, for: .normal)
+                                    cell.makeAsAdminWidthConstraint.constant = 120
                                 }
                             }
                             else if self.companyOverViewDataSource!.last!.isAdminAvailable && isEmplView { // check if the company have admin and other users have employee
@@ -605,31 +624,40 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                                 if self.isCurrentUserAsAdmin {
                                     cell.reportBtn.isHidden = true
                                     cell.reportBtnWidthConstraint.constant = 0
-                                    cell.adminBtn.setTitle(self.makeAsAdminText, for: .normal)
+                                    
+                                    cell.makeAsAdminBtn.isHidden = false
+                                    cell.makeAsAdminBtn.setTitle(self.makeAsAdminText, for: .normal)
+                                    cell.makeAsAdminWidthConstraint.constant = 120
                                 }
                                 else {
                                     cell.reportBtn.isHidden = true
                                     cell.reportBtnWidthConstraint.constant = 0
                                     
-                                    cell.adminBtn.isHidden = true
+//                                    cell.adminBtn.isHidden = true
                                 }
                             }
                             else {
                                 if isAdmin { // Show other user Admin
-                                    cell.adminBtn.isHidden = false
                                     cell.reportBtn.isHidden = false
-                                    cell.adminBtn.setTitle(self.adminText, for: .normal)
-                                    
+                                    cell.adminLabel.isHidden = false
+
+                                    cell.makeAsAdminWidthConstraint.constant = 0
+
                                     if adminReported == "Reported" {
                                         cell.reportBtn.setTitle(self.reportedText, for: .normal)
                                     }
                                     else {
                                         cell.reportBtn.setTitle(self.reportText, for: .normal)
                                     }
-                                    cell.reportBtnWidthConstraint.constant = 85
+                                    cell.reportBtnWidthConstraint.constant = 70
                                 }
                                 else {
-                                    cell.adminBtn.isHidden = true
+                                    cell.adminLabel.isHidden = true
+
+                                    cell.makeAsAdminBtn.isHidden = false
+                                    cell.makeAsAdminBtn.setTitle(self.makeAsAdminText, for: .normal)
+                                    cell.makeAsAdminWidthConstraint.constant = 120
+
                                     cell.reportBtn.isHidden = true
                                     cell.reportBtnWidthConstraint.constant = 0
                                 }
@@ -753,19 +781,35 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
     //MARK: Cell Actions
     @objc func makeAsAdminButtonAction(sender : UIButton) {
         
-        if sender.tag != 0 {
-            let dict = self.employeesArray[sender.tag - 1]
-
-            let isEmployeeView = dict.isEmployeeView
-
-            let userId = dict.userId
+        let isAdminAvailable = self.companyOverViewDataSource!.last!.isAdminAvailable
+        
+        if isAdminAvailable {
             
-            if userId != "" {
-                if userId != AuthService.instance.userId && isEmployeeView
-                {
-                    self.makeEmployeeAsAdmin(userIDForMakingAdmin: userId)
+            if sender.tag != 0 {
+                let dict = self.employeesArray[sender.tag - 1]
+
+                let isEmployeeView = dict.isEmployeeView
+
+                let userId = dict.userId
+                
+                if userId != "" {
+                    if userId != AuthService.instance.userId && isEmployeeView
+                    {
+                        self.makeEmployeeAsAdmin(userIDForMakingAdmin: userId)
+                    }
                 }
             }
+        }
+        else {
+            let vc = OwnThisCompanyVC()
+            vc.viewDelegate = self
+
+            if self.companyOverViewDataSource!.last != nil {//.count > 0 {
+                vc.getCompanyItems = self.companyOverViewDataSource!.last!
+            }
+
+            self.navigationController?.pushViewController(vc, animated: true)
+
         }
     }
 
@@ -798,7 +842,6 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                         let dict = self.employeesArray[sender.tag - 1]
 
                         if dict.reportOfCompanyAdmin != "" {
-    //                        cell.reportBtn.setTitle(self.reportedText, for: .normal)
                             dict.reportOfCompanyAdmin = "Reported"
                             self.tableView.reloadSections(IndexSet(integer: sender.tag - 1), with: .none)
                         }
@@ -1079,3 +1122,11 @@ class CompanyModuleHeaderCell: UITableViewCell {
 //        return nil
 //    }
 //}
+
+extension CompanyModuleOverViewVC : UpdateOwnCompanydelegate {
+    
+    func updateData() {
+//        self.ownCompBtn.setTitle(self.requestedStr, for: .normal)
+        self.showAlert(message: "Request has been sent. You will be notified soon")
+    }
+}

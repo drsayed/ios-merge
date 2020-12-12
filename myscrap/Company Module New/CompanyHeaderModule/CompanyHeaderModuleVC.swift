@@ -293,10 +293,10 @@ class CompanyHeaderModuleVC: UIViewController {
     
     @objc func reportCompanyButtonAction(sender : UIButton) {
         
-        let isAdminAvailable = self.companyData.last!.isAdminAvailable
-
-        if isAdminAvailable {
-            print(self.reportCompanyButton.frame.origin.x)
+//        let isAdminAvailable = self.companyData.last!.isAdminAvailable
+//
+//        if isAdminAvailable {
+//            print(self.reportCompanyButton.frame.origin.x)
             
             self.reportCompanyDropDown.anchorView = sender
             self.reportCompanyDropDown.bottomOffset = CGPoint(x: self.reportCompanyButton.frame.origin.x, y:(self.reportCompanyDropDown.anchorView?.plainView.bounds.height)!)
@@ -314,7 +314,7 @@ class CompanyHeaderModuleVC: UIViewController {
 
                 self.reportCompanyAlertView()
             }
-        }
+//        }
     }
     
     @objc func callBtnAction() {
@@ -1060,102 +1060,99 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
 
             //Checking Admin is Available for this comapny
             let isAdminAvailable = self.companyData.last?.isAdminAvailable
-//            let commodImg = self.companyData.last?.commodityAdminImage
-//            let commodCount = self.companyData.last?.commodityImageCount
-            if isAdminAvailable! {
-//                self.ownCompanyView.isHidden = true
-//                self.ownCompBtn.isHidden = true
-//                self.ownCompBtn.isEnabled = false
-//                self.commoImgOverView.isHidden = false
-//                self.commoCount.isHidden = false
-//                self.commImgView.isHidden = false
-                //self.commImgView.sd_setImage(with: URL(string: commodImg!), completed: nil)
-                /*if commodCount! >= 1 {
-                    self.commoCount.text = String(format: "%d", commodCount!) + "+"
-                } else {
-                    self.commoCount.text = ""
-                }*/
-            } else {
-//                self.ownCompanyView.isHidden = false
-//                self.ownCompBtn.isHidden = false
-//                self.ownCompBtn.isEnabled = true
-//                self.commoImgOverView.isHidden = true
-//                self.commoCount.isHidden = true
-//                self.commImgView.isHidden = true
-//                self.commImgView.sd_setImage(with: URL(string: commodImg!), completed: nil)
-//                if commodCount! >= 1 {
-//                    self.commoCount.text = String(format: "%d +", commodCount!)
-//                } else {
-//                    self.commoCount.text = ""
-//                }
-            }
 
             let getOwnCompanyRequest = self.companyData.last?.ownCompanyRequest
 //            let adminReport = self.companyData.last?.adminReport
             let reportedStatusOfCompany = self.companyData.last?.reportedStatusOfCompany
 
-            var buttonTitleStr = ""
-            
-//            if isAdminAvailable! {
-            let companyOwnerId = self.companyData.last!.companyOwnerId
-            
-            if companyOwnerId != "" {
+//          Own this company Button will show when there are no employees and admin for the company
+            // Own this company Button
+            self.ownCompBtn.layer.cornerRadius = 10
+            self.ownCompBtn.layer.masksToBounds = true
+            var ownCompanyButtonTitleStr = self.ownthisCompanyStr
+            if self.companyData.last!.employeeCount == 0 && isAdminAvailable == false {
+                self.ownCompBtn.isHidden = false
+                self.ownCompBtn.isEnabled = true
                 
-                if companyOwnerId == AuthService.instance.userId && isAdminAvailable! {
-                    self.ownCompBtn.isHidden = true
-                    self.ownCompBtn.isEnabled = true
-                    
-                    self.editButton.isHidden = false
+                if getOwnCompanyRequest == "Requested" {
+                    ownCompanyButtonTitleStr = self.requestedStr
                 }
-                else if isAdminAvailable! { // Need to check
-                    self.ownCompBtn.isHidden = true//false
-                    self.reportCompanyButton.isHidden = false
-                    
-                    if reportedStatusOfCompany == "Reported" {
-                        buttonTitleStr = self.reportedStr
-                    }
-                    else {
-                        buttonTitleStr = self.reportStr
-                    }
-                    
-                    self.reportCompanyButton.setTitle(buttonTitleStr, for: .normal)
-                     
-//                    self.ownCompBtn.layer.cornerRadius = 3
-//                    self.ownCompBtn.layer.masksToBounds = true
-                }
+                self.ownCompBtn.setTitle(ownCompanyButtonTitleStr, for: .normal)
             }
             else {
+                self.ownCompBtn.isHidden = true
+                self.reportCompanyButton.isHidden = false
                 
+                var reportButtonTitleStr = ""
                 if reportedStatusOfCompany == "Reported" {
-                    buttonTitleStr = self.reportedStr
-                    self.ownCompBtn.isHidden = true
-                    self.reportCompanyButton.isHidden = false
-//                    self.ownCompBtn.isHidden = false
-//                    self.ownCompBtn.isEnabled = false
-//                    self.ownCompBtn.layer.cornerRadius = 3
-//                    self.ownCompBtn.layer.masksToBounds = true
-                    self.reportCompanyButton.setTitle(buttonTitleStr, for: .normal)
+                    reportButtonTitleStr = self.reportedStr
                 }
-                else if getOwnCompanyRequest == "Requested" {
-                    buttonTitleStr = self.requestedStr
-                   self.ownCompBtn.isHidden = false
-                   self.ownCompBtn.isEnabled = false
-                    self.ownCompBtn.layer.cornerRadius = 10
-                    self.ownCompBtn.layer.masksToBounds = true
-               }
-               else {
-                   self.ownCompBtn.isHidden = false
-                   self.ownCompBtn.isEnabled = true
-                   self.ownCompBtn.layer.cornerRadius = 10
-                   self.ownCompBtn.layer.masksToBounds = true
+                else {
+                    reportButtonTitleStr = self.reportStr
+                }
 
-                   buttonTitleStr = self.ownthisCompanyStr
-               }
+                self.reportCompanyButton.setTitle(reportButtonTitleStr, for: .normal)
+
             }
             
-            if buttonTitleStr != "" {
-                self.ownCompBtn.setTitle(buttonTitleStr, for: .normal)
-            }
+//            var buttonTitleStr = ""
+//
+////            if isAdminAvailable! {
+//            let companyOwnerId = self.companyData.last!.companyOwnerId
+//
+//            if companyOwnerId != "" {
+//
+//                if companyOwnerId == AuthService.instance.userId && isAdminAvailable! {
+//                    self.ownCompBtn.isHidden = true
+//                    self.ownCompBtn.isEnabled = true
+//
+//                    self.editButton.isHidden = false
+//                }
+//                else if isAdminAvailable! { // Need to check
+//                    self.ownCompBtn.isHidden = true//false
+//                    self.reportCompanyButton.isHidden = false
+//
+//                    if reportedStatusOfCompany == "Reported" {
+//                        buttonTitleStr = self.reportedStr
+//                    }
+//                    else {
+//                        buttonTitleStr = self.reportStr
+//                    }
+//
+//                    self.reportCompanyButton.setTitle(buttonTitleStr, for: .normal)
+//
+////                    self.ownCompBtn.layer.cornerRadius = 3
+////                    self.ownCompBtn.layer.masksToBounds = true
+//                }
+//            }
+//            else {
+//
+//                if reportedStatusOfCompany == "Reported" {
+//                    buttonTitleStr = self.reportedStr
+//                    self.ownCompBtn.isHidden = true
+//                    self.reportCompanyButton.isHidden = false
+//                    self.reportCompanyButton.setTitle(buttonTitleStr, for: .normal)
+//                }
+//                else if getOwnCompanyRequest == "Requested" {
+//                    buttonTitleStr = self.requestedStr
+//                   self.ownCompBtn.isHidden = false
+//                    self.ownCompBtn.layer.masksToBounds = true
+//               }
+////               else if self.companyData.last!.employeeCount == 0 {
+////
+////                    self.reportCompanyButton.isHidden = false
+////                    self.reportCompanyButton.setTitle(self.reportStr, for: .normal)
+////
+////                    self.ownCompBtn.isHidden = false
+////                    self.ownCompBtn.isEnabled = true
+////
+////                    buttonTitleStr = self.ownthisCompanyStr
+////               }
+//            }
+//
+//            if buttonTitleStr != "" {
+//                self.ownCompBtn.setTitle(buttonTitleStr, for: .normal)
+//            }
 
             self.photoCV.reloadData()
             if self.activityIndicator.isAnimating{
