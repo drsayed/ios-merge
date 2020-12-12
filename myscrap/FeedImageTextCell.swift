@@ -22,6 +22,10 @@ class FeedImageTextCell: FeedImageCell {
         //Download StackView hide for only FeedText
         dwnldStackView.isHidden = false
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutIfNeeded()
+    }
     override func setupAPIViews(item: FeedV2Item) {
         super.setupAPIViews(item: item)
         statusTextView?.attributedText = item.descriptionStatus

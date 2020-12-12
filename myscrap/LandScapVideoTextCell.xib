@@ -8,21 +8,26 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="dF5-Ya-yPJ" customClass="LandScapVideoTextCell" customModule="myscrap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="484" height="720"/>
+            <rect key="frame" x="0.0" y="0.0" width="484" height="704"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="484" height="720"/>
+                <rect key="frame" x="0.0" y="0.0" width="484" height="704"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIQ-EP-F87" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="484" height="720"/>
+                        <rect key="frame" x="0.0" y="0.0" width="484" height="704"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hhR-sp-WGS">
-                                <rect key="frame" x="0.0" y="110" width="484" height="500"/>
+                                <rect key="frame" x="0.0" y="101" width="484" height="500"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="0bp-zz-H0q"/>
@@ -35,12 +40,12 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="E8Z-Pg-zQE">
-                                <rect key="frame" x="181" y="580" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="571" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyA-dU-0Zt">
-                                <rect key="frame" x="439" y="140" width="40" height="30"/>
+                                <rect key="frame" x="439" y="131" width="40" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjh-AR-yT8">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
@@ -155,7 +160,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuU-f5-1Up" customClass="UserTagTextView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="8" y="77" width="468" height="33"/>
+                                <rect key="frame" x="8" y="77" width="468" height="24"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment content="hello">
@@ -168,7 +173,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="65Q-LU-znO">
-                                <rect key="frame" x="8" y="627" width="468" height="93"/>
+                                <rect key="frame" x="8" y="611" width="468" height="93"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBC-x7-ndY">
                                         <rect key="frame" x="0.0" y="0.0" width="468" height="30"/>
@@ -404,15 +409,16 @@
                             <constraint firstItem="Dur-5H-Stl" firstAttribute="top" secondItem="yIQ-EP-F87" secondAttribute="top" constant="20" id="nXb-pv-uBB"/>
                             <constraint firstItem="AI2-iR-1OA" firstAttribute="centerX" secondItem="7Eo-Lq-NwP" secondAttribute="centerX" id="pEV-0P-0bF"/>
                             <constraint firstItem="Pow-O9-tAL" firstAttribute="bottom" secondItem="7Eo-Lq-NwP" secondAttribute="bottom" id="uwH-Xd-ff7"/>
+                            <constraint firstAttribute="width" constant="484" id="wVJ-rh-6SY"/>
                             <constraint firstAttribute="trailing" secondItem="hhR-sp-WGS" secondAttribute="trailing" id="wfh-vq-8Yr"/>
                             <constraint firstItem="Pow-O9-tAL" firstAttribute="leading" secondItem="7Eo-Lq-NwP" secondAttribute="trailing" constant="8" id="xUh-aD-jJR"/>
                         </constraints>
                     </view>
                     <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaP-P2-iM6" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="484" height="720"/>
+                        <rect key="frame" x="0.0" y="0.0" width="484" height="704"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YZJ-K3-SGK">
-                                <rect key="frame" x="98" y="337.5" width="288.5" height="45"/>
+                                <rect key="frame" x="98" y="329.5" width="288.5" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="3eL-Fi-mVL">
                                         <rect key="frame" x="134" y="0.0" width="20" height="20"/>
@@ -431,7 +437,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-eT-nfE" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="446" y="682" width="30" height="30"/>
+                                <rect key="frame" x="446" y="666" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="A2o-6N-j3X"/>
                                     <constraint firstAttribute="height" constant="30" id="g0b-r5-Ijp"/>
@@ -464,7 +470,7 @@
                 <constraint firstItem="yIQ-EP-F87" firstAttribute="top" secondItem="dF5-Ya-yPJ" secondAttribute="top" id="buF-sy-ooN"/>
                 <constraint firstItem="yaP-P2-iM6" firstAttribute="leading" secondItem="dF5-Ya-yPJ" secondAttribute="leading" id="qyW-8z-LlO"/>
             </constraints>
-            <size key="customSize" width="484" height="721"/>
+            <size key="customSize" width="484" height="705"/>
             <connections>
                 <outlet property="comImgBtn" destination="b7I-pV-06i" id="8OZ-DJ-lem"/>
                 <outlet property="commentBtn" destination="fs8-29-aQq" id="XbY-7N-Hge"/>
@@ -473,6 +479,7 @@
                 <outlet property="downloadImgBtn" destination="3il-0F-bHY" id="vri-di-QFc"/>
                 <outlet property="dwnldBtn" destination="Wxu-QH-LWW" id="6rd-Wc-9e5"/>
                 <outlet property="editButton" destination="6uD-fg-ycu" id="7rE-pM-irF"/>
+                <outlet property="fancyViewWidthConstraint" destination="wVJ-rh-6SY" id="TXy-fa-LTj"/>
                 <outlet property="favouriteBtn" destination="Vvw-Ae-D3q" id="NtU-OU-rGo"/>
                 <outlet property="likeBtn" destination="xBH-bA-ydp" id="1NU-qC-OUV"/>
                 <outlet property="likeCountBtn" destination="57P-qL-OaF" id="6vK-Zu-xSN"/>
@@ -497,7 +504,7 @@
                 <outlet property="videosCoutLable" destination="bjh-AR-yT8" id="C8r-Ss-NYt"/>
                 <outlet property="viewCount" destination="ApK-CX-n4J" id="7Hx-d4-VhL"/>
             </connections>
-            <point key="canvasLocation" x="373.91304347826087" y="-58.59375"/>
+            <point key="canvasLocation" x="373.91304347826087" y="-64.285714285714278"/>
         </collectionViewCell>
     </objects>
     <designables>

@@ -11,6 +11,7 @@ import SwiftLinkPreview
 
 class FeedTextCell: FeedNewUserCell   {
 
+    @IBOutlet weak var linkPreviewHeight: NSLayoutConstraint!
     @IBOutlet weak var statusTextView: UserTagTextView?
     @IBOutlet weak var favouriteBtn: FavouriteButton!
     @IBOutlet weak var editButton: UIButton!
@@ -41,7 +42,10 @@ class FeedTextCell: FeedNewUserCell   {
             configCell(withItem: item)
         }
     }
-
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutIfNeeded()
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         setupTap()
@@ -136,6 +140,7 @@ class FeedTextCell: FeedNewUserCell   {
                 linkPreviewView.layer.cornerRadius = 8
                 linkPreviewView.clipsToBounds = true
                 linkPreviewView.layer.borderWidth = 0.5
+                linkPreviewHeight.constant = 400
                 linkPreviewView.layer.borderColor = UIColor.lightGray.cgColor
                 linkDescriptionLbl.text = ""
                 shortLinkLbl.text = ""
@@ -166,6 +171,7 @@ class FeedTextCell: FeedNewUserCell   {
                                 
             })
         } else {
+            linkPreviewHeight.constant = 0
             linkPreviewView.isHidden = true
         }
     }

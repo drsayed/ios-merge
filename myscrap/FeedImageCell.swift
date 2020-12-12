@@ -40,6 +40,10 @@ class FeedImageCell: FeedTextCell {
             countView.layer.cornerRadius = countView.frame.height/2
                }
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutIfNeeded()
+    }
     func refreshTable()  {
         
         self.feedImages.register(CompanyImageslCell.Nib, forCellWithReuseIdentifier: CompanyImageslCell.identifier)

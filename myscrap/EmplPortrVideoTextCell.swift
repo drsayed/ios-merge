@@ -14,6 +14,7 @@ protocol PortraitVideoTextDelegate:class {
     func PortraitTextVideoChanged()
 }
 class EmplPortrVideoTextCell: BaseCell {
+    @IBOutlet var fancyViewWidthConstraint : NSLayoutConstraint!
 
     weak var delegateVideoChange : PortraitVideoTextDelegate?
 
@@ -99,6 +100,8 @@ class EmplPortrVideoTextCell: BaseCell {
            setupFriendViewTaps()
         visibleCellIndex = IndexPath(item: 0, section: 0)
         self.videosCountView.layer.cornerRadius =   self.videosCountView.frame.size.height/2
+        let viewWidth = UIScreen.main.bounds.width
+        self.fancyViewWidthConstraint.constant = UIScreen.main.bounds.width
 //           spinner.startAnimating()
 //           spinner.hidesWhenStopped = true
 //           //player.addObserver(self, forKeyPath: "rate", options: NSKeyValueObservingOptions.new, context: nil)

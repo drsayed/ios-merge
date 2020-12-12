@@ -502,6 +502,8 @@ class CompanyHeaderModuleVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationItem.title = " "
+        NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
     }
     
     @objc func handleReview(notif: Notification){
@@ -855,7 +857,23 @@ extension CompanyHeaderModuleVC: UICollectionViewDelegateFlowLayout {
             
             direction = .reverse
         }
-        
+        if indexPath.item != 1 {
+            NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+        }
+        else
+        {
+            let screenRect = UIScreen.main.bounds
+            let screenHeight = screenRect.size.height
+            NotificationCenter.default.post(name: Notification.Name("PlayVideoFromTab"), object: nil)
+
+//            if mainScroll.contentOffset.y > 300 {
+//                NotificationCenter.default.post(name: Notification.Name("PlayVideoFromTab"), object: nil)
+//            }else
+//            {
+//                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+//
+//            }
+        }
         pageCollection.selectedPageIndex = indexPath.item
         
         tabBarCollectionView.scrollToItem(at: indexPath,
@@ -920,7 +938,23 @@ extension CompanyHeaderModuleVC: UIPageViewControllerDelegate {
         guard let currentVCIndex = pageCollection.pages.firstIndex(where: { $0.vc == currentVC }) else { return }
         
         let indexPathAtCollectionView = IndexPath(item: currentVCIndex, section: 0)
-        
+        if indexPathAtCollectionView.item != 1 {
+            NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+        }
+        else
+        {
+            let screenRect = UIScreen.main.bounds
+            let screenHeight = screenRect.size.height
+            NotificationCenter.default.post(name: Notification.Name("PlayVideoFromTab"), object: nil)
+
+//            if mainScroll.contentOffset.y > 300 {
+//                NotificationCenter.default.post(name: Notification.Name("PlayVideoFromTab"), object: nil)
+//            }else
+//            {
+//                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+//
+//            }
+        }
         scrollSelectedTabView(toIndexPath: indexPathAtCollectionView)
         tabBarCollectionView.scrollToItem(at: indexPathAtCollectionView,
                                           at: .centeredHorizontally,

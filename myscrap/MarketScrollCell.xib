@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,7 +46,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzP-om-Xdr">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzP-om-Xdr">
                                 <rect key="frame" x="287" y="18.5" width="65" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="PRQ-Ci-waF"/>
@@ -69,6 +67,7 @@
                             <constraint firstItem="XzP-om-Xdr" firstAttribute="centerY" secondItem="UI1-ZG-zNI" secondAttribute="centerY" id="hO3-70-7WF"/>
                             <constraint firstItem="iVd-Pa-v5r" firstAttribute="leading" secondItem="FiK-ae-tmV" secondAttribute="trailing" constant="16" id="i1F-2I-15b"/>
                             <constraint firstItem="iVd-Pa-v5r" firstAttribute="centerY" secondItem="UI1-ZG-zNI" secondAttribute="centerY" id="mGm-04-aH2"/>
+                            <constraint firstAttribute="width" constant="375" id="mSz-OY-weL"/>
                             <constraint firstItem="FiK-ae-tmV" firstAttribute="centerY" secondItem="UI1-ZG-zNI" secondAttribute="centerY" id="sKa-fD-rwC"/>
                             <constraint firstItem="FiK-ae-tmV" firstAttribute="leading" secondItem="UI1-ZG-zNI" secondAttribute="leading" constant="8" id="wsS-Oe-1ZW"/>
                         </constraints>
@@ -96,11 +95,15 @@
                             <constraint firstItem="Cka-xD-hRp" firstAttribute="top" secondItem="xbw-dy-Pa6" secondAttribute="top" id="0W1-qZ-cYi"/>
                             <constraint firstAttribute="trailing" secondItem="Cka-xD-hRp" secondAttribute="trailing" id="7Ef-RH-xYB"/>
                             <constraint firstItem="Cka-xD-hRp" firstAttribute="leading" secondItem="xbw-dy-Pa6" secondAttribute="leading" id="Bjm-Ph-7t6"/>
+                            <constraint firstAttribute="width" constant="375" id="GKv-qo-gkl"/>
+                            <constraint firstAttribute="height" constant="265" id="XEP-tX-BZk"/>
                             <constraint firstAttribute="bottom" secondItem="Cka-xD-hRp" secondAttribute="bottom" id="k7Y-oG-sqn"/>
+                            <constraint firstItem="Cka-xD-hRp" firstAttribute="width" secondItem="xbw-dy-Pa6" secondAttribute="width" id="riX-nV-ssD"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="xbw-dy-Pa6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5QY-jk-Lj7"/>
                 <constraint firstItem="xbw-dy-Pa6" firstAttribute="top" secondItem="UI1-ZG-zNI" secondAttribute="bottom" constant="-5" id="A83-qq-KC8"/>
@@ -110,13 +113,14 @@
                 <constraint firstItem="UI1-ZG-zNI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="j0S-TF-3u0"/>
                 <constraint firstItem="UI1-ZG-zNI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nVk-Tt-y4Q"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="375" height="115"/>
             <connections>
                 <outlet property="collectionView" destination="Cka-xD-hRp" id="cum-eD-fl8"/>
                 <outlet property="insideView" destination="xbw-dy-Pa6" id="mct-Tk-tqs"/>
+                <outlet property="insiderViewWidth" destination="GKv-qo-gkl" id="Nr3-ps-riH"/>
                 <outlet property="marketImage" destination="aJN-XP-9ZX" id="GP8-JW-K20"/>
                 <outlet property="topView" destination="UI1-ZG-zNI" id="iGV-Pm-t80"/>
+                <outlet property="topViewWidthConstraints" destination="mSz-OY-weL" id="oGZ-Iq-e5x"/>
                 <outlet property="viewAllBtn" destination="XzP-om-Xdr" id="Vrf-Ap-cXH"/>
             </connections>
             <point key="canvasLocation" x="92" y="94.902548725637189"/>

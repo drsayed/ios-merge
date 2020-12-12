@@ -15,6 +15,7 @@ protocol LandScapVideoTextDelegate:class {
 }
 class LandScapVideoTextCell: BaseCell {
     weak var delegateVideoChange : LandScapVideoTextDelegate?
+    @IBOutlet var fancyViewWidthConstraint : NSLayoutConstraint!
 
      @IBOutlet weak var editButton: UIButton!
        @IBOutlet weak var favouriteBtn: FavouriteButton!
@@ -98,6 +99,8 @@ class LandScapVideoTextCell: BaseCell {
            setupFriendViewTaps()
         visibleCellIndex = IndexPath(item: 0, section: 0)
         self.videosCountView.layer.cornerRadius =   self.videosCountView.frame.size.height/2
+        let viewWidth = UIScreen.main.bounds.width
+        self.fancyViewWidthConstraint.constant = UIScreen.main.bounds.width
 //           spinner.startAnimating()
 //           spinner.hidesWhenStopped = true
 //           //player.addObserver(self, forKeyPath: "rate", options: NSKeyValueObservingOptions.new, context: nil)

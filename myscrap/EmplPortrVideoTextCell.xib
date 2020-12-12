@@ -8,6 +8,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -390,6 +395,7 @@
                             <constraint firstAttribute="trailing" secondItem="65Q-LU-znO" secondAttribute="trailing" constant="8" id="9lu-et-NIG"/>
                             <constraint firstItem="E8Z-Pg-zQE" firstAttribute="centerX" secondItem="hhR-sp-WGS" secondAttribute="centerX" id="C8E-yg-Ida"/>
                             <constraint firstAttribute="bottom" secondItem="65Q-LU-znO" secondAttribute="bottom" id="IsK-UM-L6W"/>
+                            <constraint firstAttribute="width" constant="484" id="Iya-1g-UiE"/>
                             <constraint firstItem="7Eo-Lq-NwP" firstAttribute="leading" secondItem="yIQ-EP-F87" secondAttribute="leading" constant="8" id="PaG-S4-tbs"/>
                             <constraint firstItem="GuU-f5-1Up" firstAttribute="top" secondItem="Dur-5H-Stl" secondAttribute="bottom" constant="4" id="Wjl-gv-ASY"/>
                             <constraint firstAttribute="trailing" secondItem="Dur-5H-Stl" secondAttribute="trailing" constant="8" id="Z0e-37-6yZ"/>
@@ -473,6 +479,7 @@
                 <outlet property="downloadImgBtn" destination="3il-0F-bHY" id="vri-di-QFc"/>
                 <outlet property="dwnldBtn" destination="Wxu-QH-LWW" id="6rd-Wc-9e5"/>
                 <outlet property="editButton" destination="6uD-fg-ycu" id="7rE-pM-irF"/>
+                <outlet property="fancyViewWidthConstraint" destination="Iya-1g-UiE" id="YeT-Np-VzT"/>
                 <outlet property="favouriteBtn" destination="Vvw-Ae-D3q" id="NtU-OU-rGo"/>
                 <outlet property="likeBtn" destination="xBH-bA-ydp" id="1NU-qC-OUV"/>
                 <outlet property="likeCountBtn" destination="57P-qL-OaF" id="6vK-Zu-xSN"/>

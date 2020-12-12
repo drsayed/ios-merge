@@ -17,6 +17,8 @@ class MarketScrollCell: BaseCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var marketImage: UIImageView!
     
+    @IBOutlet weak var topViewWidthConstraints: NSLayoutConstraint!
+    @IBOutlet weak var insiderViewWidth: NSLayoutConstraint!
     var marketItem : [MarketFeed]!
     var userData : PostedUserData?
     var viewAllActionBlock: (() -> Void)? = nil
@@ -52,7 +54,9 @@ class MarketScrollCell: BaseCell {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         collectionView.register(MarketInsideScrollCell.Nib, forCellWithReuseIdentifier: MarketInsideScrollCell.identifier)
-        
+        let viewWidth = UIScreen.main.bounds.width
+        self.topViewWidthConstraints.constant = UIScreen.main.bounds.width
+        self.insiderViewWidth.constant = UIScreen.main.bounds.width
         //collectionView.isScrollEnabled = false
     }
 

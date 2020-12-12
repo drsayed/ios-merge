@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VOf-j7-Sf5" customClass="NewsScrollCell" customModule="myscrap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="360"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="355"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="355"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vv7-Rv-wxy">
@@ -47,7 +46,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqb-j1-ykm">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqb-j1-ykm">
                                 <rect key="frame" x="287" y="19" width="65" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="Iu2-GT-NJn"/>
@@ -73,10 +72,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZt-Z1-SBP">
-                        <rect key="frame" x="0.0" y="65" width="375" height="295"/>
+                        <rect key="frame" x="0.0" y="65" width="375" height="290"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="V8d-aj-Upv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="295"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="290"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Sjg-KM-r1F">
                                     <size key="itemSize" width="50" height="50"/>
@@ -94,12 +93,14 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="V8d-aj-Upv" secondAttribute="trailing" id="1XP-5p-7UN"/>
                             <constraint firstItem="V8d-aj-Upv" firstAttribute="leading" secondItem="OZt-Z1-SBP" secondAttribute="leading" id="8r5-pn-5nE"/>
+                            <constraint firstAttribute="height" constant="290" id="Gat-Bj-sWs"/>
                             <constraint firstAttribute="bottom" secondItem="V8d-aj-Upv" secondAttribute="bottom" id="lSE-Ek-qrf"/>
                             <constraint firstItem="V8d-aj-Upv" firstAttribute="top" secondItem="OZt-Z1-SBP" secondAttribute="top" id="yYQ-iN-FvQ"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="e6R-H6-IZB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="OZt-Z1-SBP" secondAttribute="bottom" id="5Uj-5W-0Ju"/>
                 <constraint firstItem="OZt-Z1-SBP" firstAttribute="top" secondItem="Vv7-Rv-wxy" secondAttribute="bottom" constant="-5" id="GlT-0S-eWl"/>
@@ -109,7 +110,6 @@
                 <constraint firstItem="Vv7-Rv-wxy" firstAttribute="top" secondItem="VOf-j7-Sf5" secondAttribute="top" id="lS2-WK-aQU"/>
                 <constraint firstItem="OZt-Z1-SBP" firstAttribute="leading" secondItem="VOf-j7-Sf5" secondAttribute="leading" id="yoR-dv-2jB"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="e6R-H6-IZB"/>
             <size key="customSize" width="375" height="150"/>
             <connections>
                 <outlet property="collectionView" destination="V8d-aj-Upv" id="gnd-ie-F2d"/>

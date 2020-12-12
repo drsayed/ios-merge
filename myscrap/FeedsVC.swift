@@ -823,7 +823,10 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     private func setupViews(){
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+//        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+//             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//           }
+
         collectionView.register(FeedPollResultCell.Nib, forCellWithReuseIdentifier: FeedPollResultCell.identifier)
         collectionView.register(FeedTextCell.Nib, forCellWithReuseIdentifier: FeedTextCell.identifier)
         collectionView.register(FeedImageCell.Nib, forCellWithReuseIdentifier: FeedImageCell.identifier)
@@ -1206,6 +1209,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
             case .covidPoll:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedPollResultCell.identifier, for: indexPath) as? FeedPollResultCell else { return UICollectionViewCell()}
                 cell.item = data
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .feedTextCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedTextCell.identifier, for: indexPath) as? FeedTextCell else { return UICollectionViewCell()}
@@ -1215,6 +1220,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .feedImageCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageCell.identifier, for: indexPath) as? FeedImageCell else { return UICollectionViewCell()}
@@ -1234,6 +1241,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .feedImageTextCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageTextCell.identifier, for: indexPath) as? FeedImageTextCell else { return UICollectionViewCell()}
@@ -1252,6 +1261,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .feedVideoCell:
                  guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmplPortraitVideoCell.identifier, for: indexPath) as? EmplPortraitVideoCell else { return UICollectionViewCell()}
@@ -1295,6 +1306,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                              cell.offlineBtnAction = {
                                  self.showToast(message: "No internet connection")
                              }
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                              return cell
             case .feedVideoTextCell:
                 /*guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedVideoTextCell.identifier, for: indexPath) as? FeedVideoTextCell else { return UICollectionViewCell()}
@@ -1335,6 +1348,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AdvertismentCell.identifier, for: indexPath) as? AdvertismentCell else { return UICollectionViewCell()}
                 cell.item = data
                 cell.sliderAdImageView.delegate = self
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .market:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarketScrollCell.identifier, for: indexPath) as? MarketScrollCell else { return UICollectionViewCell()}
@@ -1364,6 +1379,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                         
                     }
                 }
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .userFeedTextCell:
                 return UICollectionViewCell()
@@ -1399,10 +1416,14 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                         }
                     }
                 }
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .news:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsScrollCell.identifier, for: indexPath) as? NewsScrollCell else { return UICollectionViewCell()}
                 cell.item = data
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .companyMonth:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompanyOfMonthCell.identifier, for: indexPath) as? CompanyOfMonthCell else { return UICollectionViewCell()}
@@ -1416,6 +1437,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 //                    //cell.readMoreBtn.setTitle("Show Less...", for: .normal)
                 //                    cell.readMoreBtn.isHidden = true
                 //                }
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .personWeek:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonOfWeek.identifier, for: indexPath) as? PersonOfWeek else { return UICollectionViewCell()}
@@ -1424,6 +1447,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 }
                 cell.updatedDelegate = self
                 cell.item = data
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .vote:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VotingScrollCell.identifier, for: indexPath) as? VotingScrollCell else { return UICollectionViewCell()}
@@ -1443,12 +1468,15 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                     }
                 }
                
-             
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .personWeekScroll:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonWeekScrollCell.identifier, for: indexPath) as? PersonWeekScrollCell else { return UICollectionViewCell()}
                 cell.item = data
                 cell.delegate = self
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .feedPortrVideoCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmplPortraitVideoCell.identifier, for: indexPath) as? EmplPortraitVideoCell else { return UICollectionViewCell()}
@@ -1492,7 +1520,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
-                  cell.layoutIfNeeded()
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .feedLandsVideoCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LandScapVideoCell.identifier, for: indexPath) as? LandScapVideoCell else { return UICollectionViewCell()}
@@ -1536,7 +1565,8 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
-                  cell.layoutIfNeeded()
+                cell.setNeedsLayout()
+                   cell.layoutIfNeeded()
                 return cell
             case .feedPortrVideoTextCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmplPortrVideoTextCell.identifier, for: indexPath) as? EmplPortrVideoTextCell else { return UICollectionViewCell()}
@@ -1581,6 +1611,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                     self.showToast(message: "No internet connection")
                 }
                 cell.layoutSubviews()
+                cell.setNeedsLayout()
                    cell.layoutIfNeeded()
                 return cell
             case .feedLandsVideoTextCell:
@@ -1626,6 +1657,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                     self.showToast(message: "No internet connection")
                 }
                 cell.layoutSubviews()
+                cell.setNeedsLayout()
                    cell.layoutIfNeeded()
                 return cell
             }
@@ -2145,12 +2177,12 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
       }
     //#7after api loaded
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
-        
+
         let width = screenWidth //self.view.frame.width
-    
+
             let item = feedDatasource[indexPath.item]
             print("Get the raw values",item.cellType.rawValue)
             var height : CGFloat = 0
@@ -2161,7 +2193,7 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
                 return CGSize(width: width , height: height)
             case .feedImageCell:
                 height = FeedsHeight.heightForImageCellV2(item: item, width: width)
-                return CGSize(width: width, height: height)
+                return   CGSize(width: width, height: height)
             case .feedImageTextCell:
                 height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
                 return CGSize(width: width, height: height)
@@ -2211,17 +2243,17 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
                 return CGSize(width: width, height: height + 20)
             case .feedPortrVideoCell:
                 height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-                return CGSize(width: width, height: height + 20)
+                return   CGSize(width: width, height: height + 20)
             case .feedPortrVideoTextCell:
                 height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height + 15)    //height + 30
+                return  CGSize(width: width, height: height + 15)    //height + 30
             case .feedLandsVideoTextCell:
                 height = FeedsHeight.heightForLandsVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height + 15)    //height + 30
+                return  CGSize(width: width, height: height + 15)    //height + 30
             }
-        
+
     }
     @objc func refreshAllFeedsData()
         {
