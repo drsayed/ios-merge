@@ -24,7 +24,7 @@ extension FeedsNewsDelegate where Self: UIViewController{
             vc.companyId = id
             self.navigationController?.pushViewController(vc, animated: true)
         }*/
-        if  let vc = CompanyDetailVC.storyBoardInstance() {
+        if  let vc = CompanyHeaderModuleVC.storyBoardInstance() {//CompanyDetailVC.storyBoardInstance() {
             vc.companyId = id
             UserDefaults.standard.set(vc.companyId, forKey: "companyId")
             self.navigationController?.pushViewController(vc, animated: true)

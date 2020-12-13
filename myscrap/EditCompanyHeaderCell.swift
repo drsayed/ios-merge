@@ -12,6 +12,10 @@ class EditCompanyHeaderCell: UICollectionViewCell {
     
     @IBOutlet weak var label:UILabel!
     
+    @IBOutlet weak var downArrowButton:UIButton!
+    
+    @IBOutlet weak var topSeparatorLabel : UILabel!
+
     override func awakeFromNib() {
         
         super.awakeFromNib()
@@ -19,6 +23,9 @@ class EditCompanyHeaderCell: UICollectionViewCell {
         label.textColor = UIColor.darkGray
         //label.font = Fonts.descriptionFont
         label.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
+        
+        topSeparatorLabel.backgroundColor = UIColor.lightGray
+
     }
     
 }
