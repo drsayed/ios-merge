@@ -45,7 +45,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0D6-WM-GVj">
-                                <rect key="frame" x="369" y="107" width="40" height="30"/>
+                                <rect key="frame" x="369" y="117" width="40" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmX-yV-zSi">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
@@ -387,7 +387,7 @@
                             <constraint firstItem="lFO-G6-EKY" firstAttribute="top" secondItem="cvz-eu-7rX" secondAttribute="top" id="9Nb-cu-8Jv"/>
                             <constraint firstItem="NEy-yN-2j0" firstAttribute="top" secondItem="jQe-b5-hps" secondAttribute="bottom" id="CYD-p2-ML3"/>
                             <constraint firstItem="8ST-Ns-zSo" firstAttribute="bottom" secondItem="cvz-eu-7rX" secondAttribute="bottom" constant="7.5" id="Fl8-9X-pSd"/>
-                            <constraint firstItem="0D6-WM-GVj" firstAttribute="top" secondItem="jQe-b5-hps" secondAttribute="bottom" constant="30" id="Fud-mf-bR9"/>
+                            <constraint firstItem="0D6-WM-GVj" firstAttribute="top" secondItem="jQe-b5-hps" secondAttribute="bottom" constant="40" id="Fud-mf-bR9"/>
                             <constraint firstItem="cJD-MV-McY" firstAttribute="leading" secondItem="C4w-lW-PuO" secondAttribute="leading" constant="8" id="R8A-NS-thU"/>
                             <constraint firstAttribute="trailing" secondItem="24Y-B6-0Vu" secondAttribute="trailing" constant="8" id="ToS-4H-QaY"/>
                             <constraint firstItem="cvz-eu-7rX" firstAttribute="top" secondItem="C4w-lW-PuO" secondAttribute="top" constant="8" id="VO5-F6-DBv"/>

@@ -121,7 +121,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8a-33-DtQ">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8a-33-DtQ">
                                 <rect key="frame" x="404" y="43" width="30" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXS-6T-6Bk" customClass="EditButton" customModule="myscrap" customModuleProvider="target">
@@ -386,7 +386,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rB-Lx-9ok">
-                                <rect key="frame" x="374" y="189" width="60" height="30"/>
+                                <rect key="frame" x="374" y="199" width="60" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hw1-wE-co0">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
@@ -467,7 +467,7 @@
                             <constraint firstItem="qdk-Be-8yd" firstAttribute="leading" secondItem="PLq-fD-tKl" secondAttribute="leading" constant="8" id="QRj-qq-ePG"/>
                             <constraint firstItem="Rl2-qU-0ri" firstAttribute="leading" secondItem="PLq-fD-tKl" secondAttribute="leading" id="QSa-fj-CyD"/>
                             <constraint firstItem="pw8-w2-kmr" firstAttribute="centerY" secondItem="PLq-fD-tKl" secondAttribute="centerY" id="V5s-c1-PvF"/>
-                            <constraint firstItem="0rB-Lx-9ok" firstAttribute="top" secondItem="K9u-zW-RX7" secondAttribute="bottom" constant="30" id="Zxg-tf-7Dt"/>
+                            <constraint firstItem="0rB-Lx-9ok" firstAttribute="top" secondItem="K9u-zW-RX7" secondAttribute="bottom" constant="40" id="Zxg-tf-7Dt"/>
                             <constraint firstItem="K9u-zW-RX7" firstAttribute="top" secondItem="P8a-33-DtQ" secondAttribute="bottom" constant="8" id="a9p-LH-anR"/>
                             <constraint firstAttribute="trailing" secondItem="Rl2-qU-0ri" secondAttribute="trailing" id="aGQ-C5-M4H"/>
                             <constraint firstItem="pw8-w2-kmr" firstAttribute="width" secondItem="PLq-fD-tKl" secondAttribute="width" id="apI-nQ-gNA"/>

@@ -192,7 +192,7 @@ final class NotificationService{
                                     AuthStatus.instance.isModeraor = isModerator == "1" ? true : false
                                 }
                                 if let isModeratorCount = dict["moderatorCount"] as? Int{
-                                    AuthStatus.instance.isModeraor = isModeratorCount == 1 ? true : false
+                                    AuthStatus.instance.isModeraor = isModeratorCount >= 1 ? true : false
                                 }
                                 if let moderatorCount = dict["companyReportCount"] as? Int{
                                     self.moderatorCount = moderatorCount
