@@ -192,7 +192,7 @@ struct FeedsHeight {
                }
                else
                 {
-                    imageHeight = width  + 30
+                    imageHeight = width
                }
        let likeHeight : CGFloat = 0
         let bottomLikeSpacing : CGFloat = 8
@@ -360,7 +360,7 @@ struct FeedsHeight {
         }
         else
         {
-            height += 25
+            height += 0
         }
         return height
     }

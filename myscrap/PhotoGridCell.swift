@@ -25,8 +25,14 @@ class PhotoGridCell: BaseCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tap.numberOfTapsRequired = 1
         imageView.addGestureRecognizer(tap)
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchRecognized(_:)))
+            self.imageView.addGestureRecognizer(pinchGesture)
+       
     }
-    
+    @IBAction func pinchRecognized(_ pinch: UIPinchGestureRecognizer) {
+
+        TMImageZoom.shared()?.gestureStateChanged(pinch, withZoom: self.imageView)
+    }
     func configCell(_ photo: PictureURL){
         
         photo.loadThumbnailImageWithCompletionHandler { [weak photo] (image, error) in

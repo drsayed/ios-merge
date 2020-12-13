@@ -38,7 +38,10 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             setNeedsLayout()
         }
     }
-    
+//    @IBAction func pinchRecognized(_ pinch: UIPinchGestureRecognizer) {
+//
+//      //  TMImageZoom.shared()?.gestureStateChanged(pinch, withZoom: imageView)
+//    }
     lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +73,7 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
-    
+   
     private lazy var sliderCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -530,7 +533,9 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MSSliderCell = collectionView.dequeReusableCell(forIndexPath: indexPath)
         cell.data = dataSource[indexPath.item]
-        
+       
+     //   let pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchRecognized(_:)))
+     //   cell.imageView.addGestureRecognizer(pinchGesture)
         return cell
     }
     
@@ -688,7 +693,7 @@ class MSSliderCell: UICollectionViewCell{
         return iv
     }()
     
-    private var imageView: UIImageView = {
+     var imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         //iv.contentMode = .scaleAspectFill
@@ -705,13 +710,19 @@ class MSSliderCell: UICollectionViewCell{
         ai.startAnimating()
         return ai
     }()
-    
+    @IBAction func pinchRecognized(_ pinch: UIPinchGestureRecognizer) {
+
+        TMImageZoom.shared()?.gestureStateChanged(pinch, withZoom: self.imageView)
+    }
     var image: UIImage? {
         didSet{
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 self.activityIndicator.stopAnimating()
                 if let img = self.image{
                     self.imageView.image = img
+                    self.imageView.isUserInteractionEnabled = true
+                    let pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchRecognized(_:)))
+                    self.imageView.addGestureRecognizer(pinchGesture)
                     //self.imageView.image = img.scaled(to: self.imageView.bounds.size)
                     //self.backgroundImageView.image = img
                 } else {
@@ -789,12 +800,16 @@ class MSSliderCell: UICollectionViewCell{
         setupViews()
     }
     
+   
     private func setupViews(){
         
         addSubview(imageView)
         imageView.anchor(leading: leadingAnchor, trailing: trailingAnchor, top: topAnchor, bottom: bottomAnchor)
         print("Image view size \(imageView.width)")
+      
         
+    
+   
         /*addSubview(backgroundImageView)
         backgroundImageView.anchor(leading: leadingAnchor, trailing: trailingAnchor, top: topAnchor, bottom: bottomAnchor)
         if !UIAccessibilityIsReduceTransparencyEnabled(){

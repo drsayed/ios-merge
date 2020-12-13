@@ -133,6 +133,8 @@ final class ReportedVC: BaseRevealVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.pauseVisibleVideos()
+        NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
     }
     
     //MARK:- SETUP COLLECTIONVIEW

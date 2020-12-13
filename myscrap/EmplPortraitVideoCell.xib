@@ -169,19 +169,19 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="cJD-MV-McY">
-                                <rect key="frame" x="8" y="337" width="398" height="81"/>
+                                <rect key="frame" x="8" y="330" width="398" height="88"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o69-Ks-vbf">
-                                        <rect key="frame" x="0.0" y="0.0" width="398" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="25"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ME2-3c-rN8">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="25"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ch5-fx-EoA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="198" height="18"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="198" height="25"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBk-Zj-4Tg" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="25"/>
                                                                 <state key="normal" title="Likes count"/>
                                                                 <connections>
                                                                     <action selector="likeCountPressed:" destination="nOZ-bQ-Kcr" eventType="touchUpInside" id="LJl-kP-Q6E"/>
@@ -190,20 +190,20 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="3DU-dA-mSt">
-                                                        <rect key="frame" x="200" y="0.0" width="198" height="18"/>
+                                                        <rect key="frame" x="200" y="0.0" width="198" height="25"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="SDo-73-sv7">
-                                                                <rect key="frame" x="4" y="0.0" width="194" height="18"/>
+                                                                <rect key="frame" x="4" y="0.0" width="194" height="25"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuD-Oe-Jha" customClass="ViewCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="18"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="25"/>
                                                                         <state key="normal" title="View Count"/>
                                                                         <connections>
                                                                             <action selector="videoViewBtnTappedWith_sender:" destination="nOZ-bQ-Kcr" eventType="touchUpInside" id="yMB-Sv-8e8"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogN-we-uwh" customClass="VideoCommentCountBtn" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="81" y="0.0" width="113" height="18"/>
+                                                                        <rect key="frame" x="81" y="0.0" width="113" height="25"/>
                                                                         <state key="normal" title="Comment Count"/>
                                                                         <connections>
                                                                             <action selector="toDetailsVC:" destination="nOZ-bQ-Kcr" eventType="touchUpInside" id="ys0-oc-g3e"/>
@@ -218,7 +218,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5bw-LV-x5c">
-                                        <rect key="frame" x="0.0" y="22" width="398" height="59"/>
+                                        <rect key="frame" x="0.0" y="29" width="398" height="59"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fPj-5A-qN6">
                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="1"/>
@@ -400,7 +400,7 @@
                             <constraint firstItem="Kip-A7-H6M" firstAttribute="top" secondItem="NEy-yN-2j0" secondAttribute="bottom" constant="-30" id="ih0-aN-wcH"/>
                             <constraint firstAttribute="bottom" secondItem="cJD-MV-McY" secondAttribute="bottom" id="jpv-wv-loT"/>
                             <constraint firstAttribute="width" constant="414" id="jwV-eY-pNI"/>
-                            <constraint firstItem="cJD-MV-McY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NEy-yN-2j0" secondAttribute="bottom" constant="10" id="oKa-Tg-yjy"/>
+                            <constraint firstItem="cJD-MV-McY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NEy-yN-2j0" secondAttribute="bottom" constant="3" id="oKa-Tg-yjy"/>
                             <constraint firstItem="cvz-eu-7rX" firstAttribute="leading" secondItem="C4w-lW-PuO" secondAttribute="leading" constant="8" id="oMj-sc-28z"/>
                             <constraint firstItem="24Y-B6-0Vu" firstAttribute="leading" secondItem="lFO-G6-EKY" secondAttribute="trailing" constant="8" id="p65-SL-jT5"/>
                             <constraint firstItem="lFO-G6-EKY" firstAttribute="centerY" secondItem="cvz-eu-7rX" secondAttribute="centerY" id="pA4-Y9-mRY"/>

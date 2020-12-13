@@ -289,13 +289,13 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Lorem ipsum dolor sit er elit " textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="gfy-x8-F8F" customClass="UserTagTextView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="8" y="89" width="468" height="7"/>
+                                <rect key="frame" x="8" y="89" width="468" height="12"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLK-uI-2lQ">
-                                <rect key="frame" x="8" y="112" width="468" height="398"/>
+                                <rect key="frame" x="8" y="117" width="468" height="398"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uF0-9r-e0k">
                                         <rect key="frame" x="0.0" y="0.0" width="468" height="398"/>
@@ -579,7 +579,7 @@
                             <constraint firstItem="PLK-uI-2lQ" firstAttribute="leading" secondItem="Uai-Fo-fyr" secondAttribute="leading" constant="8" id="Fu2-Is-F8x"/>
                             <constraint firstItem="W8j-Hc-rT3" firstAttribute="centerX" secondItem="ff6-mg-EnQ" secondAttribute="centerX" id="IGN-VN-ORu"/>
                             <constraint firstAttribute="trailing" secondItem="wz0-Dp-gpe" secondAttribute="trailing" constant="8" id="IhI-To-1Y6"/>
-                            <constraint firstItem="Maz-hB-Vnx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PLK-uI-2lQ" secondAttribute="bottom" constant="10" id="JUN-ah-6Gm"/>
+                            <constraint firstItem="Maz-hB-Vnx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PLK-uI-2lQ" secondAttribute="bottom" constant="5" id="JUN-ah-6Gm"/>
                             <constraint firstItem="hGa-qX-483" firstAttribute="bottom" secondItem="ff6-mg-EnQ" secondAttribute="bottom" id="L92-om-7mR"/>
                             <constraint firstItem="PLK-uI-2lQ" firstAttribute="top" secondItem="gfy-x8-F8F" secondAttribute="bottom" constant="16" id="M7g-Ua-oyG"/>
                             <constraint firstItem="ff6-mg-EnQ" firstAttribute="leading" secondItem="Uai-Fo-fyr" secondAttribute="leading" constant="8" id="NDZ-Oz-rhr"/>

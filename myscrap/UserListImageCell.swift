@@ -21,9 +21,15 @@ class UserListImageCell: UserFeedTextCell {
         feedImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tap.numberOfTapsRequired = 1
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchRecognized(_:)))
+            self.feedImage.addGestureRecognizer(pinchGesture)
+       
       //  feedImage.addGestureRecognizer(tap)
     }
-      
+    @IBAction func pinchRecognized(_ pinch: UIPinchGestureRecognizer) {
+
+        TMImageZoom.shared()?.gestureStateChanged(pinch, withZoom: self.feedImage)
+    }
     override func setupTap(){
         
     }

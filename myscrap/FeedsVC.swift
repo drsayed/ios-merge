@@ -2247,7 +2247,7 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
             case .feedPortrVideoTextCell:
                 height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
-                return  CGSize(width: width, height: height + 15)    //height + 30
+                return  CGSize(width: width, height: height )    //height + 30
             case .feedLandsVideoTextCell:
                 height = FeedsHeight.heightForLandsVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
