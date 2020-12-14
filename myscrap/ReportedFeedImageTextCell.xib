@@ -29,8 +29,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2S6-Af-Yi1">
                                 <rect key="frame" x="0.0" y="0.0" width="484" height="35"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQK-EY-dVQ">
-                                        <rect key="frame" x="8" y="7.5" width="41.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQK-EY-dVQ">
+                                        <rect key="frame" x="8" y="17.5" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -376,14 +376,14 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iKK-DG-RCV">
                                                                 <rect key="frame" x="382.5" y="0.0" width="85.5" height="54"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2P-FK-Sa9">
+                                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2P-FK-Sa9" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
                                                                         <rect key="frame" x="30" y="0.0" width="25" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="25" id="Q00-hR-UdI"/>
                                                                             <constraint firstAttribute="width" constant="25" id="RCf-vn-dSW"/>
                                                                         </constraints>
                                                                         <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                                        <state key="normal" image="ellipsis"/>
+                                                                        <state key="normal" image="reportFeed"/>
                                                                         <connections>
                                                                             <action selector="reportBtnPressed:" destination="j54-fm-2QN" eventType="touchUpInside" id="0Au-fB-Qk5"/>
                                                                         </connections>
@@ -746,6 +746,9 @@
         <designable name="4vn-m1-io1">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
+        <designable name="F2P-FK-Sa9">
+            <size key="intrinsicContentSize" width="26" height="32"/>
+        </designable>
         <designable name="L1i-BN-19d">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
@@ -936,9 +939,9 @@ NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
 0AAAAAAAAAIBAAAAAAAAAEMAAAAAAAAAAAAAAAAAABDTA
 </mutableData>
         </image>
-        <image name="ellipsis" width="16" height="16"/>
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
+        <image name="reportFeed" width="16" height="16"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

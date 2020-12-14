@@ -1047,19 +1047,43 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .personWeekScroll:
                 return CGSize(width: 0, height: 0)
             case .feedPortrVideoCell:
-                let height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-                return CGSize(width: width, height: height + 20)
+                var height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
+                if !(item.likeCount == 0 ){
+                    height -= 35
+                }
+                else{
+                    height += 35
+                }
+                return CGSize(width: width, height: height )
             case .feedLandsVideoCell:
-                let height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-                return CGSize(width: width, height: height + 20)
+                var height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
+                if !(item.likeCount == 0 ){
+                    height -= 35
+                }
+                else{
+                    height += 35
+                }
+                return CGSize(width: width, height: height)
             case .feedPortrVideoTextCell:
-                let height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
+                var height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
+                if !(item.likeCount == 0 ){
+                    height -= 35
+                }
+                else{
+                    height += 35
+                }
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height + 15)    //height + 30
+                return CGSize(width: width, height: height)    //height + 30
             case .feedLandsVideoTextCell:
-                let height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
+                var height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
+                if !(item.likeCount == 0 ){
+                    height -= 35
+                }
+                else{
+                    height += 35
+                }
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height + 15)    //height + 30
+                return CGSize(width: width, height: height )    //height + 30
             
             }
         } else if indexPath.section == 1 {

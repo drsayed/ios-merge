@@ -242,7 +242,7 @@ final class NotificationService{
         }
         
         if let bumpCount = bumpCount{
-            appCount += bumpCount
+          //  appCount += bumpCount
         }
         
         if let messageCount = messageCount {

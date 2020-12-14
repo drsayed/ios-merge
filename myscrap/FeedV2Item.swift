@@ -552,8 +552,8 @@ final class FeedV2Item: Equatable{
     
     // MARK DESCRIPTION
     var descriptionStatus: NSMutableAttributedString{
-        var st = status + "\n"
-        
+        var st = status //+ "\n"
+      //  st = st.replacingOccurrences(of: <#T##StringProtocol#>, with: <#T##StringProtocol#>)
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 5
         

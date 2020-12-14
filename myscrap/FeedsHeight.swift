@@ -51,7 +51,7 @@ struct FeedsHeight {
         let seperator : CGFloat = 8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + labelHeight  + likeHeight + bottomLikeSpacing + seperator + linkPreviewSpacing
         if item.status.contains("http") {
-            height += 360
+            height += 390
         } else {
             height -= 16
         }
@@ -397,7 +397,7 @@ struct FeedsHeight {
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 60       //95
         let bottomSpacing: CGFloat = 8
-        let labelHeight: CGFloat = LabelHeight.videoHeightForAttributed(for: item.descriptionStatus, for: labelWidth)
+        let labelHeight: CGFloat = LabelHeight.videoHeightForAttributed(for: item.descriptionStatus, for: labelWidth) + 15
         let labelSpacing: CGFloat = 5
            var imageHeight: CGFloat = 500
         if item.videoURL.count > 1 {
@@ -418,7 +418,7 @@ struct FeedsHeight {
         }
         else
         {
-            height += 25
+            height += 05
         }
         return height
     }
@@ -622,20 +622,30 @@ struct LabelHeight{
     
     static func videoHeightForAttributed(for text:NSAttributedString, for width: CGFloat) -> CGFloat{
         
+        
         let textView = UserTagTextView()
         textView.isScrollEnabled = false
         textView.attributedText = text
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        // Remove all padding
-        textView.textContainerInset = .zero
-        // This option has a default value of 5.0.
-        // So we set this option to 0.0 instead of
-        // setting the view.contentInset
-        textView.textContainer.lineFragmentPadding = 0.0
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
         let maxLabelWidth: CGFloat = width
         let maxSize = CGSize(width: maxLabelWidth, height: .greatestFiniteMagnitude)
         let neededSize = textView.sizeThatFits(maxSize)
         return neededSize.height
+        
+//        let textView = UserTagTextView()
+//        textView.isScrollEnabled = false
+//        textView.attributedText = text
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        // Remove all padding
+//        textView.textContainerInset = .zero
+//        // This option has a default value of 5.0.
+//        // So we set this option to 0.0 instead of
+//        // setting the view.contentInset
+//        textView.textContainer.lineFragmentPadding = 0.0
+//        let maxLabelWidth: CGFloat = width
+//        let maxSize = CGSize(width: maxLabelWidth, height: .greatestFiniteMagnitude)
+//        let neededSize = textView.sizeThatFits(maxSize)
+//        return neededSize.height
     }
     
     static func heightForLabel(for text: String, for Width: CGFloat , for font: UIFont) -> CGFloat{

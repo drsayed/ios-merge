@@ -198,9 +198,6 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuD-Oe-Jha" customClass="ViewCountButton" customModule="myscrap" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="79" height="25"/>
                                                                         <state key="normal" title="View Count"/>
-                                                                        <connections>
-                                                                            <action selector="videoViewBtnTappedWith_sender:" destination="nOZ-bQ-Kcr" eventType="touchUpInside" id="yMB-Sv-8e8"/>
-                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogN-we-uwh" customClass="VideoCommentCountBtn" customModule="myscrap" customModuleProvider="target">
                                                                         <rect key="frame" x="81" y="0.0" width="113" height="25"/>

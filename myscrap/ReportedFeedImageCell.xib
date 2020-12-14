@@ -29,8 +29,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frB-dg-2AI">
                                 <rect key="frame" x="0.0" y="0.0" width="484" height="35"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJ8-Xn-ptX">
-                                        <rect key="frame" x="8" y="7.5" width="41.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJ8-Xn-ptX">
+                                        <rect key="frame" x="8" y="17.5" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -505,7 +505,7 @@
                                                                             <constraint firstAttribute="height" constant="25" id="RcI-9I-THs"/>
                                                                         </constraints>
                                                                         <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                                        <state key="normal" image="ellipsis"/>
+                                                                        <state key="normal" image="icReport"/>
                                                                         <connections>
                                                                             <action selector="reportBtnPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="3aQ-u8-yrw"/>
                                                                         </connections>
@@ -736,7 +736,7 @@
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="w52-sc-Rb9">
-            <size key="intrinsicContentSize" width="26" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="34"/>
         </designable>
         <designable name="y2T-wA-ctc">
             <size key="intrinsicContentSize" width="41.5" height="20.5"/>
@@ -901,7 +901,7 @@ NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
 0AAAAAAAAAIBAAAAAAAAAEMAAAAAAAAAAAAAAAAAABDTA
 </mutableData>
         </image>
-        <image name="ellipsis" width="16" height="16"/>
+        <image name="icReport" width="24" height="24"/>
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
         <systemColor name="darkTextColor">

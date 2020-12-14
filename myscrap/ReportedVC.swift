@@ -9,7 +9,12 @@
 import UIKit
 import AVKit
 import AVFoundation
-
+import StoreKit
+import Photos
+import UserNotifications
+import AVKit
+import AVFoundation
+import DKImagePickerController
 final class ReportedVC: BaseRevealVC {
     
      lazy var collectionView: UICollectionView = {
@@ -107,6 +112,41 @@ final class ReportedVC: BaseRevealVC {
             }
         })
         collectionView.addSubview(refreshControll)
+    }
+    func downloadVideo(path : String) {
+        self.showMessage(with: "Download begins!")
+        let videoImageUrl = path
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
+        let filePath="\(documentsPath)/MSVIDEO.mp4"
+        DispatchQueue.global(qos: .background).async {
+            if let url = URL(string: videoImageUrl),
+                let urlData = NSData(contentsOf: url) {
+                
+                DispatchQueue.main.async {
+                    urlData.write(toFile: filePath, atomically: true)
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: URL(fileURLWithPath: filePath))
+                    }) { completed, error in
+                        if completed {
+                            
+                            DispatchQueue.main.async {
+                                //Triggering the videoDownloadNotify method.
+                                NotificationCenter.default.post(name: .videoDownloaded, object: nil)
+                            }
+                        } else {
+                            if let dwnldError = error {
+                                DispatchQueue.main.async {
+                                    print("Download Failed : \(dwnldError.localizedDescription)")
+                                    self.showMessage(with: "Failed to download the video")
+                                }
+                                
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
     @objc func feed_image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -292,6 +332,16 @@ extension ReportedVC: UICollectionViewDataSource{
                         playerViewController.player!.play()
                     }
                 }
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                   for imageCell in cell.videosCollection.visibleCells   {
+                      let videoCell = imageCell as! PortraitVideoCell
+                       self.downloadVideo(path: videoCell.newVedio!.video)
+                       cell.dwnldBtn.isEnabled = true
+                       cell.dwnldBtn.isEnabled = true
+                       }
+                 
+                }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
@@ -313,6 +363,16 @@ extension ReportedVC: UICollectionViewDataSource{
                     self.present(playerViewController, animated: true) {
                         playerViewController.player!.play()
                     }
+                }
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                   for imageCell in cell.videosCollection.visibleCells   {
+                      let videoCell = imageCell as! PortraitVideoCell
+                       self.downloadVideo(path: videoCell.newVedio!.video)
+                       cell.dwnldBtn.isEnabled = true
+                       cell.dwnldBtn.isEnabled = true
+                       }
+                 
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -336,6 +396,16 @@ extension ReportedVC: UICollectionViewDataSource{
                         playerViewController.player!.play()
                     }
                 }
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                   for imageCell in cell.videosCollection.visibleCells   {
+                      let videoCell = imageCell as! PortraitVideoCell
+                       self.downloadVideo(path: videoCell.newVedio!.video)
+                       cell.dwnldBtn.isEnabled = true
+                       cell.dwnldBtn.isEnabled = true
+                       }
+                 
+                }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
@@ -358,6 +428,16 @@ extension ReportedVC: UICollectionViewDataSource{
                         playerViewController.player!.play()
                     }
                 }
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                   for imageCell in cell.videosCollection.visibleCells   {
+                      let videoCell = imageCell as! PortraitVideoCell
+                       self.downloadVideo(path: videoCell.newVedio!.video)
+                       cell.dwnldBtn.isEnabled = true
+                       cell.dwnldBtn.isEnabled = true
+                       }
+                 
+                }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
@@ -379,6 +459,16 @@ extension ReportedVC: UICollectionViewDataSource{
                         playerViewController.player!.play()
                     }
                 }
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                   for imageCell in cell.videosCollection.visibleCells   {
+                      let videoCell = imageCell as! PortraitVideoCell
+                       self.downloadVideo(path: videoCell.newVedio!.video)
+                       cell.dwnldBtn.isEnabled = true
+                       cell.dwnldBtn.isEnabled = true
+                       }
+                 
+                }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
@@ -399,6 +489,16 @@ extension ReportedVC: UICollectionViewDataSource{
                     self.present(playerViewController, animated: true) {
                         playerViewController.player!.play()
                     }
+                }
+                cell.dwnldBtnAction = {
+                    cell.dwnldBtn.isEnabled = false
+                   for imageCell in cell.videosCollection.visibleCells   {
+                      let videoCell = imageCell as! PortraitVideoCell
+                       self.downloadVideo(path: videoCell.newVedio!.video)
+                       cell.dwnldBtn.isEnabled = true
+                       cell.dwnldBtn.isEnabled = true
+                       }
+                 
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")

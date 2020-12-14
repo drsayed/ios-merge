@@ -63,7 +63,8 @@ class ReportedVideoCell: BaseCell {
     var likeBtnAction : (() -> Void)? = nil
     
     var playBtnAction: (() -> Void)? = nil
-    
+    var dwnldBtnAction: (() -> Void)? = nil
+ var addCommentAction : (() -> Void)? = nil
     var inDetailView = false
     
     var player = AVPlayer()
@@ -284,7 +285,77 @@ class ReportedVideoCell: BaseCell {
         guard let item = newItem else { return }
         updatedDelegate?.didTapForFriendView(id: item.reportedUserId)
     }
+    @IBAction func likePressed(_ sender: UIButton){
+        if network.reachability.isReachable == true {
+            print("LIKE ***")
+            if inDetailView {
+                guard let item = newItem else { return }
+                updatedDelegate?.didTapDetailFeedsLikeV2(item: item, cell: self)
+                likeBtnAction?()
+            } else {
+                guard let item = newItem else { return }
+                if let del = updatedDelegate {
+                    print("delegate is there", del)
+                }
+                updatedDelegate?.didTapLikeV2(item: item, cell: self)
+            }
+        } else {
+            offlineBtnAction?()
+        }
+    }
     
+    @IBAction func toDetailsVC(_ sender: UIButton){
+        
+        if network.reachability.isReachable == true {
+            print("Comment ***")
+            guard let newItem = newItem else { return }
+            //downloadVideo(item: newItem)
+            if inDetailView {
+                //commentBtnAction?()
+             
+                 //User can write comment here in detail page.
+                 //If no profile pic / no email / no mobile, user can't write comments.
+                 
+                 let profilePic = AuthService.instance.profilePic
+                 let email = AuthService.instance.email
+                 let mobile = AuthService.instance.mobile
+                 if (profilePic == "https://myscrap.com/style/images/icons/no-profile-pic-female.png" || profilePic == "") || (mobile == "" || email == ""){
+                     //User can't add comment
+                     addCommentAction?()
+                 } else {
+                     commentBtnAction?()
+                 }
+            } else {
+                updatedDelegate?.didTapcommentV2(item: newItem)
+            }
+        } else {
+            offlineBtnAction?()
+        }
+    }
+    
+    @IBAction func likeCountPressed(_ sender: LikeCountButton) {
+        if network.reachability.isReachable == true {
+            print("Like count")
+            guard let newItem = newItem else { return }
+            updatedDelegate?.didTapLikeCountV2(item: newItem)
+        } else {
+            offlineBtnAction?()
+        }
+    }
+    
+    @IBAction func dwnldBtnTapped(_ sender: UIButton) {
+        self.dwnldBtnAction?()
+        //guard let item = newItem else { return }
+        //downloadVideo(item: item)
+    }
+    @IBAction func shareBtnTapped(_ sender: UIButton){
+        if network.reachability.isReachable == true {
+            guard let item = newItem else { return }
+            updatedDelegate?.didTapShareVideoV2(sender: sender, item: item)
+        } else {
+            offlineBtnAction?()
+        }
+    }
     private func setupFriendViewTaps() {
         if network.reachability.isReachable == true {
             profileView.isUserInteractionEnabled = true
@@ -357,17 +428,7 @@ class ReportedVideoCell: BaseCell {
         playBtnAction?()
     }
     
-    @IBAction func dwnldBtnTapped(_ sender: UIButton) {
-        
-    }
-    @IBAction func shareBtnTapped(_ sender: UIButton){
-        if network.reachability.isReachable == true {
-            guard let item = newItem else { return }
-            updatedDelegate?.didTapShareVideoV2(sender: sender, item: item)
-        } else {
-            offlineBtnAction?()
-        }
-    }
+
     
     @IBAction func editBtnPressed(_ sender: UIButton) {
         if network.reachability.isReachable == true {

@@ -29,8 +29,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rl2-qU-0ri">
                                 <rect key="frame" x="0.0" y="0.0" width="442" height="35"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poi-bh-tKb">
-                                        <rect key="frame" x="8" y="7.5" width="41.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poi-bh-tKb">
+                                        <rect key="frame" x="8" y="17.5" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -178,6 +178,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OS4-R9-ZgK" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
                                                                 <state key="normal" title="Likes count"/>
+                                                                <connections>
+                                                                    <action selector="likeCountTapped:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="l0V-5x-KDa"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -194,6 +197,9 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxa-C7-zie" customClass="VideoCommentCountBtn" customModule="myscrap" customModuleProvider="target">
                                                                         <rect key="frame" x="81" y="0.0" width="113" height="30"/>
                                                                         <state key="normal" title="Comment Count"/>
+                                                                        <connections>
+                                                                            <action selector="toDetailsVC:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="me5-Zd-KwK"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
@@ -240,6 +246,9 @@
                                                                                 <state key="normal">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="likePressed:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="ann-0Q-iUl"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whr-Px-5sF">
                                                                                 <rect key="frame" x="23.5" y="25" width="30" height="29"/>
@@ -248,6 +257,9 @@
                                                                                 <state key="normal" title="0">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="likePressed:" destination="ahx-qf-ZEu" eventType="touchDragInside" id="Rv4-TW-TdX"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
@@ -261,6 +273,9 @@
                                                                                     <constraint firstAttribute="width" constant="25" id="e00-uG-elQ"/>
                                                                                 </constraints>
                                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <connections>
+                                                                                    <action selector="toDetailsVC:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="1VA-kD-HmJ"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2s-4b-gRC">
                                                                                 <rect key="frame" x="24" y="25" width="30" height="29"/>
@@ -268,6 +283,9 @@
                                                                                 <state key="normal" title="0">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="toDetailsVC:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="mdA-oq-LWe"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
@@ -281,6 +299,9 @@
                                                                                     <constraint firstAttribute="width" constant="25" id="j3h-Bh-COZ"/>
                                                                                 </constraints>
                                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <connections>
+                                                                                    <action selector="dwnldBtnTapped:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="zCN-dx-Wlx"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Uy-77-EaN">
                                                                                 <rect key="frame" x="6.5" y="25" width="64" height="29"/>
@@ -288,6 +309,9 @@
                                                                                 <state key="normal" title="Download">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="dwnldBtnTapped:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="Zhs-5S-eF5"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
@@ -301,6 +325,9 @@
                                                                                     <constraint firstAttribute="width" constant="25" id="kHT-6A-zJc"/>
                                                                                 </constraints>
                                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <connections>
+                                                                                    <action selector="shareBtnTapped:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="Mn5-XI-M2R"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdI-b3-UhH">
                                                                                 <rect key="frame" x="20" y="25" width="37" height="29"/>
@@ -308,13 +335,16 @@
                                                                                 <state key="normal" title="Share">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="shareBtnTapped:" destination="ahx-qf-ZEu" eventType="touchUpInside" id="03d-1F-Cmh"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7hW-dC-Fx4" userLabel="Report Stack View">
                                                                         <rect key="frame" x="349" y="0.0" width="77" height="54"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxT-SI-vwa" customClass="ReportButton">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxT-SI-vwa" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
                                                                                 <rect key="frame" x="26" y="0.0" width="25" height="25"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="25" id="gbE-QM-lH8"/>
@@ -381,7 +411,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="0hh-xC-FIq">
-                                <rect key="frame" x="160" y="397" width="122.5" height="27.5"/>
+                                <rect key="frame" x="160" y="387" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -462,7 +492,7 @@
                             <constraint firstItem="P8a-33-DtQ" firstAttribute="leading" secondItem="UYd-D6-15m" secondAttribute="trailing" constant="8" id="HAa-y4-iyo"/>
                             <constraint firstItem="K9u-zW-RX7" firstAttribute="leading" secondItem="hD3-Td-bFS" secondAttribute="leading" id="IdE-0G-1Kx"/>
                             <constraint firstAttribute="trailing" secondItem="Yic-i3-iaj" secondAttribute="trailing" id="Kxm-Ok-jjr"/>
-                            <constraint firstItem="0hh-xC-FIq" firstAttribute="top" secondItem="dTK-mi-Qg7" secondAttribute="bottom" constant="-20" id="MPO-FP-db3"/>
+                            <constraint firstItem="0hh-xC-FIq" firstAttribute="top" secondItem="dTK-mi-Qg7" secondAttribute="bottom" constant="-30" id="MPO-FP-db3"/>
                             <constraint firstItem="Yic-i3-iaj" firstAttribute="leading" secondItem="PLq-fD-tKl" secondAttribute="leading" id="NKR-os-mrG"/>
                             <constraint firstItem="qdk-Be-8yd" firstAttribute="leading" secondItem="PLq-fD-tKl" secondAttribute="leading" constant="8" id="QRj-qq-ePG"/>
                             <constraint firstItem="Rl2-qU-0ri" firstAttribute="leading" secondItem="PLq-fD-tKl" secondAttribute="leading" id="QSa-fj-CyD"/>

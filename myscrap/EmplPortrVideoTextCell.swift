@@ -65,11 +65,11 @@ class EmplPortrVideoTextCell: BaseCell {
        
        var offlineBtnAction : (() -> Void)? = nil
        var commentBtnAction : (() -> Void)? = nil
-       var addCommentAction : (() -> Void)? = nil
+     
        var likeBtnAction : (() -> Void)? = nil
        var playBtnAction: (() -> Void)? = nil
        var dwnldBtnAction: (() -> Void)? = nil
-       
+    var addCommentAction : (() -> Void)? = nil
        var muteBtnAction: (() -> Void)? = nil
        
        var inDetailView = false
