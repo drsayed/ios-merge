@@ -841,14 +841,14 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
             return CGSize(width: width, height: height)
         case .feedImageTextCell:
             height += FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-            return CGSize(width: width, height: height-30)
+            return CGSize(width: width, height: height)
         case .feedVideoCell:
             height += FeedsHeight.heightForVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height + 30)
+            return CGSize(width: width, height: height )
         case .feedVideoTextCell:
             height += FeedsHeight.heightForVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
             print("Video Cell height : \(height)")
-            return CGSize(width: width, height: height + 30)
+            return CGSize(width: width, height: height )
         case .ads:
             //height += messageHeight(for: item.description)
             //print("height of ad : \(height)")
@@ -889,18 +889,18 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
                 return CGSize(width: 0, height: 0)
         case .feedPortrVideoCell:
             height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height + 20)
+            return CGSize(width: width, height: height)
         case .feedPortrVideoTextCell:
             height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
             print("Video Cell height : \(height)")
-            return CGSize(width: width, height: height + 55)    //height + 30
+            return CGSize(width: width, height: height )    //height + 30
         case .feedLandsVideoCell:
             height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height + 20)
+            return CGSize(width: width, height: height )
             case .feedLandsVideoTextCell:
                 height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height + 55)    //height + 30
+                return CGSize(width: width, height: height )    //height + 30
         }
         }
     }

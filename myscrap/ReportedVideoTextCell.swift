@@ -322,6 +322,14 @@ class ReportedVideoTextCell: BaseCell {
         //guard let item = newItem else { return }
         //downloadVideo(item: item)
     }
+    @IBAction func videoViewBtnTapped(_sender: UIButton) {
+        if network.reachability.isReachable {
+            guard let item = newItem else { return }
+            updatedDelegate?.didTapVideoViewCountV2(item: item)
+        } else {
+            offlineBtnAction?()
+        }
+    }
     @IBAction func shareBtnTapped(_ sender: UIButton){
         if network.reachability.isReachable == true {
             guard let item = newItem else { return }

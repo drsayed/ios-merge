@@ -438,7 +438,14 @@ class ReportedVideoCell: BaseCell {
             offlineBtnAction?()
         }
     }
-    
+    @IBAction func videoViewBtnTapped(_sender: UIButton) {
+        if network.reachability.isReachable {
+            guard let item = newItem else { return }
+            updatedDelegate?.didTapVideoViewCountV2(item: item)
+        } else {
+            offlineBtnAction?()
+        }
+    }
     @IBAction func unreportBtnTapped(_ sender: UnReportBtn) {
         if network.reachability.isReachable == true {
             print("Unreport ***")

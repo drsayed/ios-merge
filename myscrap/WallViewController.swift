@@ -928,18 +928,18 @@ extension WallViewController:UICollectionViewDelegateFlowLayout{
             return CGSize(width: width, height: height)
             case .feedPortrVideoCell:
                         let   height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-                           return CGSize(width: width, height: height + 20)
+                           return CGSize(width: width, height: height )
                        case .feedLandsVideoCell:
                           let height = FeedsHeight.heightForLandsVideoCellV2(item: item, width: width)
-                           return CGSize(width: width, height: height + 20)
+                           return CGSize(width: width, height: height )
                        case .feedPortrVideoTextCell:
                           let height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                            print("Video Cell height : \(height)")
-                           return CGSize(width: width, height: height + 25)    //height + 30
+                           return CGSize(width: width, height: height )    //height + 30
                        case .feedLandsVideoTextCell:
                        let    height = FeedsHeight.heightForLandsVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                            print("Video Cell height : \(height)")
-                           return CGSize(width: width, height: height + 25)    //height + 30
+                           return CGSize(width: width, height: height )    //height + 30
          default:
             let height = FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
             return CGSize(width: width , height: height)

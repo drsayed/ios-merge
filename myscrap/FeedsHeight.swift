@@ -51,9 +51,9 @@ struct FeedsHeight {
         let seperator : CGFloat = 8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + labelHeight  + likeHeight + bottomLikeSpacing + seperator + linkPreviewSpacing
         if item.status.contains("http") {
-            height += 390
+            height += 400
         } else {
-            height -= 16
+            height += 0
         }
         if !(item.likeCount == 0 && item.commentCount == 0){
             height += 35
@@ -84,7 +84,7 @@ struct FeedsHeight {
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //95
         let bottomSpacing: CGFloat = 8
-        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth)
+        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth)  + 10
         let likeHeight : CGFloat = 35
         let bottomLikeSpacing : CGFloat = 8    //8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + labelHeight  + likeHeight + bottomLikeSpacing
@@ -112,13 +112,13 @@ struct FeedsHeight {
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
         let bottomSpacing: CGFloat = 8
-         var imageHeight: CGFloat = width  + 30
+         var imageHeight: CGFloat = width
          if  item.pictureURL.count as Int == 1 {
               imageHeight  = width
         }
         else
          {
-             imageHeight = width  + 30
+             imageHeight = width
         }
        
         let likeHeight : CGFloat = 35
@@ -139,14 +139,14 @@ struct FeedsHeight {
                       }
                       else
                        {
-                           imageHeight = width  + 30
+                           imageHeight = width
                       }
-        let likeHeight : CGFloat = 60
+        let likeHeight : CGFloat = 0
         let bottomLikeSpacing : CGFloat = 8
        // let bottomViewheight : CGFloat = 60
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing
         if !(item.likeCount == 0 && item.commentCount == 0){
-            height += 35
+            height += 55
         }
         return height
     }
@@ -184,9 +184,9 @@ struct FeedsHeight {
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
         let bottomSpacing: CGFloat = 8
-        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth)
+        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth) + 5
         let labelSpacing: CGFloat = 5
-         var imageHeight: CGFloat = width  + 30
+         var imageHeight: CGFloat = width
          if  item.pictureURL.count as Int == 1 {
                      imageHeight  = width
                }

@@ -17,17 +17,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="dF5-Ya-yPJ" customClass="UserFeedVideoTextCell" customModule="myscrap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="484" height="474"/>
+            <rect key="frame" x="0.0" y="0.0" width="484" height="441"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="484" height="474"/>
+                <rect key="frame" x="0.0" y="0.0" width="484" height="441"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIQ-EP-F87" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="484" height="474"/>
+                        <rect key="frame" x="0.0" y="0.0" width="484" height="441"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hhR-sp-WGS">
-                                <rect key="frame" x="0.0" y="110" width="484" height="250"/>
+                                <rect key="frame" x="0.0" y="88" width="484" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="ayf-iE-ylc"/>
@@ -40,12 +40,12 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="E8Z-Pg-zQE">
-                                <rect key="frame" x="181" y="330" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="308" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyA-dU-0Zt">
-                                <rect key="frame" x="439" y="150" width="40" height="30"/>
+                                <rect key="frame" x="439" y="123" width="40" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjh-AR-yT8">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
@@ -159,8 +159,8 @@
                                     <constraint firstAttribute="trailing" secondItem="Vvw-Ae-D3q" secondAttribute="trailing" id="zhv-Ii-tbD"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuU-f5-1Up" customClass="UserTagTextView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="8" y="77" width="468" height="33"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuU-f5-1Up" customClass="UserTagTextView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="8" y="77" width="468" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment content="hello">
@@ -173,7 +173,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="65Q-LU-znO">
-                                <rect key="frame" x="8" y="381" width="468" height="93"/>
+                                <rect key="frame" x="8" y="348" width="468" height="93"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBC-x7-ndY">
                                         <rect key="frame" x="0.0" y="0.0" width="468" height="30"/>
@@ -202,6 +202,9 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApK-CX-n4J" customClass="ViewCountButton" customModule="myscrap" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
                                                                         <state key="normal" title="View Count"/>
+                                                                        <connections>
+                                                                            <action selector="videoViewBtnTappedWith_sender:" destination="dF5-Ya-yPJ" eventType="touchUpInside" id="toH-ev-hpv"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54G-HU-Gw2" customClass="VideoCommentCountBtn" customModule="myscrap" customModuleProvider="target">
                                                                         <rect key="frame" x="81" y="0.0" width="113" height="30"/>
@@ -375,7 +378,7 @@
                             <constraint firstItem="AI2-iR-1OA" firstAttribute="bottom" secondItem="7Eo-Lq-NwP" secondAttribute="bottom" constant="7.5" id="dhd-ao-3C4"/>
                             <constraint firstItem="GuU-f5-1Up" firstAttribute="trailing" secondItem="Dur-5H-Stl" secondAttribute="trailing" id="fXY-ed-yam"/>
                             <constraint firstItem="Pow-O9-tAL" firstAttribute="centerY" secondItem="7Eo-Lq-NwP" secondAttribute="centerY" id="g8v-e5-kWb"/>
-                            <constraint firstItem="hhR-sp-WGS" firstAttribute="top" secondItem="GuU-f5-1Up" secondAttribute="bottom" id="hjs-sr-yrx"/>
+                            <constraint firstItem="hhR-sp-WGS" firstAttribute="top" secondItem="GuU-f5-1Up" secondAttribute="bottom" constant="5" id="hjs-sr-yrx"/>
                             <constraint firstItem="Pow-O9-tAL" firstAttribute="top" secondItem="7Eo-Lq-NwP" secondAttribute="top" id="kLi-Nw-4KQ"/>
                             <constraint firstItem="Dur-5H-Stl" firstAttribute="top" secondItem="yIQ-EP-F87" secondAttribute="top" constant="20" id="nXb-pv-uBB"/>
                             <constraint firstItem="AI2-iR-1OA" firstAttribute="centerX" secondItem="7Eo-Lq-NwP" secondAttribute="centerX" id="pEV-0P-0bF"/>
@@ -386,10 +389,10 @@
                         </constraints>
                     </view>
                     <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaP-P2-iM6" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="484" height="474"/>
+                        <rect key="frame" x="0.0" y="0.0" width="484" height="441"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YZJ-K3-SGK">
-                                <rect key="frame" x="98" y="214.5" width="288.5" height="45"/>
+                                <rect key="frame" x="98" y="198" width="288.5" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="3eL-Fi-mVL">
                                         <rect key="frame" x="134" y="0.0" width="20" height="20"/>
@@ -408,7 +411,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnV-eT-nfE" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="446" y="436" width="30" height="30"/>
+                                <rect key="frame" x="446" y="403" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="A2o-6N-j3X"/>
                                     <constraint firstAttribute="height" constant="30" id="g0b-r5-Ijp"/>

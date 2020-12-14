@@ -2240,10 +2240,10 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
                 return CGSize(width: width, height: 365)
             case .feedLandsVideoCell:
                 height = FeedsHeight.heightForLandsVideoCellV2(item: item, width: width)
-                return CGSize(width: width, height: height + 20)
+                return CGSize(width: width, height: height )
             case .feedPortrVideoCell:
                 height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-                return   CGSize(width: width, height: height + 20)
+                return   CGSize(width: width, height: height )
             case .feedPortrVideoTextCell:
                 height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")

@@ -336,15 +336,33 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSe-IV-DT9" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="552" y="423.5" width="81" height="32"/>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSe-IV-DT9">
+                                <rect key="frame" x="563" y="427" width="70" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="Gby-sO-naU"/>
+                                    <constraint firstAttribute="width" constant="70" id="T7L-A5-Y3j"/>
+                                </constraints>
                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Report" image="reportFeed">
+                                <state key="normal" title="Report">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="reportBtnPressed:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="JIP-Kb-GBj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQc-dJ-eZA" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="522" y="427" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="NM2-CQ-U73"/>
+                                    <constraint firstAttribute="width" constant="25" id="ipQ-Nx-wbn"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" image="reportFeed">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="reportBtnPressed:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="s78-9j-k5N"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Lorem ipsum dolor sit er elit " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cVt-nX-4ll" customClass="UserTagTextView" customModule="myscrap" customModuleProvider="target">
@@ -361,9 +379,11 @@
                             <constraint firstItem="FaK-1o-0Do" firstAttribute="centerY" secondItem="njh-BB-9xr" secondAttribute="centerY" id="4Yq-cr-RuE"/>
                             <constraint firstItem="FaK-1o-0Do" firstAttribute="leading" secondItem="njh-BB-9xr" secondAttribute="trailing" constant="8" id="6jp-eG-RdF"/>
                             <constraint firstItem="90C-tk-e9z" firstAttribute="top" secondItem="qQa-2A-ogs" secondAttribute="bottom" constant="8" id="JOS-QX-dDA"/>
+                            <constraint firstItem="VQc-dJ-eZA" firstAttribute="trailing" secondItem="DSe-IV-DT9" secondAttribute="leading" constant="8" id="Ktw-nC-AEq"/>
                             <constraint firstItem="Ztj-mb-hjL" firstAttribute="leading" secondItem="L7h-9c-VsQ" secondAttribute="leading" constant="8" id="LmK-6d-x4V"/>
                             <constraint firstAttribute="trailing" secondItem="Ztj-mb-hjL" secondAttribute="trailing" constant="8" id="NjW-Y8-BP1"/>
                             <constraint firstItem="om9-t1-asp" firstAttribute="bottom" secondItem="njh-BB-9xr" secondAttribute="bottom" multiplier="1.05" id="SlJ-8r-Rqa"/>
+                            <constraint firstItem="DSe-IV-DT9" firstAttribute="centerY" secondItem="VQc-dJ-eZA" secondAttribute="centerY" id="TNd-hy-ROR"/>
                             <constraint firstItem="pGd-s2-Hye" firstAttribute="width" secondItem="L7h-9c-VsQ" secondAttribute="width" id="UCT-mf-rtb"/>
                             <constraint firstItem="cVt-nX-4ll" firstAttribute="top" secondItem="90C-tk-e9z" secondAttribute="bottom" constant="8" id="V9L-rb-G58"/>
                             <constraint firstAttribute="bottom" secondItem="Ztj-mb-hjL" secondAttribute="bottom" constant="8" id="WZW-s4-zzq"/>
@@ -419,8 +439,8 @@
         <designable name="1Rb-Ke-6Rt">
             <size key="intrinsicContentSize" width="35" height="25"/>
         </designable>
-        <designable name="DSe-IV-DT9">
-            <size key="intrinsicContentSize" width="81" height="32"/>
+        <designable name="VQc-dJ-eZA">
+            <size key="intrinsicContentSize" width="26" height="32"/>
         </designable>
         <designable name="XYn-TY-adM">
             <size key="intrinsicContentSize" width="20" height="22"/>
