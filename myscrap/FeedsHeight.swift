@@ -141,12 +141,12 @@ struct FeedsHeight {
                        {
                            imageHeight = width
                       }
-        let likeHeight : CGFloat = 0
+        let likeHeight : CGFloat = 15
         let bottomLikeSpacing : CGFloat = 8
        // let bottomViewheight : CGFloat = 60
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing
         if !(item.likeCount == 0 && item.commentCount == 0){
-            height += 55
+            height += 65
         }
         return height
     }
@@ -560,13 +560,13 @@ struct FeedsHeight {
                       }
                       else
                        {
-                           imageHeight = width  + 30
+                           imageHeight = width
                       }
-        let likeHeight : CGFloat = 60
+        let likeHeight : CGFloat = 10
         let bottomLikeSpacing : CGFloat = 8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing + labelHeight + labelSpacing
         if !(item.likeCount == 0 && item.commentCount == 0){
-            height += 35
+            height += 55
         }
         return height
     }

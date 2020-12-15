@@ -36,6 +36,7 @@ class ReportedFeedImageCell: ReportedFeedTextCell {
         } else {
             offlineBtnAction?()
         }
+      //  self.setupFriendViewTaps()
         if let countView : UIView = self.viewWithTag(1000) {
             countView.layer.cornerRadius = countView.frame.height/2
                }
@@ -71,6 +72,7 @@ class ReportedFeedImageCell: ReportedFeedTextCell {
         }
       
     }
+
 //    override func configCell(withItem item: FeedItem){
 //        super.configCell(withItem: item)
 //    }

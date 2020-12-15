@@ -112,6 +112,8 @@ final class ReportedVC: BaseRevealVC {
             }
         })
         collectionView.addSubview(refreshControll)
+        self.collectionView.alwaysBounceVertical = true;
+
     }
     func downloadVideo(path : String) {
         self.showMessage(with: "Download begins!")
@@ -202,16 +204,21 @@ final class ReportedVC: BaseRevealVC {
         if activityIndicator.isAnimating{
             activityIndicator.stopAnimating()
         }
+        
         modelV2.getReportedPosts(completion: { (members, companyItems) in
             DispatchQueue.main.async {
+                if self.refreshControll.isRefreshing {
+                    self.refreshControll.endRefreshing()
+                }
                 self.dataSourceV2 = members
                 self.companyDataArray = companyItems
 
                 self.activityIndicator.stopAnimating()
-                self.collectionView.performBatchUpdates({
-                    let indexSet = IndexSet(integer: 0)
-                    self.collectionView.reloadSections(indexSet)
-                }, completion: nil)
+                self.collectionView.reloadData()
+//                self.collectionView.performBatchUpdates({
+//                    let indexSet = IndexSet(integer: 0)
+//                    self.collectionView.reloadSections(indexSet)
+//                }, completion: nil)
             }
         })
         /*model.getReportedPosts(completion: { (members) in
@@ -795,7 +802,7 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
         else{
         let width = self.view.frame.width
         let item = dataSourceV2[indexPath.item]
-        var height : CGFloat = 37
+        var height : CGFloat = 0
         /*switch item.cellType{
         case .feedNewUserCell:
             height += FeedsHeight.heightForNewUserCell(item: item, viewWidth: width)
@@ -835,20 +842,20 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
             return CGSize(width: 0, height: 0)
         case .feedTextCell:
             height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
-            return CGSize(width: width , height: height)
+            return CGSize(width: width , height: height + 30)
         case .feedImageCell:
             height += FeedsHeight.heightForImageCellV2(item: item, width: width)
-            return CGSize(width: width, height: height)
+            return CGSize(width: width, height: height + 35)
         case .feedImageTextCell:
             height += FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-            return CGSize(width: width, height: height)
+            return CGSize(width: width, height: height + 30)
         case .feedVideoCell:
             height += FeedsHeight.heightForVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height )
+            return CGSize(width: width, height: height + 30)
         case .feedVideoTextCell:
             height += FeedsHeight.heightForVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
             print("Video Cell height : \(height)")
-            return CGSize(width: width, height: height )
+            return CGSize(width: width, height: height + 35)
         case .ads:
             //height += messageHeight(for: item.description)
             //print("height of ad : \(height)")
@@ -865,7 +872,7 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
         case .userFeedImageTextCell:
             return CGSize(width: 0, height: 0)
         case .newUser:
-            return CGSize(width: width, height: 355)
+            return CGSize(width: width, height: 355 )
         case .news:
             return CGSize(width: width, height: 355)
         case .companyMonth:
@@ -885,22 +892,20 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
         case .personWeekScroll:
             //return CGSize(width: width, height: 290)
             return CGSize(width: 0, height: 0)
-            case .feedLandsVideoCell:
-                return CGSize(width: 0, height: 0)
         case .feedPortrVideoCell:
             height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height)
+            return CGSize(width: width, height: height + 60)
         case .feedPortrVideoTextCell:
             height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
             print("Video Cell height : \(height)")
-            return CGSize(width: width, height: height )    //height + 30
+            return CGSize(width: width, height: height + 65)    //height + 30
         case .feedLandsVideoCell:
             height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height )
+            return CGSize(width: width, height: height + 60 )
             case .feedLandsVideoTextCell:
                 height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height )    //height + 30
+                return CGSize(width: width, height: height + 65 )    //height + 30
         }
         }
     }

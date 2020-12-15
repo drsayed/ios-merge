@@ -54,12 +54,6 @@ class ReportedFeedTextCell: FeedNewUserCell {
         }
         
     }
-    
-    @objc func reportedByTap(_ sender: UITapGestureRecognizer){
-        guard let item = newItem else { return }
-        updatedDelegate?.didTapForFriendView(id: item.reportedUserId)
-    }
-    
     private func setupFriendViewTaps() {
         if network.reachability.isReachable == true {
             profileView.isUserInteractionEnabled = true
@@ -78,9 +72,16 @@ class ReportedFeedTextCell: FeedNewUserCell {
     }
     
     @objc private func toFriendView(_ sender: UITapGestureRecognizer){
-        guard let item = item else { return }
+        guard let item = newItem else { return }
         updatedDelegate?.didTapForFriendView(id: item.postedUserId)
     }
+    
+    @objc func reportedByTap(_ sender: UITapGestureRecognizer){
+        guard let item = newItem else { return }
+        updatedDelegate?.didTapForFriendView(id: item.reportedUserId)
+    }
+    
+   
     
     func setupTap(){
         if network.reachability.isReachable == true {

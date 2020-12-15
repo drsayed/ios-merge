@@ -97,6 +97,29 @@ class ReportedVideoCell: BaseCell {
         } else {
             offlineBtnAction?()
         }
+        setupTap()
+        setupFriendViewTaps()
+    }
+    private func setupFriendViewTaps() {
+        if network.reachability.isReachable == true {
+            profileView.isUserInteractionEnabled = true
+            let profiletap = UITapGestureRecognizer(target: self, action: #selector(toFriendView(_:)))
+            profiletap.numberOfTapsRequired = 1
+            profileView.addGestureRecognizer(profiletap)
+            
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(toFriendView(_:)))
+            tap.numberOfTapsRequired = 1
+            nameLbl.isUserInteractionEnabled = true
+            nameLbl.addGestureRecognizer(tap)
+        } else {
+            offlineBtnAction?()
+        }
+    }
+    
+    @objc private func toFriendView(_ sender: UITapGestureRecognizer){
+        guard let item = newItem else { return }
+        updatedDelegate?.didTapForFriendView(id: item.postedUserId)
     }
     func UpdateLable()  {
         if let countLable  = self.viewWithTag(1001) as? UILabel {
@@ -356,28 +379,28 @@ class ReportedVideoCell: BaseCell {
             offlineBtnAction?()
         }
     }
-    private func setupFriendViewTaps() {
-        if network.reachability.isReachable == true {
-            profileView.isUserInteractionEnabled = true
-            let profiletap = UITapGestureRecognizer(target: self, action: #selector(toFriendView(_:)))
-            profiletap.numberOfTapsRequired = 1
-            profileView.addGestureRecognizer(profiletap)
-            
-            
-            let tap = UITapGestureRecognizer(target: self, action: #selector(toFriendView(_:)))
-            tap.numberOfTapsRequired = 1
-            nameLbl.isUserInteractionEnabled = true
-            nameLbl.addGestureRecognizer(tap)
-        } else {
-            offlineBtnAction?()
-        }
-    }
-    
-    @objc private func toFriendView(_ sender: UITapGestureRecognizer){
-        guard let item = newItem else { return }
-        updatedDelegate?.didTapForFriendView(id: item.postedUserId)
-        
-    }
+//    private func setupFriendViewTaps() {
+//        if network.reachability.isReachable == true {
+//            profileView.isUserInteractionEnabled = true
+//            let profiletap = UITapGestureRecognizer(target: self, action: #selector(toFriendView(_:)))
+//            profiletap.numberOfTapsRequired = 1
+//            profileView.addGestureRecognizer(profiletap)
+//            
+//            
+//            let tap = UITapGestureRecognizer(target: self, action: #selector(toFriendView(_:)))
+//            tap.numberOfTapsRequired = 1
+//            nameLbl.isUserInteractionEnabled = true
+//            nameLbl.addGestureRecognizer(tap)
+//        } else {
+//            offlineBtnAction?()
+//        }
+//    }
+//    
+//    @objc private func toFriendView(_ sender: UITapGestureRecognizer){
+//        guard let item = newItem else { return }
+//        updatedDelegate?.didTapForFriendView(id: item.postedUserId)
+//        
+//    }
     
     func setupTap(){
         if network.reachability.isReachable == true {

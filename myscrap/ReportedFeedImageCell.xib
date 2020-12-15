@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="484" height="690"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPQ-aS-tOO" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPQ-aS-tOO" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="484" height="690"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frB-dg-2AI">
@@ -325,19 +325,19 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7qm-uN-20f">
-                                <rect key="frame" x="8" y="619.5" width="468" height="70.5"/>
+                                <rect key="frame" x="8" y="604.5" width="468" height="85.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfe-0U-uAa">
-                                        <rect key="frame" x="0.0" y="0.0" width="468" height="7.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="468" height="22.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="oxF-rG-Hbu">
-                                                <rect key="frame" x="0.0" y="0.0" width="468" height="7.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="468" height="22.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="YRB-9E-R1j">
-                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="7.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="22.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67k-zt-3nZ" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="7.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="22.5"/>
                                                                 <state key="normal" title="Likes count"/>
                                                                 <connections>
                                                                     <action selector="likeCountPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="LmH-zz-9Dc"/>
@@ -346,13 +346,13 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="9M2-EX-9Tg">
-                                                        <rect key="frame" x="235" y="0.0" width="233" height="7.5"/>
+                                                        <rect key="frame" x="235" y="0.0" width="233" height="22.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="vGU-CN-CFt">
-                                                                <rect key="frame" x="120" y="0.0" width="113" height="7.5"/>
+                                                                <rect key="frame" x="120" y="0.0" width="113" height="22.5"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-25-wfs" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="7.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="22.5"/>
                                                                         <state key="normal" title="Comment Count"/>
                                                                         <connections>
                                                                             <action selector="toDetailsVC:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="pxr-e9-ZFM"/>
@@ -367,7 +367,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yC1-dE-cRy">
-                                        <rect key="frame" x="0.0" y="11.5" width="468" height="59"/>
+                                        <rect key="frame" x="0.0" y="26.5" width="468" height="59"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tYN-Qu-TJW">
                                                 <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
@@ -537,13 +537,13 @@
                                 </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ave-Lj-Z2V">
-                                <rect key="frame" x="0.0" y="93" width="484" height="484"/>
+                                <rect key="frame" x="0.0" y="115.5" width="484" height="484"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ave-Lj-Z2V" secondAttribute="height" id="5Ph-8s-agF"/>
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BMj-ZY-vnw">
-                                <rect key="frame" x="0.0" y="130.5" width="484" height="484"/>
+                                <rect key="frame" x="0.0" y="115.5" width="484" height="484"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="484" id="f7d-WP-LwV"/>
@@ -576,7 +576,7 @@
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="DBO-FZ-0Tx">
-                                <rect key="frame" x="181" y="584.5" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="569.5" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -604,7 +604,7 @@
                             <constraint firstItem="fk3-fu-1uG" firstAttribute="leading" secondItem="EhK-Ug-EFi" secondAttribute="trailing" constant="8" id="Z4c-n7-FfQ"/>
                             <constraint firstAttribute="trailing" secondItem="ave-Lj-Z2V" secondAttribute="trailing" id="cAe-FO-qK2"/>
                             <constraint firstItem="EhK-Ug-EFi" firstAttribute="leading" secondItem="ygn-Kx-aWW" secondAttribute="trailing" constant="8" id="cYu-4R-9tO"/>
-                            <constraint firstItem="ave-Lj-Z2V" firstAttribute="top" secondItem="fk3-fu-1uG" secondAttribute="bottom" constant="20" id="dRg-hq-yF0"/>
+                            <constraint firstItem="ave-Lj-Z2V" firstAttribute="top" secondItem="xme-gV-lC8" secondAttribute="bottom" constant="5" id="dRg-hq-yF0"/>
                             <constraint firstItem="7qm-uN-20f" firstAttribute="leading" secondItem="OPQ-aS-tOO" secondAttribute="leading" constant="8" id="hOm-5H-o4d"/>
                             <constraint firstAttribute="trailing" secondItem="fk3-fu-1uG" secondAttribute="trailing" constant="8" id="hj9-gF-gwD"/>
                             <constraint firstItem="ygn-Kx-aWW" firstAttribute="leading" secondItem="OPQ-aS-tOO" secondAttribute="leading" constant="8" id="iGS-Ux-Bc4"/>
@@ -612,7 +612,7 @@
                             <constraint firstItem="EhK-Ug-EFi" firstAttribute="centerY" secondItem="ygn-Kx-aWW" secondAttribute="centerY" id="piY-G3-gMA"/>
                             <constraint firstItem="Fhy-CH-Gg6" firstAttribute="centerY" secondItem="wsZ-KI-Ktx" secondAttribute="centerY" id="r67-yd-wpI"/>
                             <constraint firstItem="ygn-Kx-aWW" firstAttribute="top" secondItem="frB-dg-2AI" secondAttribute="bottom" constant="8" id="r9V-ek-X7w"/>
-                            <constraint firstItem="BMj-ZY-vnw" firstAttribute="top" secondItem="xme-gV-lC8" secondAttribute="bottom" constant="20" id="tMZ-Ga-Ccc"/>
+                            <constraint firstItem="BMj-ZY-vnw" firstAttribute="top" secondItem="xme-gV-lC8" secondAttribute="bottom" constant="5" id="tMZ-Ga-Ccc"/>
                             <constraint firstAttribute="trailing" secondItem="frB-dg-2AI" secondAttribute="trailing" id="tkK-oe-gDZ"/>
                             <constraint firstAttribute="bottom" secondItem="d8H-Sh-bhA" secondAttribute="bottom" constant="8" id="wq6-0n-uqK"/>
                             <constraint firstItem="7qm-uN-20f" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BMj-ZY-vnw" secondAttribute="bottom" constant="5" id="xFJ-Bf-6EM"/>
