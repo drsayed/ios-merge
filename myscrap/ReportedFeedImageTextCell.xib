@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QT3-ZW-Ttu" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="484" height="680"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzz-LN-CPr">
+                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzz-LN-CPr">
                                 <rect key="frame" x="61" y="349" width="362" height="16.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-T3-A0q">
@@ -583,7 +583,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTU-z9-ivB">
-                                <rect key="frame" x="432" y="154.5" width="40" height="30"/>
+                                <rect key="frame" x="432" y="167.5" width="40" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c3-l7-2Sb">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
@@ -616,13 +616,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sTU-z9-ivB" firstAttribute="top" secondItem="Xlp-5R-ccU" secondAttribute="bottom" constant="11" id="4Bf-aZ-h3t"/>
                             <constraint firstItem="xPO-BL-DRa" firstAttribute="bottom" secondItem="8oj-Q3-PwD" secondAttribute="bottom" id="8Pu-8C-Pfw"/>
                             <constraint firstItem="Xlp-5R-ccU" firstAttribute="top" secondItem="ukr-Pi-s02" secondAttribute="bottom" constant="3" id="8ei-a6-fpH"/>
                             <constraint firstItem="Ql4-xv-NBm" firstAttribute="leading" secondItem="QT3-ZW-Ttu" secondAttribute="leading" constant="8" id="8yE-YS-kj1"/>
                             <constraint firstItem="8oj-Q3-PwD" firstAttribute="leading" secondItem="QT3-ZW-Ttu" secondAttribute="leading" constant="8" id="9B8-hX-eJm"/>
                             <constraint firstAttribute="bottom" secondItem="oPn-YY-TSj" secondAttribute="bottom" id="9J8-FM-Xma"/>
                             <constraint firstItem="mKW-KY-zkY" firstAttribute="top" secondItem="e6v-aI-STX" secondAttribute="bottom" constant="-30" id="AgT-tx-3R4"/>
+                            <constraint firstItem="AQm-rA-gF0" firstAttribute="top" secondItem="sTU-z9-ivB" secondAttribute="bottom" constant="-50" id="Bgx-cp-deM"/>
                             <constraint firstAttribute="width" constant="484" id="GTI-Hj-2qT"/>
                             <constraint firstItem="2S6-Af-Yi1" firstAttribute="top" secondItem="QT3-ZW-Ttu" secondAttribute="top" id="H5f-GY-wlG"/>
                             <constraint firstItem="AQm-rA-gF0" firstAttribute="leading" secondItem="QT3-ZW-Ttu" secondAttribute="leading" id="I4n-Wx-BJe"/>
@@ -941,9 +941,6 @@ NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
         <image name="reportFeed" width="16" height="16"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -83,7 +83,9 @@ struct Endpoints {
     static let INSERT_FAVOURITE_POST_URL = "\(BASE_URL)msInsertFavouritePost"
     static let INSERT_FAVOURITE_COMPANY_URL = "\(BASE_URL)msInsertFavouriteCompany"
     static let INSERT_FAVOURITE_LISTING = "\(BASE_URL)msInsertFavouriteListings"
-    static let REPORT_POST_URL = "\(BASE_URL)msReport"
+    //static let REPORT_POST_URL = "\(BASE_URL)msReport"
+    static let REPORT_POST_URL = "\(BASE_URL_Common)msReport"
+    
     static let DELETE_POST_URL = "\(BASE_URL)msPostDelete"
     static let DETAILS_POST_URL = "\(BASE_URL)msPostDetails"
     static let DETAILS_POST_URL_V2 = "\(BASE_URL_Common)msPostDetailsNew"

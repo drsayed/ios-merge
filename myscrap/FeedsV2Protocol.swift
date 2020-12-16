@@ -60,7 +60,6 @@ protocol UpdatedFeedsDelegate : class {
     func didPOWTapShareV2(sender: UIButton, item: FeedV2Item)
     func didTapReadMoreV2(item: FeedV2Item, cell : PersonOfWeek)
     
-    
     func didTapDeleteOwnPost(item: FeedV2Item, cell: UICollectionViewCell)
     
     
@@ -451,6 +450,8 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 actionSheet.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self] (report) in
                     self?.showToast(message: "Post Un-Reported")
                     item.isReported = false
+                    NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                     self?.removeCollectionViewCell(indexPath.item)
                     vc.performUnreport(reportId: item.reportId)
                     print("ReportID \(item.reportId)")
@@ -464,8 +465,12 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 
             }
             let deletAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+                
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 self.removeCollectionViewCell(indexPath.item)
                 self.showToast(message: "Report Deleted Succesfully")
+
                 vc.deletePost(postId: item.postId)
             }
             

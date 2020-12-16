@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -376,8 +376,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vba-hW-4UD">
-                                <rect key="frame" x="130.5" y="253.5" width="100" height="100"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vba-hW-4UD">
+                                <rect key="frame" x="130.5" y="255.5" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="ra0-mx-IH8"/>
                                     <constraint firstAttribute="height" constant="100" id="yqg-2E-3ec"/>
@@ -388,9 +388,9 @@
                                 </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sdt-Z1-4Wg">
-                                <rect key="frame" x="0.0" y="123" width="361" height="246"/>
+                                <rect key="frame" x="0.0" y="123" width="361" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Sdt-Z1-4Wg" secondAttribute="height" constant="115" id="PBB-By-RHa"/>
+                                    <constraint firstAttribute="height" constant="250" id="RXn-Ya-Hai"/>
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="v0x-qU-x27">
@@ -488,14 +488,13 @@
                             <constraint firstItem="HDD-hd-SrG" firstAttribute="centerY" secondItem="Pgk-9F-8D3" secondAttribute="centerY" id="PnD-1Y-h4f"/>
                             <constraint firstItem="HDD-hd-SrG" firstAttribute="width" secondItem="Pgk-9F-8D3" secondAttribute="width" id="Q0L-lD-JJJ"/>
                             <constraint firstItem="ihl-eZ-b5G" firstAttribute="top" secondItem="4Vl-e7-gPQ" secondAttribute="bottom" constant="8" id="QI7-We-igA"/>
-                            <constraint firstItem="GC7-zF-NqE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Sdt-Z1-4Wg" secondAttribute="bottom" constant="3" id="Uy7-29-cMN"/>
+                            <constraint firstItem="GC7-zF-NqE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v0x-qU-x27" secondAttribute="bottom" constant="3" id="Uy7-29-cMN"/>
                             <constraint firstItem="PgK-HE-2lh" firstAttribute="top" secondItem="v0x-qU-x27" secondAttribute="bottom" constant="-30" id="WbX-Tq-k4N"/>
                             <constraint firstItem="HDD-hd-SrG" firstAttribute="height" secondItem="Pgk-9F-8D3" secondAttribute="height" id="aU0-zD-j6b"/>
                             <constraint firstAttribute="trailing" secondItem="Sdt-Z1-4Wg" secondAttribute="trailing" id="b0W-id-2Zu"/>
                             <constraint firstItem="Sdt-Z1-4Wg" firstAttribute="leading" secondItem="Pgk-9F-8D3" secondAttribute="leading" id="b51-GL-bHY"/>
                             <constraint firstItem="Fiw-M2-LMh" firstAttribute="centerX" secondItem="Xtf-ON-wrb" secondAttribute="centerX" id="b8w-Za-Nx1"/>
                             <constraint firstItem="GAd-ac-kqU" firstAttribute="top" secondItem="ihl-eZ-b5G" secondAttribute="bottom" constant="40" id="cgR-aP-nox"/>
-                            <constraint firstItem="Vba-hW-4UD" firstAttribute="centerY" secondItem="Sdt-Z1-4Wg" secondAttribute="centerY" constant="57.5" id="cyp-Tc-Hd4"/>
                             <constraint firstItem="4Vl-e7-gPQ" firstAttribute="leading" secondItem="Pgk-9F-8D3" secondAttribute="leading" id="fva-px-DX7"/>
                             <constraint firstItem="v0x-qU-x27" firstAttribute="top" secondItem="ihl-eZ-b5G" secondAttribute="bottom" constant="1" id="hbO-DU-jPY"/>
                             <constraint firstAttribute="trailing" secondItem="v0x-qU-x27" secondAttribute="trailing" id="ias-UJ-KF5"/>

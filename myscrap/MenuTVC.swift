@@ -750,6 +750,7 @@ class MenuTVC: UITableViewController {
                 let vc = ReportedVC()
                 vc.title = MenuName.report.rawValue
                 let nav = UINavigationController(rootViewController: vc)
+                
                 revealViewController().pushFrontViewController(nav, animated: true)
              } else if indexPath.item == 12 {
                 selectAndReload(with: indexPath)
@@ -1041,6 +1042,7 @@ class MenuTVC: UITableViewController {
         }
         let vc = UIStoryboard(name: storyBoard , bundle: nil).instantiateViewController(withIdentifier: Identifier)
         let nav = UINavigationController(rootViewController: vc)
+        self.revealViewController()?.navigationController?.popViewController(animated: false)
         revealViewController().pushFrontViewController(nav, animated: true)
     }
     

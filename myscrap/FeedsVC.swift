@@ -219,6 +219,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         //storiesService.getStories()         //Get recent stories feeds
         //Calling story delegate
         //storiesService.delegate = self
+        self.collectionView.isHidden = true
         feedOperation = BlockOperation {
             print("hello")
             let group = DispatchGroup()
@@ -463,7 +464,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         }
         
         //Load Local feeds
-        getOfflineFeeds()
+       
         
         if AuthStatus.instance.isLoggedIn {
             self.usersignedIn()
@@ -870,6 +871,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
                     self.topSpinnerHeightConstraint.constant = 0
                     self.topLoader.stopAnimating()
                 }
+                self.collectionView.isHidden = false
                 switch result{
                 case .Error(let _):
                     completion(false)

@@ -173,9 +173,10 @@ final class ReportedVC: BaseRevealVC {
     }
     //MARK:- VIEW WILL DISAPPEAR
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         self.pauseVisibleVideos()
-        NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+        super.viewWillDisappear(animated)
+       
+     //   NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
     }
     
@@ -527,7 +528,7 @@ extension ReportedVC: UICollectionViewDataSource{
             
             var indexPathNotVisible = collectionView.indexPath(for: videoParentCell)
             
-            if let videoParentwithoutTextCell = videoParentCell as? EmplPortraitVideoCell
+            if let videoParentwithoutTextCell = videoParentCell as? ReportedVideoTextCell
             {
                 for videoCell in videoParentwithoutTextCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
                     print("You can stop play the video from here")
@@ -535,7 +536,7 @@ extension ReportedVC: UICollectionViewDataSource{
 
                 }
             }
-            if let videoParentTextCell = videoParentCell as? EmplPortrVideoTextCell
+            if let videoParentTextCell = videoParentCell as? ReportedVideoCell
             {
                 for videoCell in videoParentTextCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
                     print("You can stop play the video from here")
@@ -544,24 +545,7 @@ extension ReportedVC: UICollectionViewDataSource{
 
                 }
             }
-            if let videoParentTextCell = videoParentCell as? LandScapVideoCell
-            {
-                for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
-                    print("You can stop play the video from here")
-                        videoCell.pause()
-                    
-
-                }
-            }
-            if let videoParentTextCell = videoParentCell as? LandScapVideoTextCell
-            {
-                for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
-                    print("You can stop play the video from here")
-                        videoCell.pause()
-                    
-
-                }
-            }
+           
             }
         
     }
@@ -937,6 +921,7 @@ extension ReportedVC {
     
     
    func removeCollectionViewCell(_ i : Int){
+    self.pauseVisibleVideos()
         self.collectionView.performBatchUpdates({
             //let j = i + 1
             dataSource.remove(at: i)
@@ -946,6 +931,7 @@ extension ReportedVC {
     }
     
     func performUnreport(reportId:String){
+        self.pauseVisibleVideos()
         let service = APIService()
         service.endPoint = Endpoints.UNREPORT_URL
         service.params = "userId=\(AuthService.instance.userId)&reportId=\(reportId)&apiKey=\(API_KEY)"
@@ -960,6 +946,7 @@ extension ReportedVC {
     }
     
     func deletePost(postId:String){
+        self.pauseVisibleVideos()
         let api = APIService()
         api.endPoint = Endpoints.DELETE_POST_URL
         api.params = "postId=\(postId)&albumId=&userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)"
@@ -1060,6 +1047,8 @@ extension ReportedVC {
     }
 }*/
 extension ReportedVC : UpdatedFeedsDelegate {
+   
+    
     func didTapForFriendView(id: String) {
         print("not using")
         if let vc = FriendVC.storyBoardInstance(){
@@ -1070,7 +1059,7 @@ extension ReportedVC : UpdatedFeedsDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+   
     //#2#7api after count
     var feedsV2DataSource: [FeedV2Item] {
         get {
@@ -1170,6 +1159,8 @@ extension ReportedVC : UpdatedFeedsDelegate {
                  self.handleRefresh()
                  
                  }*/
+                self.pauseVisibleVideos()
+                
                 self.feedsV2DataSource.remove(at: indexPath.item)
                 self.feedV2Service.deletePost(postId: item.postId, albumId: item.albumId)
                 self.feedCollectionView.performBatchUpdates({
