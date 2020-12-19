@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,7 +45,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyA-dU-0Zt">
-                                <rect key="frame" x="439" y="117" width="40" height="30"/>
+                                <rect key="frame" x="439" y="102" width="40" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjh-AR-yT8">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
@@ -362,7 +362,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dur-5H-Stl" firstAttribute="leading" secondItem="Pow-O9-tAL" secondAttribute="trailing" constant="8" id="2RC-ZM-Wzh"/>
-                            <constraint firstItem="FyA-dU-0Zt" firstAttribute="top" secondItem="GuU-f5-1Up" secondAttribute="bottom" constant="40" id="3cI-hd-6Yo"/>
+                            <constraint firstItem="FyA-dU-0Zt" firstAttribute="top" secondItem="GuU-f5-1Up" secondAttribute="bottom" constant="25" id="3cI-hd-6Yo"/>
                             <constraint firstItem="7Eo-Lq-NwP" firstAttribute="top" secondItem="yIQ-EP-F87" secondAttribute="top" constant="8" id="45G-r7-Qut"/>
                             <constraint firstItem="65Q-LU-znO" firstAttribute="leading" secondItem="yIQ-EP-F87" secondAttribute="leading" constant="8" id="4Sf-Qa-DEe"/>
                             <constraint firstItem="GuU-f5-1Up" firstAttribute="leading" secondItem="7Eo-Lq-NwP" secondAttribute="leading" id="7dP-o5-6AC"/>

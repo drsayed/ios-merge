@@ -1251,6 +1251,7 @@ extension CompanyModuleUpdatesVC : PortraitVideoDelegate
     func PortraitVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1267,6 +1268,7 @@ extension CompanyModuleUpdatesVC : PortraitVideoTextDelegate
     func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1285,6 +1287,7 @@ extension CompanyModuleUpdatesVC : LandScapVideoDelegate
     func LandScapVideoFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1299,8 +1302,16 @@ extension CompanyModuleUpdatesVC : LandScapVideoTextDelegate
     func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
+    }
+}
+extension CompanyModuleUpdatesVC : AVPlayerViewControllerDelegate
+{
+    func playerViewController(_: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator: UIViewControllerTransitionCoordinator)
+    {
+        self.scrollViewDidEndScrolling()
     }
 }

@@ -149,7 +149,7 @@ class PortraitVideoCell: BaseCell {
         else
         {
             let minutes = time/60
-            let seconds = time/60
+            let seconds = time%60
             if minutes < 10 && seconds < 10 {
                
                 currentTimeString = "0\(minutes):0\(seconds)"
@@ -257,7 +257,7 @@ class PortraitVideoCell: BaseCell {
            setupVideoLayer(videoUrl: URL(string: item.videoUrl)!)
             
         if player.rate == 0 {
-            addPeriodicTimeObserver()
+          //  addPeriodicTimeObserver()
             addPeriodicTimeObserverForControls()
         }
     }
@@ -311,7 +311,7 @@ class PortraitVideoCell: BaseCell {
             }
           //  self.addPeriodicTimeObserver()
             if playerView.state != .playing {
-                       addPeriodicTimeObserver()
+                   //    addPeriodicTimeObserver()
                 addPeriodicTimeObserverForControls()
 
                    }
@@ -687,16 +687,7 @@ class PortraitVideoCell: BaseCell {
         self.playButton.isSelected = true
     }
 }
-extension AVPlayerViewController {
 
-    func goFullScreen() {
-        let selector = NSSelectorFromString("_transitionToFullScreenViewControllerAnimated:completionHandler:")
-        if self.responds(to: selector) {
-            // first argument is animated (true for me), second is completion handler (nil in my case)
-            self.perform(selector, with: true, with: nil)
-        }
-    }
-}
 //extension PortraitVideoCell: CachingPlayerItemDelegate {
 //
 //    func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {

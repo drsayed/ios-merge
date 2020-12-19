@@ -713,6 +713,8 @@ var muteVideo : Bool = false
                 self.pauseAllVideos(indexPath: indexPath)
                 if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? UserFeedVideoCell
                  {
+                    let data  = dataSourceV2[indexPath.item]
+
                     for videoCell in collectionViewCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
                     
 
@@ -731,7 +733,15 @@ var muteVideo : Bool = false
                         } else {
                             videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                         }
+                        if data.isReported {
+                            videoCell.pause()
+                        }
+                        else
+                        {
                             videoCell.resume()
+                           
+                        }
+                          //  videoCell.resume()
 
                     }
                     self.pauseAllVideos(indexPath: indexPath)
@@ -740,6 +750,7 @@ var muteVideo : Bool = false
                  }
                else if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? UserFeedVideoTextCell
                {
+                let data  = dataSourceV2[indexPath.item]
                   for videoCell in collectionViewCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
                   
                     let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
@@ -758,7 +769,14 @@ var muteVideo : Bool = false
                         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                     }
 
-                          videoCell.resume()
+                    if data.isReported {
+                        videoCell.pause()
+                    }
+                    else
+                    {
+                        videoCell.resume()
+                       
+                    }
 
                   }
                 self.pauseAllVideos(indexPath: indexPath)
@@ -767,6 +785,7 @@ var muteVideo : Bool = false
                }
                else if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? UserFeedLandScapVideoCell
                {
+                let data  = dataSourceV2[indexPath.item]
                   for videoCell in collectionViewCell.videosCollection.visibleCells  as [LandScapCell]    {
                   
                     let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
@@ -785,7 +804,14 @@ var muteVideo : Bool = false
                         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                     }
 
-                          videoCell.resume()
+                    if data.isReported {
+                        videoCell.pause()
+                    }
+                    else
+                    {
+                        videoCell.resume()
+                       
+                    }
 
                   }
                 self.pauseAllVideos(indexPath: indexPath)
@@ -794,6 +820,7 @@ var muteVideo : Bool = false
                }
                else if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? UserFeedLandScapVideoTextCell
                {
+                let data  = dataSourceV2[indexPath.item]
                   for videoCell in collectionViewCell.videosCollection.visibleCells  as [LandScapCell]    {
                   
                     let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
@@ -812,7 +839,14 @@ var muteVideo : Bool = false
                         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                     }
 
-                          videoCell.resume()
+                    if data.isReported {
+                        videoCell.pause()
+                    }
+                    else
+                    {
+                        videoCell.resume()
+                       
+                    }
 
                   }
                 self.pauseAllVideos(indexPath: indexPath)
@@ -2416,6 +2450,7 @@ extension UserFeedsVC : UserFeedVideoDelegate
     func UserVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -2432,6 +2467,7 @@ extension UserFeedsVC : UserFeedTextVideoDelegate
     func UserVideoTextFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -2450,6 +2486,7 @@ extension UserFeedsVC : UserFeedLandScapVideoDelegate
     func UserLandScapVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -2466,6 +2503,7 @@ extension UserFeedsVC : UserFeedLandScapTextVideoDelegate
     func UserLandScapVideoTextFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -2486,4 +2524,11 @@ extension UserFeedsVC: UIScrollViewDelegate{
                 // Dragging up
             }
         }
+}
+extension UserFeedsVC : AVPlayerViewControllerDelegate
+{
+    func playerViewController(_: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator: UIViewControllerTransitionCoordinator)
+    {
+        self.scrollViewDidEndScrolling()
+    }
 }

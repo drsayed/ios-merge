@@ -921,10 +921,16 @@ extension WallViewController:UICollectionViewDelegateFlowLayout{
          let width = view.frame.width
          switch item.cellType{
          case .feedImageCell:
-            let height = FeedsHeight.heightForImageCellV2(item: item, width: width)
+            var height = FeedsHeight.heightForImageCellV2(item: item, width: width)
+             if item.likeCount == 0 && item.commentCount == 0 &&  item.viewsCount == 0 {
+                height =  height + 20
+            }
             return CGSize(width: width, height: height)
          case .feedImageTextCell:
-            let height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
+            var height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
+            if item.likeCount == 0 && item.commentCount == 0 &&  item.viewsCount == 0 {
+               height =  height + 20
+           }
             return CGSize(width: width, height: height)
             case .feedPortrVideoCell:
                         let   height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
@@ -2392,6 +2398,7 @@ extension WallViewController : PortraitVideoDelegate
     func PortraitVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -2407,6 +2414,7 @@ extension WallViewController : PortraitVideoTextDelegate
     func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -2425,6 +2433,7 @@ extension WallViewController : LandScapVideoDelegate
     func LandScapVideoFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -2439,8 +2448,16 @@ extension WallViewController : LandScapVideoTextDelegate
     func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
+    }
+}
+extension WallViewController : AVPlayerViewControllerDelegate
+{
+    func playerViewController(_: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator: UIViewControllerTransitionCoordinator)
+    {
+        self.scrollViewDidEndScrolling()
     }
 }

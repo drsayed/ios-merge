@@ -4987,6 +4987,7 @@ extension FeedsVC : PortraitVideoDelegate
     func PortraitVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -5003,6 +5004,7 @@ extension FeedsVC : PortraitVideoTextDelegate
     func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -5023,6 +5025,7 @@ extension FeedsVC : LandScapVideoDelegate
     func LandScapVideoFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -5036,8 +5039,16 @@ extension FeedsVC : LandScapVideoTextDelegate
     func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
+    }
+}
+extension FeedsVC : AVPlayerViewControllerDelegate
+{
+    func playerViewController(_: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator: UIViewControllerTransitionCoordinator)
+    {
+        self.scrollViewDidEndScrolling()
     }
 }

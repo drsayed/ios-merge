@@ -1421,6 +1421,7 @@ extension CompanyUpdatesVC : PortraitVideoDelegate
     func PortraitVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1436,6 +1437,7 @@ extension CompanyUpdatesVC : PortraitVideoTextDelegate
     func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1454,6 +1456,7 @@ extension CompanyUpdatesVC : LandScapVideoDelegate
     func LandScapVideoFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1465,6 +1468,7 @@ extension CompanyUpdatesVC : LandScapVideoTextDelegate
     func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1474,4 +1478,11 @@ extension CompanyUpdatesVC : LandScapVideoTextDelegate
         self.scrollViewDidEndScrolling()
     }
    
+}
+extension CompanyUpdatesVC : AVPlayerViewControllerDelegate
+{
+    func playerViewController(_: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator: UIViewControllerTransitionCoordinator)
+    {
+        self.scrollViewDidEndScrolling()
+    }
 }

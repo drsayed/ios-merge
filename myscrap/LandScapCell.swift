@@ -154,7 +154,7 @@ class LandScapCell: BaseCell {
         else
         {
             let minutes = time/60
-            let seconds = time/60
+            let seconds = time%60
             if minutes < 10 && seconds < 10 {
                
                 currentTimeString = "0\(minutes):0\(seconds)"
@@ -250,7 +250,7 @@ class LandScapCell: BaseCell {
            setupVideoLayer(videoUrl: URL(string: item.videoUrl)!)
             
         if player.rate == 0 {
-            addPeriodicTimeObserver()
+          //  addPeriodicTimeObserver()
             addPeriodicTimeObserverForControls()
         }
     }
@@ -304,7 +304,7 @@ class LandScapCell: BaseCell {
             }
           //  self.addPeriodicTimeObserver()
             if playerView.state != .playing {
-                       addPeriodicTimeObserver()
+                    //   addPeriodicTimeObserver()
                 addPeriodicTimeObserverForControls()
 
                    }

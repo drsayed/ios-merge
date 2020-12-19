@@ -45,7 +45,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyA-dU-0Zt">
-                                <rect key="frame" x="439" y="117" width="40" height="30"/>
+                                <rect key="frame" x="439" y="102" width="40" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjh-AR-yT8">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
@@ -380,7 +380,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dur-5H-Stl" firstAttribute="leading" secondItem="Pow-O9-tAL" secondAttribute="trailing" constant="8" id="2RC-ZM-Wzh"/>
-                            <constraint firstItem="FyA-dU-0Zt" firstAttribute="top" secondItem="GuU-f5-1Up" secondAttribute="bottom" constant="40" id="3cI-hd-6Yo"/>
+                            <constraint firstItem="FyA-dU-0Zt" firstAttribute="top" secondItem="GuU-f5-1Up" secondAttribute="bottom" constant="25" id="3cI-hd-6Yo"/>
                             <constraint firstItem="7Eo-Lq-NwP" firstAttribute="top" secondItem="yIQ-EP-F87" secondAttribute="top" constant="8" id="45G-r7-Qut"/>
                             <constraint firstItem="65Q-LU-znO" firstAttribute="leading" secondItem="yIQ-EP-F87" secondAttribute="leading" constant="8" id="4Sf-Qa-DEe"/>
                             <constraint firstItem="65Q-LU-znO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hhR-sp-WGS" secondAttribute="bottom" constant="3" id="7FL-gI-9a1"/>

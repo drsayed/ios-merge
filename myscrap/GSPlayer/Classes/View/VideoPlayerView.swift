@@ -163,7 +163,11 @@ open class VideoPlayerView: UIView {
     open func play(for url: URL) {
         guard playerURL != url else {
             pausedReason = .waitingKeepUp
-            player?.play()
+            if #available(iOS 10.0, *) {
+                player?.playImmediately(atRate: 1.0)
+            } else {
+                player?.play()
+            }
             return
         }
         
@@ -202,7 +206,11 @@ open class VideoPlayerView: UIView {
     /// Continue playing video.
     open func resume() {
         pausedReason = .waitingKeepUp
-        player?.play()
+        if #available(iOS 10.0, *) {
+            player?.playImmediately(atRate: 1.0)
+        } else {
+            player?.play()
+        }
     }
     
     /// Pause video.
@@ -277,7 +285,13 @@ private extension VideoPlayerView {
         )
         
         layer.addSublayer(playerLayer)
-        playerLayer.player?.play()
+      //  playerLayer.player?.play()
+        if #available(iOS 10.0, *) {
+            playerLayer.player?.playImmediately(atRate: 1.0)
+        } else {
+            playerLayer.player?.play()
+        }
+      //  playerLayer.player?.playImmediately(atRate: 1.0)
     }
     
     func stateDidChanged(state: State, previous: State) {
@@ -359,7 +373,12 @@ private extension VideoPlayerView {
         playerItemKeepUpObservation = playerItem.observe(\.isPlaybackLikelyToKeepUp) { [unowned self] item, _ in
             if item.isPlaybackLikelyToKeepUp {
                 if self.player?.rate == 0, self.pausedReason == .waitingKeepUp {
-                    self.player?.play()
+                   // self.player?.play()
+                    if #available(iOS 10.0, *) {
+                        player?.playImmediately(atRate: 1.0)
+                    } else {
+                        player?.play()
+                    }
                 }
             }
         }
@@ -381,7 +400,11 @@ private extension VideoPlayerView {
         replayCount += 1
         
         player?.seek(to: CMTime.zero)
-        player?.play()
+        if #available(iOS 10.0, *) {
+            player?.playImmediately(atRate: 1.0)
+        } else {
+            player?.play()
+        }
     }
     
 }

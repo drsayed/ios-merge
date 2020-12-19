@@ -1180,6 +1180,7 @@ extension ReportedVC: VideoTextsOnReportPlayerDelegate{
     func ReportedVideoTextFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1197,6 +1198,7 @@ extension ReportedVC: VideoTextsOnReportPlayerDelegate{
                    let player = AVPlayer(url: videoURL!)
                    let playerViewController = AVPlayerViewController()
                    playerViewController.player = player
+        playerViewController.delegate = self
                    self.present(playerViewController, animated: true) {
                        playerViewController.player!.play()
                    }
@@ -1207,6 +1209,7 @@ extension ReportedVC: VideoOnReportedPlayerDelegate{
     func ReportedVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
+        playerViewController.delegate = self
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
@@ -1222,13 +1225,20 @@ extension ReportedVC: VideoOnReportedPlayerDelegate{
                    let player = AVPlayer(url: videoURL!)
                    let playerViewController = AVPlayerViewController()
                    playerViewController.player = player
+        playerViewController.delegate = self
                    self.present(playerViewController, animated: true) {
                        playerViewController.player!.play()
                    }
     }
     
 }
-
+extension ReportedVC : AVPlayerViewControllerDelegate
+{
+    func playerViewController(_: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator: UIViewControllerTransitionCoordinator)
+    {
+        self.scrollViewDidEndScrolling()
+    }
+}
 
 
 
