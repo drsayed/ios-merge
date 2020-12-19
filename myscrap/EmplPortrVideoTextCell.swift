@@ -12,6 +12,7 @@ import AVFoundation
 import Photos
 protocol PortraitVideoTextDelegate:class {
     func PortraitTextVideoChanged()
+    func PortraitTextVideoFullscreenPressed(player: AVPlayer)
 }
 class EmplPortrVideoTextCell: BaseCell {
     @IBOutlet var fancyViewWidthConstraint : NSLayoutConstraint!
@@ -1082,6 +1083,7 @@ extension EmplPortrVideoTextCell : UICollectionViewDelegate,UICollectionViewData
          //      cell.newItem = self.newItem
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
         cell.pause()
+        cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true
@@ -1205,4 +1207,11 @@ return CGSize(width:screenWidth, height: 250)
     }
     }
 }
-
+extension EmplPortrVideoTextCell : PortraitVideoFullScreenDelegate
+{
+    func PortraitVideoFullScreenPressed(player: AVPlayer) {
+        delegateVideoChange?.PortraitTextVideoFullscreenPressed(player: player)
+    }
+    
+   
+}

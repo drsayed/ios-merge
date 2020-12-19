@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="E8Z-Pg-zQE">
-                                <rect key="frame" x="181" y="299" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="304" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -393,7 +393,7 @@
                             <constraint firstItem="GuU-f5-1Up" firstAttribute="top" secondItem="Dur-5H-Stl" secondAttribute="bottom" constant="4" id="Wjl-gv-ASY"/>
                             <constraint firstAttribute="trailing" secondItem="Dur-5H-Stl" secondAttribute="trailing" constant="8" id="Z0e-37-6yZ"/>
                             <constraint firstAttribute="trailing" secondItem="FyA-dU-0Zt" secondAttribute="trailing" constant="5" id="Z4X-sh-qFx"/>
-                            <constraint firstItem="E8Z-Pg-zQE" firstAttribute="top" secondItem="hhR-sp-WGS" secondAttribute="bottom" constant="-30" id="cZv-LN-E9P"/>
+                            <constraint firstItem="E8Z-Pg-zQE" firstAttribute="top" secondItem="hhR-sp-WGS" secondAttribute="bottom" constant="-25" id="cZv-LN-E9P"/>
                             <constraint firstItem="hhR-sp-WGS" firstAttribute="leading" secondItem="yIQ-EP-F87" secondAttribute="leading" id="cyh-kU-8VG"/>
                             <constraint firstItem="AI2-iR-1OA" firstAttribute="bottom" secondItem="7Eo-Lq-NwP" secondAttribute="bottom" constant="7.5" id="dhd-ao-3C4"/>
                             <constraint firstItem="GuU-f5-1Up" firstAttribute="trailing" secondItem="Dur-5H-Stl" secondAttribute="trailing" id="fXY-ed-yam"/>

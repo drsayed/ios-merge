@@ -1418,6 +1418,13 @@ extension CompanyUpdatesVC : CompanyUpdatedServiceDelegate {
 }
 extension CompanyUpdatesVC : PortraitVideoDelegate
 {
+    func PortraitVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     func PortraitVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -1426,6 +1433,13 @@ extension CompanyUpdatesVC : PortraitVideoDelegate
 }
 extension CompanyUpdatesVC : PortraitVideoTextDelegate
 {
+    func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     func PortraitTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -1437,11 +1451,25 @@ extension CompanyUpdatesVC : LandScapVideoDelegate
     func LandScapVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
-    
+    func LandScapVideoFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     
 }
 extension CompanyUpdatesVC : LandScapVideoTextDelegate
 {
+    func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func LandScapTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }

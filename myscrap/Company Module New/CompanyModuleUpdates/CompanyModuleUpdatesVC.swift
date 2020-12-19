@@ -1247,6 +1247,15 @@ extension CompanyModuleUpdatesVC : UpdatedFeedsDelegate, FriendControllerDelegat
 
 extension CompanyModuleUpdatesVC : PortraitVideoDelegate
 {
+    
+    func PortraitVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func PortraitVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -1255,6 +1264,13 @@ extension CompanyModuleUpdatesVC : PortraitVideoDelegate
 }
 extension CompanyModuleUpdatesVC : PortraitVideoTextDelegate
 {
+    func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     func PortraitTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -1266,7 +1282,13 @@ extension CompanyModuleUpdatesVC : LandScapVideoDelegate
     func LandScapVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
-    
+    func LandScapVideoFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     
 }
 extension CompanyModuleUpdatesVC : LandScapVideoTextDelegate
@@ -1274,5 +1296,11 @@ extension CompanyModuleUpdatesVC : LandScapVideoTextDelegate
     func LandScapTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
-   
+    func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
 }

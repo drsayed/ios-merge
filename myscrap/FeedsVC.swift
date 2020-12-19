@@ -4984,6 +4984,14 @@ extension FeedsVC : AlartMessagePopupViewDelegate
 }
 extension FeedsVC : PortraitVideoDelegate
 {
+    func PortraitVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func PortraitVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -4992,6 +5000,14 @@ extension FeedsVC : PortraitVideoDelegate
 }
 extension FeedsVC : PortraitVideoTextDelegate
 {
+    func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func PortraitTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -5004,12 +5020,24 @@ extension FeedsVC : LandScapVideoDelegate
         self.scrollViewDidEndScrolling()
     }
     
-    
+    func LandScapVideoFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
 }
 extension FeedsVC : LandScapVideoTextDelegate
 {
     func LandScapTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
-   
+    func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
 }

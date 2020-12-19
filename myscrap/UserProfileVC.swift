@@ -2357,6 +2357,9 @@ extension UserProfileVC : MyProfileCellDelegate {
 }
 extension UserProfileVC : UserFeedVideoDelegate
 {
+    func UserVideoFullscreenPressed(player: AVPlayer) {
+        
+    }
     func UserFeedVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -2365,6 +2368,9 @@ extension UserProfileVC : UserFeedVideoDelegate
 }
 extension UserProfileVC : UserFeedTextVideoDelegate
 {
+    func UserVideoTextFullscreenPressed(player: AVPlayer) {
+        
+    }
     func UserFeedTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -2375,6 +2381,9 @@ extension UserProfileVC : UserFeedTextVideoDelegate
 }
 extension UserProfileVC : UserFeedLandScapVideoDelegate
 {
+    func UserLandScapVideoFullscreenPressed(player: AVPlayer) {
+        
+    }
     func UserFeedLandScapVideoChanged() {
         self.scrollViewDidEndScrolling()
 
@@ -2383,6 +2392,9 @@ extension UserProfileVC : UserFeedLandScapVideoDelegate
 }
 extension UserProfileVC : UserFeedLandScapTextVideoDelegate
 {
+    func UserLandScapVideoTextFullscreenPressed(player: AVPlayer) {
+        
+    }
     func UserFeedLandScapTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }

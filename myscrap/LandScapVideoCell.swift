@@ -12,6 +12,7 @@ import AVFoundation
 import Photos
 protocol LandScapVideoDelegate:class {
     func LandScapVideoChanged()
+    func LandScapVideoFullScreenPressed (player : AVPlayer)
 }
 class LandScapVideoCell: BaseCell {
     weak var delegateVideoChange : LandScapVideoDelegate?
@@ -1077,6 +1078,7 @@ extension LandScapVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
          //      cell.newItem = self.newItem
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
         cell.pause()
+        cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true
@@ -1353,3 +1355,11 @@ extension LandScapVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
 //    }
 }
 
+extension LandScapVideoCell : LandScapFullScreenDelegate
+{
+    func LandScapVideoFullScreenPressed(player: AVPlayer) {
+        delegateVideoChange?.LandScapVideoFullScreenPressed(player: player)
+    }
+    
+   
+}

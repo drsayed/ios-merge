@@ -12,6 +12,7 @@ import AVFoundation
 import Photos
 protocol UserFeedTextVideoDelegate:class {
     func UserFeedTextVideoChanged()
+    func UserVideoTextFullscreenPressed(player : AVPlayer)
 }
 class UserFeedVideoTextCell: BaseCell {
     weak var delegateVideoChange : UserFeedTextVideoDelegate?
@@ -1072,6 +1073,7 @@ extension UserFeedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
              //cell.indexPath = indexPath.row
          //      cell.newItem = self.newItem
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
+        cell.delegate = self
         cell.pause()
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
@@ -1145,5 +1147,13 @@ extension UserFeedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
                   }
         }
 
+}
+extension UserFeedVideoTextCell : PortraitVideoFullScreenDelegate
+{
+    func PortraitVideoFullScreenPressed(player: AVPlayer) {
+      delegateVideoChange?.UserVideoTextFullscreenPressed(player: player)
+    }
+    
+   
 }
 

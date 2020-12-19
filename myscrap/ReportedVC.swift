@@ -1177,6 +1177,14 @@ extension ReportedVC : UpdatedFeedsDelegate {
 }
 
 extension ReportedVC: VideoTextsOnReportPlayerDelegate{
+    func ReportedVideoTextFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func PortraitTextVideoChanged() {
         pauseVisibleVideos()
         self.scrollViewDidEndScrolling()
@@ -1196,6 +1204,14 @@ extension ReportedVC: VideoTextsOnReportPlayerDelegate{
     
 }
 extension ReportedVC: VideoOnReportedPlayerDelegate{
+    func ReportedVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func PortraitVideoChanged() {
         pauseVisibleVideos()
         self.scrollViewDidEndScrolling()

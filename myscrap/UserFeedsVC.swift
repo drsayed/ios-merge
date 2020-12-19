@@ -2413,6 +2413,14 @@ extension UserFeedsVC : MyProfileCellDelegate {
 }
 extension UserFeedsVC : UserFeedVideoDelegate
 {
+    func UserVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func UserFeedVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -2421,6 +2429,14 @@ extension UserFeedsVC : UserFeedVideoDelegate
 }
 extension UserFeedsVC : UserFeedTextVideoDelegate
 {
+    func UserVideoTextFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func UserFeedTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -2431,6 +2447,14 @@ extension UserFeedsVC : UserFeedTextVideoDelegate
 }
 extension UserFeedsVC : UserFeedLandScapVideoDelegate
 {
+    func UserLandScapVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func UserFeedLandScapVideoChanged() {
         self.scrollViewDidEndScrolling()
 
@@ -2439,6 +2463,14 @@ extension UserFeedsVC : UserFeedLandScapVideoDelegate
 }
 extension UserFeedsVC : UserFeedLandScapTextVideoDelegate
 {
+    func UserLandScapVideoTextFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
     func UserFeedLandScapTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }

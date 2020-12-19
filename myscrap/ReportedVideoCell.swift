@@ -13,7 +13,9 @@ import Photos
 protocol VideoOnReportedPlayerDelegate : class {
     func playReportedVedio(url: String)
     func PortraitVideoChanged()
+    func ReportedVideoFullscreenPressed(player : AVPlayer)
 }
+
 class ReportedVideoCell: BaseCell {
     
     
@@ -700,6 +702,7 @@ extension ReportedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
          //      cell.newItem = self.newItem
         cell.inDetailView = false
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
+        cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true
@@ -832,4 +835,12 @@ return CGSize(width:screenWidth, height: 250)
           
     }
     }
+}
+extension ReportedVideoCell : PortraitVideoFullScreenDelegate
+{
+    func PortraitVideoFullScreenPressed(player: AVPlayer) {
+        videoPlayerDelegate?.ReportedVideoFullscreenPressed(player: player)
+    }
+    
+   
 }

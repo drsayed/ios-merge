@@ -2,6 +2,9 @@
 //  LandScapCell.swift
 //  myscrap
 //
+//  LandScapCell.swift
+//  myscrap
+//
 //  Created by MyScrap on 23/04/2020.
 //  Copyright © 2020 MyScrap. All rights reserved.
 //
@@ -10,21 +13,45 @@ import UIKit
 import AVKit
 import AVFoundation
 import Photos
-
+protocol LandScapFullScreenDelegate:class {
+    func  LandScapVideoFullScreenPressed(player : AVPlayer)
+}
 class LandScapCell: BaseCell {
+    @IBOutlet weak var playButton: UIButton!
+    
+    weak var delegate: LandScapFullScreenDelegate?
 
-
+    @IBOutlet weak var timeLable: UILabel!
     @IBOutlet weak var playerView: VideoPlayerView!
-
-       @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var playerControllsView: UIView!
+    
+    @IBOutlet weak var fullScreenButton: UIButton!
+    @IBOutlet weak var muteButton: UIButton!
+    @IBOutlet weak var progressBar: UISlider!
+    @IBOutlet weak var videoView: UIView!
        @IBOutlet weak var muteBtn: UIButton!
        @IBOutlet weak var thumbnailImg: UIImageView!
        @IBOutlet weak var playBtn: UIButton!
        @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var playBackTimeLbl: UILabel!
-       
+    var hideTimer: Timer?
     
     var indexPath : Int =  0
+    var isHideControlls : Bool = true {
+        didSet
+        {
+            if !isHideControlls
+            {
+                self.hideTimer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.hideeControlls), userInfo: nil, repeats: false)
+            }
+            else{
+                
+                self.hideTimer?.invalidate()
+                self.hideTimer = nil
+
+            }
+        }
+    }
        weak var updatedDelegate : UpdatedFeedsDelegate?
        var feedV2Service : FeedV2Model?
        
@@ -43,7 +70,7 @@ class LandScapCell: BaseCell {
        var player = AVQueuePlayer()
        var playerLayer = AVPlayerLayer()
        var timeObserverToken: Any?
-    
+    var timeObserverControlls: Any?
         var gameTimer: Timer?
        
        //var thumbnailImg = UIImageView()
@@ -70,6 +97,7 @@ class LandScapCell: BaseCell {
            // Initialization code
            spinner.startAnimating()
            spinner.hidesWhenStopped = true
+        self.playerControllsView.isHidden = true
 //           setupFriendViewTaps()
            
            //player.addObserver(self, forKeyPath: "rate", options: NSKeyValueObservingOptions.new, context: nil)
@@ -111,11 +139,65 @@ class LandScapCell: BaseCell {
            let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
            videoTap.numberOfTapsRequired = 1
            videoView.isUserInteractionEnabled = true
-           videoView.addGestureRecognizer(videoTap)
+          videoView.addGestureRecognizer(videoTap)
         playerView.contentMode =  UIView.ContentMode.scaleAspectFill
        }
+    func TimeDurationFormater(time: Int) -> String {
+            var currentTimeString =  ""
+        if time < 10 {
+           
+            currentTimeString = "00:0\(time)"
+        }
+        else  if time < 60  {
+            currentTimeString = "00:\(time)"
+        }
+        else
+        {
+            let minutes = time/60
+            let seconds = time/60
+            if minutes < 10 && seconds < 10 {
+               
+                currentTimeString = "0\(minutes):0\(seconds)"
+            }
+            else  if minutes < 10 && seconds > 10   {
+                currentTimeString = "0\(minutes):\(seconds)"
+            }
+            else  if minutes > 10 && seconds < 10   {
+                currentTimeString = "\(minutes):0\(seconds)"
+            }
+            else
+            {
+                currentTimeString = "\(minutes):\(seconds)"
+            }
+            
+        }
+        return currentTimeString
+    }
+    @IBAction func fullscreenPressed(_ sender: Any) {
+        delegate?.LandScapVideoFullScreenPressed(player: playerView.playerLayer.player!)
+
+    }
+    @IBAction func mutePressed(_ sender: Any) {
+//     //   self.updateMute()
+    }
+    @IBAction func progressbarChanged(_ sender: Any) {
+     //  let segment =  sender as UISegmentedControl
+        self.playerView.seek(to:CMTimeMake(value: Int64(progressBar.value), timescale: 1))
+    }
+    @IBAction func PlayPausePressed(_ sender: UIButton) {
+        
+        if  self.playButton.isSelected {
+            self.pause()
+            self.playButton.isSelected = false
+        }
+        else
+        {
+            self.resume()
+            self.playButton.isSelected = true
+        }
        
-       override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
            if keyPath == "status" {
             if player.status == .readyToPlay {
                    print("Player got ready to play Video")
@@ -169,6 +251,7 @@ class LandScapCell: BaseCell {
             
         if player.rate == 0 {
             addPeriodicTimeObserver()
+            addPeriodicTimeObserverForControls()
         }
     }
     override func layoutSubviews() {
@@ -186,21 +269,20 @@ class LandScapCell: BaseCell {
                    self.thumbnailImg.setImageWithIndicator(imageURL: item.videoThumbnail)
                              thumbnailImg.isHidden = false
                              videoView.isHidden = true
-                            muteBtn.isHidden = true
+                         playerControllsView.isHidden = true
                              thumbnailImg.contentMode = .scaleAspectFill
                              thumbnailImg.clipsToBounds = true
                 }
         else
            {
-            muteBtn.isHidden = false
             setupThumbnail(videoUrl: URL(string: item.videoThumbnail)!)
            self.thumbnailImg.setImageWithIndicator(imageURL: item.videoThumbnail)
             thumbnailImg.isHidden = false
             videoView.isHidden = true
             spinner.startAnimating()
-            
+         //   playerView.pla
             playerView.play(for: URL(string: item.video)!)
-            playerView.stateDidChanged = { state in
+            playerView.stateDidChanged = { [self] state in
                 switch state {
                 case .none:
                     print("none")
@@ -213,7 +295,9 @@ class LandScapCell: BaseCell {
                     print("paused - progress \(Int(playing * 100))% buffering \(Int(buffering * 100))%")
                 case .playing:
                     self.videoView.isHidden = false
-                 
+                    self.playerControllsView.isHidden = false
+                    self.isHideControlls = false
+                    self.playButton.isSelected = true
                     self.spinner.stopAnimating()
                     print("playing")
                 }
@@ -221,6 +305,8 @@ class LandScapCell: BaseCell {
           //  self.addPeriodicTimeObserver()
             if playerView.state != .playing {
                        addPeriodicTimeObserver()
+                addPeriodicTimeObserverForControls()
+
                    }
         }
          
@@ -228,9 +314,11 @@ class LandScapCell: BaseCell {
             
        
     }
+    
            //MARK:- NAME LABEL
        
     @objc func updateMute()  {
+        
           let muteImg = #imageLiteral(resourceName: "mute-60x60")
                   let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
                   
@@ -250,22 +338,62 @@ class LandScapCell: BaseCell {
                       self.muteBtn.setImage(tintMuteImg, for: .normal)
                   }
     }
-       func addPeriodicTimeObserver() {
+    func addPeriodicTimeObserver() {
+        // Notify every half second
+        let timeScale = CMTimeScale(NSEC_PER_SEC)
+        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
+     //gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: false)
+        timeObserverToken = playerView.addPeriodicTimeObserver(forInterval: time, queue: .main) { [self] time in
+            // update player transport UI
+      
+             self.gameTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: false)
+             let currentTime = self.playerView.currentDuration //CMTimeGetSeconds((self.playerView.currentDuration))
+                
+                let duration = self.playerView.totalDuration //CMTimeGetSeconds((self.playerView.totalDuration)!)
+       
+        
+    
+                    let secs = Int(duration - currentTime)
+                 self.playBackTimeLbl.isHidden = false
+                 self.playBackTimeLbl.text = NSString(format: "00:%02d", secs) as String//"\(secs/60):\(secs%60)"
+                
+            
+        }
+    }
+       func addPeriodicTimeObserverForControls() {
            // Notify every half second
            let timeScale = CMTimeScale(NSEC_PER_SEC)
            let time = CMTime(seconds: 1, preferredTimescale: timeScale)
         //gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: false)
-           timeObserverToken = playerView.addPeriodicTimeObserver(forInterval: time, queue: .main) { [self] time in
+        timeObserverControlls = playerView.addPeriodicTimeObserver(forInterval: time, queue: .main) { [self] time in
                // update player transport UI
          
-                self.gameTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.runTimedCode), userInfo: nil, repeats: false)
+             
                 let currentTime = self.playerView.currentDuration //CMTimeGetSeconds((self.playerView.currentDuration))
                    
                    let duration = self.playerView.totalDuration //CMTimeGetSeconds((self.playerView.totalDuration)!)
-                
-                       let secs = Int(duration - currentTime)
-                    self.playBackTimeLbl.isHidden = false
-                    self.playBackTimeLbl.text = NSString(format: "00:%02d", secs) as String//"\(secs/60):\(secs%60)"
+            if duration > 0
+            {
+                progressBar.minimumValue = 0
+                progressBar.maximumValue =  Float(duration)
+                let normalizedTime = Float(currentTime / (duration) )
+                let secs = Int(duration - currentTime)
+                let dur = Int(duration)
+                progressBar.value = Float(currentTime)
+                var currentTimeString = ""
+                var durationTimeString = ""
+                let time = Int(progressBar.value)
+                currentTimeString  =  self.TimeDurationFormater(time: time)
+                durationTimeString  =  self.TimeDurationFormater(time: Int(duration))
+
+                self.timeLable.text = currentTimeString + "/" + "\(durationTimeString)"
+              //  self.timeLable.text = "\(secs/60):\(secs%60)" + "/" +  "\(dur/60):\(dur%60)" // "\(NSString(format: "%02d:%02d", "\(secs/60)","\(secs%60)"))"
+            }
+           
+       
+//                       let secs = Int(duration - currentTime)
+//                    self.playBackTimeLbl.isHidden = false
+//                    self.playBackTimeLbl.text = NSString(format: "00:%02d", secs) as String//"\(secs/60):\(secs%60)"
                    
                
            }
@@ -278,7 +406,9 @@ class LandScapCell: BaseCell {
             self.removePeriodicTimeObserver()
         }
     }
-       
+    @objc func hideeControlls() {
+        self.playerControllsView.isHidden = true
+    }
        func removePeriodicTimeObserver() {
            if let timeObserverToken = timeObserverToken {
                playerView.removeTimeObserver(timeObserverToken)
@@ -287,7 +417,9 @@ class LandScapCell: BaseCell {
        }
     
        @objc func videoViewTapped(tapGesture: UITapGestureRecognizer) {
-        self.updateMute()
+        self.playerControllsView.isHidden = !self.playerControllsView.isHidden
+        isHideControlls = self.playerControllsView.isHidden
+      
            if inDetailView {
                if network.reachability.isReachable == true {
                    guard let item = newItem else { return }
@@ -305,6 +437,7 @@ class LandScapCell: BaseCell {
                    offlineBtnAction?()
                }
            }
+    
            //playBtnAction?()
        }
        func setupThumbnail(videoUrl: URL) {
@@ -541,13 +674,15 @@ class LandScapCell: BaseCell {
     
     func pause() {
         playerView.pause(reason: .hidden)
+        self.playButton.isSelected = false
     }
     func resume() {
         playerView.resume()
+        self.playButton.isSelected = true
     }
 }
 
-//extension PortraitVideoCell: CachingPlayerItemDelegate {
+//extension LandScapCell: CachingPlayerItemDelegate {
 //
 //    func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {
 //        print("File is downloaded and ready for storing")

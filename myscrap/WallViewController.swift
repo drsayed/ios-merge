@@ -2389,6 +2389,13 @@ extension WallViewController: UpdatedFeedsDelegate, FriendControllerDelegate{
 }
 extension WallViewController : PortraitVideoDelegate
 {
+    func PortraitVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     func PortraitVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -2397,6 +2404,13 @@ extension WallViewController : PortraitVideoDelegate
 }
 extension WallViewController : PortraitVideoTextDelegate
 {
+    func PortraitTextVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     func PortraitTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
@@ -2408,7 +2422,13 @@ extension WallViewController : LandScapVideoDelegate
     func LandScapVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
-    
+    func LandScapVideoFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     
 }
 extension WallViewController : LandScapVideoTextDelegate
@@ -2416,5 +2436,11 @@ extension WallViewController : LandScapVideoTextDelegate
     func LandScapTextVideoChanged() {
         self.scrollViewDidEndScrolling()
     }
-   
+    func LandScapVideoTextFullScreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
 }

@@ -12,6 +12,8 @@ import AVFoundation
 import Photos
 protocol UserFeedVideoDelegate:class {
     func UserFeedVideoChanged()
+    func UserVideoFullscreenPressed(player: AVPlayer)
+    
 }
 class UserFeedVideoCell: BaseCell {
     weak var delegateVideoChange : UserFeedVideoDelegate?
@@ -1075,6 +1077,7 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
          //      cell.newItem = self.newItem
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
         cell.pause()
+        cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true
@@ -1150,3 +1153,11 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
 
 }
 
+extension UserFeedVideoCell : PortraitVideoFullScreenDelegate
+{
+    func PortraitVideoFullScreenPressed(player: AVPlayer) {
+        delegateVideoChange?.UserVideoFullscreenPressed(player: player)
+    }
+    
+   
+}

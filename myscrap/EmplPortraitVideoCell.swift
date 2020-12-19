@@ -12,6 +12,7 @@ import AVFoundation
 import Photos
 protocol PortraitVideoDelegate:class {
     func PortraitVideoChanged()
+    func PortraitVideoFullscreenPressed(player : AVPlayer)
 }
 class EmplPortraitVideoCell: BaseCell {
 
@@ -1080,6 +1081,7 @@ extension EmplPortraitVideoCell : UICollectionViewDelegate,UICollectionViewDataS
          //      cell.newItem = self.newItem
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
         cell.pause()
+        cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true
@@ -1355,4 +1357,11 @@ extension EmplPortraitVideoCell : UICollectionViewDelegate,UICollectionViewDataS
 //    }
 //    }
 }
-
+extension EmplPortraitVideoCell : PortraitVideoFullScreenDelegate
+{
+    func PortraitVideoFullScreenPressed(player: AVPlayer) {
+        delegateVideoChange?.PortraitVideoFullscreenPressed(player: player)
+    }
+    
+   
+}

@@ -15,6 +15,7 @@ import Photos
 protocol VideoTextsOnReportPlayerDelegate : class {
     func playReportedTextVedio(url: String)
     func PortraitTextVideoChanged()
+    func ReportedVideoTextFullscreenPressed(player : AVPlayer)
 }
 class ReportedVideoTextCell: BaseCell {
     var visibleCellIndex = IndexPath()
@@ -710,6 +711,7 @@ extension ReportedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
          //      cell.newItem = self.newItem
         cell.inDetailView = false //inDetailView
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
+        cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true
@@ -843,4 +845,12 @@ return CGSize(width:screenWidth, height: 250)
           
     }
     }
+}
+extension ReportedVideoTextCell : PortraitVideoFullScreenDelegate
+{
+    func PortraitVideoFullScreenPressed(player: AVPlayer) {
+       videoPlayerDelegate?.ReportedVideoTextFullscreenPressed(player: player)
+    }
+    
+   
 }

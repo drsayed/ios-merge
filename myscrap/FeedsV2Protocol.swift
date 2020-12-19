@@ -620,7 +620,26 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 portrateCell.statusTextView?.attributedText = item.descriptionStatus
                 feedCollectionView.collectionViewLayout.invalidateLayout()
 
-        }else
+        }
+        else  if let portrateCell = feedCollectionView.cellForItem(at: indexPath) as? UserFeedVideoTextCell {
+                portrateCell.statusTextView?.attributedText = item.descriptionStatus
+                feedCollectionView.collectionViewLayout.invalidateLayout()
+
+                }
+            
+        else if let portrateCell = feedCollectionView.cellForItem(at: indexPath) as? UserFeedLandScapVideoTextCell {
+                
+                portrateCell.statusTextView?.attributedText = item.descriptionStatus
+                feedCollectionView.collectionViewLayout.invalidateLayout()
+
+        }
+        else if let portrateCell = feedCollectionView.cellForItem(at: indexPath) as? ReportedVideoTextCell {
+                
+                portrateCell.descriptionText?.attributedText = item.descriptionStatus
+                feedCollectionView.collectionViewLayout.invalidateLayout()
+
+        }
+        else
             {
                 feedCollectionView.performBatchUpdates({
                     self.feedCollectionView.reloadItems(at: [indexPath])
