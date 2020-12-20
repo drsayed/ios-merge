@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -122,19 +122,19 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oPn-YY-TSj">
-                                <rect key="frame" x="8" y="575" width="468" height="93"/>
+                                <rect key="frame" x="8" y="583" width="468" height="85"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4R-PB-FNt">
-                                        <rect key="frame" x="0.0" y="0.0" width="468" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ywh-v7-wKZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="468" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2rK-NG-2Mi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="22"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVy-o6-sbB" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="22"/>
                                                                 <state key="normal" title="Likes count"/>
                                                                 <connections>
                                                                     <action selector="likeCountPressed:" destination="j54-fm-2QN" eventType="touchUpInside" id="ngY-3Q-0Eu"/>
@@ -143,13 +143,13 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="xCK-U1-ZR8">
-                                                        <rect key="frame" x="235" y="0.0" width="233" height="30"/>
+                                                        <rect key="frame" x="235" y="0.0" width="233" height="22"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="kLg-Rm-QkK">
-                                                                <rect key="frame" x="120" y="0.0" width="113" height="30"/>
+                                                                <rect key="frame" x="120" y="0.0" width="113" height="22"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqj-pd-O0q" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="22"/>
                                                                         <state key="normal" title="Comment Count"/>
                                                                         <connections>
                                                                             <action selector="toDetailsVC:" destination="j54-fm-2QN" eventType="touchUpInside" id="IbJ-RX-V9O"/>
@@ -164,7 +164,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l0b-9H-ge9">
-                                        <rect key="frame" x="0.0" y="34" width="468" height="59"/>
+                                        <rect key="frame" x="0.0" y="26" width="468" height="59"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WON-ei-3WB">
                                                 <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
@@ -481,17 +481,16 @@
                                 </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e6v-aI-STX">
-                                <rect key="frame" x="0.0" y="84" width="484" height="484"/>
+                                <rect key="frame" x="0.0" y="91" width="484" height="484"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="e6v-aI-STX" secondAttribute="height" id="a3z-17-Swy"/>
+                                    <constraint firstAttribute="height" constant="484" id="dse-kc-ZdN"/>
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="AQm-rA-gF0">
-                                <rect key="frame" x="0.0" y="88" width="484" height="484"/>
+                                <rect key="frame" x="0.0" y="91" width="484" height="484"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="484" id="Puv-vj-yap"/>
-                                    <constraint firstAttribute="width" secondItem="AQm-rA-gF0" secondAttribute="height" id="zkI-dS-6K9"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wFU-ya-hfB">
                                     <size key="itemSize" width="128" height="128"/>
@@ -521,7 +520,7 @@
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="mKW-KY-zkY">
-                                <rect key="frame" x="181" y="538" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="545" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -542,13 +541,13 @@
                             <constraint firstItem="Ql4-xv-NBm" firstAttribute="leading" secondItem="QT3-ZW-Ttu" secondAttribute="leading" constant="8" id="8yE-YS-kj1"/>
                             <constraint firstItem="8oj-Q3-PwD" firstAttribute="leading" secondItem="QT3-ZW-Ttu" secondAttribute="leading" constant="8" id="9B8-hX-eJm"/>
                             <constraint firstAttribute="bottom" secondItem="oPn-YY-TSj" secondAttribute="bottom" id="9J8-FM-Xma"/>
-                            <constraint firstItem="mKW-KY-zkY" firstAttribute="top" secondItem="e6v-aI-STX" secondAttribute="bottom" constant="-30" id="AgT-tx-3R4"/>
-                            <constraint firstItem="oPn-YY-TSj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AQm-rA-gF0" secondAttribute="bottom" constant="3" id="EWU-GD-80Z"/>
+                            <constraint firstItem="mKW-KY-zkY" firstAttribute="top" secondItem="AQm-rA-gF0" secondAttribute="bottom" constant="-30" id="AgT-tx-3R4"/>
+                            <constraint firstItem="oPn-YY-TSj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AQm-rA-gF0" secondAttribute="bottom" constant="8" id="EWU-GD-80Z"/>
                             <constraint firstAttribute="width" constant="484" id="GTI-Hj-2qT"/>
                             <constraint firstItem="AQm-rA-gF0" firstAttribute="leading" secondItem="QT3-ZW-Ttu" secondAttribute="leading" id="I4n-Wx-BJe"/>
                             <constraint firstAttribute="trailing" secondItem="ISX-yY-VVq" secondAttribute="trailing" constant="8" id="IKK-HF-yV0"/>
-                            <constraint firstItem="e6v-aI-STX" firstAttribute="top" secondItem="Xlp-5R-ccU" secondAttribute="bottom" constant="1" id="Kzz-XU-u8t"/>
-                            <constraint firstItem="AQm-rA-gF0" firstAttribute="top" secondItem="Xlp-5R-ccU" secondAttribute="bottom" constant="5" id="LjV-0v-61v"/>
+                            <constraint firstItem="e6v-aI-STX" firstAttribute="top" secondItem="Xlp-5R-ccU" secondAttribute="bottom" constant="8" id="Kzz-XU-u8t"/>
+                            <constraint firstItem="AQm-rA-gF0" firstAttribute="top" secondItem="Xlp-5R-ccU" secondAttribute="bottom" constant="8" id="LjV-0v-61v"/>
                             <constraint firstItem="mKW-KY-zkY" firstAttribute="centerX" secondItem="AQm-rA-gF0" secondAttribute="centerX" id="SX5-8p-EpZ"/>
                             <constraint firstItem="x35-zp-cmd" firstAttribute="centerY" secondItem="3cP-m9-M3P" secondAttribute="centerY" id="VxV-HE-Hkk"/>
                             <constraint firstAttribute="trailing" secondItem="AQm-rA-gF0" secondAttribute="trailing" id="X2R-B0-hAo"/>
@@ -861,9 +860,6 @@ NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
         </image>
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

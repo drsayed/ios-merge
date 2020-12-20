@@ -440,7 +440,7 @@ extension UserFeedsVC: UICollectionViewDelegate, UICollectionViewDataSource{
                             } else {
                                 videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                             }
-                        videoCell.resume()
+                      //  videoCell.resume()
                          
                         //}
                     }
@@ -468,7 +468,7 @@ extension UserFeedsVC: UICollectionViewDelegate, UICollectionViewDataSource{
                                 } else {
                                     videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                                 }
-                            videoCell.resume()
+                           // videoCell.resume()
                             //}
                         }
                     }
@@ -495,7 +495,7 @@ extension UserFeedsVC: UICollectionViewDelegate, UICollectionViewDataSource{
                                 } else {
                                     videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                                 }
-                            videoCell.resume()
+                          //  videoCell.resume()
                             //}
                         }
                 }
@@ -522,7 +522,7 @@ extension UserFeedsVC: UICollectionViewDelegate, UICollectionViewDataSource{
                                 } else {
                                     videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                                 }
-                            videoCell.resume()
+                          //  videoCell.resume()
                             //}
                         }
                 }
@@ -738,6 +738,10 @@ var muteVideo : Bool = false
                         }
                         else
                         {
+                            let visibleRect = CGRect(origin: collectionViewCell.videosCollection.contentOffset, size: collectionViewCell.videosCollection.bounds.size)
+                            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+                            let visibleIndexPath = collectionViewCell.videosCollection.indexPathForItem(at: visiblePoint)
+                           
                             videoCell.resume()
                            
                         }
@@ -2040,10 +2044,10 @@ extension UserFeedsVC:UICollectionViewDelegateFlowLayout{
             let width = view.frame.width
             switch item.userCellType{
             case .userFeedImageCell:
-                let height = FeedsHeight.heightForUserFeedImageCellV2(item: item, width: width - 16)
+               let height = FeedsHeight.heightForImageCellV2(item: item, width: width)
                 return CGSize(width: width, height: height)
             case .userFeedImageTextCell:
-                let height = FeedsHeight.heightForUserFeedImageTextCellV2(item: item, width: width, labelWidth: width - 16)
+                let height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
                 return CGSize(width: width, height: height)
                 case .feedPortrVideoCell:
                    let height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
@@ -2457,6 +2461,7 @@ extension UserFeedsVC : UserFeedVideoDelegate
     }
     
     func UserFeedVideoChanged() {
+      //  self.pauseVisibleVideos()
         self.scrollViewDidEndScrolling()
     }
     
@@ -2474,6 +2479,7 @@ extension UserFeedsVC : UserFeedTextVideoDelegate
     }
     
     func UserFeedTextVideoChanged() {
+      //  self.pauseVisibleVideos()
         self.scrollViewDidEndScrolling()
     }
     
@@ -2484,6 +2490,7 @@ extension UserFeedsVC : UserFeedTextVideoDelegate
 extension UserFeedsVC : UserFeedLandScapVideoDelegate
 {
     func UserLandScapVideoFullscreenPressed(player: AVPlayer) {
+        
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
         playerViewController.delegate = self
@@ -2493,6 +2500,7 @@ extension UserFeedsVC : UserFeedLandScapVideoDelegate
     }
     
     func UserFeedLandScapVideoChanged() {
+       // self.pauseVisibleVideos()
         self.scrollViewDidEndScrolling()
 
     }
@@ -2510,6 +2518,7 @@ extension UserFeedsVC : UserFeedLandScapTextVideoDelegate
     }
     
     func UserFeedLandScapTextVideoChanged() {
+        self.pauseVisibleVideos()
         self.scrollViewDidEndScrolling()
     }
 
@@ -2529,6 +2538,7 @@ extension UserFeedsVC : AVPlayerViewControllerDelegate
 {
     func playerViewController(_: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator: UIViewControllerTransitionCoordinator)
     {
+        
         self.scrollViewDidEndScrolling()
     }
 }

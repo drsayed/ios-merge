@@ -216,7 +216,7 @@ collectionView.register(UserFeedVideoTextCell.Nib, forCellWithReuseIdentifier: U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
+       // NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
 
         self.navigationController?.navigationBar.tintColor = .white
        // self.navigationItem.title = ""

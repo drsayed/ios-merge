@@ -1101,11 +1101,11 @@ extension LandScapVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
         
              if   item.videoType == "landscape" {
               //   return CGSize(width:self.videosCollection.frame.size.width, height: 300)
-return CGSize(width:screenWidth, height: 500)
+return CGSize(width:screenWidth, height: 420)
              }
         else
              {
-                return CGSize(width:screenWidth, height:500)
+                return CGSize(width:screenWidth, height:420)
 
         }
     }

@@ -383,15 +383,20 @@ class PortraitVideoCell: BaseCell {
             {
                 progressBar.minimumValue = 0
                 progressBar.maximumValue =  Float(duration)
-                let normalizedTime = Float(currentTime / (duration) )
-                let secs = Int(duration - currentTime)
-                let dur = Int(duration)
+//                let normalizedTime = Float(currentTime / (duration) )
+//                let secs = Int(duration - currentTime)
+//                let dur = Int(duration)
                 progressBar.value = Float(currentTime)
                 var currentTimeString = ""
                 var durationTimeString = ""
                 let time = Int(progressBar.value)
+                
+                var timeDuration = Int(duration)
+                if Double(timeDuration) < duration {
+                    timeDuration = timeDuration + 1
+                }
                 currentTimeString  =  self.TimeDurationFormater(time: time)
-                durationTimeString  =  self.TimeDurationFormater(time: Int(duration))
+                durationTimeString  =  self.TimeDurationFormater(time: timeDuration)
 
                 self.timeLable.text = currentTimeString + "/" + "\(durationTimeString)"// "\(NSString(format: "%02d:%02d", "\(secs/60)","\(secs%60)"))"
             }

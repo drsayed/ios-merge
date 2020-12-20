@@ -933,11 +933,11 @@ extension FeedDetailVideoTextCell : UICollectionViewDelegate,UICollectionViewDat
         
              if   item.videoType == "landscape" {
               //   return CGSize(width:self.videosCollection.frame.size.width, height: 300)
-return CGSize(width:screenWidth, height: 250)
+return CGSize(width:screenWidth, height: 220)
              }
         else
              {
-                return CGSize(width:screenWidth, height:250)
+                return CGSize(width:screenWidth, height:220)
 
         }
     }

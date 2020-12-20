@@ -25,6 +25,9 @@ final class ReportedVC: BaseRevealVC {
         cv.register(ReportedVideoCell.Nib, forCellWithReuseIdentifier: ReportedVideoCell.identifier)
         cv.register(ReportedVideoTextCell.Nib, forCellWithReuseIdentifier: ReportedVideoTextCell.identifier)
         cv.register(ReportCompanyAdminCollectionViewCell.Nib, forCellWithReuseIdentifier: ReportCompanyAdminCollectionViewCell.identifier)
+        cv.register(ReportedLandscapVideoCell.Nib, forCellWithReuseIdentifier: ReportedLandscapVideoCell.identifier)
+        cv.register(ReportedLanscapVideoTextCell.Nib, forCellWithReuseIdentifier: ReportedLanscapVideoTextCell.identifier)
+        
 
         
         cv.backgroundColor = UIColor(hexString: "EFEFEF")
@@ -355,8 +358,8 @@ extension ReportedVC: UICollectionViewDataSource{
                 }
                 return cell
             case .feedLandsVideoCell:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedVideoCell.identifier, for: indexPath) as?
-                    ReportedVideoCell else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedLandscapVideoCell.identifier, for: indexPath) as?
+                        ReportedLandscapVideoCell else { return UICollectionViewCell() }
                 cell.newItem = data
                 cell.updatedDelegate = self
                 cell.videoPlayerDelegate = self
@@ -375,7 +378,7 @@ extension ReportedVC: UICollectionViewDataSource{
                 cell.dwnldBtnAction = {
                     cell.dwnldBtn.isEnabled = false
                    for imageCell in cell.videosCollection.visibleCells   {
-                      let videoCell = imageCell as! PortraitVideoCell
+                      let videoCell = imageCell as! LandScapCell
                        self.downloadVideo(path: videoCell.newVedio!.video)
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
@@ -419,8 +422,8 @@ extension ReportedVC: UICollectionViewDataSource{
                 }
                 return cell
             case .feedLandsVideoTextCell:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedVideoTextCell.identifier, for: indexPath) as?
-                    ReportedVideoTextCell else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedLanscapVideoTextCell.identifier, for: indexPath) as?
+                        ReportedLanscapVideoTextCell else { return UICollectionViewCell() }
                 cell.newItem = data
                 cell.updatedDelegate = self
                 cell.videoPlayerDelegate = self
@@ -439,7 +442,7 @@ extension ReportedVC: UICollectionViewDataSource{
                 cell.dwnldBtnAction = {
                     cell.dwnldBtn.isEnabled = false
                    for imageCell in cell.videosCollection.visibleCells   {
-                      let videoCell = imageCell as! PortraitVideoCell
+                      let videoCell = imageCell as! LandScapCell
                        self.downloadVideo(path: videoCell.newVedio!.video)
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
@@ -545,6 +548,24 @@ extension ReportedVC: UICollectionViewDataSource{
 
                 }
             }
+            if let videoParentTextCell = videoParentCell as? ReportedLandscapVideoCell
+            {
+                for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
+                    print("You can stop play the video from here")
+                        videoCell.pause()
+                    
+
+                }
+            }
+            if let videoParentTextCell = videoParentCell as? ReportedLanscapVideoTextCell
+            {
+                for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
+                    print("You can stop play the video from here")
+                        videoCell.pause()
+                    
+
+                }
+            }
            
             }
         
@@ -572,6 +593,24 @@ extension ReportedVC: UICollectionViewDataSource{
 
                 }
             }
+            if let videoParentTextCell = videoParentCell as? ReportedLandscapVideoCell
+                {
+                    for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
+                        print("You can stop play the video from here")
+                            videoCell.pause()
+                        
+
+                    }
+                }
+                if let videoParentTextCell = videoParentCell as? ReportedLanscapVideoTextCell
+                {
+                    for videoCell in videoParentTextCell.videosCollection.visibleCells  as [LandScapCell]    {
+                        print("You can stop play the video from here")
+                            videoCell.pause()
+                        
+
+                    }
+                }
             }
         }
     }
@@ -652,22 +691,6 @@ var muteVideo : Bool = false
                    videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                }
 
-//                var visibleRect = CGRect()
-//                visibleRect.origin = collectionViewCell.videosCollection.contentOffset
-//                   visibleRect.size = collectionViewCell.videosCollection.bounds.size
-//
-//                   let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-//
-//                   guard let indexPathVisible = collectionViewCell.videosCollection.indexPathForItem(at: visiblePoint) else { return }
-//
-//                guard let indexPathCurrent = collectionViewCell.videosCollection.indexPath(for: videoCell) else { return }
-//                if indexPathVisible != indexPathCurrent {
-//                    videoCell.pause()
-//                }
-//                else
-//                {
-//                    videoCell.resume()
-//                }
                    print(indexPath)
 
                     var point = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.center, to: self.view)
@@ -689,7 +712,88 @@ var muteVideo : Bool = false
              }
             collectionViewCell.UpdateLable()
           }
-        
+          else if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? ReportedLandscapVideoCell
+          {
+             for videoCell in collectionViewCell.videosCollection.visibleCells  as [LandScapCell]    {
+              //  videoCell.backgroundColor = .red
+               let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
+               if muteValue == "1"
+               {
+                muteVideo =  false
+               }
+                else
+               {
+                muteVideo =  true
+               }
+               videoCell.playerView.isMuted = muteVideo
+               if  videoCell.playerView.isMuted {
+                   videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+               } else {
+                   videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+               }
+
+                   print(indexPath)
+
+                    var point = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.center, to: self.view)
+                    let buttonAbsoluteFrame = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.bounds, to: self.view)
+
+
+                    if ( buttonAbsoluteFrame.contains(centerPoint) ) {
+                        // Point lies inside the bounds.
+                        videoCell.resume()
+                    }
+                    else
+                    {
+                        videoCell.pause()
+                    }
+//
+               
+           
+                self.pauseAllVideos(indexPath: indexPath)
+             }
+            collectionViewCell.UpdateLable()
+          }
+          else if   let collectionViewCell = collectionView.cellForItem(at: indexPath) as? ReportedLanscapVideoTextCell
+          {
+             for videoCell in collectionViewCell.videosCollection.visibleCells  as [LandScapCell]    {
+              //  videoCell.backgroundColor = .red
+               let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
+               if muteValue == "1"
+               {
+                muteVideo =  false
+               }
+                else
+               {
+                muteVideo =  true
+               }
+               videoCell.playerView.isMuted = muteVideo
+               if  videoCell.playerView.isMuted {
+                   videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+               } else {
+                   videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+               }
+
+                   print(indexPath)
+
+                    var point = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.center, to: self.view)
+                    let buttonAbsoluteFrame = collectionViewCell.videosCollection.convert(collectionViewCell.videosCollection.bounds, to: self.view)
+
+
+                    if ( buttonAbsoluteFrame.contains(centerPoint) ) {
+                        // Point lies inside the bounds.
+                        videoCell.resume()
+                    }
+                    else
+                    {
+                        videoCell.pause()
+                    }
+//
+               
+           
+                self.pauseAllVideos(indexPath: indexPath)
+             }
+            collectionViewCell.UpdateLable()
+          }
           
    }
 }
@@ -884,10 +988,10 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
             print("Video Cell height : \(height)")
             return CGSize(width: width, height: height + 65)    //height + 30
         case .feedLandsVideoCell:
-            height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
+            height = FeedsHeight.heightForLandsVideoCellV2(item: item, width: width)
             return CGSize(width: width, height: height + 60 )
             case .feedLandsVideoTextCell:
-                height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
+                height = FeedsHeight.heightForLandsVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
                 return CGSize(width: width, height: height + 65 )    //height + 30
         }
@@ -1175,7 +1279,6 @@ extension ReportedVC : UpdatedFeedsDelegate {
         }
     }
 }
-
 extension ReportedVC: VideoTextsOnReportPlayerDelegate{
     func ReportedVideoTextFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
@@ -1205,6 +1308,36 @@ extension ReportedVC: VideoTextsOnReportPlayerDelegate{
     }
     
 }
+
+extension ReportedVC: LandscapVideoTextsOnReportPlayerDelegate{
+    func ReportedLandscapVideoTextFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        playerViewController.delegate = self
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
+    func LandscapTextVideoChanged() {
+        pauseVisibleVideos()
+        self.scrollViewDidEndScrolling()
+    }
+    
+    
+    func playLandscapReportedTextVedio(url: String) {
+             let urlString = url
+                   let videoURL = URL(string: urlString)
+                   let player = AVPlayer(url: videoURL!)
+                   let playerViewController = AVPlayerViewController()
+                   playerViewController.player = player
+        playerViewController.delegate = self
+                   self.present(playerViewController, animated: true) {
+                       playerViewController.player!.play()
+                   }
+    }
+    
+}
 extension ReportedVC: VideoOnReportedPlayerDelegate{
     func ReportedVideoFullscreenPressed(player: AVPlayer) {
         let playerViewController = AVPlayerViewController()
@@ -1220,6 +1353,33 @@ extension ReportedVC: VideoOnReportedPlayerDelegate{
         self.scrollViewDidEndScrolling()
     }
     func playReportedVedio(url: String) {
+             let urlString = url
+                   let videoURL = URL(string: urlString)
+                   let player = AVPlayer(url: videoURL!)
+                   let playerViewController = AVPlayerViewController()
+                   playerViewController.player = player
+        playerViewController.delegate = self
+                   self.present(playerViewController, animated: true) {
+                       playerViewController.player!.play()
+                   }
+    }
+    
+}
+extension ReportedVC: VideoOnLandscapReportedPlayerDelegate{
+    func ReportedLandscapVideoFullscreenPressed(player: AVPlayer) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        playerViewController.delegate = self
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
+    
+    func LandscapVideoChanged() {
+        pauseVisibleVideos()
+        self.scrollViewDidEndScrolling()
+    }
+    func playLandscapReportedVedio(url: String) {
              let urlString = url
                    let videoURL = URL(string: urlString)
                    let player = AVPlayer(url: videoURL!)

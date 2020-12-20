@@ -1415,6 +1415,10 @@
 		94FAEFE821D8E55500C1B6A3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAEFE721D8E55500C1B6A3 /* CustomCell.swift */; };
 		C1C2A625F6043F1BCE133C73 /* Pods_myscrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26ADC0DEE31A11386A67C02 /* Pods_myscrap.framework */; };
 		CD47DB0A1792FACA76DDE33D /* Pods_myscrapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14F9F70FE83748186B72F44 /* Pods_myscrapUITests.framework */; };
+		FB00F562258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB00F560258F3E1400FEEE93 /* ReportedLanscapVideoTextCell.swift */; };
+		FB00F563258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB00F561258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.xib */; };
+		FB00F568258F3EC100FEEE93 /* ReportedLandscapVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB00F566258F3EC000FEEE93 /* ReportedLandscapVideoCell.swift */; };
+		FB00F569258F3EC100FEEE93 /* ReportedLandscapVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB00F567258F3EC000FEEE93 /* ReportedLandscapVideoCell.xib */; };
 		FB0CB7C8255BCA9B00B992C7 /* IncompleteProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0CB7C7255BCA9A00B992C7 /* IncompleteProfileVC.swift */; };
 		FB1DB8B8251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */; };
 		FB30E378255E679200551312 /* FeedDetailVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */; };
@@ -3052,6 +3056,10 @@
 		B26ADC0DEE31A11386A67C02 /* Pods_myscrap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myscrap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14F9F70FE83748186B72F44 /* Pods_myscrapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myscrapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F565CBC235C461D61ECF1F65 /* Pods-myscrapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myscrapTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-myscrapTests/Pods-myscrapTests.release.xcconfig"; sourceTree = "<group>"; };
+		FB00F560258F3E1400FEEE93 /* ReportedLanscapVideoTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportedLanscapVideoTextCell.swift; sourceTree = "<group>"; };
+		FB00F561258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportedLanscapVideoTextCell.xib; sourceTree = "<group>"; };
+		FB00F566258F3EC000FEEE93 /* ReportedLandscapVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportedLandscapVideoCell.swift; sourceTree = "<group>"; };
+		FB00F567258F3EC000FEEE93 /* ReportedLandscapVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportedLandscapVideoCell.xib; sourceTree = "<group>"; };
 		FB0CB7C7255BCA9A00B992C7 /* IncompleteProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncompleteProfileVC.swift; sourceTree = "<group>"; };
 		FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileCodeVerifyVC.swift; sourceTree = "<group>"; };
 		FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailVideoTextCell.xib; sourceTree = "<group>"; };
@@ -4872,8 +4880,12 @@
 				22565C7F1F8CAF8300CCD749 /* ReportedFeedImageTextCell.xib */,
 				942AC1462400F7180032401C /* ReportedVideoCell.swift */,
 				942AC1472400F7180032401C /* ReportedVideoCell.xib */,
+				FB00F566258F3EC000FEEE93 /* ReportedLandscapVideoCell.swift */,
+				FB00F567258F3EC000FEEE93 /* ReportedLandscapVideoCell.xib */,
 				942AC14A2400F8160032401C /* ReportedVideoTextCell.swift */,
 				942AC14B2400F8160032401C /* ReportedVideoTextCell.xib */,
+				FB00F560258F3E1400FEEE93 /* ReportedLanscapVideoTextCell.swift */,
+				FB00F561258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.xib */,
 			);
 			name = Reported;
 			sourceTree = "<group>";
@@ -7929,6 +7941,7 @@
 				94D6B02421C4F5D100F705FC /* UserFeedImageCell.xib in Resources */,
 				9414DED9216F36710082C1D3 /* VC-32.png in Resources */,
 				9414DECB216F36710082C1D3 /* UA-32.png in Resources */,
+				FB00F569258F3EC100FEEE93 /* ReportedLandscapVideoCell.xib in Resources */,
 				941C4C2722461398000C4391 /* NewUserInsideScrollCell.xib in Resources */,
 				9414DE27216F36700082C1D3 /* MO-32.png in Resources */,
 				9414DEA3216F36700082C1D3 /* SV-32.png in Resources */,
@@ -8336,6 +8349,7 @@
 				9414DE1E216F36700082C1D3 /* MK-128.png in Resources */,
 				22C1121A1FA1A4FA0028F9AC /* About.storyboard in Resources */,
 				FBD7DDA12566FFD10068768C /* LandScapCell.xib in Resources */,
+				FB00F563258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.xib in Resources */,
 				9414DDA8216F36700082C1D3 /* GM-128.png in Resources */,
 				FB8C9541250D17AD000E1B40 /* ConfirmCommudityTableHeader.xib in Resources */,
 				94F37E1D212E829C00B7D49D /* FeedListingCell.xib in Resources */,
@@ -9213,6 +9227,7 @@
 				22565C6D1F8C89F300CCD749 /* FeedTextCell.swift in Sources */,
 				94CA560624514E9800289A63 /* EmplPortraitVideoCell.swift in Sources */,
 				FBB0CEA02525C63F0065656C /* AVPlayer+Extensions.swift in Sources */,
+				FB00F568258F3EC100FEEE93 /* ReportedLandscapVideoCell.swift in Sources */,
 				22053F401F5E6D2100C2510E /* SingleNewsTableCell.swift in Sources */,
 				9469CA7322BF8EE4009EA847 /* ReviewItems.swift in Sources */,
 				941891992201E360006AA20F /* ViewMailVC.swift in Sources */,
@@ -9274,6 +9289,7 @@
 				947AB27B2100C3BB00DA45B0 /* PortView.swift in Sources */,
 				94CA560024514E5300289A63 /* EmplImageTextCell.swift in Sources */,
 				94909403205D067200F952F7 /* CommentHeaderView.swift in Sources */,
+				FB00F562258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.swift in Sources */,
 				227D31092042CE2F00467026 /* MyScrapAlbumCell.swift in Sources */,
 				940A570E246D1B2000E61CDD /* ForexPricesTVCell.swift in Sources */,
 				2289315F1FCE831000544FCA /* VisitorItem.swift in Sources */,
@@ -9713,7 +9729,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16.0;
+				CURRENT_PROJECT_VERSION = 17.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -9802,7 +9818,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16.0;
+				CURRENT_PROJECT_VERSION = 17.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;

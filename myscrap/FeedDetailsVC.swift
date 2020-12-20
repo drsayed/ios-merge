@@ -1052,7 +1052,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
                     height -= 35
                 }
                 else{
-                    height += 35
+                    height += 25
                 }
                 return CGSize(width: width, height: height )
             case .feedLandsVideoCell:
@@ -1061,7 +1061,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
                     height -= 35
                 }
                 else{
-                    height += 35
+                    height += 25
                 }
                 return CGSize(width: width, height: height)
             case .feedPortrVideoTextCell:
@@ -1070,7 +1070,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
                     height -= 35
                 }
                 else{
-                    height += 35
+                    height += 25
                 }
                 print("Video Cell height : \(height)")
                 return CGSize(width: width, height: height)    //height + 30
@@ -1080,7 +1080,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
                     height -= 35
                 }
                 else{
-                    height += 35
+                    height += 25
                 }
                 print("Video Cell height : \(height)")
                 return CGSize(width: width, height: height )    //height + 30

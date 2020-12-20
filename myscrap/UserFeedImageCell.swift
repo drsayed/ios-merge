@@ -13,7 +13,8 @@ class UserFeedImageCell: UserFeedTextCell {
     @IBOutlet weak var feedImage: UIImageView!
     @IBOutlet weak var feedImages: UICollectionView!
       @IBOutlet weak var pageControll: UIPageControl!
-    
+    @IBOutlet var feedImagesCollectionViewHeightConstraint : NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -78,6 +79,9 @@ class UserFeedImageCell: UserFeedTextCell {
                                                  }
                }
                      self.feedImages.reloadData()
+            let viewWidth = UIScreen.main.bounds.width
+          //  self.fancyViewWidthConstraint.constant = viewWidth
+            self.feedImagesCollectionViewHeightConstraint.constant = viewWidth
            }
          
        }

@@ -207,17 +207,28 @@ final class FeedV2Item: Equatable{
         } */
         else if _feedType == "videoFeed" {
             if videoURL.count > 0 {
-                let vido =  videoURL[0] as VideoURL
-                if vido.videoType == "landscape" && status != "" {
-                    ct = .feedPortrVideoTextCell
-                } else if vido.videoType == "landscape" && status == "" {
-                    ct = .feedPortrVideoCell
+                if videoURL.count > 1 {
+                    if   status != ""  {
+                        ct = .feedPortrVideoTextCell
+                    } else if  status == "" {
+                        ct = .feedPortrVideoCell
+                    }
                 }
-                else if  vido.videoType == "portrait" &&  status != ""  {
-                    ct = .feedLandsVideoTextCell
-                } else if vido.videoType == "portrait" &&  status == "" {
-                    ct = .feedLandsVideoCell
+                else
+                {
+                    let vido =  videoURL[0] as VideoURL
+                    if vido.videoType == "landscape" && status != "" {
+                        ct = .feedPortrVideoTextCell
+                    } else if vido.videoType == "landscape" && status == "" {
+                        ct = .feedPortrVideoCell
+                    }
+                    else if  vido.videoType == "portrait" &&  status != ""  {
+                        ct = .feedLandsVideoTextCell
+                    } else if vido.videoType == "portrait" &&  status == "" {
+                        ct = .feedLandsVideoCell
+                    }
                 }
+               
             }
             else
             {
@@ -269,6 +280,15 @@ final class FeedV2Item: Equatable{
         }
         else if _feedType == "videoFeed" {
             if videoURL.count > 0 {
+                if videoURL.count > 1 {
+                    if   status != ""  {
+                        uct = .feedPortrVideoTextCell
+                    } else if  status == "" {
+                        uct = .feedPortrVideoCell
+                    }
+                }
+                else
+                {
             let vido =  videoURL[0] as VideoURL
             if vido.videoType == "landscape" && status != "" {
                 uct = .feedPortrVideoTextCell
@@ -279,6 +299,7 @@ final class FeedV2Item: Equatable{
                 uct = .feedLandsVideoTextCell
             } else if vido.videoType == "portrait" &&  status == "" {
                 uct = .feedLandsVideoCell
+            }
             }
             }
             else

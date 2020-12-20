@@ -939,10 +939,10 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
                    } else {
                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                    }
-                  videoCell.player.pause()
-                   videoCell.player.actionAtItemEnd = .pause
-                  NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                   NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
+                  videoCell.pause()
+//                   videoCell.player.actionAtItemEnd = .pause
+//                  NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
+//                   NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
                    //videoCell.player.pause()
                //}
            }
@@ -1076,7 +1076,7 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
              //cell.indexPath = indexPath.row
          //      cell.newItem = self.newItem
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
-        cell.pause()
+        
         cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
@@ -1085,6 +1085,7 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
                         cell.thumbnailImg.tag = indexPath.row*/
                       // self.visibleCellIndex = indexPath
         cell.layoutIfNeeded()
+        cell.pause()
                
                return cell
     }
@@ -1095,12 +1096,12 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
     let item =  self.newItem!.videoURL[indexPath.row]
                 if   item.videoType == "landscape" {
                     
-                    return CGSize(width:screenWidth, height: 250)
+                    return CGSize(width:screenWidth, height: 220)
                    //return CGSize(width:screenWidth, height: self.videosCollection.frame.size.height)
                 }
            else
                 {
-                   return CGSize(width:screenWidth, height: 250)
+                   return CGSize(width:screenWidth, height: 220)
 
            }
       //  return CGSize(width:self.videosCollection.frame.size.width, height: self.videosCollection.frame.size.height)

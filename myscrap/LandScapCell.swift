@@ -383,8 +383,12 @@ class LandScapCell: BaseCell {
                 var currentTimeString = ""
                 var durationTimeString = ""
                 let time = Int(progressBar.value)
+                var timeDuration = Int(duration)
+                if Double(timeDuration) < duration {
+                    timeDuration = timeDuration + 1
+                }
                 currentTimeString  =  self.TimeDurationFormater(time: time)
-                durationTimeString  =  self.TimeDurationFormater(time: Int(duration))
+                durationTimeString  =  self.TimeDurationFormater(time: timeDuration)
 
                 self.timeLable.text = currentTimeString + "/" + "\(durationTimeString)"
               //  self.timeLable.text = "\(secs/60):\(secs%60)" + "/" +  "\(dur/60):\(dur%60)" // "\(NSString(format: "%02d:%02d", "\(secs/60)","\(secs%60)"))"

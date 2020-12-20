@@ -132,7 +132,7 @@ struct FeedsHeight {
     static func heightForUserFeedImageCellV2(item: FeedV2Item , width: CGFloat) -> CGFloat{
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //95
-        let bottomSpacing: CGFloat = 8
+        let bottomSpacing: CGFloat = 8 +  5
         var imageHeight: CGFloat = width
         if  item.pictureURL.count as Int == 1 {
                             imageHeight  = width
@@ -147,6 +147,10 @@ struct FeedsHeight {
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing
         if !(item.likeCount == 0 && item.commentCount == 0){
             height += 65
+        }
+        else
+        {
+            height += 5
         }
         return height
     }
@@ -312,24 +316,24 @@ struct FeedsHeight {
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
         let bottomSpacing: CGFloat = 8
-         var imageHeight: CGFloat = 250
+         var imageHeight: CGFloat = 220
               if item.videoURL.count > 1 {
-                           imageHeight = 250
+                           imageHeight = 220
                     }
                     else
                     {
-                          imageHeight  = 250
+                          imageHeight  = 220
                     }
       
         let likeHeight : CGFloat = 5
         let bottomLikeSpacing : CGFloat = 8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing
         if !(item.likeCount == 0 && item.commentCount == 0 && item.viewsCount == 0){
-            height += 35
+            height += 45
         }
         else
         {
-            height += 15
+            height += 25
         }
         return height
     }
@@ -341,13 +345,13 @@ struct FeedsHeight {
         let bottomSpacing: CGFloat = 8
         let labelHeight: CGFloat = LabelHeight.videoHeightForAttributed(for: item.descriptionStatus, for: labelWidth) + 15
         let labelSpacing: CGFloat = 5
-           var imageHeight: CGFloat = 250
+           var imageHeight: CGFloat = 220
         if item.videoURL.count > 1 {
-                     imageHeight = 250
+                     imageHeight = 220
               }
               else
               {
-                    imageHeight  = 250
+                    imageHeight  = 220
               }
         /*if item.videoType == "landscape" {
             imageHeight -= 187.5
@@ -356,7 +360,7 @@ struct FeedsHeight {
         let bottomLikeSpacing : CGFloat = 8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing + labelHeight + labelSpacing
         if !(item.likeCount == 0 && item.commentCount == 0 && item.viewsCount == 0){
-            height += 55
+            height += 65
         }
         else
         {
@@ -369,21 +373,21 @@ struct FeedsHeight {
         
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
-        let bottomSpacing: CGFloat = 8
-         var imageHeight: CGFloat = 500
+        let bottomSpacing: CGFloat = 8 + 5
+         var imageHeight: CGFloat = 420
               if item.videoURL.count > 1 {
-                           imageHeight = 500
+                           imageHeight = 420
                     }
                     else
                     {
-                          imageHeight  = 500
+                          imageHeight  = 420
                     }
       
         let likeHeight : CGFloat = 5
         let bottomLikeSpacing : CGFloat = 8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing
         if !(item.likeCount == 0 && item.commentCount == 0 && item.viewsCount == 0){
-            height += 35
+            height += 40
         }
         else
         {
@@ -399,13 +403,13 @@ struct FeedsHeight {
         let bottomSpacing: CGFloat = 8
         let labelHeight: CGFloat = LabelHeight.videoHeightForAttributed(for: item.descriptionStatus, for: labelWidth) + 15
         let labelSpacing: CGFloat = 5
-           var imageHeight: CGFloat = 500
+           var imageHeight: CGFloat = 420
         if item.videoURL.count > 1 {
-                     imageHeight = 500
+                     imageHeight = 420
               }
               else
               {
-                    imageHeight  = 500
+                    imageHeight  = 420
               }
         /*if item.videoType == "landscape" {
             imageHeight -= 187.5
@@ -551,7 +555,7 @@ struct FeedsHeight {
     static func heightForUserFeedImageTextCellV2(item: FeedV2Item , width: CGFloat,labelWidth: CGFloat) -> CGFloat{
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //95
-        let bottomSpacing: CGFloat = 8
+        let bottomSpacing: CGFloat = 8 + 8
         let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth)
         let labelSpacing: CGFloat = 5
         var imageHeight: CGFloat = width
@@ -567,6 +571,10 @@ struct FeedsHeight {
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing + labelHeight + labelSpacing
         if !(item.likeCount == 0 && item.commentCount == 0){
             height += 55
+        }
+        else
+        {
+            height += 15
         }
         return height
     }
