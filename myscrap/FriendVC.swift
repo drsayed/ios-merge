@@ -437,9 +437,15 @@ extension FriendVC: UIScrollViewDelegate{
             let screenWidth = screenRect.size.width
             let screenHeight = screenRect.size.height
             
-            if scrollView.contentOffset.y < collectionView.frame.size.height-100 {
+            if scrollView.contentOffset.y < 300 {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
+            }
+            else
+            {
+                if currentSelectedTab == 0 {
+                    NotificationCenter.default.post(name: Notification.Name("PlayUserCurrentVideo"), object: nil)
+                }
             }
           
           

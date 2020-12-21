@@ -54,7 +54,6 @@ class CompanyModuleUpdatesVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllProfileVideos"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayCompanyCurrentVideo"), object: nil)
         
         self.view.backgroundColor = .white
 
@@ -66,6 +65,8 @@ class CompanyModuleUpdatesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayCompanyCurrentVideo"), object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("SharedClosed"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayVideoFromTab"), object: nil)
     }
@@ -73,6 +74,7 @@ class CompanyModuleUpdatesVC: UIViewController {
 
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "SharedClosed"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PlayVideoFromTab"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PlayCompanyCurrentVideo"), object: nil)
 
 
     }

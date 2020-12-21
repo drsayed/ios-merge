@@ -50,7 +50,6 @@ class UserFeedsVC: BaseVC, FriendControllerDelegate {
        // NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("VideoPlayedChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("SharedOpen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("SharedClosed"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayMyCurrentVideo"), object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
@@ -121,7 +120,8 @@ class UserFeedsVC: BaseVC, FriendControllerDelegate {
     //MARK:- ViewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayMyCurrentVideo"), object: nil)
+
         //if dataSource.count == 0 {
             self.activityIndicator.startAnimating()
             self.getProfile()
@@ -144,6 +144,8 @@ class UserFeedsVC: BaseVC, FriendControllerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.pauseVisibleVideos()
+      
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PlayMyCurrentVideo"), object: nil)
         NotificationCenter.default.removeObserver(self, name: .userSignedIn, object: nil)
         NotificationCenter.default.removeObserver(self, name: .videoDownloaded, object: nil)
         

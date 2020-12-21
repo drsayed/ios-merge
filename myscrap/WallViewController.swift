@@ -43,7 +43,7 @@ class WallViewController: UIViewController {
      //   NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("VideoPlayedChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("SharedOpen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("SharedClosed"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayUserCurrentVideo"), object: nil)
+      
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllProfileVideos"), object: nil)
@@ -76,10 +76,12 @@ class WallViewController: UIViewController {
             self.activityIndicator.startAnimating()
             getProfile()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayUserCurrentVideo"), object: nil)
        // self.scrollViewDidEndScrolling()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PlayUserCurrentVideo"), object: nil)
         NotificationCenter.default.removeObserver(self, name: .userSignedIn, object: nil)
         NotificationCenter.default.removeObserver(self, name: .videoDownloaded, object: nil)
         let muteImg = #imageLiteral(resourceName: "mute-60x60")

@@ -40,7 +40,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="E8Z-Pg-zQE">
-                                <rect key="frame" x="181" y="323" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="318" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -397,7 +397,7 @@
                             <constraint firstItem="7Eo-Lq-NwP" firstAttribute="leading" secondItem="yIQ-EP-F87" secondAttribute="leading" constant="8" id="PaG-S4-tbs"/>
                             <constraint firstItem="GuU-f5-1Up" firstAttribute="top" secondItem="Dur-5H-Stl" secondAttribute="bottom" constant="4" id="Wjl-gv-ASY"/>
                             <constraint firstAttribute="trailing" secondItem="Dur-5H-Stl" secondAttribute="trailing" constant="8" id="Z0e-37-6yZ"/>
-                            <constraint firstItem="E8Z-Pg-zQE" firstAttribute="top" secondItem="hhR-sp-WGS" secondAttribute="bottom" constant="-25" id="cZv-LN-E9P"/>
+                            <constraint firstItem="E8Z-Pg-zQE" firstAttribute="top" secondItem="hhR-sp-WGS" secondAttribute="bottom" constant="-30" id="cZv-LN-E9P"/>
                             <constraint firstItem="hhR-sp-WGS" firstAttribute="leading" secondItem="yIQ-EP-F87" secondAttribute="leading" id="cyh-kU-8VG"/>
                             <constraint firstItem="AI2-iR-1OA" firstAttribute="bottom" secondItem="7Eo-Lq-NwP" secondAttribute="bottom" constant="7.5" id="dhd-ao-3C4"/>
                             <constraint firstItem="GuU-f5-1Up" firstAttribute="trailing" secondItem="Dur-5H-Stl" secondAttribute="trailing" id="fXY-ed-yam"/>

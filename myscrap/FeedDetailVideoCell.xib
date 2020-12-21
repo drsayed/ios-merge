@@ -40,7 +40,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="kGH-LE-v2R">
-                                <rect key="frame" x="181" y="306" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="301" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -384,7 +384,7 @@
                             <constraint firstItem="L2i-pP-yFV" firstAttribute="centerX" secondItem="J4M-7k-714" secondAttribute="centerX" id="Sio-tF-DsG"/>
                             <constraint firstItem="kGH-LE-v2R" firstAttribute="centerX" secondItem="Zqf-qW-tev" secondAttribute="centerX" id="UWy-gQ-8Is"/>
                             <constraint firstItem="2k3-Lm-YEn" firstAttribute="leading" secondItem="J4M-7k-714" secondAttribute="trailing" constant="8" id="YyX-WC-Qll"/>
-                            <constraint firstItem="kGH-LE-v2R" firstAttribute="top" secondItem="Zqf-qW-tev" secondAttribute="bottom" constant="-25" id="cxe-oW-42i"/>
+                            <constraint firstItem="kGH-LE-v2R" firstAttribute="top" secondItem="Zqf-qW-tev" secondAttribute="bottom" constant="-30" id="cxe-oW-42i"/>
                             <constraint firstItem="J4M-7k-714" firstAttribute="leading" secondItem="FV2-Tf-YnT" secondAttribute="leading" constant="8" id="e28-1j-ygV"/>
                             <constraint firstAttribute="bottom" secondItem="oPj-Sb-hKZ" secondAttribute="bottom" id="f2L-dM-Z2w"/>
                             <constraint firstItem="oPj-Sb-hKZ" firstAttribute="leading" secondItem="FV2-Tf-YnT" secondAttribute="leading" constant="8" id="hbq-HL-UqW"/>
