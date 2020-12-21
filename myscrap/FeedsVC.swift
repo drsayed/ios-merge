@@ -496,6 +496,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         
         //Add observer for downloading video
         NotificationCenter.default.addObserver(self, selector: #selector(self.videoDownloadNotify(_:)), name: .videoDownloaded, object: nil)
+        self.scrollViewDidEndScrolling()
     }
     @objc func ProfileBtnTap(tapGesture:UITapGestureRecognizer) {
         if AuthStatus.instance.isGuest{

@@ -111,7 +111,7 @@ struct FeedsHeight {
     static func heightForImageCellV2(item: FeedV2Item , width: CGFloat) -> CGFloat{
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
-        let bottomSpacing: CGFloat = 8
+        let bottomSpacing: CGFloat = 8 + 5
          var imageHeight: CGFloat = width
          if  item.pictureURL.count as Int == 1 {
               imageHeight  = width
@@ -187,7 +187,7 @@ struct FeedsHeight {
     static func heightForImageTextCellV2(item: FeedV2Item , width: CGFloat,labelWidth: CGFloat) -> CGFloat{
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
-        let bottomSpacing: CGFloat = 8
+        let bottomSpacing: CGFloat = 8 + 10
         let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth) + 5
         let labelSpacing: CGFloat = 5
          var imageHeight: CGFloat = width
@@ -316,13 +316,13 @@ struct FeedsHeight {
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
         let bottomSpacing: CGFloat = 8
-         var imageHeight: CGFloat = 220
+         var imageHeight: CGFloat = 230
               if item.videoURL.count > 1 {
-                           imageHeight = 220
+                           imageHeight = 230
                     }
                     else
                     {
-                          imageHeight  = 220
+                          imageHeight  = 230
                     }
       
         let likeHeight : CGFloat = 5
@@ -345,13 +345,13 @@ struct FeedsHeight {
         let bottomSpacing: CGFloat = 8
         let labelHeight: CGFloat = LabelHeight.videoHeightForAttributed(for: item.descriptionStatus, for: labelWidth) + 15
         let labelSpacing: CGFloat = 5
-           var imageHeight: CGFloat = 220
+           var imageHeight: CGFloat = 230
         if item.videoURL.count > 1 {
-                     imageHeight = 220
+                     imageHeight = 230
               }
               else
               {
-                    imageHeight  = 220
+                    imageHeight  = 230
               }
         /*if item.videoType == "landscape" {
             imageHeight -= 187.5

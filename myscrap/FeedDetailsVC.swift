@@ -1049,7 +1049,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedPortrVideoCell:
                 var height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
                 if !(item.likeCount == 0 ){
-                    height -= 35
+                    height -= 0
                 }
                 else{
                     height += 25
@@ -1058,7 +1058,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedLandsVideoCell:
                 var height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
                 if !(item.likeCount == 0 ){
-                    height -= 35
+                    height -= 0
                 }
                 else{
                     height += 25
@@ -1067,7 +1067,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedPortrVideoTextCell:
                 var height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 if !(item.likeCount == 0 ){
-                    height -= 35
+                    height -= 10
                 }
                 else{
                     height += 25
@@ -1077,7 +1077,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedLandsVideoTextCell:
                 var height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 if !(item.likeCount == 0 ){
-                    height -= 35
+                    height -= 10
                 }
                 else{
                     height += 25

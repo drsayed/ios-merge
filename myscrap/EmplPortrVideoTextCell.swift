@@ -1102,11 +1102,11 @@ extension EmplPortrVideoTextCell : UICollectionViewDelegate,UICollectionViewData
         
              if   item.videoType == "landscape" {
               //   return CGSize(width:self.videosCollection.frame.size.width, height: 300)
-return CGSize(width:screenWidth, height: 250)
+return CGSize(width:screenWidth, height: 230)
              }
         else
              {
-                return CGSize(width:screenWidth, height:250)
+                return CGSize(width:screenWidth, height:230)
 
         }
     }

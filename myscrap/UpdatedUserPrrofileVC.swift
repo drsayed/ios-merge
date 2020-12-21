@@ -18,7 +18,7 @@ class UpdatedUserPrrofileVC:BaseVC{
     @IBOutlet weak var interestView: UIView!
     @IBOutlet weak var aboutVC: UIView!
     @IBOutlet weak var photosVC: UIView!
-
+    var currentSelectedTab = 0
     fileprivate var pictureItems = [PictureURL]()
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var mainScrollView: UIScrollView!
@@ -66,6 +66,7 @@ class UpdatedUserPrrofileVC:BaseVC{
         } else {
             // Fallback on earlier versions
         }
+        currentSelectedTab = 0
         service.delegate = self
         scrollView.delegate = self
         mainScrollView.delegate = self
@@ -217,6 +218,9 @@ collectionView.register(UserFeedVideoTextCell.Nib, forCellWithReuseIdentifier: U
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
        // NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
+        if currentSelectedTab == 0 {
+            NotificationCenter.default.post(name: Notification.Name("PlayMyCurrentVideo"), object: nil)
+        }
 
         self.navigationController?.navigationBar.tintColor = .white
        // self.navigationItem.title = ""
@@ -237,6 +241,7 @@ collectionView.register(UserFeedVideoTextCell.Nib, forCellWithReuseIdentifier: U
                 DispatchQueue.main.async {
                     let xOffset = self.scrollView.frame.width * CGFloat(2)
                     let point = CGPoint(x: xOffset, y: 0)
+                    self.currentSelectedTab = 2
                     self.scrollView.setContentOffset(point, animated: true)
                 }
             //  self.collectionPage.reloadData()
@@ -246,6 +251,7 @@ collectionView.register(UserFeedVideoTextCell.Nib, forCellWithReuseIdentifier: U
                 DispatchQueue.main.async {
                     let xOffset = self.scrollView.frame.width * CGFloat(2)
                     let point = CGPoint(x: xOffset, y: 0)
+                    self.currentSelectedTab = 0
                     self.scrollView.setContentOffset(point, animated: true)
                 
                   //  self.collectionView.scrollToItem(at:IndexPath(item: 2, section: 1), at: .left, animated: false)
@@ -513,7 +519,7 @@ extension UpdatedUserPrrofileVC: UIScrollViewDelegate{
         let index = targetContentOffset.pointee.x / view.frame.width
         let indexPath = IndexPath(item: Int(index), section: 1)
         let cell:NewsBarCell = collectionView.dequeReusableCell(forIndexPath: indexPath)
-        
+        currentSelectedTab = indexPath.row
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
     }
 }
@@ -669,6 +675,7 @@ extension UpdatedUserPrrofileVC: UICollectionViewDelegate, UICollectionViewDataS
         if indexPath.section == 1 {
             let xOffset = self.scrollView.frame.width * CGFloat(indexPath.item)
             let point = CGPoint(x: xOffset, y: 0)
+            currentSelectedTab = indexPath.item
             self.scrollView.setContentOffset(point, animated: true)
         }
     }

@@ -54,6 +54,8 @@ class CompanyModuleUpdatesVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllProfileVideos"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayCompanyCurrentVideo"), object: nil)
+        
         self.view.backgroundColor = .white
 
         self.getEmployeeData(pageLoad: 0, completion: { _ in })

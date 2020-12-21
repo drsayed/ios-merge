@@ -50,6 +50,8 @@ class UserFeedsVC: BaseVC, FriendControllerDelegate {
        // NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("VideoPlayedChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("SharedOpen"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("SharedClosed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("PlayMyCurrentVideo"), object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.enableScroll), name: Notification.Name("EnableScroll"), object: nil)
@@ -2048,7 +2050,7 @@ extension UserFeedsVC:UICollectionViewDelegateFlowLayout{
                 return CGSize(width: width, height: height)
             case .userFeedImageTextCell:
                 let height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-                return CGSize(width: width, height: height)
+                return CGSize(width: width, height: height+10)
                 case .feedPortrVideoCell:
                    let height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
                     return CGSize(width: width, height: height)

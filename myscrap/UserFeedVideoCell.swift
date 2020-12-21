@@ -1096,12 +1096,12 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
     let item =  self.newItem!.videoURL[indexPath.row]
                 if   item.videoType == "landscape" {
                     
-                    return CGSize(width:screenWidth, height: 220)
+                    return CGSize(width:screenWidth, height: 230)
                    //return CGSize(width:screenWidth, height: self.videosCollection.frame.size.height)
                 }
            else
                 {
-                   return CGSize(width:screenWidth, height: 220)
+                   return CGSize(width:screenWidth, height: 230)
 
            }
       //  return CGSize(width:self.videosCollection.frame.size.width, height: self.videosCollection.frame.size.height)

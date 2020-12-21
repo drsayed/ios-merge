@@ -21,7 +21,7 @@ class FriendVC:BaseVC{
     @IBOutlet weak var horizontalBarWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var horizontalBarLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var aboutView: UIView!
-   
+   var currentSelectedTab = 0
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     
     var friendId : String = ""
@@ -59,6 +59,7 @@ class FriendVC:BaseVC{
         } else {
             // Fallback on earlier versions
         }
+        currentSelectedTab = 0
         service.delegate = self
         scrollView.delegate = self
         mainScrollView.delegate = self
@@ -184,8 +185,16 @@ class FriendVC:BaseVC{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
+        if currentSelectedTab == 0 {
+            NotificationCenter.default.post(name: Notification.Name("PlayUserCurrentVideo"), object: nil)
+        }
+        else
+        {
+            NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
 
+        }
+
+        
         self.navigationController?.navigationBar.tintColor = .white
        // self.navigationItem.title = ""
         //self.navigationItem.title = ""
@@ -453,6 +462,7 @@ extension FriendVC: UIScrollViewDelegate{
         if indexPath.item != 0 {
             NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
         }
+        currentSelectedTab = indexPath.item
 //        else
 //        {
 //            NotificationCenter.default.post(name: Notification.Name("PlayVideoFromTab"), object: nil)
@@ -614,6 +624,7 @@ extension FriendVC: UICollectionViewDelegate, UICollectionViewDataSource{
             if indexPath.item != 0 {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
             }
+            currentSelectedTab = indexPath.item
 //            else
 //            {
 //                NotificationCenter.default.post(name: Notification.Name("PlayVideoFromFriedsTab"), object: nil)

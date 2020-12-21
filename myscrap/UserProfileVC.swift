@@ -111,6 +111,8 @@ class UserProfileVC: BaseVC, FriendControllerDelegate {
         //if dataSource.count == 0 {
             self.activityIndicator.startAnimating()
             self.getProfile()
+    //    NotificationCenter.default.post(name: Notification.Name("PlayUserCurrentVideo"), object: nil)
+
         //}
         
 //        profileView.backgroundColor = UIColor(hexString: AuthService.instance.colorCode)

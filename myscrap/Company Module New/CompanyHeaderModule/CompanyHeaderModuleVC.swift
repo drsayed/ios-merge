@@ -40,7 +40,7 @@ let topViewHeightConstraintRange = topViewFinalHeight..<topViewInitialHeight
 class CompanyHeaderModuleVC: UIViewController {
 
     var companyId : String?
-
+     var currentSelectedTab = 0
     let tabsArray = ["OVERVIEW", "UPDATES",  "MEDIA", "REVIEWS"]
 
     @IBOutlet weak var stickyHeaderView: UIView!
@@ -110,7 +110,7 @@ class CompanyHeaderModuleVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        currentSelectedTab = 0
         //countLabel
         self.countLabel.isHidden = true
         self.countLabel.textAlignment = .center
@@ -480,6 +480,10 @@ class CompanyHeaderModuleVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = false
+        if currentSelectedTab == 1 {
+            NotificationCenter.default.post(name: Notification.Name("PlayCompanyCurrentVideo"), object: nil)
+        }
+
         if self.navigationItem.title == "" {
             let companyName = UserDefaults.standard.object(forKey: "companyAdminView") as? String
             if companyName != "" {
@@ -857,14 +861,17 @@ extension CompanyHeaderModuleVC: UICollectionViewDelegateFlowLayout {
             
             direction = .reverse
         }
+        currentSelectedTab = indexPath.item
         if indexPath.item != 1 {
             NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+          
         }
         else
         {
             let screenRect = UIScreen.main.bounds
             let screenHeight = screenRect.size.height
             NotificationCenter.default.post(name: Notification.Name("PlayVideoFromTab"), object: nil)
+         
 
 //            if mainScroll.contentOffset.y > 300 {
 //                NotificationCenter.default.post(name: Notification.Name("PlayVideoFromTab"), object: nil)
@@ -938,6 +945,7 @@ extension CompanyHeaderModuleVC: UIPageViewControllerDelegate {
         guard let currentVCIndex = pageCollection.pages.firstIndex(where: { $0.vc == currentVC }) else { return }
         
         let indexPathAtCollectionView = IndexPath(item: currentVCIndex, section: 0)
+        currentSelectedTab = indexPathAtCollectionView.item
         if indexPathAtCollectionView.item != 1 {
             NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
         }
