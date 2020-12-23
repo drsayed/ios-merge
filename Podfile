@@ -41,6 +41,7 @@ target 'myscrap' do
     pod 'Firebase/Auth'
     pod 'ADCountryPicker', '~> 2.1.0'
     pod 'TLPhotoPicker', '~> 1.8.3'
+    pod 'CHIPageControl/Jaloro'
 
 #    pod 'BSImagePicker', '~> 2.4'
 #    pod 'KeychainAccess'

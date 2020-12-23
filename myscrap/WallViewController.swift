@@ -598,6 +598,7 @@ extension WallViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedTextCell.identifier, for: indexPath) as? FeedTextCell else { return UICollectionViewCell()}
                 cell.updatedDelegate = self
                 cell.newItem = data
+                cell.SetLikeCountButton()
                 cell.editButton.isHidden = true
              /*   if data.rank == "MOD" {
                     cell.profileTypeView.label.text = data.rank
@@ -631,6 +632,7 @@ extension WallViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageCell.identifier, for: indexPath) as? FeedImageCell else { return UICollectionViewCell()}
                 cell.updatedDelegate = self
                 cell.newItem = data
+                cell.SetLikeCountButton()
                 cell.refreshImagesCollection()
                 cell.editButton.isHidden = true
                /* if data.rank == "MOD" {
@@ -676,6 +678,7 @@ extension WallViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageTextCell.identifier, for: indexPath) as? FeedImageTextCell else { return UICollectionViewCell()}
                 cell.updatedDelegate = self
                 cell.newItem = data
+                cell.SetLikeCountButton()
                 cell.refreshImagesCollection()
                 cell.editButton.isHidden = true
                 cell.dwnldBtnAction = {
@@ -721,6 +724,7 @@ extension WallViewController: UICollectionViewDelegate, UICollectionViewDataSour
                            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmplPortraitVideoCell.identifier, for: indexPath) as? EmplPortraitVideoCell else { return UICollectionViewCell()}
                            cell.updatedDelegate = self
                            cell.newItem = data
+                cell.SetLikeCountButton()
                           self.visibleCellIndex = indexPath
                 cell.delegateVideoChange = self
                 cell.editButton.isHidden = true
@@ -764,6 +768,7 @@ extension WallViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LandScapVideoCell.identifier, for: indexPath) as? LandScapVideoCell else { return UICollectionViewCell()}
                         cell.updatedDelegate = self
                         cell.newItem = data
+                        cell.SetLikeCountButton()
                         cell.delegateVideoChange = self
                         cell.editButton.isHidden = true
                         cell.refreshTable()
@@ -808,6 +813,8 @@ extension WallViewController: UICollectionViewDelegate, UICollectionViewDataSour
                            cell.updatedDelegate = self
                         cell.delegateVideoChange = self
                            cell.newItem = data
+                        cell.SetLikeCountButton()
+
                         cell.editButton.isHidden = true
                         self.visibleCellIndex = indexPath
 
@@ -855,6 +862,8 @@ extension WallViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LandScapVideoTextCell.identifier, for: indexPath) as? LandScapVideoTextCell else { return UICollectionViewCell()}
                         cell.updatedDelegate = self
                         cell.newItem = data
+                        cell.SetLikeCountButton()
+
                         cell.editButton.isHidden = true
                         cell.delegateVideoChange = self
                         cell.refreshTable()

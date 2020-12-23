@@ -130,35 +130,41 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ywh-v7-wKZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2rK-NG-2Mi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="22"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWK-XZ-VJJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVy-o6-sbB" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVy-o6-sbB" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="79" height="22"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Likes count"/>
                                                                 <connections>
                                                                     <action selector="likeCountPressed:" destination="j54-fm-2QN" eventType="touchUpInside" id="ngY-3Q-0Eu"/>
                                                                 </connections>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqj-pd-O0q" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
+                                                                <rect key="frame" x="89" y="0.0" width="120" height="22"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="PkN-h7-JXn"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Comment Count"/>
+                                                                <connections>
+                                                                    <action selector="toDetailsVC:" destination="j54-fm-2QN" eventType="touchUpInside" id="IbJ-RX-V9O"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="xCK-U1-ZR8">
-                                                        <rect key="frame" x="235" y="0.0" width="233" height="22"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="kLg-Rm-QkK">
-                                                                <rect key="frame" x="120" y="0.0" width="113" height="22"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqj-pd-O0q" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="22"/>
-                                                                        <state key="normal" title="Comment Count"/>
-                                                                        <connections>
-                                                                            <action selector="toDetailsVC:" destination="j54-fm-2QN" eventType="touchUpInside" id="IbJ-RX-V9O"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                            </stackView>
-                                                        </subviews>
-                                                    </stackView>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="kVy-o6-sbB" firstAttribute="top" secondItem="yWK-XZ-VJJ" secondAttribute="top" id="3Je-FL-izw"/>
+                                                            <constraint firstItem="kVy-o6-sbB" firstAttribute="leading" secondItem="yWK-XZ-VJJ" secondAttribute="leading" id="9eM-Vd-93Q"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iqj-pd-O0q" secondAttribute="trailing" constant="5" id="AYM-m8-vFN"/>
+                                                            <constraint firstAttribute="bottom" secondItem="iqj-pd-O0q" secondAttribute="bottom" id="WYJ-Ef-FGH"/>
+                                                            <constraint firstItem="iqj-pd-O0q" firstAttribute="top" secondItem="yWK-XZ-VJJ" secondAttribute="top" id="gAK-pQ-Hoq"/>
+                                                            <constraint firstAttribute="bottom" secondItem="kVy-o6-sbB" secondAttribute="bottom" id="gVz-0I-KOj"/>
+                                                            <constraint firstAttribute="height" constant="22" id="hAs-ab-nPK"/>
+                                                            <constraint firstItem="iqj-pd-O0q" firstAttribute="leading" secondItem="kVy-o6-sbB" secondAttribute="trailing" constant="10" id="uoz-ii-VZU"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -324,6 +330,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ql4-xv-NBm">
                                 <rect key="frame" x="8" y="589" width="468" height="71"/>
@@ -642,6 +649,7 @@
                 <outlet property="feedImages" destination="AQm-rA-gF0" id="7pc-Yl-kag"/>
                 <outlet property="feedImagesCollectionViewHeightConstraint" destination="Puv-vj-yap" id="ZLW-so-zoS"/>
                 <outlet property="likeBtn" destination="UU0-CF-3Mr" id="bhj-r0-XrC"/>
+                <outlet property="likeCommentViewHeight" destination="hAs-ab-nPK" id="2RU-tp-mXo"/>
                 <outlet property="likeCountBtn" destination="kVy-o6-sbB" id="9kj-Q0-Gvy"/>
                 <outlet property="likeImage" destination="ybg-Sd-GhO" id="Hgw-Il-J0r"/>
                 <outlet property="nameLbl" destination="20H-zs-wBf" id="amJ-N5-FM6"/>
@@ -658,7 +666,7 @@
                 <outlet property="timeLbl" destination="Xfs-4c-ObF" id="S6w-nQ-WMY"/>
                 <outlet property="unReportBtn" destination="dLZ-pJ-naC" id="kEy-8e-hza"/>
             </connections>
-            <point key="canvasLocation" x="-115.2" y="-30.134932533733135"/>
+            <point key="canvasLocation" x="-115.2" y="-30.584707646176913"/>
         </collectionViewCell>
     </objects>
     <designables>

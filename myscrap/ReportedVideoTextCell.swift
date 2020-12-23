@@ -19,6 +19,7 @@ protocol VideoTextsOnReportPlayerDelegate : class {
 }
 class ReportedVideoTextCell: BaseCell {
     var visibleCellIndex = IndexPath()
+    @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
 
     @IBOutlet weak var videosCountView: UIView!
     @IBOutlet weak var videosCoutLable: UILabel!
@@ -225,13 +226,13 @@ class ReportedVideoTextCell: BaseCell {
                 viewCount.isHidden = true
                 commentCountBtn.isHidden = false
                 
-                commentCountBtn.viewCount = item.viewsCount
+                commentCountBtn.viewCount = item.likeCount
                 commentCountBtn.commentCount = item.commentCount
             } else {
                 viewCount.isHidden = false
                 commentCountBtn.isHidden = false
                 viewCount.viewCount = item.viewsCount
-                commentCountBtn.viewCount = item.viewsCount
+                commentCountBtn.viewCount = item.likeCount
                 commentCountBtn.commentCount = item.commentCount
             }
             if item.likeCount == 0 {
@@ -282,6 +283,12 @@ class ReportedVideoTextCell: BaseCell {
         profileTypeView?.checkType = (isAdmin:false,isMod: item.moderator == "1", isNew:item.newJoined, rank:item.rank, isLevel: item.isLevel, level: item.level)
         descriptionText?.attributedText = item.descriptionStatus
      //   setupThumbnail(videoUrl: URL(string: item.videoThumbnail)!)
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
     }
     @IBAction func likePressed(_ sender: UIButton){
         if network.reachability.isReachable == true {

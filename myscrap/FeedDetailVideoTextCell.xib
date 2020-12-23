@@ -184,12 +184,9 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="4Zo-lY-7ho">
                                                         <rect key="frame" x="0.0" y="0.0" width="233" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57P-qL-OaF" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57P-qL-OaF" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="0.0"/>
                                                                 <state key="normal" title="Likes count"/>
-                                                                <connections>
-                                                                    <action selector="likeCountPressed:" destination="dF5-Ya-yPJ" eventType="touchUpInside" id="qrf-OK-JjX"/>
-                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -479,7 +476,6 @@
                 <outlet property="editButton" destination="6uD-fg-ycu" id="7rE-pM-irF"/>
                 <outlet property="favouriteBtn" destination="Vvw-Ae-D3q" id="NtU-OU-rGo"/>
                 <outlet property="likeBtn" destination="xBH-bA-ydp" id="1NU-qC-OUV"/>
-                <outlet property="likeCountBtn" destination="57P-qL-OaF" id="6vK-Zu-xSN"/>
                 <outlet property="likeImage" destination="JKN-uu-ibc" id="q7G-p4-2h8"/>
                 <outlet property="nameLbl" destination="Ocx-x4-cl3" id="uUN-Fd-eEr"/>
                 <outlet property="pageController" destination="E8Z-Pg-zQE" id="vg4-9a-oaA"/>

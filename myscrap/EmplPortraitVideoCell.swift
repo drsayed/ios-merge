@@ -18,6 +18,7 @@ class EmplPortraitVideoCell: BaseCell {
 
     weak var delegateVideoChange : PortraitVideoDelegate?
     @IBOutlet var fancyViewWidthConstraint : NSLayoutConstraint!
+    @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
 
      @IBOutlet weak var editButton: UIButton!
        @IBOutlet weak var favouriteBtn: FavouriteButton!
@@ -338,13 +339,13 @@ class EmplPortraitVideoCell: BaseCell {
                    viewCount.isHidden = true
                    commentCountBtn.isHidden = false
                    
-                   commentCountBtn.viewCount = item.viewsCount
+                   commentCountBtn.viewCount = item.likeCount
                    commentCountBtn.commentCount = item.commentCount
                } else {
                    viewCount.isHidden = false
                    commentCountBtn.isHidden = false
                    viewCount.viewCount = item.viewsCount
-                   commentCountBtn.viewCount = item.viewsCount
+                   commentCountBtn.viewCount = item.likeCount
                    commentCountBtn.commentCount = item.commentCount
                }
                if item.likeCount == 0 {
@@ -407,6 +408,12 @@ class EmplPortraitVideoCell: BaseCell {
                //reportBtnHeight.constant = 25
                reportStackView.isHidden = false
            }
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
        }
     
     func addPeriodicTimeObserver() {

@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-
+import CHIPageControl
 protocol MSSliderDataSource {
     var imageURL: String? { get }
     var url: URL? { get }
@@ -34,7 +34,10 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var dataSource = [MSSliderDataSource]() {
         didSet{
             sliderCollectionView.reloadData()
+            let screenSize = UIScreen.main.bounds
+            let screenWidth = screenSize.width
             pageControl.numberOfPages = dataSource.count
+            pageControl.elementWidth = screenWidth/CGFloat(dataSource.count) - CGFloat(dataSource.count-1)*5
             setNeedsLayout()
         }
     }
@@ -42,7 +45,7 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
 //
 //      //  TMImageZoom.shared()?.gestureStateChanged(pinch, withZoom: imageView)
 //    }
-    lazy var pageControl: UIPageControl = {
+    lazy var pageControl1: UIPageControl = {
         let pc = UIPageControl()
         pc.translatesAutoresizingMaskIntoConstraints = false
         pc.currentPage = 0
@@ -51,7 +54,16 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         pc.hidesForSinglePage = false
         return pc
     }()
-    
+    lazy var pageControl: CHIPageControlJaloro = {
+        let pc = CHIPageControlJaloro()
+        pc.translatesAutoresizingMaskIntoConstraints = false
+        pc.radius = 5
+        pc.tintColor = .gray
+        pc.currentPageTintColor = .white
+        pc.padding = 5
+        pc.hidesForSinglePage = false
+        return pc
+    }()
     var countView: UIView = {
        let view = UIView()
         view.backgroundColor = UIColor.GREEN_PRIMARY
@@ -98,28 +110,40 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         //countView.anchor(leading: leadingAnchor, trailing: self.trailingAnchor, top: self.topAnchor, bottom: bottomAnchor)
         
         
-        addSubview(countView)
-        
+      //  addSubview(countView)
+        pageControl.frame = CGRect(x: 5, y:5, width:self.frame.size.width-10 , height: 5)
+       // pageControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+            let horizontalConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+//            let verticalConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self , attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.frame.size.width-10)
+            let heightConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 5)
+//        let topConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 5)
+
+        self.addConstraints([horizontalConstraint, widthConstraint, heightConstraint])
+
+       // pageControl.widthAnchor.constraint(equalTo: self.width, multiplier: self.frame.size.width)
         addSubview(pageControl)
-        pageControl.anchor(leading: nil, trailing: countView.trailingAnchor, top: topAnchor, bottom: countView.topAnchor)
+        pageControl.anchor(leading: leadingAnchor, trailing: trailingAnchor, top: topAnchor, bottom: nil, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
         //pageControl.x = 100
         
         
         
         //countView.anchor(leading: nil, trailing: nil, top: pageControl.bottomAnchor, bottom: nil)
         
-        countView.height = 30
-        countView.width = 50
-        countView.x = 310
-        countView.y = 35
-        
-        countView.layer.cornerRadius = 10
-        countView.clipsToBounds = true
-        countView.backgroundColor = UIColor.MyScrapGreen
-        
-        addSubview(img_count)
-        img_count.centerXAnchor.constraint(equalTo: countView.centerXAnchor).isActive = true
-        img_count.centerYAnchor.constraint(equalTo: countView.centerYAnchor).isActive = true
+//        countView.height = 30
+//        countView.width = 50
+//        countView.x = 310
+//        countView.y = 35
+//
+//        countView.layer.cornerRadius = 10
+//        countView.clipsToBounds = true
+//        countView.backgroundColor = UIColor.MyScrapGreen
+//
+//    //    addSubview(img_count)
+//        img_count.centerXAnchor.constraint(equalTo: countView.centerXAnchor).isActive = true
+//        img_count.centerYAnchor.constraint(equalTo: countView.centerYAnchor).isActive = true
         //img_count.anchor(leading: nil, trailing: countView.trailingAnchor, top: countView.topAnchor, bottom: nil)
         //pageControl.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
@@ -200,7 +224,7 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         print("Image count in tap : \(String(describing: img_count.text))")
         img_count.text = String(format: "%d / %d", indexPath.item + 1, dataSource.count)
-        self.pageControl.currentPage = indexPath.item
+        self.pageControl.progress = Double(indexPath.item)
         
         
     }
@@ -533,9 +557,7 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MSSliderCell = collectionView.dequeReusableCell(forIndexPath: indexPath)
         cell.data = dataSource[indexPath.item]
-       
-     //   let pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchRecognized(_:)))
-     //   cell.imageView.addGestureRecognizer(pinchGesture)
+        
         return cell
     }
     

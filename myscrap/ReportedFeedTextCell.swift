@@ -14,7 +14,8 @@ class ReportedFeedTextCell: FeedNewUserCell {
     @IBOutlet weak var descriptionText: UserTagTextView!
     @IBOutlet weak var editBtn: EditButton!
     @IBOutlet weak var favBtn: FavouriteButton!
-    
+    @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
+
     @IBOutlet weak var updatedProfileText: UILabel!
     override var newItem : FeedV2Item? {
         didSet{
@@ -52,7 +53,12 @@ class ReportedFeedTextCell: FeedNewUserCell {
         {
             updatedProfileText.text = ""
         }
-        
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
     }
     private func setupFriendViewTaps() {
         if network.reachability.isReachable == true {

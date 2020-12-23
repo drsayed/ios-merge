@@ -83,6 +83,12 @@ class FeedImageCell: FeedTextCell {
         super.configCell(withItem: item)
         //Download StackView hide for only FeedText
         dwnldStackView.isHidden = false
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
     }
 
     func refreshImagesCollection() {

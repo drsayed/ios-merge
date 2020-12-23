@@ -285,6 +285,7 @@ private extension VideoPlayerView {
         )
         
         layer.addSublayer(playerLayer)
+        playerLayer.player?.automaticallyWaitsToMinimizeStalling = false;
       //  playerLayer.player?.play()
         if #available(iOS 10.0, *) {
             playerLayer.player?.playImmediately(atRate: 1.0)

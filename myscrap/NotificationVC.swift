@@ -49,7 +49,8 @@ class NotificationVC: UIViewController{
         if self.dataSource.count == 0 {
             active.startAnimating()
         }
-       
+        NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
         getNotifications()
     }
     

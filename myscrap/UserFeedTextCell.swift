@@ -17,7 +17,8 @@ class UserFeedTextCell: UserFeedNewCell {
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var favBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var verticalSpacingConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -43,6 +44,12 @@ class UserFeedTextCell: UserFeedNewCell {
         }
         profileTypeView?.checkType = ProfileTypeScore(isAdmin:false,isMod: isMod, isNew:item.newJoined, rank:item.rank ,isLevel: item.isLevel, level: item.level)
 
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
         //editBtnHeightConstraint.constant = 0
         //favBottomConstraint.constant = 30
         //verticalSpacingConstraint.constant = -5

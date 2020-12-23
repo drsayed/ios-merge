@@ -114,6 +114,7 @@ class FeedNewUserCell: BaseCell {
         //likeCountBtn.setTitle(item.likedByText, for: .normal)
         //commentCountBtn.likeCount = item.likeCount
         commentCountBtn.commentCount = item.commentCount
+        commentCountBtn.likeCount = item.likeCount
         reportedView.isHidden = !item.isReported
         unReportBtn.isHidden =  !((item.reportedUserId == AuthService.instance.userId) || item.moderator == "1")
         
@@ -176,13 +177,13 @@ class FeedNewUserCell: BaseCell {
                 likeCountBtn.isHidden = true
                 commentCountBtn.isHidden = false
                 
-                //commentCountBtn.likeCount = item.likeCount
+               commentCountBtn.likeCount = item.likeCount
                 commentCountBtn.commentCount = item.commentCount
             } else {
                 likeCountBtn.isHidden = false
                 commentCountBtn.isHidden = false
                 likeCountBtn.likeCount = item.likeCount
-                //commentCountBtn.likeCount = item.likeCount
+                commentCountBtn.likeCount = item.likeCount
                 commentCountBtn.commentCount = item.commentCount
             }
         }

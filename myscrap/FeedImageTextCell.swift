@@ -29,6 +29,12 @@ class FeedImageTextCell: FeedImageCell {
     override func setupAPIViews(item: FeedV2Item) {
         super.setupAPIViews(item: item)
         statusTextView?.attributedText = item.descriptionStatus
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
     }
     
     override func setupTap(){

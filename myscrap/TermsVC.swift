@@ -30,7 +30,11 @@ class TermsVC: BaseVC {
         imageView.tintColor = UIColor.GREEN_PRIMARY
         imageView.image = img
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

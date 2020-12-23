@@ -496,7 +496,7 @@ extension UpdatedUserPrrofileVC: UIScrollViewDelegate{
             let screenWidth = screenRect.size.width
             let screenHeight = screenRect.size.height
             
-            if scrollView.contentOffset.y < 300 {
+            if scrollView.contentOffset.y < 100 {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
             }

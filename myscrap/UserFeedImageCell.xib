@@ -120,44 +120,46 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TNr-9D-Hve">
                                 <rect key="frame" x="8" y="583" width="426" height="79"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Gkl-du-8GH" userLabel="LikeCountStack">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Gkl-du-8GH" userLabel="LikeCountStack">
                                         <rect key="frame" x="0.0" y="0.0" width="426" height="35"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="SE7-w9-PO2">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2A-cZ-Sft">
+                                                <rect key="frame" x="0.0" y="0.0" width="426" height="35"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OwC-ei-1VV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvV-Y9-O4Q" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="35" id="YhI-Nz-Uug"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                                <state key="normal" title="5 Likes"/>
-                                                                <connections>
-                                                                    <action selector="likeCountPressed:" destination="0ns-jy-8fD" eventType="touchUpInside" id="pFA-Sl-Taz"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2B-2W-3zc" customClass="CommentCountBtn" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="40" y="0.0" width="56" height="35"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                                <state key="normal" title="1 comment"/>
-                                                                <connections>
-                                                                    <action selector="toDetailsVC:" destination="0ns-jy-8fD" eventType="touchUpInside" id="D9O-4V-CGP"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvV-Y9-O4Q" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="wvV-Y9-O4Q" firstAttribute="height" secondItem="z2B-2W-3zc" secondAttribute="height" id="Mv7-lL-7iD"/>
+                                                            <constraint firstAttribute="height" constant="35" id="YhI-Nz-Uug"/>
                                                         </constraints>
-                                                    </stackView>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                        <state key="normal" title="5 Likes"/>
+                                                        <connections>
+                                                            <action selector="likeCountPressed:" destination="0ns-jy-8fD" eventType="touchUpInside" id="pFA-Sl-Taz"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2B-2W-3zc" customClass="CommentCountBtn" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="45" y="0.0" width="56" height="35"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                        <state key="normal" title="1 comment"/>
+                                                        <connections>
+                                                            <action selector="toDetailsVC:" destination="0ns-jy-8fD" eventType="touchUpInside" id="D9O-4V-CGP"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
-                                            </stackView>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="0jA-Ij-jL0"/>
+                                                    <constraint firstItem="z2B-2W-3zc" firstAttribute="top" secondItem="E2A-cZ-Sft" secondAttribute="top" id="5kf-cd-iaJ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="z2B-2W-3zc" secondAttribute="bottom" id="6GE-iA-91Q"/>
+                                                    <constraint firstItem="wvV-Y9-O4Q" firstAttribute="leading" secondItem="E2A-cZ-Sft" secondAttribute="leading" id="9sl-77-79M"/>
+                                                    <constraint firstItem="z2B-2W-3zc" firstAttribute="leading" secondItem="wvV-Y9-O4Q" secondAttribute="trailing" constant="10" id="DQf-Hm-bVf"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z2B-2W-3zc" secondAttribute="trailing" id="G3h-Pg-oNh"/>
+                                                    <constraint firstAttribute="bottom" secondItem="wvV-Y9-O4Q" secondAttribute="bottom" id="VuM-D5-djH"/>
+                                                    <constraint firstItem="wvV-Y9-O4Q" firstAttribute="top" secondItem="E2A-cZ-Sft" secondAttribute="top" id="qNT-CB-nN1"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FoU-Yj-PQc">
@@ -448,6 +450,7 @@
                 <outlet property="feedImages" destination="CJn-pb-lcO" id="Gsk-d3-t8Q"/>
                 <outlet property="feedImagesCollectionViewHeightConstraint" destination="vAY-mt-wl8" id="ois-FN-sra"/>
                 <outlet property="likeBtn" destination="XIS-AC-OVx" id="aaC-7n-sdU"/>
+                <outlet property="likeCommentViewHeight" destination="0jA-Ij-jL0" id="wbN-JH-7pD"/>
                 <outlet property="likeCountBtn" destination="wvV-Y9-O4Q" id="fpq-33-WKf"/>
                 <outlet property="likeImage" destination="un9-ZK-hwL" id="hQb-vh-8ay"/>
                 <outlet property="nameLbl" destination="eqh-vg-kD6" id="aMb-ch-URH"/>

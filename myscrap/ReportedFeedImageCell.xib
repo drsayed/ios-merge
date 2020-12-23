@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -333,8 +333,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="oxF-rG-Hbu">
                                                 <rect key="frame" x="0.0" y="0.0" width="468" height="22.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="YRB-9E-R1j">
-                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="22.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMH-37-5Bk">
+                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="22.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67k-zt-3nZ" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="79" height="22.5"/>
@@ -343,25 +343,26 @@
                                                                     <action selector="likeCountPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="LmH-zz-9Dc"/>
                                                                 </connections>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-25-wfs" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
+                                                                <rect key="frame" x="100" y="-0.5" width="113" height="22.5"/>
+                                                                <state key="normal" title="Comment Count"/>
+                                                                <connections>
+                                                                    <action selector="toDetailsVC:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="pxr-e9-ZFM"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="9M2-EX-9Tg">
-                                                        <rect key="frame" x="235" y="0.0" width="233" height="22.5"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="vGU-CN-CFt">
-                                                                <rect key="frame" x="120" y="0.0" width="113" height="22.5"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-25-wfs" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="22.5"/>
-                                                                        <state key="normal" title="Comment Count"/>
-                                                                        <connections>
-                                                                            <action selector="toDetailsVC:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="pxr-e9-ZFM"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                            </stackView>
-                                                        </subviews>
-                                                    </stackView>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="67k-zt-3nZ" firstAttribute="top" secondItem="sMH-37-5Bk" secondAttribute="top" id="5EU-0A-uhx"/>
+                                                            <constraint firstItem="67k-zt-3nZ" firstAttribute="leading" secondItem="sMH-37-5Bk" secondAttribute="leading" id="5g7-do-Qpk"/>
+                                                            <constraint firstAttribute="height" constant="22.5" id="Ekd-ho-7iw"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nfC-25-wfs" secondAttribute="trailing" constant="5" id="McY-Pw-gK8"/>
+                                                            <constraint firstItem="nfC-25-wfs" firstAttribute="leading" secondItem="67k-zt-3nZ" secondAttribute="trailing" constant="10" id="WyD-QA-E7F"/>
+                                                            <constraint firstAttribute="bottom" secondItem="67k-zt-3nZ" secondAttribute="bottom" id="c4h-Hr-YTk"/>
+                                                            <constraint firstItem="nfC-25-wfs" firstAttribute="top" secondItem="sMH-37-5Bk" secondAttribute="top" id="g8A-DP-3oL"/>
+                                                            <constraint firstAttribute="bottom" secondItem="nfC-25-wfs" secondAttribute="bottom" id="sLz-Ta-D1t"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -690,6 +691,7 @@
                 <outlet property="feedImages" destination="BMj-ZY-vnw" id="l3A-mD-0c0"/>
                 <outlet property="feedImagesCollectionViewHeightConstraint" destination="f7d-WP-LwV" id="Y4n-2J-2ej"/>
                 <outlet property="likeBtn" destination="F9e-KS-VjR" id="KTS-so-xfI"/>
+                <outlet property="likeCommentViewHeight" destination="Ekd-ho-7iw" id="cd4-DA-UPK"/>
                 <outlet property="likeCountBtn" destination="67k-zt-3nZ" id="AYD-XL-tFN"/>
                 <outlet property="likeImage" destination="yxs-jl-Zwd" id="mRK-mH-yNY"/>
                 <outlet property="nameLbl" destination="w8j-fr-Bfv" id="tN6-xY-Yh6"/>
@@ -704,7 +706,7 @@
                 <outlet property="unReportBtn" destination="nhY-Oc-1Az" id="b5P-pi-Kpd"/>
                 <outlet property="updatedProfileText" destination="6jN-w3-RCD" id="bwO-IR-DXt"/>
             </connections>
-            <point key="canvasLocation" x="9.5999999999999996" y="287.85607196401799"/>
+            <point key="canvasLocation" x="9.5999999999999996" y="286.95652173913044"/>
         </collectionViewCell>
     </objects>
     <designables>
@@ -904,9 +906,6 @@ NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
         <image name="icReport" width="24" height="24"/>
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

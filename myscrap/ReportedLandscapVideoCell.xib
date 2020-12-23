@@ -169,44 +169,45 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXr-TY-GWh">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="27"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VTg-Sa-dVF">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-jL-0Wz">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="27"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ccP-ZU-5Qr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="27"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgY-mi-zzw" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="27"/>
-                                                                <state key="normal" title="Likes count"/>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="ncg-Ib-iLi">
-                                                        <rect key="frame" x="173.5" y="0.0" width="171.5" height="27"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="W49-l0-hni">
-                                                                <rect key="frame" x="22.5" y="0.0" width="149" height="27"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRk-Yn-3iy" customClass="ViewCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="34" height="27"/>
-                                                                        <state key="normal" title="View"/>
-                                                                        <connections>
-                                                                            <action selector="videoViewBtnTappedWith_sender:" destination="eZi-id-Ozl" eventType="touchUpInside" id="gBw-gB-qOh"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcS-bl-mO1" customClass="VideoCommentCountBtn" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="36" y="0.0" width="113" height="27"/>
-                                                                        <state key="normal" title="Comment Count"/>
-                                                                        <connections>
-                                                                            <action selector="toDetailsVC:" destination="eZi-id-Ozl" eventType="touchUpInside" id="2CG-5T-6W8"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                            </stackView>
-                                                        </subviews>
-                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgY-mi-zzw" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="27"/>
+                                                        <state key="normal" title="Likes count"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcS-bl-mO1" customClass="VideoCommentCountBtn" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="89" y="0.0" width="120" height="27"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="H2r-SZ-8RK"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Comment Count"/>
+                                                        <connections>
+                                                            <action selector="toDetailsVC:" destination="eZi-id-Ozl" eventType="touchUpInside" id="2CG-5T-6W8"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRk-Yn-3iy" customClass="ViewCountButton" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="311" y="0.0" width="34" height="27"/>
+                                                        <state key="normal" title="View"/>
+                                                        <connections>
+                                                            <action selector="videoViewBtnTappedWith_sender:" destination="eZi-id-Ozl" eventType="touchUpInside" id="gBw-gB-qOh"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
-                                            </stackView>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="NRk-Yn-3iy" firstAttribute="top" secondItem="fv6-jL-0Wz" secondAttribute="top" id="5TB-En-rtc"/>
+                                                    <constraint firstAttribute="height" constant="27" id="IQR-EI-2kL"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JcS-bl-mO1" secondAttribute="bottom" id="N79-PU-rpL"/>
+                                                    <constraint firstAttribute="trailing" secondItem="NRk-Yn-3iy" secondAttribute="trailing" id="NGA-im-8MB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="NRk-Yn-3iy" secondAttribute="bottom" id="Ura-B7-sJi"/>
+                                                    <constraint firstItem="JcS-bl-mO1" firstAttribute="top" secondItem="fv6-jL-0Wz" secondAttribute="top" id="VtJ-ud-fHW"/>
+                                                    <constraint firstItem="zgY-mi-zzw" firstAttribute="top" secondItem="fv6-jL-0Wz" secondAttribute="top" id="ZfF-dg-loC"/>
+                                                    <constraint firstItem="zgY-mi-zzw" firstAttribute="leading" secondItem="fv6-jL-0Wz" secondAttribute="leading" id="aHN-Xw-wxx"/>
+                                                    <constraint firstAttribute="bottom" secondItem="zgY-mi-zzw" secondAttribute="bottom" id="b02-m8-J6n"/>
+                                                    <constraint firstItem="JcS-bl-mO1" firstAttribute="leading" secondItem="zgY-mi-zzw" secondAttribute="trailing" constant="10" id="rwh-4D-NCZ"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ljt-PP-dmQ">
@@ -526,6 +527,7 @@
                 <outlet property="editButton" destination="gIn-Um-ShD" id="LOz-XY-4Ma"/>
                 <outlet property="favouriteBtn" destination="6b8-Ue-bfb" id="WJm-Qz-GsT"/>
                 <outlet property="likeBtn" destination="Sor-G6-0dA" id="Y9T-aO-UGB"/>
+                <outlet property="likeCommentViewHeight" destination="IQR-EI-2kL" id="vgZ-4t-TRk"/>
                 <outlet property="likeCountBtn" destination="zgY-mi-zzw" id="yTd-1X-5Ae"/>
                 <outlet property="likeImage" destination="3BR-we-Lm4" id="t3F-jh-Ejg"/>
                 <outlet property="nameLbl" destination="grf-aQ-jGy" id="76b-yv-mZW"/>

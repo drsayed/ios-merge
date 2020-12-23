@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -104,44 +110,46 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aai-CF-qJ2">
                                 <rect key="frame" x="8" y="211" width="468" height="70"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="QUp-X8-Syo" userLabel="LikeCountStack">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUp-X8-Syo" userLabel="LikeCountStack">
                                         <rect key="frame" x="0.0" y="0.0" width="468" height="35"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="rda-uJ-kTW">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEL-Kd-tjd">
+                                                <rect key="frame" x="0.0" y="0.0" width="468" height="35"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="z3h-3J-6gt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="35"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s90-fc-wwX" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="35" id="yeJ-qc-qZm"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                                <state key="normal" title="5 Likes"/>
-                                                                <connections>
-                                                                    <action selector="likeCountPressed:" destination="pZw-ay-Ehn" eventType="touchUpInside" id="Bay-h2-rwx"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBL-xa-gOR" customClass="CommentCountBtn" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="40" y="0.0" width="56" height="35"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                                <state key="normal" title="1 comment"/>
-                                                                <connections>
-                                                                    <action selector="toDetailsVC:" destination="pZw-ay-Ehn" eventType="touchUpInside" id="TQ0-MO-Mu6"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s90-fc-wwX" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="s90-fc-wwX" firstAttribute="height" secondItem="KBL-xa-gOR" secondAttribute="height" id="bBQ-Oo-8ld"/>
+                                                            <constraint firstAttribute="height" constant="35" id="yeJ-qc-qZm"/>
                                                         </constraints>
-                                                    </stackView>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                        <state key="normal" title="5 Likes"/>
+                                                        <connections>
+                                                            <action selector="likeCountPressed:" destination="pZw-ay-Ehn" eventType="touchUpInside" id="Bay-h2-rwx"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBL-xa-gOR" customClass="CommentCountBtn" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="45" y="0.0" width="56" height="35"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                        <state key="normal" title="1 comment"/>
+                                                        <connections>
+                                                            <action selector="toDetailsVC:" destination="pZw-ay-Ehn" eventType="touchUpInside" id="TQ0-MO-Mu6"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
-                                            </stackView>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="KBL-xa-gOR" secondAttribute="bottom" id="24e-w2-WiN"/>
+                                                    <constraint firstItem="KBL-xa-gOR" firstAttribute="leading" secondItem="s90-fc-wwX" secondAttribute="trailing" constant="10" id="3iU-tx-BBg"/>
+                                                    <constraint firstAttribute="bottom" secondItem="s90-fc-wwX" secondAttribute="bottom" id="970-Yo-oAZ"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KBL-xa-gOR" secondAttribute="trailing" constant="5" id="Ffg-LK-Vli"/>
+                                                    <constraint firstItem="s90-fc-wwX" firstAttribute="top" secondItem="XEL-Kd-tjd" secondAttribute="top" id="SDd-Lx-5S7"/>
+                                                    <constraint firstItem="s90-fc-wwX" firstAttribute="leading" secondItem="XEL-Kd-tjd" secondAttribute="leading" id="YM7-lU-sUq"/>
+                                                    <constraint firstItem="KBL-xa-gOR" firstAttribute="top" secondItem="XEL-Kd-tjd" secondAttribute="top" id="aAo-mZ-M0y"/>
+                                                    <constraint firstAttribute="height" constant="35" id="gPc-76-UJk"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rKS-6O-ZfQ">
@@ -333,6 +341,7 @@
                 <outlet property="favBottomConstraint" destination="Kni-yV-SED" id="ZIG-S6-R7r"/>
                 <outlet property="favouriteBtn" destination="ode-1B-FS6" id="3rD-6U-Jdw"/>
                 <outlet property="likeBtn" destination="JMD-zK-K1H" id="DHM-7y-0YZ"/>
+                <outlet property="likeCommentViewHeight" destination="gPc-76-UJk" id="z5C-nQ-H0Q"/>
                 <outlet property="likeCountBtn" destination="s90-fc-wwX" id="yNa-Mo-sKR"/>
                 <outlet property="likeImage" destination="BGc-xl-H4B" id="IW6-nC-jLS"/>
                 <outlet property="nameLbl" destination="MJw-rs-cJS" id="vy2-75-Jjq"/>
@@ -532,6 +541,9 @@ NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
         <image name="reportContent" width="20" height="20"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

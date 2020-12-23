@@ -40,6 +40,7 @@ class ReportedFeedImageCell: ReportedFeedTextCell {
         if let countView : UIView = self.viewWithTag(1000) {
             countView.layer.cornerRadius = countView.frame.height/2
                }
+        
     }
     func refreshTable()  {
         
@@ -81,7 +82,12 @@ class ReportedFeedImageCell: ReportedFeedTextCell {
         super.configCell(withItem: item)
         //Download StackView hide for only FeedText
         dwnldStackView.isHidden = false
-       
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
 
     }
 

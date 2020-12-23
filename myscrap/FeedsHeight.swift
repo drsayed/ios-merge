@@ -44,7 +44,7 @@ struct FeedsHeight {
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
         let bottomSpacing: CGFloat = 8
-        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth)
+        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth) 
         let linkPreviewSpacing : CGFloat = 16
         let likeHeight : CGFloat = 35
         let bottomLikeSpacing : CGFloat = 8    //8
@@ -127,6 +127,10 @@ struct FeedsHeight {
         if !(item.likeCount == 0 && item.commentCount == 0){
             height += 35
         }
+        else
+        {
+            height += 20
+        }
         return height
     }
     static func heightForUserFeedImageCellV2(item: FeedV2Item , width: CGFloat) -> CGFloat{
@@ -146,11 +150,11 @@ struct FeedsHeight {
        // let bottomViewheight : CGFloat = 60
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing
         if !(item.likeCount == 0 && item.commentCount == 0){
-            height += 65
+            height += 50
         }
         else
         {
-            height += 5
+            height += 15
         }
         return height
     }
@@ -202,7 +206,11 @@ struct FeedsHeight {
         let bottomLikeSpacing : CGFloat = 8
         var height = topSpacing + favouriteViewHeight + bottomSpacing + imageHeight  + likeHeight + bottomLikeSpacing + labelHeight + labelSpacing
         if !(item.likeCount == 0 && item.commentCount == 0){
-            height += 60
+            height += 50
+        }
+        else
+        {
+            height += 20
         }
         return height
     }

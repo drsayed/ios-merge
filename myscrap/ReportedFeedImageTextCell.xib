@@ -207,40 +207,39 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4R-PB-FNt">
                                         <rect key="frame" x="0.0" y="0.0" width="468" height="30"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ywh-v7-wKZ">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fO-sk-WBS">
                                                 <rect key="frame" x="0.0" y="0.0" width="468" height="30"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2rK-NG-2Mi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="233" height="30"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVy-o6-sbB" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
-                                                                <state key="normal" title="Likes count"/>
-                                                                <connections>
-                                                                    <action selector="likeCountPressed:" destination="j54-fm-2QN" eventType="touchUpInside" id="ngY-3Q-0Eu"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="xCK-U1-ZR8">
-                                                        <rect key="frame" x="235" y="0.0" width="233" height="30"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="kLg-Rm-QkK">
-                                                                <rect key="frame" x="120" y="0.0" width="113" height="30"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqj-pd-O0q" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="30"/>
-                                                                        <state key="normal" title="Comment Count"/>
-                                                                        <connections>
-                                                                            <action selector="toDetailsVC:" destination="j54-fm-2QN" eventType="touchUpInside" id="IbJ-RX-V9O"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                            </stackView>
-                                                        </subviews>
-                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVy-o6-sbB" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="30x-Ct-3UC"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Likes count"/>
+                                                        <connections>
+                                                            <action selector="likeCountPressed:" destination="j54-fm-2QN" eventType="touchUpInside" id="ngY-3Q-0Eu"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqj-pd-O0q" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
+                                                        <rect key="frame" x="89" y="0.0" width="113" height="30"/>
+                                                        <state key="normal" title="Comment Count"/>
+                                                        <connections>
+                                                            <action selector="toDetailsVC:" destination="j54-fm-2QN" eventType="touchUpInside" id="IbJ-RX-V9O"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
-                                            </stackView>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iqj-pd-O0q" secondAttribute="trailing" constant="5" id="Cwr-HB-Xk3"/>
+                                                    <constraint firstItem="kVy-o6-sbB" firstAttribute="top" secondItem="1fO-sk-WBS" secondAttribute="top" id="ETg-g4-mlo"/>
+                                                    <constraint firstAttribute="bottom" secondItem="iqj-pd-O0q" secondAttribute="bottom" id="JHw-b0-b3c"/>
+                                                    <constraint firstItem="kVy-o6-sbB" firstAttribute="leading" secondItem="1fO-sk-WBS" secondAttribute="leading" id="L4J-z8-S65"/>
+                                                    <constraint firstAttribute="height" constant="30" id="cFw-uA-3yn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kVy-o6-sbB" secondAttribute="bottom" id="hkx-8S-Izn"/>
+                                                    <constraint firstItem="iqj-pd-O0q" firstAttribute="leading" secondItem="kVy-o6-sbB" secondAttribute="trailing" constant="10" id="i8K-tY-dhL"/>
+                                                    <constraint firstItem="iqj-pd-O0q" firstAttribute="top" secondItem="1fO-sk-WBS" secondAttribute="top" id="r7D-8w-k0i"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l0b-9H-ge9">
@@ -723,6 +722,7 @@
                 <outlet property="feedImages" destination="AQm-rA-gF0" id="7pc-Yl-kag"/>
                 <outlet property="feedImagesCollectionViewHeightConstraint" destination="Puv-vj-yap" id="ZLW-so-zoS"/>
                 <outlet property="likeBtn" destination="UU0-CF-3Mr" id="bhj-r0-XrC"/>
+                <outlet property="likeCommentViewHeight" destination="cFw-uA-3yn" id="mu5-Aw-JUk"/>
                 <outlet property="likeCountBtn" destination="kVy-o6-sbB" id="9kj-Q0-Gvy"/>
                 <outlet property="likeImage" destination="ybg-Sd-GhO" id="Hgw-Il-J0r"/>
                 <outlet property="nameLbl" destination="0tT-Q9-Zbr" id="fQh-SD-o89"/>

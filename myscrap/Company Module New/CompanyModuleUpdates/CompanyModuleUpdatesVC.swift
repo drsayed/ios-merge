@@ -432,6 +432,7 @@ extension CompanyModuleUpdatesVC : UICollectionViewDelegate , UICollectionViewDa
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedTextCell.identifier, for: indexPath) as? FeedTextCell else { return UICollectionViewCell()}
             cell.updatedDelegate = self
             cell.newItem = data
+            cell.SetLikeCountButton()
             cell.offlineBtnAction = {
                 self.showToast(message: "No internet connection")
             }
@@ -442,6 +443,7 @@ extension CompanyModuleUpdatesVC : UICollectionViewDelegate , UICollectionViewDa
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageCell.identifier, for: indexPath) as? FeedImageCell else { return UICollectionViewCell()}
             cell.updatedDelegate = self
             cell.newItem = data
+            cell.SetLikeCountButton()
             cell.refreshImagesCollection()
             cell.dwnldBtnAction = {
                 cell.dwnldBtn.isEnabled = false
@@ -470,6 +472,7 @@ extension CompanyModuleUpdatesVC : UICollectionViewDelegate , UICollectionViewDa
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageTextCell.identifier, for: indexPath) as? FeedImageTextCell else { return UICollectionViewCell()}
             cell.updatedDelegate = self
             cell.newItem = data
+            cell.SetLikeCountButton()
             cell.refreshImagesCollection()
             cell.dwnldBtnAction = {
                 cell.dwnldBtn.isEnabled = false
@@ -488,6 +491,7 @@ extension CompanyModuleUpdatesVC : UICollectionViewDelegate , UICollectionViewDa
                        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmplPortraitVideoCell.identifier, for: indexPath) as? EmplPortraitVideoCell else { return UICollectionViewCell()}
                        cell.updatedDelegate = self
                        cell.newItem = data
+            cell.SetLikeCountButton()
                       self.visibleCellIndex = indexPath
             cell.delegateVideoChange = self
             cell.editButton.isHidden = true
@@ -506,6 +510,7 @@ extension CompanyModuleUpdatesVC : UICollectionViewDelegate , UICollectionViewDa
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LandScapVideoCell.identifier, for: indexPath) as? LandScapVideoCell else { return UICollectionViewCell()}
          cell.updatedDelegate = self
          cell.newItem = data
+            cell.SetLikeCountButton()
          cell.delegateVideoChange = self
          cell.editButton.isHidden = true
          cell.refreshTable()
@@ -550,6 +555,7 @@ extension CompanyModuleUpdatesVC : UICollectionViewDelegate , UICollectionViewDa
             cell.updatedDelegate = self
          cell.delegateVideoChange = self
             cell.newItem = data
+            cell.SetLikeCountButton()
             if cell.editButton != nil {
                 cell.editButton.isHidden = true
             }
@@ -600,6 +606,7 @@ for imageCell in cell.videosCollection.visibleCells   {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LandScapVideoTextCell.identifier, for: indexPath) as? LandScapVideoTextCell else { return UICollectionViewCell()}
          cell.updatedDelegate = self
          cell.newItem = data
+            cell.SetLikeCountButton()
          cell.editButton.isHidden = true
          cell.delegateVideoChange = self
          cell.refreshTable()

@@ -57,9 +57,9 @@ class CommentCountBtn: UIButton {
             case 0:
                 setTitle("", for: .normal)
             case 1:
-                setTitle(" •  1 Comment", for: .normal)
+                setTitle("•  1 Comment", for: .normal)
             default:
-                setTitle(" •  \(commentCount) Comments", for: .normal)
+                setTitle("•  \(commentCount) Comments", for: .normal)
             }
         }
     }
@@ -117,9 +117,9 @@ class VideoCommentCountBtn: UIButton {
             case 0:
                 setTitle("", for: .normal)
             case 1:
-                setTitle(" • 1 Comment", for: .normal)
+                setTitle("• 1 Comment", for: .normal)
             default:
-                setTitle(" • \(commentCount) Comments", for: .normal)
+                setTitle("• \(commentCount) Comments", for: .normal)
             }
         }
     }
@@ -129,7 +129,11 @@ class VideoCommentCountBtn: UIButton {
     }
 }
 class CommentCountBtnV2: UIButton {
-    
+    var likeCount: Int = 0 {
+        didSet{
+            configureTitle()
+        }
+    }
     var commentCount: Int = 0{
         didSet{
             configureTitle()
@@ -157,13 +161,25 @@ class CommentCountBtnV2: UIButton {
     }
     
     private func configureTitle(){
-        switch commentCount {
-        case 0:
-            setTitle("", for: .normal)
-        case 1:
-            setTitle("1 Comment", for: .normal)
-        default:
-            setTitle("\(commentCount) Comments", for: .normal)
+        
+        if likeCount == 0{
+            switch commentCount {
+            case 0:
+                setTitle("", for: .normal)
+            case 1:
+                setTitle("1 Comment", for: .normal)
+            default:
+                setTitle("\(commentCount) Comments", for: .normal)
+            }
+        } else {
+            switch commentCount {
+            case 0:
+                setTitle("", for: .normal)
+            case 1:
+                setTitle("•  1 Comment", for: .normal)
+            default:
+                setTitle("•  \(commentCount) Comments", for: .normal)
+            }
         }
     }
     

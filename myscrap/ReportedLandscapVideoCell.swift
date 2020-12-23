@@ -17,7 +17,8 @@ protocol VideoOnLandscapReportedPlayerDelegate : class {
 }
 
 class ReportedLandscapVideoCell: BaseCell {
-    
+    @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
+
     
     @IBOutlet weak var videosCountView: UIView!
     @IBOutlet weak var videosCoutLable: UILabel!
@@ -222,13 +223,13 @@ class ReportedLandscapVideoCell: BaseCell {
                 viewCount.isHidden = true
                 commentCountBtn.isHidden = false
                 
-                commentCountBtn.viewCount = item.viewsCount
+                commentCountBtn.viewCount = item.likeCount
                 commentCountBtn.commentCount = item.commentCount
             } else {
                 viewCount.isHidden = false
                 commentCountBtn.isHidden = false
                 viewCount.viewCount = item.viewsCount
-                commentCountBtn.viewCount = item.viewsCount
+                commentCountBtn.viewCount = item.likeCount
                 commentCountBtn.commentCount = item.commentCount
             }
             if item.likeCount == 0 {
@@ -275,6 +276,12 @@ class ReportedLandscapVideoCell: BaseCell {
         profileTypeView?.checkType = (isAdmin:false,isMod: item.moderator == "1", isNew:item.newJoined, rank:item.rank, isLevel: false, level: nil)
         
       //  setupThumbnail(videoUrl: URL(string: item.videoThumbnail)!)
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
     }
     
     func setupThumbnail(videoUrl: URL) {

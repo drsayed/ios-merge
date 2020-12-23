@@ -10,6 +10,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
   - BTNavigationDropdownMenu (0.5)
+  - CHIPageControl/Jaloro (0.2)
   - Cluster (2.1.0)
   - CocoaAsyncSocket (7.6.2)
   - CocoaLumberjack (3.4.1):
@@ -222,6 +223,7 @@ DEPENDENCIES:
   - ALCameraViewController
   - AnimatedBlurLabel
   - BTNavigationDropdownMenu
+  - CHIPageControl/Jaloro
   - Cluster
   - Cosmos
   - DKImagePickerController
@@ -262,6 +264,7 @@ SPEC REPOS:
     - AnimatedBlurLabel
     - Bolts
     - BTNavigationDropdownMenu
+    - CHIPageControl
     - Cluster
     - CocoaAsyncSocket
     - CocoaLumberjack
@@ -322,6 +325,7 @@ SPEC CHECKSUMS:
   AnimatedBlurLabel: d1c68bfa657a56347b150c9f58a151fd101099eb
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BTNavigationDropdownMenu: ba3a26fdb6a56c4721c31df8a0875106c259663a
+  CHIPageControl: a787bf7205c9b7e7fbfc412be36c5e8636b68f86
   Cluster: b1b363bb4b6991c73f5da2f4ab175fc7424f9900
   CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
   CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
@@ -375,6 +379,6 @@ SPEC CHECKSUMS:
   VegaScrollFlowLayout: 9158061f29179147755f937c2b21693fc5dbbac3
   XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
 
-PODFILE CHECKSUM: 3523e50060bb74460eeae0728a73f239de74d448
+PODFILE CHECKSUM: 2009e60c65a447c07a9fc1f7a8e4264697a49ceb
 
 COCOAPODS: 1.8.4

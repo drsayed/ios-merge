@@ -349,6 +349,9 @@ extension DetailsVC{
                 cell.newItem = data
                 cell.inDetailView = true
                 cell.refreshImagesCollection()
+                cell.likeCountBtn.isHidden = true
+                cell.commentCountBtn.isHidden = true
+                
                 cell.commentBtnAction = {
                     self.commentInputView.inputTextView.becomeFirstResponder()
                     self.collectionView?.scrollToLastItem(animated: false)
@@ -379,6 +382,9 @@ extension DetailsVC{
                 cell.newItem = data
                  cell.refreshImagesCollection()
                 cell.inDetailView = true
+                cell.likeCountBtn.isHidden = true
+                cell.commentCountBtn.isHidden = true
+                
                 cell.dwnldBtnAction = {
                     cell.dwnldBtn.isEnabled = false
                     for imageCell in cell.feedImages.visibleCells   {

@@ -16,6 +16,7 @@ class FeedTextCell: FeedNewUserCell   {
     @IBOutlet weak var favouriteBtn: FavouriteButton!
     @IBOutlet weak var editButton: UIButton!
     
+    @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
     @IBOutlet weak var spinnerView: NVActivityIndicatorView!
     @IBOutlet weak var linkPreviewView: UIView!
     @IBOutlet weak var linkImageView: UIImageView!
@@ -173,6 +174,13 @@ class FeedTextCell: FeedNewUserCell   {
         } else {
             linkPreviewHeight.constant = 0
             linkPreviewView.isHidden = true
+        }
+        
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
         }
     }
     

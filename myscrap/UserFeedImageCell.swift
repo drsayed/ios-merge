@@ -27,6 +27,7 @@ class UserFeedImageCell: UserFeedTextCell {
         if let countView : UIView = self.viewWithTag(1000) {
                         countView.layer.cornerRadius = 15
                     }
+        
     }
     override func SetLikeCountButton()  {
         guard  let item = newItem else { return }
@@ -96,6 +97,12 @@ class UserFeedImageCell: UserFeedTextCell {
     
     override func configCell(withItem item: FeedV2Item){
         super.configCell(withItem: item)
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+        }
+        else{
+            likeCommentViewHeight.constant = 22
+        }
     }
     
     override func setupAPIViews(item:FeedV2Item){
