@@ -182,6 +182,9 @@ class FeedTextCell: FeedNewUserCell   {
         else{
             likeCommentViewHeight.constant = 22
         }
+        if inDetailView {
+            likeCommentViewHeight.constant = 0
+        }
     }
     
     func printResult(_ result: Response) {

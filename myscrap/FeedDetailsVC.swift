@@ -375,6 +375,7 @@ extension DetailsVC{
                 cell.likeBtnAction = {
                     self.likePressed()
                 }
+                cell.likeCommentViewHeight.constant = 0
                 return cell
             case .feedImageTextCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedImageTextCell.identifier, for: indexPath) as? FeedImageTextCell else { return UICollectionViewCell()}
@@ -408,6 +409,7 @@ extension DetailsVC{
                 cell.likeBtnAction = {
                     self.likePressed()
                 }
+                cell.likeCommentViewHeight.constant = 0
                 return cell
             case .feedTextCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedTextCell.identifier, for: indexPath) as? FeedTextCell else { return UICollectionViewCell()}
@@ -431,6 +433,7 @@ extension DetailsVC{
                 cell.likeBtnAction = {
                     self.likePressed()
                 }
+           cell.likeCommentViewHeight.constant = 0
             return cell
             case .feedVideoCell:
                 /*guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedVideoCell.identifier, for: indexPath) as? FeedVideoCell else { return UICollectionViewCell()}
@@ -997,30 +1000,42 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedTextCell:
                 let height = FeedsHeight.heightforDetailFeedTextCellV2(item: item , labelWidth: width - 16)
                 if item.likeCount == 0 && item.commentCount == 0 && item.status.contains("http") {
-                    return CGSize(width: width , height: height - 38)
+                    return CGSize(width: width , height: height - 22 )
                 } else if item.likeCount == 0 && item.commentCount == 0 {
-                    return CGSize(width: width , height: height)
+                    return CGSize(width: width , height: height+15)
                 } else {
-                    return CGSize(width: width , height: height - 35)
+                    return CGSize(width: width , height: height  -  22 )
                 }
             case .feedImageCell:
                 let height = FeedsHeight.heightForImageCellV2(item: item, width: width)
-                if item.likeCount == 0 && item.commentCount == 0 && item.status.contains("http") {
-                    return CGSize(width: width , height: height - 38)
-                } else if item.likeCount == 0 && item.commentCount == 0 {
+//                if item.likeCount == 0 && item.commentCount == 0 && item.status.contains("http") {
+//                    return CGSize(width: width , height: height - 38)
+//                } else if item.likeCount == 0 && item.commentCount == 0 {
+//                    return CGSize(width: width , height: height)
+//                } else {
+//                    return CGSize(width: width , height: height - 35)
+//                }
+                if item.likeCount == 0 && item.commentCount == 0 {
                     return CGSize(width: width , height: height)
                 } else {
-                    return CGSize(width: width , height: height - 35)
+                    return CGSize(width: width , height: height - 22)
                 }
+                return CGSize(width: width , height: height)
             case .feedImageTextCell:
                 let height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-                if item.likeCount == 0 && item.commentCount == 0 && item.status.contains("http") {
-                    return CGSize(width: width , height: height - 38)
-                } else if item.likeCount == 0 && item.commentCount == 0 {
+//                if item.likeCount == 0 && item.commentCount == 0 && item.status.contains("http") {
+//                    return CGSize(width: width , height: height - 38)
+//                } else if item.likeCount == 0 && item.commentCount == 0 {
+//                    return CGSize(width: width , height: height)
+//                } else {
+//                    return CGSize(width: width , height: height - 35)
+//                }
+                if item.likeCount == 0 && item.commentCount == 0 {
                     return CGSize(width: width , height: height)
                 } else {
-                    return CGSize(width: width , height: height - 35)
+                    return CGSize(width: width , height: height - 22)
                 }
+                return CGSize(width: width , height: height)
             case .feedVideoCell:
                 /*let height = FeedsHeight.heightForDetailVideoCellV2(item: item, width: width)
                 return CGSize(width: width, height: height + 30)*/
@@ -1055,7 +1070,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedPortrVideoCell:
                 var height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
                 if !(item.likeCount == 0 ){
-                    height -= 0
+                    height -= 22
                 }
                 else{
                     height += 25
@@ -1064,7 +1079,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedLandsVideoCell:
                 var height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
                 if !(item.likeCount == 0 ){
-                    height -= 0
+                    height -= 22
                 }
                 else{
                     height += 25
@@ -1073,7 +1088,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedPortrVideoTextCell:
                 var height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 if !(item.likeCount == 0 ){
-                    height -= 10
+                    height -= 22
                 }
                 else{
                     height += 25
@@ -1083,7 +1098,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedLandsVideoTextCell:
                 var height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 if !(item.likeCount == 0 ){
-                    height -= 10
+                    height -= 22
                 }
                 else{
                     height += 25

@@ -289,7 +289,7 @@ class FeedDetailVideoCell: BaseCell {
            print("Checking in wallvc : \(String(describing: timeLbl.text))")
            
            if inDetailView {
-               likeCountBtn.isHidden = true
+            //   likeCountBtn.isHidden = true
                commentCountBtn.isHidden = true
                viewCount.isHidden = true
            } else {
@@ -315,10 +315,10 @@ class FeedDetailVideoCell: BaseCell {
                    commentCountBtn.commentCount = item.commentCount
                }
                if item.likeCount == 0 {
-                   likeCountBtn.isHidden = true
+            //       likeCountBtn.isHidden = true
                } else {
-                   likeCountBtn.isHidden = false
-                   likeCountBtn.setTitle(item.likedByText, for: .normal)
+             //      likeCountBtn.isHidden = false
+            //       likeCountBtn.setTitle(item.likedByText, for: .normal)
                    //likeCountBtn.likeCount = item.likeCount
                    
                }

@@ -108,6 +108,11 @@ final class ReportedVC: BaseRevealVC {
 
                 self.activityIndicator.stopAnimating()
                 self.collectionView.reloadData()
+                self.collectionView.performBatchUpdates(nil, completion: {
+                    (result) in
+                    self.scrollViewDidEndScrolling()
+                })
+            
 //                self.collectionView.performBatchUpdates({
 //                    let indexSet = IndexSet(integer: 0)
 //                 //   self.collectionView.reloadSections(indexSet)

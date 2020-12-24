@@ -369,7 +369,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptZ-hg-p04">
                                         <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ey-9A-nTs">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ey-9A-nTs">
                                                 <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRO-xi-AeI" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
@@ -387,7 +387,6 @@
                                                         <state key="normal" title="Comment Count"/>
                                                         <connections>
                                                             <action selector="commentCountTapped:" destination="8gS-03-YN2" eventType="touchUpInside" id="efZ-Fi-ufu"/>
-                                                            <action selector="toDetailsVC:" destination="8gS-03-YN2" eventType="touchUpInside" id="7uO-Ll-lVf"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

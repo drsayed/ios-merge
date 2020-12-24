@@ -431,9 +431,9 @@ class EmplFeedImageCell: BaseCell {
         if network.reachability.isReachable == true {
             print("Comment item tapped")
             
-            if let item = item {
-                delegate?.didTapcomment(item: item)
-            }
+//            if let item = item {
+//                delegate?.didTapcomment(item: item)
+//            }
             //        guard let item = item else { return }
             //        delegate?.didTapcomment(item: item)
             if inDetailView {

@@ -555,6 +555,7 @@ extension UserFeedsVC: UICollectionViewDelegate, UICollectionViewDataSource{
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
+              
                 return cell
                 
 //                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserFeedTextCell.identifier, for: indexPath) as? UserFeedTextCell else { return UICollectionViewCell()}
