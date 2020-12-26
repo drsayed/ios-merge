@@ -12,7 +12,7 @@ protocol FeedDelegate:class {
     func didReceiveData(data: [FeedItem])
 }
 
-final class FeedModel{
+final class FeedModel {
     
     typealias completionHandler = (_ success: Bool, _ error: String?, _ data: [FeedItem]?) -> ()
     

@@ -305,6 +305,34 @@ class CompanyUpdatedService {
                 }
             }
     }
+    
+    //MARK:- Moderator ACCEPT|REJECT new company and company's admin request
+    func respondAdminRequest(view:UIView,companyId:String, userID:String, type: String,success: @escaping (String) -> (), failure: @escaping (String) -> ()){
+        
+        let spinner = MBProgressHUD.showAdded(to: view, animated: true)
+        spinner.mode = MBProgressHUDMode.indeterminate
+        spinner.label.text = "Requesting..."
+        
+        let service = APIService()
+        service.endPoint = Endpoints.ACCEPT_OR_REJECT_ADMIN_REQUEST
+        service.params = "friendId=\(AuthService.instance.userId)&apiKey=\(API_KEY)&companyId=\(companyId)&type=\(type)&userId=\(userID)"
+        service.getDataWith {(result) in
+            print(result)
+            switch result {
+            case .Success(let dict):
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: (view), animated: true)
+                    success(dict["status"] as? String ?? "")
+                }
+                
+            case .Error(let err):
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: (view), animated: true)
+                    failure(err)
+                }
+            }
+        }
+    }
 }
 
 protocol CompanyUpdatedServiceDelegate: class {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TagItem{
+class TagItem {
     var taggedId: String?
     var taggedName: String?
     
