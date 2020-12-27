@@ -28,6 +28,14 @@ class ReportedFeedImageTextCell: ReportedFeedImageCell {
         else{
             likeCommentViewHeight.constant = 22
         }
+        if (item.likeCount == 0) {
+          
+            likeCommentsDistance.constant = -30
+        }
+        else{
+            
+            likeCommentsDistance.constant = 10
+        }
     }
     override func setupAPIViews(item: FeedV2Item) {
         super.setupAPIViews(item: item)

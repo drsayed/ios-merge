@@ -46,7 +46,7 @@ class LandScapVideoTextCell: BaseCell {
        @IBOutlet weak var commentCountBtn: VideoCommentCountBtn!
        @IBOutlet weak var viewCount: ViewCountButton!
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
        @IBOutlet weak var likeImage: LikeImageV2FeedButton!
        @IBOutlet weak var likeBtn: UIButton!
        @IBOutlet weak var commentBtn: UIButton!
@@ -409,6 +409,14 @@ class LandScapVideoTextCell: BaseCell {
         }
         else{
             likeCommentViewHeight.constant = 22
+            if (item.likeCount == 0) {
+              
+                likeCommentsDistance.constant = -30
+            }
+            else{
+                
+                likeCommentsDistance.constant = 10
+            }
         }
        }
     

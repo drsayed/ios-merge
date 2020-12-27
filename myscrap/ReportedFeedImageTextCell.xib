@@ -723,6 +723,7 @@
                 <outlet property="feedImagesCollectionViewHeightConstraint" destination="Puv-vj-yap" id="ZLW-so-zoS"/>
                 <outlet property="likeBtn" destination="UU0-CF-3Mr" id="bhj-r0-XrC"/>
                 <outlet property="likeCommentViewHeight" destination="cFw-uA-3yn" id="mu5-Aw-JUk"/>
+                <outlet property="likeCommentsDistance" destination="i8K-tY-dhL" id="Ryb-gY-YSW"/>
                 <outlet property="likeCountBtn" destination="kVy-o6-sbB" id="9kj-Q0-Gvy"/>
                 <outlet property="likeImage" destination="ybg-Sd-GhO" id="Hgw-Il-J0r"/>
                 <outlet property="nameLbl" destination="0tT-Q9-Zbr" id="fQh-SD-o89"/>

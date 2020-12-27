@@ -2050,10 +2050,10 @@ extension UserFeedsVC:UICollectionViewDelegateFlowLayout{
             switch item.userCellType{
             case .userFeedImageCell:
                let height = FeedsHeight.heightForImageCellV2(item: item, width: width)
-                return CGSize(width: width, height: height)
+                return CGSize(width: width, height: height+15)
             case .userFeedImageTextCell:
                 let height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-                return CGSize(width: width, height: height+10)
+                return CGSize(width: width, height: height+15)
                 case .feedPortrVideoCell:
                    let height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
                     return CGSize(width: width, height: height)

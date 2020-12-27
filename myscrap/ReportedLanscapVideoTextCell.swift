@@ -20,7 +20,7 @@ protocol LandscapVideoTextsOnReportPlayerDelegate : class {
 class ReportedLanscapVideoTextCell: BaseCell {
     var visibleCellIndex = IndexPath()
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
     @IBOutlet weak var videosCountView: UIView!
     @IBOutlet weak var videosCoutLable: UILabel!
     @IBOutlet weak var pageController: UIPageControl!
@@ -287,6 +287,14 @@ class ReportedLanscapVideoTextCell: BaseCell {
         }
         else{
             likeCommentViewHeight.constant = 22
+        }
+        if (item.likeCount == 0) {
+          
+            likeCommentsDistance.constant = -30
+        }
+        else{
+            
+            likeCommentsDistance.constant = 10
         }
      //   setupThumbnail(videoUrl: URL(string: item.videoThumbnail)!)
     }

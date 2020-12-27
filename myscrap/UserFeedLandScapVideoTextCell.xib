@@ -457,6 +457,7 @@
                 <outlet property="favouriteBtn" destination="Vvw-Ae-D3q" id="NtU-OU-rGo"/>
                 <outlet property="likeBtn" destination="xBH-bA-ydp" id="1NU-qC-OUV"/>
                 <outlet property="likeCommentViewHeight" destination="0Su-sq-QpW" id="ese-5T-8oT"/>
+                <outlet property="likeCommentsDistance" destination="6f4-VG-TvW" id="4oA-7J-D29"/>
                 <outlet property="likeCountBtn" destination="57P-qL-OaF" id="6vK-Zu-xSN"/>
                 <outlet property="likeImage" destination="JKN-uu-ibc" id="q7G-p4-2h8"/>
                 <outlet property="nameLbl" destination="Ocx-x4-cl3" id="uUN-Fd-eEr"/>

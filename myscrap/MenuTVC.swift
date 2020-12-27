@@ -673,6 +673,8 @@ class MenuTVC: UITableViewController {
                     selectAndReload(with: indexPath)
                     //let vc = UINavigationController(rootViewController: ChatVC())
                     //present(vc, animated: true, completion: nil)
+                    NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                     self.pushViewController(storyBoard: StoryBoard.CHAT, Identifier: ChatVC.id, checkisGuest: AuthStatus.instance.isGuest)
                 }
             } else if indexPath.item == 2 {
@@ -687,6 +689,8 @@ class MenuTVC: UITableViewController {
                     showGuestAlert()
                 } else {
                     selectAndReload(with: indexPath)
+                    NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                     presentViewController(isGuest: AuthStatus.instance.isGuest, storyBoard: StoryBoard.MAIN, identifier: NotificationVC.id)
                 }
             } else {
@@ -703,23 +707,35 @@ class MenuTVC: UITableViewController {
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: FeedsVC.id)
              } else if indexPath.item == 2 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
               pushViewController(storyBoard: StoryBoard.MAIN, Identifier: PricesTabVC.id)
              //   pushViewController(storyBoard: StoryBoard.MAIN, Identifier: PricesUpdatedVCOld.id)
             } else if indexPath.item == 3 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 pushViewController(storyBoard: StoryBoard.MARKET, Identifier: MarketVC.id)
             } else if indexPath.item == 4 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: MembersVC.id)
             } else if indexPath.item == 5 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 pushViewController(storyBoard: StoryBoard.COMPANIES, Identifier: CompaniesVC.id)
                 //pushViewController(storyBoard: StoryBoard.COMPANIES, Identifier: CompanyDetailedTVC.id)
             } else if indexPath.item == 6 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: VisitorsVC.id, checkisGuest: AuthStatus.instance.isGuest)
             } else if indexPath.item == 7 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: DiscoverVC.id)
             }
             /*else if indexPath.item == 8 {
@@ -741,6 +757,8 @@ class MenuTVC: UITableViewController {
                 revealViewController().pushFrontViewController(nav, animated: true)
              } else if indexPath.item == 9 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: PeopleVc.id,checkisGuest: AuthStatus.instance.isGuest)
              } else if indexPath.item == 10 {
                 inviteFriends()
@@ -754,6 +772,8 @@ class MenuTVC: UITableViewController {
                 revealViewController().pushFrontViewController(nav, animated: true)
              } else if indexPath.item == 12 {
                 selectAndReload(with: indexPath)
+                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
                 pushViewController(storyBoard: StoryBoard.ABOUT, Identifier: AboutMyscrapVC.id)
              } else {
                 print("nothing to tap in menu")

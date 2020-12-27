@@ -17,7 +17,7 @@ protocol UserFeedTextVideoDelegate:class {
 class UserFeedVideoTextCell: BaseCell {
     weak var delegateVideoChange : UserFeedTextVideoDelegate?
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
      @IBOutlet weak var editButton: UIButton!
        @IBOutlet weak var favouriteBtn: FavouriteButton!
        @IBOutlet weak var timeLbl: TimeLabel!
@@ -408,6 +408,14 @@ class UserFeedVideoTextCell: BaseCell {
         }
         else{
             likeCommentViewHeight.constant = 22
+        }
+        if (item.likeCount == 0) {
+          
+            likeCommentsDistance.constant = -30
+        }
+        else{
+            
+            likeCommentsDistance.constant = 10
         }
        }
     
@@ -944,9 +952,9 @@ extension UserFeedVideoTextCell : UICollectionViewDelegate,UICollectionViewDataS
                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                    }
                   videoCell.player.pause()
-                   videoCell.player.actionAtItemEnd = .pause
-                  NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                   NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
+//                   videoCell.player.actionAtItemEnd = .pause
+//                  NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
+//                   NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
                    //videoCell.player.pause()
                //}
            }

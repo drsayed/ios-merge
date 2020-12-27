@@ -441,6 +441,7 @@
                 <outlet property="favouriteBtn" destination="hva-PL-yfF" id="4Sb-3c-b6h"/>
                 <outlet property="likeBtn" destination="zFI-9f-3IB" id="U2m-bR-xBg"/>
                 <outlet property="likeCommentViewHeight" destination="I9w-uf-gyU" id="8RE-QV-6rU"/>
+                <outlet property="likeCommentsDistance" destination="GrV-ez-XBG" id="ZEg-TR-GcL"/>
                 <outlet property="likeCountBtn" destination="fd2-wJ-4XY" id="DTI-px-eEK"/>
                 <outlet property="likeImage" destination="mM5-X4-XtB" id="6V7-gb-X3N"/>
                 <outlet property="nameLbl" destination="Ro7-mL-dpR" id="CGB-58-0r3"/>

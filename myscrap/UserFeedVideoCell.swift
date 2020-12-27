@@ -18,7 +18,7 @@ protocol UserFeedVideoDelegate:class {
 class UserFeedVideoCell: BaseCell {
     weak var delegateVideoChange : UserFeedVideoDelegate?
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
      @IBOutlet weak var editButton: UIButton!
        @IBOutlet weak var favouriteBtn: FavouriteButton!
        @IBOutlet weak var timeLbl: TimeLabel!
@@ -411,6 +411,14 @@ class UserFeedVideoCell: BaseCell {
         }
         else{
             likeCommentViewHeight.constant = 22
+        }
+        if (item.likeCount == 0) {
+          
+            likeCommentsDistance.constant = -30
+        }
+        else{
+            
+            likeCommentsDistance.constant = 10
         }
        }
     

@@ -18,7 +18,7 @@ class UserFeedTextCell: UserFeedNewCell {
     @IBOutlet weak var favBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var verticalSpacingConstraint: NSLayoutConstraint!
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -49,6 +49,14 @@ class UserFeedTextCell: UserFeedNewCell {
         }
         else{
             likeCommentViewHeight.constant = 22
+        }
+        if (item.likeCount == 0) {
+          
+            likeCommentsDistance.constant = -30
+        }
+        else{
+            
+            likeCommentsDistance.constant = 10
         }
         //editBtnHeightConstraint.constant = 0
         //favBottomConstraint.constant = 30

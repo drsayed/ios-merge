@@ -580,6 +580,8 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.pauseVisibleVideos()
+        NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
         NotificationCenter.default.removeObserver(self, name: .userSignedIn, object: nil)
         NotificationCenter.default.removeObserver(self, name: .videoDownloaded, object: nil)
         let muteImg = #imageLiteral(resourceName: "mute-60x60")

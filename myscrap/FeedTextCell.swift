@@ -15,7 +15,7 @@ class FeedTextCell: FeedNewUserCell   {
     @IBOutlet weak var statusTextView: UserTagTextView?
     @IBOutlet weak var favouriteBtn: FavouriteButton!
     @IBOutlet weak var editButton: UIButton!
-    
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
     @IBOutlet weak var spinnerView: NVActivityIndicatorView!
     @IBOutlet weak var linkPreviewView: UIView!
@@ -180,7 +180,17 @@ class FeedTextCell: FeedNewUserCell   {
             likeCommentViewHeight.constant = 0
         }
         else{
+            
+            
             likeCommentViewHeight.constant = 22
+            if (item.likeCount == 0) {
+              
+                likeCommentsDistance.constant = -30
+            }
+            else{
+                
+                likeCommentsDistance.constant = 10
+            }
         }
         if inDetailView {
             likeCommentViewHeight.constant = 0

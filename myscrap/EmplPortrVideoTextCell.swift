@@ -17,7 +17,7 @@ protocol PortraitVideoTextDelegate:class {
 class EmplPortrVideoTextCell: BaseCell {
     @IBOutlet var fancyViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
     weak var delegateVideoChange : PortraitVideoTextDelegate?
 
      @IBOutlet weak var editButton: UIButton!
@@ -410,6 +410,14 @@ class EmplPortrVideoTextCell: BaseCell {
         }
         else{
             likeCommentViewHeight.constant = 22
+        }
+        if (item.likeCount == 0) {
+          
+            likeCommentsDistance.constant = -30
+        }
+        else{
+            
+            likeCommentsDistance.constant = 10
         }
        }
     

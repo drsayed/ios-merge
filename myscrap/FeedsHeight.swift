@@ -191,8 +191,8 @@ struct FeedsHeight {
     static func heightForImageTextCellV2(item: FeedV2Item , width: CGFloat,labelWidth: CGFloat) -> CGFloat{
         let topSpacing: CGFloat = 8
         let favouriteViewHeight: CGFloat = 95       //60
-        let bottomSpacing: CGFloat = 8 + 10
-        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth) + 5
+        let bottomSpacing: CGFloat = 8 
+        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth) + 15
         let labelSpacing: CGFloat = 5
          var imageHeight: CGFloat = width
          if  item.pictureURL.count as Int == 1 {

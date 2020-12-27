@@ -281,16 +281,15 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0RQ-FB-Pjp">
                                                         <rect key="frame" x="0.0" y="0.0" width="468" height="19.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67k-zt-3nZ" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79" height="19.5"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="30" placeholderIntrinsicHeight="19.5" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67k-zt-3nZ" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="19.5"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Likes count"/>
                                                                 <connections>
                                                                     <action selector="likeCountPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="LmH-zz-9Dc"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-25-wfs" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="89" y="0.0" width="120" height="19.5"/>
+                                                                <rect key="frame" x="40" y="0.0" width="120" height="19.5"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="r5B-yp-R9Q"/>
@@ -642,6 +641,7 @@
                 <outlet property="feedImagesCollectionViewHeightConstraint" destination="f7d-WP-LwV" id="Y4n-2J-2ej"/>
                 <outlet property="likeBtn" destination="F9e-KS-VjR" id="KTS-so-xfI"/>
                 <outlet property="likeCommentViewHeight" destination="f37-QK-TtT" id="MkW-EG-HE7"/>
+                <outlet property="likeCommentsDistance" destination="Mys-cg-aY8" id="OIL-dH-sTr"/>
                 <outlet property="likeCountBtn" destination="67k-zt-3nZ" id="AYD-XL-tFN"/>
                 <outlet property="likeImage" destination="yxs-jl-Zwd" id="mRK-mH-yNY"/>
                 <outlet property="nameLbl" destination="vDY-YV-zpR" id="ZV6-Vq-ddG"/>
@@ -663,7 +663,7 @@
             <size key="intrinsicContentSize" width="31" height="29"/>
         </designable>
         <designable name="67k-zt-3nZ">
-            <size key="intrinsicContentSize" width="79" height="30"/>
+            <size key="intrinsicContentSize" width="30" height="19.5"/>
         </designable>
         <designable name="8NF-3W-vkD">
             <size key="intrinsicContentSize" width="73" height="29"/>

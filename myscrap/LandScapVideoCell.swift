@@ -18,7 +18,7 @@ class LandScapVideoCell: BaseCell {
     weak var delegateVideoChange : LandScapVideoDelegate?
     @IBOutlet var fancyViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
      @IBOutlet weak var editButton: UIButton!
        @IBOutlet weak var favouriteBtn: FavouriteButton!
        @IBOutlet weak var timeLbl: TimeLabel!
@@ -413,6 +413,14 @@ class LandScapVideoCell: BaseCell {
         }
         else{
             likeCommentViewHeight.constant = 22
+            if (item.likeCount == 0) {
+              
+                likeCommentsDistance.constant = -30
+            }
+            else{
+                
+                likeCommentsDistance.constant = 10
+            }
         }
         
        }
