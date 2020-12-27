@@ -95,7 +95,7 @@ final class FeedV2Model {
         }
     } */
     
-    func getReportedPosts(completion: @escaping ([FeedV2Item], [CompanyItems]) -> ()){
+    func getReportedPosts(completion: @escaping ([FeedV2Item], [CompanyItems],[AdminRequestModel]) -> ()){
         let service = APIService()
         service.endPoint = Endpoints.REPORTED_POST_URL_V2//REPORTED_POST_URL
         service.params = "userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)"
@@ -106,6 +106,7 @@ final class FeedV2Model {
             
                 var feedsData = [FeedV2Item]()
                 var companyData = [CompanyItems]()
+                var requests = [AdminRequestModel]()
 
                 if let data = dict["feedsData"] as? [[String:AnyObject]] {
                     let feedsItem = self?.handleFeed(json: dict)
@@ -122,7 +123,15 @@ final class FeedV2Model {
                         }
                     }
                 }
-                completion(feedsData,companyData)
+                if let requestsDict = dict["employeeReq"] as? [[String:AnyObject]] {
+                    
+                    for reqItem in requestsDict {
+                        let request = AdminRequestModel(Dict: reqItem)
+                        requests.append(request)
+                    }
+                }
+                completion(feedsData,companyData,requests)
+                
             case .Error(let err):
                 if let delegate = self?.delegate{
                     delegate.didReceivedFailure(error: err)

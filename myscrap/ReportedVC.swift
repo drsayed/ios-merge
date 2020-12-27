@@ -27,7 +27,7 @@ final class ReportedVC: BaseRevealVC {
         cv.register(ReportCompanyAdminCollectionViewCell.Nib, forCellWithReuseIdentifier: ReportCompanyAdminCollectionViewCell.identifier)
         cv.register(ReportedLandscapVideoCell.Nib, forCellWithReuseIdentifier: ReportedLandscapVideoCell.identifier)
         cv.register(ReportedLanscapVideoTextCell.Nib, forCellWithReuseIdentifier: ReportedLanscapVideoTextCell.identifier)
-        
+        cv.register(CompanyAdminRequestCell.Nib, forCellWithReuseIdentifier: CompanyAdminRequestCell.identifier)
 
         
         cv.backgroundColor = UIColor(hexString: "EFEFEF")
@@ -66,6 +66,7 @@ final class ReportedVC: BaseRevealVC {
     }
     fileprivate var modelV2 = FeedV2Model()
     internal var dataSourceV2 = [FeedV2Item]()
+    internal var adminRequests = [AdminRequestModel]()
     fileprivate var expandedIndexPaths = [IndexPath]()
     fileprivate var hide = false
     
@@ -101,10 +102,11 @@ final class ReportedVC: BaseRevealVC {
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
 
        
-        modelV2.getReportedPosts(completion: { (members, companyItems) in
+        modelV2.getReportedPosts(completion: { (members, companyItems, requests) in
             DispatchQueue.main.async {
                 self.dataSourceV2 = members
                 self.companyDataArray = companyItems
+                self.adminRequests = requests
 
                 self.activityIndicator.stopAnimating()
                 self.collectionView.reloadData()
@@ -214,13 +216,14 @@ final class ReportedVC: BaseRevealVC {
             activityIndicator.stopAnimating()
         }
         
-        modelV2.getReportedPosts(completion: { (members, companyItems) in
+        modelV2.getReportedPosts(completion: { (members, companyItems, requests)  in
             DispatchQueue.main.async {
                 if self.refreshControll.isRefreshing {
                     self.refreshControll.endRefreshing()
                 }
                 self.dataSourceV2 = members
                 self.companyDataArray = companyItems
+                self.adminRequests = requests
 
                 self.activityIndicator.stopAnimating()
                 self.collectionView.reloadData()
@@ -242,12 +245,40 @@ final class ReportedVC: BaseRevealVC {
         self.collectionView.reloadData()
     }
     
-    
+    func respondToRequest(isAccepted:Bool, type:String, index:Int) {
+        var titleStr:String {
+            // 0 for new company request, 1 for admin request
+            if isAccepted {
+               return type == "0" ? "Are you sure you want to accept company request?" : "Are you sure you want to accept admin request?"
+            }
+            else {
+              return type == "0" ? "Are you sure you want to reject company request?" : "Are you sure you want to reject admin request?"
+            }
+        }
+        
+        var status: String { // 0 for accepted, 1 for rejected
+            return isAccepted ? "1" : "0"
+        }
+        
+        let reqRespAlert = RequestResponseAlertView()
+        reqRespAlert.displayAlert(withSuperView: self, title: titleStr, buttonAction: { [unowned self] in
+            
+            self.apiService.respondAdminRequest(view:self.view,companyId: adminRequests[index].companyId!, userID: adminRequests[index].userId!, type: status, success: { [unowned self] (message) in
+                
+                self.adminRequests.remove(at: index)
+                self.collectionView.reloadData()
+                
+            }, failure: { (error) in
+                
+                showAlert(message: error)
+            })
+        })
+    }
 }
 
 extension ReportedVC: UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         /*
@@ -263,6 +294,9 @@ extension ReportedVC: UICollectionViewDataSource{
         }
         else if section == 1 {
             return self.dataSourceV2.count
+        }
+        else if section == 2 {
+            return adminRequests.count
         }
         else {
             return 0
@@ -280,7 +314,7 @@ extension ReportedVC: UICollectionViewDataSource{
             return cell
         }
         else if indexPath.section == 1 {
-                
+
             let data = dataSourceV2[indexPath.item]
             UserDefaults.standard.set(indexPath.item, forKey: "indexPath")
             print("Data",data.cellType)
@@ -304,7 +338,7 @@ extension ReportedVC: UICollectionViewDataSource{
                         UIImageWriteToSavedPhotosAlbum(image.companyImageView.image!, self, #selector(self.feed_image(_:didFinishSavingWithError:contextInfo:)), nil)
                         cell.dwnldBtn.isEnabled = true
                         }
-                   
+
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -329,7 +363,7 @@ extension ReportedVC: UICollectionViewDataSource{
                     self.showToast(message: "No internet connection")
                 }
                 return cell
-                
+
             case .feedPortrVideoCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedVideoCell.identifier, for: indexPath) as?
                     ReportedVideoCell else { return UICollectionViewCell() }
@@ -356,7 +390,7 @@ extension ReportedVC: UICollectionViewDataSource{
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
                        }
-                 
+
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -388,7 +422,7 @@ extension ReportedVC: UICollectionViewDataSource{
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
                        }
-                 
+
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -420,7 +454,7 @@ extension ReportedVC: UICollectionViewDataSource{
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
                        }
-                 
+
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -452,7 +486,7 @@ extension ReportedVC: UICollectionViewDataSource{
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
                        }
-                 
+
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -483,7 +517,7 @@ extension ReportedVC: UICollectionViewDataSource{
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
                        }
-                 
+
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -514,7 +548,7 @@ extension ReportedVC: UICollectionViewDataSource{
                        cell.dwnldBtn.isEnabled = true
                        cell.dwnldBtn.isEnabled = true
                        }
-                 
+
                 }
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
@@ -525,11 +559,37 @@ extension ReportedVC: UICollectionViewDataSource{
                 return UICollectionViewCell()
             }
         }
+        else if indexPath.section == 2 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompanyAdminRequestCell.identifier, for: indexPath) as? CompanyAdminRequestCell else { return UICollectionViewCell()}
+            let item = adminRequests[indexPath.row]
+            cell.requestItem = item
+            cell.acceptAction = { [unowned self] in
+                self.respondToRequest(isAccepted: true, type: item.type!, index: indexPath.row)
+            }
+            cell.rejectAction = { [unowned self] in
+                self.respondToRequest(isAccepted: false, type: item.type!, index: indexPath.row)
+            }
+            
+            return cell
+        }
         else {
             return UICollectionViewCell()
         }
-
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if  let vc = CompanyHeaderModuleVC.storyBoardInstance() {
+            let request = adminRequests[indexPath.row]
+            vc.title = request.companyName
+            vc.companyId = request.companyId
+            UserDefaults.standard.set(vc.title, forKey: "companyName")
+            UserDefaults.standard.set(vc.companyId, forKey: "companyId")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
+    
     @objc func pauseVisibleVideos()  {
         
         for videoParentCell in collectionView.visibleCells   {
@@ -888,122 +948,129 @@ var muteVideo : Bool = false
 
 extension ReportedVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if  indexPath.section == 0 {
-           
-            return  CGSize(width:  self.view.frame.width, height: 480)
-        }
-        else{
         let width = self.view.frame.width
-        let item = dataSourceV2[indexPath.item]
-        var height : CGFloat = 0
-        /*switch item.cellType{
-        case .feedNewUserCell:
-            height += FeedsHeight.heightForNewUserCell(item: item, viewWidth: width)
-            return CGSize(width: width , height: height)
-        case .feedTextCell:
-            height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
-            return CGSize(width: width , height: height)
-        case .feedImageCell:
-            height += FeedsHeight.heightForImageCellV2(item: item, width: width)
-            return CGSize(width: width, height: height)
-        case .feedImageTextCell:
-            height += FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-            return CGSize(width: width, height: height)
-        case .newsTextCell:
-            height += FeedsHeight.heightForNewsTextCell(item: item, labelWidth: width - 16)
-            return CGSize(width: width, height: height)
-        case .newsImageCell:
-            height += FeedsHeight.heightForNewsImageCell(item: item, labelWidth: width - 16)
-            return CGSize(width: width, height: height)
-        case .eventCell:
-            height += FeedsHeight.heightForImageTextCell(item: item, width: width, labelWidth: width - 16)
-            return CGSize(width: width, height: height)
-        case .feedListingCell:
-            return CGSize(width: width, height: height)
-        case .userFeedImageTextCell:
-            print("Image text")
-            return CGSize(width: width, height: height)
-        case .userFeedImageCell:
-            print("Image")
-            return CGSize(width: width, height: height)
-        case .userFeedTextCell:
-            print("Text")
-            return CGSize(width: width, height: height)
-        }*/
-        switch item.cellType{
-        case .covidPoll:
-            return CGSize(width: 0, height: 0)
-        case .feedTextCell:
-            height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
-            return CGSize(width: width , height: height + 30)
-        case .feedImageCell:
-            height += FeedsHeight.heightForImageCellV2(item: item, width: width)
-            return CGSize(width: width, height: height + 35)
-        case .feedImageTextCell:
-            height += FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
-            return CGSize(width: width, height: height + 30)
-        case .feedVideoCell:
-            height += FeedsHeight.heightForVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height + 30)
-        case .feedVideoTextCell:
-            height += FeedsHeight.heightForVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
-            print("Video Cell height : \(height)")
-            return CGSize(width: width, height: height + 35)
-        case .ads:
-            //height += messageHeight(for: item.description)
-            //print("height of ad : \(height)")
-            //return CGSize(width: width, height: height + 362)  //469 //500
-            return CGSize(width: 0, height: 0)
-        case .market:
-            //print("Width of market scroll: \(width)")
-            //return CGSize(width: width, height: 330)    //355
-            return CGSize(width: 0, height: 0)
-        case .userFeedTextCell:
-            return CGSize(width: 0, height: 0)
-        case .userFeedImageCell:
-            return CGSize(width: 0, height: 0)
-        case .userFeedImageTextCell:
-            return CGSize(width: 0, height: 0)
-        case .newUser:
-            return CGSize(width: width, height: 355 )
-        case .news:
-            return CGSize(width: width, height: 355)
-        case .companyMonth:
-            //guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompanyOfMonthCell.identifier, for: indexPath) as? CompanyOfMonthCell else { return CGSize(width: 0, height: 0)}
-            //height = FeedsHeight.heightForCompanyOfMonthCellV2(item: item, labelWidth: width - 16)  //Aligning width by omitting (leading & trailing)
-            //print("Height of COM cell : \(height)")
-            //return CGSize(width: width, height: height)
-            return CGSize(width: 0, height: 0)
-        case .personWeek:
-            //height = FeedsHeight.heightForPersonOfWeekCellV2(item: item, labelWidth: width - 16)  //Aligning width by omitting (leading & trailing)
-            //print("Height of POW cell : \(height)")
-            //return CGSize(width: width, height: height)
-            return CGSize(width: 0, height: 0)
-        case .vote:
-            //return CGSize(width: width, height: 290)    //260
-            return CGSize(width: 0, height: 0)
-        case .personWeekScroll:
-            //return CGSize(width: width, height: 290)
-            return CGSize(width: 0, height: 0)
-        case .feedPortrVideoCell:
-            height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height + 60)
-        case .feedPortrVideoTextCell:
-            height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
-            print("Video Cell height : \(height)")
-            return CGSize(width: width, height: height + 65)    //height + 30
-        case .feedLandsVideoCell:
-            height = FeedsHeight.heightForLandsVideoCellV2(item: item, width: width)
-            return CGSize(width: width, height: height + 60 )
+        if indexPath.section == 0 {
+            return  CGSize(width:  width, height: 480)
+        }
+        else if indexPath.section == 1 {
+
+            let item = dataSourceV2[indexPath.item]
+            var height : CGFloat = 0
+            /*switch item.cellType{
+             case .feedNewUserCell:
+             height += FeedsHeight.heightForNewUserCell(item: item, viewWidth: width)
+             return CGSize(width: width , height: height)
+             case .feedTextCell:
+             height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
+             return CGSize(width: width , height: height)
+             case .feedImageCell:
+             height += FeedsHeight.heightForImageCellV2(item: item, width: width)
+             return CGSize(width: width, height: height)
+             case .feedImageTextCell:
+             height += FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
+             return CGSize(width: width, height: height)
+             case .newsTextCell:
+             height += FeedsHeight.heightForNewsTextCell(item: item, labelWidth: width - 16)
+             return CGSize(width: width, height: height)
+             case .newsImageCell:
+             height += FeedsHeight.heightForNewsImageCell(item: item, labelWidth: width - 16)
+             return CGSize(width: width, height: height)
+             case .eventCell:
+             height += FeedsHeight.heightForImageTextCell(item: item, width: width, labelWidth: width - 16)
+             return CGSize(width: width, height: height)
+             case .feedListingCell:
+             return CGSize(width: width, height: height)
+             case .userFeedImageTextCell:
+             print("Image text")
+             return CGSize(width: width, height: height)
+             case .userFeedImageCell:
+             print("Image")
+             return CGSize(width: width, height: height)
+             case .userFeedTextCell:
+             print("Text")
+             return CGSize(width: width, height: height)
+             }*/
+            switch item.cellType{
+            case .covidPoll:
+                return CGSize(width: 0, height: 0)
+            case .feedTextCell:
+                height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
+                return CGSize(width: width , height: height + 30)
+            case .feedImageCell:
+                height += FeedsHeight.heightForImageCellV2(item: item, width: width)
+                return CGSize(width: width, height: height + 35)
+            case .feedImageTextCell:
+                height += FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
+                return CGSize(width: width, height: height + 30)
+            case .feedVideoCell:
+                height += FeedsHeight.heightForVideoCellV2(item: item, width: width)
+                return CGSize(width: width, height: height + 30)
+            case .feedVideoTextCell:
+                height += FeedsHeight.heightForVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
+                print("Video Cell height : \(height)")
+                return CGSize(width: width, height: height + 35)
+            case .ads:
+                //height += messageHeight(for: item.description)
+                //print("height of ad : \(height)")
+                //return CGSize(width: width, height: height + 362)  //469 //500
+                return CGSize(width: 0, height: 0)
+            case .market:
+                //print("Width of market scroll: \(width)")
+                //return CGSize(width: width, height: 330)    //355
+                return CGSize(width: 0, height: 0)
+            case .userFeedTextCell:
+                return CGSize(width: 0, height: 0)
+            case .userFeedImageCell:
+                return CGSize(width: 0, height: 0)
+            case .userFeedImageTextCell:
+                return CGSize(width: 0, height: 0)
+            case .newUser:
+                return CGSize(width: width, height: 355 )
+            case .news:
+                return CGSize(width: width, height: 355)
+            case .companyMonth:
+                //guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompanyOfMonthCell.identifier, for: indexPath) as? CompanyOfMonthCell else { return CGSize(width: 0, height: 0)}
+                //height = FeedsHeight.heightForCompanyOfMonthCellV2(item: item, labelWidth: width - 16)  //Aligning width by omitting (leading & trailing)
+                //print("Height of COM cell : \(height)")
+                //return CGSize(width: width, height: height)
+                return CGSize(width: 0, height: 0)
+            case .personWeek:
+                //height = FeedsHeight.heightForPersonOfWeekCellV2(item: item, labelWidth: width - 16)  //Aligning width by omitting (leading & trailing)
+                //print("Height of POW cell : \(height)")
+                //return CGSize(width: width, height: height)
+                return CGSize(width: 0, height: 0)
+            case .vote:
+                //return CGSize(width: width, height: 290)    //260
+                return CGSize(width: 0, height: 0)
+            case .personWeekScroll:
+                //return CGSize(width: width, height: 290)
+                return CGSize(width: 0, height: 0)
+            case .feedPortrVideoCell:
+                height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
+                return CGSize(width: width, height: height + 60)
+            case .feedPortrVideoTextCell:
+                height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
+                print("Video Cell height : \(height)")
+                return CGSize(width: width, height: height + 65)    //height + 30
+            case .feedLandsVideoCell:
+                height = FeedsHeight.heightForLandsVideoCellV2(item: item, width: width)
+                return CGSize(width: width, height: height + 60 )
             case .feedLandsVideoTextCell:
                 height = FeedsHeight.heightForLandsVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
                 return CGSize(width: width, height: height + 65 )    //height + 30
+            }
         }
+        else {
+            return  CGSize(width:  width, height: 353)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        16
     }
 }
 
