@@ -317,7 +317,7 @@ struct Endpoints {
     
     //This API is only for Moderator
     static let DELETE_COMPANY_REPORT = "https://myscrap.com/android/deleteCompanyReport"
-    
+    static let ACCEPT_OR_REJECT_ADMIN_REQUEST = "https://myscrap.com/android/add_admin"
     
     static let ADD_OR_DECLINE_EMPLOYEE_REQUEST = "https://myscrap.com/android/add_employee"
 

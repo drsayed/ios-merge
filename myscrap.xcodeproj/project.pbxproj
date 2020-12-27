@@ -1414,6 +1414,18 @@
 		94FAEFE621D8821300C1B6A3 /* LiveSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAEFE521D8821300C1B6A3 /* LiveSender.swift */; };
 		94FAEFE821D8E55500C1B6A3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAEFE721D8E55500C1B6A3 /* CustomCell.swift */; };
 		C1C2A625F6043F1BCE133C73 /* Pods_myscrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26ADC0DEE31A11386A67C02 /* Pods_myscrap.framework */; };
+		C23D548D259733AC006D6C0A /* CompanyAdminRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D548B259733AC006D6C0A /* CompanyAdminRequestCell.swift */; };
+		C23D548E259733AC006D6C0A /* CompanyAdminRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D548B259733AC006D6C0A /* CompanyAdminRequestCell.swift */; };
+		C23D548F259733AC006D6C0A /* CompanyAdminRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D548B259733AC006D6C0A /* CompanyAdminRequestCell.swift */; };
+		C23D5490259733AC006D6C0A /* CompanyAdminRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D548C259733AC006D6C0A /* CompanyAdminRequestCell.xib */; };
+		C23D5491259733AC006D6C0A /* CompanyAdminRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D548C259733AC006D6C0A /* CompanyAdminRequestCell.xib */; };
+		C23D5492259733AC006D6C0A /* CompanyAdminRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D548C259733AC006D6C0A /* CompanyAdminRequestCell.xib */; };
+		C23D54962597504D006D6C0A /* AdminRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D54952597504D006D6C0A /* AdminRequestModel.swift */; };
+		C23D54972597504D006D6C0A /* AdminRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D54952597504D006D6C0A /* AdminRequestModel.swift */; };
+		C23D54982597504D006D6C0A /* AdminRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D54952597504D006D6C0A /* AdminRequestModel.swift */; };
+		C23D54A4259773E5006D6C0A /* RequestResponseAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D54A3259773E5006D6C0A /* RequestResponseAlertView.swift */; };
+		C23D54A5259773E5006D6C0A /* RequestResponseAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D54A3259773E5006D6C0A /* RequestResponseAlertView.swift */; };
+		C23D54A6259773E5006D6C0A /* RequestResponseAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D54A3259773E5006D6C0A /* RequestResponseAlertView.swift */; };
 		CD47DB0A1792FACA76DDE33D /* Pods_myscrapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14F9F70FE83748186B72F44 /* Pods_myscrapUITests.framework */; };
 		FB00F562258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB00F560258F3E1400FEEE93 /* ReportedLanscapVideoTextCell.swift */; };
 		FB00F563258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB00F561258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.xib */; };
@@ -3054,6 +3066,10 @@
 		9908F6FF7D63AC5B72BE0147 /* Pods_myscrapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myscrapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACECD7F3D2EF90289B65F07 /* Pods-myscrap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myscrap.release.xcconfig"; path = "Pods/Target Support Files/Pods-myscrap/Pods-myscrap.release.xcconfig"; sourceTree = "<group>"; };
 		B26ADC0DEE31A11386A67C02 /* Pods_myscrap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myscrap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C23D548B259733AC006D6C0A /* CompanyAdminRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyAdminRequestCell.swift; sourceTree = "<group>"; };
+		C23D548C259733AC006D6C0A /* CompanyAdminRequestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanyAdminRequestCell.xib; sourceTree = "<group>"; };
+		C23D54952597504D006D6C0A /* AdminRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRequestModel.swift; sourceTree = "<group>"; };
+		C23D54A3259773E5006D6C0A /* RequestResponseAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResponseAlertView.swift; sourceTree = "<group>"; };
 		F14F9F70FE83748186B72F44 /* Pods_myscrapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myscrapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F565CBC235C461D61ECF1F65 /* Pods-myscrapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myscrapTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-myscrapTests/Pods-myscrapTests.release.xcconfig"; sourceTree = "<group>"; };
 		FB00F560258F3E1400FEEE93 /* ReportedLanscapVideoTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportedLanscapVideoTextCell.swift; sourceTree = "<group>"; };
@@ -4062,6 +4078,7 @@
 				220C430B1FC46330005B418C /* DetailService.swift */,
 				22FD91A21F88937F00D32952 /* FeedItem.swift */,
 				22DA832A1FC6B8F200F34054 /* CommentItem.swift */,
+				C23D54952597504D006D6C0A /* AdminRequestModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4871,6 +4888,7 @@
 		22F704821F9250D00045603B /* Reported */ = {
 			isa = PBXGroup;
 			children = (
+				C22614AD259512BA0064501A /* CompanyAdminRequestCell */,
 				18277AD1257E6A0600D5AC15 /* ReportCompanyAdminCollectionViewCell */,
 				22565C701F8C8BCB00CCD749 /* ReportedFeedTextCell.swift */,
 				22565C711F8C8BCB00CCD749 /* ReportedFeedTextCell.xib */,
@@ -7275,6 +7293,16 @@
 			name = Cell;
 			sourceTree = "<group>";
 		};
+		C22614AD259512BA0064501A /* CompanyAdminRequestCell */ = {
+			isa = PBXGroup;
+			children = (
+				C23D548B259733AC006D6C0A /* CompanyAdminRequestCell.swift */,
+				C23D548C259733AC006D6C0A /* CompanyAdminRequestCell.xib */,
+				C23D54A3259773E5006D6C0A /* RequestResponseAlertView.swift */,
+			);
+			path = CompanyAdminRequestCell;
+			sourceTree = "<group>";
+		};
 		FB8C9536250D16BA000E1B40 /* ConfirmYourPriceVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -8271,6 +8299,7 @@
 				9414DD33216F36700082C1D3 /* BM-32.png in Resources */,
 				22DAE6751FD538560008E746 /* INSPhotoGallery.bundle in Resources */,
 				9414DE93216F36700082C1D3 /* SK-32.png in Resources */,
+				C23D5490259733AC006D6C0A /* CompanyAdminRequestCell.xib in Resources */,
 				9414DD01216F36700082C1D3 /* AE-32.png in Resources */,
 				9414DE2B216F36700082C1D3 /* MQ-32.png in Resources */,
 				94350949225353FF00206717 /* MenuDiscoverCell.xib in Resources */,
@@ -8453,6 +8482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				222C12EF1F397F8D004D69EE /* GoogleService-Info.plist in Resources */,
+				C23D5491259733AC006D6C0A /* CompanyAdminRequestCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8461,6 +8491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				222C12F01F397F8D004D69EE /* GoogleService-Info.plist in Resources */,
+				C23D5492259733AC006D6C0A /* CompanyAdminRequestCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8736,6 +8767,7 @@
 				94CD4812232F5B2100FCBD22 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
 				22845F5A2029991A008803B3 /* ImageFetcher.swift in Sources */,
 				22845F572029991A008803B3 /* CameraGlobals.swift in Sources */,
+				C23D54A4259773E5006D6C0A /* RequestResponseAlertView.swift in Sources */,
 				FB9E017B2511332B003D10E2 /* MagazineLayoutFooterVisibilityMode.swift in Sources */,
 				22BE45B21F1F886F005E2735 /* CompanyEditProfileVC.swift in Sources */,
 				22F8CB091F2624C0003FF692 /* InterestMenuBar.swift in Sources */,
@@ -8993,6 +9025,7 @@
 				94489A0520B173970071F5D2 /* FloatyViewController.swift in Sources */,
 				FB322F4125174B6D0046EB98 /* VideoURL.swift in Sources */,
 				2253C0D21EFE4482001446D6 /* UserProfileVC.swift in Sources */,
+				C23D548D259733AC006D6C0A /* CompanyAdminRequestCell.swift in Sources */,
 				9420E6ED224F659F00E10943 /* MenuTVC.swift in Sources */,
 				220ED9F61FA7560300FEAF3D /* DesignationLabel.swift in Sources */,
 				94799A4D20D79E4500670077 /* EditMarketVC.swift in Sources */,
@@ -9472,6 +9505,7 @@
 				94CD4823232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */,
 				04CDBF901EFCE284001DFE5B /* RSKPlaceholderTextView.swift in Sources */,
 				94CD4804232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */,
+				C23D54962597504D006D6C0A /* AdminRequestModel.swift in Sources */,
 				FB919772250A2371003AF533 /* ShangaiHeaderTVCell.swift in Sources */,
 				94ABE0672104B445008299B6 /* AddListingBottomView.swift in Sources */,
 				228839321EDE88E5005DDC47 /* NotificationVC.swift in Sources */,
@@ -9542,7 +9576,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C23D54A5259773E5006D6C0A /* RequestResponseAlertView.swift in Sources */,
 				2295BF8A1EC6D66F0075020A /* myscrapTests.swift in Sources */,
+				C23D548E259733AC006D6C0A /* CompanyAdminRequestCell.swift in Sources */,
+				C23D54972597504D006D6C0A /* AdminRequestModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9550,7 +9587,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C23D54A6259773E5006D6C0A /* RequestResponseAlertView.swift in Sources */,
 				2295BF951EC6D66F0075020A /* myscrapUITests.swift in Sources */,
+				C23D548F259733AC006D6C0A /* CompanyAdminRequestCell.swift in Sources */,
+				C23D54982597504D006D6C0A /* AdminRequestModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
