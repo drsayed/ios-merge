@@ -52,6 +52,7 @@ class AboutUserVC: UIViewController { //ScrollViewContainerController{
     var cardFront = ""
     var cardBack   = ""
     var cardCount = 0
+    var cardsDataSource:[PictureURL] = []
     private let stackView: UIStackView = {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -228,18 +229,22 @@ class AboutUserVC: UIViewController { //ScrollViewContainerController{
             cardCount = 2
             cardFront = item.cardFront
             cardBack = item.cardBack
+            cardsDataSource.append(PictureURL(imageURL: URL(string: item.cardFront), thumbnailImageURL:nil))
+            cardsDataSource.append(PictureURL(imageURL: URL(string: item.cardBack), thumbnailImageURL: nil))
            }
           else  if item.cardFront != ""
             {
              cardCount = 1
              cardFront =  item.cardFront
              cardBack = ""
+            cardsDataSource.append(PictureURL(imageURL: URL(string: item.cardFront), thumbnailImageURL: nil))
                }
             else  if item.cardBack != ""
             {
              cardCount = 1
              cardFront = ""
              cardBack =  item.cardBack
+                cardsDataSource.append(PictureURL(imageURL: URL(string: item.cardBack), thumbnailImageURL: nil))
                }
             self.pageController.currentPage = 0
             self.pageController.numberOfPages = cardCount
@@ -521,7 +526,7 @@ extension AboutUserVC : UICollectionViewDelegate,UICollectionViewDataSource,UICo
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BusinessCardCell.identifier, for: indexPath) as? BusinessCardCell else { return UICollectionViewCell()}
             var downloadURL : URL =   URL(string: cardFront)!
-            if indexPath.item == 0{
+            if indexPath.item == 0 {
                  downloadURL = URL(string: cardFront)!
             }
             else
@@ -562,6 +567,10 @@ extension AboutUserVC : UICollectionViewDelegate,UICollectionViewDataSource,UICo
         }
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            
+          //  let cell = collectionView.cellForItem(at: indexPath)
+            let galleryPreview = INSPhotosViewController(photos: cardsDataSource, initialPhoto: cardsDataSource[indexPath.row], referenceView: nil)
+            present(galleryPreview, animated: true, completion: nil)
+            
     }
         func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
