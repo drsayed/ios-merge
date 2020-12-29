@@ -285,7 +285,14 @@ final class APIService: NSObject {
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "content-Type")
         request.httpBody = postString.data(using: String.Encoding.ascii, allowLossyConversion: false)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        var configuration = URLSessionConfiguration.default
+        if #available(iOS 13.0, *) {
+            configuration.allowsConstrainedNetworkAccess = false
+        } else {
+            // Fallback on earlier versions
+        }
+        let session = URLSession(configuration: configuration)
+        session.dataTask(with: request) { (data, response, error) in
             //print("Data, response, error :\(data), \(response), \(error)")
             guard error == nil else{
                 print("Here1", error as Any)

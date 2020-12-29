@@ -830,7 +830,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
 //        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
 //             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
 //           }
-
+     
         collectionView.register(FeedPollResultCell.Nib, forCellWithReuseIdentifier: FeedPollResultCell.identifier)
         collectionView.register(FeedTextCell.Nib, forCellWithReuseIdentifier: FeedTextCell.identifier)
         collectionView.register(FeedImageCell.Nib, forCellWithReuseIdentifier: FeedImageCell.identifier)

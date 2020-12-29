@@ -667,7 +667,7 @@
                 <outlet property="timeLbl" destination="Xfs-4c-ObF" id="S6w-nQ-WMY"/>
                 <outlet property="unReportBtn" destination="dLZ-pJ-naC" id="kEy-8e-hza"/>
             </connections>
-            <point key="canvasLocation" x="-115.2" y="-30.584707646176913"/>
+            <point key="canvasLocation" x="8" y="-70"/>
         </collectionViewCell>
     </objects>
     <designables>
