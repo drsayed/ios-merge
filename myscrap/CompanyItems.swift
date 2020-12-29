@@ -468,6 +468,15 @@ class CompanyItems {
         self.reportedStatusOfCompany = JSONUtils.GetStringFromObject(object: companyDict, key: "reportedStatus")
 
     }
+    
+    func isUserEmployeeOfThisCompany() -> Bool {
+        for emp in employees {
+            if emp.userId == AuthService.instance.userId {
+                return true
+            }
+        }
+        return false
+    }
 }
 class Company_Images {
     

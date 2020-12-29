@@ -1115,19 +1115,20 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
 //            let adminReport = self.companyData.last?.adminReport
             let reportedStatusOfCompany = self.companyData.last?.reportedStatusOfCompany
 
-//          Own this company Button will show when there are no employees and admin for the company
+//          Own this company Button will show when there is no admin for the company and user is not employee of the company. if user is employee then Make as admin will show against employee in employee section
             // Own this company Button
             self.ownCompBtn.layer.cornerRadius = 10
             self.ownCompBtn.layer.masksToBounds = true
             var ownCompanyButtonTitleStr = self.ownthisCompanyStr
-            if self.companyData.last!.employeeCount == 0 && isAdminAvailable == false {
-                self.ownCompBtn.isHidden = false
-                self.ownCompBtn.isEnabled = true
-                
-                if getOwnCompanyRequest == "Requested" {
-                    ownCompanyButtonTitleStr = self.requestedStr
-                }
-                self.ownCompBtn.setTitle(ownCompanyButtonTitleStr, for: .normal)
+            
+            if isAdminAvailable == false && !self.companyData.last!.isUserEmployeeOfThisCompany() {
+                    self.ownCompBtn.isHidden = false
+                    self.ownCompBtn.isEnabled = true
+                    
+                    if getOwnCompanyRequest == "Requested" {
+                        ownCompanyButtonTitleStr = self.requestedStr
+                    }
+                    self.ownCompBtn.setTitle(ownCompanyButtonTitleStr, for: .normal)
             }
             else {
                 self.ownCompBtn.isHidden = true
