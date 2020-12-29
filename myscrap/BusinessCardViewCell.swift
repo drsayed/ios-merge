@@ -8,6 +8,11 @@
 
 import UIKit
 import SDWebImage
+
+protocol BusinessCardTap {
+    func businessCardTap(cell:UICollectionViewCell?,index:Int, dataSource:[PictureURL])
+}
+
 class BusinessCardViewCell: BaseTableCell {
 
     @IBOutlet weak var feedImages: UICollectionView!
@@ -16,9 +21,11 @@ class BusinessCardViewCell: BaseTableCell {
     @IBOutlet weak var pageCountLable: UILabel!
     @IBOutlet weak var cardHideView: UIView!
     @IBOutlet weak var sendRequestButton: CorneredButton!
+    var businessCardTapDelegate:BusinessCardTap?
     var cardFront = ""
     var cardBack   = ""
     var cardCount = 0
+    var dataSource:[PictureURL] = []
    
     
     var newItem : ProfileData? {
@@ -33,18 +40,22 @@ class BusinessCardViewCell: BaseTableCell {
                                   cardCount = 2
                                   cardFront = item.cardFront
                                   cardBack = item.cardBack
+                                    dataSource.append(PictureURL(imageURL: URL(string: item.cardFront), thumbnailImageURL: nil))
+                                    dataSource.append(PictureURL(imageURL: URL(string: item.cardBack), thumbnailImageURL: nil))
                                     }
                         else  if item.cardFront != ""
                           {
                            cardCount = 1
                            cardFront =  item.cardFront
                            cardBack = ""
+                            dataSource.append(PictureURL(imageURL: URL(string: item.cardFront), thumbnailImageURL: nil))
                              }
                           else  if item.cardBack != ""
                           {
                            cardCount = 1
                            cardFront = ""
                            cardBack =  item.cardBack
+                            dataSource.append(PictureURL(imageURL: URL(string: item.cardBack), thumbnailImageURL: nil))
                              }
             }
             self.refreshTable()
@@ -149,8 +160,10 @@ extension BusinessCardViewCell : UICollectionViewDelegate,UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       
-        guard let item = newItem else { return }
+    //    guard let item = newItem else { return }
     //    updatedDelegate?.didTapImageViewV2(atIndex: indexPath.item, item: item)
+        
+        businessCardTapDelegate?.businessCardTap(cell: collectionView.cellForItem(at: indexPath), index: indexPath.row, dataSource: dataSource)
 }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 

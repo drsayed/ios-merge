@@ -464,6 +464,7 @@ class AboutProfileController: UIViewController, MKMapViewDelegate, UITableViewDa
                 
             }
             cell.layoutIfNeeded()
+            cell.businessCardTapDelegate = self
              return cell
         }
         
@@ -617,6 +618,17 @@ extension AboutProfileController: AboutProfileViewDelegate{
         }*/
     }
 }
+
+extension AboutProfileController: BusinessCardTap {
+    func businessCardTap(cell: UICollectionViewCell?, index: Int, dataSource: [PictureURL]) {
+        
+        let galleryPreview = INSPhotosViewController(photos: dataSource, initialPhoto: dataSource[index], referenceView: cell)
+        present(galleryPreview, animated: true, completion: nil)
+        
+    }
+}
+    
+  
 
 
 
