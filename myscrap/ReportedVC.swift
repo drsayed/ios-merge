@@ -995,6 +995,13 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
                 return CGSize(width: 0, height: 0)
             case .feedTextCell:
                 height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
+                if item.status.contains("http") {
+                    height -= 410
+                }
+                else
+                {
+                    height -= 0
+                }
                 return CGSize(width: width , height: height + 30)
             case .feedImageCell:
                 height += FeedsHeight.heightForImageCellV2(item: item, width: width)

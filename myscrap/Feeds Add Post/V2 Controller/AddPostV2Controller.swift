@@ -91,6 +91,7 @@ class AddPostV2Controller: UIViewController, UIImagePickerControllerDelegate, UI
         uploadPercentage = 0
         picker.delegate = self
         picker.allowsEditing = true
+        
       //  NotificationCenter.default.addObserver(self, selector: #selector(self.OpenEditProfileView(notification:)), name: Notification.Name("editButtonPressed"), object: nil)
         mentionsTableView.register(MemberTVC.classForCoder(), forCellReuseIdentifier: "cell")
         mentionsListner = SZMentionsListener(mentionTextView: textView, mentionsManager: self)

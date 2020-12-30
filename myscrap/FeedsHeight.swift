@@ -42,21 +42,21 @@ struct FeedsHeight {
     /* API V2.0*/
     static func heightforFeedTextCellV2(item: FeedV2Item , labelWidth: CGFloat) -> CGFloat{
         let topSpacing: CGFloat = 8
-        let favouriteViewHeight: CGFloat = 95       //60
-        let bottomSpacing: CGFloat = 8
+        let ProfileViewHeight: CGFloat = 60       //60
+        let textViewTopSpacing: CGFloat = 10
         let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth) 
-        let linkPreviewSpacing : CGFloat = 16
-        let likeHeight : CGFloat = 35
-        let bottomLikeSpacing : CGFloat = 8    //8
+//        let linkPreviewSpacing : CGFloat = 16
+        let bottombuttons : CGFloat = 60    //8
         let seperator : CGFloat = 8
-        var height = topSpacing + favouriteViewHeight + bottomSpacing + labelHeight  + likeHeight + bottomLikeSpacing + seperator + linkPreviewSpacing
+        let misculleniousHeight : CGFloat = 10
+        var height = topSpacing + ProfileViewHeight + textViewTopSpacing + labelHeight  + bottombuttons + seperator + misculleniousHeight
         if item.status.contains("http") {
-            height += 400
+            height += 400 + 10 // Link view spacing
         } else {
             height += 0
         }
         if !(item.likeCount == 0 && item.commentCount == 0){
-            height += 35
+            height += 22
         }
         return height
     }
@@ -82,14 +82,21 @@ struct FeedsHeight {
     }
     static func heightforUserFeedTextCellV2(item: FeedV2Item , labelWidth: CGFloat) -> CGFloat{
         let topSpacing: CGFloat = 8
-        let favouriteViewHeight: CGFloat = 95       //95
-        let bottomSpacing: CGFloat = 8
-        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth)  + 10
-        let likeHeight : CGFloat = 35
-        let bottomLikeSpacing : CGFloat = 8    //8
-        var height = topSpacing + favouriteViewHeight + bottomSpacing + labelHeight  + likeHeight + bottomLikeSpacing
+        let ProfileViewHeight: CGFloat = 60       //60
+        let textViewTopSpacing: CGFloat = 10
+        let labelHeight: CGFloat = LabelHeight.heightForAttributed(for: item.descriptionStatus, for: labelWidth)
+//        let linkPreviewSpacing : CGFloat = 16
+        let bottombuttons : CGFloat = 60    //8
+        let seperator : CGFloat = 8
+        let misculleniousHeight : CGFloat = 10
+        var height = topSpacing + ProfileViewHeight + textViewTopSpacing + labelHeight  + bottombuttons + seperator + misculleniousHeight
+        if item.status.contains("http") {
+            height += 400 + 10 // Link view spacing
+        } else {
+            height += 0
+        }
         if !(item.likeCount == 0 && item.commentCount == 0){
-            height += 35
+            height += 22
         }
         return height
     }
@@ -629,7 +636,11 @@ struct LabelHeight{
         let textView = UserTagTextView()
         textView.isScrollEnabled = false
         textView.attributedText = text
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
+       // textView.font = UIFont(name: "HelveticaNeue", size: 14)
+
+       textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
+//        textView.textContainerInset = UIEdgeInsets.zero;
+//        textView.textContainer.lineFragmentPadding = 0;
         let maxLabelWidth: CGFloat = width
         let maxSize = CGSize(width: maxLabelWidth, height: .greatestFiniteMagnitude)
         let neededSize = textView.sizeThatFits(maxSize)

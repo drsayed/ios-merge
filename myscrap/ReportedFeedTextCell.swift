@@ -61,11 +61,11 @@ class ReportedFeedTextCell: FeedNewUserCell {
         }
         if (item.likeCount == 0) {
           
-            likeCommentsDistance.constant = -30
+     likeCommentsDistance.constant = -30
         }
         else{
             
-            likeCommentsDistance.constant = 10
+   likeCommentsDistance.constant = 10
         }
     }
     private func setupFriendViewTaps() {
