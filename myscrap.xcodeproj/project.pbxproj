@@ -4462,6 +4462,7 @@
 		2295BFAC1EC6DDB70075020A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FB0EFAEF259BA92000922BF4 /* AllFeedsCell */,
 				94CDF294252AEE2000C879F1 /* Additions */,
 				94CDF299252AEE2000C879F1 /* API */,
 				94CDF297252AEE2000C879F1 /* CreateCompanyStoryboard */,
@@ -7303,6 +7304,13 @@
 			path = CompanyAdminRequestCell;
 			sourceTree = "<group>";
 		};
+		FB0EFAEF259BA92000922BF4 /* AllFeedsCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AllFeedsCell;
+			sourceTree = "<group>";
+		};
 		FB8C9536250D16BA000E1B40 /* ConfirmYourPriceVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -9771,7 +9779,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25.0;
+				CURRENT_PROJECT_VERSION = 26.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -9860,7 +9868,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25.0;
+				CURRENT_PROJECT_VERSION = 26.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
