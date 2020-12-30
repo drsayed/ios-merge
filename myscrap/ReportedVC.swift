@@ -302,6 +302,42 @@ extension ReportedVC: UICollectionViewDataSource{
             return 0
         }
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if (self.companyDataArray.count == 0 && self.dataSourceV2.count == 0) || (self.companyDataArray.count == 0 && self.adminRequests.count == 0) || (self.dataSourceV2.count == 0 && self.adminRequests.count == 0) {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+        else{
+         
+            if self.companyDataArray.count == 0 {
+                if section != 1 && section != 0 {
+                    return UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+                }
+                   return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                }
+         else   if self.dataSourceV2.count == 0 {
+            if section != 0 && section != 1 {
+                return UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+            }
+               return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+        }
+         else   if self.adminRequests.count == 0 {
+            if section != 0 && section != 2  {
+                return UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+            }
+               return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+        }
+            else
+            {
+                if section != 0 {
+                    return UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+                }
+                   return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                }
+            
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportCompanyAdminCollectionViewCell.identifier, for: indexPath) as? ReportCompanyAdminCollectionViewCell else { return UICollectionViewCell()}
@@ -995,13 +1031,7 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
                 return CGSize(width: 0, height: 0)
             case .feedTextCell:
                 height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
-                if item.status.contains("http") {
-                    height -= 410
-                }
-                else
-                {
-                    height -= 0
-                }
+             
                 return CGSize(width: width , height: height + 30)
             case .feedImageCell:
                 height += FeedsHeight.heightForImageCellV2(item: item, width: width)
@@ -1054,18 +1084,18 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
                 return CGSize(width: 0, height: 0)
             case .feedPortrVideoCell:
                 height = FeedsHeight.heightForPortraitVideoCellV2(item: item, width: width)
-                return CGSize(width: width, height: height + 60)
+                return CGSize(width: width, height: height + 30)
             case .feedPortrVideoTextCell:
                 height = FeedsHeight.heightForPortraitVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height + 65)    //height + 30
+                return CGSize(width: width, height: height + 30)    //height + 30
             case .feedLandsVideoCell:
                 height = FeedsHeight.heightForLandsVideoCellV2(item: item, width: width)
-                return CGSize(width: width, height: height + 60 )
+                return CGSize(width: width, height: height + 30 )
             case .feedLandsVideoTextCell:
                 height = FeedsHeight.heightForLandsVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
                 print("Video Cell height : \(height)")
-                return CGSize(width: width, height: height + 65 )    //height + 30
+                return CGSize(width: width, height: height + 30 )    //height + 30
             }
         }
         else {

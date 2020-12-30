@@ -27,7 +27,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="484" height="446"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Zqf-qW-tev">
-                                <rect key="frame" x="0.0" y="101" width="484" height="230"/>
+                                <rect key="frame" x="0.0" y="85.5" width="484" height="230"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="230" id="1IE-gT-noq"/>
@@ -40,7 +40,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="kGH-LE-v2R">
-                                <rect key="frame" x="181" y="301" width="122.5" height="27.5"/>
+                                <rect key="frame" x="181" y="285.5" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -160,7 +160,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oPj-Sb-hKZ">
-                                <rect key="frame" x="8" y="353" width="468" height="93"/>
+                                <rect key="frame" x="8" y="325.5" width="468" height="93"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ql0-7u-TXE">
                                         <rect key="frame" x="0.0" y="0.0" width="468" height="30"/>
@@ -383,14 +383,14 @@
                             <constraint firstItem="2k3-Lm-YEn" firstAttribute="leading" secondItem="J4M-7k-714" secondAttribute="trailing" constant="8" id="YyX-WC-Qll"/>
                             <constraint firstItem="kGH-LE-v2R" firstAttribute="top" secondItem="Zqf-qW-tev" secondAttribute="bottom" constant="-30" id="cxe-oW-42i"/>
                             <constraint firstItem="J4M-7k-714" firstAttribute="leading" secondItem="FV2-Tf-YnT" secondAttribute="leading" constant="8" id="e28-1j-ygV"/>
-                            <constraint firstAttribute="bottom" secondItem="oPj-Sb-hKZ" secondAttribute="bottom" id="f2L-dM-Z2w"/>
                             <constraint firstItem="oPj-Sb-hKZ" firstAttribute="leading" secondItem="FV2-Tf-YnT" secondAttribute="leading" constant="8" id="hbq-HL-UqW"/>
                             <constraint firstItem="2k3-Lm-YEn" firstAttribute="bottom" secondItem="J4M-7k-714" secondAttribute="bottom" id="k56-ck-cpp"/>
                             <constraint firstItem="2k3-Lm-YEn" firstAttribute="centerY" secondItem="J4M-7k-714" secondAttribute="centerY" id="oTQ-w2-teN"/>
                             <constraint firstItem="mTM-Nk-60X" firstAttribute="top" secondItem="FV2-Tf-YnT" secondAttribute="top" constant="20" id="oex-ub-Cn4"/>
-                            <constraint firstItem="Zqf-qW-tev" firstAttribute="top" secondItem="mTM-Nk-60X" secondAttribute="bottom" constant="8" id="ohL-dl-dJj"/>
+                            <constraint firstItem="Zqf-qW-tev" firstAttribute="top" secondItem="L2i-pP-yFV" secondAttribute="bottom" constant="10" id="ohL-dl-dJj"/>
                             <constraint firstItem="77I-nu-sKz" firstAttribute="top" secondItem="mTM-Nk-60X" secondAttribute="bottom" constant="30" id="rZb-AY-3Re"/>
                             <constraint firstAttribute="trailing" secondItem="Zqf-qW-tev" secondAttribute="trailing" id="w5R-aE-g0u"/>
+                            <constraint firstItem="oPj-Sb-hKZ" firstAttribute="top" secondItem="Zqf-qW-tev" secondAttribute="bottom" constant="10" id="xuc-mh-ZIq"/>
                         </constraints>
                     </view>
                     <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHY-gI-Adu" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">

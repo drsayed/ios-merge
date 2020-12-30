@@ -23,6 +23,49 @@
                 <rect key="frame" x="0.0" y="0.0" width="484" height="670"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view hidden="YES" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVL-K6-cxo" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="484" height="670"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Vhm-1w-0Zs">
+                                <rect key="frame" x="98" y="312.5" width="288.5" height="45"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="C9h-Eq-B87">
+                                        <rect key="frame" x="134" y="0.0" width="20" height="20"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="oC4-fb-gek"/>
+                                            <constraint firstAttribute="width" constant="20" id="uLJ-K7-yI1"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This post is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZV7-sg-HB2">
+                                        <rect key="frame" x="0.0" y="25" width="288.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhY-Oc-1Az" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="438" y="632" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="x7S-B2-hoS"/>
+                                    <constraint firstAttribute="width" constant="30" id="yKH-O0-F8w"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="report"/>
+                                <connections>
+                                    <action selector="unreportBtnPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="xJ8-eF-dMk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="nhY-Oc-1Az" secondAttribute="bottom" constant="8" id="PVP-Hw-OjT"/>
+                            <constraint firstItem="Vhm-1w-0Zs" firstAttribute="centerY" secondItem="DVL-K6-cxo" secondAttribute="centerY" id="WTb-pu-e4f"/>
+                            <constraint firstAttribute="trailing" secondItem="nhY-Oc-1Az" secondAttribute="trailing" constant="16" id="syL-Lu-Qeg"/>
+                            <constraint firstItem="Vhm-1w-0Zs" firstAttribute="centerX" secondItem="DVL-K6-cxo" secondAttribute="centerX" id="wap-Zw-O44"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPQ-aS-tOO" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="484" height="670"/>
                         <subviews>
@@ -121,175 +164,77 @@
                                     <constraint firstAttribute="trailing" secondItem="WSX-Mm-fzr" secondAttribute="trailing" id="ygI-Qp-20C"/>
                                 </constraints>
                             </view>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="d8H-Sh-bhA">
-                                <rect key="frame" x="8" y="587" width="468" height="75"/>
+                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsZ-KI-Ktx" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="446" y="620" width="30" height="30"/>
+                                <connections>
+                                    <action selector="reportBtnPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="0TB-Bh-cdb"/>
+                                </connections>
+                            </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ave-Lj-Z2V">
+                                <rect key="frame" x="0.0" y="93" width="484" height="484"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="484" id="YV0-MY-b2M"/>
+                                </constraints>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BMj-ZY-vnw">
+                                <rect key="frame" x="0.0" y="85.5" width="484" height="484"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="484" id="f7d-WP-LwV"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3VQ-JB-Mrp">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                            </collectionView>
+                            <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggh-sg-dqp">
+                                <rect key="frame" x="432" y="105" width="40" height="30"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cUF-xD-D5J" userLabel="LikeCountStack">
-                                        <rect key="frame" x="0.0" y="0.0" width="468" height="35"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="YXa-R9-rr2">
-                                                <rect key="frame" x="0.0" y="0.0" width="93" height="35"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="4M2-4L-wa9">
-                                                        <rect key="frame" x="0.0" y="0.0" width="93" height="35"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQW-jU-nKZ" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="35" id="qbP-Vw-hv0"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                                <state key="normal" title="5 Likes"/>
-                                                                <connections>
-                                                                    <action selector="likeCountPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="ZBz-yh-KDj"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CwR-Bw-GaA" customClass="CommentCountBtn" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="37" y="0.0" width="56" height="35"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                                <state key="normal" title="1 comment"/>
-                                                                <connections>
-                                                                    <action selector="toDetailsVC:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="gBu-GI-cm6"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="0.066666666669999999" green="0.55294117649999996" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstItem="IQW-jU-nKZ" firstAttribute="height" secondItem="CwR-Bw-GaA" secondAttribute="height" id="yVm-a6-80X"/>
-                                                        </constraints>
-                                                    </stackView>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mhw-8V-Rta">
-                                        <rect key="frame" x="0.0" y="35" width="468" height="40"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EHn-bx-Rud">
-                                                <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NbJ-b7-qUE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="kC3-Bl-Uwt"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="rxU-Wy-z1a">
-                                                <rect key="frame" x="0.0" y="6" width="468" height="34"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="Fhy-CH-Gg6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="289.5" height="34"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iK1-Y0-su1">
-                                                                <rect key="frame" x="0.0" y="2.5" width="61" height="29"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zn-ys-jDv" customClass="LikeImageButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="30" id="lsp-6P-dxG"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" systemColor="darkTextColor"/>
-                                                                        <state key="normal" image="button:2Zn-ys-jDv:image">
-                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </state>
-                                                                        <connections>
-                                                                            <action selector="likePressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="tfr-H8-vV0"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1B5-X4-g2h" customClass="LikeButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="30" y="0.0" width="31" height="29"/>
-                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="31" id="qsd-iO-lIw"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
-                                                                        <state key="normal" title="LIKE">
-                                                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </state>
-                                                                        <connections>
-                                                                            <action selector="likePressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="M7D-LM-lfc"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                            </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SUi-nv-6xo">
-                                                                <rect key="frame" x="96" y="2.5" width="103" height="29"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mft-a2-E8P" customClass="CommentImageButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="30" id="nRy-de-8JJ"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <state key="normal" image="button:Mft-a2-E8P:image"/>
-                                                                        <connections>
-                                                                            <action selector="toDetailsVC:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="07F-uh-7g7"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NF-3W-vkD" customClass="LikeButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="30" y="0.0" width="73" height="29"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="73" id="oKu-ym-c5m"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
-                                                                        <state key="normal" title="COMMENT">
-                                                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </state>
-                                                                        <connections>
-                                                                            <action selector="toDetailsVC:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="ejK-1M-XHw"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                            </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mGa-Oz-VKN">
-                                                                <rect key="frame" x="239.5" y="0.0" width="50" height="34"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5p-ZD-hFu" customClass="ShareImageButton" customModule="myscrap" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="50" id="KPU-ck-iHt"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <connections>
-                                                                            <action selector="shareBtnTapped:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="Akr-pP-boG"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                            </stackView>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nko-yA-xHf">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1GH-nh-9bS"/>
+                                    <constraint firstAttribute="trailing" secondItem="nko-yA-xHf" secondAttribute="trailing" id="4pi-4s-gCI"/>
+                                    <constraint firstAttribute="width" constant="40" id="FMt-G3-5h0"/>
+                                    <constraint firstAttribute="bottom" secondItem="nko-yA-xHf" secondAttribute="bottom" id="a8E-2s-eMz"/>
+                                    <constraint firstItem="nko-yA-xHf" firstAttribute="top" secondItem="Ggh-sg-dqp" secondAttribute="top" id="bwM-JW-iHT"/>
+                                    <constraint firstItem="nko-yA-xHf" firstAttribute="leading" secondItem="Ggh-sg-dqp" secondAttribute="leading" id="hmy-25-lBD"/>
+                                </constraints>
+                            </view>
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="DBO-FZ-0Tx">
+                                <rect key="frame" x="181" y="539.5" width="122.5" height="27.5"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7qm-uN-20f">
-                                <rect key="frame" x="8" y="587.5" width="468" height="82.5"/>
+                                <rect key="frame" x="8" y="579.5" width="468" height="85"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfe-0U-uAa">
-                                        <rect key="frame" x="0.0" y="0.0" width="468" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="oxF-rG-Hbu">
-                                                <rect key="frame" x="0.0" y="0.0" width="468" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0RQ-FB-Pjp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="19.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="468" height="22"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="30" placeholderIntrinsicHeight="19.5" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67k-zt-3nZ" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="22"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <connections>
                                                                     <action selector="likeCountPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="LmH-zz-9Dc"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-25-wfs" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                                <rect key="frame" x="40" y="0.0" width="120" height="19.5"/>
+                                                                <rect key="frame" x="40" y="0.0" width="120" height="22"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="r5B-yp-R9Q"/>
@@ -307,7 +252,7 @@
                                                             <constraint firstItem="nfC-25-wfs" firstAttribute="leading" secondItem="67k-zt-3nZ" secondAttribute="trailing" constant="10" id="Mys-cg-aY8"/>
                                                             <constraint firstItem="67k-zt-3nZ" firstAttribute="top" secondItem="0RQ-FB-Pjp" secondAttribute="top" id="QFr-hT-Soj"/>
                                                             <constraint firstItem="nfC-25-wfs" firstAttribute="top" secondItem="0RQ-FB-Pjp" secondAttribute="top" id="Uzp-Dr-zFt"/>
-                                                            <constraint firstAttribute="height" constant="19.5" id="f37-QK-TtT"/>
+                                                            <constraint firstAttribute="height" constant="22" id="f37-QK-TtT"/>
                                                             <constraint firstAttribute="bottom" secondItem="67k-zt-3nZ" secondAttribute="bottom" id="iOg-rj-nSp"/>
                                                             <constraint firstAttribute="bottom" secondItem="nfC-25-wfs" secondAttribute="bottom" id="vij-EB-FE5"/>
                                                         </constraints>
@@ -319,7 +264,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yC1-dE-cRy">
-                                        <rect key="frame" x="0.0" y="23.5" width="468" height="59"/>
+                                        <rect key="frame" x="0.0" y="26" width="468" height="59"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tYN-Qu-TJW">
                                                 <rect key="frame" x="0.0" y="0.0" width="468" height="1"/>
@@ -480,56 +425,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsZ-KI-Ktx" customClass="ReportButton" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="446" y="630" width="30" height="30"/>
-                                <connections>
-                                    <action selector="reportBtnPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="0TB-Bh-cdb"/>
-                                </connections>
-                            </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ave-Lj-Z2V">
-                                <rect key="frame" x="0.0" y="93" width="484" height="484"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="484" id="YV0-MY-b2M"/>
-                                </constraints>
-                            </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BMj-ZY-vnw">
-                                <rect key="frame" x="0.0" y="95.5" width="484" height="484"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="484" id="f7d-WP-LwV"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3VQ-JB-Mrp">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                            </collectionView>
-                            <view tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggh-sg-dqp">
-                                <rect key="frame" x="432" y="105" width="40" height="30"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nko-yA-xHf">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="1GH-nh-9bS"/>
-                                    <constraint firstAttribute="trailing" secondItem="nko-yA-xHf" secondAttribute="trailing" id="4pi-4s-gCI"/>
-                                    <constraint firstAttribute="width" constant="40" id="FMt-G3-5h0"/>
-                                    <constraint firstAttribute="bottom" secondItem="nko-yA-xHf" secondAttribute="bottom" id="a8E-2s-eMz"/>
-                                    <constraint firstItem="nko-yA-xHf" firstAttribute="top" secondItem="Ggh-sg-dqp" secondAttribute="top" id="bwM-JW-iHT"/>
-                                    <constraint firstItem="nko-yA-xHf" firstAttribute="leading" secondItem="Ggh-sg-dqp" secondAttribute="leading" id="hmy-25-lBD"/>
-                                </constraints>
-                            </view>
-                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="DBO-FZ-0Tx">
-                                <rect key="frame" x="181" y="549.5" width="122.5" height="27.5"/>
-                                <color key="pageIndicatorTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="currentPageIndicatorTintColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -538,20 +433,17 @@
                             <constraint firstAttribute="trailing" secondItem="Ggh-sg-dqp" secondAttribute="trailing" constant="12" id="4be-FB-im9"/>
                             <constraint firstItem="BMj-ZY-vnw" firstAttribute="leading" secondItem="OPQ-aS-tOO" secondAttribute="leading" id="6Nu-cn-QK9"/>
                             <constraint firstItem="DBO-FZ-0Tx" firstAttribute="centerX" secondItem="BMj-ZY-vnw" secondAttribute="centerX" id="8wF-gr-4GP"/>
-                            <constraint firstItem="wsZ-KI-Ktx" firstAttribute="centerY" secondItem="rxU-Wy-z1a" secondAttribute="centerY" id="9p0-Sg-SI9"/>
                             <constraint firstItem="xme-gV-lC8" firstAttribute="bottom" secondItem="ygn-Kx-aWW" secondAttribute="bottom" constant="7.5" id="CwU-eV-x4L"/>
-                            <constraint firstAttribute="bottom" secondItem="7qm-uN-20f" secondAttribute="bottom" id="Ehf-cz-D4y"/>
                             <constraint firstItem="xme-gV-lC8" firstAttribute="centerX" secondItem="ygn-Kx-aWW" secondAttribute="centerX" id="HMq-UD-KSg"/>
                             <constraint firstAttribute="trailing" secondItem="BMj-ZY-vnw" secondAttribute="trailing" id="HOE-1N-VoW"/>
                             <constraint firstAttribute="trailing" secondItem="7qm-uN-20f" secondAttribute="trailing" constant="8" id="IYO-dc-bXW"/>
                             <constraint firstItem="Ggh-sg-dqp" firstAttribute="top" secondItem="fk3-fu-1uG" secondAttribute="bottom" constant="32" id="JSc-wt-JkR"/>
-                            <constraint firstItem="d8H-Sh-bhA" firstAttribute="leading" secondItem="OPQ-aS-tOO" secondAttribute="leading" constant="8" id="Llo-eo-Dvp"/>
                             <constraint firstItem="ave-Lj-Z2V" firstAttribute="leading" secondItem="OPQ-aS-tOO" secondAttribute="leading" id="P8b-rq-Bs3"/>
                             <constraint firstItem="fk3-fu-1uG" firstAttribute="top" secondItem="OPQ-aS-tOO" secondAttribute="top" constant="20" id="RZY-OL-anC"/>
+                            <constraint firstItem="wsZ-KI-Ktx" firstAttribute="top" secondItem="BMj-ZY-vnw" secondAttribute="bottom" constant="50.5" id="UBU-Zj-3pe"/>
                             <constraint firstItem="EhK-Ug-EFi" firstAttribute="bottom" secondItem="ygn-Kx-aWW" secondAttribute="bottom" id="Ule-Om-lyr"/>
                             <constraint firstItem="fk3-fu-1uG" firstAttribute="leading" secondItem="EhK-Ug-EFi" secondAttribute="trailing" constant="8" id="Z4c-n7-FfQ"/>
                             <constraint firstAttribute="trailing" secondItem="ave-Lj-Z2V" secondAttribute="trailing" id="cAe-FO-qK2"/>
-                            <constraint firstItem="d8H-Sh-bhA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BMj-ZY-vnw" secondAttribute="bottom" constant="3" id="cRw-w5-xNY"/>
                             <constraint firstItem="EhK-Ug-EFi" firstAttribute="leading" secondItem="ygn-Kx-aWW" secondAttribute="trailing" constant="8" id="cYu-4R-9tO"/>
                             <constraint firstItem="ave-Lj-Z2V" firstAttribute="top" secondItem="fk3-fu-1uG" secondAttribute="bottom" constant="20" id="dRg-hq-yF0"/>
                             <constraint firstItem="7qm-uN-20f" firstAttribute="leading" secondItem="OPQ-aS-tOO" secondAttribute="leading" constant="8" id="hOm-5H-o4d"/>
@@ -559,56 +451,10 @@
                             <constraint firstItem="ygn-Kx-aWW" firstAttribute="leading" secondItem="OPQ-aS-tOO" secondAttribute="leading" constant="8" id="iGS-Ux-Bc4"/>
                             <constraint firstAttribute="width" constant="484" id="pRU-dM-Nh5"/>
                             <constraint firstItem="EhK-Ug-EFi" firstAttribute="centerY" secondItem="ygn-Kx-aWW" secondAttribute="centerY" id="piY-G3-gMA"/>
-                            <constraint firstItem="Fhy-CH-Gg6" firstAttribute="centerY" secondItem="wsZ-KI-Ktx" secondAttribute="centerY" id="r67-yd-wpI"/>
                             <constraint firstItem="ygn-Kx-aWW" firstAttribute="top" secondItem="OPQ-aS-tOO" secondAttribute="top" constant="8" id="r9V-ek-X7w"/>
-                            <constraint firstItem="BMj-ZY-vnw" firstAttribute="top" secondItem="xme-gV-lC8" secondAttribute="bottom" constant="20" id="tMZ-Ga-Ccc"/>
-                            <constraint firstAttribute="bottom" secondItem="d8H-Sh-bhA" secondAttribute="bottom" constant="8" id="wq6-0n-uqK"/>
-                            <constraint firstItem="7qm-uN-20f" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BMj-ZY-vnw" secondAttribute="bottom" constant="8" id="xFJ-Bf-6EM"/>
-                            <constraint firstAttribute="trailing" secondItem="d8H-Sh-bhA" secondAttribute="trailing" constant="8" id="xcq-J1-gwK"/>
+                            <constraint firstItem="BMj-ZY-vnw" firstAttribute="top" secondItem="xme-gV-lC8" secondAttribute="bottom" constant="10" id="tMZ-Ga-Ccc"/>
+                            <constraint firstItem="7qm-uN-20f" firstAttribute="top" secondItem="BMj-ZY-vnw" secondAttribute="bottom" constant="10" id="xFJ-Bf-6EM"/>
                             <constraint firstAttribute="trailing" secondItem="wsZ-KI-Ktx" secondAttribute="trailing" constant="8" id="yMa-Sg-Chd"/>
-                        </constraints>
-                    </view>
-                    <view hidden="YES" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVL-K6-cxo" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="484" height="670"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Vhm-1w-0Zs">
-                                <rect key="frame" x="98" y="312.5" width="288.5" height="45"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="C9h-Eq-B87">
-                                        <rect key="frame" x="134" y="0.0" width="20" height="20"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="oC4-fb-gek"/>
-                                            <constraint firstAttribute="width" constant="20" id="uLJ-K7-yI1"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This post is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZV7-sg-HB2">
-                                        <rect key="frame" x="0.0" y="25" width="288.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhY-Oc-1Az" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="438" y="632" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="x7S-B2-hoS"/>
-                                    <constraint firstAttribute="width" constant="30" id="yKH-O0-F8w"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="report"/>
-                                <connections>
-                                    <action selector="unreportBtnPressed:" destination="Dzx-7A-eLS" eventType="touchUpInside" id="xJ8-eF-dMk"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="nhY-Oc-1Az" secondAttribute="bottom" constant="8" id="PVP-Hw-OjT"/>
-                            <constraint firstItem="Vhm-1w-0Zs" firstAttribute="centerY" secondItem="DVL-K6-cxo" secondAttribute="centerY" id="WTb-pu-e4f"/>
-                            <constraint firstAttribute="trailing" secondItem="nhY-Oc-1Az" secondAttribute="trailing" constant="16" id="syL-Lu-Qeg"/>
-                            <constraint firstItem="Vhm-1w-0Zs" firstAttribute="centerX" secondItem="DVL-K6-cxo" secondAttribute="centerX" id="wap-Zw-O44"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -659,28 +505,13 @@
         </collectionViewCell>
     </objects>
     <designables>
-        <designable name="1B5-X4-g2h">
-            <size key="intrinsicContentSize" width="31" height="29"/>
-        </designable>
         <designable name="67k-zt-3nZ">
             <size key="intrinsicContentSize" width="30" height="19.5"/>
-        </designable>
-        <designable name="8NF-3W-vkD">
-            <size key="intrinsicContentSize" width="73" height="29"/>
-        </designable>
-        <designable name="IQW-jU-nKZ">
-            <size key="intrinsicContentSize" width="35" height="25"/>
         </designable>
         <designable name="Jsf-qd-a8b">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
-        <designable name="Mft-a2-E8P">
-            <size key="intrinsicContentSize" width="20" height="22"/>
-        </designable>
         <designable name="PlH-hR-m2Z">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="R5p-ZD-hFu">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="axP-22-Ku9">
@@ -697,164 +528,6 @@
         </designable>
     </designables>
     <resources>
-        <image name="button:2Zn-ys-jDv:image" width="20" height="20">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
-S2V5ZWRBcmNoaXZlctEICVRyb290gAGuCwwZGh8UJCkqMTQ3PUBVJG51bGzWDQ4PEBESExQVFhcYVk5T
-U2l6ZV5OU1Jlc2l6aW5nTW9kZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVwc1dOU0NvbG9ygAIQAIAN
-EiDAAACAA4ALWHsyMCwgMjB90hsPHB5aTlMub2JqZWN0c6EdgASACtIbDyAjoiEigAWABoAJ0w8lJico
-FF8QFE5TVElGRlJlcHJlc2VudGF0aW9uXxAZTlNJbnRlcm5hbExheW91dERpcmVjdGlvboAIgAdPEQ72
-TU0AKgAABkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAoKChUoKChLLy8vXCAgIDwEBAQJAAAAAAAAAAAEBAQJICAgPS8vL1woKChLCgoKFQAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAsLCxUc3Nz1oyMjP+Ojo7/h4eH/WRkZLsaGhozGhoaNGRkZLuHh4f9
-jo6O/4yMjP9zc3PWLCwsVAAAAAAAAAAAAAAAAAAAAAAAAAAAJycnS4aGhvV4eHjgPz8/eDAwMFpNTU2R
-g4OD9Hx8fOZ8fHzmg4OD9E1NTZEwMDBaPz8/d3h4eOCFhYX1JycnSwAAAAAAAAAAAAAAAAYGBg1paWnF
-fX196BgYGDAAAAAAAAAAAAAAAAAoKChOgoKC84KCgvMoKChNAAAAAAAAAAAAAAAAGBgYL35+fuhpaWnF
-BgYGDQAAAAAAAAAAGxsbNYaGhvtRUVGYAAAAAAAAAAAAAAAAAAAAAAAAAAAcHBw2HBwcNgAAAAAAAAAA
-AAAAAAAAAAAAAAAAUVFRmIaGhvsbGxs1AAAAAAAAAAAgICA8i4uL/0lJSYkAAAAAAAAAAAAAAAAAAAAA
-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
-ABYAAAO2c3ZTRQAAACYAAALYemhDTgAAABYAAAPMamFKUAAAABoAAAPiZWxHUgAAACIAAAP8cHRQTwAA
-ACYAAAQebmxOTAAAACgAAAREZXNFUwAAACYAAAQedGhUSAAAACQAAARsdHJUUgAAACIAAASQZmlGSQAA
-ACgAAASyaHJIUgAAACgAAATacGxQTAAAACwAAAUCcnVSVQAAACIAAAUuYXJFRwAAACYAAAVQZW5VUwAA
-ACYAAAV2AFYBYQBlAG8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAZQBs
-ACAAUgBHAEIALQBiAGUAcwBrAHIAaQB2AGUAbABzAGUAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBu
-AOgAcgBpAGMAQx6lAHUAIABoAOwAbgBoACAAUgBHAEIAIABDAGgAdQBuAGcAUABlAHIAZgBpAGwAIABS
-AEcAQgAgAEcAZQBuAOkAcgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABS
-AEcAQgBQAHIAbwBmAGkAbAAgAGcA6QBuAOkAcgBpAHEAdQBlACAAUgBWAEIAwQBsAHQAYQBsAOEAbgBv
-AHMAIABSAEcAQgAgAHAAcgBvAGYAaQBskBp1KAAgAFIARwBCACCCcl9pY8+P8ABHAGUAbgBlAHIAaQBz
-AGsAIABSAEcAQgAtAHAAcgBvAGYAaQBsAE8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbAXk
-BegF1QXkBdkF3AAgAFIARwBCACAF2wXcBdwF2QBQAHIAbwBmAGkAbABvACAAUgBHAEIAIABnAGUAbgBl
-AHIAaQBjAG8AUAByAG8AZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAQQBsAGwAZwBlAG0AZQBp
-AG4AZQBzACAAUgBHAEIALQBQAHIAbwBmAGkAbMd8vBgAIABSAEcAQgAg1QS4XNMMx3xmbpAaACAAUgBH
-AEIAIGPPj/Blh072TgCCLAAgAFIARwBCACAw1zDtMNUwoTCkMOsDkwO1A70DuQO6A8wAIAPAA8EDvwPG
-A68DuwAgAFIARwBCAFAAZQByAGYAaQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBsAGcAZQBt
-AGUAZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAgDhcOMQ5I
-DicORA4bAEcAZQBuAGUAbAAgAFIARwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBuACAAUgBH
-AEIALQBwAHIAbwBmAGkAaQBsAGkARwBlAG4AZQByAGkBDQBrAGkAIABSAEcAQgAgAHAAcgBvAGYAaQBs
-AFUAbgBpAHcAZQByAHMAYQBsAG4AeQAgAHAAcgBvAGYAaQBsACAAUgBHAEIEHgQxBEkEOAQ5ACAEPwRA
-BD4ERAQ4BDsETAAgAFIARwBCBkUGRAZBACAGKgY5BjEGSgZBACAAUgBHAEIAIAYnBkQGOQYnBkUARwBl
-AG4AZQByAGkAYwAgAFIARwBCACAAUAByAG8AZgBpAGwAZXRleHQAAAAAQ29weXJpZ2h0IDIwMDcgQXBw
-bGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9YWVogAAAAAAAA
-dE0AAD3uAAAD0FhZWiAAAAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZjdXJ2AAAAAAAA
-AAEBzQAAc2YzMgAAAAAAAQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGzSKywtLlokY2xh
-c3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMtLzBaTlNJbWFnZVJlcFhOU09iamVjdNIr
-LDIzV05TQXJyYXmiMjDSKyw1Nl5OU011dGFibGVBcnJheaM1MjDTODkPOjs8V05TV2hpdGVcTlNDb2xv
-clNwYWNlRDAgMAAQA4AM0issPj9XTlNDb2xvcqI+MNIrLEFCV05TSW1hZ2WiQTAACAARABoAJAApADIA
-NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
-6gDxAQgBJAEmASgQIhAnEDIQOxBOEFIQXRBmEGsQcxB2EHsQihCOEJUQnRCqEK8QsRCzELgQwBDDEMgQ
-0AAAAAAAAAIBAAAAAAAAAEMAAAAAAAAAAAAAAAAAABDTA
-</mutableData>
-        </image>
-        <image name="button:Mft-a2-E8P:image" width="20" height="20">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
-S2V5ZWRBcmNoaXZlctEICVRyb290gAGuCwwZGh8UJCkqMTQ3PUBVJG51bGzWDQ4PEBESExQVFhcYVk5T
-U2l6ZV5OU1Jlc2l6aW5nTW9kZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVwc1dOU0NvbG9ygAIQAIAN
-EiDAAACAA4ALWHsyMCwgMjB90hsPHB5aTlMub2JqZWN0c6EdgASACtIbDyAjoiEigAWABoAJ0w8lJico
-FF8QFE5TVElGRlJlcHJlc2VudGF0aW9uXxAZTlNJbnRlcm5hbExheW91dERpcmVjdGlvboAIgAdPEQ72
-TU0AKgAABkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAFsAAACuAAAAywAAAMwAAADM
-AAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAywAAAK4AAABbAAAABwAAAAAAAAAAAAAAAAAAAA4AAACv
-AAAA/wAAANQAAAC4AAAAuAAAALgAAAC4AAAAuAAAALgAAAC4AAAAuAAAALgAAAC4AAAA1AAAAP8AAACv
-AAAADgAAAAAAAAAAAAAAkQAAAP4AAABrAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAJAAAAawAAAP4AAACRAAAAAAAAAB4AAADxAAAAlQAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlQAAAPEAAAAeAAAAPQAAAP8AAABA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA
-AAAA/wAAAD0AAABCAAAA/wAAADUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAADUAAAD/AAAAQgAAAEIAAAD/AAAANgAAAAAAAAAAAAAAAAAAAAAAAAAA
-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
-ABYAAAO2c3ZTRQAAACYAAALYemhDTgAAABYAAAPMamFKUAAAABoAAAPiZWxHUgAAACIAAAP8cHRQTwAA
-ACYAAAQebmxOTAAAACgAAAREZXNFUwAAACYAAAQedGhUSAAAACQAAARsdHJUUgAAACIAAASQZmlGSQAA
-ACgAAASyaHJIUgAAACgAAATacGxQTAAAACwAAAUCcnVSVQAAACIAAAUuYXJFRwAAACYAAAVQZW5VUwAA
-ACYAAAV2AFYBYQBlAG8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAZQBs
-ACAAUgBHAEIALQBiAGUAcwBrAHIAaQB2AGUAbABzAGUAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBu
-AOgAcgBpAGMAQx6lAHUAIABoAOwAbgBoACAAUgBHAEIAIABDAGgAdQBuAGcAUABlAHIAZgBpAGwAIABS
-AEcAQgAgAEcAZQBuAOkAcgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABS
-AEcAQgBQAHIAbwBmAGkAbAAgAGcA6QBuAOkAcgBpAHEAdQBlACAAUgBWAEIAwQBsAHQAYQBsAOEAbgBv
-AHMAIABSAEcAQgAgAHAAcgBvAGYAaQBskBp1KAAgAFIARwBCACCCcl9pY8+P8ABHAGUAbgBlAHIAaQBz
-AGsAIABSAEcAQgAtAHAAcgBvAGYAaQBsAE8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbAXk
-BegF1QXkBdkF3AAgAFIARwBCACAF2wXcBdwF2QBQAHIAbwBmAGkAbABvACAAUgBHAEIAIABnAGUAbgBl
-AHIAaQBjAG8AUAByAG8AZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAQQBsAGwAZwBlAG0AZQBp
-AG4AZQBzACAAUgBHAEIALQBQAHIAbwBmAGkAbMd8vBgAIABSAEcAQgAg1QS4XNMMx3xmbpAaACAAUgBH
-AEIAIGPPj/Blh072TgCCLAAgAFIARwBCACAw1zDtMNUwoTCkMOsDkwO1A70DuQO6A8wAIAPAA8EDvwPG
-A68DuwAgAFIARwBCAFAAZQByAGYAaQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBsAGcAZQBt
-AGUAZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAgDhcOMQ5I
-DicORA4bAEcAZQBuAGUAbAAgAFIARwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBuACAAUgBH
-AEIALQBwAHIAbwBmAGkAaQBsAGkARwBlAG4AZQByAGkBDQBrAGkAIABSAEcAQgAgAHAAcgBvAGYAaQBs
-AFUAbgBpAHcAZQByAHMAYQBsAG4AeQAgAHAAcgBvAGYAaQBsACAAUgBHAEIEHgQxBEkEOAQ5ACAEPwRA
-BD4ERAQ4BDsETAAgAFIARwBCBkUGRAZBACAGKgY5BjEGSgZBACAAUgBHAEIAIAYnBkQGOQYnBkUARwBl
-AG4AZQByAGkAYwAgAFIARwBCACAAUAByAG8AZgBpAGwAZXRleHQAAAAAQ29weXJpZ2h0IDIwMDcgQXBw
-bGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9YWVogAAAAAAAA
-dE0AAD3uAAAD0FhZWiAAAAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZjdXJ2AAAAAAAA
-AAEBzQAAc2YzMgAAAAAAAQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGzSKywtLlokY2xh
-c3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMtLzBaTlNJbWFnZVJlcFhOU09iamVjdNIr
-LDIzV05TQXJyYXmiMjDSKyw1Nl5OU011dGFibGVBcnJheaM1MjDTODkPOjs8V05TV2hpdGVcTlNDb2xv
-clNwYWNlRDAgMAAQA4AM0issPj9XTlNDb2xvcqI+MNIrLEFCV05TSW1hZ2WiQTAACAARABoAJAApADIA
-NwBJAEwAUQBTAGIAaAB1AHwAiwCSAJ8ApgCuALAAsgC0ALkAuwC9AMYAywDWANgA2gDcAOEA5ADmAOgA
-6gDxAQgBJAEmASgQIhAnEDIQOxBOEFIQXRBmEGsQcxB2EHsQihCOEJUQnRCqEK8QsRCzELgQwBDDEMgQ
-0AAAAAAAAAIBAAAAAAAAAEMAAAAAAAAAAAAAAAAAABDTA
-</mutableData>
-        </image>
         <image name="report" width="48" height="48"/>
         <image name="reportContent" width="20" height="20"/>
         <systemColor name="darkTextColor">

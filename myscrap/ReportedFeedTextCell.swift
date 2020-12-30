@@ -7,8 +7,16 @@
 //
 
 import UIKit
-
+import SwiftLinkPreview
 class ReportedFeedTextCell: FeedNewUserCell {
+    
+    @IBOutlet weak var linkPreviewHeight: NSLayoutConstraint!
+    @IBOutlet weak var linkViewTopSpace: NSLayoutConstraint!
+    @IBOutlet weak var spinnerView: NVActivityIndicatorView!
+    @IBOutlet weak var linkPreviewView: UIView!
+    @IBOutlet weak var linkImageView: UIImageView!
+    @IBOutlet weak var linkDescriptionLbl: UILabel!
+    @IBOutlet weak var shortLinkLbl: UILabel!
     
     @IBOutlet weak var reportedLbl: UILabel!
     @IBOutlet weak var descriptionText: UserTagTextView!
@@ -17,6 +25,12 @@ class ReportedFeedTextCell: FeedNewUserCell {
     @IBOutlet weak var likeCommentViewHeight: NSLayoutConstraint!
     @IBOutlet weak var likeCommentsDistance: NSLayoutConstraint!
     @IBOutlet weak var updatedProfileText: UILabel!
+    
+    //LinkPreview
+    private var result = Response()
+    private let slp = SwiftLinkPreview(cache: InMemoryCache())
+    
+    
     override var newItem : FeedV2Item? {
         didSet{
             guard let item = newItem else { return }
@@ -137,9 +151,86 @@ class ReportedFeedTextCell: FeedNewUserCell {
         }
     }
     func setupAPIViews(item:FeedV2Item){
+        
+        if item.status.contains("http") {
+            spinnerView.color = .MyScrapGreen
+            spinnerView.type = .ballPulseSync
+            spinnerView.startAnimating()
+            if linkPreviewView.isHidden {
+                linkPreviewView.isHidden = false
+                linkPreviewView.layer.cornerRadius = 8
+                linkPreviewView.clipsToBounds = true
+                linkPreviewView.layer.borderWidth = 0.5
+                linkPreviewHeight.constant = 400
+                linkViewTopSpace.constant = 10
+                linkPreviewView.layer.borderColor = UIColor.lightGray.cgColor
+                linkDescriptionLbl.text = ""
+                shortLinkLbl.text = ""
+                
+                
+            }
+            /*if let url = self.slp.extractURL(text: item.status),
+                let cached = self.slp.cache.slp_getCachedResponse(url: url.absoluteString) {
+                
+                self.result = cached
+                self.setupLinkPreview()
+                
+                printResult(result)
+                
+            } else {
+                
+            }*/
+            self.slp.preview(item.status, onSuccess: { result in
+                
+                self.printResult(result)
+                
+                self.result = result
+                self.setupLinkPreview()
+                
+            }, onError: { error in
+                print(error)
+                print("Unable to get the link preview ")
+                                
+            })
+        } else {
+            linkPreviewHeight.constant = 0
+            linkViewTopSpace.constant = 0
+            linkPreviewView.isHidden = true
+        }
+        
+        if (item.likeCount == 0 && item.commentCount == 0  && item.viewsCount == 0 ){
+            likeCommentViewHeight.constant = 0
+            
+        }
+        else{
+            
+            
+            likeCommentViewHeight.constant = 22
+            if (item.likeCount == 0) {
+              
+                likeCommentsDistance.constant = -30
+            }
+            else{
+                
+                likeCommentsDistance.constant = 10
+            }
+        }
+        if inDetailView {
+            likeCommentViewHeight.constant = 0
+        }
         descriptionText?.attributedText = item.descriptionStatus
     }
-    
+    func printResult(_ result: Response) {
+        print("url: ", result.url ?? "no url")
+        print("finalUrl: ", result.finalUrl ?? "no finalUrl")
+        print("canonicalUrl: ", result.canonicalUrl ?? "no canonicalUrl")
+        print("title: ", result.title ?? "no title")
+        print("images: ", result.images ?? "no images")
+        print("image: ", result.image ?? "no image")
+        print("video: ", result.video ?? "no video")
+        print("icon: ", result.icon ?? "no icon")
+        print("description: ", result.description ?? "no description")
+    }
     @IBAction func editBtnPressed(_ sender: UIButton) {
         if network.reachability.isReachable == true {
             guard let item = newItem else { return }
@@ -162,7 +253,58 @@ class ReportedFeedTextCell: FeedNewUserCell {
         guard  let item = newItem else { return }
         updatedDelegate?.didTapFavouriteV2(item: item, cell: self)
     }
+    func setupLinkPreview() {
+        
+        
+        if let value = self.result.images {
+            
+            if !value.isEmpty {
+                if let imageString = value.first {
+                    if imageString.contains("blank.png") {
+                        self.linkImageView.image = #imageLiteral(resourceName: "no-image")
+                    } else {
+                        self.linkImageView.sd_setImage(with: URL(string: imageString), completed: nil)
+                    }
+                    print("Preview image url : \(imageString) ")
+                    
+                }
+            }
+        }
+        
+        if let value: String = self.result.description {
+            
+            self.linkDescriptionLbl?.text = value.isEmpty ? "No description" : value
+            
+        } else {
+            
+            self.linkDescriptionLbl?.text = "No description"
+            
+        }
+        if let value: String = self.result.canonicalUrl {
+            
+            self.shortLinkLbl?.text = value.isEmpty ? "No description" : value
+            
+        } else {
+            
+            self.shortLinkLbl?.text = "No description"
+            
+        }
+        self.spinnerView.stopAnimating()
+        let imgtap = UITapGestureRecognizer(target: self, action: #selector(setupLinkTap(_:)))
+        imgtap.numberOfTapsRequired = 1
+        linkImageView?.addGestureRecognizer(imgtap)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(setupLinkTap(_:)))
+        tap.numberOfTapsRequired = 1
+        linkPreviewView?.addGestureRecognizer(tap)
+    }
     
+    @objc func setupLinkTap(_ sender: UITapGestureRecognizer) {
+        if let link = self.result.finalUrl?.absoluteString {
+            updatedDelegate?.didTap(url: link)
+        }
+        
+    }
     @IBAction func likeImgTapped(_ sender: UIButton) {
         if network.reachability.isReachable == true {
             print("LIKE ***")
