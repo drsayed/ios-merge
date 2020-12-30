@@ -351,7 +351,8 @@ extension DetailsVC{
                 cell.refreshImagesCollection()
                 cell.likeCountBtn.isHidden = true
                 cell.commentCountBtn.isHidden = true
-                
+                cell.likeCountBtn.isHidden = true
+
                 cell.commentBtnAction = {
                     self.commentInputView.inputTextView.becomeFirstResponder()
                     self.collectionView?.scrollToLastItem(animated: false)
@@ -416,6 +417,8 @@ extension DetailsVC{
                 cell.updatedDelegate = self
                 cell.newItem = data
                 cell.inDetailView = true
+                cell.commentCountBtn.isHidden = true
+                cell.likeCountBtn.isHidden = true
                 cell.commentBtnAction = {
                     
                     self.commentInputView.inputTextView.becomeFirstResponder()
@@ -550,6 +553,8 @@ extension DetailsVC{
                // self.visibleCellIndex = indexPath
                 cell.updatedDelegate = self
                 cell.newItem = data
+                cell.commentCountBtn.isHidden = true
+             //   cell.likeCountBtn.isHidden = true
                 cell.inDetailView = true
                 cell.refreshTable()
                   cell.videoPlayerDelegate = self
@@ -617,6 +622,8 @@ extension DetailsVC{
                // self.visibleCellIndex = indexPath
                 cell.updatedDelegate = self
                 cell.newItem = data
+                cell.commentCountBtn.isHidden = true
+                //cell.likeCountBtn.isHidden = true
                 cell.inDetailView = true
                 cell.refreshTable()
                   cell.videoPlayerDelegate = self
@@ -681,10 +688,13 @@ extension DetailsVC{
                 return cell
             case .feedPortrVideoTextCell:
                  guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedDetailVideoTextCell.identifier, for: indexPath) as? FeedDetailVideoTextCell else { return UICollectionViewCell()}
+                
                                // self.visibleCellIndex = indexPath
                                 cell.updatedDelegate = self
                                 cell.newItem = data
                                 cell.inDetailView = true
+                cell.commentCountBtn.isHidden = true
+               // cell.likeCountBtn.isHidden = true
                  cell.videoPlayerDelegate = self
 //                            cell.videosCountView.isHidden = true
 //                                cell.thumbnailImg.isHidden = false
@@ -753,6 +763,8 @@ extension DetailsVC{
                                 cell.newItem = data
                                 cell.inDetailView = true
                  cell.videoPlayerDelegate = self
+                cell.commentCountBtn.isHidden = true
+              //  cell.likeCountBtn.isHidden = true
 //                            cell.videosCountView.isHidden = true
 //                                cell.thumbnailImg.isHidden = false
 //                                cell.playBtn.isHidden = false
