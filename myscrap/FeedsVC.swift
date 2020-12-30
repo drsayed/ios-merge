@@ -13,8 +13,6 @@ import XMPPFramework
 import RealmSwift
 import Social
 import Reachability
-
-
 import StoreKit
 import Photos
 import UserNotifications
@@ -96,101 +94,16 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         } else {
             // Fallback on earlier versions
         }
-        self.headerCellHeight.constant = 0
-       // NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("VideoPlayedChanged"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("SharedOpen"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("SharedClosed"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAllFeedsData), name: Notification.Name("DeletedUserOwnVideo"), object: nil)
-
-        
-       // NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling(notification:)), name: Notification.Name("addObserver"), object: nil)
-
-        self.headerCell =  UINib(nibName: "FeedVCHeadeer", bundle: nil).instantiate(withOwner: nil, options: nil)[0]  as! FeedVCHeadeer
-            self.headerCell!.datasource = self.memberDataSource
-                self.headerCell!.delegate = self
-               self.headerCell!.collectionView.reloadData()
-                                                           self.headerView.addSubview( self.headerCell!)
-        
-        //Get the Database Path
-        print(Realm.Configuration.defaultConfiguration.fileURL as Any)
-          NotificationCenter.default.addObserver(self, selector: #selector(self.OpenEditProfileView(notification:)), name: Notification.Name("editButtonPressed"), object: nil)
-        //Top Spinner
-        self.topSpinner.type = .lineSpinFadeLoader
-        self.topSpinner.color = .MyScrapGreen
-        self.topSpinnerHeightConstraint.constant = 0
-        
-        //Load More Spinner
-        self.loadMoreSpinner.type = .ballScaleMultiple
-        self.loadMoreSpinner.color = .MyScrapGreen
-        self.bottomSpinnerViewHeightConstraint.constant = 0
-        
-        /*let items = ["Feeds", "Live Discussion"]
-         
-         let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView:(self.navigationController?.view)!, title: BTTitle.index(0), items: items)
-         self.navigationItem.titleView = menuView
-         //menuView.arrowTintColor = UIColor.white
-         menuView.cellTextLabelAlignment = .left
-         menuView.cellTextLabelColor = UIColor.MyScrapGreen
-         menuView.menuTitleColor = UIColor.white
-         menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
-         print("I am here so this is my stuff")
-         
-         if items[indexPath] == "Live Discussion" {
-         print("Did select item at index: 22222 \(indexPath)")
-         
-         //                let controller = self?.storyboard?.instantiateViewController(withIdentifier: "LiveDiscussion")
-         //                let rearViewController = MenuVC()
-         //                let frontNavigationController = UINavigationController(rootViewController: controller!)
-         //                let mainRevealController = SWRevealViewController()
-         //                mainRevealController.rearViewController = rearViewController
-         //                mainRevealController.frontViewController = frontNavigationController
-         //                self?.present(mainRevealController, animated: true, completion: {
-         //                    //NotificationCenter.default.post(name: .userSignedIn, object: nil)
-         //                })
-         if let vc = LiveDiscussion.storyBoardInstance() {
-         if AuthStatus.instance.isGuest{
-         print("Guest user")
-         self!.showGuestAlert()
-         } else {
-         print("Live btn pressed")
-         //                let joined = UserDefaults.standard.bool(forKey: "joinedStatus")
-         //                if  joined == true {
-         //                    XMPPService.instance.addMembers()
-         print("this is  sparta!!!!!!!!")
-         
-         //                } else {
-         //                    print("Xmpp still not connected")
-         //                }
-         self?.navigationController?.pushViewController(vc, animated: true)
-         }
-         
-         }
-         //self!.present(controller!, animated: true, completion: nil)
-         } else {
-         print("I'm in Feeds module")
-         }
-         }*/
-        
-        
-        
-        updateUserInterface()
-        
-        //For testing purpose Market as Default page commented timer
-        //gameTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
-        
-        collectionView.refreshControl = refreshContol
-       collectionView.alwaysBounceVertical = true;
-
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionHeadersPinToVisibleBounds = false
+       
+        self.addObserverNotifications()
+        self.configureHeaderView()
         setupViews()
         if isSignedIn {
             active.startAnimating()
@@ -199,74 +112,132 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
                 self.topSpinnerHeightConstraint.constant = 58
                 self.topLoader.startAnimating()
                 //self.refreshContol.beginRefreshing()
-                self.handleRefresh()
+            //    self.handleRefresh()
             }
         }
-        print("hi get profile percent")
-        
-        //Showing Market AD POPUP here
-        if showPopup {
-            self.showingMarketPopup()
-        }
-        
-        //Showing COVID-19 Poll
-        //Removed and not using
-        if showCovidPoll {
-            covidService.delegate = self
-            covidService.getPollStatusForMe()
-        }
-        //getProfile()
-        //storiesService.getStories()         //Get recent stories feeds
-        //Calling story delegate
-        //storiesService.delegate = self
+        self.getAllFeedsData()
+        self.processLocation()
+        self.marketPOpUP()
+        self.getCovid19Pol()
+        self.getRoasterData()
         self.collectionView.isHidden = true
-        feedOperation = BlockOperation {
-            print("hello")
-            let group = DispatchGroup()
-            group.enter()
-            self.getFeeds(pageLoad: 0, completion: { _ in       //self.feedDataSource.count
-                group.leave()
-            })
-            group.notify(queue: .main, execute: {
-                print("groupleaved")
-                self.nearFriendOperation?.start()
-                self.locationAndDeviceOperation?.start()
-            })
-        }
         
-        nearFriendOperation = BlockOperation {
-            print("nearfriend operation taking place")
+        view.endEditing(true)
+        
+      
+       
+//        feedOperation = BlockOperation {
+//            print("hello")
+//            let group = DispatchGroup()
+//            group.enter()
+//            self.getFeeds(pageLoad: 0, completion: { _ in       //self.feedDataSource.count
+//                group.leave()
+//            })
+//            group.notify(queue: .main, execute: {
+//                print("groupleaved")
+//            })
+//        }
+////
+//        nearFriendOperation = BlockOperation {
+//            print("nearfriend operation taking place")
+//            self.memberService.getOnlineFriends(completion: { (members) in
+//                DispatchQueue.main.async {
+//                    self.memberDataSource = members
+//                      self.headerCell!.datasource = self.memberDataSource
+//                     self.headerCellHeight.constant = 90
+//                        self.headerCell!.collectionView.reloadData()
+//
+//                }
+//            })
+//        }
+////
+//        locationAndDeviceOperation = BlockOperation {
+//            //Triggering FCM
+//            //Maha manually trigger this code for not sending fcm token to api everytime feeds loaded
+//            //NotificationService.instance.updateDeviceToken()
+//            //Updating the User location when opening the application.
+//            LocationService.sharedInstance.processLocation()
+//        }
+      
+        
+
+    }
+    private func getAllFeedsData(){
+        DispatchQueue.global(qos:.userInteractive).async {
+            self.getFeeds(pageLoad: 0, completion: { _ in       //self.feedDataSource.count
+                DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                   }
+            })
+          }
+        self.getAllOnlineUsersData()
+    }
+    private func getAllOnlineUsersData(){
+        DispatchQueue.global(qos:.userInteractive).async {
             self.memberService.getOnlineFriends(completion: { (members) in
                 DispatchQueue.main.async {
                     self.memberDataSource = members
                       self.headerCell!.datasource = self.memberDataSource
                      self.headerCellHeight.constant = 90
                         self.headerCell!.collectionView.reloadData()
-//                    self.collectionView.performBatchUpdates({
-//                        let indexSet = IndexSet(integer: 0)
-//                        self.collectionView.reloadSections(indexSet)
-//                    }, completion: nil)
+
                 }
             })
-        }
-        
-        locationAndDeviceOperation = BlockOperation {
-            //Triggering FCM
-            //Maha manually trigger this code for not sending fcm token to api everytime feeds loaded
-            //NotificationService.instance.updateDeviceToken()
-            //Updating the User location when opening the application.
+          }
+    }
+    private func processLocation(){
+        DispatchQueue.global(qos:.userInteractive).async {
             LocationService.sharedInstance.processLocation()
+          }
+    }
+    private func marketPOpUP(){
+        //Showing Market AD POPUP here
+        if showPopup {
+            self.showingMarketPopup()
         }
-        view.endEditing(true)
-        
-        setupLoading()
+    }
+    private func getCovid19Pol(){
+        if showCovidPoll {
+            DispatchQueue.global(qos:.userInteractive).async {
+            //Showing COVID-19 Poll
+            //Removed and not using
+          
+                self.covidService.delegate = self
+                self.covidService.getPollStatusForMe()
+           
+          }
+        }
+    }
+    private func getRoasterData(){
         if isSignedIn {
-            //let group = DispatchGroup()
-            //group.enter()
-            self.getRoasterHistory(completion: { _ in       //self.feedDataSource.count
-                //group.leave()
-            })
+            DispatchQueue.global(qos:.userInteractive).async {
+            //Showing COVID-19 Poll
+            //Removed and not using
+          
+                self.getRoasterHistory(completion: { _ in       //self.feedDataSource.count
+                    //group.leave()
+                })
+           
+          }
         }
+    }
+    private func configureHeaderView(){
+        
+        self.headerCellHeight.constant = 0
+        self.headerCell =  UINib(nibName: "FeedVCHeadeer", bundle: nil).instantiate(withOwner: nil, options: nil)[0]  as! FeedVCHeadeer
+            self.headerCell!.datasource = self.memberDataSource
+                self.headerCell!.delegate = self
+               self.headerCell!.collectionView.reloadData()
+                self.headerView.addSubview( self.headerCell!)
+    }
+    private func addObserverNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("SharedOpen"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollViewDidEndScrolling), name: Notification.Name("SharedClosed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAllFeedsData), name: Notification.Name("DeletedUserOwnVideo"), object: nil)
+        
+
     }
     @objc func OpenEditProfileView(notification: Notification) {
 //              profileEditPopUp.removeFromSuperview()
@@ -399,7 +370,8 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     }
     
     private func setupLoading(){
-        feedOperation?.start()
+       // feedOperation?.start()
+        self.getAllFeedsData()
         //        nearFriendOperation?.addDependency(feedOperation!)
         //        locationAndDeviceOperation?.addDependency(feedOperation!)
         //        nearFriendOperation?.start()
@@ -418,33 +390,20 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     @objc
     fileprivate func handleRefresh(){
         if network.reachability.isReachable == true {
-            if active.isAnimating { active.stopAnimating() }
+            if active.isAnimating {
+                active.stopAnimating() }
             isRefreshControl = true
-            getFeeds(pageLoad: 0, completion: {_ in })
-            self.memberService.getOnlineFriends(completion: { (members) in
-                DispatchQueue.main.async {
-                    self.memberDataSource = members
-                      self.headerCellHeight.constant = 90
-                    self.headerCell!.datasource = self.memberDataSource
-                         self.headerCell!.collectionView.reloadData()
-//                    if self.headerCell ==  nil
-//                               {
-//                                   self.headerCell =  UINib(nibName: "FeedVCHeadeer", bundle: nil).instantiate(withOwner: nil, options: nil)[0]  as! FeedVCHeadeer
-//                                   self.headerCell!.datasource = self.memberDataSource
-//                                   self.headerCell!.delegate = self
-//                                   self.headerCell!.collectionView.reloadData()
-//                                   self.headerView.addSubview( self.headerCell!)
-//                               }
-//                               else
-//                               {
-                                  
-                          //     }
-//                    self.collectionView.performBatchUpdates({
-//                        let indexSet = IndexSet(integer: 0)
-//                        self.collectionView.reloadSections(indexSet)
-//                    }, completion: nil)
-                }
-            })
+            self.getAllFeedsData()
+            self.getAllOnlineUsersData()
+//            getFeeds(pageLoad: 0, completion: {_ in })
+//            self.memberService.getOnlineFriends(completion: { (members) in
+//                DispatchQueue.main.async {
+//                    self.memberDataSource = members
+//                      self.headerCellHeight.constant = 90
+//                    self.headerCell!.datasource = self.memberDataSource
+//                         self.headerCell!.collectionView.reloadData()
+//                }
+//            })
         } else {
             self.showToast(message: "No internet connection")
         }
@@ -825,6 +784,23 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     
     
     private func setupViews(){
+        
+        //Top Spinner
+        self.topSpinner.type = .lineSpinFadeLoader
+        self.topSpinner.color = .MyScrapGreen
+        self.topSpinnerHeightConstraint.constant = 0
+        
+        //Load More Spinner
+        self.loadMoreSpinner.type = .ballScaleMultiple
+        self.loadMoreSpinner.color = .MyScrapGreen
+        self.bottomSpinnerViewHeightConstraint.constant = 0
+
+        collectionView.refreshControl = refreshContol
+       collectionView.alwaysBounceVertical = true;
+
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionHeadersPinToVisibleBounds = false
+        
         collectionView.delegate = self
         collectionView.dataSource = self
 //        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -1055,47 +1031,7 @@ self.collectionView.collectionViewLayout.invalidateLayout()
         }
         
     }
-    func updateUserInterface() {
-        /*switch Network.reachability.status {
-         case .unreachable:
-         let alertController = UIAlertController(title:"No Internet", message:  "Seems to be internet is not connected!!", preferredStyle: .alert)
-         
-         // Setting button action
-         let settingsAction = UIAlertAction(title: "Go to Setting", style: .default) { (_) -> Void in
-         guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-         return
-         }
-         
-         if UIApplication.shared.canOpenURL(settingsUrl) {
-         UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-         // Checking for setting is opened or not
-         print("Setting is opened: \(success)")
-         })
-         }
-         }
-         
-         alertController.addAction(settingsAction)
-         // Cancel button action
-         let cancelAction = UIAlertAction(title: "Cancel", style: .default){ (_) -> Void in
-         // Magic is here for cancel button
-         }
-         alertController.addAction(cancelAction)
-         // This part is important to show the alert controller ( You may delete "self." from present )
-         self.present(alertController, animated: true, completion: nil)
-         case .wwan:
-         view.backgroundColor = .yellow
-         case .wifi:
-         view.backgroundColor = .green
-         }
-         print("Reachability Summary")
-         print("Status:", Network.reachability.status)
-         print("HostName:", Network.reachability.hostname ?? "nil")
-         print("Reachable:", Network.reachability.isReachable)
-         print("Wifi:", Network.reachability.isReachableViaWiFi)
-         */
-    }
     @objc func statusManager(_ notification: Notification) {
-        updateUserInterface()
     }
 }
 extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
@@ -4026,78 +3962,6 @@ extension FeedsVC: MSSliderDelegate {
     }
 }
 
-
-
-
-//extension FeedsVC: FeedsNewsDelegate{
-//    func DidTapLikeCount(cell: NewsTextCell) {
-//        if AuthStatus.instance.isGuest{
-//            showGuestAlert()
-//        } else {
-//            if let indexPath = collectionView.indexPathForItem(at: cell.center) {
-//                let obj = feedDatasource[indexPath.item]
-//                //                performLikeVC(for: obj)
-//                performLikeVC(for: obj.postId)
-//            }
-//        }
-//    }
-//
-//    func PerformLike(cell: NewsTextCell) {
-//        if AuthStatus.instance.isGuest{
-//            showGuestAlert()
-//        } else {
-//            if let indexpath = collectionView.indexPathForItem(at: cell.center){
-//                let obj = feedDatasource[indexpath.item]
-//                obj.likeStatus = !obj.likeStatus
-//                if obj.likeStatus{
-//                    obj.likeCount += 1
-//                } else {
-//                    obj.likeCount -= 1
-//                }
-//                collectionView.reloadItems(at: [indexpath])
-//                feedService.postLike(postId: obj.postId, frinedId: obj.postedUserId)
-//            }
-//        }
-//    }
-//
-//    func PerformContinueReading(cell: NewsTextCell) {
-//        if let indexPath = collectionView.indexPathForItem(at: cell.center) {
-//            let obj = feedDatasource[indexPath.item]
-//            obj.isCellExpanded = true
-//            collectionView.performBatchUpdates({
-//                self.collectionView.reloadItems(at: [indexPath])
-//            }, completion: nil)
-//        }
-//    }
-//
-//    func PerformDetailNews(cell: NewsTextCell) {
-//        if !AuthStatus.instance.isGuest {
-//            print("News is disabled")
-//            //            if let indexPath = collectionView.indexPathForItem(at: cell.center){
-//            //                let obj = feedDatasource[indexPath.row]
-//            //                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SingleNewsVC") as! SingleNewsVC
-//            //                vc.newsId = obj.postId
-//            //                self.navigationController?.pushViewController(vc, animated: true)
-//            //            }
-//        } else {
-//            showGuestAlert()
-//        }
-//    }
-//
-//    func PerformComapny(cell: NewsTextCell) {
-//        if let indexPath = collectionView.indexPathForItem(at: cell.center){
-//            let obj = feedDatasource[indexPath.row]
-//            if let url = URL(string: obj.publisherUrl){
-//                let vc = SFSafariViewController(url: url)
-//                vc.preferredBarTintColor = UIColor.GREEN_PRIMARY
-//                self.present(vc, animated: true, completion: nil)
-//            }
-//        }
-//    }
-//}
-
-
-
 extension FeedsVC {
     fileprivate func performDetailsController(obj: FeedV2Item){
         let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
@@ -4724,7 +4588,8 @@ extension FeedsVC{
         userSignedInOperation = BlockOperation{
             self.usersignedIn()
         }
-        userSignedInOperation?.addDependency(feedOperation!)
+        
+//        userSignedInOperation?.addDependency(feedOperation!)
         userSignedInOperation?.start()
     }
     

@@ -19,7 +19,6 @@ enum UnNotificationType: String{
     case editprofile = "editprofile"
     case price = "price"
     case profile = "profile"
-    
     case market = "market"
     case marketmpost = "market/mpost"
     case members = "members"
@@ -57,7 +56,6 @@ struct UnNotificationKeys{
     static let companyId = "companyId"
     static let listingId = "listingId"
     static let listingid = "listingid"
-
     //chat
     static let fname = "friendName"
     static let colorCode = "colorCode"
@@ -76,55 +74,20 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
     func registerForNotifications(_ application: UIApplication){
         
         if #available(iOS 10.0, *) {
-          // For iOS 10 display notification (sent via APNS)
-          UNUserNotificationCenter.current().delegate = self
-
-          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-          UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: {_, _ in })
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
         } else {
-          let settings: UIUserNotificationSettings =
-          UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-          application.registerUserNotificationSettings(settings)
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
         }
         self.center.delegate = self
         application.registerForRemoteNotifications()
-        
-//        if #available(iOS 10.0, *) {
-//                let center = UNUserNotificationCenter.current()
-//                center.delegate = self
-//                center.requestAuthorization(options: [.badge, .alert, .sound]) {
-//                    (granted, error) in
-//                    if granted {
-//                        DispatchQueue.main.async {
-//                            self.center.delegate = self
-//                            application.registerForRemoteNotifications()
-//                            //UIApplication.shared.registerForRemoteNotifications()
-//                        }
-//                    } else {
-//                        //print("APNS Registration failed")
-//                        //print("Error: \(String(describing: error?.localizedDescription))")
-//                    }
-//                }
-//            } else {
-//                let type: UIUserNotificationType = [UIUserNotificationType.badge, UIUserNotificationType.alert, UIUserNotificationType.sound]
-//                let setting = UIUserNotificationSettings(types: type, categories: nil)
-//                application.registerUserNotificationSettings(setting)
-//                self.center.delegate = self
-//                application.registerForRemoteNotifications()
-//                //UIApplication.shared.registerForRemoteNotifications()
-//            }
-//        let options : UNAuthorizationOptions = [.alert, .badge, .sound]
-//        UNUserNotificationCenter.current().requestAuthorization(options: options) { (success, err) in
-//            if success {
-//                DispatchQueue.main.async {
-//                    self.center.delegate = self
-//                    application.registerForRemoteNotifications()
-//                }
-//            }
-//        }
-        
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -133,35 +96,27 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
-      
+        
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-       print("New Tocken is : \(token)")
+        print("New Tocken is : \(token)")
         NotificationService.instance.udidToken = token
-       // Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.sandbox)
-             //  Messaging.messaging().apnsToken = deviceToken
-               InstanceID.instanceID().instanceID { (result, error) in
-                   if let error = error {
-                      // Log.Error("Error fetching remote instance ID: \(error)")
-                   } else if let result = result {
-                  //     Log.Info("Remote instance ID token: \(result.token)")
-                    //   LocalStorage.set(result.token, "dacDeviceToken")
-                    NotificationService.instance.apnToken = result.token
-                    self.connectToFcm()
-
-                   }
-               }
-             //  Messaging.messaging().shouldEstablishDirectChannel = true
-
-       // let remoteNotificationToken = deviceToken.map{ String(format: "%02.2hhx", $0 )}.joined()
+        // Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.sandbox)
+        //  Messaging.messaging().apnsToken = deviceToken
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                // Log.Error("Error fetching remote instance ID: \(error)")
+            } else if let result = result {
+                
+                NotificationService.instance.apnToken = result.token
+                self.connectToFcm()
+                
+            }
+        }
         
         self.voipRegistration()
         
     }
     
-   
-//    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-//            print("remoteMessage: \(remoteMessage)")
-//    }
     func applicationReceivedRemoteMessage(_ remoteMessage:
                                             Messaging) {
         print("Received data message: \(remoteMessage)")
@@ -251,8 +206,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 content.body = content_notif
                 
                 content.userInfo = [
-                        "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.notificationID : notificationID, UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id, UnNotificationKeys.postId : postId
-                        ]
+                    "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.notificationID : notificationID, UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id, UnNotificationKeys.postId : postId
+                    ]
                 ]
                 
                 content.sound = UNNotificationSound.default
@@ -290,7 +245,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             print("User not logged to Myscrap")
         }
     }
-
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //App is foreground message received here then will move to present handler
@@ -309,7 +264,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         let listingId = message["listingId"] as? String ?? ""
         let listingid = message["listingid"] as? String ?? ""
         let notificationID = message["notId"] as? String ?? ""
-
+        
         let sound = message["sound"] as? String ?? ""
         let type = message["type"] as? String ?? ""
         let flag = message["flag"] as? String ?? ""
@@ -341,10 +296,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             print("aps not found")
         }
         
-        
-        
         if type == "xmppOfflineMessageNot" {
-            
             
             let center = UNUserNotificationCenter.current()
             let content = UNMutableNotificationContent()
@@ -367,14 +319,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         }
         
         print("Back ground remote fetch")
-        //DispatchQueue.main.async{
-        //let app = UIApplication.shared
         
-        //bgTask = app.beginBackgroundTask(expirationHandler: {
         if application.applicationState == .background {
-            
-            //XMPPService.instance.disconnect()
-            //XMPPService.instance.connectEst = false
             
             if let id = AuthService.instance.userJID {
                 
@@ -382,11 +328,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     if !XMPPService.instance.connectEst {
                         print("Started connecting XMPP ... in remote")
                         XMPPService.instance.connect(with: id)
-                        //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        //XMPPService.instance.sendOnline()
                         
-                        //}
-                        //self.endBackgroundTask()
                     }
                 } else {
                     print("Already XMPP connected remotely")
@@ -394,123 +336,27 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
         }
         
-        //})
-        //}
-        
-        // Print full message.
-        print(userInfo)
-        print("Foreground notification test : \(UIBackgroundFetchResult.newData)")
+        //      print(userInfo)
+        //        print("Foreground notification test : \(UIBackgroundFetchResult.newData)")
         completionHandler(UIBackgroundFetchResult.newData)
     }
-
+    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(fcmToken)")
         
         let dataDict:[String: String] = ["token": fcmToken!]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-        // TODO: If necessary send token to application server.
-        // Note: This callback is fired at each app startup and whenever a new token is generated.
-        //Assigning the firebase registeration token as apnToken
+        
         NotificationService.instance.apnToken = fcmToken
         NotificationService.instance.updateDeviceToken()
         print("Stored FCM : \(NotificationService.instance.apnToken)")
     }
     
     //MARK: FCM Token Refreshed
-//    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-//         guard let fcmToken = fcmToken else { return }
-//         print("Firebase registration token: \(fcmToken)")
-//    }
+    
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         NSLog("[RemoteNotification] didRefreshRegistrationToken: \(fcmToken)")
     }
-   
-//    func applicationReceivedRemoteMessage(_ remoteMessage:
-//                                            FirebaseMessaging) {
-//        print("Received data message: \(remoteMessage.appData)")
-//    }
-    
-    // Receive data message on iOS 10 devices while app is in the foreground.
-//    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-//        NSLog("remoteMessage: \(remoteMessage.appData)")
-//        print("Print receive message : \(remoteMessage.appData)")
-//
-//        let message = remoteMessage.appData
-//        let name = message["name"] as? String ?? ""
-//        let friendId = message["friendId"] as? String ?? ""
-//        let notId = message["notId"] as? String ?? ""
-//        let flag = message["flag"] as? String ?? ""
-//        let text = message["text"] as? String ?? ""
-//        let id = message["id"] as? String ?? ""
-//        let profilepic = message["profilepic"] as? String ?? ""
-//        let postId = message["postId"] as? String ?? ""
-//        let companyId = message["companyId"] as? String ?? ""
-//        let type = message["type"] as? String ?? ""
-//        let listingId = message["listingId"] as? String ?? ""
-//        let title = message["title"] as? String ?? ""
-//        let content_notif = message["content"] as? String ?? ""
-//        let from = message["from"] as? String ?? ""
-//        let notificationcount = message["notificationcount"] as? String ?? ""
-//
-//        print(" \nName : \(name), \nFriendId : \(friendId), \nNotifID : \(notId), \nFlag : \(flag), \nText :\(text), \nID : \(id), \nProfile Picture : \(profilepic), \nPostID : \(postId), \nCompanyId : \(companyId), \nType : \(type), \nTitle : \(title), \nContent : \(content_notif), \nFrom : \(from), \nNotification Count : \(notificationcount)")
-//        /*
-//        if type == "xmppOfflineMessageNot" {
-//            let center = UNUserNotificationCenter.current()
-//            let content = UNMutableNotificationContent()
-//            content.title = title
-//            content.body = content_notif
-//
-//            content.userInfo = [
-//                "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id
-//                ]
-//            ]
-//            content.sound = UNNotificationSound.default()
-//            let req = UNNotificationRequest(identifier: flag, content: content, trigger: nil)
-//
-//
-//            center.add(req) { (err) in
-//                if let error = err {
-//                    print(error.localizedDescription)
-//                }
-//            }
-//        }*/
-//
-//        //Banner in navigation bar
-//        //let banner = NotificationBanner(title: content_notif, style: .success, colors: CustomBannerColors())
-//        //banner.show()
-//
-//
-//        if content_notif != "" {
-//            let center = UNUserNotificationCenter.current()
-//            let content = UNMutableNotificationContent()
-//            content.title = name            //title
-//            content.body = content_notif
-//
-//            if type == "post" && postId != "" {
-//                content.userInfo = [
-//                    "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id, UnNotificationKeys.postId : postId
-//                    ]
-//                ]
-//            } else {
-//                content.userInfo = [
-//                    "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.listingId : listingId, UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id
-//                    ]
-//                ]
-//            }
-//
-//            content.sound = UNNotificationSound.default
-//            let req = UNNotificationRequest(identifier: flag, content: content, trigger: nil)
-//
-//
-//            center.add(req) { (err) in
-//                if let error = err {
-//                    print(error.localizedDescription)
-//                }
-//            }
-//        } else {
-//            print("unfav and unlike will not triggered")
-//        }
-//    }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,  willPresent notification: UNNotification, withCompletionHandler   completionHandler: @escaping (_ options:   UNNotificationPresentationOptions) -> Void) {
         //
@@ -523,13 +369,13 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         let v = vc as? ConversationVC
         let currentjid = v?.jid
         if let data = userInfo[UnNotificationKeys.data] as? [String: AnyObject],
-            let jid = data[UnNotificationKeys.jid] as? String,
-            jid == currentjid {
-                completionHandler([.sound])
-            }
-         else {
+           let jid = data[UnNotificationKeys.jid] as? String,
+           jid == currentjid {
+            completionHandler([.sound])
+        }
+        else {
             if let vc = UIApplication.shared.topMostViewController(),
-                let _ = vc as? ChatVC{
+               let _ = vc as? ChatVC{
                 completionHandler([.alert, .sound, .badge])
             } else {
                 //Foreground notification received without type : "" specified
@@ -538,8 +384,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         }
     }
     //Notification handling for iOS 10
-      @available(iOS 10.0, *)
-      func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+    @available(iOS 10.0, *)
+    func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
         //
         print("Remote Notification received on foreground : \(notification.request.content.userInfo)")
         let userInfo = notification.request.content.userInfo
@@ -550,13 +396,13 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         let v = vc as? ConversationVC
         let currentjid = v?.jid
         if let data = userInfo[UnNotificationKeys.data] as? [String: AnyObject],
-            let jid = data[UnNotificationKeys.jid] as? String,
-            jid == currentjid {
-                completionHandler([.sound])
-            }
-         else {
+           let jid = data[UnNotificationKeys.jid] as? String,
+           jid == currentjid {
+            completionHandler([.sound])
+        }
+        else {
             if let vc = UIApplication.shared.topMostViewController(),
-                let _ = vc as? ChatVC{
+               let _ = vc as? ChatVC{
                 completionHandler([.alert, .sound, .badge])
             } else {
                 //Foreground notification received without type : "" specified
@@ -590,12 +436,12 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         var listingid: String?
         var notificationId = ""
         let notificationBody =   response.notification.request.content.body as? String
-      
+        
         
         print("User info after tapped : ",userInfo)
         
         if let data = userInfo[UnNotificationKeys.data] as? [String: AnyObject], let type = data[UnNotificationKeys.notificationType] as? String{
-
+            
             print("Data from user info",data)
             
             notificationType = UnNotificationType(rawValue: type) ?? .other
@@ -612,7 +458,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     notificationId = "\(notID)"
                 }
             }
-          
+            
             
             if let listId = data[UnNotificationKeys.listingId] as? String{
                 listingId = listId
@@ -657,28 +503,28 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
             else
             {
-            if let vc = NotificationVC.storyBoardInstance(){
-                let nav = UINavigationController(rootViewController: vc)
-                nav.modalPresentationStyle = .fullScreen
-                navController?.present(nav, animated: true, completion: nil)
-            }
+                if let vc = NotificationVC.storyBoardInstance(){
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    navController?.present(nav, animated: true, completion: nil)
+                }
             }
         case .event:
             if let id = postId{
                 let vc = EventDetailVC()
                 vc.eventId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 navController?.pushViewController(vc, animated: true)
             }
         case .bumped:
             print("Bump notification has been removed manually by MAHA on Nov 20/2019 ")
-            //setBumpVC()           removed the bump notification manually base on the requirements
+        //setBumpVC()           removed the bump notification manually base on the requirements
         case .card:
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 vc.isfromCardNoti = "1"
                 self.navController?.pushViewController(vc, animated: true)
             }
@@ -686,7 +532,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 vc.isfromCardNoti = ""
                 self.navController?.pushViewController(vc, animated: true)
             }
@@ -694,16 +540,16 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 vc.isfromCardNoti = "1"
                 self.navController?.pushViewController(vc, animated: true)
             }
-   
+            
         case .numberaccept:
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 vc.isfromCardNoti = ""
                 self.navController?.pushViewController(vc, animated: true)
             }
@@ -718,7 +564,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 vc.isfromCardNoti = ""
                 self.navController?.pushViewController(vc, animated: true)
             }
@@ -736,7 +582,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 if let id = userId, let vc = FriendVC.storyBoardInstance(){
                     vc.friendId = id
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                    
                     vc.isfromCardNoti = ""
                     self.navController?.pushViewController(vc, animated: true)
                 }
@@ -747,7 +593,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 if let id = userId, let vc = FriendVC.storyBoardInstance(){
                     vc.friendId = id
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                    
                     vc.isfromCardNoti = "1"
                     self.navController?.pushViewController(vc, animated: true)
                 }
@@ -756,24 +602,24 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 if let id = userId, let vc = FriendVC.storyBoardInstance(){
                     vc.friendId = id
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                    
                     vc.isfromCardNoti = ""
                     self.navController?.pushViewController(vc, animated: true)
                 }
             }
-           
+            
         case .company:
             if  let id = companyId, let vc = CompanyHeaderModuleVC.storyBoardInstance() { //CompanyDetailVC.storyBoardInstance() {
                 vc.companyId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 UserDefaults.standard.set(vc.companyId, forKey: "companyId")
                 self.navController?.pushViewController(vc, animated: true)
             }
         case .marketmpost:
             if  let listingID = listingId{
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 let vc = DetailListingOfferVC.controllerInstance(with: listingID, with1: userId)
                 self.navController?.pushViewController(vc, animated: true)
             }
@@ -781,46 +627,46 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             {
                 if  let listingiD = listingid{
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                    
                     let vc = DetailListingOfferVC.controllerInstance(with: listingiD, with1: userId)
                     self.navController?.pushViewController(vc, animated: true)
                 }
                 else
                 {
-                if let vc = MarketVC.storyBoardInstance(){
-                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
-                    self.navController?.pushViewController(vc, animated: true)
-
-                }
+                    if let vc = MarketVC.storyBoardInstance(){
+                        UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                        
+                        self.navController?.pushViewController(vc, animated: true)
+                        
+                    }
                 }
             }
         case .market:
             if  let listingID = listingId{
                 let vc = DetailListingOfferVC.controllerInstance(with: listingID, with1: userId)
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 self.navController?.pushViewController(vc, animated: true)
             }
             else
             {
                 if  let listingiD = listingid{
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                    
                     let vc = DetailListingOfferVC.controllerInstance(with: listingiD, with1: userId)
                     self.navController?.pushViewController(vc, animated: true)
                 }
                 else
                 {
-                if let vc = MarketVC.storyBoardInstance(){
-                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
-                    self.navController?.pushViewController(vc, animated: true)
-
-                }
+                    if let vc = MarketVC.storyBoardInstance(){
+                        UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                        
+                        self.navController?.pushViewController(vc, animated: true)
+                        
+                    }
                 }
             }
-      
+            
         case .chat:
             
             if let fid = chatUserId, let fnm = fName, let cCode = colorCode, let propic = profilePic, let jd = jid {
@@ -832,18 +678,17 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     let vc = UINavigationController(rootViewController: controller)
                     controller.isTapNotifMsg = true
                     controller.modalPresentationStyle = .fullScreen
-
+                    
                     self.getRearViewController().present(vc, animated: false) {
                         NotificationCenter.default.post(name: Notification.Name.navigate, object: fmodel)
                     }
-                    //NotificationCenter.default.post(name: Notification.Name.navigate, object: fmodel)
-                    //self.pushViewController(storyBoard: StoryBoard.CHAT, Identifier: ChatVC.id, checkisGuest: AuthStatus.instance.isGuest)
+                    
                 }
             }
         case .listingChatReq, .listingChatAck:
             if let vc = NotificationVC.storyBoardInstance(){
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-
+                
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
                 navController?.present(nav, animated: true, completion: nil)
@@ -858,10 +703,6 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         default:
             print("go to notification vc")
             
-            /*if let vc = NotificationVC.storyBoardInstance(){
-                let nav = UINavigationController(rootViewController: vc)
-                navController?.present(nav, animated: true, completion: nil)
-            }*/
             let protectedPage = FeedsVC.storyBoardInstance()!
             let rearViewController = MenuTVC()
             let protectedNav = UINavigationController(rootViewController: protectedPage)

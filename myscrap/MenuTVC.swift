@@ -702,41 +702,97 @@ class MenuTVC: UITableViewController {
                 selectAndReload(with: indexPath)
                 //pushViewController(storyBoard: StoryBoard.MAIN, Identifier: FeedsVC.id)
                 pushViewController(storyBoard: StoryBoard.LAND, Identifier: LandHomePageVC.id)
-             } else */if indexPath.item == 1 {
+             
+             } else */
+            let vcOnTop = (self.revealViewController()?.frontViewController!) as? UINavigationController
+            let topViewController = vcOnTop?.viewControllers[(vcOnTop?.viewControllers.count ?? 1)-1]
+            if indexPath.item == 1 {
                 selectAndReload(with: indexPath)
-                pushViewController(storyBoard: StoryBoard.MAIN, Identifier: FeedsVC.id)
+               
+                if  topViewController is FeedsVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
+                    pushViewController(storyBoard: StoryBoard.MAIN, Identifier: FeedsVC.id)
+                }
              } else if indexPath.item == 2 {
                 selectAndReload(with: indexPath)
-                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
-
-              pushViewController(storyBoard: StoryBoard.MAIN, Identifier: PricesTabVC.id)
+                if  topViewController is PricesTabVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
+                    NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+                  pushViewController(storyBoard: StoryBoard.MAIN, Identifier: PricesTabVC.id)
+                }
              //   pushViewController(storyBoard: StoryBoard.MAIN, Identifier: PricesUpdatedVCOld.id)
             } else if indexPath.item == 3 {
                 selectAndReload(with: indexPath)
-                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+                if  topViewController is MarketVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
+                    NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
-                pushViewController(storyBoard: StoryBoard.MARKET, Identifier: MarketVC.id)
+                    pushViewController(storyBoard: StoryBoard.MARKET, Identifier: MarketVC.id)
+                }
+            
             } else if indexPath.item == 4 {
                 selectAndReload(with: indexPath)
-                NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+                
+                if  topViewController is MembersVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
+                    NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
-                pushViewController(storyBoard: StoryBoard.MAIN, Identifier: MembersVC.id)
+                    pushViewController(storyBoard: StoryBoard.MAIN, Identifier: MembersVC.id)
+                }
+              
             } else if indexPath.item == 5 {
                 selectAndReload(with: indexPath)
+                if  topViewController is CompaniesVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
                 pushViewController(storyBoard: StoryBoard.COMPANIES, Identifier: CompaniesVC.id)
+                }
                 //pushViewController(storyBoard: StoryBoard.COMPANIES, Identifier: CompanyDetailedTVC.id)
             } else if indexPath.item == 6 {
                 selectAndReload(with: indexPath)
+                if  topViewController is VisitorsVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: VisitorsVC.id, checkisGuest: AuthStatus.instance.isGuest)
+                }
             } else if indexPath.item == 7 {
                 selectAndReload(with: indexPath)
+                if  topViewController is DiscoverVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: DiscoverVC.id)
+                }
             }
             /*else if indexPath.item == 8 {
                 if AuthStatus.instance.isGuest{
@@ -751,30 +807,58 @@ class MenuTVC: UITableViewController {
             }*/
              else if indexPath.item == 8 {
                 selectAndReload(with: indexPath)
+                if  topViewController is CalendarVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
                 let vc = CalendarVC()
                 vc.title = MenuName.calendar.rawValue
                 let nav = UINavigationController(rootViewController: vc)
                 revealViewController().pushFrontViewController(nav, animated: true)
+                }
              } else if indexPath.item == 9 {
                 selectAndReload(with: indexPath)
+                if  topViewController is PeopleVc {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
                 pushViewController(storyBoard: StoryBoard.MAIN, Identifier: PeopleVc.id,checkisGuest: AuthStatus.instance.isGuest)
+                }
              } else if indexPath.item == 10 {
                 inviteFriends()
              } else if indexPath.item == 11 {
                 //Moderator
                 selectAndReload(with: indexPath)
+                if  topViewController is ReportedVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
                 let vc = ReportedVC()
                 vc.title = MenuName.report.rawValue
                 let nav = UINavigationController(rootViewController: vc)
                 
                 revealViewController().pushFrontViewController(nav, animated: true)
+                }
              } else if indexPath.item == 12 {
                 selectAndReload(with: indexPath)
+                if  topViewController is AboutMyscrapVC {
+                    //do something if it's an instance of that class
+                    self.revealViewController()?.revealToggle(animated: true)
+                }
+                else
+                {
                 NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
 
                 pushViewController(storyBoard: StoryBoard.ABOUT, Identifier: AboutMyscrapVC.id)
+                }
              } else {
                 print("nothing to tap in menu")
             }
@@ -801,7 +885,16 @@ class MenuTVC: UITableViewController {
     }
     @objc func homeTap(tapGesture:UITapGestureRecognizer) {
         print("Home tapped")
+        let vcOnTop = (self.revealViewController()?.frontViewController!) as? UINavigationController
+        let topViewController = vcOnTop?.viewControllers[(vcOnTop?.viewControllers.count ?? 1)-1]
+        if  topViewController is FeedsVC {
+            //do something if it's an instance of that class
+            self.revealViewController()?.revealToggle(animated: true)
+        }
+        else
+        {
        pushViewController(storyBoard: StoryBoard.MAIN, Identifier: FeedsVC.id)
+        }
         //pushViewController(storyBoard: StoryBoard.LAND, Identifier: LandHomePageVC.id)
         //pushViewController(storyBoard: StoryBoard.MARKET, Identifier: MarketVC.id)
         //performDetailVC(indexPath: tapGesture.view!.tag)
@@ -882,9 +975,19 @@ class MenuTVC: UITableViewController {
     @objc func closeBtnTap(tapGesture:UITapGestureRecognizer) {
         print("close tapped")
         //pushViewController(storyBoard: StoryBoard.LAND, Identifier: LandHomePageVC.id)
+        let vcOnTop = (self.revealViewController()?.frontViewController!) as? UINavigationController
+        let topViewController = vcOnTop?.viewControllers[(vcOnTop?.viewControllers.count ?? 1)-1]
+        if  topViewController is FeedsVC {
+            //do something if it's an instance of that class
+            self.revealViewController()?.revealToggle(animated: true)
+        }
+        else
+        {
         pushViewController(storyBoard: StoryBoard.MAIN, Identifier: FeedsVC.id)
+            self.revealViewController()?.revealToggle(animated: true)
+        }
         //pushViewController(storyBoard: StoryBoard.MARKET, Identifier: MarketVC.id)
-        self.revealViewController()?.revealToggle(animated: true)
+      
     }
     
     //MARK:- Invite Friends

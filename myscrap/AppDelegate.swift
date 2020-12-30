@@ -22,8 +22,6 @@ let network: NetworkManager = NetworkManager.sharedInstance
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate, MessagingDelegate,GIDSignInDelegate {
-    
-//    let reachabillity = Reachability()!
     let center = UNUserNotificationCenter.current()
     var window: UIWindow?
     let locationManager = CLLocationManager()
@@ -31,10 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var ping : XMPPPing!
     var xmppAutoPing: XMPPAutoPing!
     var backgroundUpdateTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
-
     var fireBaseConfig = false
-    
-    //Other modules from FEED/Landing Menu selection custom
     var isLandMenuSelected = false
     var isFeedMenuSelected = false
     var isMarketMenuSelected = false
@@ -44,13 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var isCompanyMenuSelected = false
     var isMembersMenuSelected = false
     var isAppLaunching = false
-
-    
-    //OS log while background fetch
     fileprivate let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "log")
-    
     var tagCallTimer: Timer?
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupWindow()
@@ -59,37 +49,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if AuthStatus.instance.isLoggedIn {
             isAppLaunching = true
             self.registerForNotifications(application)
-            //FireBase configure
             FirebaseApp.configure()
             UserDefaults.standard.setValue("0", forKey: "MuteValue")
-
             Messaging.messaging().delegate = self
-            //Firebase Token
-//            Messaging.messaging().token { token, error in
-//                if let error = error {
-//                    print("Error fetching FCM registration token: \(error)")
-//                  } else if let token = token {
-//                    print("FCM registration token: \(token)")
-//                    NotificationService.instance.apnToken = token
-//                    self.connectToFcm()
-//                  }
-//               // Check for error. Otherwise do what you will with token here
-//
-//            }
-         
-           
             fireBaseConfig = true
         }
-        
+
         if launchOptions != nil {
             //opened from a push notification when the app is closed
             if AuthStatus.instance.isLoggedIn {
                 let remoteNotification = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] ?? [AnyHashable: Any]()
                 self.application(application, didReceiveRemoteNotification: remoteNotification)
             }
-            
             //Get background Music play
-             do{
+            do{
                 try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback, options: [.mixWithOthers])
                 try AVAudioSession.sharedInstance().setActive(true)
             }catch{
@@ -103,55 +76,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             print("push notification not received while opening app")
         }
         handleNotificationWhenAppIsKilled(launchOptions)
-        
-        
         NotificationService.instance.messageCount = 0
-
         if !AuthService.instance.isCoreDataCleared {
             clearCoreDataStore()
             AuthService.instance.isCoreDataCleared = true
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
-//        DDLog.add(DDTTYLogger.sharedInstance, with: DDLogLevel.all)
-        print("Core Data File location:- \(NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true).last! as String)\n")
-        
-        setupIQKeyBoardManager()
+       setupIQKeyBoardManager()
         setupLocation()
         AuthStatus.instance.isGuest = false
         setupNavigationBar()
         self.checkUpdateVersion()
-        
         // Initialize Google sign-in
         GIDSignIn.sharedInstance().clientID = "1016788342618-v7jk56j1vcpsk1oncdluvv74t69vs81h.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
-        
-        /*do {
-            try Network.reachability = Reachability(hostname: "www.google.com")
-            /*if AuthStatus.instance.isLoggedIn {
-                print("User name and ID in reachability: \(AuthService.instance.firstname), \(AuthService.instance.userId)")
-                if  let id = AuthService.instance.userJID {
-                    print("Connect method called in App delegate")
-                    XMPPService.instance.connect(with: id)
-                }
-            }*/
-        }
-        catch {
-            switch error as? Network.Error {
-            case let .failedToCreateWith(hostname)?:
-                print("Network error:\nFailed to create reachability object With host named:", hostname)
-            case let .failedToInitializeWith(address)?:
-                print("Network error:\nFailed to initialize reachability object With address:", address)
-            case .failedToSetCallout?:
-                print("Network error:\nFailed to set callout")
-            case .failedToSetDispatchQueue?:
-                print("Network error:\nFailed to set DispatchQueue")
-            case .none:
-                print(error)
-            }
-        }*/
-        
         //Connecting XMPP when app launches
-        //if application.applicationState == .active {
         if !AuthStatus.instance.isLoggedIn {
             print("User is not logged in XMPP will connect while signing in")
         } else {
@@ -172,9 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             }
         }
         
-        //}
-        
-        //If internet reconnected then it starts new xmpp connection only from here
         network.reachability.whenReachable = { reachability in
             if AuthStatus.instance.isLoggedIn {
                 //XMPPService.instance.connectEst = false
@@ -191,8 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         network.reachability.whenUnreachable = { reachability in
             XMPPService.instance.connectEst = false
             XMPPService.instance.disconnect()
-            //XMPPService.instance.offline()
-            //XMPPService.instance.xmppStream?.asyncSocket.disconnect()
+            
         }
         
         if AuthStatus.instance.isLoggedIn {
@@ -210,26 +145,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     @objc func tokenRefreshNotification(_ notification: Notification) {
         print(#function)
-      
+        
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
-              } else if let token = token {
+            } else if let token = token {
                 print("FCM registration token: \(token)")
                 NotificationService.instance.apnToken = token
                 NotificationService.instance.updateDeviceToken()
                 
-              }
-           // Check for error. Otherwise do what you will with token here
+            }
             
         }
-        // Connect to FCM since connection may have failed when attempted before having a token.
-     //   connectToFcm()
+        
     }
     
     func connectToFcm() {
         // Won't connect since there is no token
-    
+        
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -261,12 +194,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             if AuthStatus.instance.isLoggedIn {
                 let marketvc = DetailListingOfferVC.controllerInstance(with: trimMarket, with1: trimUser)
-                //let vc = FeedsVC.storyBoardInstance()!
                 let vc = MarketVC.storyBoardInstance()!
                 let rearViewController = MenuTVC()
                 let frontNavigationController = UINavigationController(rootViewController: vc)
                 let mainRevealController = SWRevealViewController()
-                //mainRevealController.panGestureRecognizer()?.isEnabled = true
                 mainRevealController.rearViewController = rearViewController
                 mainRevealController.frontViewController = frontNavigationController
                 setRootViewController(mainRevealController)
@@ -279,7 +210,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         self.window?.makeKeyAndVisible()
         return true
-        //return GIDSignIn.sharedInstance().handle(url as URL?,sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
     }
     
     
@@ -492,16 +423,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                             decodedListId = trimVote.fromBase64()!
                             print("Trim voter id decoded : \(decodedListId)")
                         }
-                        /*let marketvc = ViewBioVoteVC.controllerInstance(voterId: decodedListId)
-                        let vc = FeedsVC.storyBoardInstance()!
-                        //let vc = MarketVC.storyBoardInstance()!
-                        let rearViewController = MenuTVC()
-                        let frontNavigationController = UINavigationController(rootViewController: vc)
-                        let mainRevealController = SWRevealViewController()
-                        mainRevealController.rearViewController = rearViewController
-                        mainRevealController.frontViewController = frontNavigationController
-                        setRootViewController(mainRevealController)
-                        frontNavigationController.pushViewController(marketvc, animated: true)*/
+                        
                         let mainStoryboard:UIStoryboard = UIStoryboard(name: "Vote", bundle: nil)
                         let homePage = mainStoryboard.instantiateViewController(withIdentifier: "ViewBioVoteVC") as! ViewBioVoteVC
                         homePage.voterId = decodedListId
@@ -527,20 +449,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         return true
     }
-
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
         if let error = error {
             print("\(error.localizedDescription)")
         } else {
-            // Perform any operations on signed in user here.
-            let userId = user.userID                  // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let fullName = user.profile.name
-            let givenName = user.profile.givenName
-            let familyName = user.profile.familyName
-            let email = user.profile.email
-            // ...
+            
         }
     }
     
@@ -553,51 +468,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     
     func clearCoreDataStore(){
-            let delegate = UIApplication.shared.delegate as! AppDelegate
-            let context = delegate.persistentContainer.viewContext
-            for i in 0...delegate.persistentContainer.managedObjectModel.entities.count-1 {
-                let entity = delegate.persistentContainer.managedObjectModel.entities[i]
-                do {
-                    let query = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
-                    let deleterequest = NSBatchDeleteRequest(fetchRequest: query)
-                    try context.execute(deleterequest)
-                    try context.save()
-                } catch let error as NSError {
-                    print("Error: \(error.localizedDescription)")
-                    abort()
-                }
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        for i in 0...delegate.persistentContainer.managedObjectModel.entities.count-1 {
+            let entity = delegate.persistentContainer.managedObjectModel.entities[i]
+            do {
+                let query = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
+                let deleterequest = NSBatchDeleteRequest(fetchRequest: query)
+                try context.execute(deleterequest)
+                try context.save()
+            } catch let error as NSError {
+                print("Error: \(error.localizedDescription)")
+                abort()
             }
+        }
     }
     
     private func setupNetworkReachable(){
-        /*NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name: .reachabilityChanged, object: reachabillity)
-        do {
-            try reachabillity.startNotifier()
-        } catch {
-            print("Could not start notifier")
-        }*/
+        
     }
     
     @objc
     func reachabilityChanged(_ note: Notification){
-        /*guard let reachability = note.object as? Reachability else { return }
-        switch reachability.connection {
-        case .wifi,.cellular:
-            if AuthStatus.instance.isLoggedIn {
-                print("User name and ID in reachability: \(AuthService.instance.firstname), \(AuthService.instance.userId)")
-                if  let id = AuthService.instance.userJID {
-                    print("Connect method called in App delegate")
-                    XMPPService.instance.connect(with: id)
-                }
-            }
-        default:
-            print("not reachable")
-        }*/
+        
     }
     
     private func stopNetworkReachable(){
-//        reachabillity.stopNotifier()
-//        NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: reachabillity)
+        
     }
     
     func endBackgroundUpdateTask() {
@@ -607,10 +504,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationDidEnterBackground(_ application: UIApplication) {
         //stopNetworkReachable()
         if AuthStatus.instance.isLoggedIn {
-          //  goBackground()
+            //  goBackground()
             self.backgroundUpdateTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-                    self.endBackgroundUpdateTask()
-                })
+                self.endBackgroundUpdateTask()
+            })
         } else {
             //comment xmpp on 11/march/2020 -> reverted back
             XMPPService.instance.offline()
@@ -625,17 +522,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if AuthStatus.instance.isLoggedIn{
             //uncomment xmpp on 11/march/2020 -> reverted back 12/March
             let jid = AuthService.instance.userJID
-                print("User name and ID in did active: \(AuthService.instance.firstname), \(AuthService.instance.userId)")
+            print("User name and ID in did active: \(AuthService.instance.firstname), \(AuthService.instance.userId)")
             if XMPPService.instance.xmppStream?.isConnecting() == false && XMPPService.instance.isConnected == false && XMPPService.instance.xmppStream?.isAuthenticating() == false && XMPPService.instance.xmppStream?.isAuthenticated() == false {
-             //   XMPPService.instance.disconnect()
-                  //  XMPPService.instance.connect(with: jid!)
-                  //  XMPPService.instance.enableBackgroundingOnSocket
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        XMPPService.instance.sendOnline()
-                    }
-                } else {
-                    print("XMPP already conneccted in app become active")
+                //   XMPPService.instance.disconnect()
+                //  XMPPService.instance.connect(with: jid!)
+                //  XMPPService.instance.enableBackgroundingOnSocket
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    XMPPService.instance.sendOnline()
                 }
+            } else {
+                print("XMPP already conneccted in app become active")
+            }
             
             NotificationService.instance.getNotificationCount()
         }
@@ -658,37 +555,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if let remoteNotification = launchOptions?[.remoteNotification] as?  [AnyHashable : Any] {
             // Handle your app navigation accordingly and update the webservice as per information on the app.
             let jid = AuthService.instance.userJID
-            /*if XMPPService.instance.isConnected == false {
-                XMPPService.instance.connect(with: jid!)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    XMPPService.instance.sendOnline()
-                }
-            } else {
-                print("XMPP already in connect at back ground voip")
-            }*/
+            
         }
     }
     
     lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
+        
         let container = NSPersistentContainer(name: "myscrap")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
+                
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
@@ -701,14 +577,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
-
+    
 }
 
 
@@ -737,7 +612,7 @@ extension AppDelegate{
 // MARK:- INITIAL VIEW CONTROLLER
 extension AppDelegate{
     
-     func setupInitialViewController(){
+    func setupInitialViewController(){
         
         if !AuthStatus.instance.isApiKeyRegistered{
             AuthService.instance.isDeviceRegistered = false
@@ -756,21 +631,7 @@ extension AppDelegate{
     }
     
     func initializeLandingPage() {
-        //setRootViewController(VideoPlayerVC.storyBoardInstance()!)
-        /*window = UIWindow(frame: UIScreen.main.bounds)
         
-        
-        let storyboard = UIStoryboard.init(name: "Land", bundle: nil)
-        
-        // controller identifier sets up in storyboard utilities
-        // panel (on the right), it called Storyboard ID
-        let viewController = storyboard.instantiateViewController(withIdentifier: "LandTabControllerV2") as! LandTabControllerV2
-        
-        self.window?.rootViewController = viewController
-        self.window?.makeKeyAndVisible()
-        
-        window?.makeKeyAndVisible()
-        window?.rootViewController = viewController*/
     }
     
     
@@ -815,7 +676,7 @@ extension AppDelegate{
     fileprivate func setupIQKeyBoardManager(){
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
-//        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 20
+        //        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 20
     }
     
     fileprivate func setupLocation(){
@@ -823,12 +684,12 @@ extension AppDelegate{
         LocationService.sharedInstance.setupLocationManager()
         UserDefaults.standard.set(false, forKey: "locationSended")
     }
-
+    
     func performFriendView(friendId: String){
         //let vc = FeedsVC.storyBoardInstance()
         //let vc = MarketVC.storyBoardInstance()
         if let vc = FeedsVC.storyBoardInstance(){
-        //if let vc = LandHomePageVC.storyBoardInstance(){
+            //if let vc = LandHomePageVC.storyBoardInstance(){
             switch friendId {
             case nil:
                 return
@@ -862,18 +723,18 @@ extension AppDelegate: PKPushRegistryDelegate {
     @available(iOS 8.0, *)
     func pushRegistry(registry: PKPushRegistry!, didReceiveIncomingPushWithPayload payload: PKPushPayload!, forType type: String!) {
         // Process the received push
-
-
+        
+        
     }
     func getMember(with messageId: String, context: NSManagedObjectContext) -> Member?{
         let fetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "msgId = %@", messageId)
         fetchRequest.fetchLimit = 1
         do {
-
+            
             guard let message = try context.fetch(fetchRequest).first , let member = message.member  else { return nil }
             return member
-
+            
         } catch {
             print("error executing")
             return nil
@@ -886,7 +747,7 @@ extension AppDelegate: PKPushRegistryDelegate {
             
             if UIApplication.shared.applicationState == .background || UIApplication.shared.applicationState == .inactive {
                 print("processing background")
-             //   self.goBackground()
+                //   self.goBackground()
             }
         }
     }
@@ -908,86 +769,25 @@ extension AppDelegate: PKPushRegistryDelegate {
         if #available(iOS 11.0, *) {
             voipRegistry.desiredPushTypes = [PKPushType.voIP]
         } else {
-            // Fallback on earlier versions
         }
     }
-    
-
-//    - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
-//    NSLog(@"VoIP - got Push with payload: %@ and Type: %@", payload.dictionaryPayload, type);
-//
-//    NSDictionary *dictAps = [payload.dictionaryPayload valueForKey:@"aps"];
-//    if ([dictAps valueForKey:@"content-available"] != nil) {
-//    NSLog(@"Silent VoIP");
-//
-//    //Fetch payload info and create local notification and fire that local notification.
-//    UILocalNotification *voipNotification = [[UILocalNotification alloc] init];
-//    voipNotification.alertTitle = @"Silent VoIP";
-//    voipNotification.alertBody = [dictAps valueForKey:@"alert"];
-//    voipNotification.soundName = UILocalNotificationDefaultSoundName;
-//    [[UIApplication sharedApplication] presentLocalNotificationNow:voipNotification];
-//
-//    //Call xmpp connection method here.
-//    if (xmppStream == nil) { [self setupStream]; }
-//    if ([xmppStream isDisconnected]) { [self connect]; }
-//    }
-//    }
-//
-//    - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
-//    NSLog(@"VoIP - device Token: %@", credentials.token);
-//
-//    NSString *newToken = credentials.token.description;
-//    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-//    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-//
-//    NSLog(@"VoIP token is: %@", newToken);
-//    [obj_DataModel setVoIPToken:newToken]; //Store token in somewhere for further use.
-//    }
-    //Note :- Commenting Background Run ==> #Prevent the App termination after 3 minutes -> reverted back 12/march
-    
     fileprivate func goBackground(){
         
         let app = UIApplication.shared
         
         bgTask = app.beginBackgroundTask(expirationHandler: {
             if AuthStatus.instance.isLoggedIn == false {
-                //if XMPPService.instance.xmppStream?.isConnecting() == false || XMPPService.instance.xmppStream?.isConnected() == false  || XMPPService.instance.xmppStream?.isAuthenticating() == false {
-                    
-                    XMPPService.instance.offline()
-                    XMPPService.instance.disconnect()
-                    self.endBackgroundTask()
-                //}
-
+                
+                XMPPService.instance.offline()
+                XMPPService.instance.disconnect()
+                self.endBackgroundTask()
+                
             } else {
                 print("Voip were expiring")
                 XMPPService.instance.offline()
-             //   XMPPService.instance.disconnect()
-                //To prevent crash commented on Nov13/19
-                //let jid = AuthService.instance.userJID
-                //if XMPPService.instance.xmppStream?.isConnecting() == false || XMPPService.instance.xmppStream?.isConnected() == false  || XMPPService.instance.xmppStream?.isAuthenticating() == false {
-                    //if !XMPPService.instance.connectEst {
-                        //XMPPService.instance.connect(with: jid!)
-                        //DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            //XMPPService.instance.sendOnline()
-                        //}
-                    //} else {
-                      //  print("XMPP connection started already")
-                    //}
-                //} else {
-                  //  print("XMPP already in connect at back ground voip")
-               // }
+                
             }
         })
-        
-        /*let app = UIApplication.shared
-        var bgTask : UIBackgroundTaskIdentifier = 0
-        bgTask = app.beginBackgroundTask(expirationHandler: {
-            XMPPService.instance.offline()
-            XMPPService.instance.disconnect()
-            print("Voip were expiring")
-            app.endBackgroundTask(bgTask)
-            bgTask = UIBackgroundTaskInvalid
-        })*/
         
         
         if AuthStatus.instance.isLoggedIn {
@@ -1026,5 +826,5 @@ extension AppDelegate: PKPushRegistryDelegate {
         app.endBackgroundTask(bgTask)
         bgTask = UIBackgroundTaskIdentifier.invalid
     }
- 
+    
 }
