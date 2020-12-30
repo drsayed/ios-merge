@@ -149,14 +149,7 @@ class CompanyHeaderModuleVC: UIViewController {
         isriBtn.layer.borderWidth = 1
         NotificationCenter.default.addObserver(self, selector: #selector(handleReview(notif:)), name: NSNotification.Name(rawValue: "updateReview"), object: nil)
        
-        //ownCompanyView
-//        self.ownCompanyView.isHidden = true
-        self.ownCompBtn.isHidden = true
-        self.ownCompBtn.setTitle(self.ownthisCompanyStr, for: .normal)
-//        self.ownCompBtn.isEnabled = true
-        self.ownCompBtn.layer.cornerRadius = 10
-        self.ownCompBtn.layer.masksToBounds = true
-        self.ownCompBtn.addTarget(self, action: #selector(ownCompanyBtnAction), for: .touchUpInside)
+
         
         //reportCompanyButton
         self.reportCompanyButton.isHidden = true
@@ -211,6 +204,14 @@ class CompanyHeaderModuleVC: UIViewController {
         self.directionBtn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 14)
         self.directionBtn.alignTextUnderImage(imgsize: CGSize(width: 40, height: 40), spacing: 2)
         self.directionBtn.addTarget(self, action: #selector(directionBtnAction), for: .touchUpInside)
+        
+        
+        // own Company button
+        self.ownCompBtn.isHidden = true
+        self.ownCompBtn.setTitle(self.ownthisCompanyStr, for: .normal)
+        self.ownCompBtn.layer.cornerRadius = self.ownCompBtn.frame.size.height / 2
+        self.ownCompBtn.layer.masksToBounds = true
+        
 
         self.setUpEditButton()
         
@@ -224,6 +225,44 @@ class CompanyHeaderModuleVC: UIViewController {
 //        service.delegate = self
 //
 //    }
+    
+    
+    private func setOwnCompanyButton() {
+        
+        // Own this company Button will show when there is no admin for the company and user is not employee of the company. if user is employee then 'Make as admin' will show against employee in employee section
+        
+        let isAdminAvailable = self.companyData.last?.isAdminAvailable
+        let getOwnCompanyRequest = self.companyData.last?.ownCompanyRequest
+        let reportedStatusOfCompany = self.companyData.last?.reportedStatusOfCompany
+        
+        if isAdminAvailable == true {
+            let companyOwnerId = self.companyData.last!.companyOwnerId
+            if companyOwnerId == AuthService.instance.userId {
+                    self.editButton.isHidden = false
+                    self.ownCompBtn.isHidden = false
+                    self.ownCompBtn.setTitle("  Verified as admin  ", for: .normal)
+            }
+            else {
+                self.reportCompanyButton.isHidden = false
+                let reportButtonTitleStr = reportedStatusOfCompany == "Reported" ? self.reportedStr : self.reportStr
+                self.reportCompanyButton.setTitle(reportButtonTitleStr, for: .normal)
+            }
+        }
+        else {
+            if !self.companyData.last!.isUserEmployeeOfThisCompany() || getOwnCompanyRequest != "" {
+                self.ownCompBtn.isHidden = false
+                self.ownCompBtn.isEnabled = true
+                if getOwnCompanyRequest != "" {
+                    self.ownCompBtn.isEnabled = false
+                    self.ownCompBtn.setTitle("  \(getOwnCompanyRequest!)  ", for: .normal)
+                }
+                else {
+                    self.ownCompBtn.addTarget(self, action: #selector(ownCompanyBtnAction), for: .touchUpInside)
+                }
+            }
+        }
+    }
+    
     private func setUpEditButton(){
         
 //        editButton = UIButton(frame: CGRect(x: 0, y: 0, width: 65, height: 25))
@@ -1100,52 +1139,8 @@ extension CompanyHeaderModuleVC: CompanyUpdatedServiceDelegate {
             self.companyRatingStar.rating = (self.avgRatingLbl.text! as NSString).doubleValue
             self.companyRatingStar.text = " (" + self.companyData.last!.totalReview + ")"
 
-            //Checking Admin is Available for this comapny
-            let isAdminAvailable = self.companyData.last?.isAdminAvailable
+            self.setOwnCompanyButton()
 
-            //editButton
-            let companyOwnerId = self.companyData.last!.companyOwnerId
-            if companyOwnerId != "" {
-                if companyOwnerId == AuthService.instance.userId && isAdminAvailable! {
-                    self.editButton.isHidden = false
-                }
-            }
-
-            let getOwnCompanyRequest = self.companyData.last?.ownCompanyRequest
-//            let adminReport = self.companyData.last?.adminReport
-            let reportedStatusOfCompany = self.companyData.last?.reportedStatusOfCompany
-
-//          Own this company Button will show when there is no admin for the company and user is not employee of the company. if user is employee then Make as admin will show against employee in employee section
-            // Own this company Button
-            self.ownCompBtn.layer.cornerRadius = 10
-            self.ownCompBtn.layer.masksToBounds = true
-            var ownCompanyButtonTitleStr = self.ownthisCompanyStr
-            
-            if isAdminAvailable == false && !self.companyData.last!.isUserEmployeeOfThisCompany() {
-                    self.ownCompBtn.isHidden = false
-                    self.ownCompBtn.isEnabled = true
-                    
-                    if getOwnCompanyRequest == "Requested" {
-                        ownCompanyButtonTitleStr = self.requestedStr
-                    }
-                    self.ownCompBtn.setTitle(ownCompanyButtonTitleStr, for: .normal)
-            }
-            else {
-                self.ownCompBtn.isHidden = true
-                self.reportCompanyButton.isHidden = false
-                
-                var reportButtonTitleStr = ""
-                if reportedStatusOfCompany == "Reported" {
-                    reportButtonTitleStr = self.reportedStr
-                }
-                else {
-                    reportButtonTitleStr = self.reportStr
-                }
-
-                self.reportCompanyButton.setTitle(reportButtonTitleStr, for: .normal)
-
-            }
-            
 //            var buttonTitleStr = ""
 //
 ////            if isAdminAvailable! {

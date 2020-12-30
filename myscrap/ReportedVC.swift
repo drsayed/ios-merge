@@ -249,10 +249,10 @@ final class ReportedVC: BaseRevealVC {
         var titleStr:String {
             // 0 for new company request, 1 for admin request
             if isAccepted {
-               return type == "0" ? "Are you sure you want to accept company request?" : "Are you sure you want to accept admin request?"
+               return type == "0" ? "Are you sure you want to accept company\nrequest?" : "Are you sure you want to accept admin\nrequest?"
             }
             else {
-              return type == "0" ? "Are you sure you want to reject company request?" : "Are you sure you want to reject admin request?"
+              return type == "0" ? "Are you sure you want to reject company\nrequest?" : "Are you sure you want to reject admin\nrequest?"
             }
         }
         
