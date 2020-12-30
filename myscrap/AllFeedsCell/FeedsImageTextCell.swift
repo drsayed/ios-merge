@@ -1,5 +1,5 @@
 //
-//  FeedImageTextCell.swift
+//  FeedsImageTextCell.swift
 //  myscrap
 //
 //  Created by MS1 on 10/15/17.
@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class FeedImageTextCell: FeedImageCell {
+class FeedsImageTextCell: FeedImageCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -51,16 +51,6 @@ class FeedImageTextCell: FeedImageCell {
         tap.numberOfTapsRequired = 1
         statusTextView?.addGestureRecognizer(tap)
     }
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-            setNeedsLayout()
-            layoutIfNeeded()
-            let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-            var newFrame = layoutAttributes.frame
-            // note: don't change the width
-            newFrame.size.height = ceil(size.height)
-            layoutAttributes.frame = newFrame
-            return layoutAttributes
-        }
 //    override  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //          
 //            guard let item = newItem else { return }
