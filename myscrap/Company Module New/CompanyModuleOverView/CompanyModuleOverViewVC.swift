@@ -128,12 +128,12 @@ class CompanyModuleOverViewVC: UIViewController, FriendControllerDelegate {
             if self.companyOverViewDataSource!.last!.phone != "" {
                 companyPhoneStr = self.companyOverViewDataSource!.last!.phone
             }
-
+            
             var companyEmailStr = "-"
             if self.companyOverViewDataSource!.last!.email != "" {
                 companyEmailStr = self.companyOverViewDataSource!.last!.email
             }
-
+            
             var companyWebSiteStr = "-"
             if self.companyOverViewDataSource!.last!.website != "" {
                 companyWebSiteStr = self.companyOverViewDataSource!.last!.website
@@ -149,7 +149,7 @@ class CompanyModuleOverViewVC: UIViewController, FriendControllerDelegate {
             
             self.company_lat = self.companyOverViewDataSource!.last!.lat
             self.company_long = self.companyOverViewDataSource!.last!.long
-
+            
             if self.companyDetailsArray.count > 0 {
                 self.companyDetailsArray.removeAll()
             }
@@ -162,6 +162,8 @@ class CompanyModuleOverViewVC: UIViewController, FriendControllerDelegate {
             
             self.tableView.reloadData()
         }
+        
+        
     }
 }
 
@@ -653,11 +655,11 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                                 }
                                 else {
                                     cell.adminLabel.isHidden = true
-
-                                    cell.makeAsAdminBtn.isHidden = false
-                                    cell.makeAsAdminBtn.setTitle(self.makeAsAdminText, for: .normal)
-                                    cell.makeAsAdminWidthConstraint.constant = 120
-
+                                    if userId == AuthService.instance.userId {
+                                        cell.makeAsAdminBtn.isHidden = false
+                                        cell.makeAsAdminBtn.setTitle(self.makeAsAdminText, for: .normal)
+                                        cell.makeAsAdminWidthConstraint.constant = 120
+                                    }
                                     cell.reportBtn.isHidden = true
                                     cell.reportBtnWidthConstraint.constant = 0
                                 }
@@ -672,7 +674,6 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        return UITableViewCell()
 }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
