@@ -313,17 +313,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     }
     
     private func setupFloaty(){
-        /*floaty.respondsToKeyboard = false
-         floaty.paddingX = 20
-         floaty.paddingY = 70
-         floaty.title.text = "Live"
-         //        floaty.buttonImage = #imageLiteral(resourceName: "Chat-0")
-         print("Floating text Width and height : \(floaty.title.width), \(floaty.title.height)")
-         floaty.hasShadow = true
-         floaty.buttonColor = UIColor(hexString: "#ed1b24")
-         floaty.fabDelegate = self
-         
-         self.view.addSubview(floaty)*/
+     
         let liveView = CircleView()
         liveView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(liveView)
@@ -372,9 +362,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     private func setupLoading(){
        // feedOperation?.start()
         self.getAllFeedsData()
-        //        nearFriendOperation?.addDependency(feedOperation!)
-        //        locationAndDeviceOperation?.addDependency(feedOperation!)
-        //        nearFriendOperation?.start()
+    
     }
     
     fileprivate var isRefreshControl = false
@@ -395,15 +383,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
             isRefreshControl = true
             self.getAllFeedsData()
             self.getAllOnlineUsersData()
-//            getFeeds(pageLoad: 0, completion: {_ in })
-//            self.memberService.getOnlineFriends(completion: { (members) in
-//                DispatchQueue.main.async {
-//                    self.memberDataSource = members
-//                      self.headerCellHeight.constant = 90
-//                    self.headerCell!.datasource = self.memberDataSource
-//                         self.headerCell!.collectionView.reloadData()
-//                }
-//            })
+
         } else {
             self.showToast(message: "No internet connection")
         }
@@ -501,286 +481,285 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        let _ = collectionView.indexPathsForSelectedItems
-        if feedsV2DataSource.count != 0 {
-            //loadParticularFeed(pageLoad: 0, completion: {_ in })
-            //self.collectionView.reloadItems(at: index!)
-            self.memberService.getOnlineFriends(completion: { (members) in
-                DispatchQueue.main.async {
-                    self.memberDataSource = members
-                    self.headerCellHeight.constant = 90
-                                       self.headerCell!.datasource = self.memberDataSource
-                                                            self.headerCell!.collectionView.reloadData()
-//                    self.collectionView.performBatchUpdates({
-//                        let indexSet = IndexSet(integer: 0)
-//                        self.collectionView.reloadSections(indexSet)
-//                    }, completion: nil)
-                }
-            })
-            if isCommentInserted {
-               // self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
-            }
-//            if fromDetailedFeeds {
-//                if !self.topLoader.isAnimating && !refreshContol.isRefreshing {
-//                    self.topSpinnerHeightConstraint.constant = 58
-//                    self.topLoader.startAnimating()
-//                    self.active.startAnimating()
-//                    //self.refreshContol.beginRefreshing()
-//                    self.handleRefresh()
+//        let _ = collectionView.indexPathsForSelectedItems
+//        if feedsV2DataSource.count != 0 {
+//            //loadParticularFeed(pageLoad: 0, completion: {_ in })
+//            //self.collectionView.reloadItems(at: index!)
+//            self.memberService.getOnlineFriends(completion: { (members) in
+//                DispatchQueue.main.async {
+//                    self.memberDataSource = members
+//                    self.headerCellHeight.constant = 90
+//                                       self.headerCell!.datasource = self.memberDataSource
+//                                                            self.headerCell!.collectionView.reloadData()
+////                    self.collectionView.performBatchUpdates({
+////                        let indexSet = IndexSet(integer: 0)
+////                        self.collectionView.reloadSections(indexSet)
+////                    }, completion: nil)
 //                }
+//            })
+//            if isCommentInserted {
+//               // self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
 //            }
-            if isScrollToAD {
-              //  self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 1), at: [.centeredHorizontally,.centeredVertically], animated: true)
-            }
-
-        }
+////            if fromDetailedFeeds {
+////                if !self.topLoader.isAnimating && !refreshContol.isRefreshing {
+////                    self.topSpinnerHeightConstraint.constant = 58
+////                    self.topLoader.startAnimating()
+////                    self.active.startAnimating()
+////                    //self.refreshContol.beginRefreshing()
+////                    self.handleRefresh()
+////                }
+////            }
+//            if isScrollToAD {
+//              //  self.collectionView.scrollToItem(at: IndexPath(row: 1, section: 1), at: [.centeredHorizontally,.centeredVertically], animated: true)
+//            }
+//
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.pauseVisibleVideos()
         NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
-
         NotificationCenter.default.removeObserver(self, name: .userSignedIn, object: nil)
         NotificationCenter.default.removeObserver(self, name: .videoDownloaded, object: nil)
-        let muteImg = #imageLiteral(resourceName: "mute-60x60")
-        let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-
-        let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-        let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-
-        
-        if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? EmplPortraitVideoCell {
-                     
-                        for videoCell in portrateCell.videosCollection.visibleCells  as! [PortraitVideoCell]    {
-                          
-                        //cell.player.isMuted = true
-                        //if videoCell.player.timeControlStatus == .playing {
-                        
-                            videoCell.pause()
-        //                    videoCell.player.actionAtItemEnd = .pause
-        //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                        //}
-                    }
-        }
-        else if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? EmplPortrVideoTextCell {
-             
-                for videoCell in portrateCell.videosCollection.visibleCells  as! [PortraitVideoCell]    {
-                    
-                    //cell.player.isMuted = true
-                    //if videoCell.player.timeControlStatus == .playing {
-                       
-                        videoCell.pause()
-    //                    videoCell.player.actionAtItemEnd = .pause
-    //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                    //}
-                }
-            }
-        else if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? LandScapVideoCell {
-             
-                for videoCell in portrateCell.videosCollection.visibleCells  as! [LandScapCell]    {
-                    
-                    //cell.player.isMuted = true
-                    //if videoCell.player.timeControlStatus == .playing {
-                       
-                        videoCell.pause()
-    //                    videoCell.player.actionAtItemEnd = .pause
-    //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                    //}
-                }
-            }
-        else if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? LandScapVideoTextCell {
-             
-                for videoCell in portrateCell.videosCollection.visibleCells  as! [LandScapCell]    {
-                    
-                    //cell.player.isMuted = true
-                    //if videoCell.player.timeControlStatus == .playing {
-                       
-                        videoCell.pause()
-    //                    videoCell.player.actionAtItemEnd = .pause
-    //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                    //}
-                }
-            }
+//        let muteImg = #imageLiteral(resourceName: "mute-60x60")
+//        let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+//
+//        let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
+//        let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+//
+//
+//        if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? EmplPortraitVideoCell {
+//
+//                        for videoCell in portrateCell.videosCollection.visibleCells  as! [PortraitVideoCell]    {
+//
+//                        //cell.player.isMuted = true
+//                        //if videoCell.player.timeControlStatus == .playing {
+//
+//                            videoCell.pause()
+//        //                    videoCell.player.actionAtItemEnd = .pause
+//        //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
+//                        //}
+//                    }
+//        }
+//        else if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? EmplPortrVideoTextCell {
+//
+//                for videoCell in portrateCell.videosCollection.visibleCells  as! [PortraitVideoCell]    {
+//
+//                    //cell.player.isMuted = true
+//                    //if videoCell.player.timeControlStatus == .playing {
+//
+//                        videoCell.pause()
+//    //                    videoCell.player.actionAtItemEnd = .pause
+//    //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
+//                    //}
+//                }
+//            }
+//        else if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? LandScapVideoCell {
+//
+//                for videoCell in portrateCell.videosCollection.visibleCells  as! [LandScapCell]    {
+//
+//                    //cell.player.isMuted = true
+//                    //if videoCell.player.timeControlStatus == .playing {
+//
+//                        videoCell.pause()
+//    //                    videoCell.player.actionAtItemEnd = .pause
+//    //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
+//                    //}
+//                }
+//            }
+//        else if let portrateCell = collectionView.cellForItem(at: visibleCellIndex) as? LandScapVideoTextCell {
+//
+//                for videoCell in portrateCell.videosCollection.visibleCells  as! [LandScapCell]    {
+//
+//                    //cell.player.isMuted = true
+//                    //if videoCell.player.timeControlStatus == .playing {
+//
+//                        videoCell.pause()
+//    //                    videoCell.player.actionAtItemEnd = .pause
+//    //                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
+//                    //}
+//                }
+//            }
         
     }
     
-    private func findCenterIndex() {
-        var visibleRect = CGRect()
-        visibleRect.origin = self.collectionView.contentOffset
-        visibleRect.size = self.collectionView.bounds.size
-        /*let cgPoint = CGPoint(x: self.collectionView.bounds.origin.x, y: visibleRect.maxY) //minY
-        //let center = self.view.convert(cgPoint, to: self.collectionView)
-        let index = collectionView!.indexPathForItem(at: cgPoint)
-        print(index ?? "index not found")
-        
-        let cell = self.collectionView.cellForItem(at: index ?? [1 , 0])
- */
-        
-        let cgPointBottom = CGPoint(x: self.collectionView.bounds.origin.x, y: visibleRect.maxY - 600)
-        //let centerBottom = self.view.convert(cgPointBottom, to: self.collectionView)
-        guard let indexBottom = collectionView!.indexPathForItem(at: cgPointBottom) else { return }
-        print(indexBottom)
-        
-        let cellBottom = self.collectionView.cellForItem(at: indexBottom)
-        
-        let muteImg = #imageLiteral(resourceName: "mute-60x60")
-        let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        
-        let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-        let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        
-        
-        
-        /*if let videoCell = cell as? FeedVideoCell {
-         videoCell.player.isMuted = muteVideo
-         if  videoCell.player.isMuted {
-         videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-         } else {
-         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-         }
-         videoCell.player.play()
-         } else if let videoTextCell = cell as? FeedVideoTextCell {
-         videoTextCell.player.isMuted = muteVideo
-         if videoTextCell.player.isMuted {
-         videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
-         } else {
-         videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-         }
-         videoTextCell.player.play()
-         }*/
-        /*if let videoCell = cell as? EmplPortraitVideoCell {
-            videoCell.player.isMuted = muteVideo
-            if  videoCell.player.isMuted {
-                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            //videoCell.player.play()
-            if visibleCellIndex == index {
-                if videoCell.player.rate == 0 {
-                    videoCell.player.play()
-                }
-            } else if visibleCellIndex < index! {
-                if videoCell.player.rate != 0 {
-                    videoCell.player.pause()
-                }
-            } else {
-                if videoCell.player.rate != 0 {
-                    videoCell.player.pause()
-                }
-            }
-        } else*/
-            if let videoCell = cellBottom as? EmplPortraitVideoCell {
-            videoCell.player.isMuted = true
-            if  muteVideo {
-                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            videoCell.player.pause()
-            //videoCell.playerLayer.player = nil
-            //videoCell.playerLayer.removeFromSuperlayer()
-        }
-        /*if let videoTextCell = cell as? EmplLandscVideoCell {
-            videoTextCell.player.isMuted = muteVideo
-            if videoTextCell.player.isMuted {
-                videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            //videoTextCell.player.play()
-            if visibleCellIndex == index {
-                if videoTextCell.player.rate == 0 {
-                    videoTextCell.player.play()
-                }
-            } else if visibleCellIndex < index! {
-                if videoTextCell.player.rate != 0 {
-                    videoTextCell.player.pause()
-                }
-            } else {
-                if videoTextCell.player.rate != 0 {
-                    videoTextCell.player.pause()
-                }
-            }
-        } else*/
-            if let videoCell = cellBottom as? EmplLandscVideoCell {
-            videoCell.player.isMuted = true
-            if  muteVideo {
-                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            videoCell.player.pause()
-            //videoCell.playerLayer.player = nil
-            //videoCell.playerLayer.removeFromSuperlayer()
-        }
-        /*if let videoTextCell = cell as? EmplPortrVideoTextCell {
-            videoTextCell.player.isMuted = muteVideo
-            if videoTextCell.player.isMuted {
-                videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            //videoTextCell.player.play()
-            if visibleCellIndex == index {
-                if videoTextCell.player.rate == 0 {
-                    videoTextCell.player.play()
-                }
-            } else if visibleCellIndex < index! {
-                if videoTextCell.player.rate != 0 {
-                    videoTextCell.player.pause()
-                }
-            } else {
-                if videoTextCell.player.rate != 0 {
-                    videoTextCell.player.pause()
-                }
-            }
-        } else*/
-            if let videoCell = cellBottom as? EmplPortrVideoTextCell {
-            videoCell.player.isMuted = true
-            if  muteVideo {
-                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            videoCell.player.pause()
-            //videoCell.playerLayer.player = nil
-            //videoCell.playerLayer.removeFromSuperlayer()
-        }
-        /*if let videoTextCell = cell as? EmplLandsVideoTextCell {
-            videoTextCell.player.isMuted = muteVideo
-            if videoTextCell.player.isMuted {
-                videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            if visibleCellIndex == index {
-                if videoTextCell.player.rate == 0 {
-                    videoTextCell.player.play()
-                }
-            } else if visibleCellIndex < index! {
-                if videoTextCell.player.rate != 0 {
-                    videoTextCell.player.pause()
-                }
-            } else {
-                if videoTextCell.player.rate != 0 {
-                    videoTextCell.player.pause()
-                }
-            }
-        } else*/
-            if let videoCell = cellBottom as? EmplLandsVideoTextCell {
-            videoCell.player.isMuted = true
-            if  muteVideo {
-                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-            } else {
-                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            }
-            videoCell.player.pause()
-            //videoCell.playerLayer.player = nil
-            //videoCell.playerLayer.removeFromSuperlayer()
-        }
-    }
+//    private func findCenterIndex() {
+//        var visibleRect = CGRect()
+//        visibleRect.origin = self.collectionView.contentOffset
+//        visibleRect.size = self.collectionView.bounds.size
+//        /*let cgPoint = CGPoint(x: self.collectionView.bounds.origin.x, y: visibleRect.maxY) //minY
+//        //let center = self.view.convert(cgPoint, to: self.collectionView)
+//        let index = collectionView!.indexPathForItem(at: cgPoint)
+//        print(index ?? "index not found")
+//
+//        let cell = self.collectionView.cellForItem(at: index ?? [1 , 0])
+// */
+//
+//        let cgPointBottom = CGPoint(x: self.collectionView.bounds.origin.x, y: visibleRect.maxY - 600)
+//        //let centerBottom = self.view.convert(cgPointBottom, to: self.collectionView)
+//        guard let indexBottom = collectionView!.indexPathForItem(at: cgPointBottom) else { return }
+//        print(indexBottom)
+//
+//        let cellBottom = self.collectionView.cellForItem(at: indexBottom)
+//
+//        let muteImg = #imageLiteral(resourceName: "mute-60x60")
+//        let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+//
+//        let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
+//        let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+//
+//
+//
+//        /*if let videoCell = cell as? FeedVideoCell {
+//         videoCell.player.isMuted = muteVideo
+//         if  videoCell.player.isMuted {
+//         videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//         } else {
+//         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//         }
+//         videoCell.player.play()
+//         } else if let videoTextCell = cell as? FeedVideoTextCell {
+//         videoTextCell.player.isMuted = muteVideo
+//         if videoTextCell.player.isMuted {
+//         videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//         } else {
+//         videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//         }
+//         videoTextCell.player.play()
+//         }*/
+//        /*if let videoCell = cell as? EmplPortraitVideoCell {
+//            videoCell.player.isMuted = muteVideo
+//            if  videoCell.player.isMuted {
+//                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            //videoCell.player.play()
+//            if visibleCellIndex == index {
+//                if videoCell.player.rate == 0 {
+//                    videoCell.player.play()
+//                }
+//            } else if visibleCellIndex < index! {
+//                if videoCell.player.rate != 0 {
+//                    videoCell.player.pause()
+//                }
+//            } else {
+//                if videoCell.player.rate != 0 {
+//                    videoCell.player.pause()
+//                }
+//            }
+//        } else*/
+//            if let videoCell = cellBottom as? EmplPortraitVideoCell {
+//            videoCell.player.isMuted = true
+//            if  muteVideo {
+//                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            videoCell.player.pause()
+//            //videoCell.playerLayer.player = nil
+//            //videoCell.playerLayer.removeFromSuperlayer()
+//        }
+//        /*if let videoTextCell = cell as? EmplLandscVideoCell {
+//            videoTextCell.player.isMuted = muteVideo
+//            if videoTextCell.player.isMuted {
+//                videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            //videoTextCell.player.play()
+//            if visibleCellIndex == index {
+//                if videoTextCell.player.rate == 0 {
+//                    videoTextCell.player.play()
+//                }
+//            } else if visibleCellIndex < index! {
+//                if videoTextCell.player.rate != 0 {
+//                    videoTextCell.player.pause()
+//                }
+//            } else {
+//                if videoTextCell.player.rate != 0 {
+//                    videoTextCell.player.pause()
+//                }
+//            }
+//        } else*/
+//            if let videoCell = cellBottom as? EmplLandscVideoCell {
+//            videoCell.player.isMuted = true
+//            if  muteVideo {
+//                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            videoCell.player.pause()
+//            //videoCell.playerLayer.player = nil
+//            //videoCell.playerLayer.removeFromSuperlayer()
+//        }
+//        /*if let videoTextCell = cell as? EmplPortrVideoTextCell {
+//            videoTextCell.player.isMuted = muteVideo
+//            if videoTextCell.player.isMuted {
+//                videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            //videoTextCell.player.play()
+//            if visibleCellIndex == index {
+//                if videoTextCell.player.rate == 0 {
+//                    videoTextCell.player.play()
+//                }
+//            } else if visibleCellIndex < index! {
+//                if videoTextCell.player.rate != 0 {
+//                    videoTextCell.player.pause()
+//                }
+//            } else {
+//                if videoTextCell.player.rate != 0 {
+//                    videoTextCell.player.pause()
+//                }
+//            }
+//        } else*/
+//            if let videoCell = cellBottom as? EmplPortrVideoTextCell {
+//            videoCell.player.isMuted = true
+//            if  muteVideo {
+//                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            videoCell.player.pause()
+//            //videoCell.playerLayer.player = nil
+//            //videoCell.playerLayer.removeFromSuperlayer()
+//        }
+//        /*if let videoTextCell = cell as? EmplLandsVideoTextCell {
+//            videoTextCell.player.isMuted = muteVideo
+//            if videoTextCell.player.isMuted {
+//                videoTextCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoTextCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            if visibleCellIndex == index {
+//                if videoTextCell.player.rate == 0 {
+//                    videoTextCell.player.play()
+//                }
+//            } else if visibleCellIndex < index! {
+//                if videoTextCell.player.rate != 0 {
+//                    videoTextCell.player.pause()
+//                }
+//            } else {
+//                if videoTextCell.player.rate != 0 {
+//                    videoTextCell.player.pause()
+//                }
+//            }
+//        } else*/
+//            if let videoCell = cellBottom as? EmplLandsVideoTextCell {
+//            videoCell.player.isMuted = true
+//            if  muteVideo {
+//                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
+//            } else {
+//                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
+//            }
+//            videoCell.player.pause()
+//            //videoCell.playerLayer.player = nil
+//            //videoCell.playerLayer.removeFromSuperlayer()
+//        }
+//    }
     
     
     private func setupViews(){
@@ -803,9 +782,6 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         
         collectionView.delegate = self
         collectionView.dataSource = self
-//        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-//             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//           }
      
         collectionView.register(FeedPollResultCell.Nib, forCellWithReuseIdentifier: FeedPollResultCell.identifier)
         collectionView.register(FeedTextCell.Nib, forCellWithReuseIdentifier: FeedTextCell.identifier)
@@ -815,8 +791,6 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         collectionView.register(LandScapVideoCell.Nib, forCellWithReuseIdentifier: LandScapVideoCell.identifier)
         collectionView.register(LandScapVideoTextCell.Nib, forCellWithReuseIdentifier: LandScapVideoTextCell.identifier)
 
-        //collectionView.register(FeedVideoCell.Nib, forCellWithReuseIdentifier: FeedVideoCell.identifier)
-        //collectionView.register(FeedVideoTextCell.Nib, forCellWithReuseIdentifier: FeedVideoTextCell.identifier)
         collectionView.register(EmplPortraitVideoCell.Nib, forCellWithReuseIdentifier: EmplPortraitVideoCell.identifier)
         collectionView.register(EmplLandscVideoCell.Nib, forCellWithReuseIdentifier: EmplLandscVideoCell.identifier)
         collectionView.register(EmplPortrVideoTextCell.Nib, forCellWithReuseIdentifier: EmplPortrVideoTextCell.identifier)
@@ -829,12 +803,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         collectionView.register(PersonOfWeek.Nib, forCellWithReuseIdentifier: PersonOfWeek.identifier)
         collectionView.register(PersonWeekScrollCell.Nib, forCellWithReuseIdentifier: PersonWeekScrollCell.identifier)
         collectionView.register(VotingScrollCell.Nib, forCellWithReuseIdentifier: VotingScrollCell.identifier)
-       
-
-       // collectionView.register(UINib(nibName: "FeedVCHeadeer", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:"FeedVCHeadeer")
-//
-//        collectionView.register(UINib(nibName: collectionViewHeaderFooterReuseIdentifier bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier:collectionViewHeaderFooterReuseIdentifier)
-        
+    
     }
     
     private func getFeeds(pageLoad: Int, completion: @escaping (Bool) -> () ){
@@ -935,23 +904,7 @@ self.collectionView.collectionViewLayout.invalidateLayout()
             if AuthStatus.instance.isGuest{
                 self.showGuestAlert()
             } else {
-                //Checking whether user have profile pic/ email / mobile
-//                let profilePic = AuthService.instance.profilePic
-//                let email = AuthService.instance.email
-//                let mobile = AuthService.instance.mobile
-//                if (profilePic == "https://myscrap.com/style/images/icons/no-profile-pic-female.png" || profilePic == "") || (mobile == "" || email == ""){
-////                    postBtn.isEnabled = false
-////                    cameraBtn.isEnabled = false
-//                    profileEditPopUp =  Bundle.main.loadNibNamed("AlartMessagePopupView", owner: self, options: nil)?[0] as! AlartMessagePopupView
-//                    profileEditPopUp.delegate = self
-//                                           profileEditPopUp.frame = CGRect(x:0, y:0, width:self.view.frame.width,height: self.view.frame.height)
-//
-//                                           profileEditPopUp.intializeUI()
-//                                           self.view.addSubview(profileEditPopUp)
-//                    //User can't add post
-//                   // gotoEditProfilePopup()
-//                }
-//                else {
+               
                     postBtn.isEnabled = true
                     cameraBtn.isEnabled = true
                     self.toCamera()
@@ -980,20 +933,7 @@ self.collectionView.collectionViewLayout.invalidateLayout()
             } else {
                 if feedDatasource.count != 0 {
                     UserDefaults.standard.set("", forKey: "postText")
-                    
-                    //Checking whether user have profile pic/ email / mobile
-//                    let profilePic = AuthService.instance.profilePic
-//                    let email = AuthService.instance.email
-//                    let mobile = AuthService.instance.mobile
-//                    if (profilePic == "https://myscrap.com/style/images/icons/no-profile-pic-female.png" || profilePic == "") || (mobile == "" || email == ""){
-//                        postBtn.isEnabled = true
-//                        cameraBtn.isEnabled = true
-//                        profileEditPopUp =  Bundle.main.loadNibNamed("AlartMessagePopupView", owner: self, options: nil)?[0] as! AlartMessagePopupView
-//                                               self.profileEditPopUp.frame = CGRect(x:0, y:0, width:self.view.frame.width,height: self.view.frame.height)
-//                                               profileEditPopUp.intializeUI()
-//                                               self.view.addSubview(self.profileEditPopUp)
-////                        gotoEditProfilePopup()
-//                    } else {
+                
                         postBtn.isEnabled = true
                         cameraBtn.isEnabled = true
                         self.toPostVC()
@@ -1057,16 +997,14 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                     videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                 }
                 videoCell.pause()
-//                videoCell.player.actionAtItemEnd = .pause
-//                NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
+
           }
         }
         else if let portrateCell = cell as? EmplPortrVideoTextCell {
              
                 for videoCell in portrateCell.videosCollection.visibleCells  as! [PortraitVideoCell]    {
                   
-                //cell.player.isMuted = true
-                //if videoCell.player.timeControlStatus == .playing {
+             
                     videoCell.playerView.isMuted = true
                     if  videoCell.player.isMuted {
                         videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
@@ -1074,17 +1012,13 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                     }
                     videoCell.pause()
-    //                videoCell.player.actionAtItemEnd = .pause
-    //                NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                //}
+  
             }
         }
         else if let portrateCell = cell as? LandScapVideoCell {
              
                 for videoCell in portrateCell.videosCollection.visibleCells  as! [LandScapCell]    {
-                  
-                //cell.player.isMuted = true
-                //if videoCell.player.timeControlStatus == .playing {
+                
                     videoCell.playerView.isMuted = true
                     if  videoCell.player.isMuted {
                         videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
@@ -1092,17 +1026,13 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                     }
                     videoCell.pause()
-    //                videoCell.player.actionAtItemEnd = .pause
-    //                NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                //}
+    
             }
         }
         else if let portrateCell = cell as? LandScapVideoTextCell {
              
                 for videoCell in portrateCell.videosCollection.visibleCells  as! [LandScapCell]    {
                   
-                //cell.player.isMuted = true
-                //if videoCell.player.timeControlStatus == .playing {
                     videoCell.playerView.isMuted = true
                     if  videoCell.player.isMuted {
                         videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
@@ -1110,9 +1040,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                         videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
                     }
                     videoCell.pause()
-    //                videoCell.player.actionAtItemEnd = .pause
-    //                NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player.currentItem)
-                //}
+   
             }
         }
     }
@@ -1120,9 +1048,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if section == 0{
-//            return 1
-//        } else {
+
             print("count of feeds \(feedDatasource.count)")
             if feedDatasource.count != 0 {
                 if feedsManualCount < feedDatasource.count {
@@ -1132,18 +1058,12 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
             } else {
                 return 0
             }
-       // }
+       
     }
  
   
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        if indexPath.section == 0{
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedHeaderCell", for: indexPath) as? FeedHeaderCell else { return UICollectionViewCell() }
-//            cell.datasource = memberDataSource
-//            cell.delegate = self
-//            cell.collectionView.reloadData()
-//            return cell
-//        } else {
+
             let data  = feedDatasource[indexPath.item]
             print("Initialized cell type : \(data.cellType)")
             switch data.cellType{
@@ -1251,39 +1171,6 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                    cell.layoutIfNeeded()
                              return cell
             case .feedVideoTextCell:
-                /*guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedVideoTextCell.identifier, for: indexPath) as? FeedVideoTextCell else { return UICollectionViewCell()}
-                 cell.updatedDelegate = self
-                 cell.newItem = data
-                 /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
-                 videoTap.numberOfTapsRequired = 1
-                 cell.thumbnailImg.isUserInteractionEnabled = true
-                 cell.thumbnailImg.addGestureRecognizer(videoTap)
-                 cell.thumbnailImg.tag = indexPath.row*/
-                 self.visibleCellIndex = indexPath
-                 //cell.player.isMuted = muteVideo
-                 cell.muteBtnAction = {
-                 self.index = indexPath
-                 self.updateMuteBtn()
-                 }
-                 cell.playBtnAction = {
-                 let urlString = data.videoUrl
-                 let videoURL = URL(string: urlString)
-                 let player = AVPlayer(url: videoURL!)
-                 let playerViewController = AVPlayerViewController()
-                 playerViewController.player = player
-                 self.present(playerViewController, animated: true) {
-                 playerViewController.player!.play()
-                 }
-                 }
-                 cell.dwnldBtnAction = {
-                 cell.dwnldBtn.isEnabled = false
-                 self.downloadVideo(path: data.downloadVideoUrl)
-                 cell.dwnldBtn.isEnabled = true
-                 }
-                 cell.offlineBtnAction = {
-                 self.showToast(message: "No internet connection")
-                 }
-                 return cell*/
                 return UICollectionViewCell()
             case .ads:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AdvertismentCell.identifier, for: indexPath) as? AdvertismentCell else { return UICollectionViewCell()}
@@ -1373,11 +1260,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
                 cell.offlineActionBlock = {
                     self.showToast(message: "No internet connection")
                 }
-                //                cell.readMoreActionBlock = {
-                //                    cell.updatedDelegate?.didTapContinueReadingV2(item: data, cell: cell)
-                //                    //cell.readMoreBtn.setTitle("Show Less...", for: .normal)
-                //                    cell.readMoreBtn.isHidden = true
-                //                }
+            
                 cell.setNeedsLayout()
                    cell.layoutIfNeeded()
                 return cell
@@ -1472,11 +1355,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
 
                 cell.refreshTable()
                 cell.SetLikeCountButton()
-                /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
-                 videoTap.numberOfTapsRequired = 1
-                 cell.thumbnailImg.isUserInteractionEnabled = true
-                 cell.thumbnailImg.addGestureRecognizer(videoTap)
-                 cell.thumbnailImg.tag = indexPath.row*/
+             
                 self.visibleCellIndex = indexPath
                 //cell.player.isMuted = muteVideo
                 cell.muteBtnAction = {
@@ -1517,12 +1396,6 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
 
                 cell.refreshTable()
                 cell.SetLikeCountButton()
-              
-                /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
-                 videoTap.numberOfTapsRequired = 1
-                 cell.thumbnailImg.isUserInteractionEnabled = true
-                 cell.thumbnailImg.addGestureRecognizer(videoTap)
-                 cell.thumbnailImg.tag = indexPath.row*/
                 self.visibleCellIndex = indexPath
                 //cell.player.isMuted = muteVideo
                 cell.muteBtnAction = {
@@ -1563,12 +1436,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
 
                 cell.refreshTable()
                 cell.SetLikeCountButton()
-              
-                /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
-                 videoTap.numberOfTapsRequired = 1
-                 cell.thumbnailImg.isUserInteractionEnabled = true
-                 cell.thumbnailImg.addGestureRecognizer(videoTap)
-                 cell.thumbnailImg.tag = indexPath.row*/
+    
                 self.visibleCellIndex = indexPath
                 //cell.player.isMuted = muteVideo
                 cell.muteBtnAction = {
@@ -1604,22 +1472,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
             }
         //}
     }
-    
-    /*@objc func videoViewTapped(tapGesture: UITapGestureRecognizer) {
-     let data = feedDatasource[tapGesture.view!.tag]
-     let urlString = data.videoUrl
-     let videoURL = URL(string: urlString)
-     if urlString != "" || videoURL != nil {
-     let player = AVPlayer(url: videoURL!)
-     let playerViewController = AVPlayerViewController()
-     playerViewController.player = player
-     self.present(playerViewController, animated: true) {
-     playerViewController.player!.play()
-     }
-     }
-     
-     }*/
-    
+
     func downloadVideo(path : String) {
         self.showMessage(with: "Download begins!")
         let videoImageUrl = path
@@ -1656,113 +1509,7 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
         }
     }
     
-    /*func updateMuteBtn() {
-     if let cell = collectionView.cellForItem(at: index) as? FeedVideoTextCell {
-     
-     let muteImg = #imageLiteral(resourceName: "mute-60x60")
-     let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-     
-     let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-     let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-     
-     if muteVideo {
-     muteVideo = false
-     cell.player.isMuted = false
-     cell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-     } else {
-     muteVideo = true
-     cell.player.isMuted = true
-     cell.muteBtn.setImage(tintMuteImg, for: .normal)
-     }
-     } else if let cell = collectionView.cellForItem(at: index) as? FeedVideoCell {
-     let muteImg = #imageLiteral(resourceName: "mute-60x60")
-     let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-     
-     let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-     let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-     
-     if muteVideo {
-     muteVideo = false
-     cell.player.isMuted = false
-     cell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-     } else {
-     muteVideo = true
-     cell.player.isMuted = true
-     cell.muteBtn.setImage(tintMuteImg, for: .normal)
-     }
-     }
-     }*/
-    
     func updateMuteBtn() {
-        if let cell = collectionView.cellForItem(at: index) as? EmplPortraitVideoCell {
-            
-            let muteImg = #imageLiteral(resourceName: "mute-60x60")
-            let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-            let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            if muteVideo {
-                muteVideo = false
-                cell.player.isMuted = false
-                cell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            } else {
-                muteVideo = true
-                cell.player.isMuted = true
-                cell.muteBtn.setImage(tintMuteImg, for: .normal)
-            }
-        }
-        if let cell = collectionView.cellForItem(at: index) as? EmplLandscVideoCell {
-            let muteImg = #imageLiteral(resourceName: "mute-60x60")
-            let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-            let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            if muteVideo {
-                muteVideo = false
-                cell.player.isMuted = false
-                cell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            } else {
-                muteVideo = true
-                cell.player.isMuted = true
-                cell.muteBtn.setImage(tintMuteImg, for: .normal)
-            }
-        }
-        if let cell = collectionView.cellForItem(at: index) as? EmplPortrVideoTextCell {
-            let muteImg = #imageLiteral(resourceName: "mute-60x60")
-            let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-            let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            if muteVideo {
-                muteVideo = false
-                cell.player.isMuted = false
-                cell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            } else {
-                muteVideo = true
-                cell.player.isMuted = true
-                cell.muteBtn.setImage(tintMuteImg, for: .normal)
-            }
-        }
-        if let cell = collectionView.cellForItem(at: index) as? LandScapVideoCell {
-            let muteImg = #imageLiteral(resourceName: "mute-60x60")
-            let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-            let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-            
-            if muteVideo {
-                muteVideo = false
-                cell.player.isMuted = false
-                cell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-            } else {
-                muteVideo = true
-                cell.player.isMuted = true
-                cell.muteBtn.setImage(tintMuteImg, for: .normal)
-            }
-        }
     }
     
     
@@ -1804,78 +1551,9 @@ extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
             present(ac, animated: true)
         }
     }
-    
-    /*func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-     /*for cell in collectionView.visibleCells {
-     let indexPath = collectionView.indexPath(for: cell)
-     print(indexPath)
-     if self.visibleCellIndex == indexPath {
-     NotificationCenter.default.post(name:.videoCellPlay, object: nil)
-     } else {
-     NotificationCenter.default.post(name:.videoCellPause, object: nil)
-     }
-     }*/
-     //Visible cell
-     var visibleRect = CGRect()
-     
-     visibleRect.origin = self.collectionView.contentOffset
-     visibleRect.size = self.collectionView.bounds.size
-     
-     
-     let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-     
-     let visibleIndexPath: IndexPath = self.collectionView.indexPathForItem(at: visiblePoint)!
-     
-     print("Visible cell index path", visibleIndexPath)
-     if self.visibleCellIndex == visibleIndexPath {
-     NotificationCenter.default.post(name:.videoCellPlay, object: nil)
-     } else {
-     NotificationCenter.default.post(name:.videoCellPause, object: nil)
-     }
-     }*/
-    /*
-     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-     /*if self.visibleCellIndex != indexPath {
-     //NotificationCenter.default.post(name:.videoCellPlay, object: nil)
-     } else {
-     //NotificationCenter.default.post(name:.videoCellPause, object: nil)
-     if let videoCell = cell as? FeedVideoCell {
-     videoCell.player.pause()
-     } else if let videoTextCell = cell as? FeedVideoTextCell {
-     videoTextCell.player.pause()
-     }
-     }*/
-     /*if let videoCell = cell as? FeedVideoCell {
-     videoCell.player.pause()
-     } else if let videoTextCell = cell as? FeedVideoTextCell {
-     videoTextCell.player.pause()
-     }*/
-     if let videoCell = cell as? EmplPortraitVideoCell {
-     videoCell.player.pause()
-     videoCell.playerLayer.player = nil
-     videoCell.playerLayer.removeFromSuperlayer()
-     }
-     if let videoCell = cell as? EmplLandscVideoCell {
-     videoCell.player.pause()
-     videoCell.playerLayer.player = nil
-     videoCell.playerLayer.removeFromSuperlayer()
-     }
-     if let videoCell = cell as? EmplPortrVideoTextCell {
-     videoCell.player.pause()
-     videoCell.playerLayer.player = nil
-     videoCell.playerLayer.removeFromSuperlayer()
-     }
-     if let videoCell = cell as? EmplLandsVideoTextCell {
-     videoCell.player.pause()
-     videoCell.playerLayer.player = nil
-     videoCell.playerLayer.removeFromSuperlayer()
-     }
-     }
-     */
+
 func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //let visibleCell = collectionView.dequeReusableCell(forIndexPath: indexPath) as?  FeedVideoTextCell
-            //NotificationCenter.default.post(name:.videoCellPlay, object: nil)
-          //self.pauseAllVideos(indexPath: indexPath)
+   
     let centerPoint = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
 
             let muteImg = #imageLiteral(resourceName: "mute-60x60")
@@ -1888,9 +1566,7 @@ func collectionView(_ collectionView: UICollectionView, willDisplay cell: UIColl
             if let portrateCell = cell as? EmplPortraitVideoCell {
              
                 for videoCell in portrateCell.videosCollection.visibleCells  as! [PortraitVideoCell]    {
-                      
-                    //cell.player.isMuted = true
-                    //if videoCell.player.timeControlStatus == .playing {
+                    
                         let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
                         if muteValue == "1"
                         {
@@ -2052,67 +1728,13 @@ func collectionView(_ collectionView: UICollectionView, willDisplay cell: UIColl
  
         
 }
-    /*
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        let muteImg = #imageLiteral(resourceName: "mute-60x60")
-        let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        
-        let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-        let tintUnmuteIemg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        
-        let cvBotY = collectionView.bounds.maxY
-        let cvTopY = collectionView.bounds.minY
-        if let videoCell = cell as? EmplLandsVideoTextCell {
-            let vidTopY : CGFloat = videoCell.videoView.bounds.minY + 250
-            let vidBotY: CGFloat = videoCell.videoView.bounds.maxY - 100
-            
-            let cellTopY : CGFloat = videoCell.bounds.origin.y
-            let cellBotY: CGFloat = videoCell.bounds.maxY - 100
-            
-            print("CV TOP : \(cvTopY) \nCV BOT : \(cvBotY) \nVideo TOP : \(vidTopY) \nVideo BOT : \(vidBotY) \nCell TOP : \(cellTopY) \nCell BOT : \(cellBotY)")
-            
-            if cvBotY <= cellTopY {
-                //Initiate video to play
-                if videoCell.player.rate == 0 {
-                    videoCell.player.isMuted = muteVideo
-                    if  videoCell.player.isMuted {
-                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                    } else {
-                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                    }
-                    videoCell.player.play()
-                }
-            } else if cvTopY >= cellBotY {
-                if videoCell.player.timeControlStatus == .playing {
-                    videoCell.player.isMuted = muteVideo
-                    if  videoCell.player.isMuted {
-                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                    } else {
-                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                    }
-                    videoCell.player.pause()
-                }
-            }
-        }
-    }*/
+
 
     
 
 }
 extension FeedsVC: UICollectionViewDelegateFlowLayout{
-    //#3 APi not called
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//          if memberDataSource.count > 0 {
-//               return CGSize(width:collectionView.frame.width, height: 90.0)
-//          }
-//          else
-//          {
-//               return CGSize(width:collectionView.frame.width, height: 0.0)
-//          }
-//             
-//      }
+
           func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
               return CGSize(width: 0.0, height: 0.0)
       }
@@ -2139,13 +1761,9 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
                 height = FeedsHeight.heightForImageTextCellV2(item: item, width: width, labelWidth: width - 16)
                 return CGSize(width: width, height: height)
             case .feedVideoCell:
-                /*height = FeedsHeight.heightForVideoCellV2(item: item, width: width)
-                 return CGSize(width: width, height: height + 20)*/
                 return CGSize(width: 0, height: 0)
             case .feedVideoTextCell:
-                /*height = FeedsHeight.heightForVideoTextCellV2(item: item, width: width, labelWidth: width - 16)
-                 print("Video Cell height : \(height)")
-                 return CGSize(width: width, height: height + 15)    //height + 30*/
+          
                 return CGSize(width: 0, height: 0)
             case .ads:
                 let height = messageHeight(for: item.description)
@@ -2165,7 +1783,7 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
             case .news:
                 return CGSize(width: width, height: 355)
             case .companyMonth:
-                //guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompanyOfMonthCell.identifier, for: indexPath) as? CompanyOfMonthCell else { return CGSize(width: 0, height: 0)}
+              
                 height = FeedsHeight.heightForCompanyOfMonthCellV2(item: item, labelWidth: width - 16)  //Aligning width by omitting (leading & trailing)
                 print("Height of COM cell : \(height)")
                 return CGSize(width: width, height: height)
@@ -2570,1124 +2188,10 @@ var muteVideo : Bool = false
             self.scrollViewDidEndScrolling()
             
                 print("Get Center IndexPath : \(centerIndexPath) \nCurrent IndexPath :\(indexPath)")
-        //if centerIndexPath < indexPath {
-            //I can get the previous cell now
 
-//            if let portrateCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplPortraitVideoCell {
-//                //previous cell is video
-//                var cellVisibRect = portrateCell.frame
-//                cellVisibRect.size = portrateCell.bounds.size
-//
-//                let cellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY) //maxY
-//                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-//
-//                let maxCellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY)
-//                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-//
-//                print("Previous Y of Cell is Lands Text: \(rectCell.y)")
-//                //print("Previous max Y of cell is : \(maxRectCell.y)")
-//
-//                let y = rectCell.y
-//                let maxY = y + 300
-//
-//
-//                //                if y >= -150 &&  y <= 150{
-//                //                    print("You can stop playing the video from here")
-//                //                }
-//                let screenSize = UIScreen.main.bounds
-//                let screenHeight = screenSize.height
-//                for videoCell in portrateCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
-//
-//
-//                if y <= 300 || y > 900 { //For landscape ==> 3
-//                    print("You can stop play the video from here")
-//                        videoCell.playerView.isMuted = true
-//                        if  videoCell.playerView.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//
-//                        videoCell.pause()
-//
-//                } else if y > 300 && y < 900 {
-//                    print("Reverse scroll you can play")
-//
-//                    let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
-//                        if muteValue == "1"
-//                        {
-//                         muteVideo =  false
-//                        }
-//                         else
-//                        {
-//                         muteVideo =  true
-//                        }
-//                        videoCell.playerView.isMuted = muteVideo
-//                        if  videoCell.playerView.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//                    videoCell.play()
-////                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-////                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-//
-//                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-//                         videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-//                         let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-//
-//                         let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-//
-//                         let secs = Int(duration - currentTime)
-//                         videoCell.playBackTimeLbl.isHidden = false
-//                         videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-//                         /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                         videoCell.playBackTimeLbl.isHidden = true
-//                         if let timeObserverToken = videoCell.timeObserverToken {
-//                         videoCell.player.removeTimeObserver(timeObserverToken)
-//                         videoCell.timeObserverToken = nil
-//                         }
-//                         }*/
-//                         }
-//                         }*/
-//
-//
-//
-//
-////                        videoCell.player.actionAtItemEnd = .none
-////
-////                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-////                        NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-//
-//
-//                }
-//            }
-//            }
-//          else if let portrateCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplPortrVideoTextCell {
-//                //previous cell is video
-//                var cellVisibRect = portrateCell.frame
-//                cellVisibRect.size = portrateCell.bounds.size
-//
-//                let cellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY) //maxY
-//                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-//
-//                let maxCellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY)
-//                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-//
-//                print("Previous Y of Cell is Lands Text: \(rectCell.y)")
-//                //print("Previous max Y of cell is : \(maxRectCell.y)")
-//
-//                let y = rectCell.y
-//                let maxY = y + 300
-//
-//
-//                //                if y >= -150 &&  y <= 150{
-//                //                    print("You can stop playing the video from here")
-//                //                }
-//                let screenSize = UIScreen.main.bounds
-//                let screenHeight = screenSize.height
-//                for videoCell in portrateCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
-//
-//
-//                if y <= 300 || y > 900 { //For landscape ==> 3
-//                    print("You can stop play the video from here")
-//                        videoCell.playerView.isMuted = true
-//                        if  videoCell.playerView.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//
-//                        videoCell.pause()
-//
-//                } else if y > 300 && y < 900{
-//                    print("Reverse scroll you can play")
-//
-//                    let muteValue =  UserDefaults.standard.value(forKey: "MuteValue") as? String
-//                        if muteValue == "1"
-//                        {
-//                         muteVideo =  false
-//                        }
-//                         else
-//                        {
-//                         muteVideo =  true
-//                        }
-//                        videoCell.playerView.isMuted = muteVideo
-//                        if  videoCell.playerView.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//                    videoCell.play()
-////                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-////                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-//
-//                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-//                         videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-//                         let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-//
-//                         let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-//
-//                         let secs = Int(duration - currentTime)
-//                         videoCell.playBackTimeLbl.isHidden = false
-//                         videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-//                         /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                         videoCell.playBackTimeLbl.isHidden = true
-//                         if let timeObserverToken = videoCell.timeObserverToken {
-//                         videoCell.player.removeTimeObserver(timeObserverToken)
-//                         videoCell.timeObserverToken = nil
-//                         }
-//                         }*/
-//                         }
-//                         }*/
-//
-//
-//
-//
-////                        videoCell.player.actionAtItemEnd = .none
-////
-////                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-////                        NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-//
-//
-//                }
-//            }
-//            }
-            //self.pauseAllVideos(indexPath: centerIndexPath)
-
-    //    }
-//       else {
-//            if let portrateCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplPortraitVideoCell {
-//                //previous cell is video
-//                var cellVisibRect = portrateCell.frame
-//                cellVisibRect.size = portrateCell.bounds.size
-//
-//                let cellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY) //maxY
-//                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-//
-//                let maxCellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY)
-//                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-//
-//                print("Previous Y of Cell is Lands Text: \(rectCell.y)")
-//                //print("Previous max Y of cell is : \(maxRectCell.y)")
-//
-//                let y = rectCell.y
-//                let maxY = y + 150
-//
-//                for videoCell in portrateCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
-//
-//
-//                //                if y >= -150 &&  y <= 150{
-//                //                    print("You can stop playing the video from here")
-//                //                }
-//                if y <= 800 { //For landscape ==> 3
-//                    print("You can stop play the video from here")
-//                    if videoCell.player.timeControlStatus == .playing {
-//                        videoCell.player.isMuted = true
-//
-//                        if  videoCell.player.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//
-//                        videoCell.player.actionAtItemEnd = .pause
-//                        NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
-//                        videoCell.player.pause()
-//
-//                    }
-//                } else if y > 800 {
-//                    print("Reverse scroll you can play")
-//                    if videoCell.player.timeControlStatus == .paused {
-//                        videoCell.player.isMuted = muteVideo
-//                        if  videoCell.player.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-//                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-//
-//                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-//                         videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-//                         let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-//
-//                         let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-//
-//                         let secs = Int(duration - currentTime)
-//                         videoCell.playBackTimeLbl.isHidden = false
-//                         videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-//                         /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                         videoCell.playBackTimeLbl.isHidden = true
-//                         if let timeObserverToken = videoCell.timeObserverToken {
-//                         videoCell.player.removeTimeObserver(timeObserverToken)
-//                         videoCell.timeObserverToken = nil
-//                         }
-//                         }*/
-//                         }
-//                         }*/
-//
-//
-//
-//
-//                        videoCell.player.actionAtItemEnd = .none
-//                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-//                            NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-//                        videoCell.player.play()
-//                    }
-//                }
-//            }
-//            }
-//            else if let portrateCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplPortrVideoTextCell {
-//                //previous cell is video
-//                var cellVisibRect = portrateCell.frame
-//                cellVisibRect.size = portrateCell.bounds.size
-//
-//                let cellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY) //maxY
-//                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-//
-//                let maxCellCG = CGPoint(x: portrateCell.x, y: cellVisibRect.maxY)
-//                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-//
-//                print("Previous Y of Cell is Portrait text video: \(rectCell.y)")
-//                //print("Previous max Y of cell is : \(maxRectCell.y)")
-//
-//                let y = rectCell.y
-//                let maxY = y + 150
-//
-//                for videoCell in portrateCell.videosCollection.visibleCells  as [PortraitVideoCell]    {
-//
-//                //                if y >= -150 &&  y <= 150{
-//                //                    print("You can stop playing the video from here")
-//                //                }
-//                if y >= 1150 { //<=
-//                    print("You can stop play the video from here")
-//                    if videoCell.player.timeControlStatus == .playing {
-//                        videoCell.player.isMuted = muteVideo
-//                        videoCell.player.isMuted = true
-//                        if  videoCell.player.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//                        videoCell.player.actionAtItemEnd = .pause
-//                        NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
-//                        videoCell.player.pause()
-//
-//                    }
-//                } else if y < 1150 {
-//                    print("Reverse scroll you can play")
-//                    if videoCell.player.timeControlStatus == .paused {
-//                        videoCell.player.isMuted = muteVideo
-//                        if  videoCell.player.isMuted {
-//                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-//                        } else {
-//                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-//                        }
-//                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-//                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-//
-//                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-//                         videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-//                         let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-//
-//                         let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-//                         print("Duration : \(duration)")
-//                         let secs = Int(duration - currentTime)
-//                         videoCell.playBackTimeLbl.isHidden = false
-//                         videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-//                         /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                         videoCell.playBackTimeLbl.isHidden = true
-//                         if let timeObserverToken = videoCell.timeObserverToken {
-//                         videoCell.player.removeTimeObserver(timeObserverToken)
-//                         videoCell.timeObserverToken = nil
-//                         }
-//                         }*/
-//                         }
-//                         }*/
-//
-//
-//
-//                        videoCell.player.actionAtItemEnd = .none
-//                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-//                            NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-//                        videoCell.player.play()
-//                    }
-//                }
-//            }
-//            }
-//      }
-    
-        
-        /*
-        
-        //While scrolling the collection this function will triggered
-        
-        var visibleRect = CGRect()
-        visibleRect.origin = scrollView.contentOffset
-        visibleRect.size = scrollView.bounds.size
-        
-        
-        let muteImg = #imageLiteral(resourceName: "mute-60x60")
-        let tintMuteImg = muteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        
-        let unMuteImg = #imageLiteral(resourceName: "unmute-60x60")
-        let tintUnmuteImg = unMuteImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        //print("minY : \(visibleRect.minY) \nmidY : \(visibleRect.midY) \nmaxY : \(visibleRect.maxY)")
-        
-        let cgPoint = CGPoint(x: scrollView.bounds.origin.x, y: visibleRect.maxY)
-        
-        
-        guard let indexPath = collectionView.indexPathForItem(at: cgPoint) else { return}
-        //let storedIndexPath = self.visibleCellIndex
-        let visibleCellIndexPath = self.collectionView.indexPathsForVisibleItems
-        var centerIndexPath = IndexPath(row: NSNotFound, section: NSNotFound)
-        //let centerPoint   = CGPoint(x: scrollView.bounds.origin.x, y: visibleRect.minY)
-        //guard let centerIndexPath: IndexPath = collectionView.indexPathForItem(at: centerPoint) else { return }
-        for allIndex in visibleCellIndexPath {
-            if visibleCellIndexPath.count == 0 {
-                centerIndexPath = IndexPath(row: feedDatasource.count - 1, section: 1)
-            } else {
-                centerIndexPath = allIndex
-            }
-            print("Visible index path :\(centerIndexPath)")
-        }
-        
-        
-        print("Get Center IndexPath : \(centerIndexPath) \nCurrent IndexPath :\(indexPath)")
-        if centerIndexPath < indexPath {
-            //I can get the previous cell now
-            if let videoCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplLandsVideoTextCell {
-                //previous cell is video
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY) //maxY
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                
-                print("Previous Y of Cell is Lands Text: \(rectCell.y)")
-                //print("Previous max Y of cell is : \(maxRectCell.y)")
-                
-                let y = rectCell.y
-                let maxY = y + 150
-                
-                
-//                if y >= -150 &&  y <= 150{
-//                    print("You can stop playing the video from here")
-//                }
-                if y <= 150 { //<=
-                    print("You can stop play the video from here")
-                    if videoCell.player.timeControlStatus == .playing {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        
-                        videoCell.player.actionAtItemEnd = .pause
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
-                        videoCell.player.pause()
-                        
-                    }
-                } else if y > 150 {
-                    print("Reverse scroll you can play")
-                    if videoCell.player.timeControlStatus == .paused {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-                            videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                            
-                                let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                
-                                let secs = Int(duration - currentTime)
-                                videoCell.playBackTimeLbl.isHidden = false
-                                videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                    videoCell.playBackTimeLbl.isHidden = true
-                                    if let timeObserverToken = videoCell.timeObserverToken {
-                                        videoCell.player.removeTimeObserver(timeObserverToken)
-                                        videoCell.timeObserverToken = nil
-                                    }
-                                }*/
-                            }
-                        }*/
-                        
-                        
-                            
-                            
-                            videoCell.player.actionAtItemEnd = .none
-                            NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                            NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                        videoCell.player.play()
-                    }
-                }
-            }
-            else if let videoCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplPortrVideoTextCell {
-                            //previous cell is video
-                            var cellVisibRect = videoCell.frame
-                            cellVisibRect.size = videoCell.bounds.size
-                            
-                            let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY) //maxY
-                            let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                            
-                            let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                            let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                            
-                            print("Previous Y of Cell is Portrait text video: \(rectCell.y)")
-                            //print("Previous max Y of cell is : \(maxRectCell.y)")
-                            
-                            let y = rectCell.y
-                            let maxY = y + 150
-                            
-                            
-            //                if y >= -150 &&  y <= 150{
-            //                    print("You can stop playing the video from here")
-            //                }
-                            if y <= 150 { //<=
-                                print("You can stop play the video from here")
-                                if videoCell.player.timeControlStatus == .playing {
-                                    videoCell.player.isMuted = muteVideo
-                                    if  videoCell.player.isMuted {
-                                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                                    } else {
-                                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                                    }
-                                    videoCell.player.actionAtItemEnd = .pause
-                                    NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
-                                    videoCell.player.pause()
-                                    
-                                }
-                            } else if y > 150 {
-                                print("Reverse scroll you can play")
-                                if videoCell.player.timeControlStatus == .paused {
-                                    videoCell.player.isMuted = muteVideo
-                                    if  videoCell.player.isMuted {
-                                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                                    } else {
-                                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                                    }
-                                    let timeScale = CMTimeScale(NSEC_PER_SEC)
-                                    let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                                    /*if videoCell.player.currentItem?.status == .readyToPlay {
-                                        videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                            let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                                        
-                                            let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                            print("Duration : \(duration)")
-                                            let secs = Int(duration - currentTime)
-                                            videoCell.playBackTimeLbl.isHidden = false
-                                            videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                            /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                                videoCell.playBackTimeLbl.isHidden = true
-                                                if let timeObserverToken = videoCell.timeObserverToken {
-                                                    videoCell.player.removeTimeObserver(timeObserverToken)
-                                                    videoCell.timeObserverToken = nil
-                                                }
-                                            }*/
-                                        }
-                                    }*/
-                                    
-                                   
-                                    
-                                    videoCell.player.actionAtItemEnd = .none
-                                    NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                                    NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                                    videoCell.player.play()
-                                }
-                            }
-                        }
-            else if let videoCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplLandscVideoCell {
-                            //previous cell is video
-                            var cellVisibRect = videoCell.frame
-                            cellVisibRect.size = videoCell.bounds.size
-                            
-                            let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY) //maxY
-                            let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                            
-                            let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                            let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                            
-                            print("Previous Y of Cell is Landscape video: \(rectCell.y)")
-                            //print("Previous max Y of cell is : \(maxRectCell.y)")
-                            
-                            let y = rectCell.y
-                            let maxY = y + 150
-                            
-                            
-            //                if y >= -150 &&  y <= 150{
-            //                    print("You can stop playing the video from here")
-            //                }
-                            if y <= 150 { //<=
-                                print("You can stop play the video from here")
-                                if videoCell.player.timeControlStatus == .playing {
-                                    videoCell.player.isMuted = muteVideo
-                                    if  videoCell.player.isMuted {
-                                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                                    } else {
-                                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                                    }
-                                    videoCell.player.actionAtItemEnd = .pause
-                                    NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
-                                    videoCell.player.pause()
-                                    
-                                }
-                            } else if y > 150 {
-                                print("Reverse scroll you can play")
-                                if videoCell.player.timeControlStatus == .paused {
-                                    videoCell.player.isMuted = muteVideo
-                                    if  videoCell.player.isMuted {
-                                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                                    } else {
-                                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                                    }
-                                    let timeScale = CMTimeScale(NSEC_PER_SEC)
-                                    let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                                    /*if videoCell.player.currentItem?.status == .readyToPlay {
-                                        videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                            let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                                        
-                                            let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                            print("Duration : \(duration)")
-                                            let secs = Int(duration - currentTime)
-                                            videoCell.playBackTimeLbl.isHidden = false
-                                            videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                            /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                                videoCell.playBackTimeLbl.isHidden = true
-                                                if let timeObserverToken = videoCell.timeObserverToken {
-                                                    videoCell.player.removeTimeObserver(timeObserverToken)
-                                                    videoCell.timeObserverToken = nil
-                                                }
-                                            }*/
-                                        }
-                                    }*/
-                                    
-                                    
-                                    
-                                    videoCell.player.actionAtItemEnd = .none
-                                    NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                                    NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                                    videoCell.player.play()
-                                }
-                            }
-                        }
-            else if let videoCell = self.collectionView.cellForItem(at: centerIndexPath) as? EmplPortraitVideoCell {
-                            //previous cell is video
-                            var cellVisibRect = videoCell.frame
-                            cellVisibRect.size = videoCell.bounds.size
-                            
-                            let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY) //maxY
-                            let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                            
-                            let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                            let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                            
-                            print("Previous Y of Cell is Portrait video: \(rectCell.y)")
-                            //print("Previous max Y of cell is : \(maxRectCell.y)")
-                            
-                            let y = rectCell.y
-                            let maxY = y + 150
-                            
-                            
-            //                if y >= -150 &&  y <= 150{
-            //                    print("You can stop playing the video from here")
-            //                }
-                            if y <= 150 { //<=
-                                print("You can stop play the video from here")
-                                if videoCell.player.timeControlStatus == .playing {
-                                    videoCell.player.isMuted = muteVideo
-                                    if  videoCell.player.isMuted {
-                                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                                    } else {
-                                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                                    }
-                                    videoCell.player.actionAtItemEnd = .pause
-                                    NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(notification:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: videoCell.player)
-                                    videoCell.player.pause()
-                                    
-                                }
-                            } else if y > 150 {
-                                print("Reverse scroll you can play")
-                                if videoCell.player.timeControlStatus == .paused {
-                                    videoCell.player.isMuted = muteVideo
-                                    if  videoCell.player.isMuted {
-                                        videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                                    } else {
-                                        videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                                    }
-                                    let timeScale = CMTimeScale(NSEC_PER_SEC)
-                                    let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                                    /*if videoCell.player.currentItem?.status == .readyToPlay {
-                                        videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                            let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                                        
-                                            let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                            print("Duration : \(duration)")
-                                            let secs = Int(duration - currentTime)
-                                            videoCell.playBackTimeLbl.isHidden = false
-                                            videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                            /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                                videoCell.playBackTimeLbl.isHidden = true
-                                                if let timeObserverToken = videoCell.timeObserverToken {
-                                                    videoCell.player.removeTimeObserver(timeObserverToken)
-                                                    videoCell.timeObserverToken = nil
-                                                }
-                                            }*/
-                                        }
-                                    }*/
-                                    
-                                    
-                                    
-                                    videoCell.player.actionAtItemEnd = .none
-                                    NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                                    NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                                    videoCell.player.play()
-                                }
-                            }
-                        }
-                //Checking for next cell also contains video
-            else if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplLandsVideoTextCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY) //maxY
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let y = rectCell.y
-                print("Next cell Land text video Y postion is : \(y)")
-            } else if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplPortrVideoTextCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY) //maxY
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let y = rectCell.y
-                print("Next cell Portr text video Y postion is : \(y)")
-            }  else if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplPortraitVideoCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY) //maxY
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let y = rectCell.y
-                print("Next cell portr video Y postion is : \(y)")
-            } else if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplLandscVideoCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY) //maxY
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let y = rectCell.y
-                print("Next cell lands video Y postion is : \(y)")
-            }
-            
-        } /*else if centerIndexPath == indexPath{
-            if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplLandsVideoTextCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY)
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                
-                print("Y of Cell is Lands Text: \(rectCell.y)")
-                //print("max Y of cell is : \(maxRectCell.y)")
-                
-                let y = rectCell.y
-                let maxY = y - 150
-                
-                
-                /*if y >= -150 &&  y <= 150{
-                    print("You can start play the video from here")
-                }*/
-                if y <= 400 { //y <= 150 edited : 05:20 PM Apr 29th 20'20
-                    print("You can start play the video from here")
-                    if videoCell.player.rate >= 0 {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-                            videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                            
-                                let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                
-                                let secs = Int(duration - currentTime)
-                                videoCell.playBackTimeLbl.isHidden = false
-                                videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                    videoCell.playBackTimeLbl.isHidden = true
-                                    if let timeObserverToken = videoCell.timeObserverToken {
-                                        videoCell.player.removeTimeObserver(timeObserverToken)
-                                        videoCell.timeObserverToken = nil
-                                    }
-                                }*/
-                            }
-                        }*/
-                        
-                        
-                        videoCell.player.play()
-                        videoCell.player.actionAtItemEnd = .none
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                            NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                        videoCell.player.play()
-                    }
-                } else if y > 400 {
-                    print("You can stop play the video from here")
-                    if videoCell.player.timeControlStatus == .playing {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        videoCell.player.pause()
-                        videoCell.player.actionAtItemEnd = .pause
-                    }
-                }
-            }
-            else if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplPortrVideoTextCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY)
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                
-                print("Y of Cell is Portrait text: \(rectCell.y)")
-                //print("max Y of cell is : \(maxRectCell.y)")
-                
-                let y = rectCell.y
-                let maxY = y - 150
-                
-                
-                /*if y >= -150 &&  y <= 150{
-                    print("You can start play the video from here")
-                }*/
-                if y <= 400 { //y <= 150 edited : 05:20 PM Apr 29th 20'20
-                    print("You can start play the video from here")
-                    if videoCell.player.rate >= 0 {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-                            videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                            
-                                let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                
-                                let secs = Int(duration - currentTime)
-                                videoCell.playBackTimeLbl.isHidden = false
-                                videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                    videoCell.playBackTimeLbl.isHidden = true
-                                    if let timeObserverToken = videoCell.timeObserverToken {
-                                        videoCell.player.removeTimeObserver(timeObserverToken)
-                                        videoCell.timeObserverToken = nil
-                                    }
-                                }*/
-                            }
-                        }*/
-                        
-                        
-                        
-                        videoCell.player.actionAtItemEnd = .none
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                            NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                        videoCell.player.play()
-                    }
-                } else if y > 400 {
-                    print("You can stop play the video from here")
-                    if videoCell.player.timeControlStatus == .playing {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        videoCell.player.pause()
-                        videoCell.player.actionAtItemEnd = .pause
-                    }
-                }
-            }
-            else if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplLandscVideoCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY)
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                
-                print("Y of Cell is Land: \(rectCell.y)")
-                //print("max Y of cell is : \(maxRectCell.y)")
-                
-                let y = rectCell.y
-                let maxY = y - 150
-                
-                
-                /*if y >= -150 &&  y <= 150{
-                    print("You can start play the video from here")
-                }*/
-                if y <= 400 { //y <= 150 edited : 05:20 PM Apr 29th 20'20
-                    print("You can start play the video from here")
-                    if videoCell.player.rate >= 0 {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-                            videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                            
-                                let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                
-                                let secs = Int(duration - currentTime)
-                                videoCell.playBackTimeLbl.isHidden = false
-                                videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                    videoCell.playBackTimeLbl.isHidden = true
-                                    if let timeObserverToken = videoCell.timeObserverToken {
-                                        videoCell.player.removeTimeObserver(timeObserverToken)
-                                        videoCell.timeObserverToken = nil
-                                    }
-                                }*/
-                            }
-                        }*/
-                        
-                        
-                        videoCell.player.actionAtItemEnd = .none
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                            NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                        videoCell.player.play()
-                    }
-                } else if y > 400 {
-                    print("You can stop play the video from here")
-                    if videoCell.player.timeControlStatus == .playing {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        videoCell.player.pause()
-                        videoCell.player.actionAtItemEnd = .pause
-                    }
-                }
-            }
-            else if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplPortraitVideoCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.minY)
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                let maxCellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                let maxRectCell = collectionView.convert(maxCellCG, to: collectionView.superview)
-                
-                print("Y of Cell is Portrait: \(rectCell.y)")
-                //print("max Y of cell is : \(maxRectCell.y)")
-                
-                let y = rectCell.y
-                let maxY = y - 150
-                
-                
-                /*if y >= -150 &&  y <= 150{
-                    print("You can start play the video from here")
-                }*/
-                if y <= 400 { //y <= 150 edited : 05:20 PM Apr 29th 20'20
-                    print("You can start play the video from here")
-                    if videoCell.player.rate >= 0 {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        let timeScale = CMTimeScale(NSEC_PER_SEC)
-                        let time = CMTime(seconds: 1, preferredTimescale: timeScale)
-
-                        /*if videoCell.player.currentItem?.status == .readyToPlay {
-                            videoCell.timeObserverToken = videoCell.player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
-                                let currentTime = CMTimeGetSeconds(videoCell.player.currentTime())
-                            
-                                let duration = CMTimeGetSeconds((videoCell.player.currentItem?.asset.duration)!)
-                                
-                                let secs = Int(duration - currentTime)
-                                videoCell.playBackTimeLbl.isHidden = false
-                                videoCell.playBackTimeLbl.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String//"\(secs/60):\(secs%60)"
-                                /*DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                    videoCell.playBackTimeLbl.isHidden = true
-                                    if let timeObserverToken = videoCell.timeObserverToken {
-                                        videoCell.player.removeTimeObserver(timeObserverToken)
-                                        videoCell.timeObserverToken = nil
-                                    }
-                                }*/
-                            }
-                        }*/
-                    
-                        
-                        videoCell.player.actionAtItemEnd = .none
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                            NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                        videoCell.player.play()
-                    }
-                } else if y > 400 {
-                    print("You can stop play the video from here")
-                    if videoCell.player.timeControlStatus == .playing {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        videoCell.player.pause()
-                        videoCell.player.actionAtItemEnd = .pause
-                    }
-                }
-            }
-        }*/
-        /*else if centerIndexPath > indexPath {
-            //I can get the next cell now
-            if let videoCell = self.collectionView.cellForItem(at: indexPath) as? EmplLandsVideoTextCell {
-                var cellVisibRect = videoCell.frame
-                cellVisibRect.size = videoCell.bounds.size
-                
-                let cellCG = CGPoint(x: videoCell.x, y: cellVisibRect.maxY)
-                let rectCell = collectionView.convert(cellCG, to: collectionView.superview)
-                
-                
-                
-                print("Next Y of Cell is: \(rectCell.y)")
-                //print("Previous max Y of cell is : \(maxRectCell.y)")
-                
-                let y = rectCell.y
-                let maxY = y + 150
-                
-                
-                //                if y >= -150 &&  y <= 150{
-                //                    print("You can stop playing the video from here")
-                //                }
-                if y <= 150 { //<=
-                    print("You can stop play the video from here")
-                    if videoCell.player.timeControlStatus == .playing {
-                        videoCell.player.isMuted = muteVideo
-                        if  videoCell.player.isMuted {
-                            videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                        } else {
-                            videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                        }
-                        videoCell.player.pause()
-                        videoCell.player.actionAtItemEnd = .pause
-                        //NotificationCenter.default.addObserver(self, selector: #selector(self.pausedVideoDidEnd(cell:)), name:NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-                        
-                    } else if y >= rectCell.y {
-                        print("Reverse scroll you can play")
-                        if videoCell.player.timeControlStatus == .paused {
-                            videoCell.player.isMuted = muteVideo
-                            if  videoCell.player.isMuted {
-                                videoCell.muteBtn.setImage(tintMuteImg, for: .normal)
-                            } else {
-                                videoCell.muteBtn.setImage(tintUnmuteImg, for: .normal)
-                            }
-                            videoCell.player.play()
-                            videoCell.player.actionAtItemEnd = .none
-                            NotificationCenter.default.addObserver(self, selector: #selector(self.playingVideoDidEnd(notification:)), name:
-                                NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:  videoCell.player.currentItem)
-                        }
-                    }
-                    
-                }
-            }
-        }*/
- */
-        
     }
         }
-    /*@objc func playingVideoDidEnd(videoCell: UICollectionViewCell) {
-        print("Visible video ended")
-        if let cell = videoCell as? EmplLandsVideoTextCell {
-            cell.player.seek(to: CMTime.zero)
-            cell.player.play()
-        }
-    }*/
     
-    @objc func playingVideoDidEnd(notification: Notification) {
-        if let playerItem = notification.object as? AVPlayerItem {
-            //Video time be set to 0
-            
-            /*-----------------------------------------------*/
-            playerItem.seek(to: CMTime.zero) { (reachedEnd) in
-                if reachedEnd {
-                    print("Visible video started")
-                }
-            }
-        }
-    }
-    
-    @objc func pausedVideoDidEnd(notification: Notification) {
-        
-        if let player = notification.object as? AVPlayer {
-            print("Visible video ended")
-            player.pause()
-            
-            /*let playerItem = player.currentItem
-            let currentItem = player.currentItem?.currentTime()
-            playerItem!.seek(to: currentItem!) { (reachedPause) in
-                if reachedPause {
-                    print("Paused video started")
-                    player.pause()
-                }
-            }*/
-        }
-    }
-    
-//    @objc func pausedVideoDidEnd(cell: UICollectionViewCell) {
-//        print("Visible video ended do not play again")
-//        if let videoCell = cell as? EmplLandsVideoTextCell {
-//            //videoCell.player.seek(to: CMTime.zero)
-//            videoCell.player.pause()
-//        }
-//    }
     
     fileprivate func messageHeight(for text: String) -> CGFloat{
         let label = UILabel()
@@ -3732,43 +2236,7 @@ extension FeedsVC : MarketScrollDelegate {
         
         self.present(activityViewController, animated: true, completion: nil)
         
-        /*var documentInteractionController:UIDocumentInteractionController!
-         
-         let urlWhats = "whatsapp://app"
-         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
-         if let whatsappURL = NSURL(string: urlString) {
-         
-         if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-         
-         let imgURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-         let fileName = "yourImageName.jpg"
-         let fileURL = imgURL.appendingPathComponent(fileName)
-         if let image = UIImage(contentsOfFile: fileURL.path) {
-         
-         if let imageData = UIImageJPEGRepresentation(image, 0.75) {
-         let tempFile = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/yourImageName.jpg")
-         do {
-         try imageData.write(to: tempFile!, options: .atomicWrite)
-         documentInteractionController = UIDocumentInteractionController(url: tempFile!)
-         documentInteractionController.uti = "net.whatsapp.image"
-         documentInteractionController.presentOpenInMenu(from: CGRect.zero, in: self.view, animated: true)
-         } catch {
-         print(error)
-         }
-         }
-         }
-         } else {
-         // Cannot open whatsapp
-         }
-         }
-         }*/
-        
-        //        if let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook) {
-        //            vc.setInitialText("Look at this great picture!")
-        //            vc.add(UIImage(named: "fav.jpg")!)
-        //            vc.add(URL(string: "https://www.hackingwithswift.com"))
-        //            present(vc, animated: true)
-        //        }
+       
     }
     
     func didTapUserProfile(userId: String) {
@@ -3783,48 +2251,12 @@ extension FeedsVC : MarketScrollDelegate {
 extension FeedsVC: VoteScrollDelegate {
     
     func didTapVoteView(index: Int, voterId: String) {
-        /*let vc = VoteVC.storyBoardInstance()
-         if index == 0 {
-         vc?.oneRB = true
-         //vc?.firstNameRB.isSelected = true
-         } else if index == 1 {
-         vc?.twoRB = true
-         //vc?.secNameRB.isSelected = true
-         } else if index == 2 {
-         vc?.threeRB = true
-         //vc?.thirdNameRB.isSelected = true
-         } else if index == 3 {
-         vc?.fourRB = true
-         //vc?.fourthNameRB.isSelected = true
-         } else if index == 4 {
-         vc?.fiveRB = true
-         //vc?.fifthNameRB.isSelected = true
-         } else if index == 5 {
-         vc?.sixRB = true
-         } else if index == 6 {
-         vc?.sevenRB = true
-         } else if index == 7 {
-         vc?.eightRB = true
-         } else if index == 8 {
-         vc?.nineRB = true
-         } else if index == 9 {
-         vc?.tenRB = true
-         }*/
         let vc = VoterPollScreenVC.storyBoardInstance()
-        //let indexPath = IndexPath(row: index, section: 0)
-        //vc?.voterId = voterId
-        //vc?.selectedIndex = indexPath
-        //vc?.navigationItem.title = "Poll"
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     func didTapVoterBio(index: Int, voterId: String) {
-        /*let popOverVC = UIStoryboard(name: "Vote", bundle: nil).instantiateViewController(withIdentifier: "ViewBioVoteVC") as! ViewBioVoteVC
-         self.addChildViewController(popOverVC)
-         popOverVC.voterId = voterId
-         popOverVC.view.frame = CGRect(x: 0, y: 0, width: self.view.width, height: self.collectionView.height)
-         self.view.addSubview(popOverVC.view)
-         popOverVC.didMove(toParentViewController: self)*/
+     
         if let vc = ViewBioVoteVC.storyBoardInstance() {
             vc.voterId = voterId
             vc.selectedIndex = index
@@ -3834,10 +2266,8 @@ extension FeedsVC: VoteScrollDelegate {
     }
     func didShareBtnTapped(sender: Any, voterId: String, voterName: String) {
         let encodedVoterId = voterId.toBase64()
-        //let id = Int(listingId)!
-        //let firstActivityItem = "Check out the link below and Vote for \(voterName) from MyScrap"
+      
         let secondActivityItem : NSURL = NSURL(string: "https://myscrap.com/ms/vote/\(encodedVoterId)")!
-        //let secondActivityItem : NSURL = NSURL(string: "iOSMyScrapApp://myscrap.com/marketLists/\(id)/userId\(userId)")!
         
         
         let activityViewController : UIActivityViewController = UIActivityViewController(
