@@ -98,7 +98,7 @@ class DetailsVC: BaseCVC , FriendControllerDelegate, UINavigationControllerDeleg
         if feedV2Item == nil{
             self.activityIndicator.startAnimating()
         }
-        getDetails()
+      //  getDetails()
         service.delegate = self
     }
     @objc func OpenEditProfileView(notification: Notification) {
@@ -237,7 +237,10 @@ class DetailsVC: BaseCVC , FriendControllerDelegate, UINavigationControllerDeleg
     }
     
     fileprivate func getDetails(){
-        service.getDetails(postId: postId)
+        DispatchQueue.global(qos:.userInteractive).async {
+            self.service.getDetails(postId: self.postId)
+          }
+       
     }
     
     func gotoEditProfilePopup() {

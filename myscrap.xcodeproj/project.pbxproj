@@ -4462,7 +4462,6 @@
 		2295BFAC1EC6DDB70075020A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FB0EFAEF259BA92000922BF4 /* AllFeedsCell */,
 				94CDF294252AEE2000C879F1 /* Additions */,
 				94CDF299252AEE2000C879F1 /* API */,
 				94CDF297252AEE2000C879F1 /* CreateCompanyStoryboard */,
@@ -7302,13 +7301,6 @@
 				C23D54A3259773E5006D6C0A /* RequestResponseAlertView.swift */,
 			);
 			path = CompanyAdminRequestCell;
-			sourceTree = "<group>";
-		};
-		FB0EFAEF259BA92000922BF4 /* AllFeedsCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AllFeedsCell;
 			sourceTree = "<group>";
 		};
 		FB8C9536250D16BA000E1B40 /* ConfirmYourPriceVC */ = {
