@@ -1015,11 +1015,11 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             case .feedTextCell:
                 let height = FeedsHeight.heightforDetailFeedTextCellV2(item: item , labelWidth: width - 16)
                 if item.likeCount == 0 && item.commentCount == 0 && item.status.contains("http") {
-                    return CGSize(width: width , height: height - 22 )
+                    return CGSize(width: width , height: height - 32 )
                 } else if item.likeCount == 0 && item.commentCount == 0 {
-                    return CGSize(width: width , height: height+15)
+                    return CGSize(width: width , height: height)
                 } else {
-                    return CGSize(width: width , height: height  -  22 )
+                    return CGSize(width: width , height: height  -  32 )
                 }
             case .feedImageCell:
                 let height = FeedsHeight.heightForImageCellV2(item: item, width: width)

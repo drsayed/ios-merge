@@ -1432,6 +1432,7 @@
 		FB00F568258F3EC100FEEE93 /* ReportedLandscapVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB00F566258F3EC000FEEE93 /* ReportedLandscapVideoCell.swift */; };
 		FB00F569258F3EC100FEEE93 /* ReportedLandscapVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB00F567258F3EC000FEEE93 /* ReportedLandscapVideoCell.xib */; };
 		FB0CB7C8255BCA9B00B992C7 /* IncompleteProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0CB7C7255BCA9A00B992C7 /* IncompleteProfileVC.swift */; };
+		FB0EFB04259D099D00922BF4 /* DataEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFB03259D099D00922BF4 /* DataEncoding.m */; };
 		FB1DB8B8251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */; };
 		FB30E378255E679200551312 /* FeedDetailVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */; };
 		FB30E379255E679200551312 /* FeedDetailVideoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */; };
@@ -1595,7 +1596,6 @@
 		FBE5E0512513AFEA00F5EB93 /* UserListImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E04F2513AFE700F5EB93 /* UserListImageCell.swift */; };
 		FBE5E0522513AFEA00F5EB93 /* UserListImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE5E0502513AFEA00F5EB93 /* UserListImageCell.xib */; };
 		FBE5E0552513B1FF00F5EB93 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E0532513B1FB00F5EB93 /* Common.m */; };
-		FBE5E0582513B23300F5EB93 /* DataEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E0572513B23300F5EB93 /* DataEncoding.m */; };
 		FBE5E05B2513E80400F5EB93 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E0592513E80100F5EB93 /* Base64.m */; };
 		FBE5EE7C257651840098E0AE /* UserFeedsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5EE7B257651840098E0AE /* UserFeedsVC.swift */; };
 		FBE5EE8125766D390098E0AE /* UserFeedNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE5EE7F25766D340098E0AE /* UserFeedNewCell.xib */; };
@@ -3077,6 +3077,8 @@
 		FB00F566258F3EC000FEEE93 /* ReportedLandscapVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportedLandscapVideoCell.swift; sourceTree = "<group>"; };
 		FB00F567258F3EC000FEEE93 /* ReportedLandscapVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportedLandscapVideoCell.xib; sourceTree = "<group>"; };
 		FB0CB7C7255BCA9A00B992C7 /* IncompleteProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncompleteProfileVC.swift; sourceTree = "<group>"; };
+		FB0EFB02259D099C00922BF4 /* DataEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEncoding.h; sourceTree = "<group>"; };
+		FB0EFB03259D099D00922BF4 /* DataEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEncoding.m; sourceTree = "<group>"; };
 		FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileCodeVerifyVC.swift; sourceTree = "<group>"; };
 		FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailVideoTextCell.xib; sourceTree = "<group>"; };
 		FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailVideoTextCell.swift; sourceTree = "<group>"; };
@@ -3244,8 +3246,6 @@
 		FBE5E0502513AFEA00F5EB93 /* UserListImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListImageCell.xib; sourceTree = "<group>"; };
 		FBE5E0532513B1FB00F5EB93 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		FBE5E0542513B1FF00F5EB93 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		FBE5E0562513B23000F5EB93 /* DataEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEncoding.h; sourceTree = "<group>"; };
-		FBE5E0572513B23300F5EB93 /* DataEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEncoding.m; sourceTree = "<group>"; };
 		FBE5E0592513E80100F5EB93 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		FBE5E05A2513E80300F5EB93 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		FBE5EE7B257651840098E0AE /* UserFeedsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedsVC.swift; sourceTree = "<group>"; };
@@ -6454,10 +6454,10 @@
 		94900DD322719ECB007DE342 /* Main Module */ = {
 			isa = PBXGroup;
 			children = (
-				FBE5E0562513B23000F5EB93 /* DataEncoding.h */,
-				FBE5E0572513B23300F5EB93 /* DataEncoding.m */,
 				FBE5E0542513B1FF00F5EB93 /* Common.h */,
 				FBE5E0532513B1FB00F5EB93 /* Common.m */,
+				FB0EFB02259D099C00922BF4 /* DataEncoding.h */,
+				FB0EFB03259D099D00922BF4 /* DataEncoding.m */,
 				FBE5E05A2513E80300F5EB93 /* Base64.h */,
 				FBE5E0592513E80100F5EB93 /* Base64.m */,
 				FBDDDCEA25822FA100592782 /* TMImageZoom.h */,
@@ -8781,6 +8781,7 @@
 				94E1AE6923EFBE6300DE548F /* AddPostV2Controller.swift in Sources */,
 				940B168A22B909A5000EA327 /* CompanyReviewCell.swift in Sources */,
 				22C3163D1F0A113900710577 /* KeyboardAvoidable.swift in Sources */,
+				FB0EFB04259D099D00922BF4 /* DataEncoding.m in Sources */,
 				94CDF2A4252AEE2100C879F1 /* FollowUserButton.swift in Sources */,
 				944F763B221BDB7D00AF58BA /* StoriesCVCell.swift in Sources */,
 				947710132445ED7500336F40 /* OverviewEmployeeListCell.swift in Sources */,
@@ -9459,7 +9460,6 @@
 				9482C45A222CE42400DE83A1 /* OnlinePresence.swift in Sources */,
 				228B22BC1FA708AC00F7F4C7 /* CommentImageButton.swift in Sources */,
 				2244AB321F5FEB4E0069A61E /* AutoCompleteTextField.swift in Sources */,
-				FBE5E0582513B23300F5EB93 /* DataEncoding.m in Sources */,
 				FBB0CEB52525C63F0065656C /* VideoFullscreenPlayerView.swift in Sources */,
 				226FE09E1F8B90F700A18990 /* ExchangeHeaderView.swift in Sources */,
 				FB904072251A68BB00BAE2D2 /* DPDUIView+Extension.swift in Sources */,
@@ -9771,7 +9771,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29.0;
+				CURRENT_PROJECT_VERSION = 30.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -9860,7 +9860,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29.0;
+				CURRENT_PROJECT_VERSION = 30.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;

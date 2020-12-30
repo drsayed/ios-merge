@@ -227,6 +227,7 @@ final class APIService: NSObject {
     }
     
     func getTaskAndDataWith(completion: @escaping (APIResult<[String: AnyObject]>) -> Void) -> URLSessionTask? {
+        
         if AuthStatus.instance.isLoggedIn{
             
         }
@@ -243,7 +244,9 @@ final class APIService: NSObject {
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "content-Type")
         request.httpBody = postString.data(using: String.Encoding.ascii, allowLossyConversion: false)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        var task = URLSessionTask()
+        DispatchQueue.global(qos:.userInteractive).async {
+         task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
 //                printDebug(url.absoluteString)
                 completion(.Error("Error Processing API: \(error?.localizedDescription ?? " ")"))
@@ -266,17 +269,19 @@ final class APIService: NSObject {
                 return
             }
             }
+            
         task.resume()
-        
+     //   return task
+        }
         return task
     }
     
     
 
     func getDataWith(completion: @escaping (APIResult<[String: AnyObject]>) -> Void) {
-        
-        let urlString = endPoint
-        let postString = params  //.replacingOccurrences(of: "+", with: "%2B")
+        DispatchQueue.global(qos:.userInteractive).async {
+            let urlString = self.endPoint
+            let postString = self.params  //.replacingOccurrences(of: "+", with: "%2B")
         print(postString)
         printDebug(urlString)
         guard let url = URL(string: urlString) else { return completion(.Error("Invalid URL, we can't update your feed")) }
@@ -316,6 +321,7 @@ final class APIService: NSObject {
                 return completion(.Error(error.localizedDescription))
             }
         } .resume()
+    }
     }
 }
 

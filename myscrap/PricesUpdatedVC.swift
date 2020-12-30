@@ -294,7 +294,8 @@ class PricesUpdatedVC: UIViewController {
         }
     }
     @objc func getData() {
-        service.fetchPricesUpdated { (success, items) in
+        DispatchQueue.global(qos:.userInteractive).async {
+            self.service.fetchPricesUpdated { (success, items) in
             DispatchQueue.main.async {
                 if success {
                     if let item = items {
@@ -314,9 +315,9 @@ class PricesUpdatedVC: UIViewController {
                                  }
                                 
                    
-                        
+                        DispatchQueue.global(qos:.userInteractive).async {
                         self.getDataFromExchange()
-                      
+                        }
                     }
                 } else {
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -325,6 +326,7 @@ class PricesUpdatedVC: UIViewController {
                     self.showToast(message: "Server error to show the price data")
                 }
             }
+        }
         }
     }
 //  @objc func sendEmailsubscribeLME(email: String) {

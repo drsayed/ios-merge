@@ -8,5 +8,4 @@
 #import "SWRevealViewController.h"
 #import "MBProgressHUD.h"
 #import "Common.h"
-#import "DataEncoding.h"
 #import "TMImageZoom.h"
