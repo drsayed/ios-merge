@@ -113,9 +113,15 @@ class INSScalingImageView: UIScrollView {
             let scaleWidth = scrollViewFrame.size.width / image.size.width
             let scaleHeight = scrollViewFrame.size.height / image.size.height
             let minimumScale = min(scaleWidth, scaleHeight)
+            var maxScale = max(minimumScale, self.maximumZoomScale)
+            
+            //if minScale and maxScale are equal then image will not zoom so make maxScal greater to zoom image in all cases
+            if minimumScale >= maxScale {
+                maxScale += 1
+            }
             
             self.minimumZoomScale = minimumScale
-            self.maximumZoomScale = max(minimumScale, self.maximumZoomScale)
+            self.maximumZoomScale = maxScale
             
             self.zoomScale = minimumZoomScale
 
