@@ -1433,6 +1433,7 @@
 		FB00F569258F3EC100FEEE93 /* ReportedLandscapVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB00F567258F3EC000FEEE93 /* ReportedLandscapVideoCell.xib */; };
 		FB0CB7C8255BCA9B00B992C7 /* IncompleteProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0CB7C7255BCA9A00B992C7 /* IncompleteProfileVC.swift */; };
 		FB0EFB04259D099D00922BF4 /* DataEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFB03259D099D00922BF4 /* DataEncoding.m */; };
+		FB0EFB0A259DBA4500922BF4 /* CollectionViewCellHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFB09259DBA4400922BF4 /* CollectionViewCellHelper.swift */; };
 		FB1DB8B8251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */; };
 		FB30E378255E679200551312 /* FeedDetailVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */; };
 		FB30E379255E679200551312 /* FeedDetailVideoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */; };
@@ -3079,6 +3080,7 @@
 		FB0CB7C7255BCA9A00B992C7 /* IncompleteProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncompleteProfileVC.swift; sourceTree = "<group>"; };
 		FB0EFB02259D099C00922BF4 /* DataEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEncoding.h; sourceTree = "<group>"; };
 		FB0EFB03259D099D00922BF4 /* DataEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEncoding.m; sourceTree = "<group>"; };
+		FB0EFB09259DBA4400922BF4 /* CollectionViewCellHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellHelper.swift; sourceTree = "<group>"; };
 		FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileCodeVerifyVC.swift; sourceTree = "<group>"; };
 		FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailVideoTextCell.xib; sourceTree = "<group>"; };
 		FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailVideoTextCell.swift; sourceTree = "<group>"; };
@@ -4922,6 +4924,7 @@
 				22298DE31FA86D8E00F84E42 /* FeedsHeight.swift */,
 				221A9A1F1FC539BD00A30705 /* DetailsVC-KeyBoardHelpers.swift */,
 				9406DD5421D7957200C11135 /* LiveInputView.swift */,
+				FB0EFB09259DBA4400922BF4 /* CollectionViewCellHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -9186,6 +9189,7 @@
 				9406648D23CEEEBF00138DD9 /* Land_Feeds_OverAllCell.swift in Sources */,
 				FB8C9544250D17AD000E1B40 /* ConfirmCommudityTableHeader.swift in Sources */,
 				224744751F712CE20041536A /* sss.swift in Sources */,
+				FB0EFB0A259DBA4500922BF4 /* CollectionViewCellHelper.swift in Sources */,
 				22B7D2401FDFD487003DF4A9 /* Protocol-ExtVC.swift in Sources */,
 				22D3592A20077D90007F41BF /* DatePickerDialog.swift in Sources */,
 				940CBFE322EF157A00E11834 /* FeedLoadDB.swift in Sources */,

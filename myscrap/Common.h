@@ -12,9 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Common : NSObject
-+ (NSString *)ConvertToStringFromURRL:(NSString *)url;
 +(NSString *)encodeToBase64String:(UIImage *)image;
-+(void)UploadImage;
 @end
 
 NS_ASSUME_NONNULL_END
