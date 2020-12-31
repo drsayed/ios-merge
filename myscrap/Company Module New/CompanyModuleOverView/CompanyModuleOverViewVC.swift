@@ -68,6 +68,7 @@ class CompanyModuleOverViewVC: UIViewController, FriendControllerDelegate {
     var reportedText = "Reported"
 
     var isCurrentUserAsAdmin = false
+    var isSomeoneRequestedForAdmin = false
     
     var rightBarButton : UIBarButtonItem!
     
@@ -114,6 +115,15 @@ class CompanyModuleOverViewVC: UIViewController, FriendControllerDelegate {
     func reloadCompanyModulesData() {
         
         if companyOverViewDataSource != nil {
+            
+            if companyOverViewDataSource?.last?.companyOwnerId == AuthService.instance.userId {
+                self.isCurrentUserAsAdmin = true
+            }
+            
+            if companyOverViewDataSource?.last?.ownCompanyRequest != "" {
+                self.isSomeoneRequestedForAdmin = true
+            }
+            
                                     
             if companyOverViewDataSource!.last!.employees.count > 0 {
                 employeesArray = companyOverViewDataSource!.last!.employees
@@ -611,7 +621,6 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                             if userId == AuthService.instance.userId && isAdminView { // Admin point of view
                                 cell.reportBtn.isHidden = true
                                 cell.reportBtnWidthConstraint.constant = 0
-                                self.isCurrentUserAsAdmin = true
                                 if isAdmin {
                                     cell.adminLabel.isHidden = false
                                 }
@@ -655,7 +664,7 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                                 }
                                 else {
                                     cell.adminLabel.isHidden = true
-                                    if userId == AuthService.instance.userId {
+                                    if userId == AuthService.instance.userId && !isSomeoneRequestedForAdmin{
                                         cell.makeAsAdminBtn.isHidden = false
                                         cell.makeAsAdminBtn.setTitle(self.makeAsAdminText, for: .normal)
                                         cell.makeAsAdminWidthConstraint.constant = 120
