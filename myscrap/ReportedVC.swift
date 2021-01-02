@@ -19,6 +19,9 @@ final class ReportedVC: BaseRevealVC {
     
      lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        
+        cv.register(FeedTextCell.Nib, forCellWithReuseIdentifier: FeedTextCell.identifier)
+
         cv.register(ReportedFeedTextCell.Nib, forCellWithReuseIdentifier: ReportedFeedTextCell.identifier)
         cv.register(ReportedFeedImageCell.Nib, forCellWithReuseIdentifier: ReportedFeedImageCell.identifier)
         cv.register(ReportedFeedImageTextCell.Nib, forCellWithReuseIdentifier: ReportedFeedImageTextCell.identifier)
@@ -359,7 +362,15 @@ extension ReportedVC: UICollectionViewDataSource{
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedFeedTextCell.identifier, for: indexPath) as? ReportedFeedTextCell else { return UICollectionViewCell() }
                 cell.newItem = data
                 cell.updatedDelegate = self
-              //  cell.reportBtn.tag = 1
+//                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedTextCell.identifier, for: indexPath) as? FeedTextCell else { return UICollectionViewCell()}
+//                cell.updatedDelegate = self
+//                cell.newItem = data
+//                cell.SetLikeCountButton()
+//                cell.offlineBtnAction = {
+//                    self.showToast(message: "No internet connection")
+//                }
+//                cell.reportedView.isHidden = true
+//             cell.reportBtn.tag = 1
                 return cell
             case .feedImageCell:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReportedFeedImageCell.identifier, for: indexPath) as? ReportedFeedImageCell else { return UICollectionViewCell() }
@@ -614,7 +625,7 @@ extension ReportedVC: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if indexPath.section == 2 {
         if  let vc = CompanyHeaderModuleVC.storyBoardInstance() {
             let request = adminRequests[indexPath.row]
             vc.title = request.companyName
@@ -625,7 +636,7 @@ extension ReportedVC: UICollectionViewDataSource{
         }
         
     }
-    
+    }
     @objc func pauseVisibleVideos()  {
         
         for videoParentCell in collectionView.visibleCells   {
@@ -1032,7 +1043,7 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
             case .feedTextCell:
                 height += FeedsHeight.heightforFeedTextCellV2(item: item , labelWidth: width - 16)
              
-                return CGSize(width: width , height: height + 30)
+                return CGSize(width: width , height: height + 40)
             case .feedImageCell:
                 height += FeedsHeight.heightForImageCellV2(item: item, width: width)
                 return CGSize(width: width, height: height + 35)
