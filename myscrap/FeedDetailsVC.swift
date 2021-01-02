@@ -104,9 +104,7 @@ class DetailsVC: BaseCVC , FriendControllerDelegate, UINavigationControllerDeleg
     @objc func OpenEditProfileView(notification: Notification) {
                profileEditPopUp.removeFromSuperview()
           self.gotoEditProfilePopup()
-            // let vc = UIStoryboard(name: StoryBoard.PROFILE , bundle: nil).instantiateViewController(withIdentifier: EditProfileController.id) as! EditProfileController
-               //   self.navigationController?.pushViewController(vc, animated: true)
-                  // activityIndicator.stopAnimating()
+          
              }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -199,9 +197,7 @@ class DetailsVC: BaseCVC , FriendControllerDelegate, UINavigationControllerDeleg
         collectionView?.register(FeedTextCell.Nib, forCellWithReuseIdentifier: FeedTextCell.identifier)
         collectionView?.register(FeedImageCell.Nib, forCellWithReuseIdentifier: FeedImageCell.identifier)
         collectionView?.register(FeedImageTextCell.Nib, forCellWithReuseIdentifier: FeedImageTextCell.identifier)
-        //collectionView?.register(FeedVideoCell.Nib, forCellWithReuseIdentifier: FeedVideoCell.identifier)
-        //collectionView?.register(FeedVideoTextCell.Nib, forCellWithReuseIdentifier: FeedVideoTextCell.identifier)
-        
+      
         collectionView.register(FeedDetailVideoTextCell.Nib, forCellWithReuseIdentifier: FeedDetailVideoTextCell.identifier)
 
         collectionView.register(FeedDetailVideoCell.Nib, forCellWithReuseIdentifier: FeedDetailVideoCell.identifier)

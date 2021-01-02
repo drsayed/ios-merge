@@ -85,8 +85,8 @@ class BusinessCardViewCell: BaseTableCell {
           //  self.imageCountLable.text = "1/\(self.newItem!.pictureURL.count as Int)"
                 //  self.totalImages = item?.pictureURL
             if cardCount == 1 {
-                self.pageControll.isHidden = true
-                   self.pageCountView.isHidden = true
+                self.pageControll.isHidden = false
+                   self.pageCountView.isHidden = false
             }
             else
             {

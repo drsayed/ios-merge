@@ -23,50 +23,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="484" height="626"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNG-Qi-4sR" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="484" height="626"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaD-o4-vyj" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="438" y="584" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="BIv-Zd-O9L"/>
-                                    <constraint firstAttribute="width" constant="30" id="gM0-ZU-nz1"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="report"/>
-                                <connections>
-                                    <action selector="unreportBtnPressed:" destination="8gS-03-YN2" eventType="touchUpInside" id="E6A-s9-scH"/>
-                                    <action selector="unreportBtnTapped:" destination="8gS-03-YN2" eventType="touchUpInside" id="Uf2-RB-HWH"/>
-                                </connections>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uSa-3s-LnV">
-                                <rect key="frame" x="98" y="290.5" width="288.5" height="45"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="HzR-SZ-4pX">
-                                        <rect key="frame" x="134" y="0.0" width="20" height="20"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="f0O-8M-FLM"/>
-                                            <constraint firstAttribute="width" constant="20" id="l0p-sg-iSq"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This post is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMe-Jg-K1f">
-                                        <rect key="frame" x="0.0" y="25" width="288.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="uSa-3s-LnV" firstAttribute="centerY" secondItem="fNG-Qi-4sR" secondAttribute="centerY" id="9i3-73-5eJ"/>
-                            <constraint firstAttribute="trailing" secondItem="gaD-o4-vyj" secondAttribute="trailing" constant="16" id="d9h-AL-9dH"/>
-                            <constraint firstItem="uSa-3s-LnV" firstAttribute="centerX" secondItem="fNG-Qi-4sR" secondAttribute="centerX" id="mf5-dc-dig"/>
-                            <constraint firstAttribute="bottom" secondItem="gaD-o4-vyj" secondAttribute="bottom" constant="12" id="rsq-qd-Ka4"/>
-                        </constraints>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uai-Fo-fyr" customClass="FancyView" customModule="myscrap" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="484" height="626"/>
                         <subviews>
@@ -641,6 +597,50 @@
                             <constraint firstAttribute="bottom" secondItem="wz0-Dp-gpe" secondAttribute="bottom" constant="8" id="uTA-r9-N24"/>
                             <constraint firstItem="gzC-4q-NIc" firstAttribute="top" secondItem="Uai-Fo-fyr" secondAttribute="top" constant="20" id="uXV-oE-dhz"/>
                             <constraint firstItem="gzC-4q-NIc" firstAttribute="leading" secondItem="hGa-qX-483" secondAttribute="trailing" constant="8" id="zfv-cA-FtY"/>
+                        </constraints>
+                    </view>
+                    <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNG-Qi-4sR" customClass="ReportedView" customModule="myscrap" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="484" height="626"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaD-o4-vyj" customClass="UnReportBtn" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="438" y="584" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BIv-Zd-O9L"/>
+                                    <constraint firstAttribute="width" constant="30" id="gM0-ZU-nz1"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="report"/>
+                                <connections>
+                                    <action selector="unreportBtnPressed:" destination="8gS-03-YN2" eventType="touchUpInside" id="E6A-s9-scH"/>
+                                    <action selector="unreportBtnTapped:" destination="8gS-03-YN2" eventType="touchUpInside" id="Uf2-RB-HWH"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uSa-3s-LnV">
+                                <rect key="frame" x="98" y="290.5" width="288.5" height="45"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="HzR-SZ-4pX">
+                                        <rect key="frame" x="134" y="0.0" width="20" height="20"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="f0O-8M-FLM"/>
+                                            <constraint firstAttribute="width" constant="20" id="l0p-sg-iSq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This post is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMe-Jg-K1f">
+                                        <rect key="frame" x="0.0" y="25" width="288.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uSa-3s-LnV" firstAttribute="centerY" secondItem="fNG-Qi-4sR" secondAttribute="centerY" id="9i3-73-5eJ"/>
+                            <constraint firstAttribute="trailing" secondItem="gaD-o4-vyj" secondAttribute="trailing" constant="16" id="d9h-AL-9dH"/>
+                            <constraint firstItem="uSa-3s-LnV" firstAttribute="centerX" secondItem="fNG-Qi-4sR" secondAttribute="centerX" id="mf5-dc-dig"/>
+                            <constraint firstAttribute="bottom" secondItem="gaD-o4-vyj" secondAttribute="bottom" constant="12" id="rsq-qd-Ka4"/>
                         </constraints>
                     </view>
                 </subviews>

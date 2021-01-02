@@ -30,6 +30,7 @@ class ProfileService{
 
 
     func getUserProfile(pageLoad: String){
+        DispatchQueue.global(qos:.userInteractive).async {
         if AuthService.instance.userId == nil || AuthService.instance.colorCode == nil || AuthService.instance.firstname == nil || AuthService.instance.lastName == nil || AuthService.instance.fullName == nil || AuthService.instance.profilePic == nil || AuthService.instance.email == nil || AuthService.instance.password == nil || AuthService.instance.initial == nil {
             let vc = SignInViewController()
             vc.getFBUserData()
@@ -37,13 +38,7 @@ class ProfileService{
         else {
             let service = APIService()
             service.endPoint = Endpoints.MY_PROFILE_FEEDS_URL //USER_PROFILE_FEEDS_URL_V2
-            //        AuthService.instance.userId = "1"
-            //        AuthService.instance.colorCode = ""
-            //        AuthService.instance.firstname = ""
-            //        AuthService.instance.lastName = ""
-            //        AuthService.instance.profilePic = ""
-            //        AuthService.instance.email = ""
-            //        AuthService.instance.password = ""
+   
             service.params = "userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)&pageLoad=\(pageLoad)&companyId="
             service.getDataWith { [weak self] (result) in
                 switch result{
@@ -54,11 +49,11 @@ class ProfileService{
                 }
             }
         }
-        
+        }
     }
     
     func getFriendProfile(friendId:String, notId: String){
-        
+        DispatchQueue.global(qos:.userInteractive).async {
         let service = APIService()
         service.endPoint =  Endpoints.FRIEND_PROFILE_FEEDS_URL
         service.params = "userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)&friendId=\(friendId)&userView=\(notId)"
@@ -71,9 +66,11 @@ class ProfileService{
                 self?.delegate?.DidReceiveError(error: error)
             }
         }
+        }
     }
     
     func getFrndProfile(friendId: String) {
+        DispatchQueue.global(qos:.userInteractive).async {
         let service = APIService()
         service.endPoint =  Endpoints.GET_FRIEND_PHOTOS
         service.params = "userId=\(friendId)&apiKey=\(API_KEY)&friendId=\(AuthService.instance.userId)"
@@ -85,6 +82,7 @@ class ProfileService{
             case .Error(let error):
                 self?.delegate?.DidReceiveError(error: error)
             }
+        }
         }
     }
     
@@ -104,6 +102,7 @@ class ProfileService{
     }
     
     func getAboutPage(friendId: String) {
+        DispatchQueue.global(qos:.userInteractive).async {
         let service = APIService()
         service.endPoint =  Endpoints.GET_ABOUTPAGE_FRIEND_PROFILE
         service.params = "userId=\(friendId)&apiKey=\(API_KEY)&friendId=\(AuthService.instance.userId)"
@@ -116,9 +115,11 @@ class ProfileService{
                 self?.delegate?.DidReceiveError(error: error)
             }
         }
+        }
     }
     
     func getFeedsPage(friendId: String) {
+        DispatchQueue.global(qos:.userInteractive).async {
         let service = APIService()
         service.endPoint =  Endpoints.GET_USERFEEDS_FRIEND_PROFILE_V2
         service.params = "userId=\(friendId)&apiKey=\(API_KEY)&friendId=\(AuthService.instance.userId)"
@@ -131,9 +132,11 @@ class ProfileService{
                 self?.delegate?.DidReceiveError(error: error)
             }
         }
+        }
     }
     
     func getUserImagesPage(friendId: String) {
+        DispatchQueue.global(qos:.userInteractive).async {
         let service = APIService()
         service.endPoint =  Endpoints.GET_IMAGES_FRIEND_PROFILE
         service.params = "userId=\(friendId)&apiKey=\(API_KEY)&friendId=\(AuthService.instance.userId)"
@@ -145,6 +148,7 @@ class ProfileService{
             case .Error(let error):
                 self?.delegate?.DidReceiveError(error: error)
             }
+        }
         }
     }
     

@@ -37,14 +37,10 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             let screenSize = UIScreen.main.bounds
             let screenWidth = screenSize.width
             pageControl.numberOfPages = dataSource.count
-            pageControl.elementWidth = screenWidth/CGFloat(dataSource.count) - CGFloat(dataSource.count-1)*5
+            pageControl.elementWidth = ((screenWidth - 10) - CGFloat(dataSource.count-1)*5)/CGFloat(dataSource.count)
             setNeedsLayout()
         }
     }
-//    @IBAction func pinchRecognized(_ pinch: UIPinchGestureRecognizer) {
-//
-//      //  TMImageZoom.shared()?.gestureStateChanged(pinch, withZoom: imageView)
-//    }
     lazy var pageControl1: UIPageControl = {
         let pc = UIPageControl()
         pc.translatesAutoresizingMaskIntoConstraints = false
@@ -106,46 +102,16 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         addSubview(sliderCollectionView)
         sliderCollectionView.anchor(leading: leadingAnchor, trailing: trailingAnchor, top: topAnchor, bottom: bottomAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
-        
-        //countView.anchor(leading: leadingAnchor, trailing: self.trailingAnchor, top: self.topAnchor, bottom: bottomAnchor)
-        
-        
-      //  addSubview(countView)
-        pageControl.frame = CGRect(x: 5, y:5, width:self.frame.size.width-10 , height: 5)
-       // pageControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-
+        pageControl.frame = CGRect(x: 0, y:5, width:self.frame.size.width-10 , height: 5)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
-            let horizontalConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-//            let verticalConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self , attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-        let widthConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.frame.size.width-10)
+    
             let heightConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 5)
-//        let topConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 5)
-
-        self.addConstraints([horizontalConstraint, widthConstraint, heightConstraint])
-
-       // pageControl.widthAnchor.constraint(equalTo: self.width, multiplier: self.frame.size.width)
+        let leadingConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  self, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 5)
+        let trailingConstraint = NSLayoutConstraint(item: pageControl, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem:  self, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 5)
+        self.addConstraints([heightConstraint,leadingConstraint,trailingConstraint])
         addSubview(pageControl)
         pageControl.anchor(leading: leadingAnchor, trailing: trailingAnchor, top: topAnchor, bottom: nil, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
-        //pageControl.x = 100
-        
-        
-        
-        //countView.anchor(leading: nil, trailing: nil, top: pageControl.bottomAnchor, bottom: nil)
-        
-//        countView.height = 30
-//        countView.width = 50
-//        countView.x = 310
-//        countView.y = 35
-//
-//        countView.layer.cornerRadius = 10
-//        countView.clipsToBounds = true
-//        countView.backgroundColor = UIColor.MyScrapGreen
-//
-//    //    addSubview(img_count)
-//        img_count.centerXAnchor.constraint(equalTo: countView.centerXAnchor).isActive = true
-//        img_count.centerYAnchor.constraint(equalTo: countView.centerYAnchor).isActive = true
-        //img_count.anchor(leading: nil, trailing: countView.trailingAnchor, top: countView.topAnchor, bottom: nil)
-        //pageControl.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+     
     }
 
     
@@ -166,7 +132,6 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //delegate?.didSelect(photo: dataSource[indexPath.item] as! Images, in: dataSource as! [Images])
         scrollToNextCell()
     }
 
@@ -175,14 +140,7 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         //get cell size
         let cellSize = self.frame.size
         
-        //get current content Offset of the Collection view
         let contentOffset = sliderCollectionView.contentOffset
-        
-        //let section = sliderCollectionView.indexPathForItem(at: contentOffset)!.item
-        
-        //img_count.text = String(format: "%d / %d", section + 1, dataSource.count)
-        //print("Image count in tap : \(String(describing: img_count.text))")
-        //pageControl.currentPage = section + 1
         
         if sliderCollectionView.contentSize.width <= sliderCollectionView.contentOffset.x + cellSize.width
         {
@@ -209,12 +167,9 @@ class MSSliderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if sliderCollectionView == scrollView , let section = sliderCollectionView.indexPathForItem(at: targetContentOffset.pointee)?.item{
-//            img_count.text = String(format: "%d / %d", section + 1 ,dataSource.count)
-//            print("Image count : \(String(describing: img_count.text))")
-//            pageControl.currentPage = section
-            
-        }
+//        if sliderCollectionView == scrollView , let section = sliderCollectionView.indexPathForItem(at: targetContentOffset.pointee)?.item{
+//
+//        }
     }
     
     var isLoading: Bool = false
@@ -325,21 +280,12 @@ class MSSliderViewMarket: UIView, UICollectionViewDelegate, UICollectionViewData
         
         addSubview(sliderCollectionView)
         sliderCollectionView.anchor(leading: leadingAnchor, trailing: trailingAnchor, top: topAnchor, bottom: bottomAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
-        
-        
-        //countView.anchor(leading: leadingAnchor, trailing: self.trailingAnchor, top: self.topAnchor, bottom: bottomAnchor)
-        
-        
+      
         addSubview(countView)
         
         addSubview(pageControl)
         pageControl.anchor(leading: nil, trailing: countView.trailingAnchor, top: topAnchor, bottom: countView.topAnchor)
-        //pageControl.x = 100
-        
-        
-        
-        //countView.anchor(leading: nil, trailing: nil, top: pageControl.bottomAnchor, bottom: nil)
-        
+     
         countView.height = 30
         countView.width = 50
         countView.x = 310
@@ -506,28 +452,11 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
         
         addSubview(countView)
         sliderCollectionView.addSubview(pageControl)
-        //addSubview(stackView)
-        
-//        stackView.height = 50
-//        stackView.width = self.width
-//        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-//        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-//        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20 ).isActive = true
-        //stackView.anchor(leading: leadingAnchor, trailing: trailingAnchor, top: nil, bottom: nil, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12), size: CGSize(width: self.width, height: 50))
-        //stackView.addArrangedSubview(pageControl)
-
         pageControl.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         pageControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
         pageControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         pageControl.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
-        
-        
-        //pageControl.anchor(leading: stackView.leadingAnchor, trailing: stackView.trailingAnchor, top: stackView.topAnchor, bottom: stackView.topAnchor)
-        
-        //countView.anchor(leading: nil, trailing: nil, top: pageControl.bottomAnchor, bottom: nil)
-        
-        
-        countView.height = 30
+       countView.height = 30
         countView.width = 50
         countView.x = 310
         countView.y = 35
@@ -539,9 +468,7 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
         addSubview(img_count)
         img_count.centerXAnchor.constraint(equalTo: countView.centerXAnchor).isActive = true
         img_count.centerYAnchor.constraint(equalTo: countView.centerYAnchor).isActive = true
-        //img_count.anchor(leading: nil, trailing: countView.trailingAnchor, top: countView.topAnchor, bottom: nil)
-        //pageControl.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        
+     
     }
     
     
@@ -562,8 +489,7 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //Commenting this line because Ad image shouldn't open
-        //delegate?.didSelect(photo: dataSource[indexPath.item] as! Images, in: dataSource as! [Images])
+      
     }
     
     
@@ -574,41 +500,12 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
             
             pageControl.currentPage = section
             
-            
-            
-            //Commented on 19thSep/19
-//            let x = targetContentOffset.pointee.x
-//
-//            pageControl.currentPage = Int(x / self.frame.width)
-            
-            
-            // on each dot, call the transform of scale 1 to restore the scale of previously selected dot
-            
-//            pageControl.subviews.forEach {
-//                $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-//            }
-            
+         
             for pgCount in pageControl.subviews {
                 pgCount.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             }
             
-            // transform the scale of the current subview dot, adjust the scale as required, but bigger the scale value, the downward the dots goes from its centre.
-            // You can adjust the centre anchor of the selected dot to keep it in place approximately.
-            
-            //let centreBeforeScaling = self.pageControl.subviews[self.pageControl.currentPage].center
-            
-//            self.pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            
-            //self.pageControl.translatesAutoresizingMaskIntoConstraints = false
-            
-            //pageControl.subviews[self.pageControl.currentPage].topAnchor.constraint(equalTo: self.pageControl.subviews.last!.topAnchor, constant: -10).isActive = true
-            
-            //self.pageControl.subviews[self.pageControl.currentPage].centerYAnchor.constraint(equalTo: self.pageControl.subviews[0].centerYAnchor , constant: 0).isActive = true
-            
-            //self.pageControl.subviews[self.pageControl.currentPage].centerXAnchor.constraint(equalTo: self.pageControl.subviews.last!.centerXAnchor , constant: 0).isActive = true
-
-            //self.pageControl.subviews[self.pageControl.currentPage].layer.anchorPoint = centreBeforeScaling
-            self.pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1, y: 1)
+                    self.pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
     
@@ -637,34 +534,7 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
         if pageControl.currentPage == 0 {
             pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1, y: 1)
         }
-        //pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1, y: 1)
-        
-        /*
-        // on each dot, call the transform of scale 1 to restore the scale of previously selected dot
-         pageControl.subviews.forEach {
-         $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-         }
-
-        
-        print("page control frame : \(pageControl.frame)")
-        
-        //Commented on 19thSep/19
-        if pageControl.currentPage == 0 {
-            pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        }
-
-        // transform the scale of the current subview dot, adjust the scale as required, but bigger the scale value, the downward the dots goes from its centre.
-        // You can adjust the centre anchor of the selected dot to keep it in place approximately.
-
-        //self.pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-
-        //self.pageControl.subviews[self.pageControl.currentPage].translatesAutoresizingMaskIntoConstraints = false
- 
-        self.pageControl.subviews[self.pageControl.currentPage].centerYAnchor.constraint(equalTo: self.pageControl.subviews[0].centerYAnchor , constant: 0).isActive = true
-        
-        self.pageControl.subviews[self.pageControl.currentPage].centerXAnchor.constraint(equalTo: self.pageControl.subviews[0].centerXAnchor , constant: 0).isActive = true
-        */
- 
+       
     }
     
     override init(frame: CGRect) {

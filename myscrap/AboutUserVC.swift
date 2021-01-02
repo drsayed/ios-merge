@@ -249,7 +249,7 @@ class AboutUserVC: UIViewController { //ScrollViewContainerController{
             self.pageController.currentPage = 0
             self.pageController.numberOfPages = cardCount
             self.pageCountLable.text = "1/\(cardCount)"
-            if cardCount == 0 || cardCount == 1 {
+            if cardCount == 0 {
                 self.pageController.isHidden = true
                  self.pageCountLable.isHidden = true
             }
