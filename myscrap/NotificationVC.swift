@@ -434,6 +434,7 @@ extension NotificationVC
         var endPoint = ""
         let friendId = obj.friendId
         var apiType = ""
+        var body =  "userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)&friendId=\(friendId)&type=\(apiType)"
 
         if obj.type == .Card {
             apiType = "0" // card
@@ -449,6 +450,7 @@ extension NotificationVC
             else if obj.type == .EmployeeRequest { // Accept
                 apiType = "1"
                 endPoint = Endpoints.ADD_OR_DECLINE_EMPLOYEE_REQUEST
+                body =  "userId=\(obj.userid)&apiKey=\(API_KEY)&companyId=\(obj.companyID)&type=\(apiType)"
             }
             else {
                 endPoint = Endpoints.Send_Accept_Request
@@ -461,35 +463,34 @@ extension NotificationVC
             else if obj.type == .EmployeeRequest { // Decline
                 apiType = "0"
                 endPoint = Endpoints.ADD_OR_DECLINE_EMPLOYEE_REQUEST
+                body =  "userId=\(obj.userid)&apiKey=\(API_KEY)&companyId=\(obj.companyID)&type=\(apiType)"
             }
             else {
                 endPoint = Endpoints.Send_Reject_Request
             }
         }
         service.endPoint = endPoint
-        service.params = "userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)&friendId=\(friendId)&type=\(apiType)"
+        service.params = body
         print("URL : \(endPoint), \nPARAMS for get profile:",service.params)
         service.getDataWith { [weak self] (result) in
             
             switch result{
             case .Success(let dict):
-                if let error = dict["error"] as? Bool{
-                    if !error{
-                        DispatchQueue.main.async {
-                            MBProgressHUD.hide(for: (self?.view)!, animated: true)
+                
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: (self?.view)!, animated: true)
+                    if let error = dict["error"] as? Bool {
+                        if !error{
                             self?.getNotifications()
-                        }
-                        
-                        //     delegate?.DidReceiveStories(item: items)
-                    } else {
-                        DispatchQueue.main.async {
+                        } else {
                             self?.showToast(message: dict["status"] as? String ?? "Error in sending request")
                         }
-                        //  delegate?.DidReceiveError(error: "Received Error in JSON Result...!")
                     }
                 }
+                
             case .Error(let error):
                 DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: (self?.view)!, animated: true)
                     self?.showToast(message: error)
                 }
             }

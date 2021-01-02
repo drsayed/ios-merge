@@ -96,7 +96,7 @@ struct Endpoints {
     static let COMPANY_DETAILS = "https://myscrap.com/company/msCompanydetailsv1"
 
     static let COMPANY_LIKES_URL = "\(BASE_URL)msCompanyLike"
-    static let EDIT_PROFILE_URL = "\(BASE_URL)msEditProfile"
+    static let EDIT_PROFILE_URL = "\(BASE_URL_Common)msEditProfilev2"
     static let EDIT_PROFILE_PIC_URL = "\(BASE_URL)msEditProfilePic"
     static let COMPANY_EDIT_PROFILE = "\(BASE_URL)msCompanyEditProfile"
     static let COMPANY_EDIT_PROFILE_PIC = "\(BASE_URL)msEditCompanyProfilePic"
