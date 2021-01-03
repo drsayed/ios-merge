@@ -1434,6 +1434,7 @@
 		FB0CB7C8255BCA9B00B992C7 /* IncompleteProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0CB7C7255BCA9A00B992C7 /* IncompleteProfileVC.swift */; };
 		FB0EFB04259D099D00922BF4 /* DataEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFB03259D099D00922BF4 /* DataEncoding.m */; };
 		FB0EFB0A259DBA4500922BF4 /* CollectionViewCellHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFB09259DBA4400922BF4 /* CollectionViewCellHelper.swift */; };
+		FB0EFC3225A0E43800922BF4 /* LiveTopicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */; };
 		FB1DB8B8251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */; };
 		FB30E378255E679200551312 /* FeedDetailVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */; };
 		FB30E379255E679200551312 /* FeedDetailVideoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */; };
@@ -3081,6 +3082,7 @@
 		FB0EFB02259D099C00922BF4 /* DataEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEncoding.h; sourceTree = "<group>"; };
 		FB0EFB03259D099D00922BF4 /* DataEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEncoding.m; sourceTree = "<group>"; };
 		FB0EFB09259DBA4400922BF4 /* CollectionViewCellHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellHelper.swift; sourceTree = "<group>"; };
+		FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTopicVC.swift; sourceTree = "<group>"; };
 		FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileCodeVerifyVC.swift; sourceTree = "<group>"; };
 		FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailVideoTextCell.xib; sourceTree = "<group>"; };
 		FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailVideoTextCell.swift; sourceTree = "<group>"; };
@@ -6457,6 +6459,7 @@
 		94900DD322719ECB007DE342 /* Main Module */ = {
 			isa = PBXGroup;
 			children = (
+				FB0EFC2E25A0E41100922BF4 /* LiveModule */,
 				FBE5E0542513B1FF00F5EB93 /* Common.h */,
 				FBE5E0532513B1FB00F5EB93 /* Common.m */,
 				FB0EFB02259D099C00922BF4 /* DataEncoding.h */,
@@ -7304,6 +7307,14 @@
 				C23D54A3259773E5006D6C0A /* RequestResponseAlertView.swift */,
 			);
 			path = CompanyAdminRequestCell;
+			sourceTree = "<group>";
+		};
+		FB0EFC2E25A0E41100922BF4 /* LiveModule */ = {
+			isa = PBXGroup;
+			children = (
+				FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */,
+			);
+			name = LiveModule;
 			sourceTree = "<group>";
 		};
 		FB8C9536250D16BA000E1B40 /* ConfirmYourPriceVC */ = {
@@ -8627,6 +8638,7 @@
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftLinkPreview/SwiftLinkPreview.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSVG/SwiftSVG.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
@@ -8685,6 +8697,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftLinkPreview.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSVG.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
@@ -8994,6 +9007,7 @@
 				2259FBC51FC0725E0064C679 /* UserProfileCell.swift in Sources */,
 				FB9E01712511332B003D10E2 /* CollectionViewUpdateItem.swift in Sources */,
 				FBAE19132542F56600EA86EA /* FullImageViewVC.swift in Sources */,
+				FB0EFC3225A0E43800922BF4 /* LiveTopicVC.swift in Sources */,
 				224B9B682020898100BE4CEE /* CompanyFilterAlertView.swift in Sources */,
 				FBD7DDA02566FFD10068768C /* LandScapCell.swift in Sources */,
 				22786B8A1F309CDE00A0393A /* MapVCPopUp.swift in Sources */,
@@ -9775,7 +9789,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33.0;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -9801,7 +9815,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
 				);
-				MARKETING_VERSION = 1.53.44;
+				MARKETING_VERSION = 1.53.45;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -9864,7 +9878,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33.0;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
@@ -9891,7 +9905,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
 				);
-				MARKETING_VERSION = 1.53.44;
+				MARKETING_VERSION = 1.53.45;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",

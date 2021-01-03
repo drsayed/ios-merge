@@ -42,6 +42,7 @@ target 'myscrap' do
     pod 'ADCountryPicker', '~> 2.1.0'
     pod 'TLPhotoPicker', '~> 1.8.3'
     pod 'CHIPageControl/Jaloro'
+    pod 'Starscream', '~> 3.1.1'
 
 #    pod 'BSImagePicker', '~> 2.4'
 #    pod 'KeychainAccess'
