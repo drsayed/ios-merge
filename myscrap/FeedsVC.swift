@@ -31,6 +31,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     fileprivate var loadMore = true
     fileprivate var reachedEnd = false
     fileprivate var chosenImage: UIImage?
+    @IBOutlet weak var liveButton: UIButton!
     var headerCell : FeedVCHeadeer?
     @IBOutlet weak var headerCellHeight: NSLayoutConstraint!
     var   profileEditPopUp = AlartMessagePopupView()
@@ -124,6 +125,12 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         
         view.endEditing(true)
     
+    }
+    @IBAction func liveButtonPressed(_ sender: Any) {
+        if let vc = LiveTopicVC.storyBoardInstance() {
+               self.navigationController?.pushViewController(vc, animated: true)
+            }
+        
     }
     private func getAllFeedsData(){
         DispatchQueue.global(qos:.userInteractive).async {

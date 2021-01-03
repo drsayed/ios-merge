@@ -107,7 +107,12 @@ class CustomAlertView: UIViewController, UITextFieldDelegate {
 
 }
 
-
+extension CustomAlertView: UINavigationControllerDelegate {
+    
+    static func storyBoardInstance() -> CustomAlertView?{
+        return UIStoryboard(name: StoryBoard.LIVE, bundle: nil).instantiateViewController(withIdentifier: CustomAlertView.id) as? CustomAlertView
+    }
+}
 public enum UIButtonBorderSide {
     case Top, Bottom, Left, Right
 }

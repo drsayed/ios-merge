@@ -57,6 +57,10 @@ class ScrollableImageVC : UIViewController {
         } else {
             // Fallback on earlier versions
         }
+        self.imageView.isUserInteractionEnabled = true
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action:#selector(pinchRecognized(_:)))
+            self.imageView.addGestureRecognizer(pinchGesture)
+        
         view.backgroundColor = UIColor.black
         view.tintColor = UIColor.white
         view.addGestureRecognizer(singleTapGestureRecognizer)
@@ -128,7 +132,10 @@ class ScrollableImageVC : UIViewController {
         
         
     }
-    
+    @IBAction func pinchRecognized(_ pinch: UIPinchGestureRecognizer) {
+
+        TMImageZoom.shared()?.gestureStateChanged(pinch, withZoom: self.imageView)
+    }
     private func setupOverlayView(){
         overlayView.view().autoresizingMask = [.flexibleHeight, .flexibleWidth]
         overlayView.view().frame = view.bounds

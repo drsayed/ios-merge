@@ -97,13 +97,13 @@ class UserListImageCell: UserFeedTextCell {
             likeCountBtn.isHidden = true
             commentCountBtn.isHidden = false
             
-            //commentCountBtn.likeCount = photo.likecount
+            commentCountBtn.likeCount = photo.likecount
             commentCountBtn.commentCount = photo.commentCount
         } else {
             likeCountBtn.isHidden = false
             commentCountBtn.isHidden = false
             likeCountBtn.likeCount = photo.likecount
-            //commentCountBtn.likeCount = photo.likecount
+            commentCountBtn.likeCount = photo.likecount
             commentCountBtn.commentCount = photo.commentCount
         }
         
@@ -145,7 +145,7 @@ class UserListImageCell: UserFeedTextCell {
         designationLbl.text = profile.designation
         timeLbl.text = photo.timeStamp
         likeCountBtn.likeCount = photo.likecount
-        //commentCountBtn.likeCount = photo.likecount
+        commentCountBtn.likeCount = photo.likecount
         commentCountBtn.commentCount = photo.commentCount
         likeImage.isLiked = photo.likeStatus
         profileView.updateViews(name: profile.name, url: profile.profilePic, colorCode: profile.colorCode)
@@ -164,7 +164,7 @@ class UserListImageCell: UserFeedTextCell {
         designationLbl.text = profile.companyType
         timeLbl.text = photo.timeStamp
         likeCountBtn.likeCount = photo.likecount
-        //commentCountBtn.likeCount = photo.likecount
+        commentCountBtn.likeCount = photo.likecount
         commentCountBtn.commentCount = photo.commentCount
         likeImage.isLiked = photo.likeStatus
         profileView.updateViews(name: profile.companyName ?? "", url: profile.companyImage ?? "", colorCode: "")

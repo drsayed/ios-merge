@@ -569,6 +569,8 @@ extension AboutUserVC : UICollectionViewDelegate,UICollectionViewDataSource,UICo
            
           //  let cell = collectionView.cellForItem(at: indexPath)
             let galleryPreview = INSPhotosViewController(photos: cardsDataSource, initialPhoto: cardsDataSource[indexPath.row], referenceView: nil)
+            galleryPreview.modalPresentationStyle = .overFullScreen
+
             present(galleryPreview, animated: true, completion: nil)
             
     }

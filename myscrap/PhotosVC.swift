@@ -529,6 +529,7 @@ extension PhotosVC: PhotoGridDelegate{
             
             if let vc = ScrollableImageVC.storyBoardInstance(){
                 vc.image = self.datasource[indexPath.row].images
+                vc.modalPresentationStyle = .overFullScreen
                 self.present(vc, animated: true, completion: nil)
             }
         }

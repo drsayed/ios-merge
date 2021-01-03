@@ -243,7 +243,14 @@ extension FeedsDelegate where Self: UIViewController  {
                 self.feedCollectionView.reloadItems(at: [indexPath])
             }, completion: nil)
     }
-    
+//    func didTapForFriendView(id: String){
+//        if let vc = FriendVC.storyBoardInstance() {
+//        vc.friendId = id
+//        self.removeBackButtonTitle()
+//        UserDefaults.standard.set(id, forKey: "friendId")
+//        self.navigationController?.pushViewController(vc, animated: true)
+//        }
+//    }
     private func performDetailVC(postId: String){
         let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
         vc.postId = postId

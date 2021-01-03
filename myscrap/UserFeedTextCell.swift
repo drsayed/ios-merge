@@ -59,7 +59,8 @@ class UserFeedTextCell: UserFeedNewCell {
             likeCommentsDistance.constant = 10
         }
         //editBtnHeightConstraint.constant = 0
-        //favBottomConstraint.constant = 30
+        //favBottomConstraint.constant = 30f
+        
         //verticalSpacingConstraint.constant = -5
     }
     
@@ -130,14 +131,14 @@ class UserFeedTextCell: UserFeedNewCell {
             let webLink = textView.attributedText.attribute(NSAttributedString.Key(rawValue: MSTextViewAttributes.URL), at: characterIndex, effectiveRange: nil) as? String
             
             if let id = friendId {
-                delegate?.didTapForFriendView(id: id)
+                updatedDelegate?.didTapForFriendView(id: id)
             }
             if let _ = continueReading{
-                delegate?.didTapContinueReading(item: item!, cell: self)
+                updatedDelegate?.didTapContinueReadingV2(item: newItem!, cell: self)
             }
             
             if let link = webLink  {
-                delegate?.didTap(url: link)
+                updatedDelegate?.didTap(url: link)
             }
         }
     }

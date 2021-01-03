@@ -179,6 +179,7 @@ final class ReportedVC: BaseRevealVC {
     // MARK:- VIEW WILL APPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.scrollViewDidEndScrolling()
         if let reveal = self.revealViewController() {
             self.mBtn.target(forAction: #selector(reveal.revealToggle(_:)), withSender: self.revealViewController())
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())

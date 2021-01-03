@@ -249,6 +249,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //App is foreground message received here then will move to present handler
+        NotificationService.instance.notificationCount = NotificationService.instance.notificationCount! + 1
         print("Receive remote notification, setting gcm Message ID")
         let gcmMessageIDKey = "gcm.message_id"
         if let messageID = userInfo[gcmMessageIDKey] {
@@ -360,6 +361,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,  willPresent notification: UNNotification, withCompletionHandler   completionHandler: @escaping (_ options:   UNNotificationPresentationOptions) -> Void) {
         //
+        NotificationService.instance.notificationCount = NotificationService.instance.notificationCount! + 1
         print("Remote Notification received on foreground : \(notification.request.content.userInfo)")
         let userInfo = notification.request.content.userInfo
         print("Content : \(notification.request.content)")

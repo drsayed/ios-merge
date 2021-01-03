@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -783,7 +783,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8yl-Ec-8hN">
-                                <rect key="frame" x="0.0" y="359" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="bVb-nY-xq4"/>
                                 </constraints>
@@ -804,7 +804,7 @@
                                 </items>
                             </toolbar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noprofile" translatesAutoresizingMaskIntoConstraints="NO" id="ljr-O5-sOD">
-                                <rect key="frame" x="0.0" y="44" width="320" height="315"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="460" id="V5D-Oe-pdU"/>
@@ -2600,49 +2600,49 @@
     </scenes>
     <designables>
         <designable name="4DB-tB-6Qv">
-            <size key="intrinsicContentSize" width="48.5" height="18.5"/>
+            <size key="intrinsicContentSize" width="43.5" height="18.5"/>
         </designable>
         <designable name="8vJ-nQ-Y7Z">
-            <size key="intrinsicContentSize" width="39.5" height="18.5"/>
+            <size key="intrinsicContentSize" width="34.5" height="18.5"/>
         </designable>
         <designable name="909-Bu-AA5">
-            <size key="intrinsicContentSize" width="9" height="17"/>
+            <size key="intrinsicContentSize" width="4" height="17"/>
         </designable>
         <designable name="C1z-rI-64h">
-            <size key="intrinsicContentSize" width="57" height="18.5"/>
+            <size key="intrinsicContentSize" width="52" height="18.5"/>
         </designable>
         <designable name="JGT-0p-rLw">
-            <size key="intrinsicContentSize" width="44.5" height="18.5"/>
+            <size key="intrinsicContentSize" width="39.5" height="18.5"/>
         </designable>
         <designable name="VE4-bs-5Bq">
-            <size key="intrinsicContentSize" width="57.5" height="18.5"/>
+            <size key="intrinsicContentSize" width="52.5" height="18.5"/>
         </designable>
         <designable name="ZxE-DS-lEw">
-            <size key="intrinsicContentSize" width="74" height="18.5"/>
+            <size key="intrinsicContentSize" width="69" height="18.5"/>
         </designable>
         <designable name="d7W-OH-auj">
-            <size key="intrinsicContentSize" width="75" height="18.5"/>
+            <size key="intrinsicContentSize" width="70" height="18.5"/>
         </designable>
         <designable name="pbL-t3-MyS">
             <size key="intrinsicContentSize" width="10" height="33"/>
         </designable>
         <designable name="pnG-hU-G9m">
-            <size key="intrinsicContentSize" width="66.5" height="18.5"/>
+            <size key="intrinsicContentSize" width="61.5" height="18.5"/>
         </designable>
         <designable name="t5i-tG-LkL">
-            <size key="intrinsicContentSize" width="31" height="18.5"/>
+            <size key="intrinsicContentSize" width="26" height="18.5"/>
         </designable>
         <designable name="uaw-1u-d1C">
-            <size key="intrinsicContentSize" width="9" height="17"/>
+            <size key="intrinsicContentSize" width="4" height="17"/>
         </designable>
         <designable name="x7F-Gw-l9R">
-            <size key="intrinsicContentSize" width="57" height="18.5"/>
+            <size key="intrinsicContentSize" width="52" height="18.5"/>
         </designable>
     </designables>
     <resources>
         <image name="add-image" width="60" height="60"/>
         <image name="arrow" width="24" height="24"/>
-        <image name="camera" width="30" height="30"/>
+        <image name="camera" width="76" height="55"/>
         <image name="card" width="40" height="40"/>
         <image name="chekbox_check" width="15" height="15"/>
         <image name="chekbox_uncheck" width="15" height="15"/>

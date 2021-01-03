@@ -623,6 +623,8 @@ extension AboutProfileController: BusinessCardTap {
     func businessCardTap(cell: UICollectionViewCell?, index: Int, dataSource: [PictureURL]) {
         
         let galleryPreview = INSPhotosViewController(photos: dataSource, initialPhoto: dataSource[index], referenceView: cell)
+        galleryPreview.modalPresentationStyle = .overFullScreen
+
         present(galleryPreview, animated: true, completion: nil)
         
     }

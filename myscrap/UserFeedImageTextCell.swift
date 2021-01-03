@@ -12,6 +12,7 @@ class UserFeedImageTextCell: UserFeedImageCell{
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
     }
     override func setupAPIViews(item: FeedV2Item) {
@@ -21,9 +22,10 @@ class UserFeedImageTextCell: UserFeedImageCell{
     
     override func setupTap(){
         statusTextView?.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(DidTappedTextView(_:)))
-        tap.numberOfTapsRequired = 1
-        statusTextView?.addGestureRecognizer(tap)
+        super.setupTap()
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(DidTappedTextView(_:)))
+//        tap.numberOfTapsRequired = 1
+//        statusTextView?.addGestureRecognizer(tap)
     }
 
 }

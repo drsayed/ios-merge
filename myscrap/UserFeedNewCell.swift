@@ -20,7 +20,7 @@ class UserFeedNewCell: BaseCell {
     @IBOutlet weak var designationLbl: DesignationLabel!
     @IBOutlet weak var likeCountBtn: LikeCountButton!
     //@IBOutlet weak var commentCountBtn: CommentCountBtn!
-    @IBOutlet weak var commentCountBtn: CommentCountBtn!
+    @IBOutlet weak var commentCountBtn: CommentCountBtnV2!
     
     @IBOutlet weak var likeImage: LikeImageV2FeedButton!
     @IBOutlet weak var likeBtn: UIButton!

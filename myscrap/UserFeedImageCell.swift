@@ -88,7 +88,7 @@ class UserFeedImageCell: UserFeedTextCell {
        }
       
     override func setupTap(){
-        
+        super.setupTap()
     }
     
     private func setupDescription(item: FeedV2Item){

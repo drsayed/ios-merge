@@ -176,6 +176,7 @@ extension PhotosUserVC: UICollectionViewDataSource{
             cell.feedImage.isHidden = false
             cell.reportBtn.isHidden = true
             cell.delegate = self
+            cell.SetLikeCountButton()
        //     cell.updatedDelegate = self
             return cell
         default:
@@ -229,6 +230,7 @@ extension PhotosUserVC: UICollectionViewDelegateFlowLayout{
             let cell = collectionView.cellForItem(at: indexPath) as! PhotoGridCell
             let currentPhoto = datasource[(indexPath as NSIndexPath).row]
             let galleryPreview = INSPhotosViewController(photos: datasource, initialPhoto: currentPhoto, referenceView: cell)
+            galleryPreview.modalPresentationStyle = .overFullScreen
             galleryPreview.referenceViewForPhotoWhenDismissingHandler = { [weak self] photo in
                 if let index = self?.datasource.index(where: {$0 === photo}) {
                     let indexPath = IndexPath(item: index, section: 0)
@@ -240,6 +242,7 @@ extension PhotosUserVC: UICollectionViewDelegateFlowLayout{
         } else {
             let currentPhoto = datasource[(indexPath as NSIndexPath).row]
             let galleryPreview = INSPhotosViewController(photos: datasource, initialPhoto: currentPhoto, referenceView: nil)
+            galleryPreview.modalPresentationStyle = .overFullScreen
             galleryPreview.referenceViewForPhotoWhenDismissingHandler = { [weak self] photo in
                 if let index = self?.datasource.index(where: {$0 === photo}) {
                     let indexPath = IndexPath(item: index, section: 0)

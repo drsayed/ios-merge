@@ -17,7 +17,7 @@ class UserFeedsVC: BaseVC, FriendControllerDelegate {
     @IBOutlet weak var profileImgView: CircularImageView!
     @IBOutlet weak var profileView: CircleView!
     
-    
+    var loadMore  = false
     var isRefreshing = false
     var visibleCellIndex = IndexPath()
 
@@ -321,6 +321,7 @@ extension UserFeedsVC: EditProfileDelegate{
     func didUpdateProfile() {
         self.profileItem = nil
         self.dataSourceV2 = [FeedV2Item]()
+        self.loadMore = true
         collectionView.reloadData()
         self.isInitiallyLoaded = false
         self.activityIndicator.startAnimating()
@@ -550,12 +551,15 @@ extension UserFeedsVC: UICollectionViewDelegate, UICollectionViewDataSource{
              
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedTextCell.identifier, for: indexPath) as? FeedTextCell else { return UICollectionViewCell()}
                 cell.updatedDelegate = self
+                //cell.delegate = self
                 cell.newItem = data
                 cell.SetLikeCountButton()
+                cell.reportBtn.isHidden = true
                 cell.offlineBtnAction = {
                     self.showToast(message: "No internet connection")
                 }
-              
+                cell.reportStackView.isHidden = true
+
                 return cell
                 
 //                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserFeedTextCell.identifier, for: indexPath) as? UserFeedTextCell else { return UICollectionViewCell()}
@@ -704,6 +708,8 @@ extension UserFeedsVC: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     @objc func scrollViewDidEndScrolling() {
 
+        
+        
              let centerPoint = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
              let collectionViewCenterPoint = self.view.convert(centerPoint, to: collectionView)
 
@@ -874,6 +880,23 @@ var muteVideo : Bool = false
 //    }
  
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
+        
+//        if !dataSourceV2.isEmpty{
+//            let currentOffset = scrollView.contentOffset.y
+//            let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+//            let deltaOffset = maximumOffset - currentOffset
+//            if deltaOffset <= 0 {
+//                if loadMore{
+//                    loadMore = false
+//                    service.getUserProfile(pageLoad: "\(dataSourceV2.count)")
+//                }
+//            }
+//        }
+//
+        
+        
         let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if (actualPosition.y > 0){
             // Dragging down
@@ -2121,7 +2144,7 @@ extension UserFeedsVC: ProfileServiceDelegate{
     func DidReceiveFeedItems(items: [FeedV2Item], pictureItems: [PictureURL]) {
             DispatchQueue.main.async {
                 self.dataSourceV2 = items
-
+                self.loadMore = true
                 print("Ds count : \(self.dataSourceV2.last?.postuserId),  count :\(self.dataSourceV2.count)")
                 self.isInitiallyLoaded = true
                 if self.activityIndicator.isAnimating {
@@ -2320,11 +2343,13 @@ extension UserFeedsVC: UpdatedFeedsDelegate {
             dataSourceV2 = newValue
         }
     }
-    
+    func didTapForFriendView(id: String) {
+        performFriendView(friendId: id)
+    }
     var feedCollectionView: UICollectionView {
         return collectionView
     }
-    
+
     func didTapDeleteOwnPost(item: FeedV2Item, cell: UICollectionViewCell){
         if AuthStatus.instance.isGuest { showGuestAlert() } else {
             guard let indexPath = feedCollectionView.indexPathForItem(at: cell.center) else { return }

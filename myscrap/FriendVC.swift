@@ -201,7 +201,8 @@ class FriendVC:BaseVC{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
-        
+        NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+
     }
     private func getProfile() {
         var notId = ""

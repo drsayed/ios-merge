@@ -217,14 +217,14 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="651" height="22"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcF-Tw-hf1" customClass="LikeCountButton" customModule="myscrap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="79" height="22"/>
+                                                        <rect key="frame" x="20" y="0.0" width="79" height="22"/>
                                                         <state key="normal" title="Likes count"/>
                                                         <connections>
                                                             <action selector="likeCountTapped:" destination="X3G-Eb-4EV" eventType="touchUpInside" id="vlT-BY-sIm"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVn-xv-tbf" customClass="CommentCountBtnV2" customModule="myscrap" customModuleProvider="target">
-                                                        <rect key="frame" x="89" y="1" width="120" height="21"/>
+                                                        <rect key="frame" x="109" y="1" width="120" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="kRg-HC-x7a"/>
                                                         </constraints>
@@ -238,10 +238,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="7KB-kT-zjh"/>
                                                     <constraint firstAttribute="bottom" secondItem="kcF-Tw-hf1" secondAttribute="bottom" id="E9g-M9-Usm"/>
-                                                    <constraint firstItem="kcF-Tw-hf1" firstAttribute="leading" secondItem="LM5-fP-7BU" secondAttribute="leading" id="EN4-Sp-F8l"/>
                                                     <constraint firstItem="kcF-Tw-hf1" firstAttribute="top" secondItem="LM5-fP-7BU" secondAttribute="top" id="IwB-E6-cMU"/>
                                                     <constraint firstItem="WVn-xv-tbf" firstAttribute="leading" secondItem="kcF-Tw-hf1" secondAttribute="trailing" constant="10" id="JGQ-OD-Bpw"/>
                                                     <constraint firstItem="WVn-xv-tbf" firstAttribute="top" secondItem="LM5-fP-7BU" secondAttribute="top" constant="1" id="SJR-0m-mU2"/>
+                                                    <constraint firstItem="kcF-Tw-hf1" firstAttribute="leading" secondItem="LM5-fP-7BU" secondAttribute="leading" constant="20" id="cE2-aM-cWA"/>
                                                     <constraint firstAttribute="bottom" secondItem="WVn-xv-tbf" secondAttribute="bottom" id="xx3-9a-UdO"/>
                                                 </constraints>
                                             </view>
