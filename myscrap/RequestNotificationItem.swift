@@ -22,7 +22,8 @@ class RequestNotificationItem{
     private var _colorCode: String!
     private var _friendId: String!
     private var _type: String!
-   private var _status: String!
+    private var _status: String!
+    private var _companyID: String!
 
     enum NotificationStatus: String {
         case seen
@@ -49,6 +50,11 @@ class RequestNotificationItem{
             //Redirects to Feed Post
             return .Follow
         }
+        
+        else if _type == "empReq" {
+            return .EmployeeRequest
+        }
+        
             //Simpley redirects to Feeds
             //when 
             return .Mobile
@@ -63,7 +69,7 @@ class RequestNotificationItem{
     var userid:String { if _userid == nil { _userid = ""}; return _userid }
     var shortName:String { if _shortName == nil { _shortName = ""}; return _shortName }
     var friendId:String { if _friendId == nil { _friendId = ""}; return _friendId }
-   // var status:String { if _status == nil { _status = ""}; return _status }
+    var companyID:String { if _companyID == nil { _companyID = ""}; return _companyID }
     var status: NotificationStatus{
         get {
             if _status == NotificationStatus.seen.rawValue {
@@ -121,6 +127,10 @@ class RequestNotificationItem{
         }
         if let status = notificationDict["status"] as? String{
                    self._status = status
+                   
+               }
+        if let compId = notificationDict["companyId"] as? String{
+                   self._companyID = compId
                    
                }
 

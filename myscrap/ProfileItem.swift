@@ -9,7 +9,7 @@
 import Foundation
 
 class EditProfileItem{
-  
+    
     var firstName: String?
     var email: String?
     var lastName: String?
@@ -23,6 +23,8 @@ class EditProfileItem{
     var phoneNumber:String?
     var website:String?
     var companyId:String?
+    var requestedCompany:String?
+    var companyRequestStatus:String?
     var userLocation: String?
     var colorCode: String?
     var city: String?
@@ -30,9 +32,9 @@ class EditProfileItem{
     var officePhoneCode: String?
     var officePhoneNumber: String?
     var cardFront: String?
-      var cardBack: String?
-      var cardShow: String?
-      var showPhone: String?
+    var cardBack: String?
+    var cardShow: String?
+    var showPhone: String?
     
     
     var userCommoditiesArray: [String] {
@@ -40,7 +42,7 @@ class EditProfileItem{
         if let userIntersts = userInterest{
             let string = userIntersts.replacingOccurrences(of: " ", with: "")
             if string != ""{
-                   array = string.components(separatedBy: ",")
+                array = string.components(separatedBy: ",")
             }
         }
         return array
@@ -120,19 +122,26 @@ class EditProfileItem{
             self.userHereFor = userHereFor
         }
         if let cardFront = dict["cardFront"] as? String {
-                  self.cardFront = cardFront
-              }
+            self.cardFront = cardFront
+        }
         if let cardBack = dict["cardBack"] as? String {
-                  self.cardBack = cardBack
-              }
+            self.cardBack = cardBack
+        }
         if let showPhone = dict["showPhone"] as? String {
-                  self.showPhone = showPhone
-              }
+            self.showPhone = showPhone
+        }
         if let cardShow = dict["cardShow"] as? String {
-                  self.cardShow = cardShow
-              }
+            self.cardShow = cardShow
+        }
+        if let compReqName = dict["companyReqName"] as? String {
+            self.requestedCompany = compReqName
+        }
+        if let status = dict["employeeReq"] as? String {
+            self.companyRequestStatus = status
+        }
+   
     }
-
+    
     typealias completionHandler = ((EditProfileItem?) -> () )
     
     static func getEditProfile(_ completion: @escaping completionHandler) {
@@ -157,8 +166,8 @@ class EditProfileItem{
         service.endPoint = Endpoints.EDIT_PROFILE_URL
         
         service.params = "userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)&dob=&city=\(city.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlPathAllowed)!)&website=\(website.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlPathAllowed)!)&userLocation=\(country.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlPathAllowed)!)&designation=\(position)&email=\(email)&gender=&lastName=\(lastName.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlPathAllowed)!)&firstName=\(firstName.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlPathAllowed)!)&phoneNo=\(phone)&code=\(code)&officePhoneCode=\(officeCode)&userHereFor=\(userHereFor.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlPathAllowed)!)&cardFront=\(cardFront)&cardBack=\(cardBack)&cardShow=\(cardShow)&phoneShow=\(showPhone.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlPathAllowed)!)&officePhoneNumber=\(officePhoneNo)&userInterest=\(userInterest)&userRoles=\(userRoles)&company=\(company)&companyId=\(companyId)&userBio=\(bio)"
-
-   
+        
+        
         
         service.getDataWith(completion: { (result) in
             switch result{
@@ -172,13 +181,13 @@ class EditProfileItem{
                                 if let nm = profile.firstName, let lastnm = profile.lastName {
                                     AuthService.instance.firstname = nm
                                     AuthService.instance.lastName = lastnm
-
+                                    
                                 }
                                 if let cName = profile.company, let cID = profile.companyId {
-                                                                  AuthService.instance.companyId = cID
-                                                                  AuthService.instance.company = cName
-
-                                                              }
+                                    AuthService.instance.companyId = cID
+                                    AuthService.instance.company = cName
+                                    
+                                }
                                 if let profilePic = profile.profilePic{
                                     AuthService.instance.profilePic = profilePic
                                 }
@@ -188,9 +197,9 @@ class EditProfileItem{
                             completion(false, status!)
                         }
                     }
-
+                    
                 }
-
+                
             case .Error(_):
                 DispatchQueue.main.async {
                     completion(false, "Failed to update the profile")
@@ -199,49 +208,49 @@ class EditProfileItem{
         })
     }
     static func updateProfileAfterVerify(Param: String, completion: @escaping (Bool,String?) -> Void  ) {
-           let service = APIService()
-           service.endPoint = Endpoints.EDIT_PROFILE_URL
-           
-           service.params = Param
-
-           service.getDataWith(completion: { (result) in
-               switch result{
-               case .Success(let dict):
-                   DispatchQueue.main.async {
-                       let status = dict["status"] as? String
-                       if let error = dict["error"] as? Bool {
-                           if !error {
-                               if let editProfileData = dict["EditProfileData"] as? [String:AnyObject]{
-                                   let profile = EditProfileItem(dict: editProfileData)
-                                   if let nm = profile.firstName, let lastnm = profile.lastName {
-                                       AuthService.instance.firstname = nm
-                                       AuthService.instance.lastName = lastnm
-
-                                   }
-                                   if let cName = profile.company, let cID = profile.companyId {
-                                                                     AuthService.instance.companyId = cID
-                                                                     AuthService.instance.company = cName
-
-                                                                 }
-                                   if let profilePic = profile.profilePic{
-                                       AuthService.instance.profilePic = profilePic
-                                   }
-                               }
-                               completion(true, status!)
-                           } else {
-                               completion(false, status!)
-                           }
-                       }
-
-                   }
-
-               case .Error(_):
-                   DispatchQueue.main.async {
-                       completion(false, "Failed to update the profile")
-                   }
-               }
-           })
-       }
+        let service = APIService()
+        service.endPoint = Endpoints.EDIT_PROFILE_URL
+        
+        service.params = Param
+        
+        service.getDataWith(completion: { (result) in
+            switch result{
+            case .Success(let dict):
+                DispatchQueue.main.async {
+                    let status = dict["status"] as? String
+                    if let error = dict["error"] as? Bool {
+                        if !error {
+                            if let editProfileData = dict["EditProfileData"] as? [String:AnyObject]{
+                                let profile = EditProfileItem(dict: editProfileData)
+                                if let nm = profile.firstName, let lastnm = profile.lastName {
+                                    AuthService.instance.firstname = nm
+                                    AuthService.instance.lastName = lastnm
+                                    
+                                }
+                                if let cName = profile.company, let cID = profile.companyId {
+                                    AuthService.instance.companyId = cID
+                                    AuthService.instance.company = cName
+                                    
+                                }
+                                if let profilePic = profile.profilePic{
+                                    AuthService.instance.profilePic = profilePic
+                                }
+                            }
+                            completion(true, status!)
+                        } else {
+                            completion(false, status!)
+                        }
+                    }
+                    
+                }
+                
+            case .Error(_):
+                DispatchQueue.main.async {
+                    completion(false, "Failed to update the profile")
+                }
+            }
+        })
+    }
     
 }
 

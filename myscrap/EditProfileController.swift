@@ -67,7 +67,8 @@ class EditProfileController: BaseRevealVC,UIGestureRecognizerDelegate,CropViewCo
     @IBOutlet weak var cityTextField: ACFloatingTextfield!
     
     @IBOutlet weak var bioHeader: UILabel!
-
+    @IBOutlet weak var companyReqPendingLabel: UILabel!
+    
     var cardShow: String = "0"
        var showPhone: String = "0"
     var businessCardFront: String = ""
@@ -698,7 +699,8 @@ isFrontImage = true
         self.firstNameTextField.text = profileItem.firstName
         self.lastNameTextField.text = profileItem.lastName
         self.positionTextField.text = profileItem.designation
-        self.companyTextField.text = profileItem.company
+        self.companyTextField.text = profileItem.requestedCompany == "" ? profileItem.company:profileItem.requestedCompany
+        self.companyReqPendingLabel.isHidden = (profileItem.requestedCompany == "" && profileItem.companyRequestStatus == "")
         self.bioTextView.text = profileItem.userBio
         self.countryTextField.text = profileItem.userLocation
         self.phoneTextField.text = profileItem.phoneNumber

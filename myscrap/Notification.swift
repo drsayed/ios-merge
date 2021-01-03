@@ -89,6 +89,17 @@ class Notifications{
         if let error = dict["error"] as? Bool{
             if !error{
                   var data = [AnyObject]()
+                
+                if let notifications = dict["employeeReq"] as? [[String:AnyObject]]{
+                  
+                    for var notification in notifications{
+                        // manually inserting type because not receiving in API
+                        notification["type"] = "empReq" as AnyObject
+                        let obj = RequestNotificationItem(notificationDict: notification)
+                        data.append(obj)
+                    }
+                }
+                
                 if let notifications = dict["cardRequestNotification"] as? [[String:AnyObject]]{
                                    for notification in notifications{
                                        let obj = RequestNotificationItem(notificationDict: notification)
@@ -117,7 +128,7 @@ class Notifications{
                         data.append(obj)
                     }
                 }
-               
+                
                   return .Success(data)
             }
         }
