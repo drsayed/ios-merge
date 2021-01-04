@@ -61,6 +61,8 @@ class CompanyHeaderModuleVC: UIViewController {
 //    @IBOutlet weak var commImgView: UIImageView!
 //    @IBOutlet weak var commoCount: UILabel!
 
+    @IBOutlet weak var undoReportButton: UIButton!
+    @IBOutlet weak var reportedBlurView: UIView!
     @IBOutlet weak var tabBarCollectionView: UICollectionView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
@@ -109,6 +111,8 @@ class CompanyHeaderModuleVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Reported Blur View hidden by default
+        self.reportedBlurView.isHidden = true
         // Do any additional setup after loading the view.
         currentSelectedTab = 0
         //countLabel
@@ -157,7 +161,7 @@ class CompanyHeaderModuleVC: UIViewController {
         self.reportCompanyButton.setTitle("Report", for: .normal)
         self.reportCompanyButton.setTitleColor(UIColor.gray, for: .normal)
         self.reportCompanyButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 14)
-        self.reportCompanyButton.alignTextUnderImage(imgsize: CGSize(width: 25, height: 25), spacing: 2)
+        self.reportCompanyButton.alignTextUnderImage(imgsize: CGSize(width: 20, height: 20), spacing: 2)
         self.reportCompanyButton.addTarget(self, action: #selector(reportCompanyButtonAction), for: .touchUpInside)
         
 //        self.commoImgOverView.isHidden = true
@@ -243,6 +247,9 @@ class CompanyHeaderModuleVC: UIViewController {
                     self.ownCompBtn.setTitle("  Verified as admin  ", for: .normal)
             }
             else {
+                if reportedStatusOfCompany == "Reported" {
+                    self.reportedBlurView.isHidden = false
+                }
                 self.reportCompanyButton.isHidden = false
                 let reportButtonTitleStr = reportedStatusOfCompany == "Reported" ? self.reportedStr : self.reportStr
                 self.reportCompanyButton.setTitle(reportButtonTitleStr, for: .normal)
@@ -457,6 +464,7 @@ class CompanyHeaderModuleVC: UIViewController {
 
                         self.reportCompanyButton.setTitle(self.reportedStr, for: .normal)
                         self.reportCompanyButton.isEnabled = false
+                        self.reportedBlurView.isHidden = false
                     }
                     else {
                         reportView.doCloseAnimation()
@@ -465,6 +473,35 @@ class CompanyHeaderModuleVC: UIViewController {
             }
         }
     }
+
+    //MARK:- Undo Report About Company API
+    func undoCompanyReport() {
+        
+        self.showPopUpAlert(title: "", message: "Are you sure you want to un report this company?", actionTitles: ["NO","YES"], actions: [{ (action) in
+        },
+        { action2 in
+            
+            if self.companyId  != "" {
+                
+                self.service.unReportCompany(view: self.view,
+                                                      companyId: self.companyId!,
+                                                      reportType: "1") { (isSuccess) in
+                    
+                    if isSuccess! {
+                        self.reportCompanyButton.setTitle(self.reportStr, for: .normal)
+                        self.reportCompanyButton.isEnabled = false
+                        self.reportedBlurView.isHidden = true
+                    }
+                    else {
+                        self.showAlert(message: "Something went wrong")
+                    }
+                }
+            }
+            
+        }])
+    
+    }
+    
     
     //MARK:- Helpers
     func validNumber() -> String {
@@ -744,6 +781,29 @@ class CompanyHeaderModuleVC: UIViewController {
             }
         }
     }
+    
+    @IBAction func undoReportAction(_ sender: UIButton) {
+        
+        self.reportCompanyDropDown.anchorView = sender
+     
+       // self.reportCompanyDropDown.bottomOffset = CGPoint(x: sender.frame.origin.x, y:(self.reportCompanyDropDown.anchorView?.plainView.bounds.height)!)
+        self.reportCompanyDropDown.dataSource = ["Undo Report"]
+        self.reportCompanyDropDown.cellHeight = 45.0
+        
+        self.reportCompanyDropDown.direction = .top
+        
+        self.reportCompanyDropDown.dropDownWidth = UIScreen.main.bounds.width - 60
+        self.reportCompanyDropDown.setupCornerRadius(3)
+        self.reportCompanyDropDown.backgroundColor = UIColor.white
+
+        self.reportCompanyDropDown.show()
+        self.reportCompanyDropDown.selectionAction = {[unowned self] (index: Int, item: String) in
+
+            self.undoCompanyReport()
+        }
+        
+    }
+    
 }
 
 //MARK:- Collection View Data Source

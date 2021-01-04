@@ -14,7 +14,8 @@ class OverviewEmployeeListCell: UITableViewCell {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var compDesigLbl: UILabel!
     @IBOutlet weak var adminLabel: UILabel!
-
+    @IBOutlet weak var reportBlurView: UIView!
+    
     @IBOutlet weak var makeAsAdminBtn: UIButton!
     @IBOutlet weak var reportBtn : UIButton!
     @IBOutlet weak var makeAsAdminWidthConstraint: NSLayoutConstraint!

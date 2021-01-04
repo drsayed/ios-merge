@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -316,6 +316,48 @@
                                 <rect key="frame" x="0.0" y="563" width="414" height="299"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <view alpha="0.93000000000000005" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQe-Wr-uKC" userLabel="ReportedView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qfa-oT-Giv">
+                                        <rect key="frame" x="44.5" y="391" width="325.5" height="70"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="pZW-K7-nsl">
+                                                <rect key="frame" x="142.5" y="0.0" width="40" height="40"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Gbs-gm-N5b"/>
+                                                    <constraint firstAttribute="width" constant="40" id="XJ4-UF-R27"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This company is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="But-lQ-Sc6">
+                                                <rect key="frame" x="0.0" y="50" width="325.5" height="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5f-hn-pPb">
+                                        <rect key="frame" x="344" y="782" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Oc0-97-qOb"/>
+                                            <constraint firstAttribute="height" constant="40" id="txW-Sr-0U2"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_more_horiz"/>
+                                        <connections>
+                                            <action selector="undoReportAction:" destination="Nj3-Rj-dZN" eventType="touchUpInside" id="4Zg-w8-EbI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="L5f-hn-pPb" secondAttribute="trailing" constant="30" id="6cQ-JU-0KU"/>
+                                    <constraint firstItem="qfa-oT-Giv" firstAttribute="centerY" secondItem="aQe-Wr-uKC" secondAttribute="centerY" id="phD-9W-ibF"/>
+                                    <constraint firstItem="qfa-oT-Giv" firstAttribute="centerX" secondItem="aQe-Wr-uKC" secondAttribute="centerX" id="sPU-2f-Hco"/>
+                                    <constraint firstAttribute="bottom" secondItem="L5f-hn-pPb" secondAttribute="bottom" constant="30" id="ydh-YY-CLA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6gd-Ar-1Pw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -326,11 +368,15 @@
                             <constraint firstItem="vNo-IO-KQJ" firstAttribute="top" secondItem="6gd-Ar-1Pw" secondAttribute="top" id="RTr-uC-liZ"/>
                             <constraint firstItem="Bs9-It-fxF" firstAttribute="trailing" secondItem="6gd-Ar-1Pw" secondAttribute="trailing" id="RsO-kI-QBZ"/>
                             <constraint firstItem="Q7l-Vv-6SU" firstAttribute="leading" secondItem="6gd-Ar-1Pw" secondAttribute="leading" id="Su5-zh-Eo5"/>
+                            <constraint firstAttribute="bottom" secondItem="aQe-Wr-uKC" secondAttribute="bottom" id="TTy-Cr-EPz"/>
+                            <constraint firstItem="aQe-Wr-uKC" firstAttribute="top" secondItem="6gd-Ar-1Pw" secondAttribute="top" id="WlQ-Y2-eMk"/>
                             <constraint firstItem="6gd-Ar-1Pw" firstAttribute="bottom" secondItem="Bs9-It-fxF" secondAttribute="bottom" id="ZFP-dz-xg8"/>
                             <constraint firstItem="vNo-IO-KQJ" firstAttribute="leading" secondItem="6gd-Ar-1Pw" secondAttribute="leading" id="bYX-jU-Cms"/>
                             <constraint firstItem="BHe-e4-h6n" firstAttribute="trailing" secondItem="6gd-Ar-1Pw" secondAttribute="trailing" id="cQt-Fc-4Mc"/>
                             <constraint firstItem="Q7l-Vv-6SU" firstAttribute="trailing" secondItem="6gd-Ar-1Pw" secondAttribute="trailing" id="h7A-gU-mzW"/>
+                            <constraint firstItem="6gd-Ar-1Pw" firstAttribute="trailing" secondItem="aQe-Wr-uKC" secondAttribute="trailing" id="jvn-dX-See"/>
                             <constraint firstItem="Bs9-It-fxF" firstAttribute="top" secondItem="BHe-e4-h6n" secondAttribute="bottom" id="obs-WL-9Ze"/>
+                            <constraint firstItem="aQe-Wr-uKC" firstAttribute="leading" secondItem="6gd-Ar-1Pw" secondAttribute="leading" id="r7p-YP-DmD"/>
                             <constraint firstItem="Bs9-It-fxF" firstAttribute="leading" secondItem="6gd-Ar-1Pw" secondAttribute="leading" id="rEZ-d2-cAR"/>
                             <constraint firstItem="BHe-e4-h6n" firstAttribute="leading" secondItem="6gd-Ar-1Pw" secondAttribute="leading" id="wpj-mr-s7V"/>
                         </constraints>
@@ -351,8 +397,10 @@
                         <outlet property="ownCompBtn" destination="VQC-Dy-2Vi" id="csZ-N1-hud"/>
                         <outlet property="photoCV" destination="SL3-we-yDa" id="Pjo-j1-8WZ"/>
                         <outlet property="reportCompanyButton" destination="1rO-Af-r1i" id="XUY-mT-rqo"/>
+                        <outlet property="reportedBlurView" destination="aQe-Wr-uKC" id="XO2-ji-zuO"/>
                         <outlet property="stickyHeaderView" destination="vNo-IO-KQJ" id="NHl-wF-Lux"/>
                         <outlet property="tabBarCollectionView" destination="Q7l-Vv-6SU" id="Fhp-Kn-r20"/>
+                        <outlet property="undoReportButton" destination="L5f-hn-pPb" id="Gzl-AT-zpZ"/>
                         <outlet property="webBtn" destination="HdP-zk-vCs" id="J3E-DN-vHa"/>
                     </connections>
                 </viewController>
@@ -767,7 +815,7 @@
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74Y-vL-EPr" customClass="CosmosView" customModule="Cosmos">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="74Y-vL-EPr" customClass="CosmosView" customModule="Cosmos">
                                                                     <rect key="frame" x="28" y="90" width="96" height="20"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
@@ -785,7 +833,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOO-OT-6wR">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOO-OT-6wR">
                                                                     <rect key="frame" x="131" y="90" width="37" height="17.5"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1033,13 +1081,47 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
+                                                <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zsq-cx-oAn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MOo-vp-Bbd">
+                                                            <rect key="frame" x="74" y="10" width="266.5" height="42.5"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportContent" translatesAutoresizingMaskIntoConstraints="NO" id="nle-sA-rqy">
+                                                                    <rect key="frame" x="120.5" y="0.0" width="25" height="25"/>
+                                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="25" id="gbH-Hr-eVU"/>
+                                                                        <constraint firstAttribute="width" constant="25" id="kHc-nR-APM"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This admin is reported to the moderator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNr-Qi-4OM">
+                                                                    <rect key="frame" x="0.0" y="25" width="266.5" height="17.5"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="MOo-vp-Bbd" firstAttribute="centerX" secondItem="Zsq-cx-oAn" secondAttribute="centerX" id="Ghr-jE-dVG"/>
+                                                        <constraint firstItem="MOo-vp-Bbd" firstAttribute="centerY" secondItem="Zsq-cx-oAn" secondAttribute="centerY" id="Rap-KJ-vhH"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="mm2-7Y-34N" firstAttribute="centerY" secondItem="0HM-YK-Nno" secondAttribute="centerY" id="1aS-ns-xAp"/>
                                                 <constraint firstItem="whd-xo-DET" firstAttribute="leading" secondItem="WW6-Ve-aWR" secondAttribute="trailing" constant="12" id="5hv-Gd-ma3"/>
                                                 <constraint firstItem="mm2-7Y-34N" firstAttribute="leading" secondItem="wOR-eN-Rg0" secondAttribute="trailing" constant="5" id="B1D-aO-VRg"/>
+                                                <constraint firstItem="Zsq-cx-oAn" firstAttribute="top" secondItem="0HM-YK-Nno" secondAttribute="top" id="CTx-lX-edh"/>
                                                 <constraint firstItem="WW6-Ve-aWR" firstAttribute="centerY" secondItem="whd-xo-DET" secondAttribute="centerY" id="GB9-cB-zcC"/>
+                                                <constraint firstAttribute="trailing" secondItem="Zsq-cx-oAn" secondAttribute="trailing" id="Mva-jc-KSc"/>
+                                                <constraint firstItem="Zsq-cx-oAn" firstAttribute="leading" secondItem="0HM-YK-Nno" secondAttribute="leading" id="O9G-Vl-bWj"/>
+                                                <constraint firstAttribute="bottom" secondItem="Zsq-cx-oAn" secondAttribute="bottom" id="Q1h-zf-8B8"/>
                                                 <constraint firstItem="WW6-Ve-aWR" firstAttribute="leading" secondItem="0HM-YK-Nno" secondAttribute="leading" constant="16" id="V5f-WG-DeY"/>
                                                 <constraint firstAttribute="trailing" secondItem="mm2-7Y-34N" secondAttribute="trailing" constant="10" id="bDX-rD-Nh7"/>
                                                 <constraint firstItem="wOR-eN-Rg0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="whd-xo-DET" secondAttribute="trailing" constant="10" id="fTm-vo-MKE"/>
@@ -1056,6 +1138,7 @@
                                             <outlet property="makeAsAdminWidthConstraint" destination="enf-BC-Ssd" id="eIc-3B-gWi"/>
                                             <outlet property="nameLbl" destination="c2U-PH-YOF" id="H6X-Ta-LGb"/>
                                             <outlet property="profileView" destination="WW6-Ve-aWR" id="dRw-sP-uSs"/>
+                                            <outlet property="reportBlurView" destination="Zsq-cx-oAn" id="Y7H-LJ-YEJ"/>
                                             <outlet property="reportBtn" destination="mm2-7Y-34N" id="Qbq-g7-A7u"/>
                                             <outlet property="reportBtnWidthConstraint" destination="GfF-8X-kPJ" id="8VB-fI-TqP"/>
                                         </connections>
@@ -1276,11 +1359,27 @@
             <point key="canvasLocation" x="2386.9565217391305" y="12.723214285714285"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="74Y-vL-EPr">
+            <size key="intrinsicContentSize" width="96" height="20"/>
+        </designable>
+        <designable name="Puu-5w-CuF">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+        <designable name="Tq5-hB-K9l">
+            <size key="intrinsicContentSize" width="85" height="17"/>
+        </designable>
+        <designable name="s9G-Ou-5g7">
+            <size key="intrinsicContentSize" width="320" height="60"/>
+        </designable>
+    </designables>
     <resources>
         <image name="call_40x40" width="40" height="40"/>
         <image name="direction_40x40" width="40" height="40"/>
         <image name="email_40x40" width="40" height="40"/>
+        <image name="ic_more_horiz" width="24" height="24"/>
         <image name="no-image" width="397" height="397"/>
+        <image name="reportContent" width="20" height="20"/>
         <image name="website_40x40" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
