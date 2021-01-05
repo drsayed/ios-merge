@@ -253,6 +253,60 @@ class CompanyUpdatedService {
     }
     
     
+    //MARK:- Un Report Company API
+    func unReportCompany(view : UIView,
+                                    companyId : String,
+                                    reportType : String, completion:@escaping successHandler) {
+                    
+            let spinner = MBProgressHUD.showAdded(to: view, animated: true)
+            spinner.mode = MBProgressHUDMode.indeterminate
+            spinner.label.text = "Requesting..."
+            let service = APIService()
+
+            let endPoint = Endpoints.UN_REPORT_ABOUT_COMPANY
+            
+            service.endPoint = endPoint
+            if companyId != "" {
+                
+                service.params = "userId=\(AuthService.instance.userId)&apiKey=\(API_KEY)&companyId=\(companyId)&type=\(reportType)"
+                service.getDataWith { [weak self] (result) in
+
+                    switch result{
+                    case .Success(let dict):
+                        if let error = dict["error"] as? Bool{
+                            
+                            DispatchQueue.main.async {
+                                MBProgressHUD.hide(for: (view), animated: true)
+                            }
+
+                            if !error {
+                                DispatchQueue.main.async {
+                                    completion(true)
+                                }
+                            }
+                            else {
+                                DispatchQueue.main.async {
+                                completion(false)
+                                }
+                            }
+                        }
+                    case .Error(let error):
+                        DispatchQueue.main.async {
+                            completion(false)
+                            MBProgressHUD.hide(for: (view), animated: true)
+                        }
+                    }
+                }
+            }
+            else {
+                completion(false)
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: view, animated: true)
+                }
+            }
+    }
+    
+    
     //MARK:- Moderator Delete Company Report API
     func deleteCompanyReport(view : UIView,
                                     companyId : String,

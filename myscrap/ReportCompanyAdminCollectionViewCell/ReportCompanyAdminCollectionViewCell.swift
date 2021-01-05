@@ -14,6 +14,8 @@ class ReportCompanyAdminCollectionViewCell: BaseCell {
     @IBOutlet weak var reportedUserLabel : UILabel!
     @IBOutlet weak var reportedTypeLabel : UILabel!
 
+    @IBOutlet weak var adminViewButton: UIButton!
+    @IBOutlet weak var companyViewButton: UIButton!
     @IBOutlet weak var reportedImage: UIImageView!
     
     @IBOutlet weak var companyName: UILabel!
@@ -23,10 +25,19 @@ class ReportCompanyAdminCollectionViewCell: BaseCell {
     @IBOutlet weak var affliationBtn: CorneredButton!
     @IBOutlet weak var isriBtn: CorneredButton!
     @IBOutlet weak var ownCompBtn: UIButton!
-
+    @IBOutlet weak var reportedCompBtn: UIButton!
     @IBOutlet weak var reportDescTitleLabel : UILabel!
     @IBOutlet weak var reportDescLabel : UILabel!
-        
+    @IBOutlet weak var reportDescView: UIView!
+    
+    @IBOutlet weak var adminViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var adminView: UIView!
+    @IBOutlet weak var adminButton: UIButton!
+    @IBOutlet weak var adminImage: UIImageView!
+    @IBOutlet weak var adminNameLabel: UILabel!
+    
+    @IBOutlet weak var adminDesignationLabel: UILabel!
+    
     var companyItem : CompanyItems? {
         didSet{
             guard let item = companyItem else { return }
@@ -42,12 +53,25 @@ class ReportCompanyAdminCollectionViewCell: BaseCell {
             self.reportedUserLabel.attributedText = attributedString
             
             
-            var reportTypeStr : String = item.reportedType
+            var reportTypeStr : String = item.reportType
             if reportTypeStr == "0" {
                 reportTypeStr = "Admin"
+                self.adminViewHeight.constant = 60
+                self.adminView.isHidden = false
+                self.adminNameLabel.text = item.employees[0].name
+                let designation = item.employees[0].designation
+                self.adminDesignationLabel.text = designation == "" ? "Trader" : designation
+                self.reportedCompBtn.isHidden = true
+                if item.employees[0].profilePic != "" {
+                    self.adminImage.setImageWithIndicator(imageURL: item.employees[0].profilePic)
+                }
+                
             }
             else {
                 reportTypeStr = "Company"
+                self.adminViewHeight.constant = 0
+                self.adminView.isHidden = true
+                self.reportedCompBtn.isHidden = false
             }
 //            reportTypeStr = "Company"
 
@@ -97,9 +121,18 @@ class ReportCompanyAdminCollectionViewCell: BaseCell {
         self.ownCompBtn.setTitle("   Reported   ", for: .normal)
         self.ownCompBtn.layer.cornerRadius = 3
         self.ownCompBtn.layer.masksToBounds = true
+        
+        self.reportedCompBtn.setTitle("   Reported   ", for: .normal)
+        self.reportedCompBtn.layer.cornerRadius = 3
+        self.reportedCompBtn.layer.masksToBounds = true
 
-        self.reportDescLabel.layer.cornerRadius = 5
-        self.reportDescLabel.layer.masksToBounds = true
+        self.reportDescView.layer.cornerRadius = 5
+        self.reportDescView.layer.masksToBounds = true
+        
+        self.adminButton.layer.cornerRadius = 5
+        self.adminButton.layer.masksToBounds = true
+        self.adminButton.layer.borderWidth = 1
+        self.adminButton.layer.borderColor = UIColor.MyScrapGreen.cgColor
         
         if network.reachability.isReachable == true {
             reportedImage.contentMode = .scaleAspectFill

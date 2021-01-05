@@ -348,8 +348,30 @@ extension ReportedVC: UICollectionViewDataSource{
             
             let data = self.companyDataArray[indexPath.item]
             cell.companyItem = data
+            
             cell.ownCompBtn.tag = indexPath.row
+            cell.reportedCompBtn.tag = indexPath.row
+            cell.companyViewButton.tag = indexPath.row
+            cell.adminViewButton.tag = Int(companyDataArray[indexPath.row].employees[0].userId) ?? 0
+            cell.reportedImage.tag = indexPath.row
+            cell.reportedUserLabel.tag = Int(companyDataArray[indexPath.row].reportedUserId) ?? 0
+            
             cell.ownCompBtn.addTarget(self, action: #selector(reportedButtonAction), for: .touchUpInside)
+            cell.reportedCompBtn.addTarget(self, action: #selector(reportedButtonAction), for: .touchUpInside)
+            
+            
+            let compImageGesture = UITapGestureRecognizer(target: self, action: #selector(viewCompanyProfile(_:)))
+            let userlabelGesture = UITapGestureRecognizer(target: self, action: #selector(viewUserProfile(_:)))
+            let compBtnGesture = UITapGestureRecognizer(target: self, action: #selector(viewCompanyProfile(_:)))
+            let userBtnGesture = UITapGestureRecognizer(target: self, action: #selector(viewUserProfile(_:)))
+            
+            cell.companyViewButton.addGestureRecognizer(compBtnGesture)
+            cell.adminViewButton.addGestureRecognizer(userBtnGesture)
+            
+            cell.reportedImage.isUserInteractionEnabled = true
+            cell.reportedImage.addGestureRecognizer(compImageGesture)
+            cell.reportedUserLabel.isUserInteractionEnabled = true
+            cell.reportedUserLabel.addGestureRecognizer(userlabelGesture)
             
             return cell
         }
@@ -916,6 +938,24 @@ var muteVideo : Bool = false
     }
     
     
+    //MARK:- View user profile
+    @objc func viewUserProfile(_ sender: UITapGestureRecognizer) {
+        let userID = String(sender.view!.tag)
+        didTapForFriendView(id: userID)
+    }
+    
+    //MARK:- View company profile
+    @objc func viewCompanyProfile(_ sender: UITapGestureRecognizer) {
+        if  let vc = CompanyHeaderModuleVC.storyBoardInstance() {
+            let company = self.companyDataArray[sender.view!.tag]
+            vc.title = company.compnayName
+            vc.companyId = company.compnayId
+            UserDefaults.standard.set(vc.title, forKey: "companyName")
+            UserDefaults.standard.set(vc.companyId, forKey: "companyId")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     //MARK:- Actions
     @objc func reportedButtonAction(sender: UIButton) {
         
@@ -939,18 +979,21 @@ var muteVideo : Bool = false
             var titleStr = ""
             var reportStr = ""
             if index == 0 { // Undo Report
-                                
                 titleStr = "Are you sure you want to un report this company?"
                 reportStr = "4"
-                if data.reportedType == "0" { //0 is for admin
+                if data.reportType == "0" { //0 is for admin
                     reportStr = "3" // delete admin of the company
                     titleStr = "Are you sure you want to un report this admin?"
                 }
             }
             else if index == 1 { // Delete
-                
                 reportStr = "1" // delete the company
-                titleStr = "Are you sure you want to delete this company?"
+                if data.reportType == "0" {
+                titleStr = "Are you sure you want to delete this admin?"
+                }
+                else {
+                    titleStr = "Are you sure you want to delete this company?"
+                }
 
             }
             
@@ -983,7 +1026,7 @@ var muteVideo : Bool = false
                         DispatchQueue.main.async {
                             self.companyDataArray.remove(at: index)
                             self.collectionView.reloadData()
-                            self.showToast(message: "Company Unreported")
+                           // self.showToast(message: "Company Unreported")
                         }
                     }
                 }
@@ -998,7 +1041,13 @@ extension ReportedVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.view.frame.width
         if indexPath.section == 0 {
-            return  CGSize(width:  width, height: 480)
+            if self.companyDataArray[indexPath.item].reportType == "0"{
+                return  CGSize(width:  width, height: 515)
+            }
+            else {
+                return  CGSize(width:  width, height: 455)
+            }
+            
         }
         else if indexPath.section == 1 {
 

@@ -68,6 +68,7 @@ class CompanyItems {
     
     var reportedBy : String!
     var reportedType : String!
+    var reportType : String!
     var reportedUserId : String!
 
     var reportedReason : String!
@@ -457,6 +458,9 @@ class CompanyItems {
         
         let reportedTypeStr = JSONUtils.GetStringFromObject(object: companyDict, key: "reportedtype")
         self.reportedType = reportedTypeStr
+        
+        let reportTypeStr = JSONUtils.GetStringFromObject(object: companyDict, key: "reportType")
+        self.reportType = reportTypeStr
 
         let reportedUserIdStr = JSONUtils.GetStringFromObject(object: companyDict, key: "reportedUserId")
         self.reportedUserId = reportedUserIdStr

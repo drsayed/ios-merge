@@ -116,8 +116,11 @@ final class FeedV2Model {
                     
                     for companyItems in companyDict{
                         
-                        if let companyDetailsDict = companyItems["detail"] as? [String : AnyObject] {
+                        if var companyDetailsDict = companyItems["detail"] as? [String : AnyObject] {
 
+                            // manually adding report type and reason in details object because from API receiving out of the detail object
+                            companyDetailsDict["reportType"] = companyItems["reportType"]
+                            companyDetailsDict["reportReason"] = companyItems["reportReason"]
                             let companyItems = CompanyItems(companyDict: companyDetailsDict)
                             companyData.append(companyItems)
                         }

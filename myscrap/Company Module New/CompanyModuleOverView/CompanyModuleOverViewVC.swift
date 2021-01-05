@@ -595,12 +595,13 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
                         cell.makeAsAdminBtn.addTarget(self, action: #selector(makeAsAdminButtonAction), for: .touchUpInside)
 
                         //reportCompanyButton
+                        cell.reportBlurView.isHidden = true
                         cell.reportBtn.isHidden = true
                         cell.reportBtn.setImage(UIImage(named: "icReport"), for: .normal)
                         cell.reportBtn.setTitle("Report", for: .normal)
                         cell.reportBtn.setTitleColor(UIColor.gray, for: .normal)
                         cell.reportBtn.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 14)
-                        cell.reportBtn.alignTextUnderImage(imgsize: CGSize(width: 25, height: 25), spacing: 2)
+                        cell.reportBtn.alignTextUnderImage(imgsize: CGSize(width: 20, height: 20), spacing: 2)
 //                        cell.reportBtn.layer.cornerRadius = 3.0
                         cell.reportBtn.tag = indexPath.row
                         cell.reportBtn.addTarget(self, action: #selector(reportButtonAction), for: .touchUpInside)
@@ -656,9 +657,11 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
 
                                     if adminReported == "Reported" {
                                         cell.reportBtn.setTitle(self.reportedText, for: .normal)
+                                        cell.reportBlurView.isHidden = false
                                     }
                                     else {
                                         cell.reportBtn.setTitle(self.reportText, for: .normal)
+                                        cell.reportBlurView.isHidden = true
                                     }
                                     cell.reportBtnWidthConstraint.constant = 70
                                 }
@@ -846,15 +849,23 @@ extension CompanyModuleOverViewVC: UITableViewDelegate, UITableViewDataSource {
             reportAdminDropDown.show()
             reportAdminDropDown.selectionAction = {[unowned self] (index: Int, item: String) in
                 
-                self.reportAdminAlertView { (isSuccess) in
+                self.reportAdminAlertView { [unowned self] (isSuccess) in
                     
                     if isSuccess {
-                        let dict = self.employeesArray[sender.tag - 1]
-
-                        if dict.reportOfCompanyAdmin != "" {
-                            dict.reportOfCompanyAdmin = "Reported"
-                            self.tableView.reloadSections(IndexSet(integer: sender.tag - 1), with: .none)
+                       // let dict = self.employeesArray[sender.tag - 1]
+                        if self.companyOverViewDataSource!.last!.compnayId != "" {
+                            let companyId = self.companyOverViewDataSource!.last!.compnayId
+                            self.callGetCompanyAPI(companyId : companyId)
+                            DispatchQueue.main.async {
+                                MBProgressHUD.hide(for: (self.view)!, animated: true)
+                            }
                         }
+                        
+                        
+                     //   if dict.reportOfCompanyAdmin != "" {
+                     //       dict.reportOfCompanyAdmin = "Reported"
+                     //       self.tableView.reloadSections(IndexSet(integer: sender.tag - 1), with: .none)
+                    //    }
     //                    if let cell = self.tableView.cellForRow(at: IndexPath(index: sender.tag)) as? OverviewEmployeeListCell {
     //
     //                        cell.reportBtn.

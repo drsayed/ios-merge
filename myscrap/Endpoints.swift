@@ -316,6 +316,7 @@ struct Endpoints {
     
     static let REPORT_ABOUT_COMPANY = "https://myscrap.com/company/reportAboutCompany"
 
+    static let UN_REPORT_ABOUT_COMPANY = "https://myscrap.com/company/unreportAboutCompany"
     static let DELETE_COMPANY_PHOTOS = "https://myscrap.com/company/deleteCompanyPhotos"
     
     //This API is only for Moderator
