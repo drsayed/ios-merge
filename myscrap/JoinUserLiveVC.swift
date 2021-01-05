@@ -294,6 +294,7 @@ extension JoinUserLiveVC {
                         self.liveUserNameText = onlineStat["userFullName"]! as! String
                         self.liveUserImageUrl = onlineStat["userPhoto"]! as! String
                         self.userProfileColorCode = onlineStat["userColorCode"]! as! String
+                        self.topicValue.text = (onlineStat["topic"] as? String) ?? ""
                         liveUserProfile.updateViews(name: self.liveUserNameText, url:   self.liveUserImageUrl, colorCode:   self.userProfileColorCode)
                     self.startLive()
                     }
