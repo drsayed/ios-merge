@@ -1435,12 +1435,15 @@
 		FB0EFB04259D099D00922BF4 /* DataEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFB03259D099D00922BF4 /* DataEncoding.m */; };
 		FB0EFB0A259DBA4500922BF4 /* CollectionViewCellHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFB09259DBA4400922BF4 /* CollectionViewCellHelper.swift */; };
 		FB0EFC3225A0E43800922BF4 /* LiveTopicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */; };
+		FB10BEC525A37D0500D9CEF6 /* LiveFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */; };
+		FB10BEC625A37D0500D9CEF6 /* LiveFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BEC425A37D0500D9CEF6 /* LiveFriendCell.swift */; };
 		FB1DB8B8251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */; };
 		FB30E378255E679200551312 /* FeedDetailVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */; };
 		FB30E379255E679200551312 /* FeedDetailVideoTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */; };
 		FB322F4125174B6D0046EB98 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322F4025174B6D0046EB98 /* VideoURL.swift */; };
 		FB322F44251776EA0046EB98 /* PortraitVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322F42251776DF0046EB98 /* PortraitVideoCell.swift */; };
 		FB322F45251776EB0046EB98 /* PortraitVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB322F43251776EA0046EB98 /* PortraitVideoCell.xib */; };
+		FB3E3C1725A46B4100642EC9 /* EndLiveAlart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3E3C1625A46B4100642EC9 /* EndLiveAlart.swift */; };
 		FB59E93D250B5619009953FA /* blurImage.png in Resources */ = {isa = PBXBuildFile; fileRef = FB59E93C250B5619009953FA /* blurImage.png */; };
 		FB59E940250B6337009953FA /* SubscribePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59E93E250B6332009953FA /* SubscribePopupView.swift */; };
 		FB59E941250B6337009953FA /* SubscribePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB59E93F250B6337009953FA /* SubscribePopupView.xib */; };
@@ -1457,6 +1460,24 @@
 		FB7BE2A12548C1B9006D0572 /* LmeOfficialHeaderTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB7BE29F2548C1B8006D0572 /* LmeOfficialHeaderTVCell.xib */; };
 		FB7BE2A62548C1C9006D0572 /* LmeOfficialPricesTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB7BE2A42548C1C4006D0572 /* LmeOfficialPricesTVCell.xib */; };
 		FB7BE2A72548C1C9006D0572 /* LmeOfficialPricesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BE2A52548C1C8006D0572 /* LmeOfficialPricesTVCell.swift */; };
+		FB7D07B125A2394D00DD4249 /* UserLiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */; };
+		FB7D07B525A245C300DD4249 /* LiveActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07B425A245C300DD4249 /* LiveActionAlert.swift */; };
+		FB7D07D625A251B600DD4249 /* AntMediaError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07D225A251B500DD4249 /* AntMediaError.swift */; };
+		FB7D07D725A251B600DD4249 /* AntMediaClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07D325A251B500DD4249 /* AntMediaClientDelegate.swift */; };
+		FB7D07D825A251B600DD4249 /* AntMediaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07D425A251B500DD4249 /* AntMediaClient.swift */; };
+		FB7D07D925A251B600DD4249 /* AntMediaClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07D525A251B600DD4249 /* AntMediaClientProtocol.swift */; };
+		FB7D07E225A251DF00DD4249 /* WebRTCClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07DD25A251DD00DD4249 /* WebRTCClientDelegate.swift */; };
+		FB7D07E325A251DF00DD4249 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07DE25A251DE00DD4249 /* Dictionary.swift */; };
+		FB7D07E425A251DF00DD4249 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07DF25A251DE00DD4249 /* WebRTCClient.swift */; };
+		FB7D07E525A251DF00DD4249 /* ConfigRTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07E025A251DF00DD4249 /* ConfigRTC.swift */; };
+		FB7D07E625A251DF00DD4249 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D07E125A251DF00DD4249 /* String.swift */; };
+		FB7D086C25A2E15800DD4249 /* WebRTCiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB7D086825A2E0AA00DD4249 /* WebRTCiOSSDK.framework */; };
+		FB7D086D25A2E15800DD4249 /* WebRTCiOSSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB7D086825A2E0AA00DD4249 /* WebRTCiOSSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FB7D086E25A2E15A00DD4249 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB7D080725A2588600DD4249 /* WebRTC.framework */; };
+		FB7D086F25A2E15A00DD4249 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FB7D080725A2588600DD4249 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FB7D088225A2ED8700DD4249 /* SFCountdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB7D088125A2ED8600DD4249 /* SFCountdownView.m */; };
+		FB7D088625A3179F00DD4249 /* UserLiveOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */; };
+		FB7D088A25A3344800DD4249 /* JoinUserLiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7D088925A3344800DD4249 /* JoinUserLiveVC.swift */; };
 		FB8C9531250CD4DE000E1B40 /* CustomBlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8C952D250CD4B2000E1B40 /* CustomBlurEffect.swift */; };
 		FB8C9532250CD4DE000E1B40 /* UIVisualEffect+effectSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8C952F250CD4D1000E1B40 /* UIVisualEffect+effectSettings.swift */; };
 		FB8C9533250CD4DE000E1B40 /* CustomBlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8C9530250CD4DD000E1B40 /* CustomBlurEffectView.swift */; };
@@ -1625,12 +1646,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		94F43F9D206BCF5500851033 /* Embed Frameworks */ = {
+		FB7D085C25A25B7C00DD4249 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FB7D086D25A2E15800DD4249 /* WebRTCiOSSDK.framework in Embed Frameworks */,
+				FB7D086F25A2E15A00DD4249 /* WebRTC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3083,12 +3106,15 @@
 		FB0EFB03259D099D00922BF4 /* DataEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEncoding.m; sourceTree = "<group>"; };
 		FB0EFB09259DBA4400922BF4 /* CollectionViewCellHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellHelper.swift; sourceTree = "<group>"; };
 		FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTopicVC.swift; sourceTree = "<group>"; };
+		FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveFriendCell.xib; sourceTree = "<group>"; };
+		FB10BEC425A37D0500D9CEF6 /* LiveFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveFriendCell.swift; sourceTree = "<group>"; };
 		FB1DB8B7251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileCodeVerifyVC.swift; sourceTree = "<group>"; };
 		FB30E376255E679000551312 /* FeedDetailVideoTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailVideoTextCell.xib; sourceTree = "<group>"; };
 		FB30E377255E679200551312 /* FeedDetailVideoTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailVideoTextCell.swift; sourceTree = "<group>"; };
 		FB322F4025174B6D0046EB98 /* VideoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoURL.swift; sourceTree = "<group>"; };
 		FB322F42251776DF0046EB98 /* PortraitVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitVideoCell.swift; sourceTree = "<group>"; };
 		FB322F43251776EA0046EB98 /* PortraitVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PortraitVideoCell.xib; sourceTree = "<group>"; };
+		FB3E3C1625A46B4100642EC9 /* EndLiveAlart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndLiveAlart.swift; sourceTree = "<group>"; };
 		FB59E93C250B5619009953FA /* blurImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurImage.png; sourceTree = "<group>"; };
 		FB59E93E250B6332009953FA /* SubscribePopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribePopupView.swift; sourceTree = "<group>"; };
 		FB59E93F250B6337009953FA /* SubscribePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribePopupView.xib; sourceTree = "<group>"; };
@@ -3105,6 +3131,24 @@
 		FB7BE29F2548C1B8006D0572 /* LmeOfficialHeaderTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LmeOfficialHeaderTVCell.xib; sourceTree = "<group>"; };
 		FB7BE2A42548C1C4006D0572 /* LmeOfficialPricesTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LmeOfficialPricesTVCell.xib; sourceTree = "<group>"; };
 		FB7BE2A52548C1C8006D0572 /* LmeOfficialPricesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LmeOfficialPricesTVCell.swift; sourceTree = "<group>"; };
+		FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLiveVC.swift; sourceTree = "<group>"; };
+		FB7D07B425A245C300DD4249 /* LiveActionAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveActionAlert.swift; sourceTree = "<group>"; };
+		FB7D07D225A251B500DD4249 /* AntMediaError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntMediaError.swift; sourceTree = "<group>"; };
+		FB7D07D325A251B500DD4249 /* AntMediaClientDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntMediaClientDelegate.swift; sourceTree = "<group>"; };
+		FB7D07D425A251B500DD4249 /* AntMediaClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntMediaClient.swift; sourceTree = "<group>"; };
+		FB7D07D525A251B600DD4249 /* AntMediaClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntMediaClientProtocol.swift; sourceTree = "<group>"; };
+		FB7D07DD25A251DD00DD4249 /* WebRTCClientDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClientDelegate.swift; sourceTree = "<group>"; };
+		FB7D07DE25A251DE00DD4249 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		FB7D07DF25A251DE00DD4249 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
+		FB7D07E025A251DF00DD4249 /* ConfigRTC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigRTC.swift; sourceTree = "<group>"; };
+		FB7D07E125A251DF00DD4249 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		FB7D07E925A251EC00DD4249 /* WebRTCiOSSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebRTCiOSSDK.h; sourceTree = "<group>"; };
+		FB7D080725A2588600DD4249 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
+		FB7D086825A2E0AA00DD4249 /* WebRTCiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTCiOSSDK.framework; sourceTree = "<group>"; };
+		FB7D088025A2ED8600DD4249 /* SFCountdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCountdownView.h; sourceTree = "<group>"; };
+		FB7D088125A2ED8600DD4249 /* SFCountdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCountdownView.m; sourceTree = "<group>"; };
+		FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLiveOperations.swift; sourceTree = "<group>"; };
+		FB7D088925A3344800DD4249 /* JoinUserLiveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinUserLiveVC.swift; sourceTree = "<group>"; };
 		FB8C952D250CD4B2000E1B40 /* CustomBlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBlurEffect.swift; sourceTree = "<group>"; };
 		FB8C952E250CD4C5000E1B40 /* CustomBlurEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBlurEffectView.h; sourceTree = "<group>"; };
 		FB8C952F250CD4D1000E1B40 /* UIVisualEffect+effectSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIVisualEffect+effectSettings.swift"; sourceTree = "<group>"; };
@@ -3268,8 +3312,10 @@
 				94C411A321897526001BAA65 /* libxml2.tbd in Frameworks */,
 				94C411A1218974B4001BAA65 /* libresolv.tbd in Frameworks */,
 				94C4119F21897360001BAA65 /* libidn.a in Frameworks */,
+				FB7D086E25A2E15A00DD4249 /* WebRTC.framework in Frameworks */,
 				94C4119D218971E6001BAA65 /* Security.framework in Frameworks */,
 				94C4119B218971DA001BAA65 /* CFNetwork.framework in Frameworks */,
+				FB7D086C25A2E15800DD4249 /* WebRTCiOSSDK.framework in Frameworks */,
 				C1C2A625F6043F1BCE133C73 /* Pods_myscrap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4942,6 +4988,8 @@
 		3D7EAEAE8403563E31A23BAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB7D080725A2588600DD4249 /* WebRTC.framework */,
+				FB7D086825A2E0AA00DD4249 /* WebRTCiOSSDK.framework */,
 				94C411A221897526001BAA65 /* libxml2.tbd */,
 				94C411A0218974B4001BAA65 /* libresolv.tbd */,
 				94C4119E21897360001BAA65 /* libidn.a */,
@@ -6462,6 +6510,8 @@
 				FB0EFC2E25A0E41100922BF4 /* LiveModule */,
 				FBE5E0542513B1FF00F5EB93 /* Common.h */,
 				FBE5E0532513B1FB00F5EB93 /* Common.m */,
+				FB7D088025A2ED8600DD4249 /* SFCountdownView.h */,
+				FB7D088125A2ED8600DD4249 /* SFCountdownView.m */,
 				FB0EFB02259D099C00922BF4 /* DataEncoding.h */,
 				FB0EFB03259D099D00922BF4 /* DataEncoding.m */,
 				FBE5E05A2513E80300F5EB93 /* Base64.h */,
@@ -7312,9 +7362,50 @@
 		FB0EFC2E25A0E41100922BF4 /* LiveModule */ = {
 			isa = PBXGroup;
 			children = (
+				FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */,
+				FB7D07D025A2518200DD4249 /* liveSDK */,
+				FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */,
 				FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */,
+				FB7D088925A3344800DD4249 /* JoinUserLiveVC.swift */,
+				FB7D07B425A245C300DD4249 /* LiveActionAlert.swift */,
+				FB3E3C1625A46B4100642EC9 /* EndLiveAlart.swift */,
+				FB10BEC425A37D0500D9CEF6 /* LiveFriendCell.swift */,
+				FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */,
 			);
 			name = LiveModule;
+			sourceTree = "<group>";
+		};
+		FB7D07D025A2518200DD4249 /* liveSDK */ = {
+			isa = PBXGroup;
+			children = (
+				FB7D07E925A251EC00DD4249 /* WebRTCiOSSDK.h */,
+				FB7D07DC25A251BA00DD4249 /* WebRTC */,
+				FB7D07D125A251A100DD4249 /* API */,
+			);
+			name = liveSDK;
+			sourceTree = "<group>";
+		};
+		FB7D07D125A251A100DD4249 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FB7D07D425A251B500DD4249 /* AntMediaClient.swift */,
+				FB7D07D325A251B500DD4249 /* AntMediaClientDelegate.swift */,
+				FB7D07D525A251B600DD4249 /* AntMediaClientProtocol.swift */,
+				FB7D07D225A251B500DD4249 /* AntMediaError.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		FB7D07DC25A251BA00DD4249 /* WebRTC */ = {
+			isa = PBXGroup;
+			children = (
+				FB7D07E025A251DF00DD4249 /* ConfigRTC.swift */,
+				FB7D07DE25A251DE00DD4249 /* Dictionary.swift */,
+				FB7D07E125A251DF00DD4249 /* String.swift */,
+				FB7D07DF25A251DE00DD4249 /* WebRTCClient.swift */,
+				FB7D07DD25A251DD00DD4249 /* WebRTCClientDelegate.swift */,
+			);
+			name = WebRTC;
 			sourceTree = "<group>";
 		};
 		FB8C9536250D16BA000E1B40 /* ConfirmYourPriceVC */ = {
@@ -7656,8 +7747,10 @@
 				2295BF6B1EC6D66F0075020A /* Frameworks */,
 				2295BF6C1EC6D66F0075020A /* Resources */,
 				BC8F10348E86336F11AC5600 /* [CP] Embed Pods Frameworks */,
-				94F43F9D206BCF5500851033 /* Embed Frameworks */,
 				2CFFFA4A7C67DCA6442D77C9 /* [CP] Copy Pods Resources */,
+				FB7D085C25A25B7C00DD4249 /* Embed Frameworks */,
+				FB3E3C1C25A474DE00642EC9 /* ShellScript */,
+				FB3E3C6825A4779B00642EC9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -8427,6 +8520,7 @@
 				9414DE5D216F36700082C1D3 /* PF-32.png in Resources */,
 				9414DE88216F36700082C1D3 /* SE-128.png in Resources */,
 				9414DE1C216F36700082C1D3 /* MH-128.png in Resources */,
+				FB10BEC525A37D0500D9CEF6 /* LiveFriendCell.xib in Resources */,
 				9414DE56216F36700082C1D3 /* OM-128.png in Resources */,
 				9413FE3823C9E61200E7184F /* Landing.storyboard in Resources */,
 				9414DD70216F36700082C1D3 /* DJ-128.png in Resources */,
@@ -8712,6 +8806,40 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-myscrap/Pods-myscrap-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FB3E3C1C25A474DE00642EC9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\nFRAMEWORK_NAME=\"WebRTC.framework\"\n# Check if Framework is present.\nFRAMEWORK_LOCATION=$(find \"$APP_PATH\" -name \"$FRAMEWORK_NAME\" -type d)\nif [ -z $FRAMEWORK_LOCATION ]; then\necho \"Couldn't find WebRTC.framework in $APP_PATH. Make sure 'Embed Frameworks' build phase is listed before the 'Strip Unused Architectures' build phase.\"\nexit 1\nfi\n# This script strips unused architectures\nfind \"$APP_PATH\" -name \"$FRAMEWORK_NAME\" -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\nEXTRACTED_ARCHS=()\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\ndone\n";
+		};
+		FB3E3C6825A4779B00642EC9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\nFRAMEWORK_NAME=\"WebRTCiOSSDK.framework\"\n# Check if Framework is present.\nFRAMEWORK_LOCATION=$(find \"$APP_PATH\" -name \"$FRAMEWORK_NAME\" -type d)\nif [ -z $FRAMEWORK_LOCATION ]; then\necho \"Couldn't find WebRTCiOSSDK.framework in $APP_PATH. Make sure 'Embed Frameworks' build phase is listed before the 'Strip Unused Architectures' build phase.\"\nexit 1\nfi\n# This script strips unused architectures\nfind \"$APP_PATH\" -name \"$FRAMEWORK_NAME\" -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\nEXTRACTED_ARCHS=()\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\ndone\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -8767,6 +8895,7 @@
 				FB8C9535250D164B000E1B40 /* ConfirmYourPriceVC.swift in Sources */,
 				22A611CC1FC693FF006BA385 /* GrowingTextView.swift in Sources */,
 				94E9FE8C22683B680073F1E5 /* MenuModeratorCell.swift in Sources */,
+				FB7D07E625A251DF00DD4249 /* String.swift in Sources */,
 				945FEED422BB3F3800E9D1A0 /* CompanyUpdatedService.swift in Sources */,
 				2217A93120357E2F007A07D9 /* UNService.swift in Sources */,
 				FB9E01802511332B003D10E2 /* MagazineLayoutHeaderVisibilityMode.swift in Sources */,
@@ -8786,6 +8915,7 @@
 				C23D54A4259773E5006D6C0A /* RequestResponseAlertView.swift in Sources */,
 				FB9E017B2511332B003D10E2 /* MagazineLayoutFooterVisibilityMode.swift in Sources */,
 				22BE45B21F1F886F005E2735 /* CompanyEditProfileVC.swift in Sources */,
+				FB7D07B125A2394D00DD4249 /* UserLiveVC.swift in Sources */,
 				22F8CB091F2624C0003FF692 /* InterestMenuBar.swift in Sources */,
 				940A5712246D1B6800E61CDD /* LondonPricesTVCell.swift in Sources */,
 				04CDBF921EFD960E001DFE5B /* ProfileVC.swift in Sources */,
@@ -8865,6 +8995,7 @@
 				940A5716246D1BDE00E61CDD /* ComexPricesTVCell.swift in Sources */,
 				94CD4808232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallDoubleBounce.swift in Sources */,
 				22845F622029991A008803B3 /* CameraViewController.swift in Sources */,
+				FB3E3C1725A46B4100642EC9 /* EndLiveAlart.swift in Sources */,
 				9476562822D487DE00555A41 /* LiveOnlineScrollCell.swift in Sources */,
 				223908951FB7315B005CD63E /* Date-Ext.swift in Sources */,
 				22565C721F8C8BCB00CCD749 /* ReportedFeedTextCell.swift in Sources */,
@@ -8896,6 +9027,7 @@
 				18277AC3257E603700D5AC15 /* CompanyModuleUpdatesVC.swift in Sources */,
 				FB90405F251A27F300BAE2D2 /* RequestNotificationItem.swift in Sources */,
 				18277ABE257E603600D5AC15 /* CommonImageCollectionViewCell.swift in Sources */,
+				FB7D07B525A245C300DD4249 /* LiveActionAlert.swift in Sources */,
 				FB8C953F250D17AD000E1B40 /* ConfirmCommudityPriceHeader.swift in Sources */,
 				FB91978B250AB8F0003AF533 /* LMEBlurView.swift in Sources */,
 				2225C61F1F52AD4500E3184D /* Enums.swift in Sources */,
@@ -8917,6 +9049,7 @@
 				94DA676623FA669D007D24A5 /* RateReviewMyScrap.swift in Sources */,
 				FB6F4CB2256B8BA8008A880C /* UserFeedLandScapVideoCell.swift in Sources */,
 				2295BF7A1EC6D66F0075020A /* myscrap.xcdatamodeld in Sources */,
+				FB7D07E425A251DF00DD4249 /* WebRTCClient.swift in Sources */,
 				947710202448B3EC00336F40 /* CompanyPhotosAddCell.swift in Sources */,
 				228DBC481FB95ADF00AE52B5 /* Observers.swift in Sources */,
 				94F9F94923CDAD3B0063B585 /* GradientCornerView.swift in Sources */,
@@ -8940,6 +9073,7 @@
 				2210F9C11F989FB9004C98CB /* ModeratorVC.swift in Sources */,
 				227FFBE3200DE88200EBB30B /* CompanyInterestVC.swift in Sources */,
 				221703FB1F2CB3C900DADEED /* AboutMyscrapVC.swift in Sources */,
+				FB7D088225A2ED8700DD4249 /* SFCountdownView.m in Sources */,
 				94FAEFE621D8821300C1B6A3 /* LiveSender.swift in Sources */,
 				94A77CF322422B6B00F60E9B /* FontAwesomeImageRepresentable.swift in Sources */,
 				9437A10322F841B2006EE4F9 /* ViewBioImagesCell.swift in Sources */,
@@ -9028,10 +9162,12 @@
 				FB8C9550250E223E000E1B40 /* CommudityDetailCompanyCell.swift in Sources */,
 				22DA9F781F95E31A001A5EF9 /* FavouritesBar.swift in Sources */,
 				9437A10622F847CE006EE4F9 /* ViewBioVoteVC.swift in Sources */,
+				FB7D07D625A251B600DD4249 /* AntMediaError.swift in Sources */,
 				22845F682029991A008803B3 /* CropOverlay.swift in Sources */,
 				94DD9699211C0D2600604437 /* StackOverflowFile.swift in Sources */,
 				18277ADC257E6A6600D5AC15 /* AddMoreFooterCollectionResuableView.swift in Sources */,
 				94CD481B232F5B2100FCBD22 /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
+				FB7D088A25A3344800DD4249 /* JoinUserLiveVC.swift in Sources */,
 				94D4BD1C209B38F8001CC1B4 /* InputTextView.swift in Sources */,
 				94CDF2AB252AEE2100C879F1 /* CreateCompanyTitleVC.swift in Sources */,
 				94CD47FF232F5B2100FCBD22 /* NVActivityIndicatorViewable.swift in Sources */,
@@ -9045,6 +9181,7 @@
 				2253C0D21EFE4482001446D6 /* UserProfileVC.swift in Sources */,
 				C23D548D259733AC006D6C0A /* CompanyAdminRequestCell.swift in Sources */,
 				9420E6ED224F659F00E10943 /* MenuTVC.swift in Sources */,
+				FB7D07E325A251DF00DD4249 /* Dictionary.swift in Sources */,
 				220ED9F61FA7560300FEAF3D /* DesignationLabel.swift in Sources */,
 				94799A4D20D79E4500670077 /* EditMarketVC.swift in Sources */,
 				94C96DA720E7BB75001F884B /* APIClient.swift in Sources */,
@@ -9069,6 +9206,7 @@
 				94CD4822232F5B2100FCBD22 /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */,
 				94BCC36423E6AAA200BE9122 /* LandTabControllerV2.swift in Sources */,
 				9469CA7122BF8EB7009EA847 /* ReviewService.swift in Sources */,
+				FB7D07D925A251B600DD4249 /* AntMediaClientProtocol.swift in Sources */,
 				942F02F22250863B00B05816 /* MenuNearbyCell.swift in Sources */,
 				947C1E7E20E8B9D20071E650 /* MarketData.swift in Sources */,
 				22877335202EE78C0051D903 /* FriendsCell.swift in Sources */,
@@ -9152,6 +9290,7 @@
 				FBB0CEC02525E9BD0065656C /* ResizeableImageView.swift in Sources */,
 				947AB2792100B88500DA45B0 /* SliderView.swift in Sources */,
 				948F992722DDC13C00EA6CA9 /* FeedsCMDetailsVC.swift in Sources */,
+				FB7D07D825A251B600DD4249 /* AntMediaClient.swift in Sources */,
 				22DE463D1FE2AF78005EBEFC /* CalendarCell.swift in Sources */,
 				FB9E01852511332B003D10E2 /* MagazineLayoutCollectionViewCell.swift in Sources */,
 				948D764623E689F000D9EA2C /* LandHomePageV2.swift in Sources */,
@@ -9264,6 +9403,7 @@
 				94A77CEA22422B6B00F60E9B /* FontAwesomeBarButtonItem.swift in Sources */,
 				22C1121C1FA1A9340028F9AC /* Segues.swift in Sources */,
 				942F5D3F22E2DEDF007FC7DA /* FeedsPOWDetailsVC.swift in Sources */,
+				FB7D07D725A251B600DD4249 /* AntMediaClientDelegate.swift in Sources */,
 				FB30E379255E679200551312 /* FeedDetailVideoTextCell.swift in Sources */,
 				FBE5EE8225766D390098E0AE /* UserFeedNewCell.swift in Sources */,
 				2295BFC71EC6FB1A0075020A /* CircularImageView.swift in Sources */,
@@ -9344,6 +9484,7 @@
 				94CA560024514E5300289A63 /* EmplImageTextCell.swift in Sources */,
 				94909403205D067200F952F7 /* CommentHeaderView.swift in Sources */,
 				FB00F562258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.swift in Sources */,
+				FB7D07E525A251DF00DD4249 /* ConfigRTC.swift in Sources */,
 				227D31092042CE2F00467026 /* MyScrapAlbumCell.swift in Sources */,
 				940A570E246D1B2000E61CDD /* ForexPricesTVCell.swift in Sources */,
 				2289315F1FCE831000544FCA /* VisitorItem.swift in Sources */,
@@ -9469,6 +9610,7 @@
 				18277ABD257E603600D5AC15 /* CommonUserProfileContentView.swift in Sources */,
 				229A9C421FD6BDAB004EA3B1 /* TagItem.swift in Sources */,
 				2284630A1F555653008F7495 /* News.swift in Sources */,
+				FB7D088625A3179F00DD4249 /* UserLiveOperations.swift in Sources */,
 				FB9040582519491500BAE2D2 /* BusinessCardCell.swift in Sources */,
 				2229374A1F978D8800D2A1E5 /* EmptyStateView.swift in Sources */,
 				FB919783250A633E003AF533 /* ScrapPricesTVCell.swift in Sources */,
@@ -9491,6 +9633,7 @@
 				94D4BD07209AEBCE001CC1B4 /* ConversationVC.swift in Sources */,
 				220C430C1FC46330005B418C /* DetailService.swift in Sources */,
 				225027691ED01D1300CDFA74 /* PeopleVc.swift in Sources */,
+				FB7D07E225A251DF00DD4249 /* WebRTCClientDelegate.swift in Sources */,
 				FBE5E0552513B1FF00F5EB93 /* Common.m in Sources */,
 				FB7BE2A72548C1C9006D0572 /* LmeOfficialPricesTVCell.swift in Sources */,
 				94A570D822F30AC9000B7E1F /* VoteVC.swift in Sources */,
@@ -9571,6 +9714,7 @@
 				94D4BD2A209B3900001CC1B4 /* UICOLOR-Ext.swift in Sources */,
 				221A9A201FC539BD00A30705 /* DetailsVC-KeyBoardHelpers.swift in Sources */,
 				22575DE81F937C76005A7674 /* Endpoints.swift in Sources */,
+				FB10BEC625A37D0500D9CEF6 /* LiveFriendCell.swift in Sources */,
 				FB1DB8B8251B34A200E5AC54 /* EditProfileCodeVerifyVC.swift in Sources */,
 				94CD4806232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,
 				94A77CF222422B6B00F60E9B /* Enum.swift in Sources */,
@@ -9781,7 +9925,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 83C9F25876EA580F7EEA56D0 /* Pods-myscrap.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9789,7 +9932,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = 3.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -9799,6 +9942,8 @@
 					"$(PROJECT_DIR)/myscrap",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FrameWorks",
+					"$(PROJECT_DIR)/Frameworks",
+					"@executable_path/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9862,6 +10007,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Debug;
@@ -9870,7 +10016,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9ACECD7F3D2EF90289B65F07 /* Pods-myscrap.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9878,7 +10023,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = 3.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
@@ -9889,6 +10034,8 @@
 					"$(PROJECT_DIR)/myscrap",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/FrameWorks",
+					"$(PROJECT_DIR)/Frameworks",
+					"@executable_path/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9951,6 +10098,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "myscrap/myscrap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Release;

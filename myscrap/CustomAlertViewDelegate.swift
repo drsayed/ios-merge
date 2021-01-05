@@ -12,3 +12,7 @@ protocol CustomAlertViewDelegate: class {
     func okButtonTapped(selectedOption: String, textFieldValue: String)
     func cancelButtonTapped()
 }
+protocol EndLiveViewDelegate: class {
+    func okEndLiveButtonTapped(selectedOption: String, textFieldValue: String)
+    func cancelEndLiveButtonTapped()
+}

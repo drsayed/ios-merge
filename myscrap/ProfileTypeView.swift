@@ -350,6 +350,7 @@ class FeedProfileTypeView: UIView{
     
     private func commonInit(){
         addSubview(label)
+        bringSubviewToFront(label)
         label.fillSuperview()
         type = .none
     }

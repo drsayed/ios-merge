@@ -109,7 +109,10 @@ struct Endpoints {
     static let USER_DESIG_FOR_CHAT = "\(BASE_URL)msUserOnlineStatus"            ///FOR GETTING FRIEND DESIGNATION IN CHAT
    // static let USER_ONLINE_STATUS_URL = "https://myscrap.com/api/getUserOnlineStatusXMPP"
     static let USER_ONLINE_STATUS_URL = "https://myscrap.com/api/getUserOnlineStatusXMPPv2"
+    static let USER_LIVE_INSERT_URL = "https://myscrap.com/android/insertLiveUserDetailDual"
+    static let USER_LIVE_Status_URL = "https://myscrap.com/android/countliveview"
 
+    
     
     static let FavouriteCompany = "\(BASE_URL)msFavouriteCompany"
     static let ModeratorsURL = "\(BASE_URL)msModerators"

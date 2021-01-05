@@ -8,7 +8,7 @@
 
 import UIKit
 protocol FeedVCHeaderCellDelegate:class{
-    func tappedFriendSeelected(friendId: String)
+    func tappedFriendSeelected(friendId: String, isLive: Bool)
 }
 
  class FeedVCHeadeer: UICollectionReusableView {
@@ -22,6 +22,7 @@ protocol FeedVCHeaderCellDelegate:class{
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(HeaderFriendCell.Nib, forCellWithReuseIdentifier: HeaderFriendCell.identifier)
+        collectionView.register(LiveFriendCell.Nib, forCellWithReuseIdentifier: LiveFriendCell.identifier)
 
     }
     
@@ -35,10 +36,31 @@ extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return datasource.count
     }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+       if let cellAnimation = cell as? LiveFriendCell
+        {
+            cellAnimation.addAnimation()
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeaderFriendCell", for: indexPath) as? HeaderFriendCell else { return UICollectionViewCell() }
-        cell.configFeedHeaderCell(item: datasource[indexPath.item])
-        return cell
+        let item = datasource[indexPath.item]
+        if item.live! {
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveFriendCell", for: indexPath) as? LiveFriendCell else { return UICollectionViewCell() }
+         
+            
+            cell.configFeedHeaderCell(item: datasource[indexPath.item])
+//            cell.addAnimation()
+            return cell
+        }
+        else
+        {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeaderFriendCell", for: indexPath) as? HeaderFriendCell else { return UICollectionViewCell() }
+         
+            
+            cell.configFeedHeaderCell(item: datasource[indexPath.item])
+            return cell
+        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let delegate = self.delegate{
@@ -46,11 +68,11 @@ extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, U
             let vc = PhotosVC()
             vc.friendId = item.userid
             UserDefaults.standard.set(item.userid, forKey: "friendId")
-            delegate.tappedFriendSeelected(friendId: item.userid!)
+            delegate.tappedFriendSeelected(friendId: item.userid!, isLive: item.live!)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 80)
+        return CGSize(width: 70, height: 70)
     }
 
 }

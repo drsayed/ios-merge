@@ -148,7 +148,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
                 DispatchQueue.main.async {
                     self.memberDataSource = members
                     self.headerCell!.datasource = self.memberDataSource
-                    self.headerCellHeight.constant = 90
+                    self.headerCellHeight.constant = 100
                     self.headerCell!.collectionView.reloadData()
                     
                 }
@@ -406,6 +406,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         //Add observer for downloading video
         NotificationCenter.default.addObserver(self, selector: #selector(self.videoDownloadNotify(_:)), name: .videoDownloaded, object: nil)
         self.scrollViewDidEndScrolling()
+        headerCell?.collectionView.reloadData()
     }
     @objc func ProfileBtnTap(tapGesture:UITapGestureRecognizer) {
         if AuthStatus.instance.isGuest{
@@ -1878,9 +1879,18 @@ extension FeedsVC: NewUserDelegate {
     
 }
 extension FeedsVC: FeedVCHeaderCellDelegate{
-    func tappedFriendSeelected(friendId: String) {
-        performFriendView(friendId: friendId)
+    func tappedFriendSeelected(friendId: String, isLive: Bool) {
+        if isLive {
+            if let vc = JoinUserLiveVC.storyBoardInstance() {
+                  vc.friendId = friendId
+                   self.navigationController?.pushViewController(vc, animated: true)
+                }
+        }
+        else{
+            performFriendView(friendId: friendId)
+        }
     }
+
     
 }
 
@@ -1891,7 +1901,7 @@ extension FeedsVC: OnlineDelegate{
             self.memberDataSource = data
             if  self.memberDataSource.count > 0
             {
-                self.headerCellHeight.constant = 90
+                self.headerCellHeight.constant = 100
                 self.headerCell!.datasource = self.memberDataSource
                 self.headerCell!.collectionView.reloadData()
             }

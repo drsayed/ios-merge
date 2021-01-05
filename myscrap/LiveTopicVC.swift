@@ -28,6 +28,7 @@ class LiveTopicVC: UIViewController {
     @IBOutlet weak var liveLable: UILabel!
     @IBOutlet weak var livebutton: UIButton!
     @IBOutlet weak var closebutton: UIButton!
+    @IBOutlet weak var announceImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -40,7 +41,29 @@ class LiveTopicVC: UIViewController {
         announcementView.isUserInteractionEnabled = true
         announcementView.addGestureRecognizer(tapGestureRecognizer)
 
-      
+        let imageCam = UIImage(named: "ic_rotate_camera")?.withRenderingMode(.alwaysTemplate)
+        cameraToggleButton.setImage(imageCam, for: .normal)
+        cameraToggleButton.tintColor = UIColor.white
+        cameraToggleButton.drawShadow()
+        
+        let imageAnnounce = UIImage(named: "announce")?.withRenderingMode(.alwaysTemplate)
+        self.announceImage.image = imageAnnounce
+        self.announceImage.tintColor = .white
+        
+        let imageClose = UIImage(named: "close")?.withRenderingMode(.alwaysTemplate)
+        closebutton.setImage(imageClose, for: .normal)
+        closebutton.tintColor = UIColor.white
+        closebutton.drawShadow()
+        
+        let gradientLayer:CAGradientLayer = CAGradientLayer()
+           gradientLayer.frame.size = livebutton.frame.size
+           gradientLayer.colors =
+            [UIColor(red: 0.25, green: 0.69, blue: 0.16, alpha: 1.00).cgColor , UIColor.MyScrapGreen.cgColor]
+           //Use diffrent colors
+        livebutton.layer.addSublayer(gradientLayer)
+        livebutton.layer.cornerRadius = 5
+        livebutton.clipsToBounds = true
+        
     }
     @objc func tappedOnTopic(tapGestureRecognizer: UITapGestureRecognizer){
 
@@ -194,6 +217,10 @@ class LiveTopicVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func goLiveButtonPressed(_ sender: Any) {
+        if let vc = UserLiveVC.storyBoardInstance() {
+            vc.topicValueText = topicValue.text!
+               self.navigationController?.pushViewController(vc, animated: true)
+            }
     }
 }
 extension LiveTopicVC: UINavigationControllerDelegate {
@@ -214,4 +241,22 @@ extension LiveTopicVC: CustomAlertViewDelegate {
     func cancelButtonTapped() {
         print("cancelButtonTapped")
     }
+}
+class ActualGradientButton: UIButton {
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bounds
+    }
+
+    private lazy var gradientLayer: CAGradientLayer = {
+        let l = CAGradientLayer()
+        l.frame = self.bounds
+        l.colors = [UIColor(red: 0.25, green: 0.69, blue: 0.16, alpha: 1.00), UIColor(red: 1.00, green: 0.10, blue: 0.32, alpha: 1.00)]
+        l.startPoint = CGPoint(x: 0.5, y: 0)
+        l.endPoint = CGPoint(x: 0.5, y: 1)
+        l.cornerRadius = 16
+        layer.insertSublayer(l, at: 0)
+        return l
+    }()
 }
