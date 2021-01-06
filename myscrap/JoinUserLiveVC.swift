@@ -15,7 +15,12 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     var liveID = ""
     var friendId = ""
+    var liveUserNameValue = ""
+    var liveUserImageValue  = ""
+    var liveUserProfileColor = ""
+    var liveUsertopicValue = ""
     
+
     @IBOutlet weak var liveUserProfile: ProfileView!
     @IBOutlet weak var liveUserName: UILabel!
     @IBOutlet weak var liveUserImage: UIImageView!
@@ -158,11 +163,14 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     func setupLivePreview() {
         
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        let screenSize = UIScreen.main.bounds
+
         
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        self.cameraView.bounds = screenSize
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame = self.cameraView.bounds
+        self.videoPreviewLayer.frame = screenSize
       //  cameraView.layer.addSublayer(videoPreviewLayer)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
@@ -225,6 +233,15 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        DispatchQueue.main.async { [self] in
+            self.liveUserNameText = liveUserNameValue
+            self.liveUserImageUrl = liveUserImageValue
+            self.userProfileColorCode = liveUserProfileColor
+            self.topicValue.text =  liveUsertopicValue
+            liveUserProfile.updateViews(name: self.liveUserNameText, url:   self.liveUserImageUrl, colorCode:   self.userProfileColorCode)
+        self.startLive()
+        }
         self.navigationController?.navigationBar.isHidden = true
         IQKeyboardManager.sharedManager().enable = false
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
@@ -279,26 +296,25 @@ extension JoinUserLiveVC {
     
     @objc func startLive()
     { //http://3.85.1.123:5080
-        webRTCClient.setOptions(url: "ws://3.85.1.123:5443/WebRTCAppEE/websocket", streamId: "room\(liveID)", token: "room\(liveID)" , mode: .play, enableDataChannel: true)
-        webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
-        webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
-        webRTCClient.start()
+        
+     
+               //Don't forget to write your server url.
+              webRTCClient.setOptions(url: "ws://3.85.1.123:5080/WebRTCAppEE/websocket", streamId: "room1184", token: "", mode: .play, enableDataChannel: true)
+              webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
+              webRTCClient.start()
+        
+//        webRTCClient.setOptions(url: "http://3.85.1.123:5080/WebRTCAppEE/play.html?name=room1148", streamId: "room\(1148)", token: "room\(liveID)" , mode: .play, enableDataChannel: true)
+//        webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
+//        webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
+//        webRTCClient.start()
     }
     @objc func setUserStatucToLive()  {
         DispatchQueue.global(qos:.userInteractive).async { [self] in
         let op = UserLiveOperations()
-            op.userGoLive (id: "\(friendId)", topic: self.topicValueText ) { (onlineStat) in
+            op.userViewLive (id: "\(friendId)", liveid: liveID ) { (onlineStat) in
                 if let online = onlineStat["liveid"] as? String{
-                    self.liveID = online
-                  
-                    DispatchQueue.main.async { [self] in
-                        self.liveUserNameText = onlineStat["userFullName"]! as! String
-                        self.liveUserImageUrl = onlineStat["userPhoto"]! as! String
-                        self.userProfileColorCode = onlineStat["userColorCode"]! as! String
-                        self.topicValue.text = (onlineStat["topic"] as? String) ?? ""
-                        liveUserProfile.updateViews(name: self.liveUserNameText, url:   self.liveUserImageUrl, colorCode:   self.userProfileColorCode)
-                    self.startLive()
-                    }
+                 //   self.liveID = online
+                
                 }
                 print(onlineStat)
         }
@@ -310,7 +326,7 @@ extension JoinUserLiveVC {
             op.userEndLive (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
               MBProgressHUD.hide(for: self.view , animated: true)
-             self.navigationController?.popToRootViewController(animated: true)
+        //     self.navigationController?.popToRootViewController(animated: true)
                   }
              
                 print(onlineStat)
@@ -336,7 +352,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     
     func clientDidDisconnect(_ message: String) {
         print("Stream get error \(message)")
-        self.closeButtonPressed((Any).self)
+      //  self.closeButtonPressed((Any).self)
 
     }
     
@@ -361,7 +377,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func playFinished() {
-        
+        self.closeButtonPressed((Any).self)
     }
     
     func publishStarted() {
@@ -379,7 +395,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func disconnected() {
-        self.closeButtonPressed((Any).self)
+    //    self.closeButtonPressed((Any).self)
     }
     
     func audioSessionDidStartPlayOrRecord() {

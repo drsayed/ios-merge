@@ -111,8 +111,8 @@ struct Endpoints {
     static let USER_ONLINE_STATUS_URL = "https://myscrap.com/api/getUserOnlineStatusXMPPv2"
     static let USER_LIVE_INSERT_URL = "https://myscrap.com/android/insertLiveUserDetailDual"
     static let USER_LIVE_Status_URL = "https://myscrap.com/android/countliveview"
-
-    
+    static let USER_LIVE_VIEWS_URL = "https://myscrap.com/android/insert_live_views"
+   
     
     static let FavouriteCompany = "\(BASE_URL)msFavouriteCompany"
     static let ModeratorsURL = "\(BASE_URL)msModerators"

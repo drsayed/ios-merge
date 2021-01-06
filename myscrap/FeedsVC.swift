@@ -1879,15 +1879,23 @@ extension FeedsVC: NewUserDelegate {
     
 }
 extension FeedsVC: FeedVCHeaderCellDelegate{
-    func tappedFriendSeelected(friendId: String, isLive: Bool) {
+    
+    
+    func tappedFriendSeelected (activeuser: ActiveUsers, isLive: Bool) {
         if isLive {
             if let vc = JoinUserLiveVC.storyBoardInstance() {
-                  vc.friendId = friendId
+                  vc.friendId = activeuser.userid!
+                  vc.liveID = activeuser.liveId!
+                vc.liveUserNameValue  = activeuser.name!
+                vc.liveUserProfileColor  = activeuser.profilePic!
+                vc.liveUserProfileColor  = activeuser.colorCode!
+                vc.liveUsertopicValue  = activeuser.topic!
+         
                    self.navigationController?.pushViewController(vc, animated: true)
                 }
         }
         else{
-            performFriendView(friendId: friendId)
+            performFriendView(friendId: activeuser.userid!)
         }
     }
 

@@ -27,6 +27,8 @@ class ActiveUsers{
     var isLevel: Bool?
     var level: String?
     var live: Bool?
+    var liveId: String?
+    var topic: String?
     
     
     init(dict: [String: AnyObject]) {
@@ -87,6 +89,12 @@ class ActiveUsers{
         }
         if let live = dict["live"] as? Bool {
             self.live = live
+        }
+        if let liveId = dict["liveId"] as? String{
+            self.liveId = liveId
+        }
+        if let topic = dict["topic"] as? String{
+            self.topic = topic
         }
     }
 }

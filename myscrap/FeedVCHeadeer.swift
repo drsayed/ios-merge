@@ -8,7 +8,7 @@
 
 import UIKit
 protocol FeedVCHeaderCellDelegate:class{
-    func tappedFriendSeelected(friendId: String, isLive: Bool)
+    func tappedFriendSeelected(activeuser: ActiveUsers, isLive: Bool)
 }
 
  class FeedVCHeadeer: UICollectionReusableView {
@@ -68,7 +68,7 @@ extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, U
             let vc = PhotosVC()
             vc.friendId = item.userid
             UserDefaults.standard.set(item.userid, forKey: "friendId")
-            delegate.tappedFriendSeelected(friendId: item.userid!, isLive: item.live!)
+            delegate.tappedFriendSeelected(activeuser:item, isLive: item.live!)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

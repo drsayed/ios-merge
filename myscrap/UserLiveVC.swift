@@ -186,11 +186,14 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     func setupLivePreview() {
         
+        let screenSize = UIScreen.main.bounds
+
+        self.cameraView.bounds = screenSize
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame = self.cameraView.bounds
+        self.videoPreviewLayer.frame = screenSize
         cameraView.layer.addSublayer(videoPreviewLayer)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
