@@ -1887,7 +1887,7 @@ extension FeedsVC: FeedVCHeaderCellDelegate{
                   vc.friendId = activeuser.userid!
                   vc.liveID = activeuser.liveId!
                 vc.liveUserNameValue  = activeuser.name!
-                vc.liveUserProfileColor  = activeuser.profilePic!
+                vc.liveUserImageValue  = activeuser.profilePic!
                 vc.liveUserProfileColor  = activeuser.colorCode!
                 vc.liveUsertopicValue  = activeuser.topic!
          

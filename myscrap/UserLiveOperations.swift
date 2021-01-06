@@ -64,7 +64,7 @@ class UserLiveOperations {
             case .Success(let dict):
                 if let error = dict["error"] as? Bool{
                     if !error{
-                        completion(dict["message"] as! [String : AnyObject])
+                        completion(dict)
                     }
                 }
             case .Error(_):

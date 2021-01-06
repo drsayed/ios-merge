@@ -118,14 +118,14 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         webRTCClient.delegate = self
        
         addKeyboardObservers()
-
+        self.setUpCamera()
        
     }
  
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
   
-        self.setUpCamera()
+     
         // Setup your camera here...
     }
    func addActionAlert ()
@@ -240,6 +240,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.userProfileColorCode = liveUserProfileColor
             self.topicValue.text =  liveUsertopicValue
             liveUserProfile.updateViews(name: self.liveUserNameText, url:   self.liveUserImageUrl, colorCode:   self.userProfileColorCode)
+            let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+            spinner.mode = MBProgressHUDMode.indeterminate
+            spinner.label.text = "Loading..."
         self.startLive()
         }
         self.navigationController?.navigationBar.isHidden = true
@@ -297,9 +300,9 @@ extension JoinUserLiveVC {
     @objc func startLive()
     { //http://3.85.1.123:5080
         
-     
+              print("room\(liveID)")
                //Don't forget to write your server url.
-              webRTCClient.setOptions(url: "ws://3.85.1.123:5080/WebRTCAppEE/websocket", streamId: "room1184", token: "", mode: .play, enableDataChannel: true)
+              webRTCClient.setOptions(url: "ws://3.85.1.123:5080/WebRTCAppEE/websocket", streamId: "room\(liveID)", token: "", mode: .play, enableDataChannel: true)
               webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
               webRTCClient.start()
         
@@ -374,6 +377,12 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     
     func playStarted() {
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            MBProgressHUD.hide(for: self.view , animated: true)
+            self.videoPreviewLayer.removeFromSuperlayer()
+            self.captureSession.stopRunning()
+        }
+
     }
     
     func playFinished() {
@@ -383,7 +392,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     func publishStarted() {
      
         DispatchQueue.main.async { [weak self] in
-    //    MBProgressHUD.hide(for: self.view , animated: true)
+            MBProgressHUD.hide(for: (self?.view)! , animated: true)
             self?.videoPreviewLayer.removeFromSuperlayer()
             self?.captureSession.stopRunning()
         }

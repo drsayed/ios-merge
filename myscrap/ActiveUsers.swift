@@ -90,7 +90,7 @@ class ActiveUsers{
         if let live = dict["live"] as? Bool {
             self.live = live
         }
-        if let liveId = dict["liveId"] as? String{
+        if let liveId = dict["liveid"] as? String{
             self.liveId = liveId
         }
         if let topic = dict["topic"] as? String{
