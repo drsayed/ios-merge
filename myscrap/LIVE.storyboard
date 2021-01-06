@@ -1007,8 +1007,8 @@
                                     <constraint firstItem="W9G-Yo-lbh" firstAttribute="leading" secondItem="gT7-eR-JB8" secondAttribute="trailing" constant="2" id="w3T-pc-Ox9"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0l-Oc-eGU">
-                                <rect key="frame" x="172" y="604" width="31" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIVE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0l-Oc-eGU">
+                                <rect key="frame" x="170.5" y="604" width="34.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1127,6 +1127,37 @@
                                     <constraint firstItem="waZ-05-IDf" firstAttribute="centerY" secondItem="Y7a-KW-9Vf" secondAttribute="centerY" id="u5t-ZH-CaJ"/>
                                 </constraints>
                             </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbt-cz-vtK">
+                                <rect key="frame" x="270" y="62" width="80" height="44"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="n42-tX-9ME">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyk-LF-7Dh">
+                                                <rect key="frame" x="0.0" y="0.0" width="37.5" height="44"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0L-To-cmw">
+                                                <rect key="frame" x="42.5" y="0.0" width="37.5" height="44"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.67843137249999996" green="0.12549019610000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="n42-tX-9ME" secondAttribute="bottom" id="DX1-hS-VPT"/>
+                                    <constraint firstAttribute="trailing" secondItem="n42-tX-9ME" secondAttribute="trailing" id="KMP-lh-ORf"/>
+                                    <constraint firstAttribute="height" constant="44" id="Zjm-Hd-Kbi"/>
+                                    <constraint firstAttribute="width" constant="80" id="jU1-Dv-tr7"/>
+                                    <constraint firstItem="n42-tX-9ME" firstAttribute="top" secondItem="mbt-cz-vtK" secondAttribute="top" id="olb-uq-Wxw"/>
+                                    <constraint firstItem="n42-tX-9ME" firstAttribute="leading" secondItem="mbt-cz-vtK" secondAttribute="leading" id="xHh-ah-nDh"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhr-Jw-gLI">
                                 <rect key="frame" x="16" y="62" width="138.5" height="44"/>
                                 <subviews>
@@ -1138,7 +1169,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write Topic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zZ-fz-mxj">
-                                        <rect key="frame" x="36" y="15" width="62.5" height="14"/>
+                                        <rect key="frame" x="36" y="15" width="62.5" height="14.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1236,6 +1267,10 @@
                                     <action selector="closeButtonPressed:" destination="q2B-MK-6Bb" eventType="touchUpInside" id="JUy-PP-SoU"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBf-Qk-KuS" customClass="SFCountdownView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wz5-Or-jrZ">
                                 <rect key="frame" x="162" y="15" width="51" height="32"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1250,10 +1285,6 @@
                                     <action selector="goLiveButtonPressed:" destination="q2B-MK-6Bb" eventType="touchUpInside" id="Zcu-id-ldf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBf-Qk-KuS" customClass="SFCountdownView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b4z-Y0-xSJ"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1273,9 +1304,11 @@
                             <constraint firstItem="b4z-Y0-xSJ" firstAttribute="trailing" secondItem="ZBf-Qk-KuS" secondAttribute="trailing" id="KSe-cq-m3X"/>
                             <constraint firstItem="Jhr-Jw-gLI" firstAttribute="leading" secondItem="b4z-Y0-xSJ" secondAttribute="leading" constant="16" id="Naw-A9-zmL"/>
                             <constraint firstItem="znw-cg-5zT" firstAttribute="bottom" secondItem="b4z-Y0-xSJ" secondAttribute="bottom" id="Wbs-X6-Ebr"/>
+                            <constraint firstItem="mbt-cz-vtK" firstAttribute="trailing" secondItem="m8x-ZT-N7T" secondAttribute="trailing" id="YHp-d6-DWZ"/>
                             <constraint firstItem="znw-cg-5zT" firstAttribute="trailing" secondItem="b4z-Y0-xSJ" secondAttribute="trailing" id="agK-iN-NzM"/>
                             <constraint firstItem="m8x-ZT-N7T" firstAttribute="centerY" secondItem="wz5-Or-jrZ" secondAttribute="centerY" id="bX7-hW-aFB"/>
                             <constraint firstItem="ZBf-Qk-KuS" firstAttribute="top" secondItem="xeB-79-ksb" secondAttribute="top" id="dhC-a5-kZ4"/>
+                            <constraint firstItem="mbt-cz-vtK" firstAttribute="centerY" secondItem="Jhr-Jw-gLI" secondAttribute="centerY" id="hYd-26-upP"/>
                             <constraint firstItem="b4z-Y0-xSJ" firstAttribute="bottom" secondItem="ptI-Ft-kbh" secondAttribute="bottom" constant="10" id="jtz-2s-oZU"/>
                             <constraint firstItem="Jhr-Jw-gLI" firstAttribute="top" secondItem="b4z-Y0-xSJ" secondAttribute="top" constant="62" id="kgx-9L-xFv"/>
                             <constraint firstItem="wz5-Or-jrZ" firstAttribute="centerY" secondItem="XaL-S5-oUh" secondAttribute="centerY" id="mP1-rB-ysK"/>
@@ -1298,6 +1331,8 @@
                         <outlet property="constraintContentHeight" destination="jtz-2s-oZU" id="Xt4-8S-4Hg"/>
                         <outlet property="countDown" destination="ZBf-Qk-KuS" id="sYv-nL-T3L"/>
                         <outlet property="liveLable" destination="kTE-cz-B6U" id="Xvw-el-Wsf"/>
+                        <outlet property="liveTimerTextLable" destination="l0L-To-cmw" id="l8G-Ep-Oph"/>
+                        <outlet property="liveTimerView" destination="mbt-cz-vtK" id="VU5-Uv-aq4"/>
                         <outlet property="livebutton" destination="wz5-Or-jrZ" id="5zg-5h-eNH"/>
                         <outlet property="micButton" destination="BCz-h1-NGf" id="ApG-co-kDG"/>
                         <outlet property="numberOfViews" destination="VlE-OD-0pb" id="E8D-XX-ydm"/>
@@ -1364,7 +1399,7 @@
                                             <constraint firstAttribute="width" constant="40" id="XfP-lv-7bN"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Few moments you will be Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-hl-bsF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Few moment you will be Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-hl-bsF">
                                         <rect key="frame" x="9" y="71" width="263" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <nil key="textColor"/>

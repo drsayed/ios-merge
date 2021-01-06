@@ -10,25 +10,25 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderFriendCell" id="SSj-Qv-Qb6" customClass="HeaderFriendCell" customModule="myscrap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-vG-8eu">
-                        <rect key="frame" x="0.0" y="-1.5" width="60" height="63"/>
+                        <rect key="frame" x="0.0" y="-2" width="70" height="74"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCL-Hc-lXe" customClass="ProfileView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="70" height="70.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="I3c-g4-TO1"/>
-                                    <constraint firstAttribute="width" constant="60" id="JGB-i4-bTw"/>
+                                    <constraint firstAttribute="height" constant="70" id="I3c-g4-TO1"/>
+                                    <constraint firstAttribute="width" constant="70" id="JGB-i4-bTw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTp-8U-nJe" customClass="OnlineProfileTypeView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="15" y="48" width="30" height="15"/>
+                                <rect key="frame" x="20" y="59" width="30" height="15"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -39,7 +39,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2t-ha-mps" customClass="onlineView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                <rect key="frame" x="0.0" y="0.0" width="15" height="15.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="The-dw-8Ee"/>

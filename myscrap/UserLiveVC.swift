@@ -15,6 +15,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     var liveID = "0"
     @IBOutlet weak var numberOfViews: UILabel!
+    @IBOutlet weak var liveTimerView: UIView!
+    @IBOutlet weak var liveTimerTextLable: UILabel!
     @IBOutlet weak var seenIcon: UIImageView!
     @IBOutlet weak var seenView: UIView!
     @IBOutlet weak var countDown: SFCountdownView!
@@ -26,6 +28,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBOutlet weak var commentField: UITextField!
     let webRTCClient: AntMediaClient = AntMediaClient.init()
     var timer = Timer()
+    var liveTimeCount = Timer()
+    var liveTimeValue = 0
     @IBOutlet weak var announceImage: UIImageView!
     @IBOutlet weak var commentBackground: UIView!
     @IBOutlet weak var topicTtitle: UILabel!
@@ -98,6 +102,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         livebutton.drawShadow()
         closebutton.drawShadow()
         
+        liveTimerView.layer.cornerRadius = 5
+        liveTimerView.clipsToBounds = true
+        liveTimerView.isHidden = true
         seenView.layer.cornerRadius = 5
         seenView.clipsToBounds = true
 
@@ -107,7 +114,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         layoutConstraintsToAdjust.append(constraintContentHeight)
         webRTCClient.delegate = self
         //https://34.207.130.236:5080/WebRTCAppEE/peer.html
-    
+        self.setUpCamera()
         addKeyboardObservers()
 
        
@@ -121,7 +128,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
   
-        self.setUpCamera()
+    
         // Setup your camera here...
     }
    func addActionAlert ()
@@ -222,7 +229,42 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         captureSession.removeInput(input)
         captureSession.addInput(deviceInput)
     }
-
+    private func startLiveTime() {
+        liveTimerView.isHidden = false
+        liveTimeCount = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(self.currentTime) , userInfo: nil, repeats: true)
+       }
+    private func endLiveTimmer() {
+        liveTimeValue = 0
+        liveTimerView.isHidden = true
+        liveTimeCount.invalidate()
+       }
+    @objc func currentTime() {
+        liveTimeValue += 1
+        var liveTimeText = ""
+        if liveTimeValue < 10 {
+            liveTimeText = "00:0\(liveTimeValue)"
+        }
+       else if liveTimeValue < 60 {
+        liveTimeText = "00:\(liveTimeValue)"
+        }
+       else{
+        let minute = liveTimeValue/60
+        let second = liveTimeValue%60
+        if minute < 10 &&  second < 10 {
+            liveTimeText = "0\(minute):0\(second)"
+        }
+       else if minute > 10 &&  second < 10 {
+            liveTimeText = "\(minute):0\(second)"
+        }
+       else if minute < 10 &&  second >  10 {
+            liveTimeText = "0\(minute):\(second)"
+        }
+       else  {
+            liveTimeText = "\(minute):\(second)"
+        }
+       }
+        liveTimerTextLable.text = liveTimeText
+       }
     /// Create new capture device with requested position
     fileprivate func captureDevice(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
 
@@ -417,6 +459,7 @@ extension UserLiveVC : AntMediaClientDelegate
             self?.videoPreviewLayer.removeFromSuperlayer()
             self?.captureSession.stopRunning()
             self?.addTimerCall()
+            self?.startLiveTime()
         }
     
     }
@@ -453,7 +496,7 @@ extension UIButton {
 extension UserLiveVC: EndLiveViewDelegate {
     
     func okEndLiveButtonTapped(selectedOption: String, textFieldValue: String) {
-
+        self.endLiveTimmer()
         let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
         spinner.mode = MBProgressHUDMode.indeterminate
         spinner.label.text = "End Live..."

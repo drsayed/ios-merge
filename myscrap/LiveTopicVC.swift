@@ -63,6 +63,7 @@ class LiveTopicVC: UIViewController {
         livebutton.layer.addSublayer(gradientLayer)
         livebutton.layer.cornerRadius = 5
         livebutton.clipsToBounds = true
+        self.setUpCamera()
         
     }
     @objc func tappedOnTopic(tapGestureRecognizer: UITapGestureRecognizer){
@@ -74,7 +75,7 @@ class LiveTopicVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
   
-        self.setUpCamera()
+      
         // Setup your camera here...
     }
    func addTopic ()

@@ -251,10 +251,11 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
         
-    let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
-    spinner.mode = MBProgressHUDMode.indeterminate
-      spinner.label.text = "End Live..."
-        self.setUserStatusEndLive()
+        self.navigationController?.popViewController(animated: true)
+//    let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+//    spinner.mode = MBProgressHUDMode.indeterminate
+//      spinner.label.text = "End Live..."
+//        self.setUserStatusEndLive()
       
     }
     @IBAction func goLiveButtonPressed(_ sender: Any) {
@@ -335,6 +336,8 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     
     func clientDidDisconnect(_ message: String) {
         print("Stream get error \(message)")
+        self.closeButtonPressed((Any).self)
+
     }
     
     func clientHasError(_ message: String) {
@@ -376,7 +379,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func disconnected() {
-        
+        self.closeButtonPressed((Any).self)
     }
     
     func audioSessionDidStartPlayOrRecord() {

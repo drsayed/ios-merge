@@ -34,9 +34,7 @@ class EndLiveAlart: UIViewController{
         super.viewWillAppear(animated)
         setupView()
         animateView()
-//        cancelButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
-//        cancelButton.addBorder(side: .Right, color: alertViewGrayColor, width: 1)
-//        setButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
+
     }
     
     func setupView() {
@@ -64,16 +62,6 @@ class EndLiveAlart: UIViewController{
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
