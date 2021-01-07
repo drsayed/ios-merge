@@ -29,7 +29,13 @@ protocol FeedVCHeaderCellDelegate:class{
     override func prepareForReuse() {
         collectionView.reloadData()
     }
-    
+    func addAnimationIfNeeded()  {
+        for videoParentCell in collectionView.visibleCells   {
+            if let portrateCell = videoParentCell as? LiveFriendCell {
+             //   portrateCell.addAnimation()
+            }
+        }
+    }
 }
 
 extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

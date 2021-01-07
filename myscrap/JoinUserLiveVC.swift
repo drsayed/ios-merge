@@ -19,7 +19,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveUserImageValue  = ""
     var liveUserProfileColor = ""
     var liveUsertopicValue = ""
-    
+    var timer = Timer()
 
     @IBOutlet weak var liveUserProfile: ProfileView!
     @IBOutlet weak var liveUserName: UILabel!
@@ -270,12 +270,12 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         webRTCClient.toggleAudio()
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
-        
-        self.navigationController?.popViewController(animated: true)
-//    let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
-//    spinner.mode = MBProgressHUDMode.indeterminate
-//      spinner.label.text = "End Live..."
-//        self.setUserStatusEndLive()
+
+        NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+    let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+    spinner.mode = MBProgressHUDMode.indeterminate
+      spinner.label.text = "End Live..."
+        self.setUserStatusEndLive()
       
     }
     @IBAction func goLiveButtonPressed(_ sender: Any) {
@@ -319,6 +319,28 @@ extension JoinUserLiveVC {
                  //   self.liveID = online
                 
                 }
+
+                print(onlineStat)
+        }
+        }
+    }
+    func addTimerCall()  {
+        timer.invalidate() // just in case this button is tapped multiple times
+
+              // start the timer
+        timer = Timer.scheduledTimer(timeInterval: 3 , target: self, selector: #selector(self.getLiveStatus), userInfo: nil, repeats: true)
+
+    }
+    @objc func getLiveStatus()  {
+        DispatchQueue.global(qos:.userInteractive).async {
+        let op = UserLiveOperations()
+            op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+               
+                DispatchQueue.main.async { [self] in
+                    if let status = onlineStat["status"] as? String{
+                        numberOfViews.text = status
+                    }
+                }
                 print(onlineStat)
         }
         }
@@ -326,10 +348,10 @@ extension JoinUserLiveVC {
     @objc func setUserStatusEndLive()  {
         DispatchQueue.global(qos:.userInteractive).async {
         let op = UserLiveOperations()
-            op.userEndLive (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+            op.userEndViewLive(id: "\(AuthService.instance.userId)", liveid: self.liveID) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
               MBProgressHUD.hide(for: self.view , animated: true)
-        //     self.navigationController?.popToRootViewController(animated: true)
+          self.navigationController?.popToRootViewController(animated: true)
                   }
              
                 print(onlineStat)
@@ -378,6 +400,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     func playStarted() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.addTimerCall()
             MBProgressHUD.hide(for: self.view , animated: true)
             self.videoPreviewLayer.removeFromSuperlayer()
             self.captureSession.stopRunning()

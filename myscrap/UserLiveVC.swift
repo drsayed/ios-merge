@@ -293,13 +293,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         DispatchQueue.global(qos:.userInteractive).async {
         let op = UserLiveOperations()
             op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
-//                if let online = onlineStat["liveid"] as? String{
-//                    self.liveID = online
-//                    self.perform(#selector(self.startLive), with: self, afterDelay: 0.0)
-//
-//                }
+               
                 DispatchQueue.main.async { [self] in
-                    
+                    if let status = onlineStat["status"] as? String{
+                        numberOfViews.text = status
+                    }
                 }
                 print(onlineStat)
         }

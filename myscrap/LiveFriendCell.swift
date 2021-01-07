@@ -86,16 +86,30 @@ final class LiveFriendCell: BaseCell{
 //        colorAnimationView.animate()
     }
     func addAnimation()  {
-        colorAnimationView.alpha = 0.0
+       // colorAnimationView.layer.removeAllAnimations()
+        colorAnimationView.alpha = 1.0
         UIView.animate(withDuration: 0.5, //Time duration you want,
             delay: 0.0,
             options: [.curveEaseInOut, .autoreverse, .repeat],
-            animations: { [self] in colorAnimationView.alpha = 1.0
+            animations: {  self.colorAnimationView.alpha = 0.0
                 
             },
-            completion: { [ self] _ in colorAnimationView.alpha = 0.0
+            completion: { _ in  self.colorAnimationView.alpha = 1.0
                 
             })
     }
 }
-
+extension UIView {
+    func fadeOut() {
+        self.alpha = 1.0
+        UIView.animate(withDuration: 0.5, //Time duration you want,
+            delay: 0.0,
+            options: [.curveEaseInOut, .autoreverse, .repeat],
+            animations: { [self] in self.alpha = 0.0
+                
+            },
+            completion: { [ self] _ in self.alpha = 1.0
+                
+            })
+    }
+}

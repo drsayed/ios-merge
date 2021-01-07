@@ -149,8 +149,10 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
                     self.memberDataSource = members
                     self.headerCell!.datasource = self.memberDataSource
                     self.headerCellHeight.constant = 100
-                    self.headerCell!.collectionView.reloadData()
-                    
+                    UIView.performWithoutAnimation {
+                        self.headerCell!.collectionView.reloadData()
+                     }
+                    self.headerCell!.addAnimationIfNeeded()
                 }
             })
         }
@@ -197,7 +199,10 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         self.headerCell =  UINib(nibName: "FeedVCHeadeer", bundle: nil).instantiate(withOwner: nil, options: nil)[0]  as! FeedVCHeadeer
         self.headerCell!.datasource = self.memberDataSource
         self.headerCell!.delegate = self
-        self.headerCell!.collectionView.reloadData()
+        UIView.performWithoutAnimation {
+            self.headerCell!.collectionView.reloadData()
+         }
+        self.headerCell!.addAnimationIfNeeded()
         self.headerView.addSubview( self.headerCell!)
     }
     private func addObserverNotifications(){
@@ -206,6 +211,8 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAllFeedsData), name: Notification.Name("DeletedUserOwnVideo"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshLiveUserData), name: Notification.Name("EndLiveBYOtherUser"), object: nil)
         
         
     }
@@ -1440,6 +1447,19 @@ extension FeedsVC: UICollectionViewDelegateFlowLayout{
         }
         
     }
+    @objc func refreshLiveUserData()
+    {
+        DispatchQueue.main.async {
+            //self.pauseVisibleVideos()
+            
+            if !self.topLoader.isAnimating && !self.refreshContol.isRefreshing {
+//                self.topSpinnerHeightConstraint.constant = 58
+//                self.topLoader.startAnimating()
+                //self.active.startAnimating()
+                self.getAllOnlineUsersData()
+            }
+        }
+    }
     @objc func refreshAllFeedsData()
     {
         DispatchQueue.main.async {
@@ -1911,7 +1931,10 @@ extension FeedsVC: OnlineDelegate{
             {
                 self.headerCellHeight.constant = 100
                 self.headerCell!.datasource = self.memberDataSource
-                self.headerCell!.collectionView.reloadData()
+                UIView.performWithoutAnimation {
+                    self.headerCell!.collectionView.reloadData()
+                 }
+                self.headerCell!.addAnimationIfNeeded()
             }
             else
             {
