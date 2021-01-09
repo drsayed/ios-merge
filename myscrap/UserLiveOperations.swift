@@ -92,12 +92,12 @@ class UserLiveOperations {
             }
         }
     }
-    func allUsersLiveStatus(id: String, completion: @escaping  onlineStatus){
+    func allUsersLiveStatus(id: String,LiveId: String, completion: @escaping  onlineStatus){
    //     topic,link,time,status = 1,liveid="",friendId="",type="single"
     
       let service = APIService()
         service.endPoint = Endpoints.USER_LIVE_Status_URL
-        service.params = "userId=\(id)&apiKey=\(API_KEY)"
+        service.params = "userId=\(id)&apiKey=\(API_KEY)&liveId=\(LiveId)"
         print(service.endPoint)
         print(service.params)
         service.getDataWith { /* [weak self] */ (result) in

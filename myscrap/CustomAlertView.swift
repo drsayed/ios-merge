@@ -40,9 +40,15 @@ class CustomAlertView: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         setupView()
         animateView()
-        cancelButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
-        cancelButton.addBorder(side: .Right, color: alertViewGrayColor, width: 1)
-        setButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
+        cancelButton.layer.cornerRadius = 4
+        setButton.layer.cornerRadius = 4
+        setButton.layer.borderColor = UIColor.MyScrapGreen.cgColor
+        setButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor.MyScrapGreen.cgColor
+        cancelButton.layer.borderWidth = 1
+//        cancelButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
+//        cancelButton.addBorder(side: .Right, color: alertViewGrayColor, width: 1)
+//        setButton.addBorder(side: .Top, color: alertViewGrayColor, width: 1)
     }
     
     func setupView() {

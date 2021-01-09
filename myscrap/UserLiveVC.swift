@@ -292,11 +292,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @objc func getLiveStatus()  {
         DispatchQueue.global(qos:.userInteractive).async {
         let op = UserLiveOperations()
-            op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+            op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" , LiveId: self.liveID) { (onlineStat) in
                
                 DispatchQueue.main.async { [self] in
-                    if let status = onlineStat["status"] as? String{
-                        numberOfViews.text = status
+                    if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
+                        numberOfViews.text = "\(views.count)"
                     }
                 }
                 print(onlineStat)
@@ -382,6 +382,7 @@ extension UserLiveVC: CustomAlertViewDelegate {
          webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
        // webRTCClient.setMultiPeerMode(enable: true, mode: "join")
        webRTCClient.initPeerConnection()
+        
         webRTCClient.connectWebSocket()
         webRTCClient.start()
     }
@@ -406,7 +407,8 @@ extension UserLiveVC: CustomAlertViewDelegate {
             op.userEndLive (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
 //              MBProgressHUD.hide(for: self.view , animated: true)
-                  
+                    self.navigationController?.navigationBar.isHidden = false
+
              self.navigationController?.popToRootViewController(animated: true)
                   }
              
@@ -416,6 +418,8 @@ extension UserLiveVC: CustomAlertViewDelegate {
     }
     func cancelButtonTapped() {
         print("cancelButtonTapped")
+        self.navigationController?.navigationBar.isHidden = false
+
         self.navigationController?.popToRootViewController(animated: true)
     }
 }
@@ -423,6 +427,9 @@ extension UserLiveVC : AntMediaClientDelegate
 {
     func clientDidConnect(_ client: AntMediaClient) {
         print("Stream get connected")
+        DispatchQueue.main.async { [weak self] in
+        self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        }
     }
     
     func clientDidDisconnect(_ message: String) {
@@ -459,6 +466,7 @@ extension UserLiveVC : AntMediaClientDelegate
     //    MBProgressHUD.hide(for: self.view , animated: true)
             self?.videoPreviewLayer.removeFromSuperlayer()
             self?.captureSession.stopRunning()
+
             self?.addTimerCall()
             self?.startLiveTime()
         }

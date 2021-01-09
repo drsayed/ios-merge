@@ -216,6 +216,8 @@ class LiveTopicVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = false
+
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func goLiveButtonPressed(_ sender: Any) {

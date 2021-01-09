@@ -317,7 +317,7 @@ class WebRTCClient: NSObject {
         self.localAudioTrack = WebRTCClient.factory.audioTrack(with: audioSource, trackId: AUDIO_TRACK_ID)
         
         self.peerConnection?.add(self.localAudioTrack, streamIds: [LOCAL_MEDIA_STREAM_ID])
-        
+           
         if (self.localVideoTrack != nil) {
             self.localVideoTrack.add(localVideoView!)
         }

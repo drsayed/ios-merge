@@ -332,13 +332,14 @@ extension JoinUserLiveVC {
 
     }
     @objc func getLiveStatus()  {
-        DispatchQueue.global(qos:.userInteractive).async {
+        DispatchQueue.global(qos:.userInteractive).async { [self] in
         let op = UserLiveOperations()
-            op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+            op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" , LiveId: liveID) { (onlineStat) in
                
                 DispatchQueue.main.async { [self] in
-                    if let status = onlineStat["status"] as? String{
-                        numberOfViews.text = status
+                    if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
+                       
+                        numberOfViews.text = "\(views.count)"
                     }
                 }
                 print(onlineStat)
@@ -351,6 +352,8 @@ extension JoinUserLiveVC {
             op.userEndViewLive(id: "\(AuthService.instance.userId)", liveid: self.liveID) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
               MBProgressHUD.hide(for: self.view , animated: true)
+                    self.navigationController?.navigationBar.isHidden = false
+
           self.navigationController?.popToRootViewController(animated: true)
                   }
              
@@ -360,6 +363,8 @@ extension JoinUserLiveVC {
     }
     func cancelButtonTapped() {
         print("cancelButtonTapped")
+        self.navigationController?.navigationBar.isHidden = false
+
         self.navigationController?.popToRootViewController(animated: true)
     }
 }
