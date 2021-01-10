@@ -11,10 +11,28 @@ import UIKit
 import AVFoundation
 import IQKeyboardManagerSwift
 import Starscream
+struct CommentMessage {
+    var name : String = "Test"
+    var userId : String = "Test"
+    var profilePic : String = "Test"
+    var colorCode : String = "Test"
+    var messageId : String = "Test"
+    var messageText : String = "Test"
+    var timeStamp : Int =  (Int(Date().timeIntervalSince1970))
+}
 class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     var liveID = "0"
+    var liveComments = [CommentMessage]()
+    {
+        didSet
+        {
+            self.reloadComentsView()
+        }
+    }
     @IBOutlet weak var numberOfViews: UILabel!
+    
+    @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var liveTimerView: UIView!
     @IBOutlet weak var liveTimerTextLable: UILabel!
     @IBOutlet weak var seenIcon: UIImageView!
@@ -23,6 +41,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var layoutConstraintsToAdjust: [NSLayoutConstraint] = []
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     @IBOutlet weak var micButton: UIButton!
+    @IBOutlet weak var UserCommentsBackground: UIView!
+    @IBOutlet weak var userCommentsCollectionView: UICollectionView!
+
     var topicValueText = "No Topic"
     @IBOutlet weak var sendCommentButton: UIButton!
     @IBOutlet weak var commentField: UITextField!
@@ -116,8 +137,39 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         //https://34.207.130.236:5080/WebRTCAppEE/peer.html
         self.setUpCamera()
         addKeyboardObservers()
-
+        self.setUpCommentViews()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
        
+    }
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer)
+    {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.right:
+                print("right swipe")
+                self.hideCommentesView()
+            case UISwipeGestureRecognizer.Direction.left:
+                print("left swipe")
+                self.showCommentesView()
+            default:
+                print("other swipe")
+            }
+        }
+    }
+    private func setUpCommentViews()
+    {
+        self.userCommentsCollectionView.delegate = self
+        self.userCommentsCollectionView.dataSource = self
+        self.userCommentsCollectionView.register(LiveUserCommentsCell.Nib, forCellWithReuseIdentifier: LiveUserCommentsCell.identifier)
+//        if let flowLayout = userCommentsCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+//              flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//           }
     }
     @objc func tappedOnTopic(tapGestureRecognizer: UITapGestureRecognizer){
 
@@ -158,6 +210,15 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     }
     @IBAction func sendCommentPressed(_ sender: Any) {
+        
+        if commentField.text!.length > 0 {
+            var comment = CommentMessage()
+            comment.messageText = commentField.text!
+            comment.name = "Javed Tarekh"
+            self.liveComments.append(comment)
+            commentField.text = ""
+        }
+        
     }
     func setUpCamera ()
     {
@@ -295,9 +356,20 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" , LiveId: self.liveID) { (onlineStat) in
                
                 DispatchQueue.main.async { [self] in
-                    if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
-                        numberOfViews.text = "\(views.count)"
+                    
+                    if let error = onlineStat["error"] as? Bool{
+                        if !error{
+                            if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
+                               
+                                numberOfViews.text = "\(views.count)"
+                            }
+                        }
+                        else
+                        {
+                            numberOfViews.text = "\(0)"
+                        }
                     }
+                    print(onlineStat)
                 }
                 print(onlineStat)
         }
@@ -310,9 +382,19 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         timer = Timer.scheduledTimer(timeInterval: 3 , target: self, selector: #selector(self.getLiveStatus), userInfo: nil, repeats: true)
 
     }
+    @objc func keyboardWillAppear() {
+        //Do something here
+        self.reloadComentsView()
+    }
+
+    @objc func keyboardWillDisappear() {
+        //Do something here
+        self.reloadComentsView()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         self.navigationController?.navigationBar.isHidden = true
         IQKeyboardManager.sharedManager().enable = false
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
@@ -327,6 +409,34 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
       
         self.addActionAlert()
+        self.reloadCommentsDummyData()
+    }
+    func reloadCommentsDummyData() {
+        self.liveComments.removeAll()
+        var comment = CommentMessage()
+        comment.messageText = "First Message"
+        comment.name = "Javed Mia"
+        self.liveComments.append(comment)
+        var comment2 = CommentMessage()
+        comment2.messageText = "Second Message"
+        comment2.name = "Javed Tarekh"
+        self.liveComments.append(comment2)
+        self.reloadComentsView()
+     
+    }
+   func reloadComentsView()
+    {
+    if self.userCommentsCollectionView != nil {
+        self.userCommentsCollectionView.reloadData()
+        self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
+            (result) in
+            self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+            // ready
+        })
+    }
+    
+ 
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -334,6 +444,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         IQKeyboardManager.sharedManager().enable = true
         webRTCClient.stop()
         self.navigationController?.navigationBar.isHidden = false
+        NotificationCenter.default.removeObserver(self)
+
     }
     @IBAction func toggleMicButttonpressed(_ sender: Any) {
         micButton.isSelected =  !micButton.isSelected
@@ -352,6 +464,26 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
     deinit {
         removeKeyboardObservers()
+    }
+    func hideCommentesView()
+    {
+      
+           // colorAnimationView.layer.removeAllAnimations()
+        UIView.animate(withDuration: 2.0) {
+            self.commentViewLeadingSpace.constant = UIScreen.main.bounds.width
+                self.view.layoutIfNeeded()
+            }
+      
+      
+    }
+    func showCommentesView()
+    {
+      
+           // colorAnimationView.layer.removeAllAnimations()
+        UIView.animate(withDuration: 2.0) {
+            self.commentViewLeadingSpace.constant = 16
+                self.view.layoutIfNeeded()
+            }
     }
 }
 extension UserLiveVC: UINavigationControllerDelegate {
@@ -378,7 +510,9 @@ extension UserLiveVC: CustomAlertViewDelegate {
     {
        // "room\(liveID)" http://3.85.1.123:5080
         // stream1
-        webRTCClient.setOptions(url: "ws://3.85.1.123:5080/WebRTCAppEE/websocket", streamId: "room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
+       // https://sayed.net:5080/WebRTCAppEE/websocket
+     //   "ws://3.85.1.123:5080/WebRTCAppEE/websocket"
+        webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
          webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
        // webRTCClient.setMultiPeerMode(enable: true, mode: "join")
        webRTCClient.initPeerConnection()
@@ -406,6 +540,7 @@ extension UserLiveVC: CustomAlertViewDelegate {
         let op = UserLiveOperations()
             op.userEndLive (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
+                    self.showToast(message: "Live has been finished!")
 //              MBProgressHUD.hide(for: self.view , animated: true)
                     self.navigationController?.navigationBar.isHidden = false
 
@@ -482,7 +617,7 @@ extension UserLiveVC : AntMediaClientDelegate
     }
     
     func audioSessionDidStartPlayOrRecord() {
-        
+        webRTCClient.speakerOn()
     }
     
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
@@ -516,4 +651,37 @@ extension UserLiveVC: EndLiveViewDelegate {
     func cancelEndLiveButtonTapped() {
      
     }
+}
+extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
+{
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+     
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.liveComments.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserCommentsCell.identifier, for: indexPath) as? LiveUserCommentsCell else { return UICollectionViewCell()}
+        cell.configCell(item: self.liveComments[indexPath.row] )
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //let width = self.frame.width
+        return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 30)
+    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
+}
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+    }
+
 }

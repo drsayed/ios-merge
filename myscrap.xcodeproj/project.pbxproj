@@ -1626,6 +1626,8 @@
 		FBE5EEDE257B5A2D0098E0AE /* UnFollowPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5EEDD257B5A2D0098E0AE /* UnFollowPopUpVC.swift */; };
 		FBFDB18F2573AE250027AF58 /* NymexHeaderTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFDB18E2573AE250027AF58 /* NymexHeaderTVCell.xib */; };
 		FBFDB1932573C0810027AF58 /* LondonHeaderTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFDB1922573C0810027AF58 /* LondonHeaderTVCell.xib */; };
+		FBFE658D25AAD16A000E8A43 /* LiveUserCommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */; };
+		FBFE658E25AAD16A000E8A43 /* LiveUserCommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3302,6 +3304,8 @@
 		FBE5EEDD257B5A2D0098E0AE /* UnFollowPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnFollowPopUpVC.swift; sourceTree = "<group>"; };
 		FBFDB18E2573AE250027AF58 /* NymexHeaderTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NymexHeaderTVCell.xib; sourceTree = "<group>"; };
 		FBFDB1922573C0810027AF58 /* LondonHeaderTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LondonHeaderTVCell.xib; sourceTree = "<group>"; };
+		FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserCommentsCell.swift; sourceTree = "<group>"; };
+		FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveUserCommentsCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -7371,6 +7375,8 @@
 				FB3E3C1625A46B4100642EC9 /* EndLiveAlart.swift */,
 				FB10BEC425A37D0500D9CEF6 /* LiveFriendCell.swift */,
 				FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */,
+				FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */,
+				FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */,
 			);
 			name = LiveModule;
 			sourceTree = "<group>";
@@ -8413,6 +8419,7 @@
 				9414DD48216F36700082C1D3 /* CA-128.png in Resources */,
 				9414DE18216F36700082C1D3 /* MF-128.png in Resources */,
 				9414DDB3216F36700082C1D3 /* GS-32.png in Resources */,
+				FBFE658E25AAD16A000E8A43 /* LiveUserCommentsCell.xib in Resources */,
 				9414DD7E216F36700082C1D3 /* EG-128.png in Resources */,
 				9414DD9C216F36700082C1D3 /* GE-128.png in Resources */,
 				9414DD17216F36700082C1D3 /* AU-32.png in Resources */,
@@ -9067,6 +9074,7 @@
 				9477101D2448839C00336F40 /* EditCompanyCollectionCell.swift in Sources */,
 				94432BAF24AE2CA700129692 /* EditProfilePopupVC.swift in Sources */,
 				22FA8BD11FCEDF910088F2C6 /* CompanyProfileCell.swift in Sources */,
+				FBFE658D25AAD16A000E8A43 /* LiveUserCommentsCell.swift in Sources */,
 				222EE5501F518C7200C50B22 /* NewsBar.swift in Sources */,
 				22CEFD331FE1548A00403013 /* MenuVC.swift in Sources */,
 				22E30BE720160AD000A81286 /* EventHeaderCell.swift in Sources */,
@@ -9932,7 +9940,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = 3.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10023,7 +10031,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = 3.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;

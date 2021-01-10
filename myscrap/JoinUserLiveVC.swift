@@ -20,7 +20,16 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveUserProfileColor = ""
     var liveUsertopicValue = ""
     var timer = Timer()
-
+    var liveComments = [CommentMessage]()
+    {
+        didSet
+        {
+            self.reloadComentsView()
+        }
+    }
+    @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
+    @IBOutlet weak var UserCommentsBackground: UIView!
+    @IBOutlet weak var userCommentsCollectionView: UICollectionView!
     @IBOutlet weak var liveUserProfile: ProfileView!
     @IBOutlet weak var liveUserName: UILabel!
     @IBOutlet weak var liveUserImage: UIImageView!
@@ -89,7 +98,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         commentField.textColor = UIColor.gray
         commentField.delegate = self
         
-       
+        closebutton.drawShadow()
         
         
         let imageAnnounce = UIImage(named: "announce")?.withRenderingMode(.alwaysTemplate)
@@ -119,9 +128,17 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
        
         addKeyboardObservers()
         self.setUpCamera()
-       
+        self.setUpCommentViews()
     }
- 
+    private func setUpCommentViews()
+    {
+        self.userCommentsCollectionView.delegate = self
+        self.userCommentsCollectionView.dataSource = self
+        self.userCommentsCollectionView.register(LiveUserCommentsCell.Nib, forCellWithReuseIdentifier: LiveUserCommentsCell.identifier)
+//        if let flowLayout = userCommentsCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+//              flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//           }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
   
@@ -231,14 +248,29 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         webRTCClient.switchCamera()
 
     }
+    @objc func keyboardWillAppear() {
+        //Do something here
+        self.reloadComentsView()
+    }
+
+    @objc func keyboardWillDisappear() {
+        //Do something here
+        self.reloadComentsView()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         DispatchQueue.main.async { [self] in
             self.liveUserNameText = liveUserNameValue
             self.liveUserImageUrl = liveUserImageValue
             self.userProfileColorCode = liveUserProfileColor
-            self.topicValue.text =  liveUsertopicValue
+            if topicValueText == "Topic" {
+                self.topicValue.text = "No Topic"
+            }
+            else{
+                self.topicValue.text = topicValueText
+            }
             liveUserProfile.updateViews(name: self.liveUserNameText, url:   self.liveUserImageUrl, colorCode:   self.userProfileColorCode)
             let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
             spinner.mode = MBProgressHUDMode.indeterminate
@@ -258,6 +290,35 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.topicValue.text = topicValueText
         }
         self.setUserStatucToLive()
+        self.reloadCommentsDummyData()
+
+    }
+    func reloadCommentsDummyData() {
+        self.liveComments.removeAll()
+        var comment = CommentMessage()
+        comment.messageText = "First Message"
+        comment.name = "Javed Mia"
+        self.liveComments.append(comment)
+        var comment2 = CommentMessage()
+        comment2.messageText = "Second Message"
+        comment2.name = "Javed Tarekh"
+        self.liveComments.append(comment2)
+        self.reloadComentsView()
+     
+    }
+   func reloadComentsView()
+    {
+    if self.userCommentsCollectionView != nil {
+        self.userCommentsCollectionView.reloadData()
+        self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
+            (result) in
+            self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+            // ready
+        })
+    }
+    
+ 
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -265,6 +326,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         IQKeyboardManager.sharedManager().enable = true
         webRTCClient.stop()
         self.navigationController?.navigationBar.isHidden = false
+        NotificationCenter.default.removeObserver(self)
+
     }
     @IBAction func toggleMicButttonpressed(_ sender: Any) {
         webRTCClient.toggleAudio()
@@ -272,10 +335,12 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBAction func closeButtonPressed(_ sender: Any) {
 
         NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+        DispatchQueue.main.async { [self] in
     let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
     spinner.mode = MBProgressHUDMode.indeterminate
       spinner.label.text = "End Live..."
         self.setUserStatusEndLive()
+        }
       
     }
     @IBAction func goLiveButtonPressed(_ sender: Any) {
@@ -286,6 +351,26 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
     deinit {
         removeKeyboardObservers()
+    }
+    func hideCommentesView()
+    {
+      
+           // colorAnimationView.layer.removeAllAnimations()
+        UIView.animate(withDuration: 2.0) {
+            self.commentViewLeadingSpace.constant = UIScreen.main.bounds.width
+                self.view.layoutIfNeeded()
+            }
+      
+      
+    }
+    func showCommentesView()
+    {
+      
+           // colorAnimationView.layer.removeAllAnimations()
+        UIView.animate(withDuration: 2.0) {
+            self.commentViewLeadingSpace.constant = 16
+                self.view.layoutIfNeeded()
+            }
     }
 }
 extension JoinUserLiveVC: UINavigationControllerDelegate {
@@ -302,7 +387,7 @@ extension JoinUserLiveVC {
         
               print("room\(liveID)")
                //Don't forget to write your server url.
-              webRTCClient.setOptions(url: "ws://3.85.1.123:5080/WebRTCAppEE/websocket", streamId: "room\(liveID)", token: "", mode: .play, enableDataChannel: true)
+        webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: "room\(liveID)", token: "", mode: .play, enableDataChannel: true)
               webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
               webRTCClient.start()
         
@@ -337,12 +422,22 @@ extension JoinUserLiveVC {
             op.allUsersLiveStatus (id: "\(AuthService.instance.userId)" , LiveId: liveID) { (onlineStat) in
                
                 DispatchQueue.main.async { [self] in
-                    if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
-                       
-                        numberOfViews.text = "\(views.count)"
+                    
+                    if let error = onlineStat["error"] as? Bool{
+                        if !error{
+                            if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
+                               
+                                numberOfViews.text = "\(views.count)"
+                            }
+                        }
+                        else
+                        {
+                            numberOfViews.text = "\(0)"
+                        }
                     }
+                    print(onlineStat)
                 }
-                print(onlineStat)
+              
         }
         }
     }
@@ -352,7 +447,9 @@ extension JoinUserLiveVC {
             op.userEndViewLive(id: "\(AuthService.instance.userId)", liveid: self.liveID) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
               MBProgressHUD.hide(for: self.view , animated: true)
+                   
                     self.navigationController?.navigationBar.isHidden = false
+                    self.showToast(message: "Live has been finished!")
 
           self.navigationController?.popToRootViewController(animated: true)
                   }
@@ -382,7 +479,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     
     func clientDidDisconnect(_ message: String) {
         print("Stream get error \(message)")
-      //  self.closeButtonPressed((Any).self)
+   self.closeButtonPressed((Any).self)
 
     }
     
@@ -432,7 +529,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func disconnected() {
-    //    self.closeButtonPressed((Any).self)
+   self.closeButtonPressed((Any).self)
     }
     
     func audioSessionDidStartPlayOrRecord() {
@@ -443,4 +540,36 @@ extension JoinUserLiveVC : AntMediaClientDelegate
         
     }
 }
+extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
+{
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+     
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.liveComments.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserCommentsCell.identifier, for: indexPath) as? LiveUserCommentsCell else { return UICollectionViewCell()}
+        cell.configCell(item: self.liveComments[indexPath.row] )
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //let width = self.frame.width
+        return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 30)
+    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
+}
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+    }
+
+}

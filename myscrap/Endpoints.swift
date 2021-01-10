@@ -113,6 +113,8 @@ struct Endpoints {
     static let USER_LIVE_Status_URL = "https://myscrap.com/android/countliveview"
     static let USER_LIVE_VIEWS_URL = "https://myscrap.com/android/insert_live_views"
    
+    // websocket User Live
+    static let LiveUser = "wss://sayed.net:5443/WebRTCAppEE/websocket"
     
     static let FavouriteCompany = "\(BASE_URL)msFavouriteCompany"
     static let ModeratorsURL = "\(BASE_URL)msModerators"
