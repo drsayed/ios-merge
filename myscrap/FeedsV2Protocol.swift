@@ -91,13 +91,14 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 item.likeCount += 1
             } else {
                 item.likeCount -= 1
-                if item.likeCount == 1 {
-                    item.likedByText = "Liked by 1 other"
-                } else if item.likeCount >= 2 {
-                    item.likedByText = "Liked by \(item.likeCount) others"
-                } else {
-                    item.likedByText = ""
-                }
+                item.likedByText =   item.likedByTextOriginal
+//                if item.likeCount == 1 {
+//                    item.likedByText = "Liked by 1 other"
+//                } else if item.likeCount >= 2 {
+//                    item.likedByText = "Liked by \(item.likeCount) others"
+//                } else {
+//                    item.likedByText = ""
+//                }
             }
           
 
@@ -111,7 +112,8 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
-
+                    portrateCell.likeCommentViewHeight.constant = 22
+                    //portrateCell.SetLikeCountButton()
                 }
             }
             else if let portrateCell = feedCollectionView.cellForItem(at: indexPath) as? EmplPortrVideoTextCell {
@@ -124,7 +126,8 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
-
+                    portrateCell.likeCommentViewHeight.constant = 22
+                   // portrateCell.SetLikeCountButton()
                 }
                    
                 }
@@ -138,7 +141,8 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
-
+                    portrateCell.likeCommentViewHeight.constant = 22
+                  //  portrateCell.SetLikeCountButton()
                 }
                    
                 }
@@ -152,10 +156,53 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
-
+                    portrateCell.likeCommentViewHeight.constant = 22
+                   // portrateCell.SetLikeCountButton()
                 }
                    
                 }
+          else  if let portrateCell = feedCollectionView.cellForItem(at: indexPath) as? FeedTextCell {
+                         
+                        let likeCount = String(format: "%d", item.likeCount)
+                        portrateCell.likeBtn.setTitle(likeCount, for: .normal)
+                        portrateCell.likeImage.isLiked = item.likeStatus
+                if item.likeCount == 0 {
+                    portrateCell.likeCountBtn.isHidden = true
+                } else {
+                    portrateCell.likeCountBtn.isHidden = false
+                    portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
+                    portrateCell.likeCommentViewHeight.constant = 22
+                    //portrateCell.SetLikeCountButton()
+                }
+            }
+          else  if let portrateCell = feedCollectionView.cellForItem(at: indexPath) as? FeedImageCell {
+                         
+                        let likeCount = String(format: "%d", item.likeCount)
+                        portrateCell.likeBtn.setTitle(likeCount, for: .normal)
+                        portrateCell.likeImage.isLiked = item.likeStatus
+                if item.likeCount == 0 {
+                    portrateCell.likeCountBtn.isHidden = true
+                } else {
+                    portrateCell.likeCountBtn.isHidden = false
+                    portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
+                    portrateCell.likeCommentViewHeight.constant = 22
+                  //  portrateCell.SetLikeCountButton()
+                }
+            }
+          else  if let portrateCell = feedCollectionView.cellForItem(at: indexPath) as? FeedImageTextCell {
+                         
+                        let likeCount = String(format: "%d", item.likeCount)
+                        portrateCell.likeBtn.setTitle(likeCount, for: .normal)
+                        portrateCell.likeImage.isLiked = item.likeStatus
+                if item.likeCount == 0 {
+                    portrateCell.likeCountBtn.isHidden = true
+                } else {
+                    portrateCell.likeCountBtn.isHidden = false
+                    portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
+                    portrateCell.likeCommentViewHeight.constant = 22
+                  //  portrateCell.SetLikeCountButton()
+                }
+            }
             else
             {
                 UserDefaults.standard.set(true, forKey: "NoNeedToRrefresh")
@@ -201,6 +248,9 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
             } else {
                 item.likeCount -= 1
             }
+            guard let indexPath = feedCollectionView.indexPathForItem(at: cell.center) else { return }
+          //  feedCollectionView.reloadItems(at: [indexPath])
+            feedCollectionView.reloadData()
             feedV2Service.postLike(postId: item.postId, frinedId: item.postedUserId)
         }
     }

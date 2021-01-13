@@ -47,6 +47,7 @@ final class FeedV2Item: Equatable{
     private var _timeStamp:Int!
     var likeStatus:Bool = false
    var likedByText: String = ""
+    var likedByTextOriginal: String = ""
     private var _albumid:String!
     private var _postType:String!
     private var _newsLocation:String!
@@ -1289,6 +1290,10 @@ final class FeedV2Item: Equatable{
         if let likedByText = FeedDict["likedByText"] as? String{
             self.likedByText = likedByText
         }
+        if let likedByTextOriginal = FeedDict["likedByText"] as? String{
+            self.likedByTextOriginal = likedByTextOriginal
+        }
+        
         if let isLevel = FeedDict["isLevel"] as? Bool {
             self._isLevel = isLevel
         }

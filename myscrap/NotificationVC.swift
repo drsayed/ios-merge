@@ -56,7 +56,7 @@ class NotificationVC: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        notificationTask?.cancel()
+     //   notificationTask?.cancel()
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl){
@@ -77,20 +77,37 @@ class NotificationVC: UIViewController{
     }
     
     private func getNotifications(){
-        notificationTask = dataService.fetchNotificationsWith({ [weak self] (result) in
-            DispatchQueue.main.async {
-                switch result{
-                case .Success(let data):
-                    NotificationService.instance.notificationCount = 0
-                    self?.dataSource = data
-                case .Error(_):
-                    if self?.dataSource == nil || self?.dataSource.count == 0 {
-                        self?.dataSource = [AnyObject]()
+        DispatchQueue.global(qos:.userInteractive).async {
+            
+            self.dataService.fetchNotificationsWith({ [weak self] (result) in
+                DispatchQueue.main.async {
+                    switch result{
+                    case .Success(let data):
+                        NotificationService.instance.notificationCount = 0
+                        self?.dataSource = data
+                    case .Error(_):
+                        if self?.dataSource == nil || self?.dataSource.count == 0 {
+                            self?.dataSource = [AnyObject]()
+                        }
+                       
                     }
-                   
                 }
-            }
-        })
+            })
+        }
+//        notificationTask = dataService.fetchNotificationsWith({ [weak self] (result) in
+//            DispatchQueue.main.async {
+//                switch result{
+//                case .Success(let data):
+//                    NotificationService.instance.notificationCount = 0
+//                    self?.dataSource = data
+//                case .Error(_):
+//                    if self?.dataSource == nil || self?.dataSource.count == 0 {
+//                        self?.dataSource = [AnyObject]()
+//                    }
+//
+//                }
+//            }
+//        })
     }
     
     

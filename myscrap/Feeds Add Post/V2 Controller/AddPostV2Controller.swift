@@ -181,10 +181,10 @@ class AddPostV2Controller: UIViewController, UIImagePickerControllerDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        if videoPickedUrl != nil {
-//            self.videosToData.append(videoPickedUrl!.absoluteString)
-//            self.videoPickedUrl = nil
-//        }
+        if videoPickedUrl != nil {
+            self.videosToData.append(videoPickedUrl!.absoluteString)
+            self.videoPickedUrl = nil
+        }
         self.togglePostBtn()
         
         IQKeyboardManager.sharedManager().enable = false

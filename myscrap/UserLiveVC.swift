@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import IQKeyboardManagerSwift
-import Starscream
+
 struct CommentMessage {
     var name : String = "Test"
     var userId : String = "Test"
@@ -18,11 +18,13 @@ struct CommentMessage {
     var colorCode : String = "Test"
     var messageId : String = "Test"
     var messageText : String = "Test"
+    
     var timeStamp : Int =  (Int(Date().timeIntervalSince1970))
 }
 class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     var liveID = "0"
+    var isFrontCam = true
     var liveComments = [CommentMessage]()
     {
         didSet
@@ -31,7 +33,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
     }
     @IBOutlet weak var numberOfViews: UILabel!
-    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var liveTimerView: UIView!
     @IBOutlet weak var liveTimerTextLable: UILabel!
@@ -45,14 +48,16 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBOutlet weak var userCommentsCollectionView: UICollectionView!
 
     var topicValueText = "No Topic"
+    var userJoined = Array<[String:AnyObject]>()
+    var userLeft = Array<[String:AnyObject]>()
     @IBOutlet weak var sendCommentButton: UIButton!
     @IBOutlet weak var commentField: UITextField!
-    let webRTCClient: AntMediaClient = AntMediaClient.init()
     var timer = Timer()
     var liveTimeCount = Timer()
     var liveTimeValue = 0
     @IBOutlet weak var announceImage: UIImageView!
     @IBOutlet weak var commentBackground: UIView!
+    var cameraflipedView: UIView = UIView()
     @IBOutlet weak var topicTtitle: UILabel!
     @IBOutlet weak var announcementView: UIView!
     @IBOutlet weak var topicValue: UILabel!
@@ -72,7 +77,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         captureSession.sessionPreset = .medium
         self.topicTtitle.text = "Topic :"
         self.topicValue.text = topicValueText
-      
+        commentField.addTarget(self, action: #selector(self.textFieldDidChange(_:)),
+                                  for: .editingChanged)
         announcementView.layer.cornerRadius =  announcementView.frame.size.height/2
         commentBackground.layer.cornerRadius =  commentBackground.frame.size.height/2
         commentBackground.layer.borderWidth =  3
@@ -84,6 +90,17 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.countDown.countdownFrom = 3;
         self.countDown.finishText = "";
         self.countDown.updateAppearance()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
+  
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ConnectionEstablished(_:)), name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.OnlineViewTapped(_:)))
+
+        self.seenView.addGestureRecognizer(tap)
+
+        self.seenView.isUserInteractionEnabled = true
         
         let image = UIImage(named: "send")?.withRenderingMode(.alwaysTemplate)
         sendCommentButton.setImage(image, for: .normal)
@@ -104,9 +121,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         cameraToggleButton.tintColor = UIColor.white
         cameraToggleButton.drawShadow()
         
-        let imageAnnounce = UIImage(named: "announce")?.withRenderingMode(.alwaysTemplate)
-        self.announceImage.image = imageAnnounce
-        self.announceImage.tintColor = .white
+        self.announceImage.image =  UIImage.fontAwesomeIcon(name: .bullhorn, style: .solid, textColor: UIColor.white , size: CGSize(width: 30, height: 30))
         
         let imageSeen = UIImage(named: "ic_seen")?.withRenderingMode(.alwaysTemplate)
         self.seenIcon.image = imageSeen
@@ -133,12 +148,16 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         announcementView.isUserInteractionEnabled = true
         announcementView.addGestureRecognizer(tapGestureRecognizer)
         layoutConstraintsToAdjust.append(constraintContentHeight)
-        webRTCClient.delegate = self
         //https://34.207.130.236:5080/WebRTCAppEE/peer.html
         self.setUpCamera()
-        addKeyboardObservers()
         self.setUpCommentViews()
-        
+        addKeyboardObservers()
+        self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        self.cameraflipedView.frame =  self.cameraView.frame
+        self.cameraflipedView.transform = CGAffineTransform(scaleX: -1, y: 1);
+     //   self.videoPreviewLayer.customMirror
+
+        //self..transform = CGAffineTransform(scaleX: -1, y: 1);
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
@@ -146,6 +165,69 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
        
+    }
+    @objc func RecievedMessage(_ notification: NSNotification) {
+            print(notification.userInfo ?? "")
+        if let dict = notification.userInfo as? [String: AnyObject]{
+            var comment = CommentMessage()
+            comment.messageText = dict["message"]! as! String
+            comment.name = dict["fullName"]! as! String
+            comment.profilePic =  dict["profilePic"]! as! String
+            comment.colorCode =  dict["colorCode"]! as! String
+            comment.userId = dict["userId"]! as! String
+            
+            self.liveComments.append(comment)
+
+        }
+    }
+    @objc func PublishStarted(_ notification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+    //    MBProgressHUD.hide(for: self.view , animated: true)
+//            self?.videoPreviewLayer.removeFromSuperlayer()
+//            self?.captureSession.stopRunning()
+            if(self!.isFrontCam)
+            {
+                self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            }
+            else{
+                self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+            }
+            
+            self?.addTimerCall()
+            self?.startLiveTime()
+        }
+     }
+    @objc func ConnectionEstablished(_ notification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+            if(self!.isFrontCam)
+            {
+                self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            }
+            else{
+                self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+            }
+          
+        }
+     }
+    @objc func OnlineViewTapped(_ sender: UITapGestureRecognizer) {
+        if userJoined.count > 0 {
+            if let vc = OnlineViewersPopUpVC.storyBoardInstance(){
+                vc.modalPresentationStyle = .overFullScreen
+                vc.delegateOnlineViewer = self
+                vc.userJoined = userJoined
+                vc.indexValue = 0
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+      
+      }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField.text!.length > 0 {
+            sendCommentButton.tintColor = UIColor.MyScrapGreen
+        }
+        else{
+            sendCommentButton.tintColor = UIColor.gray
+        }
     }
     @objc func handleGesture(gesture: UISwipeGestureRecognizer)
     {
@@ -214,9 +296,22 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         if commentField.text!.length > 0 {
             var comment = CommentMessage()
             comment.messageText = commentField.text!
-            comment.name = "Javed Tarekh"
+            comment.name = AuthService.instance.fullName
+            comment.profilePic = AuthService.instance.profilePic
+            comment.colorCode = AuthService.instance.colorCode
+            comment.userId = AuthService.instance.userId
+            print("Messages Count : \( self.liveComments.count)")
             self.liveComments.append(comment)
+            
+            let dic = ["fullName": AuthService.instance.fullName, "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
+            
+            /* NSDictionary to NSData */
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+            appDelegate.webRTCClient.sendData(data: data, binary: false)
+
             commentField.text = ""
+            sendCommentButton.tintColor = UIColor.gray
+
         }
         
     }
@@ -251,11 +346,13 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
         self.cameraView.bounds = screenSize
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        
+        cameraflipedView.bounds = screenSize
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
         self.videoPreviewLayer.frame = screenSize
-        cameraView.layer.addSublayer(videoPreviewLayer)
+        cameraflipedView.layer.addSublayer(videoPreviewLayer)
+   //     cameraView.layer.addSublayer(cameraflipedView.layer)
+        cameraView.addSubview(cameraflipedView)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
             //Step 13
@@ -327,6 +424,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             liveTimeText = "\(minute):\(second)"
         }
        }
+       
         liveTimerTextLable.text = liveTimeText
        }
     /// Create new capture device with requested position
@@ -347,9 +445,73 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     
     @IBAction func cameraTogglePressed(_ sender: Any) {
      //   self.swapCamera()
-        webRTCClient.switchCamera()
-
+        isFrontCam = !isFrontCam
+        if(isFrontCam)
+        {
+            self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        }
+        else{
+            self.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+        }
+        appDelegate.webRTCClient.switchCamera()
+       
     }
+    func addLeftUser(dict:[String: AnyObject])  {
+        var comment = CommentMessage()
+        comment.messageText = "Left!"
+        comment.name = dict["name"]! as! String
+        comment.profilePic =  dict["likeProfilePic"]! as! String
+        comment.colorCode =  dict["colorCode"]! as! String
+        comment.userId = dict["userId"]! as! String
+        self.liveComments.append(comment)
+    }
+    func addJoinedUser(dict:[String: AnyObject])  {
+        
+        var comment = CommentMessage()
+        comment.messageText = "Joined!"
+        comment.name = dict["name"]! as! String
+        comment.profilePic =  dict["likeProfilePic"]! as! String
+        comment.colorCode =  dict["colorCode"]! as! String
+        comment.userId = dict["userId"]! as! String
+        
+        self.liveComments.append(comment)
+    }
+    func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
+        for i in 0..<userJoined.count {
+              let dict = userJoined[i]
+            var isFound = false
+            for viewer in viewers {
+                if dict["userId"] as! String == viewer["userId"] as! String {
+                    isFound = true
+                }
+            }
+            if !isFound {
+                self.addLeftUser(dict: dict)
+                userJoined.remove(at: i)
+
+            }
+        }
+    }
+    func findIfAlreadyJoined(viewers : Array<[String:AnyObject]>) {
+    
+        for dict in viewers {
+            var isFound = false
+            for viewer in userJoined {
+                if dict["userId"] as! String == viewer["userId"] as! String {
+                    isFound = true
+                }
+            }
+            if !isFound {
+                userJoined.append(dict)
+                self.addJoinedUser(dict: dict)
+            }
+        }
+    }
+    func findNewJoinORLeft(viewers : Array<[String:AnyObject]>)  {
+        self.findIfAlreadyJoined(viewers: viewers)
+     //   self.findIfAlreadyLeft(viewers: viewers)
+    }
+    
     @objc func getLiveStatus()  {
         DispatchQueue.global(qos:.userInteractive).async {
         let op = UserLiveOperations()
@@ -362,11 +524,13 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                             if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
                                
                                 numberOfViews.text = "\(views.count)"
+                                self.findNewJoinORLeft(viewers: views)
                             }
                         }
                         else
                         {
                             numberOfViews.text = "\(0)"
+                            self.findNewJoinORLeft(viewers: Array<[String : AnyObject]>())
                         }
                     }
                     print(onlineStat)
@@ -397,19 +561,28 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         self.navigationController?.navigationBar.isHidden = true
         IQKeyboardManager.sharedManager().enable = false
-        DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
-            self.captureSession.startRunning()
-            //Step 13
-        }
-        if topicValueText == "Topic" {
+     
+        if topicValueText == "Type" {
             self.topicValue.text = "No Topic"
         }
         else{
             self.topicValue.text = topicValueText
         }
-      
-        self.addActionAlert()
-        self.reloadCommentsDummyData()
+        if !appDelegate.webRTCClient.isConnected() {
+            self.addActionAlert()
+        }
+        else
+        {
+            DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
+                self.captureSession.startRunning()
+                //Step 13
+            }
+            
+            appDelegate.webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
+
+        }
+        
+      //  self.reloadCommentsDummyData()
     }
     func reloadCommentsDummyData() {
         self.liveComments.removeAll()
@@ -425,31 +598,44 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
      
     }
    func reloadComentsView()
+   {
+   DispatchQueue.main.async { [self] in
+   if self.userCommentsCollectionView != nil {
+       self.userCommentsCollectionView.reloadData()
+       self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
+           (result) in
+           self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+        if  self.userCommentsCollectionView.contentSize.height > self.userCommentsCollectionView.bounds.size.height
+        {
+            self.userCommentsCollectionView.flashScrollIndicators()
+        }
+        
+
+           // ready
+       })
+   }
+   }
+
+
+   }
+
+     deinit
     {
-    if self.userCommentsCollectionView != nil {
-        self.userCommentsCollectionView.reloadData()
-        self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
-            (result) in
-            self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
-            // ready
-        })
-    }
-    
- 
+        IQKeyboardManager.sharedManager().enable = true
+        appDelegate.webRTCClient.stop()
+        removeKeyboardObservers()
+        self.navigationController?.navigationBar.isHidden = false
+        NotificationCenter.default.removeObserver(self)
 
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
-        IQKeyboardManager.sharedManager().enable = true
-        webRTCClient.stop()
-        self.navigationController?.navigationBar.isHidden = false
-        NotificationCenter.default.removeObserver(self)
-
+      
     }
     @IBAction func toggleMicButttonpressed(_ sender: Any) {
         micButton.isSelected =  !micButton.isSelected
-        webRTCClient.toggleAudio()
+        appDelegate.webRTCClient.toggleAudio()
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
         
@@ -462,14 +648,13 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.view.endEditing(true)
             return false
         }
-    deinit {
-        removeKeyboardObservers()
-    }
+    
+    
     func hideCommentesView()
     {
       
            // colorAnimationView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 2.0) {
+        UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = UIScreen.main.bounds.width
                 self.view.layoutIfNeeded()
             }
@@ -480,7 +665,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     {
       
            // colorAnimationView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 2.0) {
+        UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = 16
                 self.view.layoutIfNeeded()
             }
@@ -512,13 +697,13 @@ extension UserLiveVC: CustomAlertViewDelegate {
         // stream1
        // https://sayed.net:5080/WebRTCAppEE/websocket
      //   "ws://3.85.1.123:5080/WebRTCAppEE/websocket"
-        webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
-         webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
+        appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
+        appDelegate.webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
        // webRTCClient.setMultiPeerMode(enable: true, mode: "join")
-       webRTCClient.initPeerConnection()
+        appDelegate.webRTCClient.initPeerConnection()
         
-        webRTCClient.connectWebSocket()
-        webRTCClient.start()
+        appDelegate.webRTCClient.connectWebSocket()
+        appDelegate.webRTCClient.start()
     }
     @objc func setUserStatucToLive()  {
         DispatchQueue.global(qos:.userInteractive).async {
@@ -541,89 +726,26 @@ extension UserLiveVC: CustomAlertViewDelegate {
             op.userEndLive (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
                     self.showToast(message: "Live has been finished!")
-//              MBProgressHUD.hide(for: self.view , animated: true)
-                    self.navigationController?.navigationBar.isHidden = false
+   //            MBProgressHUD.hide(for: self.view , animated: true)
+                    self.perform(#selector(self.cancelButtonTapped), with: self, afterDelay: 1.0)
 
-             self.navigationController?.popToRootViewController(animated: true)
+//                    self.navigationController?.navigationBar.isHidden = false
+//
+//             self.navigationController?.popToRootViewController(animated: true)
                   }
              
                 print(onlineStat)
         }
         }
     }
-    func cancelButtonTapped() {
+   @objc func cancelButtonTapped() {
         print("cancelButtonTapped")
         self.navigationController?.navigationBar.isHidden = false
 
         self.navigationController?.popToRootViewController(animated: true)
     }
 }
-extension UserLiveVC : AntMediaClientDelegate
-{
-    func clientDidConnect(_ client: AntMediaClient) {
-        print("Stream get connected")
-        DispatchQueue.main.async { [weak self] in
-        self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
-        }
-    }
-    
-    func clientDidDisconnect(_ message: String) {
-        print("Stream get error \(message)")
-    }
-    
-    func clientHasError(_ message: String) {
-        print("Stream get error \(message)")
-    }
-    
-    func remoteStreamStarted() {
-      
-    }
-    
-    func remoteStreamRemoved() {
-        
-    }
-    
-    func localStreamStarted() {
-        
-    }
-    
-    func playStarted() {
-        
-    }
-    
-    func playFinished() {
-        
-    }
-    
-    func publishStarted() {
-     
-        DispatchQueue.main.async { [weak self] in
-    //    MBProgressHUD.hide(for: self.view , animated: true)
-            self?.videoPreviewLayer.removeFromSuperlayer()
-            self?.captureSession.stopRunning()
 
-            self?.addTimerCall()
-            self?.startLiveTime()
-        }
-    
-    }
-    
-    func publishFinished() {
-        
-    }
-    
-    func disconnected() {
-        
-    }
-    
-    func audioSessionDidStartPlayOrRecord() {
-        webRTCClient.speakerOn()
-    }
-    
-    func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
-        
-    }
-}
 extension UIButton {
 
 
@@ -651,6 +773,19 @@ extension UserLiveVC: EndLiveViewDelegate {
     func cancelEndLiveButtonTapped() {
      
     }
+}
+extension UserLiveVC: OnlineViewersDelegate {
+    func onlineUserSelected(FriendID: String, AtIndex: Int) {
+        if let vc = FriendVC.storyBoardInstance() {
+            vc.friendId = FriendID
+            UserDefaults.standard.set(FriendID, forKey: "friendId")
+            self.navigationController?.navigationBar.isHidden = false
+            self.present(vc, animated: true, completion: nil)
+
+         //   self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
 }
 extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 {

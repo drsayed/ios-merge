@@ -211,7 +211,8 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("DeletedVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.pauseVisibleVideos), name: Notification.Name("PauseAllVideos"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAllFeedsData), name: Notification.Name("DeletedUserOwnVideo"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getAllFeedsOnly), name: NSNotification.Name(rawValue: "ReloadFeedsData"), object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshLiveUserData), name: Notification.Name("EndLiveBYOtherUser"), object: nil)
         
         
@@ -360,6 +361,19 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
             isRefreshControl = true
             self.getAllFeedsData()
             self.getAllOnlineUsersData()
+            
+        } else {
+            self.showToast(message: "No internet connection")
+        }
+        
+    }
+    @objc
+    fileprivate func getAllFeedsOnly(){
+        if network.reachability.isReachable == true {
+            if active.isAnimating {
+                active.stopAnimating() }
+            isRefreshControl = true
+            self.getAllFeedsData()
             
         } else {
             self.showToast(message: "No internet connection")
@@ -1904,21 +1918,21 @@ extension FeedsVC: FeedVCHeaderCellDelegate{
     
     
     func tappedFriendSeelected (activeuser: ActiveUsers, isLive: Bool) {
-        if isLive {
-            if let vc = JoinUserLiveVC.storyBoardInstance() {
-                  vc.friendId = activeuser.userid!
-                  vc.liveID = activeuser.liveId!
-                vc.liveUserNameValue  = activeuser.name!
-                vc.liveUserImageValue  = activeuser.profilePic!
-                vc.liveUserProfileColor  = activeuser.colorCode!
-                vc.liveUsertopicValue  = activeuser.topic!
-         
-                   self.navigationController?.pushViewController(vc, animated: true)
-                }
-        }
-        else{
+//        if isLive {
+//            if let vc = JoinUserLiveVC.storyBoardInstance() {
+//                  vc.friendId = activeuser.userid!
+//                  vc.liveID = activeuser.liveId!
+//                vc.liveUserNameValue  = activeuser.name!
+//                vc.liveUserImageValue  = activeuser.profilePic!
+//                vc.liveUserProfileColor  = activeuser.colorCode!
+//                vc.liveUsertopicValue  = activeuser.topic!
+//
+//                   self.navigationController?.pushViewController(vc, animated: true)
+//                }
+//        }
+//        else{
             performFriendView(friendId: activeuser.userid!)
-        }
+ //       }
     }
 
     
@@ -2124,7 +2138,7 @@ extension FeedsVC {
                 }
             }
             pickerController.modalPresentationStyle = .overFullScreen
-            self.present(pickerController, animated:false, completion: nil)
+          //  self.present(pickerController, animated:false, completion: nil)
             self.present(pickerController, animated: true, completion: nil)
         }
         

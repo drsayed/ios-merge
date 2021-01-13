@@ -1165,9 +1165,12 @@ extension DetailsVC {
     }
     
     func likePressed() {
-        DispatchQueue.main.asyncAfter(deadline: .now() ) {
-            self.getDetails()
-        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadFeedsData"), object: nil, userInfo: nil )
+//        self.collectionView.reloadData()
+//        DispatchQueue.main.asyncAfter(deadline: .now() ) {
+//           
+//        //    self.getDetails()
+//        }
         
     }
 }

@@ -687,7 +687,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="731" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FOh-nW-7PW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="731" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FOh-nW-7PW">
                                 <rect key="frame" x="0.0" y="44" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1102,10 +1102,10 @@
                                     <outlet property="delegate" destination="vpD-C7-ov4" id="WvW-Rg-e2f"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBy-3b-gGN">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BBy-3b-gGN">
                                 <rect key="frame" x="0.0" y="940" width="414" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RS7-vN-KA3" customClass="CircularButton" customModule="myscrap" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RS7-vN-KA3" customClass="CircularButton" customModule="myscrap" customModuleProvider="target">
                                         <rect key="frame" x="376" y="15" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="58a-wD-tHW"/>
@@ -1117,10 +1117,10 @@
                                             <action selector="commentBtnPRessed:" destination="vpD-C7-ov4" eventType="touchUpInside" id="CqN-2q-pHR"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKR-sF-36x" customClass="CircleView" customModule="myscrap" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lKR-sF-36x" customClass="CircleView" customModule="myscrap" customModuleProvider="target">
                                         <rect key="frame" x="16" y="8" width="352" height="44"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t2G-5E-RcB" customClass="GrowingTextView" customModule="myscrap" customModuleProvider="target">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t2G-5E-RcB" customClass="GrowingTextView" customModule="myscrap" customModuleProvider="target">
                                                 <rect key="frame" x="24" y="5" width="328" height="39"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" red="0.066666666669999999" green="0.55294117649999996" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1436,13 +1436,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rwU-o4-XVJ">
                                                     <rect key="frame" x="84" y="16" width="275" height="44.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Attributed String" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xri-G1-tXB">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attributed String" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xri-G1-tXB">
                                                             <rect key="frame" x="0.0" y="0.0" width="126" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufJ-AB-QSB">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufJ-AB-QSB">
                                                             <rect key="frame" x="0.0" y="25.5" width="35" height="19"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
@@ -2398,7 +2398,7 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="signUpPressed:" destination="XrF-ue-d9N" eventType="touchUpInside" id="cSk-FD-LdU"/>
-                                                            <segue destination="O68-Jb-QKg" kind="show" id="I7l-rb-Fkx"/>
+                                                            <segue destination="O68-Jb-QKg" kind="presentation" modalPresentationStyle="fullScreen" id="I7l-rb-Fkx"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -2445,7 +2445,7 @@
                 </button>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1mc-bn-3Fr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4468" y="-1031.3343328335832"/>
+            <point key="canvasLocation" x="-4340" y="-1139"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="pzk-0n-PzR">
@@ -4365,7 +4365,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fb-XJ-A5m" customClass="CircleView" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="65" y="8" width="220" height="39"/>
+                                        <rect key="frame" x="65" y="8" width="257" height="39"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's on your mind?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7h-vl-KHs">
                                                 <rect key="frame" x="20" y="9" width="165.5" height="21"/>
@@ -4381,7 +4381,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kC8-JB-FTP" userLabel="Camera">
-                                        <rect key="frame" x="291" y="13" width="39" height="29"/>
+                                        <rect key="frame" x="328" y="13" width="39" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="0gZ-Bj-H0i"/>
                                             <constraint firstAttribute="width" constant="39" id="CRu-UE-SHl"/>
@@ -4391,7 +4391,7 @@
                                             <action selector="cameraClicked:" destination="FRF-Rk-5mO" eventType="touchUpInside" id="f5s-6x-cZG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HF-io-C6C" userLabel="Camera">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HF-io-C6C" userLabel="Camera">
                                         <rect key="frame" x="337" y="12.5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="UbU-7G-aQy"/>
@@ -4403,7 +4403,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Je0-Wq-Sdv" userLabel="PostBtn">
-                                        <rect key="frame" x="75" y="8" width="210" height="39"/>
+                                        <rect key="frame" x="75" y="8" width="247" height="39"/>
                                         <connections>
                                             <action selector="postBtnClicked:" destination="FRF-Rk-5mO" eventType="touchUpInside" id="pMG-tW-h2j"/>
                                         </connections>
@@ -4419,7 +4419,7 @@
                                     <constraint firstItem="kC8-JB-FTP" firstAttribute="centerY" secondItem="3HF-io-C6C" secondAttribute="centerY" id="IlA-vd-uQh"/>
                                     <constraint firstItem="kC8-JB-FTP" firstAttribute="centerY" secondItem="PXW-Td-gUp" secondAttribute="centerY" id="O2J-Ju-Imz"/>
                                     <constraint firstItem="Je0-Wq-Sdv" firstAttribute="top" secondItem="1fb-XJ-A5m" secondAttribute="top" id="Vy4-bn-WHE"/>
-                                    <constraint firstItem="3HF-io-C6C" firstAttribute="leading" secondItem="kC8-JB-FTP" secondAttribute="trailing" constant="7" id="W9b-hi-12q"/>
+                                    <constraint firstItem="3HF-io-C6C" firstAttribute="leading" secondItem="kC8-JB-FTP" secondAttribute="trailing" constant="-30" id="W9b-hi-12q"/>
                                     <constraint firstItem="kC8-JB-FTP" firstAttribute="leading" secondItem="1fb-XJ-A5m" secondAttribute="trailing" constant="6" id="hPX-bj-2xP"/>
                                     <constraint firstAttribute="bottom" secondItem="XTU-ae-aOZ" secondAttribute="bottom" constant="8" id="jEO-wk-ua9"/>
                                     <constraint firstAttribute="bottom" secondItem="1fb-XJ-A5m" secondAttribute="bottom" constant="8" id="jF5-0l-HvW"/>
@@ -5415,6 +5415,7 @@
                             <constraint firstItem="OBW-rh-00w" firstAttribute="centerX" secondItem="cCj-Nb-td1" secondAttribute="centerX" id="vxn-7V-RQB"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="xji-nB-c5C"/>
                     <connections>
                         <outlet property="codeSentTo" destination="UpN-V9-xTp" id="oZS-Pj-Ean"/>
                         <outlet property="emailHeightConstraint" destination="pRa-P3-CRj" id="yxi-h4-77B"/>
@@ -5570,6 +5571,7 @@
                             <constraint firstItem="yYj-vl-vTU" firstAttribute="top" secondItem="fd7-X6-0r0" secondAttribute="top" constant="80" id="qtN-K9-Kdk"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="sGb-85-yDa"/>
                     <connections>
                         <outlet property="backBtn" destination="dpe-K9-OXQ" id="v6U-3g-kXR"/>
                         <outlet property="getCodeBtn" destination="VCx-I4-1xo" id="KVK-QE-Fkj"/>
@@ -6487,6 +6489,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nhd-U1-Cz5" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="xZd-2v-Vtv"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ggk-eW-AMV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -7450,97 +7453,76 @@
     </scenes>
     <designables>
         <designable name="5oG-ul-fjB">
-            <size key="intrinsicContentSize" width="119.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="114.5" height="21.5"/>
         </designable>
         <designable name="8wX-y4-kyM">
-            <size key="intrinsicContentSize" width="80.5" height="20"/>
+            <size key="intrinsicContentSize" width="75.5" height="20"/>
         </designable>
         <designable name="CsY-Iw-5L3">
-            <size key="intrinsicContentSize" width="88" height="21.5"/>
+            <size key="intrinsicContentSize" width="83" height="21.5"/>
         </designable>
         <designable name="DRr-VC-mj3">
-            <size key="intrinsicContentSize" width="62.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="57.5" height="21.5"/>
         </designable>
         <designable name="EHu-Rc-M8f">
-            <size key="intrinsicContentSize" width="87.5" height="21.5"/>
-        </designable>
-        <designable name="EfU-cj-gAz">
-            <size key="intrinsicContentSize" width="30" height="30"/>
+            <size key="intrinsicContentSize" width="82.5" height="21.5"/>
         </designable>
         <designable name="F0p-bm-vuK">
-            <size key="intrinsicContentSize" width="134.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="129.5" height="21.5"/>
         </designable>
         <designable name="FhG-t9-3is">
-            <size key="intrinsicContentSize" width="137" height="21.5"/>
+            <size key="intrinsicContentSize" width="132" height="21.5"/>
         </designable>
         <designable name="JVr-Rv-gKZ">
-            <size key="intrinsicContentSize" width="125.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="120.5" height="21.5"/>
         </designable>
         <designable name="Mh4-lG-dgl">
-            <size key="intrinsicContentSize" width="86.5" height="20"/>
+            <size key="intrinsicContentSize" width="81.5" height="20"/>
         </designable>
         <designable name="QTK-oa-KHs">
-            <size key="intrinsicContentSize" width="53" height="21.5"/>
+            <size key="intrinsicContentSize" width="48" height="21.5"/>
         </designable>
         <designable name="Qvj-Mq-ZNd">
-            <size key="intrinsicContentSize" width="80.5" height="20"/>
+            <size key="intrinsicContentSize" width="75.5" height="20"/>
         </designable>
         <designable name="SIV-7M-yvE">
             <size key="intrinsicContentSize" width="10" height="35.5"/>
         </designable>
         <designable name="VOh-PF-3FV">
-            <size key="intrinsicContentSize" width="47" height="21.5"/>
+            <size key="intrinsicContentSize" width="42" height="21.5"/>
         </designable>
         <designable name="YbP-f4-KGF">
-            <size key="intrinsicContentSize" width="93.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="88.5" height="21.5"/>
         </designable>
         <designable name="ZG3-KZ-1DJ">
-            <size key="intrinsicContentSize" width="94" height="21.5"/>
-        </designable>
-        <designable name="Ztm-8s-fx1">
-            <size key="intrinsicContentSize" width="380" height="400"/>
-        </designable>
-        <designable name="c8m-A4-Qvb">
-            <size key="intrinsicContentSize" width="30" height="30"/>
-        </designable>
-        <designable name="dH1-kU-59m">
-            <size key="intrinsicContentSize" width="30" height="30"/>
+            <size key="intrinsicContentSize" width="89" height="21.5"/>
         </designable>
         <designable name="giA-zL-Ni1">
-            <size key="intrinsicContentSize" width="80.5" height="20"/>
-        </designable>
-        <designable name="jXw-Xi-3cR">
-            <size key="intrinsicContentSize" width="380" height="400"/>
+            <size key="intrinsicContentSize" width="75.5" height="20"/>
         </designable>
         <designable name="kGY-qu-dop">
-            <size key="intrinsicContentSize" width="86.5" height="20"/>
+            <size key="intrinsicContentSize" width="81.5" height="20"/>
         </designable>
         <designable name="m5v-VM-2QK">
-            <size key="intrinsicContentSize" width="120.5" height="21.5"/>
-        </designable>
-        <designable name="noL-OA-CC7">
-            <size key="intrinsicContentSize" width="30" height="30"/>
+            <size key="intrinsicContentSize" width="115.5" height="21.5"/>
         </designable>
         <designable name="oUk-6c-WW9">
-            <size key="intrinsicContentSize" width="94" height="21.5"/>
+            <size key="intrinsicContentSize" width="89" height="21.5"/>
         </designable>
         <designable name="qHe-Bw-vBH">
-            <size key="intrinsicContentSize" width="93.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="88.5" height="21.5"/>
         </designable>
         <designable name="sM3-0X-c5x">
-            <size key="intrinsicContentSize" width="47" height="21.5"/>
+            <size key="intrinsicContentSize" width="42" height="21.5"/>
         </designable>
         <designable name="sWY-gR-0pm">
-            <size key="intrinsicContentSize" width="53" height="21.5"/>
-        </designable>
-        <designable name="t2G-5E-RcB">
-            <size key="intrinsicContentSize" width="-1" height="30"/>
+            <size key="intrinsicContentSize" width="48" height="21.5"/>
         </designable>
         <designable name="u2P-Xs-Mva">
-            <size key="intrinsicContentSize" width="161" height="21.5"/>
+            <size key="intrinsicContentSize" width="156" height="21.5"/>
         </designable>
         <designable name="up9-c1-yzW">
-            <size key="intrinsicContentSize" width="119.5" height="21.5"/>
+            <size key="intrinsicContentSize" width="114.5" height="21.5"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

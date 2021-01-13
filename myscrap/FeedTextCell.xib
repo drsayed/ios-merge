@@ -672,7 +672,7 @@
                 <outlet property="likeCommentViewHeight" destination="YoZ-VQ-mEy" id="gfW-mF-PAM"/>
                 <outlet property="likeCommentsDistance" destination="Hn6-N4-xot" id="6f0-P0-tlo"/>
                 <outlet property="likeCountBtn" destination="ZRO-xi-AeI" id="R7X-kq-Qby"/>
-                <outlet property="likeImage" destination="5Cu-eM-CCD" id="hoL-ja-q6X"/>
+                <outlet property="likeImage" destination="cp9-Ty-EkE" id="9cu-4u-elq"/>
                 <outlet property="linkDescriptionLbl" destination="Kki-bS-H2c" id="vFS-Q7-DfF"/>
                 <outlet property="linkImageView" destination="vkc-ZC-OGT" id="wog-tJ-p75"/>
                 <outlet property="linkPreviewHeight" destination="xwp-EX-RgC" id="vnf-9f-uDe"/>

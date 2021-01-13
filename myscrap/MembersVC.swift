@@ -441,7 +441,14 @@ extension MembersVC: MemberCellDelegate{
               self.showGuestAlert()
           } else {
             if let indexpath = self.tableView.indexPathForRow(at: cell.center){
-                let obj = dataSource[indexpath.row]
+                
+                var obj : MemberItem!
+                if isFiltering() {
+                    obj = filteredDataSource[indexpath.row]
+                } else {
+                    obj = dataSource[indexpath.row]
+                }
+             //   let obj = dataSource[indexpath.row]
                 if obj.followStatusType == 2 {
                    
                     
@@ -524,7 +531,12 @@ extension MembersVC: UnFollowDelegate{
 
     func UnFollowPressed(FriendID: String, AtIndex: Int) {
         let indexpath = IndexPath(item: AtIndex, section: 0);
-        let obj = dataSource[indexpath.item]
+        var obj : MemberItem!
+        if isFiltering() {
+            obj = filteredDataSource[indexpath.row]
+        } else {
+            obj = dataSource[indexpath.row]
+        }
         obj.followStatusType = 0
         self.service.sendUnFollowRequest(friendId: obj.userId)
 //                        let message = "Started Following" //"Successfully started following"

@@ -19,6 +19,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveUserImageValue  = ""
     var liveUserProfileColor = ""
     var liveUsertopicValue = ""
+    var userJoined = Array<[String:AnyObject]>()
+
     var timer = Timer()
     var liveComments = [CommentMessage]()
     {
@@ -90,7 +92,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         commentBackground.layer.borderColor =  UIColor.gray.cgColor
       
         
-      
+        commentField.addTarget(self, action: #selector(self.textFieldDidChange(_:)),
+                                  for: .editingChanged)
         
         let image = UIImage(named: "send")?.withRenderingMode(.alwaysTemplate)
         sendCommentButton.setImage(image, for: .normal)
@@ -101,9 +104,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         closebutton.drawShadow()
         
         
-        let imageAnnounce = UIImage(named: "announce")?.withRenderingMode(.alwaysTemplate)
-        self.announceImage.image = imageAnnounce
-        self.announceImage.tintColor = .white
+        self.announceImage.image =  UIImage.fontAwesomeIcon(name: .bullhorn, style: .solid, textColor: UIColor.white , size: CGSize(width: 30, height: 30))
         
         let imageSeen = UIImage(named: "ic_seen")?.withRenderingMode(.alwaysTemplate)
         self.seenIcon.image = imageSeen
@@ -129,6 +130,36 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         addKeyboardObservers()
         self.setUpCamera()
         self.setUpCommentViews()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField.text!.length > 0 {
+            sendCommentButton.tintColor = UIColor.MyScrapGreen
+        }
+        else{
+            sendCommentButton.tintColor = UIColor.gray
+        }
+    }
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer)
+    {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.right:
+                print("right swipe")
+                self.hideCommentesView()
+            case UISwipeGestureRecognizer.Direction.left:
+                print("left swipe")
+                self.showCommentesView()
+            default:
+                print("other swipe")
+            }
+        }
     }
     private func setUpCommentViews()
     {
@@ -152,6 +183,25 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
    }
     
     @IBAction func sendCommentPressed(_ sender: Any) {
+        
+        if commentField.text!.length > 0 {
+            var comment = CommentMessage()
+            comment.messageText = commentField.text!
+            comment.name = AuthService.instance.fullName
+            comment.profilePic = AuthService.instance.profilePic
+            comment.colorCode = AuthService.instance.colorCode
+            comment.userId = AuthService.instance.userId
+            self.liveComments.append(comment)
+            
+            let dic = ["fullName": AuthService.instance.fullName, "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
+            
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+            webRTCClient.sendData(data: data, binary: false)
+            commentField.text = ""
+            sendCommentButton.tintColor = UIColor.gray
+
+        }
+        
     }
     func setUpCamera ()
     {
@@ -242,7 +292,61 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
         return nil
     }
+    func addLeftUser(dict:[String: AnyObject])  {
+        var comment = CommentMessage()
+        comment.messageText = "Left!"
+        comment.name = dict["name"]! as! String
+        comment.profilePic =  dict["likeProfilePic"]! as! String
+        comment.colorCode =  dict["colorCode"]! as! String
+        comment.userId = dict["userId"]! as! String
+        self.liveComments.append(comment)
+    }
+    func addJoinedUser(dict:[String: AnyObject])  {
+        
+        var comment = CommentMessage()
+        comment.messageText = "Joined!"
+        comment.name = dict["name"]! as! String
+        comment.profilePic =  dict["likeProfilePic"]! as! String
+        comment.colorCode =  dict["colorCode"]! as! String
+        comment.userId = dict["userId"]! as! String
+        
+        self.liveComments.append(comment)
+    }
+    func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
+        for i in 0..<userJoined.count {
+              let dict = userJoined[i]
+            var isFound = false
+            for viewer in viewers {
+                if dict["userId"] as! String == viewer["userId"] as! String {
+                    isFound = true
+                }
+            }
+            if !isFound {
+                self.addLeftUser(dict: dict)
+                userJoined.remove(at: i)
+
+            }
+        }
+    }
+    func findIfAlreadyJoined(viewers : Array<[String:AnyObject]>) {
     
+        for dict in viewers {
+            var isFound = false
+            for viewer in userJoined {
+                if dict["userId"] as! String == viewer["userId"] as! String {
+                    isFound = true
+                }
+            }
+            if !isFound {
+                userJoined.append(dict)
+                self.addJoinedUser(dict: dict)
+            }
+        }
+    }
+    func findNewJoinORLeft(viewers : Array<[String:AnyObject]>)  {
+        self.findIfAlreadyJoined(viewers: viewers)
+      //  self.findIfAlreadyLeft(viewers: viewers)
+    }
     @IBAction func cameraTogglePressed(_ sender: Any) {
      //   self.swapCamera()
         webRTCClient.switchCamera()
@@ -274,6 +378,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             liveUserProfile.updateViews(name: self.liveUserNameText, url:   self.liveUserImageUrl, colorCode:   self.userProfileColorCode)
             let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
             spinner.mode = MBProgressHUDMode.indeterminate
+            spinner.isUserInteractionEnabled = false
             spinner.label.text = "Loading..."
         self.startLive()
         }
@@ -290,7 +395,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.topicValue.text = topicValueText
         }
         self.setUserStatucToLive()
-        self.reloadCommentsDummyData()
+      //  self.reloadCommentsDummyData()
 
     }
     func reloadCommentsDummyData() {
@@ -308,15 +413,21 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
    func reloadComentsView()
     {
+    DispatchQueue.main.async { [self] in
     if self.userCommentsCollectionView != nil {
         self.userCommentsCollectionView.reloadData()
         self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
             (result) in
             self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+            
+            if  self.userCommentsCollectionView.contentSize.height > self.userCommentsCollectionView.bounds.size.height
+            {
+                self.userCommentsCollectionView.flashScrollIndicators()
+            }
             // ready
         })
     }
-    
+    }
  
 
     }
@@ -356,7 +467,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     {
       
            // colorAnimationView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 2.0) {
+        UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = UIScreen.main.bounds.width
                 self.view.layoutIfNeeded()
             }
@@ -367,7 +478,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     {
       
            // colorAnimationView.layer.removeAllAnimations()
-        UIView.animate(withDuration: 2.0) {
+        UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = 16
                 self.view.layoutIfNeeded()
             }
@@ -399,7 +510,7 @@ extension JoinUserLiveVC {
     @objc func setUserStatucToLive()  {
         DispatchQueue.global(qos:.userInteractive).async { [self] in
         let op = UserLiveOperations()
-            op.userViewLive (id: "\(friendId)", liveid: liveID ) { (onlineStat) in
+            op.userViewLive (id: "\(AuthService.instance.userId)", liveid: liveID ) { (onlineStat) in
                 if let online = onlineStat["liveid"] as? String{
                  //   self.liveID = online
                 
@@ -428,11 +539,14 @@ extension JoinUserLiveVC {
                             if let views = onlineStat["viewData"] as? Array<[String:AnyObject]> {
                                
                                 numberOfViews.text = "\(views.count)"
+                                self.findNewJoinORLeft(viewers: views)
                             }
                         }
                         else
                         {
                             numberOfViews.text = "\(0)"
+                            self.findNewJoinORLeft(viewers: Array<[String : AnyObject]>())
+
                         }
                     }
                     print(onlineStat)
@@ -479,7 +593,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     
     func clientDidDisconnect(_ message: String) {
         print("Stream get error \(message)")
-   self.closeButtonPressed((Any).self)
+  // self.closeButtonPressed((Any).self)
 
     }
     
@@ -492,7 +606,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func remoteStreamRemoved() {
-        
+        self.closeButtonPressed((Any).self)
     }
     
     func localStreamStarted() {
@@ -511,7 +625,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func playFinished() {
-        self.closeButtonPressed((Any).self)
+    //    self.closeButtonPressed((Any).self)
     }
     
     func publishStarted() {
@@ -529,7 +643,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func disconnected() {
-   self.closeButtonPressed((Any).self)
+  // self.closeButtonPressed((Any).self)
     }
     
     func audioSessionDidStartPlayOrRecord() {
@@ -538,7 +652,25 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
         
-    }
+        do {
+            
+            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
+
+                    if let dict = unarchivedDictionary as? [String: AnyObject]{
+                        var comment = CommentMessage()
+                        comment.messageText = dict["message"]! as! String
+                        comment.name = dict["fullName"]! as! String
+                        comment.profilePic =  dict["profilePic"]! as! String
+                        comment.colorCode =  dict["colorCode"]! as! String
+                        comment.userId = dict["userId"]! as! String
+                        
+                        self.liveComments.append(comment)
+    
+                    }
+                } catch{
+                    print(error)
+                }
+        }
 }
 extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 {

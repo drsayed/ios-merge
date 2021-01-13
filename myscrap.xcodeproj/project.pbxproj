@@ -1628,6 +1628,8 @@
 		FBFDB1932573C0810027AF58 /* LondonHeaderTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFDB1922573C0810027AF58 /* LondonHeaderTVCell.xib */; };
 		FBFE658D25AAD16A000E8A43 /* LiveUserCommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */; };
 		FBFE658E25AAD16A000E8A43 /* LiveUserCommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */; };
+		FBFE662B25ADA083000E8A43 /* OnlineViewersPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE662A25ADA082000E8A43 /* OnlineViewersPopUpVC.swift */; };
+		FBFE662F25ADA62B000E8A43 /* OnlineViewerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE662E25ADA62A000E8A43 /* OnlineViewerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3306,6 +3308,8 @@
 		FBFDB1922573C0810027AF58 /* LondonHeaderTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LondonHeaderTVCell.xib; sourceTree = "<group>"; };
 		FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserCommentsCell.swift; sourceTree = "<group>"; };
 		FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveUserCommentsCell.xib; sourceTree = "<group>"; };
+		FBFE662A25ADA082000E8A43 /* OnlineViewersPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineViewersPopUpVC.swift; sourceTree = "<group>"; };
+		FBFE662E25ADA62A000E8A43 /* OnlineViewerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineViewerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -7377,6 +7381,8 @@
 				FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */,
 				FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */,
 				FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */,
+				FBFE662A25ADA082000E8A43 /* OnlineViewersPopUpVC.swift */,
+				FBFE662E25ADA62A000E8A43 /* OnlineViewerCell.swift */,
 			);
 			name = LiveModule;
 			sourceTree = "<group>";
@@ -9006,6 +9012,7 @@
 				9476562822D487DE00555A41 /* LiveOnlineScrollCell.swift in Sources */,
 				223908951FB7315B005CD63E /* Date-Ext.swift in Sources */,
 				22565C721F8C8BCB00CCD749 /* ReportedFeedTextCell.swift in Sources */,
+				FBFE662F25ADA62B000E8A43 /* OnlineViewerCell.swift in Sources */,
 				947710182448822300336F40 /* Helper-EditCompanyAdminViewVC.swift in Sources */,
 				FBB0CEB42525C63F0065656C /* VideoFullscreenTransitioner.swift in Sources */,
 				22CF36071FDBCB6800F04A3A /* MemberTVC.swift in Sources */,
@@ -9322,6 +9329,7 @@
 				94F37E1C212E829C00B7D49D /* FeedListingCell.swift in Sources */,
 				94941E3420FE0C9B00D11A67 /* ISRISearchController.swift in Sources */,
 				227060251FF4A76100C1B8D2 /* BadgeView.swift in Sources */,
+				FBFE662B25ADA083000E8A43 /* OnlineViewersPopUpVC.swift in Sources */,
 				22845F602029991A008803B3 /* Utilities.swift in Sources */,
 				228462C71F553126008F7495 /* SingleNewsCell.swift in Sources */,
 				FBB0CEB02525C63F0065656C /* VideoLoadManager.swift in Sources */,
@@ -9940,7 +9948,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.0;
+				CURRENT_PROJECT_VERSION = 9.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10031,7 +10039,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.0;
+				CURRENT_PROJECT_VERSION = 9.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;

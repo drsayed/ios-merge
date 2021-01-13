@@ -149,6 +149,7 @@ class MenuActionCell: UITableViewCell {
         }
     }
     @objc private func notificationChanged(_ notification: Notification){
+        
         let notifCount = NotificationService.instance.notificationCount!
         
         if notifCount == 0 {

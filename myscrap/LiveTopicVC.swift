@@ -35,33 +35,28 @@ class LiveTopicVC: UIViewController {
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
         self.topicTtitle.text = "Write Topic :"
-        self.topicValue.text = "Topic"
+        self.topicValue.text = "Type"
         announcementView.layer.cornerRadius =  announcementView.frame.size.height/2
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnTopic(tapGestureRecognizer:)))
         announcementView.isUserInteractionEnabled = true
         announcementView.addGestureRecognizer(tapGestureRecognizer)
 
-        let imageCam = UIImage(named: "ic_rotate_camera")?.withRenderingMode(.alwaysTemplate)
+        let imageCam = UIImage(named: "cameraSC")?.withRenderingMode(.alwaysTemplate)
         cameraToggleButton.setImage(imageCam, for: .normal)
         cameraToggleButton.tintColor = UIColor.white
         cameraToggleButton.drawShadow()
-        
-        let imageAnnounce = UIImage(named: "announce")?.withRenderingMode(.alwaysTemplate)
-        self.announceImage.image = imageAnnounce
-        self.announceImage.tintColor = .white
-        
+       
+       self.announceImage.image =  UIImage.fontAwesomeIcon(name: .bullhorn, style: .solid, textColor: UIColor.white , size: CGSize(width: 30, height: 30))
+      
         let imageClose = UIImage(named: "close")?.withRenderingMode(.alwaysTemplate)
         closebutton.setImage(imageClose, for: .normal)
         closebutton.tintColor = UIColor.white
         closebutton.drawShadow()
-        
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-           gradientLayer.frame.size = livebutton.frame.size
-           gradientLayer.colors =
-            [UIColor(red: 0.25, green: 0.69, blue: 0.16, alpha: 1.00).cgColor , UIColor.MyScrapGreen.cgColor]
-           //Use diffrent colors
-        livebutton.layer.addSublayer(gradientLayer)
-        livebutton.layer.cornerRadius = 5
+ 
+
+        self.livebutton.applyGradient(colours: [UIColor(red: 0.11, green: 0.32, blue: 0.12, alpha: 1.00), UIColor(red: 0.25, green: 0.69, blue: 0.16, alpha: 1.00)])
+
+        livebutton.layer.cornerRadius = livebutton.frame.size.height/2
         livebutton.clipsToBounds = true
         self.setUpCamera()
         
@@ -84,7 +79,7 @@ class LiveTopicVC: UIViewController {
   {
     customAlert.providesPresentationContextTransitionStyle = true
     customAlert.definesPresentationContext = true
-        if topicValue.text != "Topic"  {
+        if topicValue.text != "Type"  {
         customAlert.alertTextField.text = topicValue.text
         }
 
@@ -238,8 +233,18 @@ extension LiveTopicVC: CustomAlertViewDelegate {
     func okButtonTapped(selectedOption: String, textFieldValue: String) {
         print("okButtonTapped with \(selectedOption) option selected")
         print("TextField has value: \(textFieldValue)")
-        self.topicTtitle.text = "Topic :"
-        self.topicValue.text = textFieldValue
+      
+        if textFieldValue.length > 0 {
+            self.topicTtitle.text = "Topic :"
+            self.topicValue.text = textFieldValue
+            self.topicValue.textColor = .white
+        }
+        else
+        {
+            self.topicTtitle.text = "Write topic :"
+            self.topicValue.textColor = .lightGray
+        }
+     
     }
     
     func cancelButtonTapped() {
@@ -263,4 +268,20 @@ class ActualGradientButton: UIButton {
         layer.insertSublayer(l, at: 0)
         return l
     }()
+}
+extension UIView {
+    @discardableResult
+    func applyGradient(colours: [UIColor]) -> CAGradientLayer {
+        return self.applyGradient(colours: colours, locations: nil)
+    }
+
+    @discardableResult
+    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> CAGradientLayer {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.locations = locations
+        self.layer.insertSublayer(gradient, at: 0)
+        return gradient
+    }
 }

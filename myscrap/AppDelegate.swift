@@ -16,7 +16,7 @@ import Firebase
 import os.log
 import AVKit
 import AVFoundation
-
+import Starscream
 let uiRealm = try! Realm()
 let network: NetworkManager = NetworkManager.sharedInstance
 
@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     let locationManager = CLLocationManager()
     var bgTask : UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier.invalid
     var ping : XMPPPing!
+    let webRTCClient: AntMediaClient = AntMediaClient.init()
+
     var xmppAutoPing: XMPPAutoPing!
     var backgroundUpdateTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
     var fireBaseConfig = false
@@ -54,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             Messaging.messaging().delegate = self
             fireBaseConfig = true
         }
+        webRTCClient.delegate = self
 
         if launchOptions != nil {
             //opened from a push notification when the app is closed
@@ -827,4 +830,78 @@ extension AppDelegate: PKPushRegistryDelegate {
         bgTask = UIBackgroundTaskIdentifier.invalid
     }
     
+}
+extension AppDelegate : AntMediaClientDelegate
+{
+    func clientDidConnect(_ client: AntMediaClient) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+
+    }
+    
+    func clientDidDisconnect(_ message: String) {
+        print("Stream get error \(message)")
+    }
+    
+    func clientHasError(_ message: String) {
+        print("Stream get error \(message)")
+    }
+    
+    func remoteStreamStarted() {
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+
+    }
+    
+    func remoteStreamRemoved() {
+        
+    }
+    
+    func localStreamStarted() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+
+    }
+    
+    func playStarted() {
+        
+    }
+    
+    func playFinished() {
+        
+    }
+    
+    func publishStarted() {
+     
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PublishStarted"), object: nil, userInfo: nil)
+
+    
+    }
+    
+    func publishFinished() {
+        
+    }
+    
+    func disconnected() {
+        
+    }
+    
+    func audioSessionDidStartPlayOrRecord() {
+        webRTCClient.speakerOn()
+    }
+    
+    func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
+        
+        do {
+            
+            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
+
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
+        
+
+            
+                
+        }
+        catch{
+            print(error)
+        }
+}
 }
