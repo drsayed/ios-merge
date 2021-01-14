@@ -32,9 +32,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.reloadComentsView()
         }
     }
+    @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
     @IBOutlet weak var numberOfViews: UILabel!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
     @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var liveTimerView: UIView!
     @IBOutlet weak var liveTimerTextLable: UILabel!
@@ -72,6 +72,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBOutlet weak var closebutton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        } else {
+            // Fallback on earlier versions
+        }
         self.navigationController?.navigationBar.isHidden = true
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
@@ -93,7 +98,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
   
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.ConnectionEstablished(_:)), name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.OnlineViewTapped(_:)))
@@ -180,6 +188,12 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
         }
     }
+    @objc func AppCloseed(_ notification: NSNotification) {
+        DispatchQueue.main.async { [self] in
+            self.navigationController?.navigationBar.isHidden = false
+                self.navigationController?.popToRootViewController(animated: true)
+        }
+     }
     @objc func PublishStarted(_ notification: NSNotification) {
         DispatchQueue.main.async { [weak self] in
     //    MBProgressHUD.hide(for: self.view , animated: true)
@@ -548,12 +562,17 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @objc func keyboardWillAppear() {
         //Do something here
+        self.commentsViewHeight.constant = 200
         self.reloadComentsView()
     }
 
     @objc func keyboardWillDisappear() {
         //Do something here
+        self.commentsViewHeight.constant = 240
         self.reloadComentsView()
+    }
+    override func didReceiveMemoryWarning() {
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -569,16 +588,20 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.topicValue.text = topicValueText
         }
         if !appDelegate.webRTCClient.isConnected() {
+            DispatchQueue.main.async { [self] in
+            self.captureSession.startRunning()
             self.addActionAlert()
+            }
         }
         else
         {
-            DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
-                self.captureSession.startRunning()
-                //Step 13
-            }
+            self.reloadComentsView()
+//            DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
+//                self.captureSession.startRunning()
+//                //Step 13
+//            }
             
-            appDelegate.webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
+         //   appDelegate.webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
 
         }
         
@@ -740,8 +763,9 @@ extension UserLiveVC: CustomAlertViewDelegate {
     }
    @objc func cancelButtonTapped() {
         print("cancelButtonTapped")
-        self.navigationController?.navigationBar.isHidden = false
-
+        
+       appDelegate.webRTCClient.stop()
+    self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.popToRootViewController(animated: true)
     }
 }
@@ -780,9 +804,9 @@ extension UserLiveVC: OnlineViewersDelegate {
             vc.friendId = FriendID
             UserDefaults.standard.set(FriendID, forKey: "friendId")
             self.navigationController?.navigationBar.isHidden = false
-            self.present(vc, animated: true, completion: nil)
+          //  self.present(vc, animated: true, completion: nil)
 
-         //   self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 

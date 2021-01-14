@@ -49,24 +49,24 @@ extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let item = datasource[indexPath.item]
-//        if item.live! {
-//
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveFriendCell", for: indexPath) as? LiveFriendCell else { return UICollectionViewCell() }
-//
-//
-//            cell.configFeedHeaderCell(item: datasource[indexPath.item])
-////            cell.addAnimation()
-//            return cell
-//        }
-//        else
-//        {
+        let item = datasource[indexPath.item]
+        if item.live! {
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveFriendCell", for: indexPath) as? LiveFriendCell else { return UICollectionViewCell() }
+         
+            
+            cell.configFeedHeaderCell(item: datasource[indexPath.item])
+//            cell.addAnimation()
+            return cell
+        }
+        else
+        {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeaderFriendCell", for: indexPath) as? HeaderFriendCell else { return UICollectionViewCell() }
          
             
             cell.configFeedHeaderCell(item: datasource[indexPath.item])
             return cell
-   //     }
+        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let delegate = self.delegate{

@@ -506,6 +506,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     func applicationDidEnterBackground(_ application: UIApplication) {
         //stopNetworkReachable()
+        if webRTCClient.isConnected() {
+            self.webRTCClient.stop()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AppCloseed"), object: nil, userInfo: nil)
+
+        }
+      
         if AuthStatus.instance.isLoggedIn {
             //  goBackground()
             self.backgroundUpdateTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
@@ -550,6 +556,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         //commenting to test 11/march/2020 - >reverted back 12/March
         XMPPService.instance.offline()
         XMPPService.instance.disconnect()
+        if webRTCClient.isConnected() {
+            self.webRTCClient.stop()
+        }
+      
         self.saveContext()
     }
     

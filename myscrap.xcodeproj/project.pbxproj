@@ -9948,7 +9948,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.0;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -9976,7 +9976,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
 				);
-				MARKETING_VERSION = 1.53.46;
+				MARKETING_VERSION = 1.53.47;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -10039,7 +10039,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.0;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
@@ -10068,7 +10068,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
 				);
-				MARKETING_VERSION = 1.53.46;
+				MARKETING_VERSION = 1.53.47;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",

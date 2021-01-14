@@ -4365,7 +4365,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fb-XJ-A5m" customClass="CircleView" customModule="myscrap" customModuleProvider="target">
-                                        <rect key="frame" x="65" y="8" width="257" height="39"/>
+                                        <rect key="frame" x="65" y="8" width="220" height="39"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's on your mind?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7h-vl-KHs">
                                                 <rect key="frame" x="20" y="9" width="165.5" height="21"/>
@@ -4381,7 +4381,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kC8-JB-FTP" userLabel="Camera">
-                                        <rect key="frame" x="328" y="13" width="39" height="29"/>
+                                        <rect key="frame" x="291" y="13" width="39" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="0gZ-Bj-H0i"/>
                                             <constraint firstAttribute="width" constant="39" id="CRu-UE-SHl"/>
@@ -4391,7 +4391,7 @@
                                             <action selector="cameraClicked:" destination="FRF-Rk-5mO" eventType="touchUpInside" id="f5s-6x-cZG"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HF-io-C6C" userLabel="Camera">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HF-io-C6C" userLabel="Camera">
                                         <rect key="frame" x="337" y="12.5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="UbU-7G-aQy"/>
@@ -4403,7 +4403,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Je0-Wq-Sdv" userLabel="PostBtn">
-                                        <rect key="frame" x="75" y="8" width="247" height="39"/>
+                                        <rect key="frame" x="75" y="8" width="210" height="39"/>
                                         <connections>
                                             <action selector="postBtnClicked:" destination="FRF-Rk-5mO" eventType="touchUpInside" id="pMG-tW-h2j"/>
                                         </connections>
@@ -4419,7 +4419,7 @@
                                     <constraint firstItem="kC8-JB-FTP" firstAttribute="centerY" secondItem="3HF-io-C6C" secondAttribute="centerY" id="IlA-vd-uQh"/>
                                     <constraint firstItem="kC8-JB-FTP" firstAttribute="centerY" secondItem="PXW-Td-gUp" secondAttribute="centerY" id="O2J-Ju-Imz"/>
                                     <constraint firstItem="Je0-Wq-Sdv" firstAttribute="top" secondItem="1fb-XJ-A5m" secondAttribute="top" id="Vy4-bn-WHE"/>
-                                    <constraint firstItem="3HF-io-C6C" firstAttribute="leading" secondItem="kC8-JB-FTP" secondAttribute="trailing" constant="-30" id="W9b-hi-12q"/>
+                                    <constraint firstItem="3HF-io-C6C" firstAttribute="leading" secondItem="kC8-JB-FTP" secondAttribute="trailing" constant="7" id="W9b-hi-12q"/>
                                     <constraint firstItem="kC8-JB-FTP" firstAttribute="leading" secondItem="1fb-XJ-A5m" secondAttribute="trailing" constant="6" id="hPX-bj-2xP"/>
                                     <constraint firstAttribute="bottom" secondItem="XTU-ae-aOZ" secondAttribute="bottom" constant="8" id="jEO-wk-ua9"/>
                                     <constraint firstAttribute="bottom" secondItem="1fb-XJ-A5m" secondAttribute="bottom" constant="8" id="jF5-0l-HvW"/>

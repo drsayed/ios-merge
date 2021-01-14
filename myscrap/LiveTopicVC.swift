@@ -31,6 +31,11 @@ class LiveTopicVC: UIViewController {
     @IBOutlet weak var announceImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        } else {
+            // Fallback on earlier versions
+        }
         self.navigationController?.navigationBar.isHidden = true
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium

@@ -1918,21 +1918,21 @@ extension FeedsVC: FeedVCHeaderCellDelegate{
     
     
     func tappedFriendSeelected (activeuser: ActiveUsers, isLive: Bool) {
-//        if isLive {
-//            if let vc = JoinUserLiveVC.storyBoardInstance() {
-//                  vc.friendId = activeuser.userid!
-//                  vc.liveID = activeuser.liveId!
-//                vc.liveUserNameValue  = activeuser.name!
-//                vc.liveUserImageValue  = activeuser.profilePic!
-//                vc.liveUserProfileColor  = activeuser.colorCode!
-//                vc.liveUsertopicValue  = activeuser.topic!
-//
-//                   self.navigationController?.pushViewController(vc, animated: true)
-//                }
-//        }
-//        else{
+        if isLive {
+            if let vc = JoinUserLiveVC.storyBoardInstance() {
+                  vc.friendId = activeuser.userid!
+                  vc.liveID = activeuser.liveId!
+                vc.liveUserNameValue  = activeuser.name!
+                vc.liveUserImageValue  = activeuser.profilePic!
+                vc.liveUserProfileColor  = activeuser.colorCode!
+                vc.liveUsertopicValue  = activeuser.topic!
+
+                   self.navigationController?.pushViewController(vc, animated: true)
+                }
+        }
+        else{
             performFriendView(friendId: activeuser.userid!)
- //       }
+      }
     }
 
     

@@ -19,6 +19,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveUserImageValue  = ""
     var liveUserProfileColor = ""
     var liveUsertopicValue = ""
+    
     var userJoined = Array<[String:AnyObject]>()
 
     var timer = Timer()
@@ -29,6 +30,17 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.reloadComentsView()
         }
     }
+    
+    @IBOutlet weak var helloButton: UIButton!
+    @IBOutlet weak var emoji1Button: UIButton!
+    @IBOutlet weak var emoji2Button: UIButton!
+    @IBOutlet weak var emoji3Button: UIButton!
+    
+    @IBOutlet weak var emojo5Button: UIButton!
+    @IBOutlet weak var emoji4Button: UIButton!
+    
+    @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
+
     @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var UserCommentsBackground: UIView!
     @IBOutlet weak var userCommentsCollectionView: UICollectionView!
@@ -77,12 +89,38 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        } else {
+            // Fallback on earlier versions
+        }
         self.navigationController?.navigationBar.isHidden = true
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
       //  self.topicTtitle.text = "Topic :"
         self.topicValue.text = topicValueText
       
+        helloButton.layer.cornerRadius =  helloButton.frame.size.height/2
+        emoji1Button.layer.cornerRadius =  emoji1Button.frame.size.height/2
+        emoji2Button.layer.cornerRadius =  emoji2Button.frame.size.height/2
+        emoji3Button.layer.cornerRadius =  emoji3Button.frame.size.height/2
+        emoji4Button.layer.cornerRadius =  emoji4Button.frame.size.height/2
+        emojo5Button.layer.cornerRadius =  emojo5Button.frame.size.height/2
+
+        helloButton.backgroundColor = .darkGray
+        emoji1Button.backgroundColor = .darkGray
+        emoji2Button.backgroundColor = .darkGray
+        emoji3Button.backgroundColor = .darkGray
+        emoji4Button.backgroundColor = .darkGray
+        emojo5Button.backgroundColor = .darkGray
+        
+        helloButton.setTitle("Hello", for: .normal)
+        emoji1Button.setTitle("😂", for: .normal)
+        emoji2Button.setTitle("😍", for: .normal)
+        emoji3Button.setTitle("☺️", for: .normal)
+        emoji4Button.setTitle("✋🏻", for: .normal)
+        emojo5Button.setTitle("👍🏻", for: .normal)
+        
         announcementView.layer.cornerRadius =  announcementView.frame.size.height/2
         liveStreamerView.layer.cornerRadius =  liveStreamerView.frame.size.height/2
         liveUserImage.layer.cornerRadius =  liveUserImage.frame.size.height/2
@@ -97,7 +135,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
         let image = UIImage(named: "send")?.withRenderingMode(.alwaysTemplate)
         sendCommentButton.setImage(image, for: .normal)
-        sendCommentButton.tintColor = UIColor.gray
+        //sendCommentButton.tintColor = UIColor.gray
+        sendCommentButton.tintColor = UIColor.MyScrapGreen
+
         commentField.textColor = UIColor.gray
         commentField.delegate = self
         
@@ -143,7 +183,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             sendCommentButton.tintColor = UIColor.MyScrapGreen
         }
         else{
-            sendCommentButton.tintColor = UIColor.gray
+            sendCommentButton.tintColor = UIColor.MyScrapGreen
+
+           // sendCommentButton.tintColor = UIColor.gray
         }
     }
     @objc func handleGesture(gesture: UISwipeGestureRecognizer)
@@ -182,6 +224,39 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
    }
     
+    @IBAction func EmojiButtonsPressed(_ sender: UIButton) {
+        var message = ""
+        if sender.tag == 1 {
+            message  = "Hello"
+        }
+       else if sender.tag == 2 {
+        message = "😂"
+        }
+       else if sender.tag == 3 {
+        message = "😍"
+        }
+       else if sender.tag == 4 {
+        message = "☺️"
+
+        }
+       else if sender.tag == 5 {
+        message = "✋🏻"
+        }
+       else if sender.tag == 6 {
+        message = "👍🏻"
+        }
+        var comment = CommentMessage()
+        comment.messageText = message
+        comment.name = AuthService.instance.fullName
+        comment.profilePic = AuthService.instance.profilePic
+        comment.colorCode = AuthService.instance.colorCode
+        comment.userId = AuthService.instance.userId
+        self.liveComments.append(comment)
+        let dic = ["fullName": AuthService.instance.fullName, "profilePic": AuthService.instance.profilePic , "message": message , "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
+        
+        let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+        webRTCClient.sendData(data: data, binary: false)
+    }
     @IBAction func sendCommentPressed(_ sender: Any) {
         
         if commentField.text!.length > 0 {
@@ -198,7 +273,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             let data = NSKeyedArchiver.archivedData(withRootObject: dic)
             webRTCClient.sendData(data: data, binary: false)
             commentField.text = ""
-            sendCommentButton.tintColor = UIColor.gray
+            sendCommentButton.tintColor = UIColor.MyScrapGreen
+
+         //   sendCommentButton.tintColor = UIColor.gray
 
         }
         
@@ -354,11 +431,13 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @objc func keyboardWillAppear() {
         //Do something here
+        self.commentsViewHeight.constant = 200
         self.reloadComentsView()
     }
 
     @objc func keyboardWillDisappear() {
         //Do something here
+        self.commentsViewHeight.constant = 240
         self.reloadComentsView()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -613,6 +692,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
         
     }
     
+    
     func playStarted() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -625,7 +705,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func playFinished() {
-    //    self.closeButtonPressed((Any).self)
+    self.closeButtonPressed((Any).self)
     }
     
     func publishStarted() {
