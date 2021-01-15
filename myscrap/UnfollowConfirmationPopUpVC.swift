@@ -69,25 +69,26 @@ class UnfollowConfirmationPopUpVC: BaseVC {
         
         
         
-        guard let item = profileItem else { return }
+       // guard let item = profileItem else { return }
 
-        if item.followStatusType != 2
-        {
-            followingStatus = false
-        }
-        else{
-            followingStatus = true
-        }
+//        if item.followStatusType != 2
+//        {
+//            followingStatus = false
+//        }
+//        else{
+//            followingStatus = true
+//        }
         
         userProfileVIew.updateViews(name:liveUserNameValue, url: liveUserImageValue , colorCode: liveUserProfileColor)
-        let st = "Are you sure you want to " + "Unfollow \(liveUserNameValue)" //+ "\n"
+        let differentColorText = "Unfollow \(liveUserNameValue)?"
+        let st = "Are you sure you want to " + "\(differentColorText)" //+ "\n"
 
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 5
         
         let attributedString = NSMutableAttributedString(string: st, attributes: [.foregroundColor: UIColor.BLACK_ALPHA,NSAttributedString.Key.font: Fonts.descriptionFont, NSAttributedString.Key.paragraphStyle: style])
         
-            let ranges = st.subStringranges(of: liveUserNameValue)
+            let ranges = st.subStringranges(of: differentColorText)
             for range in ranges{
                 let rnge: NSRange = st.nsRange(from: range)
                 

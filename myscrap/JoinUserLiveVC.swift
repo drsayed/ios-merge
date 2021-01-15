@@ -188,6 +188,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.setUpCamera()
         self.setUpCommentViews()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        liveStreamerView.addGestureRecognizer(tap)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
@@ -204,10 +207,22 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
+        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+        spinner.mode = MBProgressHUDMode.indeterminate
+        spinner.isUserInteractionEnabled = false
+        spinner.label.text = "Loading..."
+        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
+
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
+           
+        
             //Step 13
         }
+    }
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        self.showFollowingAlert()
     }
     @objc func RecievedMessage(_ notification: NSNotification) {
             print(notification.userInfo ?? "")
@@ -547,6 +562,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.startLive()
+        self.reloadComentsView()
         self.getProfile()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -561,11 +578,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 self.topicValue.text = topicValueText
             }
             liveUserProfile.updateViews(name: self.liveUserNameText, url:   self.liveUserImageUrl, colorCode:   self.userProfileColorCode)
-            let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
-            spinner.mode = MBProgressHUDMode.indeterminate
-            spinner.isUserInteractionEnabled = false
-            spinner.label.text = "Loading..."
-        self.startLive()
+           
         }
         self.navigationController?.navigationBar.isHidden = true
         IQKeyboardManager.sharedManager().enable = false
@@ -718,7 +731,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
 }
 extension JoinUserLiveVC: unFollowConfirmDelegate {
-    
+   
     func unFollowPressed(FriendID: String) {
        
             self.serviceFollowing.sendUnFollowRequest(friendId: FriendID)
@@ -729,25 +742,28 @@ extension JoinUserLiveVC: unFollowConfirmDelegate {
     }
 }
 extension JoinUserLiveVC: LiveUserFollowDelegate {
-    
-    func followButtonpressed(FriendID: String, toFollowStatus: Int) {
+    func followButtonpressed(FriendID: String, toFollowStatus: Int, controller: LiveUserFollowPopUpVC) {
         if toFollowStatus == 0 {
             self.serviceFollowing.sendFollowRequest(friendId: FriendID)
            // let message = "Started Following" //"Successfully started following"
           //  showToast(message: message)
             followingStatus = true
             self.reloadComentsView()
+            controller.dismiss(animated: true, completion: nil)
         }
         else
         {
             // Show Unfollow popup
-            self.showUnFollowingAlert()
+            controller.dismiss(animated: true, completion: {
+                self.showUnFollowingAlert()
+            })
+        
             
             
             
         }
-        
     }
+
     
     func chatButtonpressed(FriendID: String, toFollowStatus: Int) {
         
@@ -798,7 +814,6 @@ extension JoinUserLiveVC {
               print("room\(liveID)")
                //Don't forget to write your server url.
         appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: "room\(liveID)", token: "", mode: .play, enableDataChannel: true)
-        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
         appDelegate.webRTCClient.start()
         
 //        webRTCClient.setOptions(url: "http://3.85.1.123:5080/WebRTCAppEE/play.html?name=room1148", streamId: "room\(1148)", token: "room\(liveID)" , mode: .play, enableDataChannel: true)
@@ -994,7 +1009,7 @@ extension JoinUserLiveVC : ProfileServiceDelegate{
 extension JoinUserLiveVC : MemberDelegate{
     func DidReceivedData(data: [MemberItem]) {
         DispatchQueue.main.async {
-          
+            self.getProfile()
         }
     }
     

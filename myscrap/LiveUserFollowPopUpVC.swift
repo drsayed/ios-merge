@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import AVKit
 protocol LiveUserFollowDelegate : class {
-    func followButtonpressed(FriendID : String, toFollowStatus : Int)
+    func followButtonpressed(FriendID : String, toFollowStatus : Int,controller : LiveUserFollowPopUpVC)
     func chatButtonpressed(FriendID : String, toFollowStatus : Int)
     func followerCountPressed(FriendID : String)
     func FollowingCountPressed(FriendID : String)
@@ -113,12 +113,12 @@ class LiveUserFollowPopUpVC: BaseVC {
         if followingStatus {
 
             followButton.setTitle("Following", for: .normal)
-            followButton.setImage( UIImage.fontAwesomeIcon(name: .check, style: .solid, textColor: UIColor.white , size: CGSize(width: 30, height: 30)), for: .normal)
+            followButton.setImage( UIImage.fontAwesomeIcon(name: .check, style: .solid, textColor: UIColor.white , size: CGSize(width: 20, height: 20)), for: .normal)
         }
         else
         {
             followButton.setTitle("Follow", for: .normal)
-            followButton.setImage( UIImage.fontAwesomeIcon(name: .plus, style: .solid, textColor: UIColor.white , size: CGSize(width: 30, height: 30)), for: .normal)
+            followButton.setImage( UIImage.fontAwesomeIcon(name: .plus, style: .solid, textColor: UIColor.white , size: CGSize(width: 20, height: 20)), for: .normal)
         }
         
         let image = UIImage(named: "ic_chat")?.withRenderingMode(.alwaysTemplate)
@@ -167,8 +167,8 @@ class LiveUserFollowPopUpVC: BaseVC {
     }
     
     @IBAction func FollowButtonPressed(_ sender: Any) {
-        delegate?.followButtonpressed(FriendID: friendId, toFollowStatus: followingStatus ? 1 : 0)
-        self.dismiss(animated: true, completion: nil)
+        delegate?.followButtonpressed(FriendID: friendId, toFollowStatus: followingStatus ? 1 : 0 , controller: self)
+       // self.dismiss(animated: true, completion: nil)
 
     }
     

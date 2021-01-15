@@ -580,16 +580,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 self.navController?.pushViewController(vc, animated: true)
             }
         case .user:
-            if notificationBody!.contains("business card")
+            if webRTCClient.isConnected()
             {
-                if let id = userId, let vc = FriendVC.storyBoardInstance(){
-                    vc.friendId = id
-                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-                    vc.isfromCardNoti = "1"
-                    self.navController?.pushViewController(vc, animated: true)
-                }
-            }
-            else{
                 if let id = userId, let vc = FriendVC.storyBoardInstance(){
                     vc.friendId = id
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
@@ -598,18 +590,31 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     self.navController?.pushViewController(vc, animated: true)
                 }
             }
-        case .User:
-            if notificationBody!.contains("business card")
+            else
             {
                 if let id = userId, let vc = FriendVC.storyBoardInstance(){
                     vc.friendId = id
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
                     
-                    vc.isfromCardNoti = "1"
+                    vc.isfromCardNoti = ""
                     self.navController?.pushViewController(vc, animated: true)
                 }
             }
-            else{
+            
+        case .User:
+            if webRTCClient.isConnected()
+            {
+                if let id = userId, let vc = FriendVC.storyBoardInstance(){
+                    vc.friendId = id
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    
+                    vc.isfromCardNoti = ""
+                    self.navController?.pushViewController(vc, animated: true)
+                }
+            }
+            else
+            {
+           
                 if let id = userId, let vc = FriendVC.storyBoardInstance(){
                     vc.friendId = id
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
