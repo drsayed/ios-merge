@@ -845,7 +845,8 @@ extension AppDelegate : AntMediaClientDelegate
 {
     func clientDidConnect(_ client: AntMediaClient) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
-
+      
+        
     }
     
     func clientDidDisconnect(_ message: String) {
@@ -854,6 +855,7 @@ extension AppDelegate : AntMediaClientDelegate
     
     func clientHasError(_ message: String) {
         print("Stream get error \(message)")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clientHasError"), object: nil, userInfo: nil)
     }
     
     func remoteStreamStarted() {
@@ -872,11 +874,11 @@ extension AppDelegate : AntMediaClientDelegate
     }
     
     func playStarted() {
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
+       
     }
-    
     func playFinished() {
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
     }
     
     func publishStarted() {

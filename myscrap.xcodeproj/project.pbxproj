@@ -1616,6 +1616,10 @@
 		FBD7DDA02566FFD10068768C /* LandScapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7DD9E2566FFCC0068768C /* LandScapCell.swift */; };
 		FBD7DDA12566FFD10068768C /* LandScapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD7DD9F2566FFD00068768C /* LandScapCell.xib */; };
 		FBDDDCEE25822FA600592782 /* TMImageZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDDDCED25822FA600592782 /* TMImageZoom.m */; };
+		FBE4FFE525B0C64600F067EF /* LiveUserFollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */; };
+		FBE4FFE625B0C64600F067EF /* LiveUserFollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */; };
+		FBE4FFEA25B0D86300F067EF /* LiveUserFollowPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */; };
+		FBE4FFEE25B1CE9700F067EF /* UnfollowConfirmationPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4FFED25B1CE9700F067EF /* UnfollowConfirmationPopUpVC.swift */; };
 		FBE5E0512513AFEA00F5EB93 /* UserListImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E04F2513AFE700F5EB93 /* UserListImageCell.swift */; };
 		FBE5E0522513AFEA00F5EB93 /* UserListImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE5E0502513AFEA00F5EB93 /* UserListImageCell.xib */; };
 		FBE5E0552513B1FF00F5EB93 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE5E0532513B1FB00F5EB93 /* Common.m */; };
@@ -3294,6 +3298,10 @@
 		FBD7DD9F2566FFD00068768C /* LandScapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandScapCell.xib; sourceTree = "<group>"; };
 		FBDDDCEA25822FA100592782 /* TMImageZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMImageZoom.h; sourceTree = "<group>"; };
 		FBDDDCED25822FA600592782 /* TMImageZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMImageZoom.m; sourceTree = "<group>"; };
+		FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserFollowCell.swift; sourceTree = "<group>"; };
+		FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveUserFollowCell.xib; sourceTree = "<group>"; };
+		FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserFollowPopUpVC.swift; sourceTree = "<group>"; };
+		FBE4FFED25B1CE9700F067EF /* UnfollowConfirmationPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfollowConfirmationPopUpVC.swift; sourceTree = "<group>"; };
 		FBE5E04F2513AFE700F5EB93 /* UserListImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListImageCell.swift; sourceTree = "<group>"; };
 		FBE5E0502513AFEA00F5EB93 /* UserListImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListImageCell.xib; sourceTree = "<group>"; };
 		FBE5E0532513B1FB00F5EB93 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
@@ -7381,6 +7389,10 @@
 				FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */,
 				FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */,
 				FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */,
+				FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */,
+				FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */,
+				FBE4FFED25B1CE9700F067EF /* UnfollowConfirmationPopUpVC.swift */,
+				FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */,
 				FBFE662A25ADA082000E8A43 /* OnlineViewersPopUpVC.swift */,
 				FBFE662E25ADA62A000E8A43 /* OnlineViewerCell.swift */,
 			);
@@ -8473,6 +8485,7 @@
 				9414DEBC216F36710082C1D3 /* TN-128.png in Resources */,
 				FB322F45251776EB0046EB98 /* PortraitVideoCell.xib in Resources */,
 				9414DDEE216F36700082C1D3 /* KN-128.png in Resources */,
+				FBE4FFE625B0C64600F067EF /* LiveUserFollowCell.xib in Resources */,
 				FBD7DD9D2566F8A10068768C /* LandScapVideoCell.xib in Resources */,
 				FBBEDAD9250FB8F60030FF19 /* HeaderFriendCell.xib in Resources */,
 				9414DE42216F36700082C1D3 /* NE-128.png in Resources */,
@@ -9297,12 +9310,14 @@
 				94CD4813232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
 				9482C45C222CE7B200DE83A1 /* OnlinePresenceModel.swift in Sources */,
 				FB91977A250A6231003AF533 /* ScrapTitleTVCell.swift in Sources */,
+				FBE4FFE525B0C64600F067EF /* LiveUserFollowCell.swift in Sources */,
 				22FE06BD1FAAF4360024E8A8 /* TimeImageView.swift in Sources */,
 				94CD4818232F5B2100FCBD22 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
 				947AB2732100B3CB00DA45B0 /* DetailListingOfferVC.swift in Sources */,
 				22F7022C200393D10038DD32 /* EventDetailVC.swift in Sources */,
 				18277ACE257E699300D5AC15 /* ReportAlertView.swift in Sources */,
 				FBB0CEC02525E9BD0065656C /* ResizeableImageView.swift in Sources */,
+				FBE4FFEE25B1CE9700F067EF /* UnfollowConfirmationPopUpVC.swift in Sources */,
 				947AB2792100B88500DA45B0 /* SliderView.swift in Sources */,
 				948F992722DDC13C00EA6CA9 /* FeedsCMDetailsVC.swift in Sources */,
 				FB7D07D825A251B600DD4249 /* AntMediaClient.swift in Sources */,
@@ -9690,6 +9705,7 @@
 				94D4BD2C209B3900001CC1B4 /* NSConstraintLayoutSet.swift in Sources */,
 				FB8C9533250CD4DE000E1B40 /* CustomBlurEffectView.swift in Sources */,
 				FBB0CEB32525C63F0065656C /* VideoPlayerView.swift in Sources */,
+				FBE4FFEA25B0D86300F067EF /* LiveUserFollowPopUpVC.swift in Sources */,
 				2291EA831FB42F95009EFA55 /* Member-Ext.swift in Sources */,
 				220EDA1E1FA766B100FEAF3D /* EditButton.swift in Sources */,
 				224A998A1FDD19D50031AE12 /* Mention.swift in Sources */,
@@ -9948,7 +9964,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 4.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10039,7 +10055,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 4.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;

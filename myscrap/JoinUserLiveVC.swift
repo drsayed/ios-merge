@@ -12,6 +12,8 @@ import AVFoundation
 import IQKeyboardManagerSwift
 import Starscream
 class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
+    
+    
 
     var liveID = ""
     var friendId = ""
@@ -19,6 +21,13 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveUserImageValue  = ""
     var liveUserProfileColor = ""
     var liveUsertopicValue = ""
+    var followingStatus = false
+    fileprivate var profileItem:ProfileData?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+    fileprivate let service = ProfileService()
+    fileprivate var serviceFollowing = MemmberModel()
+
     
     var userJoined = Array<[String:AnyObject]>()
 
@@ -36,17 +45,20 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBOutlet weak var emoji2Button: UIButton!
     @IBOutlet weak var emoji3Button: UIButton!
     
+    @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var emojo5Button: UIButton!
     @IBOutlet weak var emoji4Button: UIButton!
     
     @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var followButtonwidth: NSLayoutConstraint!
+    
     @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var UserCommentsBackground: UIView!
     @IBOutlet weak var userCommentsCollectionView: UICollectionView!
     @IBOutlet weak var liveUserProfile: ProfileView!
     @IBOutlet weak var liveUserName: UILabel!
     @IBOutlet weak var liveUserImage: UIImageView!
+    
     @IBOutlet weak var liveStreamerView: UIView!
     @IBOutlet weak var numberOfViews: UILabel!
     @IBOutlet weak var seenIcon: UIImageView!
@@ -56,7 +68,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var topicValueText = "No Topic"
     @IBOutlet weak var sendCommentButton: UIButton!
     @IBOutlet weak var commentField: UITextField!
-    let webRTCClient: AntMediaClient = AntMediaClient.init()
+//    let webRTCClient: AntMediaClient = AntMediaClient.init()
     
     @IBOutlet weak var announceImage: UIImageView!
     @IBOutlet weak var commentBackground: UIView!
@@ -99,7 +111,11 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         captureSession.sessionPreset = .medium
       //  self.topicTtitle.text = "Topic :"
         self.topicValue.text = topicValueText
-      
+        service.delegate = self
+        serviceFollowing.delegate = self
+        self.followButtonwidth.constant = 0
+        followButton.layer.cornerRadius =  followButton.frame.size.height/2
+        
         helloButton.layer.cornerRadius =  helloButton.frame.size.height/2
         emoji1Button.layer.cornerRadius =  emoji1Button.frame.size.height/2
         emoji2Button.layer.cornerRadius =  emoji2Button.frame.size.height/2
@@ -137,6 +153,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         sendCommentButton.setImage(image, for: .normal)
         //sendCommentButton.tintColor = UIColor.gray
         sendCommentButton.tintColor = UIColor.MyScrapGreen
+        sendCommentButton.isHidden = true
 
         commentField.textColor = UIColor.gray
         commentField.delegate = self
@@ -165,11 +182,21 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         seenView.clipsToBounds = true
 
         layoutConstraintsToAdjust.append(constraintContentHeight)
-        webRTCClient.delegate = self
+        //webRTCClient.delegate = self
        
         addKeyboardObservers()
         self.setUpCamera()
         self.setUpCommentViews()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.playFinished(_:)), name: NSNotification.Name(rawValue: "playFinished"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ConnectionEstablished(_:)), name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.playStarted(_:)), name: NSNotification.Name(rawValue: "playStarted"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasError(_:)), name: NSNotification.Name(rawValue: "clientHasError"), object: nil)
+       
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
@@ -177,13 +204,78 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
+        DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
+            self.captureSession.startRunning()
+            //Step 13
+        }
+    }
+    @objc func RecievedMessage(_ notification: NSNotification) {
+            print(notification.userInfo ?? "")
+        if let dict = notification.userInfo as? [String: AnyObject]{
+            var comment = CommentMessage()
+            comment.messageText = dict["message"]! as! String
+            comment.name = dict["fullName"]! as! String
+            comment.profilePic =  dict["profilePic"]! as! String
+            comment.colorCode =  dict["colorCode"]! as! String
+            comment.userId = dict["userId"]! as! String
+            
+            self.liveComments.append(comment)
+        }
+    }
+    @objc func AppCloseed(_ notification: NSNotification) {
+        DispatchQueue.main.async { [self] in
+            NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+            self.closeButtonPressed((Any).self)
+
+        }
+     }
+    @objc func PublishStarted(_ notification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+            MBProgressHUD.hide(for: (self?.view)! , animated: true)
+            self?.videoPreviewLayer.removeFromSuperlayer()
+            self?.captureSession.stopRunning()
+        }
+    
+     }
+    
+    
+    @objc func playFinished(_ notification: NSNotification) {
+        NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+        self.closeButtonPressed((Any).self)
+
+        }
+    @objc func playStarted(_ notification: NSNotification) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.addTimerCall()
+            MBProgressHUD.hide(for: self.view , animated: true)
+            self.videoPreviewLayer.removeFromSuperlayer()
+            self.captureSession.stopRunning()
+        }
+
+    }
+    @objc func clientHasError(_ notification: NSNotification) {
+        NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+        self.closeButtonPressed((Any).self)
+
+    }
+    
+    @objc func ConnectionEstablished(_ notification: NSNotification) {
+        DispatchQueue.main.async { [weak self] in
+    //    MBProgressHUD.hide(for: self.view , animated: true)
+            self?.videoPreviewLayer.removeFromSuperlayer()
+            self?.captureSession.stopRunning()
+        }
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
         if textField.text!.length > 0 {
             sendCommentButton.tintColor = UIColor.MyScrapGreen
+            sendCommentButton.isHidden = false
+
         }
         else{
             sendCommentButton.tintColor = UIColor.MyScrapGreen
+            sendCommentButton.isHidden = true
 
            // sendCommentButton.tintColor = UIColor.gray
         }
@@ -208,6 +300,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.userCommentsCollectionView.delegate = self
         self.userCommentsCollectionView.dataSource = self
         self.userCommentsCollectionView.register(LiveUserCommentsCell.Nib, forCellWithReuseIdentifier: LiveUserCommentsCell.identifier)
+        self.userCommentsCollectionView.register(LiveUserFollowCell.Nib, forCellWithReuseIdentifier: LiveUserFollowCell.identifier)
+        
 //        if let flowLayout = userCommentsCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
 //              flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
 //           }
@@ -224,6 +318,16 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
    }
     
+    @IBAction func followButtonPressed(_ sender: Any) {
+        if !followingStatus
+        {
+            self.serviceFollowing.sendFollowRequest(friendId: self.friendId)
+            let message = "Started Following" //"Successfully started following"
+            showToast(message: message)
+            followingStatus = true
+            self.reloadComentsView()
+        }
+    }
     @IBAction func EmojiButtonsPressed(_ sender: UIButton) {
         var message = ""
         if sender.tag == 1 {
@@ -255,7 +359,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         let dic = ["fullName": AuthService.instance.fullName, "profilePic": AuthService.instance.profilePic , "message": message , "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
         
         let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-        webRTCClient.sendData(data: data, binary: false)
+        appDelegate.webRTCClient.sendData(data: data, binary: false)
     }
     @IBAction func sendCommentPressed(_ sender: Any) {
         
@@ -271,9 +375,10 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             let dic = ["fullName": AuthService.instance.fullName, "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
             
             let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-            webRTCClient.sendData(data: data, binary: false)
+            appDelegate.webRTCClient.sendData(data: data, binary: false)
             commentField.text = ""
             sendCommentButton.tintColor = UIColor.MyScrapGreen
+            sendCommentButton.isHidden = true
 
          //   sendCommentButton.tintColor = UIColor.gray
 
@@ -399,14 +504,14 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 }
             }
             if !isFound {
-                self.addLeftUser(dict: dict)
+             //   self.addLeftUser(dict: dict)
                 userJoined.remove(at: i)
 
             }
         }
     }
     func findIfAlreadyJoined(viewers : Array<[String:AnyObject]>) {
-    
+      //  self.userJoined.removeAll()
         for dict in viewers {
             var isFound = false
             for viewer in userJoined {
@@ -422,11 +527,11 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     func findNewJoinORLeft(viewers : Array<[String:AnyObject]>)  {
         self.findIfAlreadyJoined(viewers: viewers)
-      //  self.findIfAlreadyLeft(viewers: viewers)
+       self.findIfAlreadyLeft(viewers: viewers)
     }
     @IBAction func cameraTogglePressed(_ sender: Any) {
      //   self.swapCamera()
-        webRTCClient.switchCamera()
+        appDelegate.webRTCClient.switchCamera()
 
     }
     @objc func keyboardWillAppear() {
@@ -442,6 +547,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.getProfile()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         DispatchQueue.main.async { [self] in
@@ -463,16 +569,14 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
         self.navigationController?.navigationBar.isHidden = true
         IQKeyboardManager.sharedManager().enable = false
-        DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
-            self.captureSession.startRunning()
-            //Step 13
-        }
+      
         if topicValueText == "Topic" {
             self.topicValue.text = "No Topic"
         }
         else{
             self.topicValue.text = topicValueText
         }
+       
         self.setUserStatucToLive()
       //  self.reloadCommentsDummyData()
 
@@ -493,6 +597,15 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
    func reloadComentsView()
     {
     DispatchQueue.main.async { [self] in
+        
+        if !followingStatus
+        {
+            self.followButtonwidth.constant = 30
+        }
+        else{
+            self.followButtonwidth.constant = 0
+        }
+        
     if self.userCommentsCollectionView != nil {
         self.userCommentsCollectionView.reloadData()
         self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
@@ -510,17 +623,22 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
  
 
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    deinit {
         self.captureSession.stopRunning()
         IQKeyboardManager.sharedManager().enable = true
-        webRTCClient.stop()
+        appDelegate.webRTCClient.stop()
+        removeKeyboardObservers()
+
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    
         self.navigationController?.navigationBar.isHidden = false
         NotificationCenter.default.removeObserver(self)
 
     }
     @IBAction func toggleMicButttonpressed(_ sender: Any) {
-        webRTCClient.toggleAudio()
+        appDelegate.webRTCClient.toggleAudio()
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
 
@@ -539,9 +657,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.view.endEditing(true)
             return false
         }
-    deinit {
-        removeKeyboardObservers()
-    }
+   
     func hideCommentesView()
     {
       
@@ -562,6 +678,110 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 self.view.layoutIfNeeded()
             }
     }
+    private func getProfile() {
+     
+        DispatchQueue.global(qos:.userInteractive).async {
+            self.service.getMainPage(friendId: self.friendId)
+        }
+        //service.getFriendProfile(friendId: friendId, notId: notId)
+        
+    }
+    func showFollowingAlert()  {
+        if let vc = LiveUserFollowPopUpVC.storyBoardInstance(){
+            vc.modalPresentationStyle = .overFullScreen
+            vc.delegate = self
+            vc.friendId = friendId
+            vc.liveUserNameValue = liveUserNameValue
+            vc.liveUserImageValue  = liveUserImageValue
+            vc.liveUserProfileColor = liveUserProfileColor
+            vc.liveUsertopicValue = liveUsertopicValue
+            vc.followingStatus = followingStatus
+            vc.profileItem = profileItem
+
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    func showUnFollowingAlert()  {
+        if let vc = UnfollowConfirmationPopUpVC.storyBoardInstance(){
+            vc.modalPresentationStyle = .overFullScreen
+            vc.delegate = self
+            vc.friendId = friendId
+            vc.liveUserNameValue = liveUserNameValue
+            vc.liveUserImageValue  = liveUserImageValue
+            vc.liveUserProfileColor = liveUserProfileColor
+            vc.liveUsertopicValue = liveUsertopicValue
+            vc.followingStatus = followingStatus
+            vc.profileItem = profileItem
+
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+}
+extension JoinUserLiveVC: unFollowConfirmDelegate {
+    
+    func unFollowPressed(FriendID: String) {
+       
+            self.serviceFollowing.sendUnFollowRequest(friendId: FriendID)
+            followingStatus = false
+            self.reloadComentsView()
+
+        
+    }
+}
+extension JoinUserLiveVC: LiveUserFollowDelegate {
+    
+    func followButtonpressed(FriendID: String, toFollowStatus: Int) {
+        if toFollowStatus == 0 {
+            self.serviceFollowing.sendFollowRequest(friendId: FriendID)
+           // let message = "Started Following" //"Successfully started following"
+          //  showToast(message: message)
+            followingStatus = true
+            self.reloadComentsView()
+        }
+        else
+        {
+            // Show Unfollow popup
+            self.showUnFollowingAlert()
+            
+            
+            
+        }
+        
+    }
+    
+    func chatButtonpressed(FriendID: String, toFollowStatus: Int) {
+        
+        performConversationVC(friendId: friendId, profileName: liveUserNameValue, colorCode: userProfileColorCode, profileImage: liveUserImageUrl , jid: (profileItem?.jid)!, listingId: "", listingTitle: "", listingType: "", listingImg: "")
+    }
+    func followerCountPressed(FriendID : String)
+    {
+        if self.profileItem?.followersCount != nil {
+            if self.profileItem!.followersCount != 0 {
+                var followerStr = "Followers"
+                if self.profileItem!.followersCount == 1 {
+                    followerStr = "Follower"
+                }
+                self.redirectToFollowersView(title: String(format: "%d %@", self.profileItem!.followersCount,followerStr), isFromFollowers: true)
+            }
+        }
+    }
+    func FollowingCountPressed(FriendID : String)
+    {
+        if self.profileItem!.followingCount != 0 {
+            var followingsStr = "Following"
+            if self.profileItem!.followersCount == 1 {
+                followingsStr = "Following"
+            }
+            self.redirectToFollowersView(title: String(format: "%d %@", self.profileItem!.followingCount,followingsStr), isFromFollowers: false)
+        }
+    }
+    func redirectToFollowersView(title: String, isFromFollowers: Bool) {
+        let vc = LikesController()
+        vc.title = title
+        vc.followUserId = friendId
+        vc.isFollower = isFromFollowers
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 extension JoinUserLiveVC: UINavigationControllerDelegate {
     
@@ -577,9 +797,9 @@ extension JoinUserLiveVC {
         
               print("room\(liveID)")
                //Don't forget to write your server url.
-        webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: "room\(liveID)", token: "", mode: .play, enableDataChannel: true)
-              webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
-              webRTCClient.start()
+        appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: "room\(liveID)", token: "", mode: .play, enableDataChannel: true)
+        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
+        appDelegate.webRTCClient.start()
         
 //        webRTCClient.setOptions(url: "http://3.85.1.123:5080/WebRTCAppEE/play.html?name=room1148", streamId: "room\(1148)", token: "room\(liveID)" , mode: .play, enableDataChannel: true)
 //        webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
@@ -658,130 +878,133 @@ extension JoinUserLiveVC {
         self.navigationController?.popToRootViewController(animated: true)
     }
 }
-extension JoinUserLiveVC : AntMediaClientDelegate
-{
-    func clientDidConnect(_ client: AntMediaClient) {
-        print("Stream get connected")
-        DispatchQueue.main.async { [weak self] in
-    //    MBProgressHUD.hide(for: self.view , animated: true)
-            self?.videoPreviewLayer.removeFromSuperlayer()
-            self?.captureSession.stopRunning()
-        }
-    }
-
-    
-    func clientDidDisconnect(_ message: String) {
-        print("Stream get error \(message)")
-  // self.closeButtonPressed((Any).self)
-
-    }
-    
-    func clientHasError(_ message: String) {
-        print("Stream get error \(message)")
-    }
-    
-    func remoteStreamStarted() {
-        
-    }
-    
-    func remoteStreamRemoved() {
-        self.closeButtonPressed((Any).self)
-    }
-    
-    func localStreamStarted() {
-        
-    }
-    
-    
-    func playStarted() {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.addTimerCall()
-            MBProgressHUD.hide(for: self.view , animated: true)
-            self.videoPreviewLayer.removeFromSuperlayer()
-            self.captureSession.stopRunning()
-        }
-
-    }
-    
-    func playFinished() {
-    self.closeButtonPressed((Any).self)
-    }
-    
-    func publishStarted() {
-     
-        DispatchQueue.main.async { [weak self] in
-            MBProgressHUD.hide(for: (self?.view)! , animated: true)
-            self?.videoPreviewLayer.removeFromSuperlayer()
-            self?.captureSession.stopRunning()
-        }
-    
-    }
-    
-    func publishFinished() {
-        
-    }
-    
-    func disconnected() {
-  // self.closeButtonPressed((Any).self)
-    }
-    
-    func audioSessionDidStartPlayOrRecord() {
-        
-    }
-    
-    func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
-        
-        do {
-            
-            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
-
-                    if let dict = unarchivedDictionary as? [String: AnyObject]{
-                        var comment = CommentMessage()
-                        comment.messageText = dict["message"]! as! String
-                        comment.name = dict["fullName"]! as! String
-                        comment.profilePic =  dict["profilePic"]! as! String
-                        comment.colorCode =  dict["colorCode"]! as! String
-                        comment.userId = dict["userId"]! as! String
-                        
-                        self.liveComments.append(comment)
-    
-                    }
-                } catch{
-                    print(error)
-                }
-        }
-}
 extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
      
     }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            guard let _ = profileItem else { return 0}
+            return 1
+        }
+        else{
         return self.liveComments.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserFollowCell.identifier, for: indexPath) as? LiveUserFollowCell else { return UICollectionViewCell()}
+            cell.configCell(followStatus: followingStatus, name: liveUserNameValue , profilePic: liveUserImageUrl , colorCode: liveUserProfileColor )
+            return cell
+        }
+        else{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserCommentsCell.identifier, for: indexPath) as? LiveUserCommentsCell else { return UICollectionViewCell()}
         cell.configCell(item: self.liveComments[indexPath.row] )
         return cell
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //let width = self.frame.width
+        if indexPath.section == 0 {
+            return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 50)
+        }
+        else{
         return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 30)
+        }
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        if section == 0 {
+                // No insets for header in section 0
+            return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+            }
+        else
+        {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+        }
 
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
+        if indexPath.section == 0 {
+            if !followingStatus
+            {
+                
+                self.serviceFollowing.sendFollowRequest(friendId: self.friendId)
+                let message = "Started Following" //"Successfully started following"
+                showToast(message: message)
+                
+                followingStatus = true
+                self.reloadComentsView()
+            }
+            else
+            {
+                self.showFollowingAlert()
+            }
+        }
 }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
     }
 
+}
+extension JoinUserLiveVC : ProfileServiceDelegate{
+    
+    func DidReceiveError(error: String) {
+    }
+    
+    func DidReceiveProfileData(item: ProfileData) {
+        
+        DispatchQueue.main.sync {
+            
+            self.profileItem = item
+//            self.profileItem?.profilePic = liveUserProfile
+//            self.profileItem?.colorCode = liveUserProfileColor
+//            self.profileItem?.name = liveUserName
+
+            if profileItem?.followStatusType != 2
+            {
+                self.followButtonwidth.constant = 30
+                followingStatus = false
+            }
+            else{
+                self.followButtonwidth.constant = 0
+                followingStatus = true
+
+            }
+            self.userCommentsCollectionView.reloadData()
+            self.reloadComentsView()
+          //  self.collectionView.reloadData()
+            //self.stopRefreshing()
+        }
+    }
+    
+    func DidReceiveFeedItems(items: [FeedV2Item],pictureItems: [PictureURL]) {
+        
+    }
+    
+}
+extension JoinUserLiveVC : MemberDelegate{
+    func DidReceivedData(data: [MemberItem]) {
+        DispatchQueue.main.async {
+          
+        }
+    }
+    
+    func DidReceivedError(error: String) {
+        print(error)
+        //if self.active.isAnimating{ self.active.stopAnimating() }
+        DispatchQueue.main.async {
+         
+        }
+        
+        
+    }
 }

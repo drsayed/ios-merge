@@ -99,9 +99,6 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
-  
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.ConnectionEstablished(_:)), name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.OnlineViewTapped(_:)))
@@ -114,6 +111,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         sendCommentButton.setImage(image, for: .normal)
         sendCommentButton.tintColor = UIColor.gray
         commentField.textColor = UIColor.gray
+        sendCommentButton.isHidden = true
+
         commentField.delegate = self
         
         let imageMic = UIImage(named: "ic_mic")?.withRenderingMode(.alwaysTemplate)
@@ -238,9 +237,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @objc func textFieldDidChange(_ textField: UITextField) {
         if textField.text!.length > 0 {
             sendCommentButton.tintColor = UIColor.MyScrapGreen
+            sendCommentButton.isHidden = false
         }
         else{
-            sendCommentButton.tintColor = UIColor.gray
+            sendCommentButton.tintColor = UIColor.MyScrapGreen
+            sendCommentButton.isHidden = true
         }
     }
     @objc func handleGesture(gesture: UISwipeGestureRecognizer)
@@ -324,8 +325,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             appDelegate.webRTCClient.sendData(data: data, binary: false)
 
             commentField.text = ""
-            sendCommentButton.tintColor = UIColor.gray
-
+            sendCommentButton.tintColor = UIColor.MyScrapGreen
+            sendCommentButton.isHidden = true
         }
         
     }
@@ -500,14 +501,14 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 }
             }
             if !isFound {
-                self.addLeftUser(dict: dict)
+              //  self.addLeftUser(dict: dict)
                 userJoined.remove(at: i)
 
             }
         }
     }
     func findIfAlreadyJoined(viewers : Array<[String:AnyObject]>) {
-    
+     //   self.userJoined.removeAll()
         for dict in viewers {
             var isFound = false
             for viewer in userJoined {
@@ -523,7 +524,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     func findNewJoinORLeft(viewers : Array<[String:AnyObject]>)  {
         self.findIfAlreadyJoined(viewers: viewers)
-     //   self.findIfAlreadyLeft(viewers: viewers)
+      self.findIfAlreadyLeft(viewers: viewers)
     }
     
     @objc func getLiveStatus()  {

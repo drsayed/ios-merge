@@ -1926,6 +1926,7 @@ extension FeedsVC: FeedVCHeaderCellDelegate{
                 vc.liveUserImageValue  = activeuser.profilePic!
                 vc.liveUserProfileColor  = activeuser.colorCode!
                 vc.liveUsertopicValue  = activeuser.topic!
+                
 
                    self.navigationController?.pushViewController(vc, animated: true)
                 }
