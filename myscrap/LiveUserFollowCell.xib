@@ -17,10 +17,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fB-yb-k5r">
-                        <rect key="frame" x="0.0" y="0.0" width="120" height="25"/>
+                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="25"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-vG-8eu">
-                                <rect key="frame" x="85" y="-2.5" width="30" height="30"/>
+                                <rect key="frame" x="76.5" y="-2.5" width="30" height="30"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCL-Hc-lXe" customClass="ProfileView" customModule="myscrap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -42,8 +42,8 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwB-ck-V8u">
-                                <rect key="frame" x="31" y="2" width="51.5" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="31" y="4" width="43" height="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>

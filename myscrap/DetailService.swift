@@ -328,7 +328,15 @@ class DetailService {
      
         let service = APIService()
         service.endPoint = Endpoints.USER_PROFILE_INSERT_URL_V2
-        service.params = "userId=\(AuthService.instance.userId)&friendId=\(friendId)&editPostId=\(editPostId)&apiKey=\(API_KEY)&content=\(content)&timeStamp=\(Int(Date().timeIntervalSince1970))&multiImage=\(decoded)&feedImage=Array&imageCount=\(imageCount as Int)&device=\(MOBILE_DEVICE)&ipAddress=\(ipAdress)".replacingOccurrences(of: "+", with: "%2B")
+        if imageCount == 0 && videoFeed == ""{
+            service.params = "userId=\(AuthService.instance.userId)&friendId=\(friendId)&editPostId=\(editPostId)&apiKey=\(API_KEY)&content=\(content)&timeStamp=\(Int(Date().timeIntervalSince1970))&multiImage=\(decoded)&feedImage=&imageCount=\(imageCount as Int)&device=\(MOBILE_DEVICE)&ipAddress=\(ipAdress)".replacingOccurrences(of: "+", with: "%2B")
+        }
+        else
+        {
+            service.params = "userId=\(AuthService.instance.userId)&friendId=\(friendId)&editPostId=\(editPostId)&apiKey=\(API_KEY)&content=\(content)&timeStamp=\(Int(Date().timeIntervalSince1970))&multiImage=\(decoded)&feedImage=Array&imageCount=\(imageCount as Int)&device=\(MOBILE_DEVICE)&ipAddress=\(ipAdress)".replacingOccurrences(of: "+", with: "%2B")
+        }
+        
+       
         
          service.params =  service.params + videoFeed
         

@@ -88,6 +88,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         commentBackground.layer.cornerRadius =  commentBackground.frame.size.height/2
         commentBackground.layer.borderWidth =  3
         commentBackground.layer.borderColor =  UIColor.gray.cgColor
+        
+        commentField.autocorrectionType = .no
+        
         self.countDown.isHidden = true
         
         self.countDown.backgroundAlpha = 0.2;
@@ -359,12 +362,13 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
         let screenSize = UIScreen.main.bounds
 
-        self.cameraView.bounds = screenSize
+        self.cameraView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+10)
+        self.cameraflipedView.frame = self.cameraView.frame
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        cameraflipedView.bounds = screenSize
+     //   cameraflipedView.bounds = screenSize
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame = screenSize
+        self.videoPreviewLayer.frame = self.cameraView.frame
         cameraflipedView.layer.addSublayer(videoPreviewLayer)
    //     cameraView.layer.addSublayer(cameraflipedView.layer)
         cameraView.addSubview(cameraflipedView)
@@ -492,8 +496,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.liveComments.append(comment)
     }
     func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
-        for i in 0..<userJoined.count {
-              let dict = userJoined[i]
+        let userJoinedCopy = userJoined
+        for i in 0..<userJoinedCopy.count {
+              let dict = userJoinedCopy[i]
             var isFound = false
             for viewer in viewers {
                 if dict["userId"] as! String == viewer["userId"] as! String {
@@ -501,7 +506,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 }
             }
             if !isFound {
-              //  self.addLeftUser(dict: dict)
+             //   self.addLeftUser(dict: dict)
                 userJoined.remove(at: i)
 
             }
@@ -824,12 +829,23 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserCommentsCell.identifier, for: indexPath) as? LiveUserCommentsCell else { return UICollectionViewCell()}
         cell.configCell(item: self.liveComments[indexPath.row] )
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //let width = self.frame.width
-        return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 30)
+        
+   
+        let  textString = self.liveComments[indexPath.row].messageText
+        var height = textString.height(constraintedWidth: self.userCommentsCollectionView.frame.size.width-38, font: UIFont.systemFont(ofSize: 13) )
+        if height < 30
+        {
+            height = 30
+        }
+        return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: height)
     }
+  
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
@@ -844,4 +860,15 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
 
     }
 
+}
+extension String {
+func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
+    let label =  UILabel(frame: CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude))
+    label.numberOfLines = 0
+    label.text = self
+    label.font = font
+    label.sizeToFit()
+
+    return label.frame.height
+ }
 }

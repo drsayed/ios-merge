@@ -79,19 +79,27 @@ class LiveUserFollowPopUpVC: BaseVC {
         
         guard let item = profileItem else { return }
 
-        if item.followStatusType != 2
-        {
-            followingStatus = false
-        }
-        else{
-            followingStatus = true
-        }
+//        if item.followStatusType != 2
+//        {
+//            followingStatus = false
+//        }
+//        else{
+//            followingStatus = true
+//        }
         
         userProfileVIew.updateViews(name:liveUserNameValue, url: liveUserImageValue , colorCode: liveUserProfileColor)
         profileTypeView.label.font = UIFont(name: "HelveticaNeue", size: 14)
         profileTypeView.label.allowsDefaultTighteningForTruncation = true
-     
-        profileTypeView.checkType = ProfileTypeScore(isAdmin: false, isMod: false, isNew: item.newJoined, rank: item.rank,isLevel:item.isLevel, level: item.level)
+
+        if item.moderator {
+           // profileTypeView.isHidden = false
+            profileTypeView.label.text = "MOD"
+            profileTypeView.backgroundColor = UIColor(red: 153/255, green: 101/255, blue: 21/255, alpha: 1.0)
+        } else {
+          //  profileTypeView.isHidden = true
+            profileTypeView.checkType = ProfileTypeScore(isAdmin: false, isMod: false, isNew: item.newJoined, rank: item.rank,isLevel:item.isLevel, level: item.level)
+        }
+    
         
         scoreLableButton.text = "Score"
         scoreCountButton.text = "\(item.score)"

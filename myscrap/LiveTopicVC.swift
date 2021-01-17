@@ -130,12 +130,14 @@ class LiveTopicVC: UIViewController {
     }
     func setupLivePreview() {
         let screenSize = UIScreen.main.bounds
+        cameraView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+10)
+
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        cameraView.frame = screenSize
+      
 
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame = screenSize
+        self.videoPreviewLayer.frame = cameraView.frame
         cameraView.layer.addSublayer(videoPreviewLayer)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()

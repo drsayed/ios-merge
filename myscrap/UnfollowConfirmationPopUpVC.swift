@@ -80,6 +80,7 @@ class UnfollowConfirmationPopUpVC: BaseVC {
 //        }
         
         userProfileVIew.updateViews(name:liveUserNameValue, url: liveUserImageValue , colorCode: liveUserProfileColor)
+        
         let differentColorText = "Unfollow \(liveUserNameValue)?"
         let st = "Are you sure you want to " + "\(differentColorText)" //+ "\n"
 

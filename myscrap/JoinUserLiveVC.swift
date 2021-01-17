@@ -17,6 +17,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     var liveID = ""
     var friendId = ""
+    var isNeedToShowFollowing = 0
     var liveUserNameValue = ""
     var liveUserImageValue  = ""
     var liveUserProfileColor = ""
@@ -428,13 +429,13 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     func setupLivePreview() {
         
         let screenSize = UIScreen.main.bounds
+        cameraView.frame =  CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+10)
 
-        
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        self.cameraView.bounds = screenSize
+       // self.cameraView.bounds = screenSize
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame = screenSize
+        self.videoPreviewLayer.frame =  cameraView.frame
       //  cameraView.layer.addSublayer(videoPreviewLayer)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
@@ -510,8 +511,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.liveComments.append(comment)
     }
     func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
-        for i in 0..<userJoined.count {
-              let dict = userJoined[i]
+        let userJoinedCopy = userJoined
+        for i in 0..<userJoinedCopy.count {
+              let dict = userJoinedCopy[i]
             var isFound = false
             for viewer in viewers {
                 if dict["userId"] as! String == viewer["userId"] as! String {
@@ -565,6 +567,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.startLive()
         self.reloadComentsView()
         self.getProfile()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         DispatchQueue.main.async { [self] in
@@ -736,6 +739,7 @@ extension JoinUserLiveVC: unFollowConfirmDelegate {
        
             self.serviceFollowing.sendUnFollowRequest(friendId: FriendID)
             followingStatus = false
+         
             self.reloadComentsView()
 
         
@@ -904,7 +908,13 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             guard let _ = profileItem else { return 0}
-            return 1
+            if isNeedToShowFollowing == 1 {
+                return 1
+            }
+          else
+            {
+                return 0
+            }
         }
         else{
         return self.liveComments.count
@@ -920,6 +930,8 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
         else{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserCommentsCell.identifier, for: indexPath) as? LiveUserCommentsCell else { return UICollectionViewCell()}
         cell.configCell(item: self.liveComments[indexPath.row] )
+            cell.setNeedsLayout()
+            cell.layoutIfNeeded()
         return cell
         }
     }
@@ -929,7 +941,16 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 50)
         }
         else{
-        return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 30)
+            //let width = self.frame.width
+            
+       
+            let  textString = self.liveComments[indexPath.row].messageText
+            var height = textString.height(constraintedWidth: self.userCommentsCollectionView.frame.size.width-38, font: UIFont.systemFont(ofSize: 13) )
+            if height < 30
+            {
+                height = 30
+            }
+            return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: height)
         }
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -988,10 +1009,12 @@ extension JoinUserLiveVC : ProfileServiceDelegate{
             {
                 self.followButtonwidth.constant = 30
                 followingStatus = false
+                isNeedToShowFollowing = 1
             }
             else{
                 self.followButtonwidth.constant = 0
                 followingStatus = true
+                isNeedToShowFollowing = 0
 
             }
             self.userCommentsCollectionView.reloadData()
