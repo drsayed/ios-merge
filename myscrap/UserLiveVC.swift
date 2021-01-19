@@ -18,7 +18,12 @@ struct CommentMessage {
     var colorCode : String = "Test"
     var messageId : String = "Test"
     var messageText : String = "Test"
-    
+    var friendId : String = ""
+    var OnlyForStreamer : String = "0"
+    var isJoingingRequest : String = "0"
+    var joingingRequestStatus : String = "0"
+    var streamStarted : String = "0"
+
     var timeStamp : Int =  (Int(Date().timeIntervalSince1970))
 }
 class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
@@ -32,8 +37,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.reloadComentsView()
         }
     }
+    @IBOutlet weak var smallStreamView: UIView!
     @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
     @IBOutlet weak var numberOfViews: UILabel!
+    @IBOutlet weak var largeCameraContainer: UIView!
+    @IBOutlet weak var smallCameraContainer: UIView!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var liveTimerView: UIView!
@@ -44,6 +52,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var layoutConstraintsToAdjust: [NSLayoutConstraint] = []
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     @IBOutlet weak var micButton: UIButton!
+    @IBOutlet weak var cameraToggleButton: UIButton!
+
     @IBOutlet weak var UserCommentsBackground: UIView!
     @IBOutlet weak var userCommentsCollectionView: UICollectionView!
 
@@ -65,7 +75,6 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var cameraType  = CameraType.Front
-    @IBOutlet weak var cameraToggleButton: UIButton!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var liveLable: UILabel!
     @IBOutlet weak var livebutton: UIButton!
@@ -77,6 +86,21 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         } else {
             // Fallback on earlier versions
         }
+        
+        
+        smallCameraContainer.tag = 0
+        smallStreamView.bounds = smallCameraContainer.bounds
+        smallStreamView.frame = CGRect(x: 0, y: 0, width: smallCameraContainer.frame.size.width, height: smallCameraContainer.frame.size.height)
+        smallCameraContainer.addSubview(smallStreamView)
+        
+        cameraView.bounds = largeCameraContainer.bounds
+        cameraView.frame = CGRect(x: 0, y: 0, width: largeCameraContainer.frame.size.width, height: largeCameraContainer.frame.size.height)
+        largeCameraContainer.addSubview(cameraView)
+        smallCameraContainer.layoutSubviews()
+        smallCameraContainer.layoutIfNeeded()
+        largeCameraContainer.layoutSubviews()
+        largeCameraContainer.layoutIfNeeded()
+        
         self.navigationController?.navigationBar.isHidden = true
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
@@ -147,6 +171,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         livebutton.clipsToBounds = true
         livebutton.drawShadow()
         closebutton.drawShadow()
+        smallCameraContainer.isHidden = true
+        appDelegate.webRTCViewerClient.delegate = self
+        appDelegate.webRTCViewerClient.setRemoteView(remoteContainer: smallStreamView, mode: .scaleAspectFill)
         
         liveTimerView.layer.cornerRadius = 5
         liveTimerView.clipsToBounds = true
@@ -154,6 +181,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         seenView.layer.cornerRadius = 5
         seenView.clipsToBounds = true
 
+        let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(tappedOnSmallWindow(tapGestureRecognizer:)))
+        smallCameraContainer.isUserInteractionEnabled = true
+        smallCameraContainer.addGestureRecognizer(tapGestureRecognizer1)
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnTopic(tapGestureRecognizer:)))
         announcementView.isUserInteractionEnabled = true
         announcementView.addGestureRecognizer(tapGestureRecognizer)
@@ -163,7 +194,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.setUpCommentViews()
         addKeyboardObservers()
         self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
-        self.cameraflipedView.frame =  self.cameraView.frame
+        self.cameraflipedView.frame =  self.largeCameraContainer.frame
         self.cameraflipedView.transform = CGAffineTransform(scaleX: -1, y: 1);
      //   self.videoPreviewLayer.customMirror
 
@@ -180,13 +211,39 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             print(notification.userInfo ?? "")
         if let dict = notification.userInfo as? [String: AnyObject]{
             var comment = CommentMessage()
-            comment.messageText = dict["message"]! as! String
-            comment.name = dict["fullName"]! as! String
-            comment.profilePic =  dict["profilePic"]! as! String
-            comment.colorCode =  dict["colorCode"]! as! String
-            comment.userId = dict["userId"]! as! String
+            comment.messageText = dict["message"] as? String ?? ""
+            comment.name = dict["fullName"] as? String ?? ""
+            comment.profilePic =  dict["profilePic"] as? String ?? ""
+            comment.colorCode =  dict["colorCode"] as? String ?? ""
+            comment.userId = dict["userId"] as? String ?? ""
+            comment.friendId = dict["friendId"] as? String ?? ""
+            comment.isJoingingRequest = dict["isJoingingRequest"] as? String ?? ""
+            comment.joingingRequestStatus = dict["joingingRequestStatus"] as? String ?? ""
+            comment.streamStarted = dict["StreamStarted"] as? String ?? ""
             
-            self.liveComments.append(comment)
+            if comment.streamStarted == "1" {
+                // Play Stream
+               
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.appDelegate.webRTCViewerClient.stop()
+                      var  webRTCViewerClient: AntMediaClient = AntMediaClient.init()
+                        webRTCViewerClient.delegate = self
+                        webRTCViewerClient.setRemoteView(remoteContainer: self.smallStreamView, mode: .scaleAspectFill)
+
+                        self.appDelegate.webRTCViewerClient = webRTCViewerClient
+                        self.playJoiningStream()
+                    
+                }
+//                else
+//                {
+//                  //  self.playJoiningStream(timeStamp:timeStamp)
+//                }
+                
+              
+            }
+            else{
+                self.liveComments.append(comment)
+            }
 
         }
     }
@@ -267,9 +324,50 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.userCommentsCollectionView.delegate = self
         self.userCommentsCollectionView.dataSource = self
         self.userCommentsCollectionView.register(LiveUserCommentsCell.Nib, forCellWithReuseIdentifier: LiveUserCommentsCell.identifier)
+        self.userCommentsCollectionView.register(ViewerJoinRequestCell.Nib, forCellWithReuseIdentifier: ViewerJoinRequestCell.identifier)
+        
 //        if let flowLayout = userCommentsCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
 //              flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
 //           }
+    }
+    @objc func tappedOnSmallWindow(tapGestureRecognizer: UITapGestureRecognizer){
+        
+        self.videoPreviewLayer.removeFromSuperlayer()
+        self.cameraflipedView.removeFromSuperview()
+        
+        if smallCameraContainer.tag == 0 {
+            smallCameraContainer.tag = 1
+            cameraView.bounds = smallCameraContainer.bounds
+            cameraView.frame = CGRect(x: 0, y: 0, width: smallCameraContainer.frame.size.width, height: smallCameraContainer.frame.size.height)
+            smallCameraContainer.addSubview(cameraView)
+            
+            smallStreamView.bounds = largeCameraContainer.bounds
+            smallStreamView.frame = CGRect(x: 0, y: 0, width: largeCameraContainer.frame.size.width, height: largeCameraContainer.frame.size.height)
+            largeCameraContainer.addSubview(smallStreamView)
+            
+            smallCameraContainer.layoutSubviews()
+            smallCameraContainer.layoutIfNeeded()
+            largeCameraContainer.layoutSubviews()
+            largeCameraContainer.layoutIfNeeded()
+            
+            //appDelegate.webRTCViewerClient.start()
+        }
+        else
+        {
+            smallCameraContainer.tag = 0
+            smallStreamView.bounds = smallCameraContainer.bounds
+            smallStreamView.frame = CGRect(x: 0, y: 0, width: smallCameraContainer.frame.size.width, height: smallCameraContainer.frame.size.height)
+            smallCameraContainer.addSubview(smallStreamView)
+            
+            cameraView.bounds = largeCameraContainer.bounds
+            cameraView.frame = CGRect(x: 0, y: 0, width: largeCameraContainer.frame.size.width, height: largeCameraContainer.frame.size.height)
+            largeCameraContainer.addSubview(cameraView)
+            smallCameraContainer.layoutSubviews()
+            smallCameraContainer.layoutIfNeeded()
+            largeCameraContainer.layoutSubviews()
+            largeCameraContainer.layoutIfNeeded()
+        }
+        self.view.layoutIfNeeded()
     }
     @objc func tappedOnTopic(tapGestureRecognizer: UITapGestureRecognizer){
 
@@ -320,9 +418,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             comment.userId = AuthService.instance.userId
             print("Messages Count : \( self.liveComments.count)")
             self.liveComments.append(comment)
+            let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "0","joingingRequestStatus": "0","OnlyForStreamer": "0","StreamStarted": "0","friendId": "" , "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
             
-            let dic = ["fullName": AuthService.instance.fullName, "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
-            
+    
             /* NSDictionary to NSData */
             let data = NSKeyedArchiver.archivedData(withRootObject: dic)
             appDelegate.webRTCClient.sendData(data: data, binary: false)
@@ -362,13 +460,14 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
         let screenSize = UIScreen.main.bounds
 
-        self.cameraView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+10)
-        self.cameraflipedView.frame = self.cameraView.frame
+        self.largeCameraContainer.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+20)
+        self.cameraView.frame = self.largeCameraContainer.frame
+        self.cameraflipedView.frame = self.largeCameraContainer.frame
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
      //   cameraflipedView.bounds = screenSize
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame = self.cameraView.frame
+        self.videoPreviewLayer.frame = self.largeCameraContainer.frame
         cameraflipedView.layer.addSublayer(videoPreviewLayer)
    //     cameraView.layer.addSublayer(cameraflipedView.layer)
         cameraView.addSubview(cameraflipedView)
@@ -376,6 +475,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.captureSession.startRunning()
             //Step 13
         }
+        self.view.layoutIfNeeded()
         //Step12
     }
     /// Swap camera and reconfigures camera session with new input
@@ -497,6 +597,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
         let userJoinedCopy = userJoined
+        var removeIds = [String]()
         for i in 0..<userJoinedCopy.count {
               let dict = userJoinedCopy[i]
             var isFound = false
@@ -506,9 +607,21 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 }
             }
             if !isFound {
-             //   self.addLeftUser(dict: dict)
-                userJoined.remove(at: i)
+                self.removeLeftObject(dict: dict)//                userJoined.remove(at: i)
 
+            }
+        }
+    
+        
+        
+    }
+    func removeLeftObject (dict : [String:AnyObject])
+    {
+        for i in 0..<userJoined.count {
+            let obj = userJoined[i]
+            if dict["userId"] as! String == obj["userId"] as! String {
+                userJoined.remove(at: i)
+                return
             }
         }
     }
@@ -633,11 +746,17 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
        self.userCommentsCollectionView.reloadData()
        self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
            (result) in
-           self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
-        if  self.userCommentsCollectionView.contentSize.height > self.userCommentsCollectionView.bounds.size.height
+        if self.userCommentsCollectionView.contentSize.height < 240
         {
-            self.userCommentsCollectionView.flashScrollIndicators()
+            commentsViewHeight.constant =  self.userCommentsCollectionView.contentSize.height
         }
+        else
+        {
+            commentsViewHeight.constant = 240
+            self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+        }
+         //  self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+    
         
 
            // ready
@@ -699,6 +818,32 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 self.view.layoutIfNeeded()
             }
     }
+    @objc func sendRequestPressed(sender : UIButton ) {
+        
+        if !appDelegate.webRTCViewerClient.isConnected() {
+            let message  = self.liveComments[sender.tag]
+            self.showJoiningPopup(message:message)
+        }
+        else
+        {
+            self.showToast(message: "You are already connected")
+        }
+     
+    
+        
+    }
+    func showJoiningPopup(message:CommentMessage)  {
+        if let vc = StreamerSideJoinRequestPopUp.storyBoardInstance(){
+            vc.modalPresentationStyle = .overFullScreen
+            vc.delegate = self
+            vc.friendId = message.userId
+            vc.liveUserNameValue = message.name
+            vc.liveUserImageValue  = message.profilePic
+            vc.liveUserProfileColor = message.colorCode
+        
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
 }
 extension UserLiveVC: UINavigationControllerDelegate {
     
@@ -726,12 +871,22 @@ extension UserLiveVC: CustomAlertViewDelegate {
         // stream1
        // https://sayed.net:5080/WebRTCAppEE/websocket
      //   "ws://3.85.1.123:5080/WebRTCAppEE/websocket"
-        appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
-        appDelegate.webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
-       // webRTCClient.setMultiPeerMode(enable: true, mode: "join")
-        appDelegate.webRTCClient.initPeerConnection()
+        print("stream1room\(liveID)")
+        appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "stream1room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
+       appDelegate.webRTCClient.setLocalView(container: cameraView, mode: .scaleAspectFill)
         
-        appDelegate.webRTCClient.connectWebSocket()
+     
+        
+        appDelegate.isStreamer = true
+        appDelegate.liveID = liveID
+     //   appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
+        smallCameraContainer.isHidden = true
+
+       // webRTCClient.setMultiPeerMode(enable: true, mode: "join")
+      //  appDelegate.webRTCClient.setMultiPeerMode(enable: true, mode: "join")
+     //   appDelegate.webRTCClient.initPeerConnection()
+        appDelegate.webRTCClient.setDebug(true)
+      //  appDelegate.webRTCClient.connectWebSocket()
         appDelegate.webRTCClient.start()
     }
     @objc func setUserStatucToLive()  {
@@ -827,23 +982,49 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+          let message =   self.liveComments[indexPath.row]
+            if message.isJoingingRequest == "1" {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
+                cell.configCell(item: self.liveComments[indexPath.row] )
+                
+                cell.requestButton.setTitle("View", for: .normal)
+                cell.requestButton.tag = indexPath.row
+                cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
+                
+                    cell.setNeedsLayout()
+                    cell.layoutIfNeeded()
+                return cell
+            }
+            else{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserCommentsCell.identifier, for: indexPath) as? LiveUserCommentsCell else { return UICollectionViewCell()}
         cell.configCell(item: self.liveComments[indexPath.row] )
         cell.setNeedsLayout()
         cell.layoutIfNeeded()
         return cell
+            }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //let width = self.frame.width
-        
-   
+        let message =   self.liveComments[indexPath.row]
+          if message.isJoingingRequest == "1" {
+            return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 50)
+          }
+        else
+          {
+       
         let  textString = self.liveComments[indexPath.row].messageText
         var height = textString.height(constraintedWidth: self.userCommentsCollectionView.frame.size.width-38, font: UIFont.systemFont(ofSize: 13) )
         if height < 30
         {
             height = 30
         }
+        else
+        {
+            height = height+10
+        }
         return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: height)
+          }
     }
   
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -871,4 +1052,135 @@ func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
 
     return label.frame.height
  }
+}
+extension UserLiveVC : StreamerSideJoinRequestDelegate
+{
+    func acceptJoinRequest(FriendID: String, controller: StreamerSideJoinRequestPopUp) {
+        
+        let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "1","joingingRequestStatus": "1","OnlyForStreamer": "0","StreamStarted": "0","SpecificUser": "1","friendId": FriendID , "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
+        
+        /* NSDictionary to NSData */
+        let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+        appDelegate.webRTCClient.sendData(data: data, binary: false)
+    }
+    
+    
+}
+extension UserLiveVC : AntMediaClientDelegate
+{
+    func clientDidConnect(_ client: AntMediaClient) {
+     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+      
+        
+    }
+    
+    func clientDidDisconnect(_ message: String) {
+      print("Stream get error \(message)")
+    }
+    
+    func clientHasError(_ message: String) {
+       print("Stream get error \(message)")
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clientHasError"), object: nil, userInfo: nil)
+        
+    }
+    
+    func remoteStreamStarted() {
+      
+     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+
+    }
+    
+    func remoteStreamRemoved() {
+      
+    }
+    
+    func localStreamStarted() {
+       // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+
+    }
+    
+    func playStarted() {
+        
+        DispatchQueue.main.async { [self] in
+            smallCameraContainer.isHidden = false
+            self.setUserToDualLive()
+        }
+     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
+       
+    }
+    func playFinished() {
+        DispatchQueue.main.async { [self] in
+            smallCameraContainer.isHidden = true
+        }
+        appDelegate.webRTCViewerClient.stop()
+    //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
+    }
+    
+    func publishStarted() {
+     
+     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PublishStarted"), object: nil, userInfo: nil)
+
+    
+    }
+    
+    func publishFinished() {
+        
+    }
+    
+    func disconnected() {
+        
+    }
+    
+    func audioSessionDidStartPlayOrRecord() {
+    //    webRTCClient.speakerOn()
+    }
+    
+    func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
+        
+//        do {
+//
+//            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
+//
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
+//
+//
+//
+//
+//        }
+//        catch{
+//            print(error)
+//        }
+}
+}
+//https://34.207.130.236:5080/WebRTCAppEE/conference.html
+extension UserLiveVC {
+
+    @objc func  playJoiningStream()
+    {
+        print("stream2room\(liveID)")
+        appDelegate.webRTCViewerClient.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
+        appDelegate.webRTCViewerClient.setDebug(true)
+        appDelegate.webRTCViewerClient.start()
+    }
+    @objc func setUserToDualLive()  {
+        DispatchQueue.global(qos:.userInteractive).async { [weak self] in
+        let op = UserLiveOperations()
+            op.UpdateUsertoDual (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+                print(onlineStat)
+        }
+        }
+    }
+    @objc func setUserStatusEndDualLive()  {
+        DispatchQueue.global(qos:.userInteractive).async {
+        let op = UserLiveOperations()
+            op.userEndViewLive(id: "\(AuthService.instance.userId)", liveid: self.liveID) { (onlineStat) in
+                DispatchQueue.main.async { [self] in
+              MBProgressHUD.hide(for: self.view , animated: true)
+                    appDelegate.webRTCViewerClient.stop()
+                  }
+             
+                print(onlineStat)
+        }
+        }
+    }
 }

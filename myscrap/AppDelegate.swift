@@ -27,8 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     let locationManager = CLLocationManager()
     var bgTask : UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier.invalid
     var ping : XMPPPing!
-    let webRTCClient: AntMediaClient = AntMediaClient.init()
+    var webRTCClient: AntMediaClient = AntMediaClient.init()
+    var webRTCViewerClient: AntMediaClient = AntMediaClient.init()
 
+    var liveID = ""
+    var isStreamer = false
+    
     var xmppAutoPing: XMPPAutoPing!
     var backgroundUpdateTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
     var fireBaseConfig = false
@@ -507,9 +511,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationDidEnterBackground(_ application: UIApplication) {
         //stopNetworkReachable()
         if webRTCClient.isConnected() {
+            self.setUserStatusEndLive()
             self.webRTCClient.stop()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AppCloseed"), object: nil, userInfo: nil)
-
+  
         }
       
         if AuthStatus.instance.isLoggedIn {
@@ -557,6 +562,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         XMPPService.instance.offline()
         XMPPService.instance.disconnect()
         if webRTCClient.isConnected() {
+            self.setUserStatusEndLive()
             self.webRTCClient.stop()
         }
       
@@ -685,6 +691,29 @@ extension AppDelegate{
     }
 }
 extension AppDelegate{
+    
+    @objc func setUserStatusEndLive()  {
+        if isStreamer {
+            DispatchQueue.global(qos:.userInteractive).async {
+            let op = UserLiveOperations()
+                op.userEndLive (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+                 
+                    print(onlineStat)
+            }
+            }
+        }
+        else{
+            DispatchQueue.global(qos:.userInteractive).async {
+            let op = UserLiveOperations()
+                op.userEndViewLive(id: "\(AuthService.instance.userId)", liveid: self.liveID) { (onlineStat) in
+          
+                    print(onlineStat)
+            }
+            }
+        }
+       
+    }
+   
     
     fileprivate func setupIQKeyBoardManager(){
         IQKeyboardManager.sharedManager().enable = true
@@ -844,6 +873,7 @@ extension AppDelegate: PKPushRegistryDelegate {
 extension AppDelegate : AntMediaClientDelegate
 {
     func clientDidConnect(_ client: AntMediaClient) {
+        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
       
         
@@ -893,7 +923,7 @@ extension AppDelegate : AntMediaClientDelegate
     }
     
     func disconnected() {
-        
+        webRTCViewerClient.stop()
     }
     
     func audioSessionDidStartPlayOrRecord() {

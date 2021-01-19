@@ -109,10 +109,14 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                         portrateCell.likeImage.isLiked = item.likeStatus
                 if item.likeCount == 0 {
                     portrateCell.likeCountBtn.isHidden = true
+                    portrateCell.likeCommentsDistance.constant = -portrateCell.likeCountBtn.frame.width
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
                     portrateCell.likeCommentViewHeight.constant = 22
+                    portrateCell.likeCommentsDistance.constant = 7
+//                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+                    portrateCell.commentCountBtn.commentCount =  item.commentCount
                     //portrateCell.SetLikeCountButton()
                 }
             }
@@ -123,10 +127,14 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                         portrateCell.likeImage.isLiked = item.likeStatus
                 if item.likeCount == 0 {
                     portrateCell.likeCountBtn.isHidden = true
+                    portrateCell.likeCommentsDistance.constant = -portrateCell.likeCountBtn.frame.width
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
                     portrateCell.likeCommentViewHeight.constant = 22
+                    portrateCell.likeCommentsDistance.constant = 7
+//                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+                    portrateCell.commentCountBtn.commentCount =  item.commentCount
                    // portrateCell.SetLikeCountButton()
                 }
                    
@@ -138,10 +146,14 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                         portrateCell.likeImage.isLiked = item.likeStatus
                 if item.likeCount == 0 {
                     portrateCell.likeCountBtn.isHidden = true
+                    portrateCell.likeCommentsDistance.constant = -portrateCell.likeCountBtn.frame.width
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
                     portrateCell.likeCommentViewHeight.constant = 22
+                    portrateCell.likeCommentsDistance.constant = 7
+//                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+                    portrateCell.commentCountBtn.commentCount =  item.commentCount
                   //  portrateCell.SetLikeCountButton()
                 }
                    
@@ -153,10 +165,14 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                         portrateCell.likeImage.isLiked = item.likeStatus
                 if item.likeCount == 0 {
                     portrateCell.likeCountBtn.isHidden = true
+                    portrateCell.likeCommentsDistance.constant = -portrateCell.likeCountBtn.frame.width
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
                     portrateCell.likeCommentViewHeight.constant = 22
+                    portrateCell.likeCommentsDistance.constant = 7
+//                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+                    portrateCell.commentCountBtn.commentCount =  item.commentCount
                    // portrateCell.SetLikeCountButton()
                 }
                    
@@ -168,10 +184,16 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                         portrateCell.likeImage.isLiked = item.likeStatus
                 if item.likeCount == 0 {
                     portrateCell.likeCountBtn.isHidden = true
+                    portrateCell.likeCommentsDistance.constant = -portrateCell.likeCountBtn.frame.width
+                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
                     portrateCell.likeCommentViewHeight.constant = 22
+                    portrateCell.likeCommentsDistance.constant = 7
+                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+                    portrateCell.commentCountBtn.commentCount =  item.commentCount
                     //portrateCell.SetLikeCountButton()
                 }
             }
@@ -182,10 +204,16 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                         portrateCell.likeImage.isLiked = item.likeStatus
                 if item.likeCount == 0 {
                     portrateCell.likeCountBtn.isHidden = true
+                    portrateCell.likeCommentsDistance.constant = -portrateCell.likeCountBtn.frame.width
+                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
                     portrateCell.likeCommentViewHeight.constant = 22
+                    portrateCell.likeCommentsDistance.constant = 7
+                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+                    portrateCell.commentCountBtn.commentCount =  item.commentCount
                   //  portrateCell.SetLikeCountButton()
                 }
             }
@@ -196,10 +224,16 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
                         portrateCell.likeImage.isLiked = item.likeStatus
                 if item.likeCount == 0 {
                     portrateCell.likeCountBtn.isHidden = true
+                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+
+                    portrateCell.likeCommentsDistance.constant = -portrateCell.likeCountBtn.frame.width
                 } else {
                     portrateCell.likeCountBtn.isHidden = false
                     portrateCell.likeCountBtn.setTitle(item.likedByText, for: .normal)
                     portrateCell.likeCommentViewHeight.constant = 22
+                    portrateCell.likeCommentsDistance.constant = 7
+                    portrateCell.commentCountBtn.likeCount =  item.likeCount
+                    portrateCell.commentCountBtn.commentCount =  item.commentCount
                   //  portrateCell.SetLikeCountButton()
                 }
             }

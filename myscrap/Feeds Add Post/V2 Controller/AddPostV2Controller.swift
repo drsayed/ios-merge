@@ -735,6 +735,20 @@ class AddPostV2Controller: UIViewController, UIImagePickerControllerDelegate, UI
             //
             //        }
                     let video = UIAlertAction(title: "Video", style: .default) { [unowned self] (action) in
+                        
+                        
+                        self.picker.sourceType = .camera
+                        self.picker.mediaTypes = ["public.movie"]
+                        self.picker.showsCameraControls = true
+                        self.picker.isToolbarHidden = true
+                        self.picker.delegate = self
+                        self.picker.videoMaximumDuration = TimeInterval(65.0)
+                        self.picker.allowsEditing = true
+                        self.picker.cameraCaptureMode = .video
+                        self.picker.videoQuality = .type640x480
+                        
+                        self.present(self.picker,animated: true,completion: nil)
+                        
                         //            self.picker.sourceType = .photoLibrary
                         //            self.picker.videoMaximumDuration = TimeInterval(65.0)
                         //            self.picker.mediaTypes = ["public.movie"]
@@ -754,49 +768,49 @@ class AddPostV2Controller: UIViewController, UIImagePickerControllerDelegate, UI
 //                        //self?.picker.cameraCaptureMode = .video
 //                        //self?.picker.modalPresentationStyle = .custom
 //                        self.present(self.picker,animated: true,completion: nil)
-                        let fetchOptions = PHFetchOptions()
-                        fetchOptions.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-                            NSPredicate(format: "mediaType == %d", PHAssetMediaType.video.rawValue),
-                           // NSPredicate(format: "duration < %d", 66),
-                        ])
-
-                        let configuration = DKImageGroupDataManagerConfiguration()
-                        configuration.assetFetchOptions = fetchOptions
-
-                        let groupDataManager = DKImageGroupDataManager(configuration: configuration)
-                        let pickerController = DKImagePickerController(groupDataManager: groupDataManager)
-
-                        //  let pickerController = DKImagePickerController()
-                        pickerController.assetType = .allAssets
-                        pickerController.maxSelectableCount=10;
-                        pickerController.sourceType = .camera
-                       // pickerController.UIDelegate = CustomUIDelegate();
-                        pickerController.showsCancelButton = true;
-                        pickerController.showsEmptyAlbums = false;
-                        pickerController.allowMultipleTypes = true;
-                        pickerController.defaultSelectedAssets = self.videosToPosts;
-                        pickerController.didSelectAssets = { (assets: [DKAsset]) in
-                            print("didSelectAssets")
-                            print(assets)
-                            self.videosToPosts.removeAll()
-                            for asset in assets {
-                                self.videosToPosts.append(asset)
-                            }
-                            self.refreshVedioToUploadData()
-                            self.isImage = false
-                            self.isVideo = true
-                            self.collectionView.reloadData()
-                        }
-                        pickerController.modalPresentationStyle = .overFullScreen
-                        self.present(pickerController, animated: true, completion: nil)
-
-                    }
-                    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//                        let fetchOptions = PHFetchOptions()
+//                        fetchOptions.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+//                            NSPredicate(format: "mediaType == %d", PHAssetMediaType.video.rawValue),
+//                           // NSPredicate(format: "duration < %d", 66),
+//                        ])
+//
+//                        let configuration = DKImageGroupDataManagerConfiguration()
+//                        configuration.assetFetchOptions = fetchOptions
+//
+//                        let groupDataManager = DKImageGroupDataManager(configuration: configuration)
+//                        let pickerController = DKImagePickerController(groupDataManager: groupDataManager)
+//
+//                        //  let pickerController = DKImagePickerController()
+//                        pickerController.assetType = .allAssets
+//                        pickerController.maxSelectableCount=10;
+//                        pickerController.sourceType = .camera
+//                       // pickerController.UIDelegate = CustomUIDelegate();
+//                        pickerController.showsCancelButton = true;
+//                        pickerController.showsEmptyAlbums = false;
+//                        pickerController.allowMultipleTypes = true;
+//                        pickerController.defaultSelectedAssets = self.videosToPosts;
+//                        pickerController.didSelectAssets = { (assets: [DKAsset]) in
+//                            print("didSelectAssets")
+//                            print(assets)
+//                            self.videosToPosts.removeAll()
+//                            for asset in assets {
+//                                self.videosToPosts.append(asset)
+//                            }
+//                            self.refreshVedioToUploadData()
+//                            self.isImage = false
+//                            self.isVideo = true
+//                            self.collectionView.reloadData()
+//                        }
+//                        pickerController.modalPresentationStyle = .overFullScreen
+//                        self.present(pickerController, animated: true, completion: nil)
+//
+                 }
+                   let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                     Alert.addAction(photo)
                     Alert.addAction(video)
                     Alert.addAction(cancel)
                     Alert.view.tintColor = UIColor.GREEN_PRIMARY
-                    self.present(Alert, animated: true, completion: nil)
+                 self.present(Alert, animated: true, completion: nil)
                 
         }
         else
@@ -1000,15 +1014,12 @@ class AddPostV2Controller: UIViewController, UIImagePickerControllerDelegate, UI
                 // Handle a movie capture
                 UISaveVideoAtPathToSavedPhotosAlbum(video.path,self,#selector(video(_:didFinishSavingWithError:contextInfo:)),nil)
             }
-//            self.videosToData.append(video.absoluteString)
-//            self.videoPickedUrl = nil
-               self.videoPickedUrl = video
-//            print("Picked video url : \(self.videoPickedUrl) / \(video)")
-            self.isVideo = true
+
+            self.videosToData.append(video.absoluteString)
+           // self.refreshVedioToUploadData()
             self.isImage = false
-//            self.removeBtn.isHidden = false
-//
-          collectionView.reloadData()
+            self.isVideo = true
+            self.collectionView.reloadData()
             
 //            togglePostBtn()
             toggleNewPostBtn()

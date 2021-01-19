@@ -89,7 +89,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     var visibleCellIndex = IndexPath()
     //var landsVidTextVisibIndexPath = IndexPath()
     var muteVideo = true
-    
+    var timerRefreshActiveUser = Timer()
     //Model Class service
     fileprivate var covidService = CovidPollService()
     
@@ -142,7 +142,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         }
         self.getAllOnlineUsersData()
     }
-    private func getAllOnlineUsersData(){
+    @objc private func getAllOnlineUsersData(){
         DispatchQueue.global(qos:.userInteractive).async {
             self.memberService.getOnlineFriends(completion: { (members) in
                 DispatchQueue.main.async {
@@ -430,6 +430,11 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(self.videoDownloadNotify(_:)), name: .videoDownloaded, object: nil)
         self.scrollViewDidEndScrolling()
         headerCell?.collectionView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+               //call any function
+            self.startTimeToGetUser()
+           }
+       
     }
     @objc func ProfileBtnTap(tapGesture:UITapGestureRecognizer) {
         if AuthStatus.instance.isGuest{
@@ -483,6 +488,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
         NotificationCenter.default.removeObserver(self, name: .userSignedIn, object: nil)
         NotificationCenter.default.removeObserver(self, name: .videoDownloaded, object: nil)
+        self.stopTimer()
     }
     
     
@@ -698,7 +704,16 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
     }
     @objc func statusManager(_ notification: Notification) {
     }
+    private func startTimeToGetUser() {
+        timerRefreshActiveUser.invalidate()
+        timerRefreshActiveUser = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector:#selector(self.getAllOnlineUsersData) , userInfo: nil, repeats: true)
+    }
+    private func stopTimer() {
+       
+        timerRefreshActiveUser.invalidate()
+    }
 }
+
 extension FeedsVC: UICollectionViewDataSource,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
@@ -1926,7 +1941,7 @@ extension FeedsVC: FeedVCHeaderCellDelegate{
                 vc.liveUserImageValue  = activeuser.profilePic!
                 vc.liveUserProfileColor  = activeuser.colorCode!
                 vc.liveUsertopicValue  = activeuser.topic!
-                
+                vc.liveType  = activeuser.liveType!
 
                    self.navigationController?.pushViewController(vc, animated: true)
                 }

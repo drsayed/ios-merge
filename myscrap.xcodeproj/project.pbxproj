@@ -1616,6 +1616,11 @@
 		FBD7DDA02566FFD10068768C /* LandScapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7DD9E2566FFCC0068768C /* LandScapCell.swift */; };
 		FBD7DDA12566FFD10068768C /* LandScapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD7DD9F2566FFD00068768C /* LandScapCell.xib */; };
 		FBDDDCEE25822FA600592782 /* TMImageZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDDDCED25822FA600592782 /* TMImageZoom.m */; };
+		FBE058E325B55CAD009275F1 /* ViewerJoinRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE058E125B55CAB009275F1 /* ViewerJoinRequestCell.xib */; };
+		FBE058E425B55CAD009275F1 /* ViewerJoinRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE058E225B55CAC009275F1 /* ViewerJoinRequestCell.swift */; };
+		FBE0593425B57B0F009275F1 /* ViewerSideJoinRequestPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE0593325B57B0E009275F1 /* ViewerSideJoinRequestPopUp.swift */; };
+		FBE0593825B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE0593725B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift */; };
+		FBE0593C25B5889F009275F1 /* ViewerSideJoinConfirmPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE0593B25B5889E009275F1 /* ViewerSideJoinConfirmPopUp.swift */; };
 		FBE4FFE525B0C64600F067EF /* LiveUserFollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */; };
 		FBE4FFE625B0C64600F067EF /* LiveUserFollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */; };
 		FBE4FFEA25B0D86300F067EF /* LiveUserFollowPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */; };
@@ -3298,6 +3303,11 @@
 		FBD7DD9F2566FFD00068768C /* LandScapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandScapCell.xib; sourceTree = "<group>"; };
 		FBDDDCEA25822FA100592782 /* TMImageZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMImageZoom.h; sourceTree = "<group>"; };
 		FBDDDCED25822FA600592782 /* TMImageZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMImageZoom.m; sourceTree = "<group>"; };
+		FBE058E125B55CAB009275F1 /* ViewerJoinRequestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewerJoinRequestCell.xib; sourceTree = "<group>"; };
+		FBE058E225B55CAC009275F1 /* ViewerJoinRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewerJoinRequestCell.swift; sourceTree = "<group>"; };
+		FBE0593325B57B0E009275F1 /* ViewerSideJoinRequestPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewerSideJoinRequestPopUp.swift; sourceTree = "<group>"; };
+		FBE0593725B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamerSideJoinRequestPopUp.swift; sourceTree = "<group>"; };
+		FBE0593B25B5889E009275F1 /* ViewerSideJoinConfirmPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewerSideJoinConfirmPopUp.swift; sourceTree = "<group>"; };
 		FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserFollowCell.swift; sourceTree = "<group>"; };
 		FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveUserFollowCell.xib; sourceTree = "<group>"; };
 		FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserFollowPopUpVC.swift; sourceTree = "<group>"; };
@@ -7378,8 +7388,8 @@
 		FB0EFC2E25A0E41100922BF4 /* LiveModule */ = {
 			isa = PBXGroup;
 			children = (
-				FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */,
 				FB7D07D025A2518200DD4249 /* liveSDK */,
+				FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */,
 				FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */,
 				FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */,
 				FB7D088925A3344800DD4249 /* JoinUserLiveVC.swift */,
@@ -7389,8 +7399,13 @@
 				FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */,
 				FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */,
 				FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */,
+				FBE058E225B55CAC009275F1 /* ViewerJoinRequestCell.swift */,
+				FBE058E125B55CAB009275F1 /* ViewerJoinRequestCell.xib */,
 				FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */,
 				FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */,
+				FBE0593325B57B0E009275F1 /* ViewerSideJoinRequestPopUp.swift */,
+				FBE0593725B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift */,
+				FBE0593B25B5889E009275F1 /* ViewerSideJoinConfirmPopUp.swift */,
 				FBE4FFED25B1CE9700F067EF /* UnfollowConfirmationPopUpVC.swift */,
 				FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */,
 				FBFE662A25ADA082000E8A43 /* OnlineViewersPopUpVC.swift */,
@@ -8326,6 +8341,7 @@
 				9414DD07216F36700082C1D3 /* AI-32.png in Resources */,
 				9414DD40216F36700082C1D3 /* BV-128.png in Resources */,
 				942F02DB225085A700B05816 /* MenuMarketCell.xib in Resources */,
+				FBE058E325B55CAD009275F1 /* ViewerJoinRequestCell.xib in Resources */,
 				9414DED5216F36710082C1D3 /* UZ-32.png in Resources */,
 				9414DDB7216F36700082C1D3 /* GU-32.png in Resources */,
 				9414DDD5216F36700082C1D3 /* IQ-32.png in Resources */,
@@ -8943,6 +8959,7 @@
 				22BE45B21F1F886F005E2735 /* CompanyEditProfileVC.swift in Sources */,
 				FB7D07B125A2394D00DD4249 /* UserLiveVC.swift in Sources */,
 				22F8CB091F2624C0003FF692 /* InterestMenuBar.swift in Sources */,
+				FBE058E425B55CAD009275F1 /* ViewerJoinRequestCell.swift in Sources */,
 				940A5712246D1B6800E61CDD /* LondonPricesTVCell.swift in Sources */,
 				04CDBF921EFD960E001DFE5B /* ProfileVC.swift in Sources */,
 				220EDA1C1FA7669E00FEAF3D /* FavouriteButton.swift in Sources */,
@@ -9138,6 +9155,7 @@
 				94FAEFE421D8813000C1B6A3 /* LiveReceiver.swift in Sources */,
 				9427FFE620FF21BF00C2A385 /* AddListingService.swift in Sources */,
 				FB9E01732511332B003D10E2 /* ElementLocationFramePairs.swift in Sources */,
+				FBE0593C25B5889F009275F1 /* ViewerSideJoinConfirmPopUp.swift in Sources */,
 				22DE463F1FE2AFC1005EBEFC /* CalendarTitleView.swift in Sources */,
 				942AC1482400F7180032401C /* ReportedVideoCell.swift in Sources */,
 				9406648F23CEEEDC00138DD9 /* Land_Market_OverAllCell.swift in Sources */,
@@ -9617,6 +9635,7 @@
 				94E4791F22CA32F30021B088 /* ChangePhotoVC.swift in Sources */,
 				9411E81222D32056004C1991 /* BGWallListDelegate.swift in Sources */,
 				22845F632029991A008803B3 /* CameraViewControllerConstraint.swift in Sources */,
+				FBE0593825B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift in Sources */,
 				2205FC0A1FA9FB6D00986FA7 /* NewsSubHeadingLabel.swift in Sources */,
 				94CD481F232F5B2100FCBD22 /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */,
 				FBD7DD9A2566F8A10068768C /* LandScapVideoCell.swift in Sources */,
@@ -9674,6 +9693,7 @@
 				228B8D251EFA8CB200142937 /* CommentsCell.swift in Sources */,
 				FB919768250A028D003AF533 /* PricesTabVC.swift in Sources */,
 				22E7DD441F109DE80053165D /* CompaniesVC.swift in Sources */,
+				FBE0593425B57B0F009275F1 /* ViewerSideJoinRequestPopUp.swift in Sources */,
 				94995782210DA6FC0046E03D /* MarketPhotosController.swift in Sources */,
 				94CD4814232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallPulse.swift in Sources */,
 				228131ED1F8DF92700A78FAF /* Fonts.swift in Sources */,
@@ -9959,12 +9979,13 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = myscrap/myscrap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7.0;
+				CURRENT_PROJECT_VERSION = 9.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10050,12 +10071,13 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = myscrap/myscrap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7.0;
+				CURRENT_PROJECT_VERSION = 9.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
