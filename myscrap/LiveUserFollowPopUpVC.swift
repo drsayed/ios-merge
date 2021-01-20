@@ -107,8 +107,8 @@ class LiveUserFollowPopUpVC: BaseVC {
         lavelLableButton.text = "Level"
         lavelCountButton.text = "\(item.level)"
         
-        self.followerLableButton.setTitle(String(format: "Following"), for: .normal)
-        self.followerCountButton.setTitle(String(format: "%d", item.followingCount), for: .normal)
+        self.followingLableButton.setTitle(String(format: "Following"), for: .normal)
+        self.followingCountButton.setTitle(String(format: "%d", item.followingCount), for: .normal)
 
         var followerStr = "Followers"
         

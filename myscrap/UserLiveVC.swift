@@ -57,6 +57,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBOutlet weak var UserCommentsBackground: UIView!
     @IBOutlet weak var userCommentsCollectionView: UICollectionView!
 
+    let joiningVC = StreamerSideJoinRequestPopUp.storyBoardInstance()
+    let onlineViewer = OnlineViewersPopUpVC.storyBoardInstance()
+    
     var topicValueText = "No Topic"
     var userJoined = Array<[String:AnyObject]>()
     var userLeft = Array<[String:AnyObject]>()
@@ -284,7 +287,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
      }
     @objc func OnlineViewTapped(_ sender: UITapGestureRecognizer) {
         if userJoined.count > 0 {
-            if let vc = OnlineViewersPopUpVC.storyBoardInstance(){
+            if let vc = onlineViewer {
                 vc.modalPresentationStyle = .overFullScreen
                 vc.delegateOnlineViewer = self
                 vc.userJoined = userJoined
@@ -462,12 +465,12 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
         self.largeCameraContainer.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+20)
         self.cameraView.frame = self.largeCameraContainer.frame
-        self.cameraflipedView.frame = self.largeCameraContainer.frame
+        self.cameraflipedView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+40)
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
      //   cameraflipedView.bounds = screenSize
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame = self.largeCameraContainer.frame
+        self.videoPreviewLayer.frame =  CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+40)
         cameraflipedView.layer.addSublayer(videoPreviewLayer)
    //     cameraView.layer.addSublayer(cameraflipedView.layer)
         cameraView.addSubview(cameraflipedView)
@@ -597,7 +600,6 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
         let userJoinedCopy = userJoined
-        var removeIds = [String]()
         for i in 0..<userJoinedCopy.count {
               let dict = userJoinedCopy[i]
             var isFound = false
@@ -641,8 +643,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
     }
     func findNewJoinORLeft(viewers : Array<[String:AnyObject]>)  {
+        self.findIfAlreadyLeft(viewers: viewers)
         self.findIfAlreadyJoined(viewers: viewers)
-      self.findIfAlreadyLeft(viewers: viewers)
     }
     
     @objc func getLiveStatus()  {
@@ -658,6 +660,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                                
                                 numberOfViews.text = "\(views.count)"
                                 self.findNewJoinORLeft(viewers: views)
+                            }
+                            else
+                            {
+                                numberOfViews.text = "\(0)"
+                                self.findNewJoinORLeft(viewers: Array<[String : AnyObject]>())
                             }
                         }
                         else
@@ -777,6 +784,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     }
     override func viewWillDisappear(_ animated: Bool) {
+        joiningVC?.dismiss(animated: false, completion: nil)
+        onlineViewer?.dismiss(animated: false, completion: nil)
+        
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
       
@@ -833,7 +843,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
     }
     func showJoiningPopup(message:CommentMessage)  {
-        if let vc = StreamerSideJoinRequestPopUp.storyBoardInstance(){
+        if let vc = joiningVC {
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
             vc.friendId = message.userId
@@ -990,6 +1000,8 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
                 
                 cell.requestButton.setTitle("View", for: .normal)
                 cell.requestButton.tag = indexPath.row
+                cell.profileView.isHidden = false
+                cell.imagePlaceholder.isHidden = true
                 cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
                 
                     cell.setNeedsLayout()
@@ -1103,6 +1115,8 @@ extension UserLiveVC : AntMediaClientDelegate
         
         DispatchQueue.main.async { [self] in
             smallCameraContainer.isHidden = false
+            MBProgressHUD.hide(for: self.view , animated: true)
+
             self.setUserToDualLive()
         }
      //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
@@ -1132,7 +1146,9 @@ extension UserLiveVC : AntMediaClientDelegate
     }
     
     func audioSessionDidStartPlayOrRecord() {
-    //    webRTCClient.speakerOn()
+    //    appDelegate.webRTCClient.speakerOn()
+     //   appDelegate.webRTCViewerClient.speakerOn()
+
     }
     
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
@@ -1157,6 +1173,12 @@ extension UserLiveVC {
 
     @objc func  playJoiningStream()
     {
+        DispatchQueue.main.async { [self]
+                let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+                spinner.mode = MBProgressHUDMode.indeterminate
+                spinner.isUserInteractionEnabled = false
+                spinner.label.text = "Connecting..."
+            }
         print("stream2room\(liveID)")
         appDelegate.webRTCViewerClient.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
         appDelegate.webRTCViewerClient.setDebug(true)

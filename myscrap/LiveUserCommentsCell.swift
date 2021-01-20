@@ -21,7 +21,7 @@ final class LiveUserCommentsCell: BaseCell{
     
     override func layoutSubviews() {
         if self.frame.size.height > 30  {
-            profileTopConstraints.constant = 5
+            profileTopConstraints.constant = 0
             nameLableTopConstaints.constant = 0
             self.darkBackground.layer.cornerRadius =   10
 

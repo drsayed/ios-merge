@@ -26,6 +26,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveUserProfileColor = ""
     var liveUsertopicValue = ""
     var followingStatus = false
+    var isSentRequest = false
     fileprivate var profileItem:ProfileData?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var micButton: UIButton!
@@ -35,8 +36,11 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBOutlet weak var largeCameraContainer: UIView!
     @IBOutlet weak var smallCameraContainer: UIView!
     @IBOutlet weak var smallStreamView: UIView!
-
-    
+    let followAlertVC = LiveUserFollowPopUpVC.storyBoardInstance()
+    let unfollowAlertVC = UnfollowConfirmationPopUpVC.storyBoardInstance()
+    let joiningVC = ViewerSideJoinRequestPopUp.storyBoardInstance()
+    let joiningConfirmVC = ViewerSideJoinConfirmPopUp.storyBoardInstance()
+   
     var userJoined = Array<[String:AnyObject]>()
 
     var timer = Timer()
@@ -570,7 +574,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
        // self.cameraView.bounds = screenSize
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.connection?.videoOrientation = .portrait
-        self.videoPreviewLayer.frame =  cameraView.frame
+        self.videoPreviewLayer.frame =  CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+40)
       //  cameraView.layer.addSublayer(videoPreviewLayer)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
@@ -800,7 +804,10 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-    
+        followAlertVC?.dismiss(animated: false, completion: nil)
+        unfollowAlertVC?.dismiss(animated: false, completion: nil)
+        joiningVC?.dismiss(animated: false, completion: nil)
+        joiningConfirmVC?.dismiss(animated: false, completion: nil)
         self.navigationController?.navigationBar.isHidden = false
         NotificationCenter.default.removeObserver(self)
 
@@ -879,7 +886,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
     }
     func showFollowingAlert()  {
-        if let vc = LiveUserFollowPopUpVC.storyBoardInstance(){
+        if let vc = followAlertVC {
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
             vc.friendId = friendId
@@ -894,7 +901,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
     }
     func showUnFollowingAlert()  {
-        if let vc = UnfollowConfirmationPopUpVC.storyBoardInstance(){
+        if let vc = unfollowAlertVC {
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
             vc.friendId = friendId
@@ -910,18 +917,27 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @objc func sendRequestPressed() {
         print("Button Clicked")
-        if !appDelegate.webRTCViewerClient.isConnected() {
-            self.showJoiningPopup()
+      //  self.liveComments[sender.tag].messageId
+        if !isSentRequest {
+            if !appDelegate.webRTCViewerClient.isConnected() {
+                isSentRequest = true
+                self.showJoiningPopup()
+                self.reloadComentsView()
+            }
+            else
+            {
+                self.showToast(message: "You are already connected")
+            }
         }
-        else
-        {
-            self.showToast(message: "You are already connected")
+        else{
+            self.showToast(message: "You have already sent request")
         }
+        
      
         
     }
     func showJoiningPopup()  {
-        if let vc = ViewerSideJoinRequestPopUp.storyBoardInstance(){
+        if let vc = joiningVC {
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
             vc.friendId = friendId
@@ -935,7 +951,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
     }
     func showJoinConfirmationPopup()  {
-        if let vc = ViewerSideJoinConfirmPopUp.storyBoardInstance(){
+        if let vc = joiningConfirmVC{
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
             vc.friendId = friendId
@@ -1168,8 +1184,15 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             if message.isJoingingRequest == "1" {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
                 cell.configCell(item: self.liveComments[indexPath.row] )
-                
-                cell.requestButton.setTitle("Request", for: .normal)
+                if isSentRequest {
+                    cell.requestButton.setTitle("Requested", for: .normal)
+                }
+                else
+                {
+                    cell.requestButton.setTitle("Request", for: .normal)
+                }
+                cell.profileView.isHidden = true
+                cell.imagePlaceholder.isHidden = false
                 cell.requestButton.tag = indexPath.row
                 cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
                 
@@ -1378,6 +1401,8 @@ extension JoinUserLiveVC : AntMediaClientDelegate
             smallCameraContainer.isHidden = false
         micButton.isHidden = false
         cameraToggleButton.isHidden = false
+            MBProgressHUD.hide(for: self.view , animated: true)
+
             self.setUserToDualLive()
         }
        // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
@@ -1388,6 +1413,8 @@ extension JoinUserLiveVC : AntMediaClientDelegate
      //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
         DispatchQueue.main.async { [self] in
             smallCameraContainer.isHidden = false
+            MBProgressHUD.hide(for: self.view , animated: true)
+
             self.setUserToDualLive()
             
         }
@@ -1417,7 +1444,9 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func audioSessionDidStartPlayOrRecord() {
-        appDelegate.webRTCViewerClient.speakerOn()
+     //   appDelegate.webRTCViewerClient.speakerOn()
+       // appDelegate.webRTCClient.speakerOn()
+       // appDelegate.webRTCViewerClient.speakerOn()
     }
     
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
@@ -1442,6 +1471,13 @@ extension JoinUserLiveVC {
 
     @objc func startJoiningStream()
     {
+        DispatchQueue.main.async { [self]
+                let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+                spinner.mode = MBProgressHUDMode.indeterminate
+                spinner.isUserInteractionEnabled = false
+                spinner.label.text = "Connecting..."
+            }
+    
         print("room\(liveID)")
         timeStampStarted = "\(Int(Date().timeIntervalSince1970))"
         appDelegate.webRTCViewerClient.stop()
@@ -1455,6 +1491,13 @@ extension JoinUserLiveVC {
     }
     @objc func playJoiningStream()
     {
+        DispatchQueue.main.async { [self]
+                let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+                spinner.mode = MBProgressHUDMode.indeterminate
+                spinner.isUserInteractionEnabled = false
+                spinner.label.text = "Connecting..."
+            }
+        
         print("room\(liveID)")
         self.appDelegate.webRTCViewerClient.stop()
         
@@ -1496,7 +1539,7 @@ extension JoinUserLiveVC: EndLiveViewDelegate {
 //        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
 //        spinner.mode = MBProgressHUDMode.indeterminate
 //        spinner.label.text = "End Live..."
-//        self.setUserStatusEndLive()
+        self.setUserStatusEndLive()
 
     }
 

@@ -124,7 +124,11 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         self.collectionView.isHidden = true
         
         view.endEditing(true)
-    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+               //call any function
+            self.startTimeToGetUser()
+           }
+
     }
     @IBAction func liveButtonPressed(_ sender: Any) {
         if let vc = LiveTopicVC.storyBoardInstance() {
@@ -149,10 +153,15 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
                     self.memberDataSource = members
                     self.headerCell!.datasource = self.memberDataSource
                     self.headerCellHeight.constant = 100
-                    UIView.performWithoutAnimation {
-                        self.headerCell!.collectionView.reloadData()
-                     }
-                    self.headerCell!.addAnimationIfNeeded()
+                //    UIView.performWithoutAnimation {
+                    self.headerCell!.collectionView.reloadData()
+                    self.headerCell!.collectionView.performBatchUpdates(nil, completion: {
+                        (result) in
+                   self.headerCell!.addAnimationIfNeeded()
+                    })
+                  
+                 //    }
+                  
                 }
             })
         }
@@ -430,10 +439,6 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(self.videoDownloadNotify(_:)), name: .videoDownloaded, object: nil)
         self.scrollViewDidEndScrolling()
         headerCell?.collectionView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
-               //call any function
-            self.startTimeToGetUser()
-           }
        
     }
     @objc func ProfileBtnTap(tapGesture:UITapGestureRecognizer) {

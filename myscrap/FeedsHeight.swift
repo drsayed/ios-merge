@@ -662,6 +662,9 @@ struct LabelHeight{
         let maxLabelWidth: CGFloat = width
         let maxSize = CGSize(width: maxLabelWidth, height: .greatestFiniteMagnitude)
         let neededSize = textView.sizeThatFits(maxSize)
+        if neededSize.height < 10 {
+          return 10
+        }
         return neededSize.height
     }
     
