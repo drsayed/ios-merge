@@ -450,6 +450,17 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         
         
         print("User info after tapped : ",userInfo)
+//        let dataValue  = userInfo["aps"] as! [String: AnyObject]
+//        let alert  = dataValue["alert"] as! String
+//        let dataObj = alert.data(using: .utf8)!
+//        var output : [String: String] = [String: String]()
+//            do{
+//                output = try (JSONSerialization.jsonObject(with: dataObj, options: .allowFragments) as? [String:String])!
+//                print ("\(String(describing: output))")
+//            }
+//            catch {
+//                print (error)
+//            }
         
         if let data = userInfo[UnNotificationKeys.data] as? [String: AnyObject], let type = data[UnNotificationKeys.notificationType] as? String{
             
@@ -459,6 +470,12 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             
             if let pid = data[UnNotificationKeys.postId] as? String{
                 postId = pid
+            }
+            else
+            {
+                if let pid = data[UnNotificationKeys.postId] as? Int{
+                    postId = "\(pid)"
+                }
             }
             if let notID = data[UnNotificationKeys.notificationID] as? String{
                 notificationId = notID
@@ -506,6 +523,14 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         
         switch notificationType {
         case .post,.doubleComment:
+            if webRTCClient.isConnected()
+            {
+                if let id = postId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = postId  {
                 let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
                 vc.postId = id
@@ -519,6 +544,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     nav.modalPresentationStyle = .fullScreen
                     navController?.present(nav, animated: true, completion: nil)
                 }
+            }
             }
         case .event:
             if let id = postId{
@@ -582,16 +608,13 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         case .user:
             if webRTCClient.isConnected()
             {
-                if let id = userId, let vc = FriendVC.storyBoardInstance(){
-                    vc.friendId = id
+                if let id = userId  {
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-                    
-                    vc.isfromCardNoti = ""
-                    self.navController?.pushViewController(vc, animated: true)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil, userInfo: ["UserId" : "\(id)"])
                 }
             }
-            else
-            {
+            else{
+                
                 if let id = userId, let vc = FriendVC.storyBoardInstance(){
                     vc.friendId = id
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
@@ -604,12 +627,9 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         case .User:
             if webRTCClient.isConnected()
             {
-                if let id = userId, let vc = FriendVC.storyBoardInstance(){
-                    vc.friendId = id
+                if let id = userId  {
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-                    
-                    vc.isfromCardNoti = ""
-                    self.navController?.pushViewController(vc, animated: true)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil, userInfo: ["UserId" : "\(id)"])
                 }
             }
             else

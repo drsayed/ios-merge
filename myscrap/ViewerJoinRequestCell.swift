@@ -13,8 +13,8 @@ final class ViewerJoinRequestCell: BaseCell{
     
     @IBOutlet weak var darkBackground: UIView!
     @IBOutlet weak var profileView: ProfileView!
-    @IBOutlet weak var imagePlaceholder: UIImageView!
-    
+    @IBOutlet weak var imagePlaceholder: UIButton!
+
     @IBOutlet weak var requestButton: UIButton!
     @IBOutlet weak var nameAndMessahe: UILabel!
     @IBOutlet weak var profileTypeView: OnlineProfileTypeView!
@@ -34,8 +34,10 @@ final class ViewerJoinRequestCell: BaseCell{
         profileView.updateViews(name: item.name, url: item.profilePic, colorCode: item.colorCode)
         self.nameAndMessahe.text =  "\(item.messageText)"
         let image = UIImage(named: "ic_emoge")?.withRenderingMode(.alwaysTemplate)
-        imagePlaceholder.image = image
-        imagePlaceholder.tintColor = UIColor.MyScrapGreen
+        imagePlaceholder.setImage(image, for: .normal)
+        imagePlaceholder.backgroundColor = UIColor.MyScrapGreen
+        imagePlaceholder.layer.cornerRadius = imagePlaceholder.frame.size.height/2
+        imagePlaceholder.tintColor = UIColor.white
 
          }
   

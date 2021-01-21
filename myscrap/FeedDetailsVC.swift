@@ -112,6 +112,7 @@ class DetailsVC: BaseCVC , FriendControllerDelegate, UINavigationControllerDeleg
         UserDefaults.standard.set(true, forKey: "NONeedToPlay")
       //  UserDefaults.standard.set(true, forKey: "\(postId)Seen")
         UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+        self.navigationController?.navigationBar.isHidden = false
 
         IQKeyboardManager.sharedManager().enable = false
         self.getDetails()

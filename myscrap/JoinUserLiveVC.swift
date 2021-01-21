@@ -119,6 +119,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         } else {
             // Fallback on earlier versions
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.likeCommentNotificationReciveLive), name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.followNotificationReciveLive), name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil)
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnSmallWindow(tapGestureRecognizer:)))
         smallCameraContainer.isUserInteractionEnabled = true
         smallCameraContainer.addGestureRecognizer(tapGestureRecognizer)
@@ -253,6 +256,55 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             //Step 13
         }
     }
+    @objc  func followNotificationReciveLive(notification: NSNotification) {
+
+      if let useriD = notification.userInfo?["UserId"] as? String  {
+      // do something with your image
+        if let vc = FriendVC.storyBoardInstance() {
+        vc.friendId = useriD
+        
+        vc.isfromCardNoti = ""
+            self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.pushViewController(vc, animated: true)
+        }
+      }
+     else
+      {
+        if let useriD = notification.userInfo?["UserId"] as? Int  {
+        // do something with your image
+          if let vc = FriendVC.storyBoardInstance() {
+          vc.friendId = "\(useriD)"
+          
+          vc.isfromCardNoti = ""
+            self.navigationController?.navigationBar.isHidden = false
+          self.navigationController?.pushViewController(vc, animated: true)
+          }
+        }
+        
+      }
+     }
+    
+    @objc  func likeCommentNotificationReciveLive(notification: NSNotification) {
+
+      if let posttID = notification.userInfo?["PostID"] as? String {
+      // do something with your image
+        let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.postId = posttID
+        
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.pushViewController(vc, animated: true)
+      }
+        else
+      {
+        if let posttID = notification.userInfo?["PostID"] as? Int {
+        // do something with your image
+          let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
+          vc.postId = "\(posttID)"
+            self.navigationController?.navigationBar.isHidden = false
+          self.navigationController?.pushViewController(vc, animated: true)
+        }
+      }
+     }
     @objc func tappedOnSmallWindow(tapGestureRecognizer: UITapGestureRecognizer){
 
         if smallCameraContainer.tag == 0 {
@@ -1182,6 +1234,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
         
           let message =   self.liveComments[indexPath.row]
             if message.isJoingingRequest == "1" {
+                
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
                 cell.configCell(item: self.liveComments[indexPath.row] )
                 if isSentRequest {
@@ -1193,6 +1246,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
                 }
                 cell.profileView.isHidden = true
                 cell.imagePlaceholder.isHidden = false
+               
                 cell.requestButton.tag = indexPath.row
                 cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
                 

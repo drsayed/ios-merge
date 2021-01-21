@@ -161,7 +161,8 @@ class FriendVC:BaseVC{
             NotificationCenter.default.post(name: Notification.Name("PauseAllProfileVideos"), object: nil)
             
         }
-        
+        self.navigationController?.navigationBar.isHidden = false
+
         
         self.navigationController?.navigationBar.tintColor = .white
         // self.navigationItem.title = ""

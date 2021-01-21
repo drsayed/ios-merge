@@ -90,6 +90,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             // Fallback on earlier versions
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.likeCommentNotificationReciveLive), name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.followNotificationReciveLive), name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil)
+
+        
         
         smallCameraContainer.tag = 0
         smallStreamView.bounds = smallCameraContainer.bounds
@@ -210,6 +214,55 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.view.addGestureRecognizer(swipeLeft)
        
     }
+    @objc  func followNotificationReciveLive(notification: NSNotification) {
+
+      if let useriD = notification.userInfo?["UserId"] as? String  {
+      // do something with your image
+        if let vc = FriendVC.storyBoardInstance() {
+        vc.friendId = useriD
+        
+        vc.isfromCardNoti = ""
+            self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.pushViewController(vc, animated: true)
+        }
+      }
+     else
+      {
+        if let useriD = notification.userInfo?["UserId"] as? Int  {
+        // do something with your image
+          if let vc = FriendVC.storyBoardInstance() {
+          vc.friendId = "\(useriD)"
+          
+          vc.isfromCardNoti = ""
+            self.navigationController?.navigationBar.isHidden = false
+          self.navigationController?.pushViewController(vc, animated: true)
+          }
+        }
+        
+      }
+     }
+    
+    @objc  func likeCommentNotificationReciveLive(notification: NSNotification) {
+
+      if let posttID = notification.userInfo?["PostID"] as? String {
+      // do something with your image
+        let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.postId = posttID
+        
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.pushViewController(vc, animated: true)
+      }
+        else
+      {
+        if let posttID = notification.userInfo?["PostID"] as? Int {
+        // do something with your image
+          let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
+          vc.postId = "\(posttID)"
+            self.navigationController?.navigationBar.isHidden = false
+          self.navigationController?.pushViewController(vc, animated: true)
+        }
+      }
+     }
     @objc func RecievedMessage(_ notification: NSNotification) {
             print(notification.userInfo ?? "")
         if let dict = notification.userInfo as? [String: AnyObject]{
