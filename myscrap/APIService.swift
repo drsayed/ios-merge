@@ -299,11 +299,13 @@ final class APIService: NSObject {
         let session = URLSession(configuration: configuration)
         session.dataTask(with: request) { (data, response, error) in
             //print("Data, response, error :\(data), \(response), \(error)")
+            DispatchQueue.main.async {
             guard error == nil else{
                 print("Here1", error as Any)
 //                printDebug(url.absoluteString)
                 
                 return completion(.Error("Error Processing API: \(error?.localizedDescription ?? " ")"))}
+            }
             guard let data = data else {
                 print("Here2", error as Any)
 //                printDebug(url.absoluteString)

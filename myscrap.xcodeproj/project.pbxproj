@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1621,6 +1621,12 @@
 		FBE0593425B57B0F009275F1 /* ViewerSideJoinRequestPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE0593325B57B0E009275F1 /* ViewerSideJoinRequestPopUp.swift */; };
 		FBE0593825B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE0593725B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift */; };
 		FBE0593C25B5889F009275F1 /* ViewerSideJoinConfirmPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE0593B25B5889E009275F1 /* ViewerSideJoinConfirmPopUp.swift */; };
+		FBE4411B25D26D5F00F00870 /* RTCCustomFrameCapturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4411925D26D5E00F00870 /* RTCCustomFrameCapturer.swift */; };
+		FBE4412025D26D7200F00870 /* ConferenceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4411F25D26D7200F00870 /* ConferenceClient.swift */; };
+		FBE4412825D2719600F00870 /* WebRTC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE4412725D2719600F00870 /* WebRTC.xcframework */; };
+		FBE4412D25D273B600F00870 /* ConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4412C25D273B600F00870 /* ConferenceViewController.swift */; };
+		FBE4413125D273F000F00870 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4413025D273EF00F00870 /* UIApplication.swift */; };
+		FBE4413525D273F800F00870 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4413425D273F800F00870 /* Run.swift */; };
 		FBE4FFE525B0C64600F067EF /* LiveUserFollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */; };
 		FBE4FFE625B0C64600F067EF /* LiveUserFollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */; };
 		FBE4FFEA25B0D86300F067EF /* LiveUserFollowPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */; };
@@ -3308,6 +3314,12 @@
 		FBE0593325B57B0E009275F1 /* ViewerSideJoinRequestPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewerSideJoinRequestPopUp.swift; sourceTree = "<group>"; };
 		FBE0593725B57FC5009275F1 /* StreamerSideJoinRequestPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamerSideJoinRequestPopUp.swift; sourceTree = "<group>"; };
 		FBE0593B25B5889E009275F1 /* ViewerSideJoinConfirmPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewerSideJoinConfirmPopUp.swift; sourceTree = "<group>"; };
+		FBE4411925D26D5E00F00870 /* RTCCustomFrameCapturer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTCCustomFrameCapturer.swift; sourceTree = "<group>"; };
+		FBE4411F25D26D7200F00870 /* ConferenceClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConferenceClient.swift; sourceTree = "<group>"; };
+		FBE4412725D2719600F00870 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = WebRTC.xcframework; sourceTree = "<group>"; };
+		FBE4412C25D273B600F00870 /* ConferenceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConferenceViewController.swift; sourceTree = "<group>"; };
+		FBE4413025D273EF00F00870 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		FBE4413425D273F800F00870 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		FBE4FFE325B0C64600F067EF /* LiveUserFollowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserFollowCell.swift; sourceTree = "<group>"; };
 		FBE4FFE425B0C64600F067EF /* LiveUserFollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveUserFollowCell.xib; sourceTree = "<group>"; };
 		FBE4FFE925B0D86300F067EF /* LiveUserFollowPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveUserFollowPopUpVC.swift; sourceTree = "<group>"; };
@@ -3343,6 +3355,7 @@
 				94C4119B218971DA001BAA65 /* CFNetwork.framework in Frameworks */,
 				FB7D086C25A2E15800DD4249 /* WebRTCiOSSDK.framework in Frameworks */,
 				C1C2A625F6043F1BCE133C73 /* Pods_myscrap.framework in Frameworks */,
+				FBE4412825D2719600F00870 /* WebRTC.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4440,6 +4453,7 @@
 		2295BF701EC6D66F0075020A /* myscrap */ = {
 			isa = PBXGroup;
 			children = (
+				FBE4412725D2719600F00870 /* WebRTC.xcframework */,
 				9457A04920A96210000E65B1 /* AppDelegate */,
 				2251C9FD1FA21B600080DB6F /* StoryBoards */,
 				94900DD322719ECB007DE342 /* Main Module */,
@@ -7388,6 +7402,7 @@
 		FB0EFC2E25A0E41100922BF4 /* LiveModule */ = {
 			isa = PBXGroup;
 			children = (
+				FBE4412B25D2738500F00870 /* Conference Setup */,
 				FB7D07D025A2518200DD4249 /* liveSDK */,
 				FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */,
 				FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */,
@@ -7427,6 +7442,7 @@
 		FB7D07D125A251A100DD4249 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FBE4411F25D26D7200F00870 /* ConferenceClient.swift */,
 				FB7D07D425A251B500DD4249 /* AntMediaClient.swift */,
 				FB7D07D325A251B500DD4249 /* AntMediaClientDelegate.swift */,
 				FB7D07D525A251B600DD4249 /* AntMediaClientProtocol.swift */,
@@ -7438,6 +7454,7 @@
 		FB7D07DC25A251BA00DD4249 /* WebRTC */ = {
 			isa = PBXGroup;
 			children = (
+				FBE4411925D26D5E00F00870 /* RTCCustomFrameCapturer.swift */,
 				FB7D07E025A251DF00DD4249 /* ConfigRTC.swift */,
 				FB7D07DE25A251DE00DD4249 /* Dictionary.swift */,
 				FB7D07E125A251DF00DD4249 /* String.swift */,
@@ -7765,6 +7782,16 @@
 				FBD7DD972566F89A0068768C /* LandScapVideoTextCell.xib */,
 			);
 			name = FeeedsLandScapCell;
+			sourceTree = "<group>";
+		};
+		FBE4412B25D2738500F00870 /* Conference Setup */ = {
+			isa = PBXGroup;
+			children = (
+				FBE4413425D273F800F00870 /* Run.swift */,
+				FBE4413025D273EF00F00870 /* UIApplication.swift */,
+				FBE4412C25D273B600F00870 /* ConferenceViewController.swift */,
+			);
+			name = "Conference Setup";
 			sourceTree = "<group>";
 		};
 		FBE5E05C2513F86200F5EB93 /* AKImageCropperView */ = {
@@ -8960,10 +8987,12 @@
 				FB7D07B125A2394D00DD4249 /* UserLiveVC.swift in Sources */,
 				22F8CB091F2624C0003FF692 /* InterestMenuBar.swift in Sources */,
 				FBE058E425B55CAD009275F1 /* ViewerJoinRequestCell.swift in Sources */,
+				FBE4411B25D26D5F00F00870 /* RTCCustomFrameCapturer.swift in Sources */,
 				940A5712246D1B6800E61CDD /* LondonPricesTVCell.swift in Sources */,
 				04CDBF921EFD960E001DFE5B /* ProfileVC.swift in Sources */,
 				220EDA1C1FA7669E00FEAF3D /* FavouriteButton.swift in Sources */,
 				94D93CFB20A6E0840026CA16 /* AlertService.swift in Sources */,
+				FBE4413125D273F000F00870 /* UIApplication.swift in Sources */,
 				FB8EF4E3250C269600395E56 /* CommudityFooter.swift in Sources */,
 				94CC7B6D21C2505E00C2C4C2 /* PhotosUserVC.swift in Sources */,
 				942F02EA2250860700B05816 /* MenuBumpedCell.swift in Sources */,
@@ -9531,6 +9560,7 @@
 				22C76C04200C6D510004DCC7 /* Annotation.swift in Sources */,
 				947AB27B2100C3BB00DA45B0 /* PortView.swift in Sources */,
 				94CA560024514E5300289A63 /* EmplImageTextCell.swift in Sources */,
+				FBE4413525D273F800F00870 /* Run.swift in Sources */,
 				94909403205D067200F952F7 /* CommentHeaderView.swift in Sources */,
 				FB00F562258F3E1500FEEE93 /* ReportedLanscapVideoTextCell.swift in Sources */,
 				FB7D07E525A251DF00DD4249 /* ConfigRTC.swift in Sources */,
@@ -9746,6 +9776,7 @@
 				FB6F4C632569502D008A880C /* VideoDetailCell.swift in Sources */,
 				223CB7BD1FE012DC00B13255 /* MenuHeaderView.swift in Sources */,
 				FBB0CEB22525C63F0065656C /* VideoLoader.swift in Sources */,
+				FBE4412025D26D7200F00870 /* ConferenceClient.swift in Sources */,
 				94CDF2A8252AEE2100C879F1 /* APIClientManager.swift in Sources */,
 				94EBD89F24713BE4002CCF8F /* ComexTitleTVCell.swift in Sources */,
 				94C32307219937D4006074F2 /* EditListingItem.swift in Sources */,
@@ -9771,6 +9802,7 @@
 				94CD4806232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,
 				94A77CF222422B6B00F60E9B /* Enum.swift in Sources */,
 				FBB0CEA12525C63F0065656C /* AVAssetResourceLoadingRequest+Extensions.swift in Sources */,
+				FBE4412D25D273B600F00870 /* ConferenceViewController.swift in Sources */,
 				94B3273B23C4669E00DF4E46 /* FPVerificationVC.swift in Sources */,
 				9438A22420C5094C004E260F /* EditCommentController.swift in Sources */,
 				2289315C1FCE7C4600544FCA /* PeopleNearByItem.swift in Sources */,
@@ -9965,7 +9997,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9985,7 +10018,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11.0;
+				CURRENT_PROJECT_VERSION = 13.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10008,7 +10041,10 @@
 				);
 				INFOPLIST_FILE = myscrap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
@@ -10060,7 +10096,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_WORKSPACE = YES;
+				VALIDATE_WORKSPACE = NO;
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Debug;
@@ -10077,7 +10113,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11.0;
+				CURRENT_PROJECT_VERSION = 13.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
@@ -10101,7 +10137,10 @@
 				);
 				INFOPLIST_FILE = myscrap/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/XMPPFramework/Vendor/libidn",
@@ -10152,7 +10191,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "myscrap/myscrap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_WORKSPACE = YES;
+				VALIDATE_WORKSPACE = NO;
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Release;
@@ -10165,7 +10204,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = K53FCL976W;
 				INFOPLIST_FILE = myscrapTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sayed.myscrapTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -10181,7 +10224,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = K53FCL976W;
 				INFOPLIST_FILE = myscrapTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sayed.myscrapTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -10196,7 +10243,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				INFOPLIST_FILE = myscrapUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sayed.myscrapUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -10211,7 +10262,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				INFOPLIST_FILE = myscrapUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sayed.myscrapUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

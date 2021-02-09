@@ -10,8 +10,24 @@ import Foundation
 import AVFoundation
 import WebRTC
 
+let COMMAND = "command"
+let STREAM_ID = "streamId"
+let TOKEN_ID = "token"
+let VIDEO = "video"
+let AUDIO = "audio"
+let ROOM_ID = "room";
+let NOTIFICATION = "notification";
+let JOINED_ROOM_DEFINITION = "joinedTheRoom";
+let DEFINITION = "definition";
+let STREAMS = "streams";
+let ROOM_INFORMATION_COMMAND = "roomInformation";
+let GET_STREAM_INFO_COMMAND = "getStreamInfo";
+let STREAM_INFORMATION_COMMAND = "streamInformation";
+let FORCE_STREAM_QUALITY_INFO = "forceStreamQuality";
+let STREAM_HEIGHT_FIELD = "streamHeight";
+
 public protocol AntMediaClientProtocol {
-    
+        
     /**
      Sets the required options to for Ant Media Client to Run
      - Parameters:
@@ -24,7 +40,7 @@ public protocol AntMediaClientProtocol {
         on the server. If it's .publish, it mean your WebRTC client will publish stream with your stream id.
         - enableDataChannel: Enable or disable data channel on the mobile side. In order to make data channel work, you also need to enable it on server side
     */
-    func setOptions(url: String, streamId: String, token: String, mode: AntMediaClientMode ,enableDataChannel: Bool)
+    func setOptions(url: String, streamId: String, token: String, mode: AntMediaClientMode ,enableDataChannel: Bool, captureScreenEnabled: Bool)
     
     /**
      Enable or disable video completely in the WebRTC Client.  It should be called before `initPeerConnection()` and `start()` method.
@@ -119,7 +135,14 @@ public protocol AntMediaClientProtocol {
     /**
      Set the debug mode. If it's true, log messages will be available.
      */
+    @available(*, deprecated, message: "Use static version of setDebug")
     func setDebug(_ value: Bool);
+    
+    
+    /**
+      Set the debug mode.  If it's true, log messages will be written to the console. It's disabled by default.
+     */
+    static func setDebug(_ value: Bool);
     
     /**
     Toggle audio in the current stream. If it's muted, it will be unmuted. If it's unmuted, it'll be muted.
@@ -130,6 +153,52 @@ public protocol AntMediaClientProtocol {
      Toggle video stream(enable, disable) in the current stream.
      */
     func toggleVideo();
+    
+    /**
+     Stream id that this client uses.
+     */
+    func getStreamId() -> String;
+    
+    /**
+     Gets the stream info from the server side. Return information includes width, height, video bitrate, audio bitrates and video codec.
+     If there are more than one bitrate or resolution, it will provides a stream information list.
+     This method triggers streamInformation delegate method to be called. If there is no stream with initialized WebRTCClient, it will not trigger streamInformation.
+     Server return no stream exists error through websocket.
+     
+     With the information in the message of streamInformation, you can call the forceStreamQuality method.
+     */
+    func getStreamInfo();
+    
+    /**
+      It forces a specific resolution to be played. You can get the resolution height values by calling getStreamInfo.
+      If the resolution is set to 0, then automatic stream quality will be used according to the measured network speed.
+     */
+    func forStreamQuality(resolutionHeight:Int);
+    /**
+     It get webrtc statistis and calls completionHandler.  There is a sample code for below to get the audio level
+     in the application latyer
+     
+     self.client.getStats { (statisticsReport) in
+         
+         for stat in statisticsReport.statistics {
+            
+             if (stat.value.type == "track") {
+                 for value in stat.value.values
+                 {
+                     if (value.key == "audioLevel") {
+                         AntMediaClient.printf("audio level: \(value.value)");
+                     }
+                 }
+             }
+         }
+     };
+     */
+    func getStats(completionHandler: @escaping (RTCStatisticsReport) -> Void);
+    
+    /**
+     Set the max video bitrate for publishing the stream
+     */
+    func setMaxVideoBps(videoBitratePerSecond: NSNumber);
 }
 
 

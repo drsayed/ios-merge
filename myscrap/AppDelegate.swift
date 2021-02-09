@@ -19,6 +19,7 @@ import AVFoundation
 import Starscream
 let uiRealm = try! Realm()
 let network: NetworkManager = NetworkManager.sharedInstance
+public typealias SimpleClosure = (() -> ())
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate, MessagingDelegate,GIDSignInDelegate {
@@ -29,7 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var ping : XMPPPing!
     var webRTCClient: AntMediaClient = AntMediaClient.init()
     var webRTCViewerClient: AntMediaClient = AntMediaClient.init()
-
+    var playerClients:[AntMediaClientConference] = [];
+    
+    var playerClient1: AntMediaClient = AntMediaClient.init()
+    var playerClient2: AntMediaClient = AntMediaClient.init()
+    
+    var conferenceClient: ConferenceClient!
+    
     var liveID = ""
     var isStreamer = false
     
@@ -60,8 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             Messaging.messaging().delegate = self
             fireBaseConfig = true
         }
+        
         webRTCClient.delegate = self
-
+//        playerClient1.delegate = self
+//        playerClient2.delegate = self
+        
         if launchOptions != nil {
             //opened from a push notification when the app is closed
             if AuthStatus.instance.isLoggedIn {
@@ -697,7 +707,12 @@ extension AppDelegate{
             DispatchQueue.global(qos:.userInteractive).async {
             let op = UserLiveOperations()
                 op.userEndLive (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
-                 
+                    for client in self.playerClients
+                    {
+                        client.playerClient.stop();
+                    }
+                    self.conferenceClient.leaveRoom()
+              
                     print(onlineStat)
             }
             }
@@ -706,7 +721,11 @@ extension AppDelegate{
             DispatchQueue.global(qos:.userInteractive).async {
             let op = UserLiveOperations()
                 op.userEndViewLive(id: "\(AuthService.instance.userId)", liveid: self.liveID) { (onlineStat) in
-          
+                    for client in self.playerClients
+                    {
+                        client.playerClient.stop();
+                    }
+                    self.conferenceClient.leaveRoom()
                     print(onlineStat)
             }
             }
@@ -872,6 +891,45 @@ extension AppDelegate: PKPushRegistryDelegate {
 }
 extension AppDelegate : AntMediaClientDelegate
 {
+    func remoteStreamStarted(streamId: String) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+    }
+    
+    func remoteStreamRemoved(streamId: String) {
+        
+    }
+    
+    func localStreamStarted(streamId: String) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+
+    }
+    
+    func playStarted(streamId: String) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
+    }
+    
+    func playFinished(streamId: String) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
+    }
+    
+    func publishStarted(streamId: String) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PublishStarted"), object: nil, userInfo: nil)
+    }
+    
+    func publishFinished(streamId: String) {
+    }
+    
+    func disconnected(streamId: String) {
+     
+    }
+    
+    func audioSessionDidStartPlayOrRecord(streamId: String) {
+        webRTCClient.speakerOn()
+    }
+    
+    func streamInformation(streamInfo: [StreamInformation]) {
+        
+    }
     func clientDidConnect(_ client: AntMediaClient) {
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
@@ -887,48 +945,7 @@ extension AppDelegate : AntMediaClientDelegate
         print("Stream get error \(message)")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clientHasError"), object: nil, userInfo: nil)
     }
-    
-    func remoteStreamStarted() {
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
 
-    }
-    
-    func remoteStreamRemoved() {
-        
-    }
-    
-    func localStreamStarted() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
-
-    }
-    
-    func playStarted() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
-       
-    }
-    func playFinished() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
-    }
-    
-    func publishStarted() {
-     
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PublishStarted"), object: nil, userInfo: nil)
-
-    
-    }
-    
-    func publishFinished() {
-        
-    }
-    
-    func disconnected() {
-        webRTCViewerClient.stop()
-    }
-    
-    func audioSessionDidStartPlayOrRecord() {
-        webRTCClient.speakerOn()
-    }
     
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
         

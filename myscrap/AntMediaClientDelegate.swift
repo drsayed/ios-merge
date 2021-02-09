@@ -8,6 +8,21 @@
 
 import Foundation
 
+public class StreamInformation {
+   public let streamWidth: Int
+   public let streamHeight: Int
+   public let videoBitrate: Int
+   public let audioBitrate: Int
+   public let videoCodec: String
+    
+    init(json: [String: Any]!) {
+        self.streamWidth = json["streamWidth"] as! Int;
+        self.streamHeight = json["streamHeight"] as! Int;
+        self.videoBitrate = json["videoBitrate"] as! Int;
+        self.audioBitrate = json["audioBitrate"] as! Int;
+        self.videoCodec = json["videoCodec"] as! String;
+    }
+}
 public protocol AntMediaClientDelegate {
 
     /**
@@ -30,54 +45,54 @@ public protocol AntMediaClientDelegate {
      This is a low level communicatin and it's good to use in P2P mode.
      Not good to use in publish and play mode
      */
-    func remoteStreamStarted()
+    func remoteStreamStarted(streamId: String)
     
     /**
      Called when stream is removed from peer to peer connection
      This is a low level notification and it's good to use in P2P mode.
      Not good to use in publish and play mode
     */
-    func remoteStreamRemoved()
+    func remoteStreamRemoved(streamId: String)
     
     /**
      Called when local audio and video is started
      */
-    func localStreamStarted()
+    func localStreamStarted(streamId: String)
     
     
     /**
      Called when playing is started.
      Triggered by server.
      */
-    func playStarted()
+    func playStarted(streamId: String)
     
     /**
      Called when playing is finished.
      Triggered by server.
      */
-    func playFinished()
+    func playFinished(streamId: String)
     
     /**
      Called when publish is started.
      Triggered by server.
      */
-    func publishStarted()
+    func publishStarted(streamId: String)
     
     /**
      Called when publish is finished.
      Triggered by server.
      */
-    func publishFinished()
+    func publishFinished(streamId: String)
     
     /**
      Called when peer to peer connection is failed, disconnected or closed
     */
-    func disconnected()
+    func disconnected(streamId: String)
     
     /**
      Called when audio session start play or record
      */
-    func audioSessionDidStartPlayOrRecord()
+    func audioSessionDidStartPlayOrRecord(streamId: String)
     
     /**
      Called when data is received from webrtc data channel.
@@ -100,4 +115,6 @@ public protocol AntMediaClientDelegate {
      
      */
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool)
+    
+    func streamInformation(streamInfo: [StreamInformation])
 }

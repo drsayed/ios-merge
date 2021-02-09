@@ -11,10 +11,29 @@ import UIKit
 import AVFoundation
 import IQKeyboardManagerSwift
 import Starscream
+
+class AntMediaClientConference {
+    var playerClient: AntMediaClient;
+    var viewIndex: Int;
+    
+    init(player: AntMediaClient, index: Int) {
+        self.playerClient = player;
+        self.viewIndex = index
+    }
+}
+
 class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
+    
+    @IBOutlet var localView: UIView!
+
+        
+    var remoteViews:[UIView] = []
+    
+    var viewFree:[Bool] = [true, true]
     
     
 
+    
     var liveID = ""
     var friendId = ""
     var liveType = ""
@@ -248,6 +267,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
         smallCameraContainer.isHidden = true
     appDelegate.webRTCViewerClient.setLocalView(container: smallStreamView, mode: .scaleAspectFill)
+        
+        self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
 //        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
@@ -426,8 +448,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @objc func AppCloseed(_ notification: NSNotification) {
         DispatchQueue.main.async { [self] in
-            NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
-            self.closeButtonPressed((Any).self)
+       //     NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+           // self.closeButtonPressed((Any).self)
 
         }
      }
@@ -442,8 +464,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     
     
     @objc func playFinished(_ notification: NSNotification) {
-        NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
-        self.closeButtonPressed((Any).self)
+    //    NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+    //    self.closeButtonPressed((Any).self)
 
         }
     @objc func playStarted(_ notification: NSNotification) {
@@ -866,7 +888,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @IBAction func EndLivepressed(_ sender: Any)
    {
-    if appDelegate.webRTCViewerClient.isConnected() {
+        if appDelegate.playerClients.count == 2{
         
         self.addEndActionAlert()
     }
@@ -1026,12 +1048,12 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         else{
             self.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
         }
-        appDelegate.webRTCViewerClient.switchCamera()
+        appDelegate.playerClient2.switchCamera()
        
     }
     @IBAction func toggleMicButttonpressed(_ sender: Any) {
         micButton.isSelected =  !micButton.isSelected
-        appDelegate.webRTCViewerClient.toggleAudio()
+        appDelegate.playerClient2.toggleAudio()
     }
 }
 extension JoinUserLiveVC: unFollowConfirmDelegate {
@@ -1113,16 +1135,30 @@ extension JoinUserLiveVC: UINavigationControllerDelegate {
 //https://34.207.130.236:5080/WebRTCAppEE/conference.html
 extension JoinUserLiveVC {
     
+    func joinConferenceCall()  {
+        
+        let joiningRoom = "stream1room\(liveID)"
+        let streamId = "stream2room\(liveID)"
+        remoteViews.append(cameraView)
+        remoteViews.append(smallStreamView)
+        AntMediaClient.setDebug(true)
+        appDelegate.conferenceClient = ConferenceClient.init(serverURL: Endpoints.LiveUser, conferenceClientDelegate: self)
+        appDelegate.conferenceClient.joinRoom(roomId: joiningRoom, streamId: streamId)
+        
+    }
     @objc func startLive()
     {
        
-        print("room\(liveID)")
+     print("live Type is : \(liveType)")
+//
+       // self.joinConferenceCall()
         appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "stream1room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
         appDelegate.isStreamer = false
         appDelegate.liveID = liveID
         appDelegate.webRTCClient.setDebug(true)
         appDelegate.webRTCClient.start()
-        
+
+     
         if liveType != "single" {
             self.playJoiningStream()
         }
@@ -1185,8 +1221,16 @@ extension JoinUserLiveVC {
                    
                     self.navigationController?.navigationBar.isHidden = false
                     self.showToast(message: "Live has been finished!")
+                    for client in self.appDelegate.playerClients
+                    {
+                        client.playerClient.stop();
+                    }
+                   if self.appDelegate.conferenceClient != nil
+                    {
+                    self.appDelegate.conferenceClient.leaveRoom()
+                    }
                     appDelegate.webRTCClient.stop()
-          self.navigationController?.popToRootViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
                   }
              
                 print(onlineStat)
@@ -1401,7 +1445,8 @@ extension JoinUserLiveVC : ViewerSideJoinConfirmDelegate{
     func acceptJoinRequest(FriendID: String, controller: ViewerSideJoinConfirmPopUp) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                //call any function
-            self.startJoiningStream()
+          //  self.startJoiningStream()
+            self.joinConferenceCall()
            }
      
     }
@@ -1412,6 +1457,80 @@ extension JoinUserLiveVC : ViewerSideJoinConfirmDelegate{
 }
 extension JoinUserLiveVC : AntMediaClientDelegate
 {
+    
+    func remoteStreamStarted(streamId: String) {
+        
+    }
+    
+    func remoteStreamRemoved(streamId: String) {
+        
+    }
+    
+    func localStreamStarted(streamId: String) {
+        // send message to user that stream started
+  
+        let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "1","joingingRequestStatus": "1","OnlyForStreamer": "0","StreamStarted": "1","friendId": friendId, "profilePic": AuthService.instance.profilePic , "message": "\(AuthService.instance.fullName) Sent a request to be in your live video.", "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId,"timestamp": timeStampStarted ]
+      
+        let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+        appDelegate.webRTCClient.sendData(data: data, binary: false)
+        DispatchQueue.main.async { [self] in
+            smallCameraContainer.isHidden = false
+        micButton.isHidden = false
+        cameraToggleButton.isHidden = false
+            MBProgressHUD.hide(for: self.view , animated: true)
+
+            self.setUserToDualLive()
+        }
+       // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
+
+    }
+    
+    func playStarted(streamId: String) {
+        //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
+           DispatchQueue.main.async { [self] in
+               smallCameraContainer.isHidden = false
+               MBProgressHUD.hide(for: self.view , animated: true)
+
+               self.setUserToDualLive()
+               
+           }
+       }
+    
+    func playFinished(streamId: String) {
+        DispatchQueue.main.async { [self] in
+            smallCameraContainer.isHidden = true
+            appDelegate.webRTCViewerClient.stop()
+
+        }
+    //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
+    }
+    
+    func publishStarted(streamId: String) {
+        
+    }
+    
+    func publishFinished(streamId: String) {
+        
+    }
+    
+    func disconnected(streamId: String) {
+        
+    }
+    
+    func audioSessionDidStartPlayOrRecord(streamId: String) {
+        if streamId.contains("stream1room")
+        {
+            appDelegate.playerClient1.speakerOn()
+        }
+        else
+        {
+            appDelegate.playerClient2.speakerOn()
+        }
+    }
+    
+    func streamInformation(streamInfo: [StreamInformation]) {
+        
+    }
     func clientDidConnect(_ client: AntMediaClient) {
      //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
       
@@ -1498,7 +1617,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func audioSessionDidStartPlayOrRecord() {
-     //   appDelegate.webRTCViewerClient.speakerOn()
+     //  appDelegate.webRTCViewerClient.speakerOn()
        // appDelegate.webRTCClient.speakerOn()
        // appDelegate.webRTCViewerClient.speakerOn()
     }
@@ -1534,14 +1653,16 @@ extension JoinUserLiveVC {
     
         print("room\(liveID)")
         timeStampStarted = "\(Int(Date().timeIntervalSince1970))"
-        appDelegate.webRTCViewerClient.stop()
-        var  webRTCViewerClient: AntMediaClient = AntMediaClient.init()
-        webRTCViewerClient.delegate = self
-        webRTCViewerClient.setLocalView(container: smallStreamView, mode: .scaleAspectFill)
-       self.appDelegate.webRTCViewerClient = webRTCViewerClient
-        appDelegate.webRTCViewerClient.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
-        appDelegate.webRTCViewerClient.setDebug(true)
-        appDelegate.webRTCViewerClient.start()
+       // appDelegate.webRTCViewerClient.stop()
+        self.joinConferenceCall()
+//        var  webRTCViewerClient: AntMediaClient = AntMediaClient.init()
+//        webRTCViewerClient.delegate = self
+//        webRTCViewerClient.setLocalView(container: smallStreamView, mode: .scaleAspectFill)
+//       self.appDelegate.webRTCViewerClient = webRTCViewerClient
+//        appDelegate.webRTCViewerClient.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .publish, enableDataChannel: true)
+//        appDelegate.webRTCViewerClient.setDebug(true)
+//        appDelegate.webRTCViewerClient.start()
+        
     }
     @objc func playJoiningStream()
     {
@@ -1551,18 +1672,13 @@ extension JoinUserLiveVC {
                 spinner.isUserInteractionEnabled = false
                 spinner.label.text = "Connecting..."
             }
-        
         print("room\(liveID)")
-        self.appDelegate.webRTCViewerClient.stop()
-        
-      var  webRTCViewerClient: AntMediaClient = AntMediaClient.init()
-        webRTCViewerClient.delegate = self
-        webRTCViewerClient.setRemoteView(remoteContainer: self.smallStreamView, mode: .scaleAspectFill)
-
-        self.appDelegate.webRTCViewerClient = webRTCViewerClient
-        appDelegate.webRTCViewerClient.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
-        appDelegate.webRTCViewerClient.setDebug(true)
-        appDelegate.webRTCViewerClient.start()
+        self.appDelegate.playerClient2 = AntMediaClient.init()
+        self.appDelegate.playerClient2.delegate = self
+        self.appDelegate.playerClient2.setRemoteView(remoteContainer: self.smallStreamView, mode: .scaleAspectFill)
+        self.appDelegate.playerClient2.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
+        self.appDelegate.playerClient2.setDebug(true)
+        self.appDelegate.playerClient2.start()
     }
     @objc func setUserToDualLive()  {
         DispatchQueue.global(qos:.userInteractive).async { [weak self] in
@@ -1599,5 +1715,119 @@ extension JoinUserLiveVC: EndLiveViewDelegate {
 
     func cancelEndLiveButtonTapped() {
      
+    }
+}
+extension JoinUserLiveVC: ConferenceClientDelegate
+{
+    public func streamIdToPublish(streamId: String) {
+        
+        Run.onMainThread {
+            
+                AntMediaClient.printf("stream in the room: \(streamId)")
+            self.appDelegate.playerClient2 = AntMediaClient.init()
+            self.appDelegate.playerClient2.delegate = self;
+            self.appDelegate.playerClient2.setOptions(url:  Endpoints.LiveUser , streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: false)
+                
+                var freeIndex: Int = -1
+                for (index,free) in self.viewFree.enumerated() {
+                    if (free) {
+                        freeIndex = index;
+                        self.viewFree[index] = false;
+                        break;
+                    }
+                }
+                if (freeIndex == -1) {
+                    AntMediaClient.printf("Problem in free view index")
+                }
+             //   playerClient.setRemoteView(remoteContainer: )
+            self.appDelegate.playerClient2.setLocalView(container: self.remoteViews[freeIndex], mode: .scaleAspectFill)
+            self.appDelegate.playerClient2.initPeerConnection()
+            self.appDelegate.playerClient2.start()
+            self.remoteViews[freeIndex].isHidden = false
+                let playerConferenceClient = AntMediaClientConference.init(player: self.appDelegate.playerClient2, index: freeIndex);
+            self.appDelegate.playerClients.append(playerConferenceClient)
+                
+            }
+            //
+//            self.appDelegate.webRTCClient.stop()
+//                //self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: streamId , token: "", mode: .publish, enableDataChannel: true)
+//                self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: false)
+//            self.appDelegate.webRTCClient.setLocalView(container: self.cameraView, mode: .scaleAspectFill)
+//                self.appDelegate.webRTCClient.initPeerConnection()
+//                self.appDelegate.webRTCClient.start()
+//                self.appDelegate.isStreamer = true
+//                self.smallCameraContainer.isHidden = true
+                
+            
+           
+    }
+       
+    public func newStreamsJoined(streams: [String]) {
+        
+        AntMediaClient.printf("Room current capacity: \(self.appDelegate.playerClients.count)")
+        if (self.appDelegate.playerClients.count == 1) {
+            AntMediaClient.printf("Room is full")
+            return
+        }
+        Run.onMainThread {
+            
+        
+            for stream in streams
+            {
+                AntMediaClient.printf("stream in the room: \(stream)")
+                
+                self.appDelegate.playerClient1 = AntMediaClient.init()
+                self.appDelegate.playerClient1.delegate = self;
+                self.appDelegate.playerClient1.setOptions(url:  Endpoints.LiveUser , streamId: stream, token: "", mode: AntMediaClientMode.play, enableDataChannel: false)
+                
+                var freeIndex: Int = -1
+                for (index,free) in self.viewFree.enumerated() {
+                    if (free) {
+                        freeIndex = index;
+                        self.viewFree[index] = false;
+                        break;
+                    }
+                }
+                if (freeIndex == -1) {
+                    AntMediaClient.printf("Problem in free view index")
+                }
+             //   playerClient.setRemoteView(remoteContainer: )
+                self.appDelegate.playerClient1.setRemoteView(remoteContainer: self.remoteViews[freeIndex], mode: .scaleAspectFill)
+                self.appDelegate.playerClient1.initPeerConnection()
+                self.appDelegate.playerClient1.start()
+                self.remoteViews[freeIndex].isHidden = false
+                
+                let playerConferenceClient = AntMediaClientConference.init(player: self.appDelegate.playerClient1, index: freeIndex);
+                
+                self.appDelegate.playerClients.append(playerConferenceClient)
+                
+            }
+        }
+       
+           
+    }
+       
+    public func streamsLeaved(streams: [String]) {
+        
+        Run.onMainThread {
+            var leavedClientIndex:[Int] = []
+            for streamId in streams
+            {
+                for  (clientIndex,conferenceClient) in self.appDelegate.playerClients.enumerated()
+                {
+                    if (conferenceClient.playerClient.getStreamId() == streamId) {
+                        conferenceClient.playerClient.stop();
+                        self.remoteViews[conferenceClient.viewIndex].isHidden = true
+                        self.viewFree[conferenceClient.viewIndex] = true
+                        leavedClientIndex.append(clientIndex)
+                        break;
+                    }
+                }
+            }
+            
+            for index in leavedClientIndex {
+                self.appDelegate.playerClients.remove(at: index);
+            }
+        }
     }
 }

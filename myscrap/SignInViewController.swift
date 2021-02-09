@@ -199,7 +199,9 @@ class SignInViewController: BaseVC, GIDSignInUIDelegate, GIDSignInDelegate {
                 if AuthService.instance.isDeviceRegistered{
                     AuthService.instance.SiginInUser(regEmail: self.email, password: self.password, regMobile: self.phone)
                 } else {
+                    DispatchQueue.main.async {
                     self.showMessage(with: "Device is not registered")
+                    }
                 }
                 
             })

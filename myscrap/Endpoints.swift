@@ -115,7 +115,9 @@ struct Endpoints {
    
     // websocket User Live
     static let LiveUser = "wss://sayed.net:5443/WebRTCAppEE/websocket"
-    
+    //107.22.156.210:5080
+
+
     static let FavouriteCompany = "\(BASE_URL)msFavouriteCompany"
     static let ModeratorsURL = "\(BASE_URL)msModerators"
     static let EMPLOYEE_DETAILS_URL = "\(BASE_URL)msEmployeeDetails"
