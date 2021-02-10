@@ -1463,7 +1463,10 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     }
     
     func remoteStreamRemoved(streamId: String) {
-        
+        DispatchQueue.main.async { [self] in
+            self.closeButtonPressed(UIButton())
+       // self.setUserStatusToLive(status: "s")
+        }
     }
     
     func localStreamStarted(streamId: String) {
@@ -1479,7 +1482,10 @@ extension JoinUserLiveVC : AntMediaClientDelegate
         cameraToggleButton.isHidden = false
             MBProgressHUD.hide(for: self.view , animated: true)
 
-            self.setUserToDualLive()
+            if appDelegate.playerClient1.isConnected()
+            {
+                self.setUserStatusToLive(status: "dual")
+            }
         }
        // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
 
@@ -1490,8 +1496,11 @@ extension JoinUserLiveVC : AntMediaClientDelegate
            DispatchQueue.main.async { [self] in
                smallCameraContainer.isHidden = false
                MBProgressHUD.hide(for: self.view , animated: true)
-
-               self.setUserToDualLive()
+            if appDelegate.playerClient1.isConnected()
+            {
+                self.setUserStatusToLive(status: "dual")
+            }
+             
                
            }
        }
@@ -1499,14 +1508,16 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     func playFinished(streamId: String) {
         DispatchQueue.main.async { [self] in
             smallCameraContainer.isHidden = true
-            appDelegate.webRTCViewerClient.stop()
-
+          //  appDelegate.webRTCViewerClient.stop()
+            self.setUserStatusToLive(status: "single")
         }
     //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
     }
     
     func publishStarted(streamId: String) {
-        
+        DispatchQueue.main.async { [self] in
+        self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        }
     }
     
     func publishFinished(streamId: String) {
@@ -1551,76 +1562,9 @@ extension JoinUserLiveVC : AntMediaClientDelegate
 //        print("Stream get error \(message)")
 //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clientHasError"), object: nil, userInfo: nil)
     }
+ 
     
-    func remoteStreamStarted() {
-        
-     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
-
-    }
-    
-    func remoteStreamRemoved() {
-        
-       
-    }
-    
-    func localStreamStarted() {
-        // send message to user that stream started
-  
-        let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "1","joingingRequestStatus": "1","OnlyForStreamer": "0","StreamStarted": "1","friendId": friendId, "profilePic": AuthService.instance.profilePic , "message": "\(AuthService.instance.fullName) Sent a request to be in your live video.", "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId,"timestamp": timeStampStarted ]
-      
-        let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-        appDelegate.webRTCClient.sendData(data: data, binary: false)
-        DispatchQueue.main.async { [self] in
-            smallCameraContainer.isHidden = false
-        micButton.isHidden = false
-        cameraToggleButton.isHidden = false
-            MBProgressHUD.hide(for: self.view , animated: true)
-
-            self.setUserToDualLive()
-        }
-       // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
-
-    }
-    
-    func playStarted() {
-     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
-        DispatchQueue.main.async { [self] in
-            smallCameraContainer.isHidden = false
-            MBProgressHUD.hide(for: self.view , animated: true)
-
-            self.setUserToDualLive()
-            
-        }
-    }
-    func playFinished() {
-        DispatchQueue.main.async { [self] in
-            smallCameraContainer.isHidden = true
-            appDelegate.webRTCViewerClient.stop()
-
-        }
-    //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
-    }
-    
-    func publishStarted() {
-     
-     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PublishStarted"), object: nil, userInfo: nil)
-
-    
-    }
-    
-    func publishFinished() {
-        
-    }
-    
-    func disconnected() {
-        
-    }
-    
-    func audioSessionDidStartPlayOrRecord() {
-     //  appDelegate.webRTCViewerClient.speakerOn()
-       // appDelegate.webRTCClient.speakerOn()
-       // appDelegate.webRTCViewerClient.speakerOn()
-    }
+ 
     
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
         
@@ -1680,10 +1624,10 @@ extension JoinUserLiveVC {
         self.appDelegate.playerClient2.setDebug(true)
         self.appDelegate.playerClient2.start()
     }
-    @objc func setUserToDualLive()  {
+    @objc func setUserStatusToLive(status : String)  {
         DispatchQueue.global(qos:.userInteractive).async { [weak self] in
         let op = UserLiveOperations()
-            op.UpdateUsertoDual (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+            op.UpdateUserStatus (id: "\(AuthService.instance.userId)",Status: status ) { (onlineStat) in
                 print(onlineStat)
         }
         }
@@ -1724,9 +1668,9 @@ extension JoinUserLiveVC: ConferenceClientDelegate
         Run.onMainThread {
             
                 AntMediaClient.printf("stream in the room: \(streamId)")
-            self.appDelegate.playerClient2 = AntMediaClient.init()
-            self.appDelegate.playerClient2.delegate = self;
-            self.appDelegate.playerClient2.setOptions(url:  Endpoints.LiveUser , streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: false)
+            let playerClient2 = AntMediaClient.init()
+            playerClient2.delegate = self;
+            playerClient2.setOptions(url:  Endpoints.LiveUser , streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: false)
                 
                 var freeIndex: Int = -1
                 for (index,free) in self.viewFree.enumerated() {
@@ -1740,13 +1684,13 @@ extension JoinUserLiveVC: ConferenceClientDelegate
                     AntMediaClient.printf("Problem in free view index")
                 }
              //   playerClient.setRemoteView(remoteContainer: )
-            self.appDelegate.playerClient2.setLocalView(container: self.remoteViews[freeIndex], mode: .scaleAspectFill)
-            self.appDelegate.playerClient2.initPeerConnection()
-            self.appDelegate.playerClient2.start()
+            playerClient2.setLocalView(container: self.remoteViews[freeIndex], mode: .scaleAspectFill)
+            playerClient2.initPeerConnection()
+            playerClient2.start()
             self.remoteViews[freeIndex].isHidden = false
-                let playerConferenceClient = AntMediaClientConference.init(player: self.appDelegate.playerClient2, index: freeIndex);
+                let playerConferenceClient = AntMediaClientConference.init(player: playerClient2, index: freeIndex);
             self.appDelegate.playerClients.append(playerConferenceClient)
-                
+            self.appDelegate.playerClient2 = playerClient2
             }
             //
 //            self.appDelegate.webRTCClient.stop()
@@ -1776,9 +1720,9 @@ extension JoinUserLiveVC: ConferenceClientDelegate
             {
                 AntMediaClient.printf("stream in the room: \(stream)")
                 
-                self.appDelegate.playerClient1 = AntMediaClient.init()
-                self.appDelegate.playerClient1.delegate = self;
-                self.appDelegate.playerClient1.setOptions(url:  Endpoints.LiveUser , streamId: stream, token: "", mode: AntMediaClientMode.play, enableDataChannel: false)
+                let playerClient1 = AntMediaClient.init()
+                playerClient1.delegate = self;
+                playerClient1.setOptions(url:  Endpoints.LiveUser , streamId: stream, token: "", mode: AntMediaClientMode.play, enableDataChannel: false)
                 
                 var freeIndex: Int = -1
                 for (index,free) in self.viewFree.enumerated() {
@@ -1792,15 +1736,15 @@ extension JoinUserLiveVC: ConferenceClientDelegate
                     AntMediaClient.printf("Problem in free view index")
                 }
              //   playerClient.setRemoteView(remoteContainer: )
-                self.appDelegate.playerClient1.setRemoteView(remoteContainer: self.remoteViews[freeIndex], mode: .scaleAspectFill)
-                self.appDelegate.playerClient1.initPeerConnection()
-                self.appDelegate.playerClient1.start()
+                playerClient1.setRemoteView(remoteContainer: self.remoteViews[freeIndex], mode: .scaleAspectFill)
+                playerClient1.initPeerConnection()
+                playerClient1.start()
                 self.remoteViews[freeIndex].isHidden = false
                 
-                let playerConferenceClient = AntMediaClientConference.init(player: self.appDelegate.playerClient1, index: freeIndex);
+                let playerConferenceClient = AntMediaClientConference.init(player: playerClient1, index: freeIndex);
                 
                 self.appDelegate.playerClients.append(playerConferenceClient)
-                
+                self.appDelegate.playerClient1 = playerClient1
             }
         }
        

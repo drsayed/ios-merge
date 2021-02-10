@@ -1174,9 +1174,12 @@ extension UserLiveVC : AntMediaClientDelegate
         
         DispatchQueue.main.async { [self] in
             smallCameraContainer.isHidden = false
+            DispatchQueue.main.async { [self] in
+            self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            }
             MBProgressHUD.hide(for: self.view , animated: true)
-
-            self.setUserToDualLive()
+            self.setUserStatusToLive(status: "dual")
+          //  self.setUserToDualLive()
         }
      //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
        
@@ -1185,6 +1188,7 @@ extension UserLiveVC : AntMediaClientDelegate
     func playFinished(streamId: String) {
         DispatchQueue.main.async { [self] in
             smallCameraContainer.isHidden = true
+            self.setUserStatusToLive(status: "single")
         }
         for client in self.playerClients
         {
@@ -1195,7 +1199,7 @@ extension UserLiveVC : AntMediaClientDelegate
     }
     
     func publishStarted(streamId: String) {
-        
+      
     }
     
     func publishFinished(streamId: String) {
@@ -1229,62 +1233,7 @@ extension UserLiveVC : AntMediaClientDelegate
 //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clientHasError"), object: nil, userInfo: nil)
         
     }
-    
-    func remoteStreamStarted() {
-      
-     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
 
-    }
-    
-    func remoteStreamRemoved() {
-      
-    }
-    
-    func localStreamStarted() {
-       // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
-
-    }
-    
-    func playStarted() {
-        
-        DispatchQueue.main.async { [self] in
-            smallCameraContainer.isHidden = false
-            MBProgressHUD.hide(for: self.view , animated: true)
-
-            self.setUserToDualLive()
-        }
-     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
-       
-    }
-    func playFinished() {
-        DispatchQueue.main.async { [self] in
-            smallCameraContainer.isHidden = true
-        }
-        appDelegate.webRTCViewerClient.stop()
-    //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
-    }
-    
-    func publishStarted() {
-     
-     //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PublishStarted"), object: nil, userInfo: nil)
-
-    
-    }
-    
-    func publishFinished() {
-        
-    }
-    
-    func disconnected() {
-        
-    }
-    
-    func audioSessionDidStartPlayOrRecord() {
-    //    appDelegate.webRTCClient.speakerOn()
-     //   appDelegate.webRTCViewerClient.speakerOn()
-
-    }
-    
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
         
 //        do {
@@ -1318,10 +1267,10 @@ extension UserLiveVC {
         appDelegate.webRTCViewerClient.setDebug(true)
         appDelegate.webRTCViewerClient.start()
     }
-    @objc func setUserToDualLive()  {
+    @objc func setUserStatusToLive(status:String)  {
         DispatchQueue.global(qos:.userInteractive).async { [weak self] in
         let op = UserLiveOperations()
-            op.UpdateUsertoDual (id: "\(AuthService.instance.userId)" ) { (onlineStat) in
+            op.UpdateUserStatus (id: "\(AuthService.instance.userId)",Status: status ) { (onlineStat) in
                 print(onlineStat)
         }
         }

@@ -7,7 +7,7 @@ import CoreData
 
 class UserLiveOperations {
     
-
+  
     typealias onlineStatus = (_ onlineStat: [String : AnyObject]) -> ()
     
     func userGoLive(id: String,topic: String, completion: @escaping  onlineStatus){
@@ -31,12 +31,12 @@ class UserLiveOperations {
             }
         }
     }
-    func UpdateUsertoDual(id: String, completion: @escaping  onlineStatus){
+    func UpdateUserStatus(id: String,Status:String = "single", completion: @escaping  onlineStatus){
    //     topic,link,time,status = 1,liveid="",friendId="",type="single"
     
       let service = APIService()
         service.endPoint = Endpoints.USER_LIVE_INSERT_URL
-        service.params = "userId=\(id)&apiKey=\(API_KEY)&link=&topic=&status=\(1)&type=dual&time=\((Int(Date().timeIntervalSince1970)))"
+        service.params = "userId=\(id)&apiKey=\(API_KEY)&link=&topic=&status=\(1)&type=\(Status)&time=\((Int(Date().timeIntervalSince1970)))"
         print(service.endPoint)
         print(service.params)
         service.getDataWith { /* [weak self] */ (result) in
