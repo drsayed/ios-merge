@@ -1,5 +1,5 @@
 //
-// LiveUserFollowPopUpVC
+// EndLiveUserFollowPopUpVC
 //  myscrap
 //
 //  Created by MS1 on 6/24/17.
@@ -9,14 +9,14 @@
 import UIKit
 import SafariServices
 import AVKit
-protocol LiveUserFollowDelegate : class {
-    func followButtonpressed(FriendID : String, toFollowStatus : Int,controller : LiveUserFollowPopUpVC)
-    func chatButtonpressed(FriendID : String, toFollowStatus : Int)
-    func followerCountPressed(FriendID : String)
-    func FollowingCountPressed(FriendID : String)
-  
+protocol EndLiveUserFollowDelegate : class {
+    func endLiveFollowButtonpressed(FriendID : String, toFollowStatus : Int,controller : EndLiveUserFollowPopUpVC)
+    func endLiveChatButtonpressed(FriendID : String, toFollowStatus : Int)
+    func endLiveFollowerCountPressed(FriendID : String)
+    func endLiveFollowingCountPressed(FriendID : String)
+    func endLiveCloseFollowingPressed()
 }
-class LiveUserFollowPopUpVC: BaseVC {
+class EndLiveUserFollowPopUpVC: BaseVC {
     
     var friendId = ""
     var liveUserNameValue = ""
@@ -26,7 +26,7 @@ class LiveUserFollowPopUpVC: BaseVC {
     var followingStatus = false
     var showCloseButton = false
     var profileItem:ProfileData?
-    weak var delegate : LiveUserFollowDelegate?
+    weak var delegate : EndLiveUserFollowDelegate?
 
     @IBOutlet weak var roundCornerView: UIView!
     @IBOutlet weak var slideToDismiss: UIView!
@@ -48,7 +48,9 @@ class LiveUserFollowPopUpVC: BaseVC {
     var friendID : String?
     var indexValue : Int?
 //    var dataSource = [FeedV2Item]()
-  
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
+    
     //MARK:- ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,21 +61,26 @@ class LiveUserFollowPopUpVC: BaseVC {
         }
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture(gesture:)))
             swipeDown.direction = .down
-            self.slideToDismiss.addGestureRecognizer(swipeDown)
-        
+          //  self.slideToDismiss.addGestureRecognizer(swipeDown)
+        self.slideToDismiss.isUserInteractionEnabled = false
         self.chatButton.layer.cornerRadius =  self.chatButton.frame.size.height/2
 
         self.followButton.layer.cornerRadius =  self.followButton.frame.size.height/2
 
         self.roundCornerView.layer.cornerRadius = 20
     //    self.nameLable.text = friendName
-        
+        self.topView.layer.cornerRadius =  self.topView.frame.size.height/2
         // shadow
         self.roundCornerView.layer.shadowColor = UIColor.darkGray.cgColor
         self.roundCornerView.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.roundCornerView.layer.shadowOpacity = 0.7
         self.roundCornerView.layer.shadowRadius = 5
         
+    }
+    @IBAction func closeButtonPressed(_ sender: Any) {
+    
+        delegate?.endLiveCloseFollowingPressed()
+        self.dismiss(animated: true, completion: nil)
     }
     func setupViews()  {
         
@@ -167,30 +174,30 @@ class LiveUserFollowPopUpVC: BaseVC {
     }
  
     @IBAction func FollowerButtonPresssed(_ sender: Any) {
-        delegate?.followerCountPressed(FriendID: friendId)
+        delegate?.endLiveFollowerCountPressed(FriendID: friendId)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func FollowingButtonPresssed(_ sender: Any) {
-        delegate?.FollowingCountPressed(FriendID: friendId)
+        delegate?.endLiveFollowingCountPressed(FriendID: friendId)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func FollowButtonPressed(_ sender: Any) {
-        delegate?.followButtonpressed(FriendID: friendId, toFollowStatus: followingStatus ? 1 : 0 , controller: self)
+        delegate?.endLiveFollowButtonpressed(FriendID: friendId, toFollowStatus: followingStatus ? 1 : 0 , controller: self)
        // self.dismiss(animated: true, completion: nil)
 
     }
     
     @IBAction func ChatButtonPressed(_ sender: Any) {
         
-        delegate?.chatButtonpressed(FriendID: friendId, toFollowStatus: followingStatus ? 1 : 0)
+        delegate?.endLiveChatButtonpressed(FriendID: friendId, toFollowStatus: followingStatus ? 1 : 0)
         self.dismiss(animated: true, completion: nil)
 
 
     }
-    static func storyBoardInstance() -> LiveUserFollowPopUpVC?{
+    static func storyBoardInstance() -> EndLiveUserFollowPopUpVC?{
         let st = UIStoryboard.LIVE
-        return st.instantiateViewController(withIdentifier: LiveUserFollowPopUpVC.id) as? LiveUserFollowPopUpVC
+        return st.instantiateViewController(withIdentifier: EndLiveUserFollowPopUpVC.id) as? EndLiveUserFollowPopUpVC
     }
 }

@@ -896,7 +896,7 @@ extension AppDelegate : AntMediaClientDelegate
     }
     
     func remoteStreamRemoved(streamId: String) {
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "remoteStreamRemoved"), object: nil, userInfo: nil)
     }
     
     func localStreamStarted(streamId: String) {

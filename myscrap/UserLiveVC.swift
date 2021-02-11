@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import IQKeyboardManagerSwift
-
+import Photos
 struct CommentMessage {
     var name : String = "Test"
     var userId : String = "Test"
@@ -70,6 +70,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     let joiningVC = StreamerSideJoinRequestPopUp.storyBoardInstance()
     let onlineViewer = OnlineViewersPopUpVC.storyBoardInstance()
+    let downloadEndsLivePopup = EndLiveDownloadPopUpVC.storyBoardInstance()
     
     var topicValueText = "No Topic"
     var userJoined = Array<[String:AnyObject]>()
@@ -1035,11 +1036,15 @@ extension UIButton {
 extension UserLiveVC: EndLiveViewDelegate {
     
     func okEndLiveButtonTapped(selectedOption: String, textFieldValue: String) {
+       
         self.endLiveTimmer()
-        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
-        spinner.mode = MBProgressHUDMode.indeterminate
-        spinner.label.text = "End Live..."
-        self.setUserStatusEndLive()
+        
+        
+        if let vc = downloadEndsLivePopup {
+            vc.modalPresentationStyle = .overFullScreen
+            vc.delegate = self
+            self.present(vc, animated: true, completion: nil)
+        }
 
     }
 
@@ -1374,4 +1379,63 @@ extension UserLiveVC: ConferenceClientDelegate
             }
         }
     }
+}
+extension UserLiveVC: EndLiveWithDownloadDelegate
+{
+    
+    func downloadVideo(path : String) {
+        self.showMessage(with: "Download begins!")
+        let videoImageUrl = path
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
+        let filePath="\(documentsPath)/MSVIDEO.mp4"
+        DispatchQueue.global(qos: .background).async {
+            if let url = URL(string: videoImageUrl),
+               let urlData = NSData(contentsOf: url) {
+                
+                DispatchQueue.main.async {
+                    urlData.write(toFile: filePath, atomically: true)
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: URL(fileURLWithPath: filePath))
+                    }) { completed, error in
+                        if completed {
+                            
+                            DispatchQueue.main.async {
+                                //Triggering the videoDownloadNotify method.
+                                NotificationCenter.default.post(name: .videoDownloaded, object: nil)
+                            }
+                        } else {
+                            if let dwnldError = error {
+                                DispatchQueue.main.async {
+                                    print("Download Failed : \(dwnldError.localizedDescription)")
+                                    self.showMessage(with: "Failed to download the video")
+                                }
+                                
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func downloadButtonPressed() {
+        
+        //  dowloaduRL http://107.22.156.210:5080/WebRTCAppEE/streams/stream2room2409.mp4?token=undefined
+        let path = "\(Endpoints.LiveUser)/streams/stream1\(self.liveID).mp4?token=undefined"
+        self.downloadVideo(path: path)
+        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+        spinner.mode = MBProgressHUDMode.indeterminate
+        spinner.label.text = "End Live..."
+        self.setUserStatusEndLive()
+    }
+    
+    func deleteButtonPressed() {
+        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+        spinner.mode = MBProgressHUDMode.indeterminate
+        spinner.label.text = "End Live..."
+        self.setUserStatusEndLive()
+    }
+    
+    
 }

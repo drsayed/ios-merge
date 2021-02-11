@@ -34,15 +34,24 @@ final class LiveUserCommentsCell: BaseCell{
 
         }
         self.darkBackground.clipsToBounds = true
-       
+        self.darkBackground.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+
     }
     override func awakeFromNib() {
            super.awakeFromNib()
+        self.darkBackground.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
 
        }
     func configCell(item: CommentMessage){
         profileView.updateViews(name: item.name, url: item.profilePic, colorCode: item.colorCode)
-        self.nameAndMessahe.text =  "\( item.name) : \(item.messageText)"
+        let quote = "\( item.name) : \(item.messageText)"
+        let attributedQuote = NSMutableAttributedString(string: quote)
+        if item.messageText.contains("Joined!") {
+            attributedQuote.addAttribute(.foregroundColor, value: UIColor.yellow, range: NSRange(location: item.name.length+3, length: item.messageText.length))
+            
+        }
+        self.nameAndMessahe.attributedText = attributedQuote
+        
          }
   
 }

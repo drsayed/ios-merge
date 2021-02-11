@@ -27,7 +27,9 @@ class EndLiveAlart: UIViewController{
         } else {
             // Fallback on earlier versions
         }
-  
+        setButton.backgroundColor = UIColor.MyScrapGreen
+        setButton.layer.cornerRadius = 5
+        cancelButton.layer.cornerRadius = 5
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +41,7 @@ class EndLiveAlart: UIViewController{
     
     func setupView() {
         alertView.layer.cornerRadius = 15
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
     }
     
     func animateView() {

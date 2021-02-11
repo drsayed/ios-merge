@@ -1449,6 +1449,9 @@
 		FB59E941250B6337009953FA /* SubscribePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB59E93F250B6337009953FA /* SubscribePopupView.xib */; };
 		FB59E943250BA0E5009953FA /* ReportYourPriceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59E942250BA0E5009953FA /* ReportYourPriceVC.swift */; };
 		FB59E945250BF6A5009953FA /* SelectCompanyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59E944250BF6A4009953FA /* SelectCompanyVC.swift */; };
+		FB693A9725D51EAB00491561 /* LiveSuggessionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB693A9625D51EAA00491561 /* LiveSuggessionCell.swift */; };
+		FB693A9B25D542F800491561 /* EndLiveUserFollowPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB693A9A25D542F700491561 /* EndLiveUserFollowPopUpVC.swift */; };
+		FB693A9F25D55BC000491561 /* EndLiveDownloadPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB693A9E25D55BC000491561 /* EndLiveDownloadPopUpVC.swift */; };
 		FB6F4C622569502D008A880C /* VideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB6F4C6025695028008A880C /* VideoDetailCell.xib */; };
 		FB6F4C632569502D008A880C /* VideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F4C612569502D008A880C /* VideoDetailCell.swift */; };
 		FB6F4CB2256B8BA8008A880C /* UserFeedLandScapVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F4CAE256B8B97008A880C /* UserFeedLandScapVideoCell.swift */; };
@@ -3139,6 +3142,9 @@
 		FB59E93F250B6337009953FA /* SubscribePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribePopupView.xib; sourceTree = "<group>"; };
 		FB59E942250BA0E5009953FA /* ReportYourPriceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportYourPriceVC.swift; sourceTree = "<group>"; };
 		FB59E944250BF6A4009953FA /* SelectCompanyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCompanyVC.swift; sourceTree = "<group>"; };
+		FB693A9625D51EAA00491561 /* LiveSuggessionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveSuggessionCell.swift; sourceTree = "<group>"; };
+		FB693A9A25D542F700491561 /* EndLiveUserFollowPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndLiveUserFollowPopUpVC.swift; sourceTree = "<group>"; };
+		FB693A9E25D55BC000491561 /* EndLiveDownloadPopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndLiveDownloadPopUpVC.swift; sourceTree = "<group>"; };
 		FB6F4C6025695028008A880C /* VideoDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDetailCell.xib; sourceTree = "<group>"; };
 		FB6F4C612569502D008A880C /* VideoDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDetailCell.swift; sourceTree = "<group>"; };
 		FB6F4CAE256B8B97008A880C /* UserFeedLandScapVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedLandScapVideoCell.swift; sourceTree = "<group>"; };
@@ -7405,6 +7411,8 @@
 				FBE4412B25D2738500F00870 /* Conference Setup */,
 				FB7D07D025A2518200DD4249 /* liveSDK */,
 				FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */,
+				FB693A9E25D55BC000491561 /* EndLiveDownloadPopUpVC.swift */,
+				FB693A9A25D542F700491561 /* EndLiveUserFollowPopUpVC.swift */,
 				FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */,
 				FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */,
 				FB7D088925A3344800DD4249 /* JoinUserLiveVC.swift */,
@@ -7412,6 +7420,7 @@
 				FB3E3C1625A46B4100642EC9 /* EndLiveAlart.swift */,
 				FB10BEC425A37D0500D9CEF6 /* LiveFriendCell.swift */,
 				FB10BEC325A37D0500D9CEF6 /* LiveFriendCell.xib */,
+				FB693A9625D51EAA00491561 /* LiveSuggessionCell.swift */,
 				FBFE658B25AAD169000E8A43 /* LiveUserCommentsCell.swift */,
 				FBFE658C25AAD16A000E8A43 /* LiveUserCommentsCell.xib */,
 				FBE058E225B55CAC009275F1 /* ViewerJoinRequestCell.swift */,
@@ -8976,6 +8985,7 @@
 				9460315A22080A7100A103FF /* EmailInboxSectionCell.swift in Sources */,
 				FBE5EE7C257651840098E0AE /* UserFeedsVC.swift in Sources */,
 				228DA3002025A274005248B5 /* AboutProfileController.swift in Sources */,
+				FB693A9B25D542F800491561 /* EndLiveUserFollowPopUpVC.swift in Sources */,
 				2210A08A1F88BACB00894F11 /* NearFriendsItem.swift in Sources */,
 				22DAE6791FD538560008E746 /* INSPhotoViewController.swift in Sources */,
 				94CD4812232F5B2100FCBD22 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
@@ -9148,6 +9158,7 @@
 				227FFBE3200DE88200EBB30B /* CompanyInterestVC.swift in Sources */,
 				221703FB1F2CB3C900DADEED /* AboutMyscrapVC.swift in Sources */,
 				FB7D088225A2ED8700DD4249 /* SFCountdownView.m in Sources */,
+				FB693A9F25D55BC000491561 /* EndLiveDownloadPopUpVC.swift in Sources */,
 				94FAEFE621D8821300C1B6A3 /* LiveSender.swift in Sources */,
 				94A77CF322422B6B00F60E9B /* FontAwesomeImageRepresentable.swift in Sources */,
 				9437A10322F841B2006EE4F9 /* ViewBioImagesCell.swift in Sources */,
@@ -9658,6 +9669,7 @@
 				22DEDF2320427944000A0F1E /* ReusableView-Ext.swift in Sources */,
 				94CDF2A7252AEE2100C879F1 /* JSONUtils.swift in Sources */,
 				22825C951EDA8B1A009E69D3 /* ReceiverView.swift in Sources */,
+				FB693A9725D51EAB00491561 /* LiveSuggessionCell.swift in Sources */,
 				18277AD5257E6A0700D5AC15 /* ReportCompanyAdminCollectionViewCell.swift in Sources */,
 				9433D928241D0E7400308EB1 /* CovidPollPopupVC.swift in Sources */,
 				FBB0CEAD2525C63F0065656C /* VideoDownloaderSessionDelegateHandler.swift in Sources */,
@@ -10018,7 +10030,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13.0;
+				CURRENT_PROJECT_VERSION = 15.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10113,7 +10125,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13.0;
+				CURRENT_PROJECT_VERSION = 15.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
