@@ -55,6 +55,10 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var isSentRequest = false
     fileprivate var profileItem:ProfileData?
     @IBOutlet weak var suggessionCollectionView: UICollectionView!
+    @IBOutlet weak var suggessionLeading: NSLayoutConstraint!
+    @IBOutlet weak var suggestionTrailing: NSLayoutConstraint!
+    @IBOutlet weak var commentLeading: NSLayoutConstraint!
+    @IBOutlet weak var commentTrailing: NSLayoutConstraint!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var cameraToggleButton: UIButton!
@@ -994,6 +998,11 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
            // colorAnimationView.layer.removeAllAnimations()
         UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = UIScreen.main.bounds.width
+            self.suggessionLeading.constant = UIScreen.main.bounds.width
+            self.suggestionTrailing.constant = -UIScreen.main.bounds.width
+            self.commentLeading.constant = UIScreen.main.bounds.width
+            self.commentTrailing.constant = -UIScreen.main.bounds.width
+            
                 self.view.layoutIfNeeded()
             }
       
@@ -1005,6 +1014,10 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
            // colorAnimationView.layer.removeAllAnimations()
         UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = 16
+            self.suggessionLeading.constant = 16
+            self.suggestionTrailing.constant = 16
+            self.commentLeading.constant = 16
+            self.commentTrailing.constant = 16
                 self.view.layoutIfNeeded()
             }
     }

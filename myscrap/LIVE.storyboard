@@ -1256,8 +1256,8 @@
                                     <constraint firstItem="FnI-vd-Ver" firstAttribute="centerY" secondItem="Jhr-Jw-gLI" secondAttribute="centerY" id="yJL-2S-WXM"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We are telling your followers that you have started a live video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTE-cz-B6U">
-                                <rect key="frame" x="22.5" y="596" width="330.5" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We are telling your followers that you have started a live video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTE-cz-B6U">
+                                <rect key="frame" x="32" y="596" width="311" height="14"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1352,6 +1352,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="kTE-cz-B6U" firstAttribute="leading" secondItem="xeB-79-ksb" secondAttribute="leadingMargin" constant="16" id="0ig-6x-EUB"/>
                             <constraint firstItem="BCz-h1-NGf" firstAttribute="centerY" secondItem="XaL-S5-oUh" secondAttribute="centerY" id="2y4-Ra-irN"/>
                             <constraint firstItem="ZBf-Qk-KuS" firstAttribute="leading" secondItem="xeB-79-ksb" secondAttribute="leading" id="3B4-xw-AYM"/>
                             <constraint firstItem="BCz-h1-NGf" firstAttribute="leading" secondItem="XaL-S5-oUh" secondAttribute="trailing" constant="10" id="52g-kZ-Kek"/>
@@ -1375,13 +1376,13 @@
                             <constraint firstItem="1Br-MX-EhN" firstAttribute="top" secondItem="Sab-FW-QWz" secondAttribute="bottom" constant="-22" id="dDb-Cv-jLe"/>
                             <constraint firstItem="ZBf-Qk-KuS" firstAttribute="top" secondItem="xeB-79-ksb" secondAttribute="top" id="dhC-a5-kZ4"/>
                             <constraint firstItem="mbt-cz-vtK" firstAttribute="centerY" secondItem="Jhr-Jw-gLI" secondAttribute="centerY" id="hYd-26-upP"/>
-                            <constraint firstItem="kTE-cz-B6U" firstAttribute="centerX" secondItem="xeB-79-ksb" secondAttribute="centerX" id="j8I-lf-OJ8"/>
                             <constraint firstItem="1Br-MX-EhN" firstAttribute="top" secondItem="ptI-Ft-kbh" secondAttribute="bottom" constant="10" id="jtz-2s-oZU"/>
                             <constraint firstItem="Jhr-Jw-gLI" firstAttribute="top" secondItem="7rl-CO-aCm" secondAttribute="bottom" constant="62" id="kgx-9L-xFv"/>
                             <constraint firstItem="wz5-Or-jrZ" firstAttribute="centerY" secondItem="XaL-S5-oUh" secondAttribute="centerY" id="mP1-rB-ysK"/>
                             <constraint firstItem="ptI-Ft-kbh" firstAttribute="top" secondItem="kTE-cz-B6U" secondAttribute="bottom" constant="10" id="mRx-9N-KtC"/>
                             <constraint firstAttribute="trailing" secondItem="m8x-ZT-N7T" secondAttribute="trailing" constant="25" id="nQY-d9-aiW"/>
                             <constraint firstItem="TRc-zM-9Wc" firstAttribute="width" secondItem="xeB-79-ksb" secondAttribute="width" multiplier="0.957333" id="qtG-K6-L5a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kTE-cz-B6U" secondAttribute="trailing" constant="16" id="stM-mg-QzO"/>
                             <constraint firstItem="Sab-FW-QWz" firstAttribute="top" secondItem="7rl-CO-aCm" secondAttribute="bottom" constant="-22" id="v5Q-PM-AWK"/>
                             <constraint firstItem="ptI-Ft-kbh" firstAttribute="leading" secondItem="xeB-79-ksb" secondAttribute="leading" constant="16" id="z4K-On-fgS"/>
                         </constraints>
@@ -1397,12 +1398,16 @@
                         <outlet property="closebutton" destination="m8x-ZT-N7T" id="xp0-nl-ezb"/>
                         <outlet property="commentBackground" destination="ptI-Ft-kbh" id="hPy-Lu-7rw"/>
                         <outlet property="commentField" destination="vPA-1j-z3o" id="EDL-O8-YcQ"/>
+                        <outlet property="commentLeading" destination="z4K-On-fgS" id="ykR-2p-Yit"/>
+                        <outlet property="commentTraining" destination="8TB-Bd-KQr" id="oBH-7O-jUd"/>
                         <outlet property="commentViewLeadingSpace" destination="Sqj-t3-jDh" id="XMT-GD-un7"/>
                         <outlet property="commentsViewHeight" destination="WJt-l9-VWt" id="aRd-oE-xce"/>
                         <outlet property="constraintContentHeight" destination="jtz-2s-oZU" id="Xt4-8S-4Hg"/>
                         <outlet property="countDown" destination="ZBf-Qk-KuS" id="sYv-nL-T3L"/>
                         <outlet property="largeCameraContainer" destination="Sab-FW-QWz" id="NZI-Vk-oAt"/>
                         <outlet property="liveLable" destination="kTE-cz-B6U" id="Xvw-el-Wsf"/>
+                        <outlet property="liveLableLeading" destination="0ig-6x-EUB" id="cJg-Hq-LSA"/>
+                        <outlet property="liveLableTraining" destination="stM-mg-QzO" id="8rp-qN-BdA"/>
                         <outlet property="liveTimerTextLable" destination="l0L-To-cmw" id="l8G-Ep-Oph"/>
                         <outlet property="liveTimerView" destination="mbt-cz-vtK" id="VU5-Uv-aq4"/>
                         <outlet property="livebutton" destination="wz5-Or-jrZ" id="5zg-5h-eNH"/>
@@ -1923,6 +1928,8 @@
                         <outlet property="closebutton" destination="bth-p5-yNY" id="qNW-BN-PQq"/>
                         <outlet property="commentBackground" destination="PN8-le-sWj" id="BPu-Z8-mrD"/>
                         <outlet property="commentField" destination="wP0-1q-dp7" id="sWR-6Z-118"/>
+                        <outlet property="commentLeading" destination="jYp-Pt-6BX" id="D3L-Hr-WuI"/>
+                        <outlet property="commentTrailing" destination="IPR-mJ-IwK" id="NgI-t7-zwz"/>
                         <outlet property="commentViewLeadingSpace" destination="saB-jO-ugY" id="1UJ-gL-CSH"/>
                         <outlet property="commentsViewHeight" destination="KH3-cJ-GHI" id="gnW-Dg-YMK"/>
                         <outlet property="constraintContentHeight" destination="DyK-aQ-CBS" id="H81-dN-sgL"/>
@@ -1943,6 +1950,8 @@
                         <outlet property="smallCameraContainer" destination="5am-8z-XXV" id="e3a-yP-Z3h"/>
                         <outlet property="smallStreamView" destination="ZwF-tB-rdw" id="tio-Fp-dye"/>
                         <outlet property="suggessionCollectionView" destination="cZf-DP-kU8" id="nrD-nU-T2P"/>
+                        <outlet property="suggessionLeading" destination="2xF-8f-Mwt" id="Z7h-xt-iis"/>
+                        <outlet property="suggestionTrailing" destination="fY9-lA-Blv" id="RPv-eR-RbW"/>
                         <outlet property="topicValue" destination="myg-ad-hW4" id="Y1R-hV-n9h"/>
                         <outlet property="userCommentsCollectionView" destination="UKy-XN-B04" id="DMG-MU-Sn2"/>
                     </connections>

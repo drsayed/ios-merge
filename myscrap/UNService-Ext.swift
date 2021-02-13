@@ -39,6 +39,7 @@ enum UnNotificationType: String{
     case doubleComment = "doubleComment"
     case missedActivity = "missedActivity"
     case event = "event"
+    case live = "live"
     case chat = "chat"
     case listingChatReq = "chat_req_sent"
     case listingChatAck = "chat_req_ack"
@@ -52,6 +53,7 @@ struct UnNotificationKeys{
     static let notificationType = "notType"
     static let notificationID = "notId"
     static let postId = "postId"
+    static let liveId = "liveId"
     static let friendId = "friendId"
     static let companyId = "companyId"
     static let listingId = "listingId"
@@ -62,7 +64,7 @@ struct UnNotificationKeys{
     static let profilePic = "profilePic"
     static let jid = "jid"
     static let userId = "userId"
-    
+    static let liveType = "liveType"
 }
 
 
@@ -156,6 +158,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             let listingId = remote_message["listingId"] as? String ?? ""
             let listingid = remote_message["listingid"] as? String ?? ""
             let notificationID = remote_message["notId"] as? String ?? ""
+            let liveId = remote_message["liveId"] as? String ?? ""
+            let liveType = remote_message["liveType"] as? String ?? ""
             //let from = remote_message["from"] as? String ?? ""
             //let notificationcount = remote_message["notificationcount"] as? String ?? ""
             let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "log")
@@ -171,7 +175,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 content.body = content_notif
                 
                 content.userInfo = [
-                    "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.listingId : listingId, UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : notificationID, UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id
+                    "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.listingId : listingId, UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : notificationID, UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.liveId : liveId, UnNotificationKeys.liveType : liveType, UnNotificationKeys.userId : id
                     ]
                 ]
                 content.sound = UNNotificationSound.default
@@ -209,7 +213,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 content.body = content_notif
                 
                 content.userInfo = [
-                    "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.notificationID : notificationID, UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id, UnNotificationKeys.postId : postId
+                    "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : friendId, UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "", UnNotificationKeys.notificationID : notificationID, UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : id, UnNotificationKeys.postId : postId, UnNotificationKeys.liveId : liveId, UnNotificationKeys.liveType : liveType
                     ]
                 ]
                 
@@ -271,7 +275,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         let listingId = message["listingId"] as? String ?? ""
         let listingid = message["listingid"] as? String ?? ""
         let notificationID = message["notId"] as? String ?? ""
-        
+        let liveId = message["liveId"] as? String ?? ""
+        let liveType = message["liveType"] as? String ?? ""
         let sound = message["sound"] as? String ?? ""
         let type = message["type"] as? String ?? ""
         let flag = message["flag"] as? String ?? ""
@@ -287,7 +292,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             content.body = "New message received"
             
             content.userInfo = [
-                "data" : [ UnNotificationKeys.notificationType : "", UnNotificationKeys.jid : "", UnNotificationKeys.fname : "MyScrap", UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : "", UnNotificationKeys.userId : ""
+                "data" : [ UnNotificationKeys.notificationType : "", UnNotificationKeys.jid : "", UnNotificationKeys.fname : "MyScrap", UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : "", UnNotificationKeys.userId : "", UnNotificationKeys.liveId : liveId, UnNotificationKeys.liveType : liveType
                 ]
             ]
             content.sound = UNNotificationSound.default
@@ -311,7 +316,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             content.body = content_notif
             
             content.userInfo = [
-                "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : "", UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : "", UnNotificationKeys.userId : ""
+                "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : "", UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : "", UnNotificationKeys.userId : "", UnNotificationKeys.liveId : liveId, UnNotificationKeys.liveType : liveType
                 ]
             ]
             content.sound = UNNotificationSound.default
@@ -445,6 +450,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         var chatUserId: String?
         var listingId: String?
         var listingid: String?
+        var liveId: String?
+        var liveType: String?
         var notificationId = ""
         let notificationBody =   response.notification.request.content.body as? String
         
@@ -517,6 +524,18 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
             if let uid = data[UnNotificationKeys.userId] as? String{
                 chatUserId = uid
+            }
+            if let liveID = data[UnNotificationKeys.liveId] as? String{
+                liveId = liveID
+            }
+            else
+            {
+                if let liveID = data[UnNotificationKeys.liveId] as? Int{
+                    liveId = "\(liveID)"
+                }
+            }
+            if let liveTp = data[UnNotificationKeys.liveType] as? String{
+                liveType = liveTp
             }
         }
         
@@ -730,6 +749,26 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 navController?.present(nav, animated: true, completion: nil)
             }
         case .notification:
+            if let vc = NotificationVC.storyBoardInstance(){
+                
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                navController?.present(nav, animated: true, completion: nil)
+            }
+        case .live:
+            if let vc = JoinUserLiveVC.storyBoardInstance() {
+                
+                vc.friendId = userId!
+                  vc.liveID = liveId!
+                vc.liveUserNameValue  = fName!
+                vc.liveUserImageValue  = profilePic!
+                vc.liveUserProfileColor  = colorCode!
+                vc.liveUsertopicValue  = ""
+                vc.liveType  = liveType!
+                self.navController?.pushViewController(vc, animated: true)
+
+                }
+            
             if let vc = NotificationVC.storyBoardInstance(){
                 
                 let nav = UINavigationController(rootViewController: vc)

@@ -50,9 +50,13 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     @IBOutlet weak var smallStreamView: UIView!
     @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var commentTraining: NSLayoutConstraint!
+    @IBOutlet weak var liveLableLeading: NSLayoutConstraint!
+    @IBOutlet weak var liveLableTraining: NSLayoutConstraint!
     @IBOutlet weak var numberOfViews: UILabel!
     @IBOutlet weak var largeCameraContainer: UIView!
     @IBOutlet weak var smallCameraContainer: UIView!
+    @IBOutlet weak var commentLeading: NSLayoutConstraint!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var liveTimerView: UIView!
@@ -881,6 +885,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
            // colorAnimationView.layer.removeAllAnimations()
         UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = UIScreen.main.bounds.width
+            self.commentLeading.constant = UIScreen.main.bounds.width
+            self.commentTraining.constant = -UIScreen.main.bounds.width
+            self.liveLableLeading.constant = UIScreen.main.bounds.width
+            self.liveLableTraining.constant = -UIScreen.main.bounds.width
+            
                 self.view.layoutIfNeeded()
             }
       
@@ -892,6 +901,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
            // colorAnimationView.layer.removeAllAnimations()
         UIView.animate(withDuration: 1.0) {
             self.commentViewLeadingSpace.constant = 16
+            self.commentLeading.constant = 16
+            self.commentTraining.constant = 16
+            self.liveLableLeading.constant = 16
+            self.liveLableTraining.constant = 16
                 self.view.layoutIfNeeded()
             }
     }
