@@ -43,7 +43,9 @@ struct Endpoints {
     //https://216.172.171.51/~papiunit
     //static let USERFEEDS_URL = "https://216.172.171.51/~papiunit/"
     static let INSERT_LIKE_URL = "\(BASE_URL)msInsertLike/"
-    static let INSERT_VIDEO_VIEWS = "https://myscrap.com/video/numberofview"
+  //  static let INSERT_VIDEO_VIEWS = "https://myscrap.com/video/numberofview"
+    static let INSERT_VIDEO_VIEWS = "https://myscrap.com/video/multiple_num_views"
+    
     static let VIDEO_VIEW_LISTS = "https://myscrap.com/api/msVideoViewersList"
     static let LIKE_COUNT_URL = "\(BASE_URL)msLike/"
     static let COMMENT_COUNT_URL = "\(BASE_URL)msComment/"

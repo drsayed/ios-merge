@@ -14,6 +14,9 @@ protocol PortraitVideoFullScreenDelegate:class {
     func PortraitVideoFullScreenPressed(player : AVPlayer)
 }
 class PortraitVideoCell: BaseCell {
+    
+ 
+    
     @IBOutlet weak var playButton: UIButton!
     
     weak var delegate: PortraitVideoFullScreenDelegate?
@@ -48,8 +51,8 @@ class PortraitVideoCell: BaseCell {
         }
     }
        weak var updatedDelegate : UpdatedFeedsDelegate?
-       var feedV2Service : FeedV2Model?
-       
+   //    var feedV2Service : FeedV2Model?
+    
        var offlineBtnAction : (() -> Void)? = nil
        var commentBtnAction : (() -> Void)? = nil
        var addCommentAction : (() -> Void)? = nil
@@ -134,7 +137,7 @@ class PortraitVideoCell: BaseCell {
            let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
            videoTap.numberOfTapsRequired = 1
            videoView.isUserInteractionEnabled = true
-          videoView.addGestureRecognizer(videoTap)
+          self.addGestureRecognizer(videoTap)
         playerView.contentMode =  UIView.ContentMode.scaleAspectFill
        }
     func TimeDurationFormater(time: Int) -> String {
@@ -433,15 +436,16 @@ class PortraitVideoCell: BaseCell {
       
            if inDetailView {
                if network.reachability.isReachable == true {
-                   guard let item = newItem else { return }
-                   //In detail view just calling the api
-                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self)
+                guard let item = newVedio else { return }
+                //Here updating the view count in feeds
+             //   feedV2Service!.hitView(postId: item.postId,videoId: item.videoId)
+             updatedDelegate?.didTapVideoViews(item: item, cell: self)
                } else {
                    offlineBtnAction?()
                }
            } else {
                if network.reachability.isReachable == true {
-                   guard let item = newItem else { return }
+                   guard let item = newVedio else { return }
                    //Here updating the view count in feeds
                    updatedDelegate?.didTapVideoViews(item: item, cell: self)
                } else {
@@ -661,7 +665,7 @@ class PortraitVideoCell: BaseCell {
        @IBAction func playBtnTapped(_ sender: UIButton) {
            if network.reachability.isReachable == true {
                guard let item = newItem else { return }
-               updatedDelegate?.didTapVideoViews(item: item, cell: self)
+               updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: newVedio!.videoId)
            } else {
                offlineBtnAction?()
            }

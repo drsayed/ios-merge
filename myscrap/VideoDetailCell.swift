@@ -142,8 +142,10 @@ class VideoDetailCell: BaseCell {
     
     @IBAction func playBtnTapped(_ sender: UIButton) {
         if network.reachability.isReachable == true {
-            guard let item = newItem else { return }
+            guard let item = newVedio else { return }
+            //Here updating the view count in feeds
             updatedDelegate?.didTapVideoViews(item: item, cell: self)
+            
         } else {
             offlineBtnAction?()
         }

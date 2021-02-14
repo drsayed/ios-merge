@@ -139,7 +139,7 @@ class LandScapCell: BaseCell {
            let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
            videoTap.numberOfTapsRequired = 1
            videoView.isUserInteractionEnabled = true
-          videoView.addGestureRecognizer(videoTap)
+        self.addGestureRecognizer(videoTap)
         playerView.contentMode =  UIView.ContentMode.scaleAspectFill
        }
     func TimeDurationFormater(time: Int) -> String {
@@ -426,17 +426,17 @@ class LandScapCell: BaseCell {
       
            if inDetailView {
                if network.reachability.isReachable == true {
-                   guard let item = newItem else { return }
-                   //In detail view just calling the api
-                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self)
+                guard let item = newVedio else { return }
+                //Here updating the view count in feeds
+                updatedDelegate?.didTapVideoViews(item: item, cell: self)
                } else {
                    offlineBtnAction?()
                }
            } else {
                if network.reachability.isReachable == true {
-                   guard let item = newItem else { return }
-                   //Here updating the view count in feeds
-                   updatedDelegate?.didTapVideoViews(item: item, cell: self)
+                guard let item = newVedio else { return }
+                //Here updating the view count in feeds
+                updatedDelegate?.didTapVideoViews(item: item, cell: self)
                } else {
                    offlineBtnAction?()
                }
@@ -654,7 +654,7 @@ class LandScapCell: BaseCell {
        @IBAction func playBtnTapped(_ sender: UIButton) {
            if network.reachability.isReachable == true {
                guard let item = newItem else { return }
-               updatedDelegate?.didTapVideoViews(item: item, cell: self)
+               updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: newVedio!.videoId)
            } else {
                offlineBtnAction?()
            }

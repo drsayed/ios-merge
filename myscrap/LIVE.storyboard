@@ -2608,7 +2608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvZ-95-oBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9044" y="-1245"/>
+            <point key="canvasLocation" x="8809" y="-1245"/>
         </scene>
         <!--Viewer Side Join Request Pop Up-->
         <scene sceneID="7P8-TZ-zoL">

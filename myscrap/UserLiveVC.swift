@@ -868,6 +868,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
         
+        self.commentField.resignFirstResponder()
+        
         self.addEndActionAlert()
       
     }

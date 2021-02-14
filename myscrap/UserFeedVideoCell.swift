@@ -492,7 +492,7 @@ class UserFeedVideoCell: BaseCell {
                if network.reachability.isReachable == true {
                    guard let item = newItem else { return }
                    //In detail view just calling the api
-                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self)
+                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self,videoId: "")
                } else {
                    offlineBtnAction?()
                }
@@ -500,7 +500,7 @@ class UserFeedVideoCell: BaseCell {
                if network.reachability.isReachable == true {
                    guard let item = newItem else { return }
                    //Here updating the view count in feeds
-                   updatedDelegate?.didTapVideoViews(item: item, cell: self)
+                   updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: "")
                } else {
                    offlineBtnAction?()
                }
@@ -796,7 +796,7 @@ class UserFeedVideoCell: BaseCell {
        @IBAction func playBtnTapped(_ sender: UIButton) {
            if network.reachability.isReachable == true {
                guard let item = newItem else { return }
-               updatedDelegate?.didTapVideoViews(item: item, cell: self)
+               updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: "")
            } else {
                offlineBtnAction?()
            }
@@ -1091,7 +1091,7 @@ extension UserFeedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
              //cell.indexPath = indexPath.row
          //      cell.newItem = self.newItem
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
-        
+        cell.updatedDelegate = self.updatedDelegate
         cell.delegate = self
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1

@@ -31,6 +31,7 @@ protocol UpdatedFeedsDelegate : class {
     func didTapEventV2(item: FeedV2Item)
     func didTapEventIntrestBtnV2(item: FeedV2Item)
     func didTapReportModV2(item: FeedV2Item, cell: UICollectionViewCell)
+    func didTapVideoViews(item:VideoURL, cell: UICollectionViewCell)
     func didTapForFriendView(id: String)
     func didTap(url: String)
     func didTapWebLinks(url: URL)
@@ -39,8 +40,8 @@ protocol UpdatedFeedsDelegate : class {
     func didTapClose(cell: UpdateProfileViewCell)
     func didTapShareV2(sender: UIButton, item : FeedV2Item)
     func didTapShareVideoV2(sender: UIButton, item : FeedV2Item)
-    func didTapVideoViews(item:FeedV2Item, cell: UICollectionViewCell)
-    func didTapDetailVideoViews(item:FeedV2Item, cell: UICollectionViewCell)
+    func didTapVideoViews(item:FeedV2Item, cell: UICollectionViewCell,videoId : String)
+    func didTapDetailVideoViews(item:FeedV2Item, cell: UICollectionViewCell,videoId : String)
     func didTapVideoViewCountV2(item: FeedV2Item)
     
     
@@ -253,7 +254,7 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
         
     }
     
-    func didTapVideoViews(item:FeedV2Item, cell: UICollectionViewCell) {
+    func didTapVideoViews(item:FeedV2Item, cell: UICollectionViewCell,videoId : String = "0") {
         if AuthStatus.instance.isGuest{
             showGuestAlert()
         } else {
@@ -261,14 +262,25 @@ extension UpdatedFeedsDelegate where Self: UIViewController  {
             //item.viewsCount += 1
             //feedCollectionView.reloadItems(at: [indexPath])
             
-            feedV2Service.hitView(postId: item.postId)
+            feedV2Service.hitView(postId: item.postId,videoId: videoId)
         }
     }
-    func didTapDetailVideoViews(item:FeedV2Item, cell: UICollectionViewCell) {
+    func didTapVideoViews(item:VideoURL, cell: UICollectionViewCell) {
         if AuthStatus.instance.isGuest{
             showGuestAlert()
         } else {
-            feedV2Service.hitView(postId: item.postId)
+            
+            //item.viewsCount += 1
+            //feedCollectionView.reloadItems(at: [indexPath])
+            
+            feedV2Service.hitView(postId: item.postId,videoId: item.videoId)
+        }
+    }
+    func didTapDetailVideoViews(item:FeedV2Item, cell: UICollectionViewCell ,videoId : String = "0") {
+        if AuthStatus.instance.isGuest{
+            showGuestAlert()
+        } else {
+            feedV2Service.hitView(postId: item.postId,videoId: videoId)
         }
     }
     

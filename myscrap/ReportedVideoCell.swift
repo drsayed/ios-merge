@@ -461,7 +461,7 @@ class ReportedVideoCell: BaseCell {
     @IBAction func playBtnTapped(_ sender: UIButton) {
         if network.reachability.isReachable == true {
             guard let item = newItem else { return }
-            updatedDelegate?.didTapVideoViews(item: item, cell: self)
+            updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: "")
         } else {
             offlineBtnAction?()
         }
@@ -718,6 +718,7 @@ extension ReportedVideoCell : UICollectionViewDelegate,UICollectionViewDataSourc
         cell.inDetailView = false
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
         cell.delegate = self
+        cell.updatedDelegate = self.updatedDelegate
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true

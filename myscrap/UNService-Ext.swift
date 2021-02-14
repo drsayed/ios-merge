@@ -756,25 +756,26 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 navController?.present(nav, animated: true, completion: nil)
             }
         case .live:
-            if let vc = JoinUserLiveVC.storyBoardInstance() {
-                
-                vc.friendId = userId!
-                  vc.liveID = liveId!
-                vc.liveUserNameValue  = fName!
-                vc.liveUserImageValue  = profilePic!
-                vc.liveUserProfileColor  = colorCode!
-                vc.liveUsertopicValue  = ""
-                vc.liveType  = liveType!
-                self.navController?.pushViewController(vc, animated: true)
-
-                }
+            print("go to notification Live VC")
+//            if let vc = JoinUserLiveVC.storyBoardInstance() {
+//
+//                vc.friendId = userId!
+//                  vc.liveID = liveId!
+//                vc.liveUserNameValue  = fName!
+//                vc.liveUserImageValue  = profilePic!
+//                vc.liveUserProfileColor  = colorCode!
+//                vc.liveUsertopicValue  = ""
+//                vc.liveType  = liveType!
+//                self.navController?.pushViewController(vc, animated: true)
+//
+//                }
             
-            if let vc = NotificationVC.storyBoardInstance(){
-                
-                let nav = UINavigationController(rootViewController: vc)
-                nav.modalPresentationStyle = .fullScreen
-                navController?.present(nav, animated: true, completion: nil)
-            }
+//            if let vc = NotificationVC.storyBoardInstance(){
+//
+//                let nav = UINavigationController(rootViewController: vc)
+//                nav.modalPresentationStyle = .fullScreen
+//                navController?.present(nav, animated: true, completion: nil)
+ //           }
         default:
             print("go to notification vc")
             

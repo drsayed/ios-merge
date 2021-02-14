@@ -446,7 +446,7 @@ class FeedDetailVideoCell: BaseCell {
                if network.reachability.isReachable == true {
                    guard let item = newItem else { return }
                    //In detail view just calling the api
-                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self)
+                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self,videoId: "")
                } else {
                    offlineBtnAction?()
                }
@@ -454,7 +454,7 @@ class FeedDetailVideoCell: BaseCell {
                if network.reachability.isReachable == true {
                    guard let item = newItem else { return }
                    //Here updating the view count in feeds
-                   updatedDelegate?.didTapVideoViews(item: item, cell: self)
+                   updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: "")
                } else {
                    offlineBtnAction?()
                }
@@ -750,7 +750,7 @@ class FeedDetailVideoCell: BaseCell {
        @IBAction func playBtnTapped(_ sender: UIButton) {
            if network.reachability.isReachable == true {
                guard let item = newItem else { return }
-               updatedDelegate?.didTapVideoViews(item: item, cell: self)
+               updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: "")
            } else {
                offlineBtnAction?()
            }
@@ -907,7 +907,7 @@ extension FeedDetailVideoCell : UICollectionViewDelegate,UICollectionViewDataSou
          //      cell.newItem = self.newItem
         cell.inDetailView = inDetailView
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
-              
+        cell.updatedDelegate = self.updatedDelegate
         cell.playBtn.tag = indexPath.row
         cell.playBtn.addTarget(self, action:#selector(FeedDetailVideoCell.playButtonPresssed), for: .touchUpInside)
    

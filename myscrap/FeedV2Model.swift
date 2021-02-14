@@ -142,10 +142,10 @@ final class FeedV2Model {
             }
         }
     }
-    func hitView(postId:String) {
+    func hitView(postId:String, videoId:String = "0") {
         let api = APIService()
         api.endPoint = Endpoints.INSERT_VIDEO_VIEWS
-        api.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&apiKey=\(API_KEY)"
+        api.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&apiKey=\(API_KEY)&videoId=\(videoId)"
         api.getDataWith { (result) in
             switch result{
             case .Success(_):

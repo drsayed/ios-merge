@@ -124,10 +124,10 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         self.collectionView.isHidden = true
         
         view.endEditing(true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
-               //call any function
-            self.startTimeToGetUser()
-           }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+//               //call any function
+//            self.startTimeToGetUser()
+//           }
 
     }
     @IBAction func liveButtonPressed(_ sender: Any) {

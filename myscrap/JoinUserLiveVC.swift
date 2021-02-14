@@ -290,7 +290,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     appDelegate.webRTCViewerClient.setLocalView(container: smallStreamView, mode: .scaleAspectFill)
         
         self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
-        self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+      //  self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
 //        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
@@ -943,6 +943,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @IBAction func EndLivepressed(_ sender: Any)
    {
+        self.commentField.resignFirstResponder()
         if appDelegate.playerClients.count == 2{
         
         self.addEndActionAlert()

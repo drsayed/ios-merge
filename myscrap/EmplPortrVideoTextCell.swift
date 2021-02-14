@@ -491,7 +491,7 @@ class EmplPortrVideoTextCell: BaseCell {
                if network.reachability.isReachable == true {
                    guard let item = newItem else { return }
                    //In detail view just calling the api
-                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self)
+                   updatedDelegate?.didTapDetailVideoViews(item: item, cell: self,videoId: "" )
                } else {
                    offlineBtnAction?()
                }
@@ -499,7 +499,7 @@ class EmplPortrVideoTextCell: BaseCell {
                if network.reachability.isReachable == true {
                    guard let item = newItem else { return }
                    //Here updating the view count in feeds
-                   updatedDelegate?.didTapVideoViews(item: item, cell: self)
+                   updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: "")
                } else {
                    offlineBtnAction?()
                }
@@ -795,7 +795,7 @@ class EmplPortrVideoTextCell: BaseCell {
        @IBAction func playBtnTapped(_ sender: UIButton) {
            if network.reachability.isReachable == true {
                guard let item = newItem else { return }
-               updatedDelegate?.didTapVideoViews(item: item, cell: self)
+               updatedDelegate?.didTapVideoViews(item: item, cell: self,videoId: "")
            } else {
                offlineBtnAction?()
            }
@@ -1096,9 +1096,11 @@ extension EmplPortrVideoTextCell : UICollectionViewDelegate,UICollectionViewData
                       // cell.updatedDelegate = self
              //cell.indexPath = indexPath.row
          //      cell.newItem = self.newItem
+        cell.tag = indexPath.row
         cell.newVedio = self.newItem!.videoURL[indexPath.row]
         cell.pause()
         cell.delegate = self
+        cell.updatedDelegate = self.updatedDelegate
                        /*let videoTap = UITapGestureRecognizer(target: self, action: #selector(videoViewTapped(tapGesture:)))
                         videoTap.numberOfTapsRequired = 1
                         cell.thumbnailImg.isUserInteractionEnabled = true
