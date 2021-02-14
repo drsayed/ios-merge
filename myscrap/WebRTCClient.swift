@@ -365,6 +365,8 @@ class WebRTCClient: NSObject {
         }
         else {
             self.cameraPosition = .front
+//            self.localVideoView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            
         }
         
         self.localVideoTrack.remove(localVideoView!)

@@ -949,6 +949,14 @@ extension AppDelegate : AntMediaClientDelegate
     
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
         
+        if binary {
+            
+            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
+
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CameraToggle"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
+            
+        }
+        else{
         do {
             
             let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
@@ -961,6 +969,7 @@ extension AppDelegate : AntMediaClientDelegate
         }
         catch{
             print(error)
+        }
         }
 }
 }

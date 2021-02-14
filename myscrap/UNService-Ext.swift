@@ -61,7 +61,7 @@ struct UnNotificationKeys{
     //chat
     static let fname = "friendName"
     static let colorCode = "colorCode"
-    static let profilePic = "profilePic"
+    static let profilePic = "profilepic"
     static let jid = "jid"
     static let userId = "userId"
     static let liveType = "liveType"
@@ -149,7 +149,9 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             let flag = remote_message["flag"] as? String ?? ""
             //let text = remote_message["text"] as? String ?? ""
             let id = remote_message["id"] as? String ?? ""
-            let profilepic = remote_message["profilepic"] as? String ?? ""
+           
+           let profilepic = remote_message["profilepic"] as? String ?? ""
+            
             let postId = remote_message["postId"] as? String ?? ""
             //let companyId = remote_message["companyId"] as? String ?? ""
             let type = remote_message["type"] as? String ?? ""
@@ -277,6 +279,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         let notificationID = message["notId"] as? String ?? ""
         let liveId = message["liveId"] as? String ?? ""
         let liveType = message["liveType"] as? String ?? ""
+        let profilepic = message["profilepic"] as? String ?? ""
         let sound = message["sound"] as? String ?? ""
         let type = message["type"] as? String ?? ""
         let flag = message["flag"] as? String ?? ""
@@ -292,7 +295,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             content.body = "New message received"
             
             content.userInfo = [
-                "data" : [ UnNotificationKeys.notificationType : "", UnNotificationKeys.jid : "", UnNotificationKeys.fname : "MyScrap", UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : "", UnNotificationKeys.userId : "", UnNotificationKeys.liveId : liveId, UnNotificationKeys.liveType : liveType
+                "data" : [ UnNotificationKeys.notificationType : "", UnNotificationKeys.jid : "", UnNotificationKeys.fname : "MyScrap", UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.userId : "", UnNotificationKeys.liveId : liveId, UnNotificationKeys.liveType : liveType
                 ]
             ]
             content.sound = UNNotificationSound.default
@@ -316,7 +319,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             content.body = content_notif
             
             content.userInfo = [
-                "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : "", UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : "", UnNotificationKeys.userId : "", UnNotificationKeys.liveId : liveId, UnNotificationKeys.liveType : liveType
+                "data" : [ UnNotificationKeys.notificationType : type, UnNotificationKeys.jid : "", UnNotificationKeys.fname : name, UnNotificationKeys.colorCode : "",UnNotificationKeys.listingId : listingId,UnNotificationKeys.listingid : listingid,UnNotificationKeys.notificationID : "\(notificationID)", UnNotificationKeys.profilePic : "", UnNotificationKeys.userId : "", UnNotificationKeys.liveId : liveId , UnNotificationKeys.profilePic : profilepic, UnNotificationKeys.liveType : liveType
                 ]
             ]
             content.sound = UNNotificationSound.default
@@ -757,18 +760,21 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
         case .live:
             print("go to notification Live VC")
-//            if let vc = JoinUserLiveVC.storyBoardInstance() {
-//
-//                vc.friendId = userId!
-//                  vc.liveID = liveId!
-//                vc.liveUserNameValue  = fName!
-//                vc.liveUserImageValue  = profilePic!
-//                vc.liveUserProfileColor  = colorCode!
-//                vc.liveUsertopicValue  = ""
-//                vc.liveType  = liveType!
-//                self.navController?.pushViewController(vc, animated: true)
-//
-//                }
+            if !self.webRTCClient.isConnected() {
+                if let vc = JoinUserLiveVC.storyBoardInstance() {
+
+                    vc.friendId = userId!
+                      vc.liveID = liveId!
+                    vc.liveUserNameValue  = fName!
+                    vc.liveUserImageValue  = profilePic!
+                    vc.liveUserProfileColor  = colorCode!
+                    vc.liveUsertopicValue  = ""
+                    vc.liveType  = liveType ?? "single"
+                    self.navController?.pushViewController(vc, animated: true)
+
+                    }
+            }
+           
             
 //            if let vc = NotificationVC.storyBoardInstance(){
 //

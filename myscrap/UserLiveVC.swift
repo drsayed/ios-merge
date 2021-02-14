@@ -150,7 +150,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.ConnectionEstablished(_:)), name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil)
-        
+      //  NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggle(_:)), name: NSNotification.Name(rawValue: "CameraToggle"), object: nil)
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.OnlineViewTapped(_:)))
 
         self.seenView.addGestureRecognizer(tap)
@@ -216,9 +216,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.setUpCamera()
         self.setUpCommentViews()
         addKeyboardObservers()
-        self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+       // self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
         self.cameraflipedView.frame =  self.largeCameraContainer.frame
-        self.cameraflipedView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        //self.cameraflipedView.transform = CGAffineTransform(scaleX: -1, y: 1);
      //   self.videoPreviewLayer.customMirror
 
         //self..transform = CGAffineTransform(scaleX: -1, y: 1);
@@ -279,6 +279,35 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
       }
      }
+//    @objc func CameraToggle(_ notification: NSNotification) {
+//            print(notification.userInfo ?? "")
+//        if let dict = notification.userInfo as? [String: AnyObject]{
+//            if let cameraToggle = dict["CameraToggle"]  as? String {
+//                if cameraToggle == "1" {
+//
+//                    DispatchQueue.main.async { [self] in
+//                    let frontCam = dict["isFrontCam"] as? String ?? "0"
+//                    if frontCam == "1"
+//                    {
+//                        if self.smallStreamView.tag != 1 {
+//                            self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+//                            self.smallStreamView.tag = 1
+//                        }
+//
+//                    }
+//                    else
+//                    {
+//                        if self.smallStreamView.tag != 0 {
+//                        self.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
+//                            self.smallStreamView.tag = 0
+//                        }
+//                    }
+//                    }
+//                }
+//            }
+//
+//        }
+//    }
     @objc func RecievedMessage(_ notification: NSNotification) {
             print(notification.userInfo ?? "")
         if let dict = notification.userInfo as? [String: AnyObject]{
@@ -334,10 +363,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 //            self?.captureSession.stopRunning()
             if(self!.isFrontCam)
             {
-                self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+           //     self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
             }
             else{
-                self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+           //     self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
             }
             
             self?.addTimerCall()
@@ -348,10 +377,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         DispatchQueue.main.async { [weak self] in
             if(self!.isFrontCam)
             {
-                self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            //    self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
             }
             else{
-                self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+             //   self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
             }
           
         }
@@ -492,6 +521,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             comment.userId = AuthService.instance.userId
             print("Messages Count : \( self.liveComments.count)")
             self.liveComments.append(comment)
+            
             let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "0","joingingRequestStatus": "0","OnlyForStreamer": "0","StreamStarted": "0","friendId": "" , "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
             
     
@@ -641,10 +671,17 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         isFrontCam = !isFrontCam
         if(isFrontCam)
         {
-            self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        //    self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            let dic = ["CameraToggle":"1","isFrontCam": "1"]
+
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+         //   appDelegate.webRTCClient.sendData(data: data, binary: true)
         }
         else{
-            self.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+          //  self.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+            let dic = ["CameraToggle":"1","isFrontCam": "0"]
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+        //    appDelegate.webRTCClient.sendData(data: data, binary: true)
         }
         appDelegate.webRTCClient.switchCamera()
        
@@ -1194,9 +1231,9 @@ extension UserLiveVC : AntMediaClientDelegate
         
         DispatchQueue.main.async { [self] in
             smallCameraContainer.isHidden = false
-            DispatchQueue.main.async { [self] in
-            self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
-            }
+//            DispatchQueue.main.async { [self] in
+//            self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+//            }
             MBProgressHUD.hide(for: self.view , animated: true)
             self.setUserStatusToLive(status: "dual")
           //  self.setUserToDualLive()
