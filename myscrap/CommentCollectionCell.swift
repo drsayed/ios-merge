@@ -11,9 +11,64 @@ import UIKit
 protocol CommentCollectionCellDelegate: class {
     func didTapEditButton(cell: CommentCollectionCell)
     func didTapForFriendView(cell: CommentCollectionCell, id: String)
+    func didTapOnLikeButton(cell: CommentCollectionCell)
+    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell)
 }
 
 extension CommentCollectionCellDelegate  where Self: DetailsVC {
+    
+    func didTapOnLikeButton(cell: CommentCollectionCell){
+        guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
+        
+        let item = commentDataSource[ip.item]
+        if item.isLike != "1" {
+            item.isLike = "1"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! + 1)"
+            if item.isDislike == "1" {
+                item.isDislike = "0"
+               
+            let dislikeCount = Int(item.userDisliked!)
+            item.userDisliked =  "\(dislikeCount! - 1)"
+            }
+            self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_LIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+        }
+      
+    }
+    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell){
+        guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
+        
+        let item = commentDataSource[ip.item]
+        if item.isDislike != "1" {
+            item.isDislike = "1"
+           
+        let dislikeCount = Int(item.userDisliked!)
+        item.userDisliked =  "\(dislikeCount! + 1)"
+        if item.isLike == "1" {
+            item.isLike = "0"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! - 1)"
+        }
+        self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_DISLIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+            
+        }
+    }
     func didTapEditButton(cell: CommentCollectionCell){
         
         guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
@@ -62,6 +117,14 @@ extension CommentCollectionCellDelegate  where Self: DetailsVC {
 }
 
 extension CommentCollectionCellDelegate  where Self: FeedsCMDetailsVC {
+    func didTapOnLikeButton(cell: CommentCollectionCell)
+    {
+        
+    }
+    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell)
+    {
+        
+    }
     func didTapEditButton(cell: CommentCollectionCell){
         
         guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
@@ -110,6 +173,14 @@ extension CommentCollectionCellDelegate  where Self: FeedsCMDetailsVC {
     
 }
 extension CommentCollectionCellDelegate  where Self: FeedsPOWDetailsVC {
+    func didTapOnLikeButton(cell: CommentCollectionCell)
+    {
+        
+    }
+    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell)
+    {
+        
+    }
     func didTapEditButton(cell: CommentCollectionCell){
         
         guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
@@ -168,6 +239,8 @@ class CommentCollectionCell: BaseCell {
     
     weak var delegate: CommentCollectionCellDelegate?
     
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dislikeButton: UIButton!
     @IBOutlet private weak var profileView: ProfileView!
     @IBOutlet private weak var userView: UserView!
     @IBOutlet private weak var nameLbl: UILabel!
@@ -231,11 +304,33 @@ class CommentCollectionCell: BaseCell {
         } else {
             desigLbl.text = item.designation
         }*/
+        
+        let imagelike = UIImage(named: "thumbUp48")?.withRenderingMode(.alwaysTemplate)
+        self.likeButton.setImage(imagelike, for: .normal)
+        self.likeButton.setTitle(item.userLike, for: .normal)
+        if item.isLike == "1" {
+            self.likeButton.tintColor = UIColor.MyScrapGreen
+        }else
+        {
+            self.likeButton.tintColor = UIColor.darkGray
+        }
+        
+        
+        let imageDislike = UIImage(named: "thumbunlike")?.withRenderingMode(.alwaysTemplate)
+        self.dislikeButton.setImage(imageDislike, for: .normal)
+        self.dislikeButton.setTitle(item.userDisliked, for: .normal)
+        if item.isDislike == "1" {
+            self.dislikeButton.tintColor = UIColor.MyScrapGreen
+        }else
+        {
+            self.dislikeButton.tintColor = UIColor.darkGray
+        }
         if item.timeStamp == "" {
             desigLbl.text = "Just now"
         } else {
             desigLbl.text = item.timeStamp
         }
+        
         
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 5
@@ -315,7 +410,12 @@ class CommentCollectionCell: BaseCell {
     @IBAction func editButtonPressed(_ sender: EditButton) {
         delegate?.didTapEditButton(cell: self)
     }
-    
+    @IBAction func likeButtonPressed(_ sender: EditButton) {
+        delegate?.didTapOnLikeButton(cell: self)
+    }
+    @IBAction func dislikeButtonPressed(_ sender: EditButton) {
+        delegate?.didTapOnDisLikeLikeButton(cell: self)
+    }
 }
 
 

@@ -557,12 +557,14 @@ struct FeedsHeight {
     //Setting Dynamic height for detail feeds comment text
     static func heightForCommentFeedsV2(item: CommentItem, labelWidth: CGFloat) -> CGFloat {
         let topSpacing: CGFloat = 8
-        let logoImage: CGFloat = 60
-        let logoSpacing: CGFloat = 12
+        let logoImage: CGFloat = 35
+       // let logoSpacing: CGFloat = 12
         //let labelHeight: CGFloat = LabelHeight.heightForLabel(for: item.comment, for: labelWidth, for: UIFont(name: "HelveticaNeue", size: 15)!)
-        let textViewHeight: CGFloat = LabelHeight.heightForAttributed(for: item.commentTextAttrib, for: labelWidth)
-        let labelSpacing: CGFloat = 8
-        let height = topSpacing + logoImage + logoSpacing + textViewHeight + labelSpacing
+        let textViewHeight: CGFloat = LabelHeight.heightForAttributed(for: item.commentTextAttrib, for: labelWidth) 
+        let labelSpacing: CGFloat = 9
+        let timeLablebottom : CGFloat = 20
+        let timeLableheight : CGFloat = 30
+        let height = topSpacing + logoImage  + textViewHeight + labelSpacing + timeLableheight + timeLablebottom
         return height
     }
     //Setting Dynamic height for comment Text in Company of the Month

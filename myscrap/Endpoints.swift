@@ -124,6 +124,9 @@ struct Endpoints {
     static let ModeratorsURL = "\(BASE_URL)msModerators"
     static let EMPLOYEE_DETAILS_URL = "\(BASE_URL)msEmployeeDetails"
     static let COMMENT_DELETE_URL = "\(BASE_URL)msCommentDelete"
+    static let COMMENT_LIKE_URL = "https://myscrap.com/android/comment_like"
+    static let COMMENT_DISLIKE_URL = "https://myscrap.com/android/comment_dislike"
+
     static let EXCHANGE_URL = "\(BASE_URL_Common)msExchange"
     static let LME_EXCHANGE_URL = "\(BASE_URL)msLmeExchange"
     

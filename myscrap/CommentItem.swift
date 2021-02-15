@@ -62,6 +62,12 @@ class CommentItem: MemberItem{
     }
     
     var postId: String?
+    var isDislike: String?
+    var isLike: String?
+    var userDisliked: String?
+    var userLike: String?
+   
+    
     
     var timeStamp : String{ if _timeStamp == nil{ _timeStamp = 0 };
         let calendar = NSCalendar.current
@@ -143,7 +149,28 @@ class CommentItem: MemberItem{
             print("time stamp in : \(timeStamp)")
             self._timeStamp = timeStamp
         }
-        self.postId = Dict["postId"] as? String
+        if let postId = Dict["postId"] as? String{
+            self.postId = postId
+        }
+        else
+        {
+            if let postId = Dict["postId"] as? Int{
+                self.postId = "\(postId)"
+            }
+        }
+        if let isDislike = Dict["isDislike"] as? Int{
+            self.isDislike = "\(isDislike)"
+        }
+        if let isLike = Dict["isLike"] as? Int{
+            self.isLike = "\(isLike)"
+        }
+        if let userDisliked = Dict["userDisliked"] as? Int{
+            self.userDisliked = "\(userDisliked)"
+        }
+        if let userLike = Dict["userLike"] as? Int{
+            self.userLike = "\(userLike)"
+        }
+    
     }
 }
 class CommentCMItem {
