@@ -769,6 +769,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     vc.liveUserImageValue  = profilePic!
                     vc.liveUserProfileColor  = colorCode!
                     vc.liveUsertopicValue  = ""
+                    vc.isFromNotificationClick  = true
                     vc.liveType  = liveType ?? "single"
                     self.navController?.pushViewController(vc, animated: true)
 

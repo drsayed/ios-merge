@@ -39,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     var liveID = ""
     var isStreamer = false
-    
+    var isDualLive = false
+    var isStreamerDisconeted = false
     var xmppAutoPing: XMPPAutoPing!
     var backgroundUpdateTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
     var fireBaseConfig = false
@@ -920,7 +921,11 @@ extension AppDelegate : AntMediaClientDelegate
     }
     
     func disconnected(streamId: String) {
-     
+        if streamId.contains("stream1room") {
+            if !self.isStreamerDisconeted {
+                webRTCClient.stop()
+            }
+        }
     }
     
     func audioSessionDidStartPlayOrRecord(streamId: String) {
@@ -939,6 +944,7 @@ extension AppDelegate : AntMediaClientDelegate
     
     func clientDidDisconnect(_ message: String) {
         print("Stream get error \(message)")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clientDidDisconnect"), object: nil, userInfo: nil)
     }
     
     func clientHasError(_ message: String) {
@@ -950,15 +956,20 @@ extension AppDelegate : AntMediaClientDelegate
     func dataReceivedFromDataChannel(streamId: String, data: Data, binary: Bool) {
         
         if binary {
-            
-            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
 
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CameraToggle"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
+            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
+            if isDualLive {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CameraToggleDualLive"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
+            }
+            else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CameraToggleSingleLive"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
+            }
             
+
         }
         else{
         do {
-            
+
             let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
 
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])

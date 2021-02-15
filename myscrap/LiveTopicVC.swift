@@ -64,6 +64,13 @@ class LiveTopicVC: UIViewController {
         livebutton.layer.cornerRadius = livebutton.frame.size.height/2
         livebutton.clipsToBounds = true
         self.setUpCamera()
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//            let revealVc = appDelegate.window?.rootViewController as? SWRevealViewController
+//            revealVc?.panGestureRecognizer().isEnabled = true;
+//        }
+
+       // self.revealViewController()?.panGestureRecognizer().isEnabled = false;
+
         
     }
     @objc func tappedOnTopic(tapGestureRecognizer: UITapGestureRecognizer){
@@ -207,8 +214,11 @@ class LiveTopicVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
+
             //Step 13
         }
     }

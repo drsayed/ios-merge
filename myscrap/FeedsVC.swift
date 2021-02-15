@@ -398,12 +398,14 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         super.viewWillAppear(true)
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.setNavigationBarHidden(false, animated: false) 
-
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         if let reveal = self.revealViewController() {
             self.mBtn.target(forAction: #selector(reveal.revealToggle(_:)), withSender: self.revealViewController())
+          
+          
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
+
         //Load Local feeds
         
         

@@ -44,7 +44,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveID = ""
     var friendId = ""
     var liveType = ""
-    
+    var isFromNotificationClick : Bool = false
     var timeStampStarted = ""
     var isNeedToShowFollowing = 0
     var liveUserNameValue = ""
@@ -173,28 +173,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         serviceFollowing.delegate = self
         self.followButtonwidth.constant = 0
         followButton.layer.cornerRadius =  followButton.frame.size.height/2
-        
-//        helloButton.layer.cornerRadius =  helloButton.frame.size.height/2
-//        emoji1Button.layer.cornerRadius =  emoji1Button.frame.size.height/2
-//        emoji2Button.layer.cornerRadius =  emoji2Button.frame.size.height/2
-//        emoji3Button.layer.cornerRadius =  emoji3Button.frame.size.height/2
-//        emoji4Button.layer.cornerRadius =  emoji4Button.frame.size.height/2
-//        emojo5Button.layer.cornerRadius =  emojo5Button.frame.size.height/2
-//
-//        helloButton.backgroundColor = .darkGray
-//        emoji1Button.backgroundColor = .darkGray
-//        emoji2Button.backgroundColor = .darkGray
-//        emoji3Button.backgroundColor = .darkGray
-//        emoji4Button.backgroundColor = .darkGray
-//        emojo5Button.backgroundColor = .darkGray
-//
-//        helloButton.setTitle("Hello", for: .normal)
-//        emoji1Button.setTitle("😂", for: .normal)
-//        emoji2Button.setTitle("😍", for: .normal)
-//        emoji3Button.setTitle("☺️", for: .normal)
-//        emoji4Button.setTitle("✋🏻", for: .normal)
-//        emojo5Button.setTitle("👍🏻", for: .normal)
-        
+    
         announcementView.layer.cornerRadius =  announcementView.frame.size.height/2
         liveStreamerView.layer.cornerRadius =  liveStreamerView.frame.size.height/2
         liveUserImage.layer.cornerRadius =  liveUserImage.frame.size.height/2
@@ -217,8 +196,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         commentField.delegate = self
         
         closebutton.drawShadow()
-        
-        
+
         self.announceImage.image =  UIImage.fontAwesomeIcon(name: .bullhorn, style: .solid, textColor: UIColor.white , size: CGSize(width: 30, height: 30))
         
         let imageSeen = UIImage(named: "ic_seen")?.withRenderingMode(.alwaysTemplate)
@@ -259,13 +237,14 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         addKeyboardObservers()
         self.setUpCamera()
         self.setUpCommentViews()
-        
+        self.FlipFrontCameraOwnStream()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         liveStreamerView.addGestureRecognizer(tap)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
         
-    //    NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggle(_:)), name: NSNotification.Name(rawValue: "CameraToggle"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggleSingleLive(_:)), name: NSNotification.Name(rawValue: "CameraToggleSingleLive"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggleDualLive(_:)), name: NSNotification.Name(rawValue: "CameraToggleDualLive"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
@@ -276,6 +255,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasErrorInSteam(_:)), name: NSNotification.Name(rawValue: "clientHasError"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasErrorInSteam(_:)), name: NSNotification.Name(rawValue: "clientDidDisconnect"), object: nil)
        
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
@@ -295,6 +275,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
       //  self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
       //  self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
 //        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
+        self.FlipFrontCameraStreamerUser(isFront: true)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
            
@@ -401,35 +382,80 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         // handling code
         self.showFollowingAlert()
     }
-//    @objc func CameraToggle(_ notification: NSNotification) {
-//            print(notification.userInfo ?? "")
-//        if let dict = notification.userInfo as? [String: AnyObject]{
-//            if let cameraToggle = dict["CameraToggle"]  as? String {
-//                if cameraToggle == "1" {
-//
-//                    DispatchQueue.main.async { [self] in
-//                    let frontCam = dict["isFrontCam"] as? String ?? "0"
-//                    if frontCam == "1"
-//                    {
-//                        if self.cameraView.tag != 1 {
-//                            self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
-//                            self.cameraView.tag = 1
-//                        }
-//
-//                    }
-//                    else
-//                    {
-//                        if self.cameraView.tag != 0 {
-//                        self.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
-//                            self.cameraView.tag = 0
-//                        }
-//                    }
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
+    func FlipFrontCameraStreamerUser(isFront : Bool = true)  {
+        DispatchQueue.main.async { [weak self] in
+            if(isFront)
+            {
+             self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                self?.cameraView.tag = 1
+            }
+            else{
+             self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+                self?.cameraView.tag = 0
+            }
+          
+        }
+    }
+    func FlipFrontCameraOwnStream()  {
+        DispatchQueue.main.async { [weak self] in
+            if(self!.isFrontCam)
+            {
+             self?.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                self?.smallStreamView.tag = 1
+            }
+            else{
+             self?.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
+                self?.smallStreamView.tag = 0
+            }
+          
+        }
+    }
+    @objc func CameraToggleDualLive(_ notification: NSNotification) {
+        print(notification.userInfo ?? "")
+    if let dict = notification.userInfo as? [String: AnyObject]{
+        if let cameraToggle = dict["CameraToggle"]  as? String {
+            if cameraToggle == "1" {
+
+                DispatchQueue.main.async { [self] in
+                let frontCam = dict["isFrontCam"] as? String ?? "0"
+                if frontCam == "1"
+                {
+                    self.FlipFrontCameraStreamerUser(isFront: true)
+
+                }
+                else
+                {
+                    self.FlipFrontCameraStreamerUser(isFront: false)
+                }
+                }
+            }
+        }
+
+    }
+}
+    @objc func CameraToggleSingleLive(_ notification: NSNotification) {
+            print(notification.userInfo ?? "")
+        if let dict = notification.userInfo as? [String: AnyObject]{
+            if let cameraToggle = dict["CameraToggle"]  as? String {
+                if cameraToggle == "1" {
+
+                    DispatchQueue.main.async { [self] in
+                    let frontCam = dict["isFrontCam"] as? String ?? "0"
+                    if frontCam == "1"
+                    {
+                        self.FlipFrontCameraStreamerUser(isFront: true)
+
+                    }
+                    else
+                    {
+                        self.FlipFrontCameraStreamerUser(isFront: false)
+                    }
+                    }
+                }
+            }
+
+        }
+    }
     @objc func RecievedMessage(_ notification: NSNotification) {
             print(notification.userInfo ?? "")
         if let dict = notification.userInfo as? [String: AnyObject]{
@@ -539,8 +565,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             MBProgressHUD.hide(for: self.view , animated: true)
             self.videoPreviewLayer.removeFromSuperlayer()
             self.captureSession.stopRunning()
-         //   self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
-            self.cameraView.tag = 1
+            self.FlipFrontCameraStreamerUser(isFront: true)
         }
 
     }
@@ -553,9 +578,15 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     
     @objc func clientHasErrorInSteam(_ notification: NSNotification) {
-        NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
-        self.closeButtonPressed((Any).self)
-
+        
+            NotificationCenter.default.post(name: Notification.Name("EndLiveBYOtherUser"), object: nil)
+//                DispatchQueue.main.async { [self] in
+//            let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+//            spinner.mode = MBProgressHUDMode.indeterminate
+//              spinner.label.text = "Connectivity issue try again..."
+//                self.setUserStatusEndLive()
+//
+//        }
     }
     
     @objc func ConnectionEstablished(_ notification: NSNotification) {
@@ -563,6 +594,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     //    MBProgressHUD.hide(for: self.view , animated: true)
             self?.videoPreviewLayer.removeFromSuperlayer()
             self?.captureSession.stopRunning()
+            self?.FlipFrontCameraOwnStream()
         }
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -880,9 +912,24 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.suggessionCollectionView.reloadData()
-        self.startLive()
+      
+        if isFromNotificationClick {
+            
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                           //call any function
+                        self.startLive()
+                        
+                    }
+        }
+        else
+        {
+            self.startLive()
+        }
         self.reloadComentsView()
         self.getProfile()
+        self.revealViewController()?.panGestureRecognizer().isEnabled = false;
+
+        endLiveFollowAlertVC?.view.tag = 0
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -972,6 +1019,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         joiningVC?.dismiss(animated: false, completion: nil)
         joiningConfirmVC?.dismiss(animated: false, completion: nil)
         self.navigationController?.navigationBar.isHidden = false
+        self.revealViewController()?.panGestureRecognizer().isEnabled = true;
+
         NotificationCenter.default.removeObserver(self)
 
     }
@@ -1167,17 +1216,19 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
       
         if(isFrontCam)
         {
-        //    self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+         self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+            self.smallStreamView.tag = 1
             let dic = ["CameraToggle":"1","isFrontCam": "1"]
 
             let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-         //   appDelegate.webRTCClient.sendData(data: data, binary: true)
+          appDelegate.webRTCClient.sendData(data: data, binary: true)
         }
         else{
-           // self.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
+           self.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
+            self.smallStreamView.tag = 0
             let dic = ["CameraToggle":"1","isFrontCam": "0"]
             let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-       //     appDelegate.webRTCClient.sendData(data: data, binary: true)
+          appDelegate.webRTCClient.sendData(data: data, binary: true)
         }
         appDelegate.playerClient2.switchCamera()
        
@@ -1335,19 +1386,20 @@ extension JoinUserLiveVC {
         
         let joiningRoom = "stream1room\(liveID)"
         let streamId = "stream2room\(liveID)"
-        remoteViews.append(cameraView)
         remoteViews.append(smallStreamView)
+        remoteViews.append(smallStreamView)
+        appDelegate.isDualLive = true;
         AntMediaClient.setDebug(true)
         appDelegate.conferenceClient = ConferenceClient.init(serverURL: Endpoints.LiveUser, conferenceClientDelegate: self)
         appDelegate.conferenceClient.joinRoom(roomId: joiningRoom, streamId: streamId)
+        
         
     }
     @objc func startLive()
     {
        
      print("live Type is : \(liveType)")
-//
-       // self.joinConferenceCall()
+        
         appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "stream1room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
         appDelegate.isStreamer = false
         appDelegate.liveID = liveID
@@ -1414,7 +1466,7 @@ extension JoinUserLiveVC {
             op.userEndViewLive(id: "\(AuthService.instance.userId)", liveid: self.liveID) { (onlineStat) in
                 DispatchQueue.main.async { [self] in
               MBProgressHUD.hide(for: self.view , animated: true)
-                   
+                    appDelegate.isStreamerDisconeted = true
                     self.navigationController?.navigationBar.isHidden = false
                     self.showToast(message: "Live has been finished!")
                     for client in self.appDelegate.playerClients
@@ -1425,7 +1477,8 @@ extension JoinUserLiveVC {
                     {
                     self.appDelegate.conferenceClient.leaveRoom()
                     }
-                    appDelegate.webRTCClient.stop()
+                  
+                   // appDelegate.webRTCClient.stop()
                 self.navigationController?.popToRootViewController(animated: true)
                   }
              
@@ -1750,7 +1803,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
             smallCameraContainer.isHidden = true
           //  appDelegate.webRTCViewerClient.stop()
          //   self.setUserStatusToLive(status: "single")
-         //   self.showEndFollowingAlert()
+            self.showEndFollowingAlert()
         }
     //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
     }
@@ -1891,11 +1944,11 @@ extension JoinUserLiveVC {
 extension JoinUserLiveVC: EndLiveViewDelegate {
     
     func okEndLiveButtonTapped(selectedOption: String, textFieldValue: String) {
-        appDelegate.webRTCViewerClient.stop()
+       // appDelegate.webRTCViewerClient.stop()
 //        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
 //        spinner.mode = MBProgressHUDMode.indeterminate
 //        spinner.label.text = "End Live..."
-        self.setUserStatusEndLive()
+        self.showEndFollowingAlert()
 
     }
 
@@ -1962,9 +2015,9 @@ extension JoinUserLiveVC: ConferenceClientDelegate
             {
                 AntMediaClient.printf("stream in the room: \(stream)")
                 
-                let playerClient1 = AntMediaClient.init()
-                playerClient1.delegate = self;
-                playerClient1.setOptions(url:  Endpoints.LiveUser , streamId: stream, token: "", mode: AntMediaClientMode.play, enableDataChannel: false)
+//                let playerClient1 = AntMediaClient.init()
+//                playerClient1.delegate = self;
+//                playerClient1.setOptions(url:  Endpoints.LiveUser , streamId: stream, token: "", mode: AntMediaClientMode.play, enableDataChannel: false)
                 
                 var freeIndex: Int = -1
                 for (index,free) in self.viewFree.enumerated() {
@@ -1978,15 +2031,15 @@ extension JoinUserLiveVC: ConferenceClientDelegate
                     AntMediaClient.printf("Problem in free view index")
                 }
              //   playerClient.setRemoteView(remoteContainer: )
-                playerClient1.setRemoteView(remoteContainer: self.remoteViews[freeIndex], mode: .scaleAspectFill)
-                playerClient1.initPeerConnection()
-                playerClient1.start()
+//                playerClient1.setRemoteView(remoteContainer: self.remoteViews[freeIndex], mode: .scaleAspectFill)
+//                playerClient1.initPeerConnection()
+//                playerClient1.start()
                 self.remoteViews[freeIndex].isHidden = false
                 
-                let playerConferenceClient = AntMediaClientConference.init(player: playerClient1, index: freeIndex);
+                let playerConferenceClient = AntMediaClientConference.init(player: self.appDelegate.webRTCClient, index: freeIndex);
                 
                 self.appDelegate.playerClients.append(playerConferenceClient)
-                self.appDelegate.playerClient1 = playerClient1
+                self.appDelegate.playerClient1 = self.appDelegate.webRTCClient
             }
         }
        

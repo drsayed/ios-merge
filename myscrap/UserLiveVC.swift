@@ -146,11 +146,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.countDown.finishText = "";
         self.countDown.updateAppearance()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.ConnectionEstablished(_:)), name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil)
-      //  NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggle(_:)), name: NSNotification.Name(rawValue: "CameraToggle"), object: nil)
+  
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.OnlineViewTapped(_:)))
 
         self.seenView.addGestureRecognizer(tap)
@@ -216,12 +213,13 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.setUpCamera()
         self.setUpCommentViews()
         addKeyboardObservers()
-       // self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+    
         self.cameraflipedView.frame =  self.largeCameraContainer.frame
-        //self.cameraflipedView.transform = CGAffineTransform(scaleX: -1, y: 1);
-     //   self.videoPreviewLayer.customMirror
-
-        //self..transform = CGAffineTransform(scaleX: -1, y: 1);
+        self.cameraflipedView.transform = CGAffineTransform(scaleX: -1, y: 1);
+        
+        self.FlipFrontCameraSinglelive()
+        self.FlipFrontCameraStreamerUser(isFront: true)
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
@@ -229,6 +227,46 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
        
+    }
+    func addNotificcationObserver()  {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.RecievedMessage(_:)), name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.PublishStarted(_:)), name: NSNotification.Name(rawValue: "PublishStarted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.AppCloseed(_:)), name: NSNotification.Name(rawValue: "AppCloseed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ConnectionEstablished(_:)), name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil)
+       NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggleSingleLive(_:)), name: NSNotification.Name(rawValue: "CameraToggleSingleLive"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggleDualLive(_:)), name: NSNotification.Name(rawValue: "CameraToggleDualLive"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasErrorInSteam(_:)), name: NSNotification.Name(rawValue: "clientHasError"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasErrorInSteam(_:)), name: NSNotification.Name(rawValue: "clientDidDisconnect"), object: nil)
+        
+    }
+    func FlipFrontCameraSinglelive()  {
+        DispatchQueue.main.async { [weak self] in
+            if(self!.isFrontCam)
+            {
+             self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                self?.cameraView.tag = 1
+            }
+            else{
+         self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
+                self?.cameraView.tag = 0
+            }
+          
+        }
+    }
+    func FlipFrontCameraStreamerUser(isFront : Bool = true)  {
+        DispatchQueue.main.async { [weak self] in
+            if(isFront)
+            {
+             self?.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                self?.smallStreamView.tag = 1
+            }
+            else{
+             self?.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
+                self?.smallStreamView.tag = 0
+            }
+          
+        }
     }
     @objc  func followNotificationReciveLive(notification: NSNotification) {
 
@@ -279,35 +317,86 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
       }
      }
-//    @objc func CameraToggle(_ notification: NSNotification) {
-//            print(notification.userInfo ?? "")
-//        if let dict = notification.userInfo as? [String: AnyObject]{
-//            if let cameraToggle = dict["CameraToggle"]  as? String {
-//                if cameraToggle == "1" {
-//
-//                    DispatchQueue.main.async { [self] in
-//                    let frontCam = dict["isFrontCam"] as? String ?? "0"
-//                    if frontCam == "1"
-//                    {
-//                        if self.smallStreamView.tag != 1 {
-//                            self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
-//                            self.smallStreamView.tag = 1
-//                        }
-//
-//                    }
-//                    else
-//                    {
-//                        if self.smallStreamView.tag != 0 {
-//                        self.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
-//                            self.smallStreamView.tag = 0
-//                        }
-//                    }
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
+    
+    @objc func CameraToggleDualLive(_ notification: NSNotification) {
+            print(notification.userInfo ?? "")
+        if let dict = notification.userInfo as? [String: AnyObject]{
+            if let cameraToggle = dict["CameraToggle"]  as? String {
+                if cameraToggle == "1" {
+
+                    DispatchQueue.main.async { [self] in
+                    let frontCam = dict["isFrontCam"] as? String ?? "0"
+                    if frontCam == "1"
+                    {
+                        self.FlipFrontCameraStreamerUser(isFront: true)
+
+                    }
+                    else
+                    {
+                        self.FlipFrontCameraStreamerUser(isFront: false)
+                    }
+                    }
+                }
+            }
+
+        }
+    }
+    @objc func CameraToggleSingleLive(_ notification: NSNotification) {
+            print(notification.userInfo ?? "")
+        if let dict = notification.userInfo as? [String: AnyObject]{
+            if let cameraToggle = dict["CameraToggle"]  as? String {
+                if cameraToggle == "1" {
+
+                    DispatchQueue.main.async { [self] in
+                    let frontCam = dict["isFrontCam"] as? String ?? "0"
+                    if frontCam == "1"
+                    {
+                        if self.smallStreamView.tag != 1 {
+                            self.smallStreamView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                            self.smallStreamView.tag = 1
+                        }
+
+                    }
+                    else
+                    {
+                        if self.smallStreamView.tag != 0 {
+                        self.smallStreamView.transform = CGAffineTransform(scaleX: 1, y: 1);
+                            self.smallStreamView.tag = 0
+                        }
+                    }
+                    }
+                }
+            }
+
+        }
+    }
+    @objc func clientHasErrorInSteam(_ notification: NSNotification) {
+        
+          
+                DispatchQueue.main.async { [self] in
+              
+                    if self.liveTimeValue < 5
+                    {
+                        self.showMessage(with: "Connectivity issue,  live disconnected")
+                        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        spinner.mode = MBProgressHUDMode.indeterminate
+                        spinner.label.text = "Disconnecting..."
+                        self.setUserStatusEndLive()
+                    }
+                    else
+                    {
+                        self.endLiveTimmer()
+        
+                        if let vc = downloadEndsLivePopup {
+                            vc.modalPresentationStyle = .overFullScreen
+                            vc.delegate = self
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    }
+                   
+ 
+        }
+    }
     @objc func RecievedMessage(_ notification: NSNotification) {
             print(notification.userInfo ?? "")
         if let dict = notification.userInfo as? [String: AnyObject]{
@@ -361,29 +450,14 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     //    MBProgressHUD.hide(for: self.view , animated: true)
 //            self?.videoPreviewLayer.removeFromSuperlayer()
 //            self?.captureSession.stopRunning()
-            if(self!.isFrontCam)
-            {
-           //     self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
-            }
-            else{
-           //     self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
-            }
+            self?.FlipFrontCameraSinglelive()
             
             self?.addTimerCall()
             self?.startLiveTime()
         }
      }
     @objc func ConnectionEstablished(_ notification: NSNotification) {
-        DispatchQueue.main.async { [weak self] in
-            if(self!.isFrontCam)
-            {
-            //    self?.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
-            }
-            else{
-             //   self?.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
-            }
-          
-        }
+        self.FlipFrontCameraSinglelive()
      }
     @objc func OnlineViewTapped(_ sender: UITapGestureRecognizer) {
         if userJoined.count > 0 {
@@ -669,19 +743,19 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBAction func cameraTogglePressed(_ sender: Any) {
      //   self.swapCamera()
         isFrontCam = !isFrontCam
+        self.FlipFrontCameraSinglelive()
         if(isFrontCam)
         {
-        //    self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
+         
             let dic = ["CameraToggle":"1","isFrontCam": "1"]
 
             let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-         //   appDelegate.webRTCClient.sendData(data: data, binary: true)
+           appDelegate.webRTCClient.sendData(data: data, binary: true)
         }
         else{
-          //  self.cameraView.transform = CGAffineTransform(scaleX: 1, y: 1);
             let dic = ["CameraToggle":"1","isFrontCam": "0"]
             let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-        //    appDelegate.webRTCClient.sendData(data: data, binary: true)
+             appDelegate.webRTCClient.sendData(data: data, binary: true)
         }
         appDelegate.webRTCClient.switchCamera()
        
@@ -810,9 +884,12 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.addNotificcationObserver()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         self.navigationController?.navigationBar.isHidden = true
+        self.revealViewController()?.panGestureRecognizer().isEnabled = false;
+
         IQKeyboardManager.sharedManager().enable = false
      
         if topicValueText == "Type" {
@@ -888,13 +965,15 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
      //   appDelegate.webRTCClient.stop()
         removeKeyboardObservers()
         self.navigationController?.navigationBar.isHidden = false
-        NotificationCenter.default.removeObserver(self)
+      
 
     }
     override func viewWillDisappear(_ animated: Bool) {
         joiningVC?.dismiss(animated: false, completion: nil)
         onlineViewer?.dismiss(animated: false, completion: nil)
-        
+        self.revealViewController()?.panGestureRecognizer().isEnabled = true;
+     
+        NotificationCenter.default.removeObserver(self)
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
       
@@ -1021,6 +1100,7 @@ extension UserLiveVC: CustomAlertViewDelegate {
 //        remoteViews.append(remoteView2)
 //        remoteViews.append(remoteView3)
         AntMediaClient.setDebug(true)
+        appDelegate.isDualLive = true;
         appDelegate.conferenceClient = ConferenceClient.init(serverURL: Endpoints.LiveUser, conferenceClientDelegate: self)
         appDelegate.conferenceClient.joinRoom(roomId: steamId, streamId: steamId)
         
@@ -1047,7 +1127,8 @@ extension UserLiveVC: CustomAlertViewDelegate {
                 DispatchQueue.main.async { [self] in
                     self.showToast(message: "Live has been finished!")
    //            MBProgressHUD.hide(for: self.view , animated: true)
-                    self.perform(#selector(self.cancelButtonTapped), with: self, afterDelay: 1.0)
+            //        self.cancelButtonTapped()
+             self.perform(#selector(self.cancelButtonTapped), with: self, afterDelay: 1.0)
 
 //                    self.navigationController?.navigationBar.isHidden = false
 //
@@ -1060,15 +1141,29 @@ extension UserLiveVC: CustomAlertViewDelegate {
     }
    @objc func cancelButtonTapped() {
         print("cancelButtonTapped")
+    Run.onMainThread {
         
-       appDelegate.webRTCClient.stop()
-    for client in self.playerClients
-    {
-        client.playerClient.stop();
+        if self.appDelegate.webRTCClient.isConnected() {
+            self.appDelegate.isStreamerDisconeted = true
+            self.appDelegate.webRTCClient.stop()
+        }
+          
+        for client in self.playerClients
+        {
+            client.playerClient.stop();
+        }
+        if self.appDelegate.conferenceClient != nil
+        {
+            if self.appDelegate.conferenceClient.streamsInTheRoom.count > 0 {
+                self.appDelegate.conferenceClient.leaveRoom()
+            }
+        }
+      
+       
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.popToRootViewController(animated: true)
     }
-    self.appDelegate.conferenceClient.leaveRoom()
-    self.navigationController?.navigationBar.isHidden = false
-    self.navigationController?.popToRootViewController(animated: true)
+ 
     }
 }
 
