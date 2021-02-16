@@ -151,6 +151,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         } else {
             // Fallback on earlier versions
         }
+        appDelegate.directionDelegate = self
+
         self.suggessionCollectionView.delegate = self
         self.suggessionCollectionView.dataSource = self
         
@@ -2090,5 +2092,63 @@ extension String {
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
 
         return ceil(boundingBox.width)
+    }
+}
+extension JoinUserLiveVC :NotificationRedirectionDelegate
+{
+    func openPostDetailsView(postId : String)
+    {
+        let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.postId = postId
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    func openEventDetailsView(eventId : String)
+    {
+        let vc = EventDetailVC()
+        vc.eventId = eventId
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    func openFriendVCView(friendId : String,isFromCardNoti : String)
+    {
+        let vc = FriendVC.storyBoardInstance()
+        vc!.friendId = friendId
+        vc!.isfromCardNoti = isFromCardNoti
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+    func openCompanyDetailsView(companyId : String)
+    {
+        let vc = CompanyHeaderModuleVC.storyBoardInstance()
+            vc!.companyId = companyId
+            self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    func openMarketDetailsView(userId : String,listingId : String)
+    {
+        if listingId != ""
+        {
+            let vc = DetailListingOfferVC.controllerInstance(with: listingId, with1: userId)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else
+        {
+            if let vc = MarketVC.storyBoardInstance(){
+               self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        
+    }
+    func openNotificationsView()
+    {
+        
+    }
+    func openJoinLiveVCNotificationsView(userId : String,liveId : String,fName : String,profilePic : String,colorCode : String,liveType : String)
+    {
+        
+    }
+    func openFeedsVCView()
+    {
+        
     }
 }

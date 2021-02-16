@@ -549,7 +549,9 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             {
                 if let id = postId  {
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                    directionDelegate?.openPostDetailsView(postId: id)
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
                 }
             }
             else{
@@ -569,6 +571,16 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
             }
         case .event:
+            if webRTCClient.isConnected()
+            {
+                if let id = postId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openEventDetailsView(eventId: id)
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = postId{
                 let vc = EventDetailVC()
                 vc.eventId = id
@@ -576,10 +588,21 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 
                 navController?.pushViewController(vc, animated: true)
             }
+            }
         case .bumped:
             print("Bump notification has been removed manually by MAHA on Nov 20/2019 ")
         //setBumpVC()           removed the bump notification manually base on the requirements
         case .card:
+            if webRTCClient.isConnected()
+            {
+                if let id = userId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "1")
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
@@ -587,7 +610,18 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 vc.isfromCardNoti = "1"
                 self.navController?.pushViewController(vc, animated: true)
             }
+            }
         case .number:
+            if webRTCClient.isConnected()
+            {
+                if let id = userId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "")
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
@@ -595,16 +629,38 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 vc.isfromCardNoti = ""
                 self.navController?.pushViewController(vc, animated: true)
             }
+            }
         case .cardaccept:
+            if webRTCClient.isConnected()
+            {
+                if let id = userId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "1")
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
                 
                 vc.isfromCardNoti = "1"
                 self.navController?.pushViewController(vc, animated: true)
+            }
             }
             
         case .numberaccept:
+            if webRTCClient.isConnected()
+            {
+                if let id = userId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "")
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
@@ -612,27 +668,52 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 vc.isfromCardNoti = ""
                 self.navController?.pushViewController(vc, animated: true)
             }
+            }
         case .cardreject:
+            if webRTCClient.isConnected()
+            {
+                if let id = userId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "1")
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
                 vc.isfromCardNoti = "1"
                 self.navController?.pushViewController(vc, animated: true)
             }
+            }
         case .numberreject:
+            if webRTCClient.isConnected()
+            {
+                if let id = userId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "")
+
+              //      NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil, userInfo: ["PostID" : "\(id)"])
+                }
+            }
+            else{
             if let id = userId, let vc = FriendVC.storyBoardInstance(){
                 vc.friendId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
                 
                 vc.isfromCardNoti = ""
                 self.navController?.pushViewController(vc, animated: true)
+            }
             }
         case .user:
             if webRTCClient.isConnected()
             {
                 if let id = userId  {
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil, userInfo: ["UserId" : "\(id)"])
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "")
+
+                //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil, userInfo: ["UserId" : "\(id)"])
                 }
             }
             else{
@@ -651,7 +732,8 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             {
                 if let id = userId  {
                     UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil, userInfo: ["UserId" : "\(id)"])
+                    directionDelegate?.openFriendVCView(friendId: id, isFromCardNoti: "")
+                  //  NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil, userInfo: ["UserId" : "\(id)"])
                 }
             }
             else
@@ -667,6 +749,15 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
             
         case .company:
+            if webRTCClient.isConnected()
+            {
+                if let id = companyId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openCompanyDetailsView(companyId: id)
+
+                }
+            }
+            else{
             if  let id = companyId, let vc = CompanyHeaderModuleVC.storyBoardInstance() { //CompanyDetailVC.storyBoardInstance() {
                 vc.companyId = id
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
@@ -674,7 +765,22 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                 UserDefaults.standard.set(vc.companyId, forKey: "companyId")
                 self.navController?.pushViewController(vc, animated: true)
             }
+            }
         case .marketmpost:
+            if webRTCClient.isConnected()
+            {
+                if let id = listingId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openMarketDetailsView(userId: userId!, listingId: id)
+
+                }
+                else
+                {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openMarketDetailsView(userId: userId!, listingId: "")
+                }
+            }
+            else{
             if  let listingID = listingId{
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
                 
@@ -698,8 +804,23 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                         
                     }
                 }
+            }
             }
         case .market:
+            if webRTCClient.isConnected()
+            {
+                if let id = listingId  {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openMarketDetailsView(userId: userId!, listingId: id)
+
+                }
+                else
+                {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    directionDelegate?.openMarketDetailsView(userId: userId!, listingId: "")
+                }
+            }
+            else{
             if  let listingID = listingId{
                 let vc = DetailListingOfferVC.controllerInstance(with: listingID, with1: userId)
                 UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
@@ -724,7 +845,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     }
                 }
             }
-            
+            }
         case .chat:
             
             if let fid = chatUserId, let fnm = fName, let cCode = colorCode, let propic = profilePic, let jd = jid {
@@ -760,7 +881,12 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
         case .live:
             print("go to notification Live VC")
-            if !self.webRTCClient.isConnected() {
+            if webRTCClient.isConnected()
+            {
+                UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                directionDelegate?.openJoinLiveVCNotificationsView(userId: userId!, liveId: liveId!, fName: fName!, profilePic: profilePic!, colorCode: colorCode!, liveType: liveType ?? "single")
+            }
+            else{
                 if let vc = JoinUserLiveVC.storyBoardInstance() {
 
                     vc.friendId = userId!

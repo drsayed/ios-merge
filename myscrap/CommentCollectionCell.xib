@@ -89,7 +89,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gos-yB-1Zf">
-                                <rect key="frame" x="134" y="86" width="60" height="36"/>
+                                <rect key="frame" x="110.5" y="86" width="60" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="yrf-gz-fYg"/>
                                     <constraint firstAttribute="width" constant="60" id="zTF-MG-Lxg"/>
@@ -103,7 +103,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S29-le-R7n">
-                                <rect key="frame" x="189" y="91" width="60" height="36"/>
+                                <rect key="frame" x="165.5" y="91" width="60" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="1qo-xU-MFg"/>
                                     <constraint firstAttribute="width" constant="60" id="8Rp-Rf-jFG"/>
@@ -133,7 +133,7 @@
                             <constraint firstItem="4nx-Xe-soG" firstAttribute="leading" secondItem="lyL-rn-Z1Y" secondAttribute="leading" constant="8" id="aYg-ba-hxv"/>
                             <constraint firstItem="S0K-dQ-wwF" firstAttribute="leading" secondItem="3bW-OC-5A4" secondAttribute="leading" id="dUb-I6-V3s"/>
                             <constraint firstItem="Vb0-Zx-jbc" firstAttribute="centerX" secondItem="aJu-ID-TQR" secondAttribute="centerX" id="eEL-RP-Lw6"/>
-                            <constraint firstItem="gos-yB-1Zf" firstAttribute="leading" secondItem="7Rb-jj-Zye" secondAttribute="trailing" constant="28.5" id="f7C-Vu-peI"/>
+                            <constraint firstItem="gos-yB-1Zf" firstAttribute="leading" secondItem="7Rb-jj-Zye" secondAttribute="trailing" constant="5" id="f7C-Vu-peI"/>
                             <constraint firstItem="Vb0-Zx-jbc" firstAttribute="width" secondItem="aJu-ID-TQR" secondAttribute="width" multiplier="0.5" id="l8d-Kj-DTB"/>
                             <constraint firstAttribute="trailing" secondItem="S0K-dQ-wwF" secondAttribute="trailing" constant="8" id="p7y-YG-yUF"/>
                             <constraint firstItem="4nx-Xe-soG" firstAttribute="top" secondItem="7Rb-jj-Zye" secondAttribute="bottom" constant="20" id="tVH-fr-xCA"/>

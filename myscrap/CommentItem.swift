@@ -87,7 +87,8 @@ class CommentItem: MemberItem{
             let dateString = datemonthformatter.string(from: date as Date)
             let timeString = timeFormatter.string(from: date as Date)
             print("Date in comment : \(dateString) \(timeString)")
-            return "\(dateString) at \(timeString)"
+            //return "\(dateString) at \(timeString) •"
+            return "\(dateString) •"
         }
     }
     
@@ -190,6 +191,12 @@ class CommentCMItem {
     private var _rank: String!
     private var _date: Int!
     
+    var postId: String?
+    var isDislike: String?
+    var isLike: String?
+    var userDisliked: String?
+    var userLike: String?
+    
     var commentId:String{
         if _commentId == nil{
             _commentId = ""
@@ -386,6 +393,27 @@ class CommentCMItem {
         }
         if let date = Dict["date"] as? Int{
             self._date = date
+        }
+        if let postId = Dict["postId"] as? String{
+            self.postId = postId
+        }
+        else
+        {
+            if let postId = Dict["postId"] as? Int{
+                self.postId = "\(postId)"
+            }
+        }
+        if let isDislike = Dict["isDislike"] as? Int{
+            self.isDislike = "\(isDislike)"
+        }
+        if let isLike = Dict["isLike"] as? Int{
+            self.isLike = "\(isLike)"
+        }
+        if let userDisliked = Dict["userDisliked"] as? Int{
+            self.userDisliked = "\(userDisliked)"
+        }
+        if let userLike = Dict["userLike"] as? Int{
+            self.userLike = "\(userLike)"
         }
     }
 }
@@ -405,6 +433,11 @@ class CommentPOWItem {
     private var _designation: String!
     private var _rank: String!
     private var _date: Int!
+    var postId: String?
+    var isDislike: String?
+    var isLike: String?
+    var userDisliked: String?
+    var userLike: String?
     
     var commentId:String{
         if _commentId == nil{
@@ -602,6 +635,27 @@ class CommentPOWItem {
         }
         if let date = Dict["date"] as? Int{
             self._date = date
+        }
+        if let postId = Dict["postId"] as? String{
+            self.postId = postId
+        }
+        else
+        {
+            if let postId = Dict["postId"] as? Int{
+                self.postId = "\(postId)"
+            }
+        }
+        if let isDislike = Dict["isDislike"] as? Int{
+            self.isDislike = "\(isDislike)"
+        }
+        if let isLike = Dict["isLike"] as? Int{
+            self.isLike = "\(isLike)"
+        }
+        if let userDisliked = Dict["userDisliked"] as? Int{
+            self.userDisliked = "\(userDisliked)"
+        }
+        if let userLike = Dict["userLike"] as? Int{
+            self.userLike = "\(userLike)"
         }
     }
 }

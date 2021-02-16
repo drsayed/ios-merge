@@ -266,6 +266,8 @@ extension NotificationVC : UITableViewDataSource{
                 self.gotoListingVC(item: data)
             case .listing:
                 self.gotoListingVC(item: data)
+            case .live:
+                self.gotoJoinLiveVC(item: data)
             case .other:
                 self.gotoFeedsVC(item: data)
             }
@@ -386,7 +388,21 @@ extension NotificationVC{
         }
      
     }
-    
+    fileprivate func gotoJoinLiveVC(item: NotificationItem){
+        if let vc = JoinUserLiveVC.storyBoardInstance() {
+
+            vc.friendId = item.userid
+            vc.liveID = item.liveId
+            vc.liveUserNameValue  = item.name
+            vc.liveUserImageValue  = item.profilePic
+            vc.liveUserProfileColor  = item.colorCode
+            vc.liveUsertopicValue  = ""
+            vc.isFromNotificationClick  = false
+            vc.liveType  =  "single"
+            self.navigationController?.pushViewController(vc, animated: true)
+
+            }
+    }
     fileprivate func gotoFeedsVC(item: NotificationItem) {
         if let vc = FeedsVC.storyBoardInstance() {
             vc.isScrollToAD = true

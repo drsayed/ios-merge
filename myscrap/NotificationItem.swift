@@ -25,7 +25,7 @@ class NotificationItem{
     private var _colorCode: String!
     private var _companyId: String!
     private var _listingId: String!
-    
+    private var _liveId: String!
     
     private var _chatRequestStatus: String?
     
@@ -48,6 +48,7 @@ class NotificationItem{
         case numberreject
         case User
         case user
+        case live
         case other
     }
     
@@ -151,7 +152,12 @@ class NotificationItem{
            //Not implemented yet
            return .user
        //    return .other   //For time being redirecting to FEEDS
-       } else {
+       }
+        else if _posttype == "live"{
+            //Redirect to Profile
+            //Combined of profilelike, favmem, view
+            return .live
+        }else {
             //Simpley redirects to Feeds
             //when 
             return .other
@@ -165,6 +171,7 @@ class NotificationItem{
     var colorCode:String { if _colorCode == nil { _colorCode = "#000000"}; return _colorCode }
     var notId:String { if _notId == nil { _notId = ""}; return _notId }
     var postId:String { if _postId == nil { _postId = ""}; return _postId }
+    var liveId:String { if _liveId == nil { _liveId = ""}; return _liveId }
 
     var userid:String { if _userid == nil { _userid = ""}; return _userid }
     var listingId :String { if _listingId == nil { _listingId = ""}; return _listingId!}
@@ -184,6 +191,8 @@ class NotificationItem{
         if let posttype = notificationDict["posttype"] as? String{ self._posttype = posttype }
         if let chatReqStatus = notificationDict["chatReqestStatus"] as? String { self._chatRequestStatus = chatReqStatus }
         if let listid = notificationDict["listingid"] as? String { self._listingId = listid }
+        if let liveId = notificationDict["liveId"] as? String { self._liveId = liveId }
+
     }
     
 }

@@ -117,13 +117,57 @@ extension CommentCollectionCellDelegate  where Self: DetailsVC {
 }
 
 extension CommentCollectionCellDelegate  where Self: FeedsCMDetailsVC {
-    func didTapOnLikeButton(cell: CommentCollectionCell)
-    {
+    func didTapOnLikeButton(cell: CommentCollectionCell){
+        guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
         
+        let item = commentDataSource[ip.item]
+        if item.isLike != "1" {
+            item.isLike = "1"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! + 1)"
+            if item.isDislike == "1" {
+                item.isDislike = "0"
+               
+            let dislikeCount = Int(item.userDisliked!)
+            item.userDisliked =  "\(dislikeCount! - 1)"
+            }
+            self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_LIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+        }
+      
     }
-    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell)
-    {
+    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell){
+        guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
         
+        let item = commentDataSource[ip.item]
+        if item.isDislike != "1" {
+            item.isDislike = "1"
+           
+        let dislikeCount = Int(item.userDisliked!)
+        item.userDisliked =  "\(dislikeCount! + 1)"
+        if item.isLike == "1" {
+            item.isLike = "0"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! - 1)"
+        }
+        self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_DISLIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+            
+        }
     }
     func didTapEditButton(cell: CommentCollectionCell){
         
@@ -173,13 +217,57 @@ extension CommentCollectionCellDelegate  where Self: FeedsCMDetailsVC {
     
 }
 extension CommentCollectionCellDelegate  where Self: FeedsPOWDetailsVC {
-    func didTapOnLikeButton(cell: CommentCollectionCell)
-    {
+    func didTapOnLikeButton(cell: CommentCollectionCell){
+        guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
         
+        let item = commentDataSource[ip.item]
+        if item.isLike != "1" {
+            item.isLike = "1"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! + 1)"
+            if item.isDislike == "1" {
+                item.isDislike = "0"
+               
+            let dislikeCount = Int(item.userDisliked!)
+            item.userDisliked =  "\(dislikeCount! - 1)"
+            }
+            self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_LIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+        }
+      
     }
-    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell)
-    {
+    func didTapOnDisLikeLikeButton(cell: CommentCollectionCell){
+        guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
         
+        let item = commentDataSource[ip.item]
+        if item.isDislike != "1" {
+            item.isDislike = "1"
+           
+        let dislikeCount = Int(item.userDisliked!)
+        item.userDisliked =  "\(dislikeCount! + 1)"
+        if item.isLike == "1" {
+            item.isLike = "0"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! - 1)"
+        }
+        self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_DISLIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+            
+        }
     }
     func didTapEditButton(cell: CommentCollectionCell){
         

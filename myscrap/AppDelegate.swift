@@ -21,6 +21,18 @@ let uiRealm = try! Realm()
 let network: NetworkManager = NetworkManager.sharedInstance
 public typealias SimpleClosure = (() -> ())
 
+protocol NotificationRedirectionDelegate : class {
+    func openPostDetailsView(postId : String)
+    func openEventDetailsView(eventId : String)
+    func openFriendVCView(friendId : String,isFromCardNoti : String)
+    func openCompanyDetailsView(companyId : String)
+    func openMarketDetailsView(userId : String,listingId : String)
+    func openNotificationsView()
+    func openJoinLiveVCNotificationsView(userId : String,liveId : String,fName : String,profilePic : String,colorCode : String,liveType : String)
+    func openFeedsVCView()
+    
+
+}
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate, MessagingDelegate,GIDSignInDelegate {
     let center = UNUserNotificationCenter.current()
@@ -31,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var webRTCClient: AntMediaClient = AntMediaClient.init()
     var webRTCViewerClient: AntMediaClient = AntMediaClient.init()
     var playerClients:[AntMediaClientConference] = [];
-    
+    weak var directionDelegate : NotificationRedirectionDelegate?
+
     var playerClient1: AntMediaClient = AntMediaClient.init()
     var playerClient2: AntMediaClient = AntMediaClient.init()
     
