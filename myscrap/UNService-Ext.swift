@@ -847,7 +847,16 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
             }
             }
         case .chat:
-            
+            if webRTCClient.isConnected()
+            {
+                if let fid = chatUserId, let fnm = fName, let cCode = colorCode, let propic = profilePic, let jd = jid {
+                    UserDefaults.standard.set(true, forKey: "\(notificationId)Seen")
+                    let fmodel = FriendModel(id: fid, profileName: fnm, colorCode: cCode, profileImg: propic, jid: jd)
+                    directionDelegate?.openChatVC(fmodel: fmodel)
+                }
+              
+            }
+            else{
             if let fid = chatUserId, let fnm = fName, let cCode = colorCode, let propic = profilePic, let jd = jid {
                 let fmodel = FriendModel(id: fid, profileName: fnm, colorCode: cCode, profileImg: propic, jid: jd)
                 if let vc = UIApplication.shared.topMostViewController(), let v = vc as? ConversationVC{
@@ -863,6 +872,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
                     }
                     
                 }
+            }
             }
         case .listingChatReq, .listingChatAck:
             if let vc = NotificationVC.storyBoardInstance(){

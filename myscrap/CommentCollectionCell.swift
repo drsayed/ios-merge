@@ -234,7 +234,7 @@ extension CommentCollectionCellDelegate  where Self: FeedsPOWDetailsVC {
             self.collectionView?.reloadData()
             if let postId = item.postId{
                 let service = APIService()
-                service.endPoint = Endpoints.COMMENT_LIKE_URL
+                service.endPoint = Endpoints.COMMENT_POW_LIKE_URL
                 service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
                 service.getDataWith(completion: { (_) in
                     print("api called")
@@ -260,7 +260,7 @@ extension CommentCollectionCellDelegate  where Self: FeedsPOWDetailsVC {
         self.collectionView?.reloadData()
             if let postId = item.postId{
                 let service = APIService()
-                service.endPoint = Endpoints.COMMENT_DISLIKE_URL
+                service.endPoint = Endpoints.COMMENT_POW_DISLIKE_URL
                 service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
                 service.getDataWith(completion: { (_) in
                     print("api called")

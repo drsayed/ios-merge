@@ -12,6 +12,7 @@ import AVFoundation
 import IQKeyboardManagerSwift
 import Photos
 struct CommentMessage {
+    
     var name : String = "Test"
     var userId : String = "Test"
     var profilePic : String = "Test"
@@ -28,6 +29,7 @@ struct CommentMessage {
 }
 class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
+    var isEndLivePressed = false
     var liveID = "0"
     var isFrontCam = true
     var liveComments = [CommentMessage]()
@@ -237,7 +239,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
        NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggleSingleLive(_:)), name: NSNotification.Name(rawValue: "CameraToggleSingleLive"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.CameraToggleDualLive(_:)), name: NSNotification.Name(rawValue: "CameraToggleDualLive"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasErrorInSteam(_:)), name: NSNotification.Name(rawValue: "clientHasError"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasErrorInSteam(_:)), name: NSNotification.Name(rawValue: "clientDidDisconnect"), object: nil)
+       NotificationCenter.default.addObserver(self, selector: #selector(self.clientHasErrorInSteam(_:)), name: NSNotification.Name(rawValue: "clientDidDisconnect"), object: nil)
         
     }
     func FlipFrontCameraSinglelive()  {
@@ -374,7 +376,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
           
                 DispatchQueue.main.async { [self] in
-              
+                    if   !self.isEndLivePressed  {
                     if self.liveTimeValue < 5
                     {
                         self.showMessage(with: "Connectivity issue,  live disconnected")
@@ -390,10 +392,12 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                         if let vc = downloadEndsLivePopup {
                             vc.modalPresentationStyle = .overFullScreen
                             vc.delegate = self
-                            self.present(vc, animated: true, completion: nil)
+                            if !vc.isModal {
+                                self.present(vc, animated: true, completion: nil)
+                            }
                         }
                     }
-                   
+                    }
  
         }
     }
@@ -466,7 +470,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                 vc.delegateOnlineViewer = self
                 vc.userJoined = userJoined
                 vc.indexValue = 0
-                self.present(vc, animated: true, completion: nil)
+                if !vc.isModal {
+                    self.present(vc, animated: true, completion: nil)
+                }
             }
         }
       
@@ -567,7 +573,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
     customAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
     customAlert.delegate = self
-    self.present(customAlert, animated: true, completion: nil)
+   if !customAlert.isModal {
+            self.present(customAlert, animated: true, completion: nil)
+        }
   }
 
    }
@@ -580,7 +588,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
      customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
      customAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
      customAlert.delegate = self
-     self.present(customAlert, animated: true, completion: nil)
+        if !customAlert.isModal {
+             self.present(customAlert, animated: true, completion: nil)
+         }
+  //   self.present(customAlert, animated: true, completion: nil)
    }
 
     }
@@ -985,7 +996,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBAction func closeButtonPressed(_ sender: Any) {
         
         self.commentField.resignFirstResponder()
-        
+        isEndLivePressed = true
         self.addEndActionAlert()
       
     }
@@ -1049,7 +1060,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             vc.liveUserImageValue  = message.profilePic
             vc.liveUserProfileColor = message.colorCode
         
-            self.present(vc, animated: true, completion: nil)
+            if !vc.isModal {
+                self.present(vc, animated: true, completion: nil)
+            }
         }
     }
 }
@@ -1099,7 +1112,7 @@ extension UserLiveVC: CustomAlertViewDelegate {
 //        remoteViews.append(remoteView1)
 //        remoteViews.append(remoteView2)
 //        remoteViews.append(remoteView3)
-        AntMediaClient.setDebug(true)
+        //AntMediaClient.setDebug(true)
         appDelegate.isDualLive = true;
         appDelegate.conferenceClient = ConferenceClient.init(serverURL: Endpoints.LiveUser, conferenceClientDelegate: self)
         appDelegate.conferenceClient.joinRoom(roomId: steamId, streamId: steamId)
@@ -1187,10 +1200,13 @@ extension UserLiveVC: EndLiveViewDelegate {
         self.endLiveTimmer()
         
         
-        if let vc = downloadEndsLivePopup {
+        if let vc = downloadEndsLivePopup   {
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
-            self.present(vc, animated: true, completion: nil)
+            if !vc.isModal {
+                self.present(vc, animated: true, completion: nil)
+            }
+       
         }
 
     }
@@ -1339,13 +1355,28 @@ extension UserLiveVC : AntMediaClientDelegate
     
     func playFinished(streamId: String) {
         DispatchQueue.main.async { [self] in
+            
+            smallCameraContainer.tag = 0
+            smallStreamView.bounds = smallCameraContainer.bounds
+            smallStreamView.frame = CGRect(x: 0, y: 0, width: smallCameraContainer.frame.size.width, height: smallCameraContainer.frame.size.height)
+            smallCameraContainer.addSubview(smallStreamView)
+            self.viewFree[0] = true;
+            self.viewFree[1] = true;
+            cameraView.bounds = largeCameraContainer.bounds
+            cameraView.frame = CGRect(x: 0, y: 0, width: largeCameraContainer.frame.size.width, height: largeCameraContainer.frame.size.height)
+            largeCameraContainer.addSubview(cameraView)
+            smallCameraContainer.layoutSubviews()
+            smallCameraContainer.layoutIfNeeded()
+            largeCameraContainer.layoutSubviews()
+            largeCameraContainer.layoutIfNeeded()
+            
             smallCameraContainer.isHidden = true
             self.setUserStatusToLive(status: "single")
         }
-        for client in self.playerClients
-        {
-            client.playerClient.stop();
-        }
+//        for client in self.playerClients
+//        {
+//            client.playerClient.stop();
+//        }
         appDelegate.playerClient1.stop()
     //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
     }
@@ -1392,7 +1423,7 @@ extension UserLiveVC : AntMediaClientDelegate
 //
 //            let unarchivedDictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
 //
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
+//            NotificationfCenter.default.post(name: NSNotification.Name(rawValue: "RecievedMessage"), object: nil, userInfo: unarchivedDictionary as? [String: AnyObject])
 //
 //
 //
@@ -1416,7 +1447,7 @@ extension UserLiveVC {
             }
         print("stream2room\(liveID)")
         appDelegate.webRTCViewerClient.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
-        appDelegate.webRTCViewerClient.setDebug(true)
+     //   appDelegate.webRTCViewerClient.setDebug(true)
         appDelegate.webRTCViewerClient.start()
     }
     @objc func setUserStatusToLive(status:String)  {
@@ -1448,12 +1479,16 @@ extension UserLiveVC: ConferenceClientDelegate
         Run.onMainThread {
         //
             //self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: streamId , token: "", mode: .publish, enableDataChannel: true)
+            if !self.appDelegate.webRTCClient.isConnected() {
+            self.appDelegate.webRTCClient = AntMediaClient.init()
+            self.appDelegate.setDelegate()
             self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: true)
             self.appDelegate.webRTCClient.setLocalView(container: self.cameraView, mode: .scaleAspectFill)
             self.appDelegate.webRTCClient.initPeerConnection()
             self.appDelegate.webRTCClient.start()
             self.appDelegate.isStreamer = true
             self.smallCameraContainer.isHidden = true
+            }
             
         }
            
@@ -1567,7 +1602,7 @@ extension UserLiveVC: EndLiveWithDownloadDelegate
     }
     
     func downloadButtonPressed() {
-        
+        isEndLivePressed = true
         //  dowloaduRL http://107.22.156.210:5080/WebRTCAppEE/streams/stream2room2409.mp4?token=undefined
         let path = "\(Endpoints.LiveUser)/streams/stream1\(self.liveID).mp4?token=undefined"
         self.downloadVideo(path: path)
@@ -1578,6 +1613,7 @@ extension UserLiveVC: EndLiveWithDownloadDelegate
     }
     
     func deleteButtonPressed() {
+        isEndLivePressed = true
         let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
         spinner.mode = MBProgressHUDMode.indeterminate
         spinner.label.text = "End Live..."
@@ -1588,18 +1624,33 @@ extension UserLiveVC: EndLiveWithDownloadDelegate
 }
 extension UserLiveVC :NotificationRedirectionDelegate
 {
+    func openChatVC(fmodel: FriendModel) {
+        let controller = ChatVC()
+        let vc = UINavigationController(rootViewController: controller)
+        controller.isTapNotifMsg = true
+        controller.modalPresentationStyle = .fullScreen
+        if !vc.isModal {
+        self.present(vc, animated: false) {
+            NotificationCenter.default.post(name: Notification.Name.navigate, object: fmodel)
+        }
+        }
+    }
     func openPostDetailsView(postId : String)
     {
         let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
         vc.postId = postId
+        if !vc.isModal {
         self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     func openEventDetailsView(eventId : String)
     {
         let vc = EventDetailVC()
         vc.eventId = eventId
+        if !vc.isModal {
         self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     func openFriendVCView(friendId : String,isFromCardNoti : String)
@@ -1607,26 +1658,34 @@ extension UserLiveVC :NotificationRedirectionDelegate
         let vc = FriendVC.storyBoardInstance()
         vc!.friendId = friendId
         vc!.isfromCardNoti = isFromCardNoti
+        if !vc!.isModal {
         self.navigationController?.pushViewController(vc!, animated: true)
+        }
         
     }
     func openCompanyDetailsView(companyId : String)
     {
         let vc = CompanyHeaderModuleVC.storyBoardInstance()
             vc!.companyId = companyId
+        if !vc!.isModal {
             self.navigationController?.pushViewController(vc!, animated: true)
+        }
     }
     func openMarketDetailsView(userId : String,listingId : String)
     {
         if listingId != ""
         {
             let vc = DetailListingOfferVC.controllerInstance(with: listingId, with1: userId)
+            if !vc.isModal {
             self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         else
         {
             if let vc = MarketVC.storyBoardInstance(){
+                if !vc.isModal {
                self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
         }
         
@@ -1642,5 +1701,20 @@ extension UserLiveVC :NotificationRedirectionDelegate
     func openFeedsVCView()
     {
         
+    }
+}
+extension UIViewController {
+    var isModal: Bool {
+        if let index = navigationController?.viewControllers.firstIndex(of: self), index > 0 {
+            return false
+        } else if presentingViewController != nil {
+            return true
+        } else if let navigationController = navigationController, navigationController.presentingViewController?.presentedViewController == navigationController {
+            return true
+        } else if let tabBarController = tabBarController, tabBarController.presentingViewController is UITabBarController {
+            return true
+        } else {
+            return false
+        }
     }
 }

@@ -47,7 +47,7 @@ open class ConferenceViewController: UIViewController {
         remoteViews.append(remoteView1)
         remoteViews.append(remoteView2)
         remoteViews.append(remoteView3)
-        AntMediaClient.setDebug(true)
+      //  AntMediaClient.setDebug(true)
         conferenceClient = ConferenceClient.init(serverURL: self.clientUrl, conferenceClientDelegate: self)
         conferenceClient.joinRoom(roomId: self.roomId, streamId: "")
     }

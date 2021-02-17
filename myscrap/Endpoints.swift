@@ -125,11 +125,11 @@ struct Endpoints {
     static let EMPLOYEE_DETAILS_URL = "\(BASE_URL)msEmployeeDetails"
     static let COMMENT_DELETE_URL = "\(BASE_URL)msCommentDelete"
     static let COMMENT_LIKE_URL = "https://myscrap.com/android/comment_like"
+    static let COMMENT_POW_LIKE_URL = "https://myscrap.com/android/pow_comment_like"
     static let COMMENT_DISLIKE_URL = "https://myscrap.com/android/comment_dislike"
-
+    static let COMMENT_POW_DISLIKE_URL = "https://myscrap.com/android/pow_comment_dislike"
     static let EXCHANGE_URL = "\(BASE_URL_Common)msExchange"
     static let LME_EXCHANGE_URL = "\(BASE_URL)msLmeExchange"
-    
     static let LME_SUBSCRIPTION_SEND_URL = "https://myscrap.com/api/v1/msEmailCodeVerification"
     
     static let SUBSCRIBE_LME_URL = "\(BASE_URL)msLmeSubscribe"
@@ -274,8 +274,10 @@ struct Endpoints {
     static let INSERT_POW_LIKE_URL = "https://myscrap.com/api/likePersonOfWeek"
     //Get Like count Members for POW
     static let GET_LIKE_MEMBERS_POW = "https://myscrap.com/api/getLikedUsersPersonOfTheWeek"
-    //Get Details of POW
-    static let FETCH_DETAIL_POW_URL = "https://myscrap.com/api/personOfTheWeekDetailPage"
+//    //Get Details of POW
+//    static let FETCH_DETAIL_POW_URL = "https://myscrap.com/api/personOfTheWeekDetailPage"
+    //Get Details of POW Updated https://myscrap.com/api/personOfTheWeekDetailPageNew
+    static let FETCH_DETAIL_POW_URL = "https://myscrap.com/api/personOfTheWeekDetailPageNew"
     //Insert/Edit Comment of POW
     static let INSERT_POW_COMMENT_URL = "https://myscrap.com/api/postCommentForPersonOfWeek"
     //Delete Comment of POW

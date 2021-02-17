@@ -485,8 +485,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                         if streamStarted == "1" {
                             // Play Other Stream
                           
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
                                    //call any function
+                                self.liveType = "dual"
                                 self.playJoiningStream()
                                }
                         }
@@ -522,8 +523,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                     if streamStarted == "1" {
                         // Play Other Stream
                       
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
                                //call any function
+                            self.liveType = "dual"
                             self.playJoiningStream()
                            }
                     }
@@ -844,9 +846,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         comment.userId = dict["userId"]! as! String
         self.liveComments.append(comment)
         if comment.userId == AuthService.instance.userId {
-            if liveType == "single" {
+       //     if liveType == "single" {
             self.addRequestMessageData()
-            }
+      //      }
         }
     
     }
@@ -925,7 +927,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
         else
         {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.startLive()
+            }
         }
         self.reloadComentsView()
         self.getProfile()
@@ -1049,7 +1053,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
      customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
      customAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
      customAlert.delegate = self
-     self.present(customAlert, animated: true, completion: nil)
+    if !customAlert.isModal {
+            self.present(customAlert, animated: true, completion: nil)
+        }
    }
 
     }
@@ -1129,7 +1135,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             vc.followingStatus = followingStatus
             vc.profileItem = profileItem
             vc.showCloseButton = true
-            self.present(vc, animated: true, completion: nil)
+            if !vc.isModal {
+                        self.present(vc, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -1145,7 +1153,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             vc.followingStatus = followingStatus
             vc.profileItem = profileItem
             vc.showCloseButton = showCloseButton
-            self.present(vc, animated: true, completion: nil)
+            if !vc.isModal {
+                        self.present(vc, animated: true, completion: nil)
+                }
         }
     }
     func showUnFollowingAlert()  {
@@ -1160,14 +1170,20 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             vc.followingStatus = followingStatus
             vc.profileItem = profileItem
 
-            self.present(vc, animated: true, completion: nil)
+            if !vc.isModal {
+                        self.present(vc, animated: true, completion: nil)
+                }
         }
     }
     @objc func sendRequestPressed() {
         print("Button Clicked")
       //  self.liveComments[sender.tag].messageId
+        if  self.liveType == "dual" {
+            self.showToast(message: "Max 2 person allow to join or already connected")
+        }
+        else{
         if !isSentRequest {
-            if !appDelegate.webRTCViewerClient.isConnected() {
+            if !appDelegate.playerClient2.isConnected() {
                 isSentRequest = true
                 self.showJoiningPopup()
                 self.reloadComentsView()
@@ -1181,7 +1197,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             self.showToast(message: "You have already sent request")
         }
         
-     
+    }
         
     }
     func showJoiningPopup()  {
@@ -1195,7 +1211,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             vc.liveUsertopicValue = liveUsertopicValue
             vc.followingStatus = followingStatus
             vc.profileItem = profileItem
-            self.present(vc, animated: true, completion: nil)
+            if !vc.isModal {
+                        self.present(vc, animated: true, completion: nil)
+                }
         }
     }
     func showJoinConfirmationPopup()  {
@@ -1209,7 +1227,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             vc.liveUsertopicValue = liveUsertopicValue
             vc.followingStatus = followingStatus
             vc.profileItem = profileItem
+            if !vc.isModal{
             self.present(vc, animated: true, completion: nil)
+            }
         }
     }
     @IBAction func cameraTogglePressed(_ sender: Any) {
@@ -1391,7 +1411,7 @@ extension JoinUserLiveVC {
         remoteViews.append(smallStreamView)
         remoteViews.append(smallStreamView)
         appDelegate.isDualLive = true;
-        AntMediaClient.setDebug(true)
+        //AntMediaClient.setDebug(true)
         appDelegate.conferenceClient = ConferenceClient.init(serverURL: Endpoints.LiveUser, conferenceClientDelegate: self)
         appDelegate.conferenceClient.joinRoom(roomId: joiningRoom, streamId: streamId)
         
@@ -1401,11 +1421,13 @@ extension JoinUserLiveVC {
     {
        
      print("live Type is : \(liveType)")
-        
+        appDelegate.webRTCClient = AntMediaClient.init()
+        appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
+        appDelegate.setDelegate()
         appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: "stream1room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
         appDelegate.isStreamer = false
         appDelegate.liveID = liveID
-        appDelegate.webRTCClient.setDebug(true)
+       // appDelegate.webRTCClient.setDebug(true)
         appDelegate.webRTCClient.start()
 
      
@@ -1779,7 +1801,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
 
             if appDelegate.playerClient1.isConnected()
             {
-                self.setUserStatusToLive(status: "dual")
+             //   self.setUserStatusToLive(status: "dual")
             }
         }
        // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionEstablished"), object: nil, userInfo: nil)
@@ -1790,11 +1812,12 @@ extension JoinUserLiveVC : AntMediaClientDelegate
         //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
            DispatchQueue.main.async { [self] in
                smallCameraContainer.isHidden = false
+            self.liveType = "dual"
                MBProgressHUD.hide(for: self.view , animated: true)
-            if appDelegate.playerClient1.isConnected()
-            {
-                self.setUserStatusToLive(status: "dual")
-            }
+//            if appDelegate.playerClient1.isConnected()
+//            {
+//                self.setUserStatusToLive(status: "dual")
+//            }
              
                
            }
@@ -1802,10 +1825,25 @@ extension JoinUserLiveVC : AntMediaClientDelegate
     
     func playFinished(streamId: String) {
         DispatchQueue.main.async { [self] in
+            self.liveType = "single"
+            smallCameraContainer.tag = 0
+            smallStreamView.bounds = smallCameraContainer.bounds
+            smallStreamView.frame = CGRect(x: 0, y: 0, width: smallCameraContainer.frame.size.width, height: smallCameraContainer.frame.size.height)
+            smallCameraContainer.addSubview(smallStreamView)
+            self.viewFree[0] = true;
+            self.viewFree[1] = true;
+            cameraView.bounds = largeCameraContainer.bounds
+            cameraView.frame = CGRect(x: 0, y: 0, width: largeCameraContainer.frame.size.width, height: largeCameraContainer.frame.size.height)
+            largeCameraContainer.addSubview(cameraView)
+            smallCameraContainer.layoutSubviews()
+            smallCameraContainer.layoutIfNeeded()
+            largeCameraContainer.layoutSubviews()
+            largeCameraContainer.layoutIfNeeded()
+            appDelegate.playerClients.removeAll()
             smallCameraContainer.isHidden = true
-          //  appDelegate.webRTCViewerClient.stop()
-         //   self.setUserStatusToLive(status: "single")
-            self.showEndFollowingAlert()
+            isSentRequest = false
+            self.reloadComentsView()
+            MBProgressHUD.hide(for: self.view , animated: true)
         }
     //    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playFinished"), object: nil, userInfo: nil)
     }
@@ -1814,11 +1852,32 @@ extension JoinUserLiveVC : AntMediaClientDelegate
         DispatchQueue.main.async { [self] in
      //   self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
             self.cameraView.tag = 1
+            self.liveType = "dual"
         }
     }
     
     func publishFinished(streamId: String) {
-        
+        DispatchQueue.main.async { [self] in
+            self.liveType = "single"
+            smallCameraContainer.tag = 0
+            smallStreamView.bounds = smallCameraContainer.bounds
+            smallStreamView.frame = CGRect(x: 0, y: 0, width: smallCameraContainer.frame.size.width, height: smallCameraContainer.frame.size.height)
+            smallCameraContainer.addSubview(smallStreamView)
+            self.viewFree[0] = true;
+            self.viewFree[1] = true;
+            cameraView.bounds = largeCameraContainer.bounds
+            cameraView.frame = CGRect(x: 0, y: 0, width: largeCameraContainer.frame.size.width, height: largeCameraContainer.frame.size.height)
+            largeCameraContainer.addSubview(cameraView)
+            smallCameraContainer.layoutSubviews()
+            smallCameraContainer.layoutIfNeeded()
+            largeCameraContainer.layoutSubviews()
+            largeCameraContainer.layoutIfNeeded()
+            appDelegate.playerClients.removeAll()
+            smallCameraContainer.isHidden = true
+            isSentRequest = false
+            self.reloadComentsView()
+            MBProgressHUD.hide(for: self.view , animated: true)
+        }
     }
     
     func disconnected(streamId: String) {
@@ -1917,8 +1976,9 @@ extension JoinUserLiveVC {
         self.appDelegate.playerClient2 = AntMediaClient.init()
         self.appDelegate.playerClient2.delegate = self
         self.appDelegate.playerClient2.setRemoteView(remoteContainer: self.smallStreamView, mode: .scaleAspectFill)
-        self.appDelegate.playerClient2.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .play, enableDataChannel: true)
-        self.appDelegate.playerClient2.setDebug(true)
+        self.appDelegate.playerClient2.setOptions(url: Endpoints.LiveUser , streamId: "stream2room\(liveID)" , token: "", mode: .play, enableDataChannel: false)
+       // self.appDelegate.playerClient2.setDebug(true)
+        self.appDelegate.playerClient2.initPeerConnection()
         self.appDelegate.playerClient2.start()
     }
     @objc func setUserStatusToLive(status : String)  {
@@ -1947,10 +2007,12 @@ extension JoinUserLiveVC: EndLiveViewDelegate {
     
     func okEndLiveButtonTapped(selectedOption: String, textFieldValue: String) {
        // appDelegate.webRTCViewerClient.stop()
-//        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
-//        spinner.mode = MBProgressHUDMode.indeterminate
-//        spinner.label.text = "End Live..."
-        self.showEndFollowingAlert()
+        let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+        spinner.mode = MBProgressHUDMode.indeterminate
+        spinner.label.text = "End Live..."
+       // self.setUserStatusToLive(status: "single")
+        self.appDelegate.playerClient2.stop()
+      //  self.showEndFollowingAlert()
 
     }
 
@@ -2096,18 +2158,33 @@ extension String {
 }
 extension JoinUserLiveVC :NotificationRedirectionDelegate
 {
+    func openChatVC(fmodel: FriendModel) {
+        let controller = ChatVC()
+        let vc = UINavigationController(rootViewController: controller)
+        controller.isTapNotifMsg = true
+        controller.modalPresentationStyle = .fullScreen
+        if !vc.isModal {
+        self.present(vc, animated: false) {
+            NotificationCenter.default.post(name: Notification.Name.navigate, object: fmodel)
+        }
+        }
+    }
     func openPostDetailsView(postId : String)
     {
         let vc = DetailsVC(collectionViewLayout: UICollectionViewFlowLayout())
         vc.postId = postId
+        if !vc.isModal {
         self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     func openEventDetailsView(eventId : String)
     {
         let vc = EventDetailVC()
         vc.eventId = eventId
+        if !vc.isModal {
         self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     func openFriendVCView(friendId : String,isFromCardNoti : String)
@@ -2115,26 +2192,34 @@ extension JoinUserLiveVC :NotificationRedirectionDelegate
         let vc = FriendVC.storyBoardInstance()
         vc!.friendId = friendId
         vc!.isfromCardNoti = isFromCardNoti
+        if !vc!.isModal {
         self.navigationController?.pushViewController(vc!, animated: true)
+        }
         
     }
     func openCompanyDetailsView(companyId : String)
     {
         let vc = CompanyHeaderModuleVC.storyBoardInstance()
             vc!.companyId = companyId
+        if !vc!.isModal {
             self.navigationController?.pushViewController(vc!, animated: true)
+        }
     }
     func openMarketDetailsView(userId : String,listingId : String)
     {
         if listingId != ""
         {
             let vc = DetailListingOfferVC.controllerInstance(with: listingId, with1: userId)
+            if !vc.isModal {
             self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         else
         {
             if let vc = MarketVC.storyBoardInstance(){
+                if !vc.isModal {
                self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
         }
         

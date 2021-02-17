@@ -30,7 +30,7 @@ protocol NotificationRedirectionDelegate : class {
     func openNotificationsView()
     func openJoinLiveVCNotificationsView(userId : String,liveId : String,fName : String,profilePic : String,colorCode : String,liveType : String)
     func openFeedsVCView()
-    
+    func openChatVC(fmodel : FriendModel) 
 
 }
 @UIApplicationMain
@@ -173,7 +173,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     @objc func runTimeCode() {
         Mention.getMentions { (_) in }
     }
-    
+    func setDelegate()  {
+        self.webRTCClient.delegate = self
+    }
     @objc func tokenRefreshNotification(_ notification: Notification) {
         print(#function)
         
@@ -739,7 +741,7 @@ extension AppDelegate{
                     {
                         client.playerClient.stop();
                     }
-                    self.conferenceClient.leaveRoom()
+//                    self.conferenceClient.leaveRoom()
                     print(onlineStat)
             }
             }
