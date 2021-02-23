@@ -41,7 +41,25 @@ extension CommentCollectionCellDelegate  where Self: DetailsVC {
                 })
             }
         }
-      
+        else
+        {
+            
+        if item.isLike == "1" {
+            item.isLike = "0"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! - 1)"
+            
+            self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_LIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+        }
+            }
     }
     func didTapOnDisLikeLikeButton(cell: CommentCollectionCell){
         guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
@@ -67,6 +85,24 @@ extension CommentCollectionCellDelegate  where Self: DetailsVC {
                 })
             }
             
+        }else
+        {
+            if item.isDislike == "1" {
+                item.isDislike = "0"
+               
+            let dislikeCount = Int(item.userDisliked!)
+            item.userDisliked =  "\(dislikeCount! - 1)"
+            self.collectionView?.reloadData()
+                if let postId = item.postId{
+                    let service = APIService()
+                    service.endPoint = Endpoints.COMMENT_DISLIKE_URL
+                    service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                    service.getDataWith(completion: { (_) in
+                        print("api called")
+                    })
+                }
+                
+            }
         }
     }
     func didTapEditButton(cell: CommentCollectionCell){
@@ -141,7 +177,25 @@ extension CommentCollectionCellDelegate  where Self: FeedsCMDetailsVC {
                 })
             }
         }
-      
+        else
+        {
+            
+        if item.isLike == "1" {
+            item.isLike = "0"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! - 1)"
+            
+            self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_LIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+        }
+            }
     }
     func didTapOnDisLikeLikeButton(cell: CommentCollectionCell){
         guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
@@ -167,6 +221,24 @@ extension CommentCollectionCellDelegate  where Self: FeedsCMDetailsVC {
                 })
             }
             
+        }else
+        {
+            if item.isDislike == "1" {
+                item.isDislike = "0"
+               
+            let dislikeCount = Int(item.userDisliked!)
+            item.userDisliked =  "\(dislikeCount! - 1)"
+            self.collectionView?.reloadData()
+                if let postId = item.postId{
+                    let service = APIService()
+                    service.endPoint = Endpoints.COMMENT_DISLIKE_URL
+                    service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                    service.getDataWith(completion: { (_) in
+                        print("api called")
+                    })
+                }
+                
+            }
         }
     }
     func didTapEditButton(cell: CommentCollectionCell){
@@ -241,7 +313,25 @@ extension CommentCollectionCellDelegate  where Self: FeedsPOWDetailsVC {
                 })
             }
         }
-      
+        else
+        {
+            
+        if item.isLike == "1" {
+            item.isLike = "0"
+            let likeCount = Int(item.userLike!)
+            item.userLike =  "\(likeCount! - 1)"
+            
+            self.collectionView?.reloadData()
+            if let postId = item.postId{
+                let service = APIService()
+                service.endPoint = Endpoints.COMMENT_POW_LIKE_URL
+                service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                service.getDataWith(completion: { (_) in
+                    print("api called")
+                })
+            }
+        }
+            }
     }
     func didTapOnDisLikeLikeButton(cell: CommentCollectionCell){
         guard let ip = collectionView?.indexPathForItem(at: cell.center) else { return }
@@ -267,6 +357,24 @@ extension CommentCollectionCellDelegate  where Self: FeedsPOWDetailsVC {
                 })
             }
             
+        }else
+        {
+            if item.isDislike == "1" {
+                item.isDislike = "0"
+               
+            let dislikeCount = Int(item.userDisliked!)
+            item.userDisliked =  "\(dislikeCount! - 1)"
+            self.collectionView?.reloadData()
+                if let postId = item.postId{
+                    let service = APIService()
+                    service.endPoint = Endpoints.COMMENT_POW_DISLIKE_URL
+                    service.params = "userId=\(AuthService.instance.userId)&postId=\(postId)&cmdId=\(item.commentId)&apiKey=\(API_KEY)"
+                    service.getDataWith(completion: { (_) in
+                        print("api called")
+                    })
+                }
+                
+            }
         }
     }
     func didTapEditButton(cell: CommentCollectionCell){
@@ -400,7 +508,7 @@ class CommentCollectionCell: BaseCell {
             self.likeButton.tintColor = UIColor.MyScrapGreen
         }else
         {
-            self.likeButton.tintColor = UIColor.darkGray
+            self.likeButton.tintColor = UIColor.gray
         }
         
         
@@ -411,10 +519,10 @@ class CommentCollectionCell: BaseCell {
             self.dislikeButton.tintColor = UIColor.MyScrapGreen
         }else
         {
-            self.dislikeButton.tintColor = UIColor.darkGray
+            self.dislikeButton.tintColor = UIColor.gray
         }
         if item.timeStamp == "" {
-            desigLbl.text = "Just now"
+            desigLbl.text = "Just now  •"
         } else {
             desigLbl.text = item.timeStamp
         }

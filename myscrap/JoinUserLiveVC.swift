@@ -53,6 +53,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var liveUsertopicValue = ""
     var followingStatus = false
     var isSentRequest = false
+    var isStreaming = false
     fileprivate var profileItem:ProfileData?
     @IBOutlet weak var suggessionCollectionView: UICollectionView!
     @IBOutlet weak var suggessionLeading: NSLayoutConstraint!
@@ -72,7 +73,8 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     let joiningVC = ViewerSideJoinRequestPopUp.storyBoardInstance()
     let joiningConfirmVC = ViewerSideJoinConfirmPopUp.storyBoardInstance()
     let endLiveFollowAlertVC = EndLiveUserFollowPopUpVC.storyBoardInstance()
-    
+    let onlineViewer = OnlineViewersPopUpVC.storyBoardInstance()
+
     var userJoined = Array<[String:AnyObject]>()
 
     var timer = Timer()
@@ -151,6 +153,19 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         } else {
             // Fallback on earlier versions
         }
+        
+        liveLable.layer.shadowColor = UIColor.black.cgColor
+        liveLable.layer.shadowRadius = 3.0
+        liveLable.layer.shadowOpacity = 1.0
+        liveLable.layer.shadowOffset = CGSize(width: 4, height: 4)
+        liveLable.layer.masksToBounds = false
+        
+       // let tap1 = UITapGestureRecognizer(target: self, action: #selector(self.OnlineViewTapped(_:)))
+
+      //  self.seenView.addGestureRecognizer(tap1)
+
+        self.seenView.isUserInteractionEnabled = true
+        
         appDelegate.directionDelegate = self
 
         self.suggessionCollectionView.delegate = self
@@ -285,6 +300,46 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             //Step 13
         }
     }
+    @objc func OnlineViewTapped(_ sender: UITapGestureRecognizer) {
+        if userJoined.count > 0 {
+            if let vc = onlineViewer {
+                vc.modalPresentationStyle = .overFullScreen
+                vc.delegateOnlineViewer = self
+                vc.userJoined = userJoined
+                vc.indexValue = 0
+                if !vc.isModal {
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+        }
+      
+      }
+    
+    func hideAllViewOnSwipe()  {
+        commentField.resignFirstResponder()
+        cameraToggleButton.isHidden = true
+        micButton.isHidden = true
+        seenView.isHidden = true
+        liveStreamerView.isHidden = true
+        cameraToggleButton.isHidden = true
+      //  closebutton.isHidden = true
+     
+//        livebutton.isHidden = true
+//        seenView.isHidden = true
+    }
+    func showAllViewOnSwipe()  {
+        commentBackground.isHidden = false
+        cameraToggleButton.isHidden = false
+        cameraToggleButton.isHidden = false
+        UserCommentsBackground.isHidden = false
+        liveStreamerView.isHidden = false
+        seenView.isHidden = false
+        micButton.isHidden = false
+        closebutton.isHidden = false
+     //   livebutton.isHidden = false
+        seenView.isHidden = false
+    }
+    
     func updateSuggessionList()  {
         suggessionList.removeAll()
         repeat {
@@ -620,9 +675,11 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.right:
                 print("right swipe")
+                self.hideAllViewOnSwipe()
                 self.hideCommentesView()
             case UISwipeGestureRecognizer.Direction.left:
                 print("left swipe")
+                self.showAllViewOnSwipe()
                 self.showCommentesView()
             default:
                 print("other swipe")
@@ -927,7 +984,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
         else
         {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.startLive()
             }
         }
@@ -969,7 +1026,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     func addRequestMessageData() {
        // self.liveComments.removeAll()
         var comment = CommentMessage()
-        comment.messageText = "Sent a request to be in \(liveUserNameValue)'s live video."
+        comment.messageText = "Send a request to be in \(liveUserNameValue)'s live video."
         comment.name = ""
         comment.isJoingingRequest = "1"
         comment.friendId =  friendId
@@ -1184,9 +1241,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         else{
         if !isSentRequest {
             if !appDelegate.playerClient2.isConnected() {
-                isSentRequest = true
+            
                 self.showJoiningPopup()
-                self.reloadComentsView()
+              
             }
             else
             {
@@ -1578,6 +1635,11 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
                 
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
                 cell.configCell(item: self.liveComments[indexPath.row] )
+                if isStreaming {
+                    cell.requestButton.setTitle("Viewed", for: .normal)
+                }
+                else
+                {
                 if isSentRequest {
                     cell.requestButton.setTitle("Requested", for: .normal)
                 }
@@ -1585,6 +1647,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
                 {
                     cell.requestButton.setTitle("Request", for: .normal)
                 }
+            }
                 cell.profileView.isHidden = true
                 cell.imagePlaceholder.isHidden = false
                
@@ -1747,8 +1810,10 @@ extension JoinUserLiveVC : MemberDelegate{
 extension JoinUserLiveVC : ViewerSideJoinRequestDelegate{
     
     func SendRequestPressed(FriendID: String, controller: ViewerSideJoinRequestPopUp) {
-        
-        let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "1","joingingRequestStatus": "0","OnlyForStreamer": "1","friendId": friendId, "profilePic": AuthService.instance.profilePic ,"StreamStarted": "0", "message": "\(AuthService.instance.fullName) Sent a request to be in your live video.", "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
+       
+        isSentRequest = true
+        self.reloadComentsView()
+        let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "1","joingingRequestStatus": "0","OnlyForStreamer": "1","friendId": friendId, "profilePic": AuthService.instance.profilePic ,"StreamStarted": "0", "message": "\(AuthService.instance.fullName) Sent a request to be in your live video.", "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId,"requestId": "1"]
         
         let data = NSKeyedArchiver.archivedData(withRootObject: dic)
         appDelegate.webRTCClient.sendData(data: data, binary: false)
@@ -1853,12 +1918,15 @@ extension JoinUserLiveVC : AntMediaClientDelegate
      //   self.cameraView.transform = CGAffineTransform(scaleX: -1, y: 1);
             self.cameraView.tag = 1
             self.liveType = "dual"
+            isStreaming = true
+            self.reloadComentsView()
         }
     }
     
     func publishFinished(streamId: String) {
         DispatchQueue.main.async { [self] in
             self.liveType = "single"
+            isStreaming = false
             smallCameraContainer.tag = 0
             smallStreamView.bounds = smallCameraContainer.bounds
             smallStreamView.frame = CGRect(x: 0, y: 0, width: smallCameraContainer.frame.size.width, height: smallCameraContainer.frame.size.height)
@@ -2236,4 +2304,17 @@ extension JoinUserLiveVC :NotificationRedirectionDelegate
     {
         
     }
+}
+extension JoinUserLiveVC: OnlineViewersDelegate {
+    func onlineUserSelected(FriendID: String, AtIndex: Int) {
+        if let vc = FriendVC.storyBoardInstance() {
+            vc.friendId = FriendID
+            UserDefaults.standard.set(FriendID, forKey: "friendId")
+            self.navigationController?.navigationBar.isHidden = false
+          //  self.present(vc, animated: true, completion: nil)
+
+        self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
 }

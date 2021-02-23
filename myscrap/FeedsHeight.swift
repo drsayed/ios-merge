@@ -561,8 +561,8 @@ struct FeedsHeight {
        // let logoSpacing: CGFloat = 12
         //let labelHeight: CGFloat = LabelHeight.heightForLabel(for: item.comment, for: labelWidth, for: UIFont(name: "HelveticaNeue", size: 15)!)
         let textViewHeight: CGFloat = LabelHeight.heightForAttributed(for: item.commentTextAttrib, for: labelWidth) 
-        let labelSpacing: CGFloat = 9
-        let timeLablebottom : CGFloat = 20
+        let labelSpacing: CGFloat = 0
+        let timeLablebottom : CGFloat = 15
         let timeLableheight : CGFloat = 30
         let height = topSpacing + logoImage  + textViewHeight + labelSpacing + timeLableheight + timeLablebottom
         return height

@@ -17,7 +17,7 @@
 
 @end
 
-#define COUNTDOWN_LABEL_FONT_SCALE_FACTOR 0.3
+#define COUNTDOWN_LABEL_FONT_SCALE_FACTOR 0.1
 
 @implementation SFCountdownView
 
@@ -96,7 +96,7 @@
 {
     [UIView animateWithDuration:0.9 animations:^{
     
-        CGAffineTransform transform = CGAffineTransformMakeScale(2.5, 2.5);
+        CGAffineTransform transform = CGAffineTransformMakeScale(1.5, 1.5);
         self.countdownLabel.transform = transform;
         self.countdownLabel.alpha = 0;
         
@@ -114,7 +114,7 @@
 {
     [UIView animateWithDuration:1.0 animations:^{
     
-        CGAffineTransform transform = CGAffineTransformMakeScale(2.5, 2.5);
+        CGAffineTransform transform = CGAffineTransformMakeScale(1.5, 1.5);
         self.countdownLabel.transform = transform;
         self.countdownLabel.alpha = 0;
         
@@ -132,7 +132,7 @@
 {
     [UIView animateWithDuration:1.0 animations:^{
     
-        CGAffineTransform transform = CGAffineTransformMakeScale(2.5, 2.5);
+        CGAffineTransform transform = CGAffineTransformMakeScale(1.5, 1.5);
         self.countdownLabel.transform = transform;
         self.countdownLabel.alpha = 0;
         

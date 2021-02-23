@@ -47,7 +47,7 @@ class CommentItem: MemberItem{
                     attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: UIColor.GREEN_PRIMARY, range: rng)
                     attributedString.addAttribute(NSAttributedString.Key(rawValue: MSTextViewAttributes.URL), value: value, range: rng)
                     attributedString.addAttribute(.foregroundColor, value: UIColor.GREEN_PRIMARY, range: rng)
-                    attributedString.addAttribute(.font, value: Fonts.descriptionFont, range: rng)
+                    attributedString.addAttribute(.font, value: Fonts.commentDescriptionFont, range: rng)
                 }
             }
         }
@@ -75,7 +75,7 @@ class CommentItem: MemberItem{
         if calendar.isDateInToday(date as Date){
             let dateTime = timeSince(from: date)
             print("if Date : \(dateTime)")
-            return "\(dateTime)"
+            return "\(dateTime) •"
         } /*else if let diff = Calendar.current.dateComponents([.hour], from: date as Date, to: Date()).hour, diff > 24 {
             //do something
             return "\(diff) hrs ago"

@@ -24,7 +24,7 @@ struct CommentMessage {
     var isJoingingRequest : String = "0"
     var joingingRequestStatus : String = "0"
     var streamStarted : String = "0"
-
+    var requestId : String = "0"
     var timeStamp : Int =  (Int(Date().timeIntervalSince1970))
 }
 class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
@@ -86,6 +86,8 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     var timer = Timer()
     var liveTimeCount = Timer()
     var liveTimeValue = 0
+    var isPlaying : Bool = false
+    var playingUserId : String = ""
     @IBOutlet weak var announceImage: UIImageView!
     @IBOutlet weak var commentBackground: UIView!
     var cameraflipedView: UIView = UIView()
@@ -107,6 +109,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         } else {
             // Fallback on earlier versions
         }
+     
         appDelegate.directionDelegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.likeCommentNotificationReciveLive), name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.followNotificationReciveLive), name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil)
@@ -415,9 +418,13 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             comment.joingingRequestStatus = dict["joingingRequestStatus"] as? String ?? ""
             comment.streamStarted = dict["StreamStarted"] as? String ?? ""
             
+            
+            
             if comment.streamStarted == "1" {
                 // Play Stream
+                playingUserId = dict["userId"] as? String ?? ""
                
+                
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 //                        self.appDelegate.webRTCViewerClient.stop()
 //                      var  webRTCViewerClient: AntMediaClient = AntMediaClient.init()
@@ -493,9 +500,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.right:
                 print("right swipe")
+                self.hideAllViewOnSwipe()
                 self.hideCommentesView()
             case UISwipeGestureRecognizer.Direction.left:
                 print("left swipe")
+                self.showAllViewOnSwipe()
                 self.showCommentesView()
             default:
                 print("other swipe")
@@ -699,6 +708,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         captureSession.addInput(deviceInput)
     }
     private func startLiveTime() {
+        MBProgressHUD.hide(for: self.view , animated: true)
         liveTimerView.isHidden = false
         liveTimeCount = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(self.currentTime) , userInfo: nil, repeats: true)
        }
@@ -754,7 +764,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBAction func cameraTogglePressed(_ sender: Any) {
      //   self.swapCamera()
         isFrontCam = !isFrontCam
+       
         self.FlipFrontCameraSinglelive()
+       
         if(isFrontCam)
         {
          
@@ -788,7 +800,19 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         comment.profilePic =  dict["likeProfilePic"]! as! String
         comment.colorCode =  dict["colorCode"]! as! String
         comment.userId = dict["userId"]! as! String
-        
+        if(isFrontCam)
+        {
+         
+            let dic = ["CameraToggle":"1","isFrontCam": "1"]
+
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+           appDelegate.webRTCClient.sendData(data: data, binary: true)
+        }
+        else{
+            let dic = ["CameraToggle":"1","isFrontCam": "0"]
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+             appDelegate.webRTCClient.sendData(data: data, binary: true)
+        }
         self.liveComments.append(comment)
     }
     func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
@@ -997,9 +1021,54 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
         self.commentField.resignFirstResponder()
         isEndLivePressed = true
+        
+        self.hideAllViewOnScreen()
         self.addEndActionAlert()
       
     }
+    func hideAllViewOnScreen()  {
+        commentField.resignFirstResponder()
+        commentBackground.isHidden = true
+        cameraToggleButton.isHidden = true
+        UserCommentsBackground.isHidden = true
+        micButton.isHidden = true
+        closebutton.isHidden = true
+        liveTimerView.isHidden = true
+//        livebutton.isHidden = true
+//        seenView.isHidden = true
+    }
+    func hideAllViewOnSwipe()  {
+        commentField.resignFirstResponder()
+//        commentBackground.isHidden = true
+        cameraToggleButton.isHidden = true
+//        UserCommentsBackground.isHidden = true
+        micButton.isHidden = true
+      //  closebutton.isHidden = true
+        liveTimerView.isHidden = true
+//        livebutton.isHidden = true
+//        seenView.isHidden = true
+    }
+    func showAllViewOnSwipe()  {
+        commentBackground.isHidden = false
+        cameraToggleButton.isHidden = false
+        UserCommentsBackground.isHidden = false
+        micButton.isHidden = false
+        closebutton.isHidden = false
+        liveTimerView.isHidden = false
+        livebutton.isHidden = false
+        seenView.isHidden = false
+    }
+    func showAllViewOnScreen()  {
+        commentBackground.isHidden = false
+        cameraToggleButton.isHidden = false
+        UserCommentsBackground.isHidden = false
+        micButton.isHidden = false
+        closebutton.isHidden = false
+        liveTimerView.isHidden = false
+//        livebutton.isHidden = false
+//        seenView.isHidden = false
+    }
+    
     @IBAction func goLiveButtonPressed(_ sender: Any) {
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -1038,9 +1107,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
             }
     }
     @objc func sendRequestPressed(sender : UIButton ) {
-        
+        var message  = self.liveComments[sender.tag]
         if !appDelegate.webRTCViewerClient.isConnected() {
-            let message  = self.liveComments[sender.tag]
+          
+          
             self.showJoiningPopup(message:message)
         }
         else
@@ -1072,12 +1142,28 @@ extension UserLiveVC: UINavigationControllerDelegate {
         return UIStoryboard(name: StoryBoard.LIVE, bundle: nil).instantiateViewController(withIdentifier: UserLiveVC.id) as? UserLiveVC
     }
 }
+extension UserLiveVC: SFCountdownViewDelegate
+{
+    func countdownFinished(_ view: SFCountdownView!) {
+        Run.onMainThread {
+            
+                let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+                spinner.mode = MBProgressHUDMode.indeterminate
+                spinner.isUserInteractionEnabled = false
+                spinner.label.text = "Connecting..."
+         
+        }
+    }
+    
+    
+}
 extension UserLiveVC: CustomAlertViewDelegate {
     
     func okButtonTapped(selectedOption: String, textFieldValue: String) {
 
             self.countDown.isHidden = false
             self.countDown.start()
+           self.countDown.delegate = self
        // }
 
       //  self.perform(#selector(self.startLive), with: self, afterDelay: 0.0)
@@ -1158,7 +1244,7 @@ extension UserLiveVC: CustomAlertViewDelegate {
         
         if self.appDelegate.webRTCClient.isConnected() {
             self.appDelegate.isStreamerDisconeted = true
-            self.appDelegate.webRTCClient.stop()
+          //  self.appDelegate.webRTCClient.stop()
         }
           
         for client in self.playerClients
@@ -1198,8 +1284,11 @@ extension UserLiveVC: EndLiveViewDelegate {
     func okEndLiveButtonTapped(selectedOption: String, textFieldValue: String) {
        
         self.endLiveTimmer()
-        
-        
+        self.appDelegate.isStreamerDisconeted = true
+        if self.appDelegate.webRTCClient.isConnected() {
+            self.appDelegate.isStreamerDisconeted = true
+          //  self.appDelegate.webRTCClient.stop()
+        }
         if let vc = downloadEndsLivePopup   {
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
@@ -1212,7 +1301,7 @@ extension UserLiveVC: EndLiveViewDelegate {
     }
 
     func cancelEndLiveButtonTapped() {
-     
+        self.showAllViewOnScreen()
     }
 }
 extension UserLiveVC: OnlineViewersDelegate {
@@ -1242,9 +1331,14 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
           let message =   self.liveComments[indexPath.row]
             if message.isJoingingRequest == "1" {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
-                cell.configCell(item: self.liveComments[indexPath.row] )
-                
+                let item = self.liveComments[indexPath.row]
+                cell.configCell(item: item )
+                if item.userId ==  playingUserId {
+                    cell.requestButton.setTitle("Viewed", for: .normal)
+                }
+                else{
                 cell.requestButton.setTitle("View", for: .normal)
+                }
                 cell.requestButton.tag = indexPath.row
                 cell.profileView.isHidden = false
                 cell.imagePlaceholder.isHidden = true
@@ -1347,6 +1441,8 @@ extension UserLiveVC : AntMediaClientDelegate
 //            }
             MBProgressHUD.hide(for: self.view , animated: true)
             self.setUserStatusToLive(status: "dual")
+            self.isPlaying = true
+            self.reloadComentsView()
           //  self.setUserToDualLive()
         }
      //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playStarted"), object: nil, userInfo: nil)
@@ -1369,7 +1465,8 @@ extension UserLiveVC : AntMediaClientDelegate
             smallCameraContainer.layoutIfNeeded()
             largeCameraContainer.layoutSubviews()
             largeCameraContainer.layoutIfNeeded()
-            
+            self.isPlaying = false
+            self.reloadComentsView()
             smallCameraContainer.isHidden = true
             self.setUserStatusToLive(status: "single")
         }
@@ -1569,8 +1666,8 @@ extension UserLiveVC: EndLiveWithDownloadDelegate
         self.showMessage(with: "Download begins!")
         let videoImageUrl = path
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
-        let filePath="\(documentsPath)/MSVIDEO.mp4"
-        DispatchQueue.global(qos: .background).async {
+        let filePath="\(documentsPath)/liveID\(liveID).mp4"
+        DispatchQueue.global(qos: .background).sync {
             if let url = URL(string: videoImageUrl),
                let urlData = NSData(contentsOf: url) {
                 
@@ -1604,7 +1701,7 @@ extension UserLiveVC: EndLiveWithDownloadDelegate
     func downloadButtonPressed() {
         isEndLivePressed = true
         //  dowloaduRL http://107.22.156.210:5080/WebRTCAppEE/streams/stream2room2409.mp4?token=undefined
-        let path = "\(Endpoints.LiveUser)/streams/stream1\(self.liveID).mp4?token=undefined"
+        let path = "\(Endpoints.liveDownload)/stream1room\(self.liveID).mp4"
         self.downloadVideo(path: path)
         let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
         spinner.mode = MBProgressHUDMode.indeterminate

@@ -27,8 +27,9 @@ struct Fonts{
     static let landDescFont = UIFont(name: "HelveticaNeue", size: 12)
     static let cmDescriptionFont = UIFont(name: "HelveticaNeue", size: 14)!
     static let userTagFont = UIFont(name: "HelveticaNeue-Bold", size: 17)!
-    static let commentFont = UIFont(name: "HelveticaNeue", size: 17)!
-    
+    static let commentFont = UIFont(name: "HelveticaNeue", size: 14)!
+    static let commentDescriptionFont = UIFont(name: "HelveticaNeue", size: 14)!
+
     static let termsHedingFont = UIFont(name: "HelveticaNeue-Bold", size: 16)!
     static let termsSubHedingFont = UIFont(name: "HelveticaNeue", size: 13)!
     static let privacyTitleFont = UIFont(name: "HelveticaNeue-Bold", size: 19)!

@@ -1123,7 +1123,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout{
             return CGSize(width: self.view.frame.width, height: 37)
         } else {
             let width = screenWidth
-            let height = FeedsHeight.heightForCommentFeedsV2(item: commentDataSource[indexPath.item], labelWidth: width)
+            let height = FeedsHeight.heightForCommentFeedsV2(item: commentDataSource[indexPath.item], labelWidth: width-80)
             print("height for comment text : \(height)")
             return CGSize(width: width, height: height)
         }
