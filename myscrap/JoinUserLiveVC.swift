@@ -339,7 +339,17 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
      //   livebutton.isHidden = false
         seenView.isHidden = false
     }
-    
+    func hideAllViewOnEnd()  {
+        commentField.resignFirstResponder()
+        cameraToggleButton.isHidden = true
+        micButton.isHidden = true
+        seenView.isHidden = true
+        liveStreamerView.isHidden = true
+        cameraToggleButton.isHidden = true
+         closebutton.isHidden = true
+          livebutton.isHidden = true
+//        seenView.isHidden = true
+    }
     func updateSuggessionList()  {
         suggessionList.removeAll()
         repeat {
@@ -1179,6 +1189,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         
     }
     func showEndFollowingAlert()  {
+        self.hideAllViewOnEnd()
         if let vc = endLiveFollowAlertVC {
             if vc.view.tag == 0 {
             vc.modalPresentationStyle = .overFullScreen
@@ -1558,7 +1569,10 @@ extension JoinUserLiveVC {
                     {
                     self.appDelegate.conferenceClient.leaveRoom()
                     }
-                  
+                    if  appDelegate.webRTCClient.isConnected(){
+                    appDelegate.isStreamerDisconeted = true
+                    appDelegate.webRTCClient.stop()
+                    }
                    // appDelegate.webRTCClient.stop()
                 self.navigationController?.popToRootViewController(animated: true)
                   }
@@ -1827,11 +1841,16 @@ extension JoinUserLiveVC : ViewerSideJoinConfirmDelegate{
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                //call any function
           //  self.startJoiningStream()
+            
             self.joinConferenceCall()
            }
      
     }
-    
+    func acceptDeclineRequest()
+    {
+        isSentRequest = false
+        self.reloadComentsView()
+    }
   
     
    

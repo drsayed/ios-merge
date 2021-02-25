@@ -11,7 +11,7 @@ import SafariServices
 import AVKit
 protocol ViewerSideJoinConfirmDelegate : class {
     func acceptJoinRequest(FriendID : String,controller : ViewerSideJoinConfirmPopUp)
-
+    func acceptDeclineRequest ()
 }
 class ViewerSideJoinConfirmPopUp: BaseVC {
     
@@ -102,6 +102,7 @@ class ViewerSideJoinConfirmPopUp: BaseVC {
 
     }
     @IBAction func doneButtonPressed(_ sender: Any) {
+        delegate?.acceptDeclineRequest()
         self.dismiss(animated: true, completion: nil)
 
     }

@@ -800,19 +800,19 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         comment.profilePic =  dict["likeProfilePic"]! as! String
         comment.colorCode =  dict["colorCode"]! as! String
         comment.userId = dict["userId"]! as! String
-        if(isFrontCam)
-        {
-         
-            let dic = ["CameraToggle":"1","isFrontCam": "1"]
-
-            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-           appDelegate.webRTCClient.sendData(data: data, binary: true)
-        }
-        else{
-            let dic = ["CameraToggle":"1","isFrontCam": "0"]
-            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-             appDelegate.webRTCClient.sendData(data: data, binary: true)
-        }
+//        if(isFrontCam)
+//        {
+//         
+//            let dic = ["CameraToggle":"1","isFrontCam": "1"]
+//
+//            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+//           appDelegate.webRTCClient.sendData(data: data, binary: true)
+//        }
+//        else{
+//            let dic = ["CameraToggle":"1","isFrontCam": "0"]
+//            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+//             appDelegate.webRTCClient.sendData(data: data, binary: true)
+//        }
         self.liveComments.append(comment)
     }
     func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
@@ -1172,6 +1172,23 @@ extension UserLiveVC: CustomAlertViewDelegate {
 
       
     }
+    private func getConnectedWith(streamId : String)
+    {
+        Run.onMainThread {
+            
+            if !self.appDelegate.webRTCClient.isConnected() {
+            self.appDelegate.webRTCClient = AntMediaClient.init()
+            self.appDelegate.setDelegate()
+            self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: true)
+            self.appDelegate.webRTCClient.setLocalView(container: self.cameraView, mode: .scaleAspectFill)
+            self.appDelegate.webRTCClient.initPeerConnection()
+            self.appDelegate.webRTCClient.start()
+            self.appDelegate.isStreamer = true
+            self.smallCameraContainer.isHidden = true
+            }
+            
+        }
+    }
     @objc func startLive()
     {
         
@@ -1189,17 +1206,20 @@ extension UserLiveVC: CustomAlertViewDelegate {
 //       appDelegate.liveID = liveID
 //        smallCameraContainer.isHidden = true
 
-        self.startConferenceCall(steamId: streamId)
+        self.getConnectedWith(streamId: streamId)
+       // self.startConferenceCall(steamId: streamId)
    
     }
     func startConferenceCall(steamId : String)  {
         
         remoteViews.append(smallStreamView)
-//        remoteViews.append(remoteView1)
-//        remoteViews.append(remoteView2)
-//        remoteViews.append(remoteView3)
-        //AntMediaClient.setDebug(true)
-        appDelegate.isDualLive = true;
+        if steamId.contains("stream2room")
+        {
+            appDelegate.isDualLive = true;
+        }else
+        {
+            appDelegate.isDualLive = false;
+        }
         appDelegate.conferenceClient = ConferenceClient.init(serverURL: Endpoints.LiveUser, conferenceClientDelegate: self)
         appDelegate.conferenceClient.joinRoom(roomId: steamId, streamId: steamId)
         
@@ -1242,10 +1262,10 @@ extension UserLiveVC: CustomAlertViewDelegate {
         print("cancelButtonTapped")
     Run.onMainThread {
         
-        if self.appDelegate.webRTCClient.isConnected() {
-            self.appDelegate.isStreamerDisconeted = true
-          //  self.appDelegate.webRTCClient.stop()
-        }
+//        if self.appDelegate.webRTCClient.isConnected() {
+//            self.appDelegate.isStreamerDisconeted = true
+//            self.appDelegate.webRTCClient.stop()
+//        }
           
         for client in self.playerClients
         {
@@ -1287,7 +1307,7 @@ extension UserLiveVC: EndLiveViewDelegate {
         self.appDelegate.isStreamerDisconeted = true
         if self.appDelegate.webRTCClient.isConnected() {
             self.appDelegate.isStreamerDisconeted = true
-          //  self.appDelegate.webRTCClient.stop()
+        self.appDelegate.webRTCClient.stop()
         }
         if let vc = downloadEndsLivePopup   {
             vc.modalPresentationStyle = .overFullScreen
@@ -1573,21 +1593,21 @@ extension UserLiveVC: ConferenceClientDelegate
 {
     public func streamIdToPublish(streamId: String) {
         
-        Run.onMainThread {
-        //
-            //self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: streamId , token: "", mode: .publish, enableDataChannel: true)
-            if !self.appDelegate.webRTCClient.isConnected() {
-            self.appDelegate.webRTCClient = AntMediaClient.init()
-            self.appDelegate.setDelegate()
-            self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: true)
-            self.appDelegate.webRTCClient.setLocalView(container: self.cameraView, mode: .scaleAspectFill)
-            self.appDelegate.webRTCClient.initPeerConnection()
-            self.appDelegate.webRTCClient.start()
-            self.appDelegate.isStreamer = true
-            self.smallCameraContainer.isHidden = true
-            }
+//        Run.onMainThread {
+//        //
+//            //self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: streamId , token: "", mode: .publish, enableDataChannel: true)
+//            if !self.appDelegate.webRTCClient.isConnected() {
+//            self.appDelegate.webRTCClient = AntMediaClient.init()
+//            self.appDelegate.setDelegate()
+//            self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser, streamId: streamId, token: "", mode: AntMediaClientMode.publish, enableDataChannel: true)
+//            self.appDelegate.webRTCClient.setLocalView(container: self.cameraView, mode: .scaleAspectFill)
+//            self.appDelegate.webRTCClient.initPeerConnection()
+//            self.appDelegate.webRTCClient.start()
+//            self.appDelegate.isStreamer = true
+//            self.smallCameraContainer.isHidden = true
+//            }
             
-        }
+//        }
            
     }
        
