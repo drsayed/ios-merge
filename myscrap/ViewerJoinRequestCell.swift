@@ -24,11 +24,11 @@ final class ViewerJoinRequestCell: BaseCell{
             self.darkBackground.layer.cornerRadius =   self.frame.size.height/2
 
         self.darkBackground.clipsToBounds = true
-        self.darkBackground.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        self.darkBackground.backgroundColor = UIColor.black.withAlphaComponent(0.65)
     }
     override func awakeFromNib() {
            super.awakeFromNib()
-        self.darkBackground.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        self.darkBackground.backgroundColor = UIColor.black.withAlphaComponent(0.65)
        }
     func configCell(item: CommentMessage){
         profileView.updateViews(name: item.name, url: item.profilePic, colorCode: item.colorCode)

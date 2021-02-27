@@ -727,7 +727,7 @@ extension AppDelegate{
                     {
                         client.playerClient.stop();
                     }
-                    self.conferenceClient.leaveRoom()
+//                    self.conferenceClient.leaveRoom()
               
                     print(onlineStat)
             }
@@ -939,7 +939,7 @@ extension AppDelegate : AntMediaClientDelegate
     func disconnected(streamId: String) {
         if streamId.contains("stream1room") {
             if !self.isStreamerDisconeted {
-                webRTCClient.stop()
+            //    webRTCClient.stop()
             }
         }
     }

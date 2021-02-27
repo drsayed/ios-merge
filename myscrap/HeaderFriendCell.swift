@@ -17,7 +17,8 @@ final class HeaderFriendCell: BaseCell{
     
     override func awakeFromNib() {
            super.awakeFromNib()
-          
+        
+    //    self.profileView.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
 
        }
     func configCell(item: ActiveUsers){

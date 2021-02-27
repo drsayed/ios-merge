@@ -25,6 +25,8 @@ final class LiveFriendCell: BaseCell{
            super.awakeFromNib()
         colorAnimationView.layer.cornerRadius =  colorAnimationView.frame.size.height/2
         colorAnimationView.clipsToBounds = true
+        self.profileView.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
+
 //        colorAnimationView.stopBlink()
 //        colorAnimationView.animate()
         greenCircle.layer.cornerRadius =  greenCircle.frame.size.height/2

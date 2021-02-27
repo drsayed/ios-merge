@@ -700,6 +700,11 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     {
         self.userCommentsCollectionView.delegate = self
         self.userCommentsCollectionView.dataSource = self
+        
+        let layout = FadingLayout(scrollDirection: .vertical)
+      
+        self.userCommentsCollectionView.setCollectionViewLayout(layout, animated: false)
+        
         self.userCommentsCollectionView.register(LiveUserCommentsCell.Nib, forCellWithReuseIdentifier: LiveUserCommentsCell.identifier)
         self.userCommentsCollectionView.register(ViewerJoinRequestCell.Nib, forCellWithReuseIdentifier: ViewerJoinRequestCell.identifier)
         
@@ -1081,7 +1086,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     deinit {
         self.captureSession.stopRunning()
         IQKeyboardManager.sharedManager().enable = true
-        appDelegate.webRTCClient.stop()
+       // appDelegate.webRTCClient.stop()
         removeKeyboardObservers()
 
     }
@@ -1489,6 +1494,7 @@ extension JoinUserLiveVC {
     {
        
      print("live Type is : \(liveType)")
+
         appDelegate.webRTCClient = AntMediaClient.init()
         appDelegate.webRTCClient.setRemoteView(remoteContainer: cameraView, mode: .scaleAspectFill)
         appDelegate.setDelegate()

@@ -34,12 +34,12 @@ final class LiveUserCommentsCell: BaseCell{
 
         }
         self.darkBackground.clipsToBounds = true
-        self.darkBackground.backgroundColor = UIColor.black.withAlphaComponent(0.85)
+        self.darkBackground.backgroundColor = UIColor.black.withAlphaComponent(0.65)
 
     }
     override func awakeFromNib() {
            super.awakeFromNib()
-        self.darkBackground.backgroundColor = UIColor.black.withAlphaComponent(0.85)
+        self.darkBackground.backgroundColor = UIColor.black.withAlphaComponent(0.65)
 
        }
     func configCell(item: CommentMessage){

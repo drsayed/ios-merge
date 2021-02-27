@@ -515,6 +515,10 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     {
         self.userCommentsCollectionView.delegate = self
         self.userCommentsCollectionView.dataSource = self
+        let layout = FadingLayout(scrollDirection: .vertical)
+      
+        self.userCommentsCollectionView.setCollectionViewLayout(layout, animated: false)
+        
         self.userCommentsCollectionView.register(LiveUserCommentsCell.Nib, forCellWithReuseIdentifier: LiveUserCommentsCell.identifier)
         self.userCommentsCollectionView.register(ViewerJoinRequestCell.Nib, forCellWithReuseIdentifier: ViewerJoinRequestCell.identifier)
         
@@ -800,19 +804,19 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         comment.profilePic =  dict["likeProfilePic"]! as! String
         comment.colorCode =  dict["colorCode"]! as! String
         comment.userId = dict["userId"]! as! String
-//        if(isFrontCam)
-//        {
-//         
-//            let dic = ["CameraToggle":"1","isFrontCam": "1"]
-//
-//            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-//           appDelegate.webRTCClient.sendData(data: data, binary: true)
-//        }
-//        else{
-//            let dic = ["CameraToggle":"1","isFrontCam": "0"]
-//            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
-//             appDelegate.webRTCClient.sendData(data: data, binary: true)
-//        }
+        if(isFrontCam)
+        {
+         
+            let dic = ["CameraToggle":"1","isFrontCam": "1"]
+
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+           appDelegate.webRTCClient.sendData(data: data, binary: true)
+        }
+        else{
+            let dic = ["CameraToggle":"1","isFrontCam": "0"]
+            let data = NSKeyedArchiver.archivedData(withRootObject: dic)
+             appDelegate.webRTCClient.sendData(data: data, binary: true)
+        }
         self.liveComments.append(comment)
     }
     func findIfAlreadyLeft(viewers : Array<[String:AnyObject]>) {
@@ -1412,7 +1416,26 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
     }
-
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//            guard let collectionView = userCommentsCollectionView else {
+//                return
+//            }
+//
+//            let offset = collectionView.contentOffset.y
+//            let height = collectionView.frame.size.height
+//            let width = collectionView.frame.size.width
+//            for cell in collectionView.visibleCells {
+//                let left = cell.frame.origin.y
+//                if left >= height / 2 {
+//                    let top = cell.frame.origin.y
+//                    let alpha = (top - offset) / height
+//                    cell.alpha = alpha
+//                } else {
+//                    cell.fadeInCell()
+//                }
+//            }
+//        }
 }
 extension String {
 func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
@@ -1833,5 +1856,101 @@ extension UIViewController {
         } else {
             return false
         }
+    }
+}
+extension UIView {
+   func fadeInCell() {
+      // Move our fade out code from earlier
+    UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+          self.alpha = 1.0 // Instead of a specific instance of, say, birdTypeLabel, we simply set [thisInstance] (ie, self)'s alpha
+            }, completion: nil)
+    }
+
+    func fadeOutCell() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+          self.alpha = 0.0
+           }, completion: nil)
+  }
+}
+class FadingLayout: UICollectionViewFlowLayout,UICollectionViewDelegateFlowLayout {
+
+    //should be 0<fade<1
+    private let fadeFactor: CGFloat = 0.5
+    private let cellHeight : CGFloat = 60.0
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    init(scrollDirection:UICollectionView.ScrollDirection) {
+        super.init()
+        self.scrollDirection = scrollDirection
+
+    }
+
+    override func prepare() {
+        setupLayout()
+        super.prepare()
+    }
+
+    func setupLayout() {
+        self.itemSize = CGSize(width: self.collectionView!.bounds.size.width,height:cellHeight)
+        self.minimumLineSpacing = 0
+    }
+
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+
+    func scrollDirectionOver() -> UICollectionView.ScrollDirection {
+        return UICollectionView.ScrollDirection.vertical
+    }
+    //this will fade both top and bottom but can be adjusted
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributesSuper: [UICollectionViewLayoutAttributes] = (super.layoutAttributesForElements(in: rect) as [UICollectionViewLayoutAttributes]?)!
+        if let attributes = NSArray(array: attributesSuper, copyItems: true) as? [UICollectionViewLayoutAttributes]{
+            var visibleRect = CGRect()
+            visibleRect.origin = collectionView!.contentOffset
+            visibleRect.size = collectionView!.bounds.size
+    
+            for attrs in attributes {
+                
+                if attrs.frame.intersects(rect) {
+                    let distance = visibleRect.midY - attrs.center.y
+                    var normalizedDistance = abs(distance) / (visibleRect.height * fadeFactor)
+                    if normalizedDistance < 0.80 {
+                        normalizedDistance = 0
+                        let fade = 1 - normalizedDistance
+                        attrs.alpha = fade
+                    }
+                    else
+                    {
+                        let value  = normalizedDistance - 0.8
+                        normalizedDistance =  value * 5
+                        
+                        let fade = 1 - normalizedDistance
+                        attrs.alpha = fade
+                    }
+                  
+                   
+                }
+            
+            }
+            return attributes
+        }else{
+            return nil
+        }
+    }
+    //appear and disappear at 0
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.layoutAttributesForItem(at: itemIndexPath)! as UICollectionViewLayoutAttributes
+        attributes.alpha = 0
+        return attributes
+    }
+
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.layoutAttributesForItem(at: itemIndexPath)! as UICollectionViewLayoutAttributes
+        attributes.alpha = 0
+        return attributes
     }
 }

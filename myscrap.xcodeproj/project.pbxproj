@@ -1579,6 +1579,7 @@
 		FBA256092544C8E300C04CAC /* FullImageAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA256082544C8E300C04CAC /* FullImageAlbumCell.swift */; };
 		FBA6873A254ED7D500AF2D90 /* blurImage1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FBA68739254ED7D500AF2D90 /* blurImage1.jpg */; };
 		FBA6873E254EDA1400AF2D90 /* BlurredLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA6873D254EDA1400AF2D90 /* BlurredLabel.swift */; };
+		FBA9B1F425EA6DF9000DFCED /* ShakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA9B1F325EA6DF8000DFCED /* ShakeView.swift */; };
 		FBAD42DD257635B8007F020E /* UpdatedUserPrrofileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD42DC257635B8007F020E /* UpdatedUserPrrofileVC.swift */; };
 		FBAE19132542F56600EA86EA /* FullImageViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE19122542F56500EA86EA /* FullImageViewVC.swift */; };
 		FBB0CE9E2525C63F0065656C /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB0CE802525C63F0065656C /* Int+Extensions.swift */; };
@@ -3274,6 +3275,7 @@
 		FBA256082544C8E300C04CAC /* FullImageAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageAlbumCell.swift; sourceTree = "<group>"; };
 		FBA68739254ED7D500AF2D90 /* blurImage1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blurImage1.jpg; sourceTree = "<group>"; };
 		FBA6873D254EDA1400AF2D90 /* BlurredLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredLabel.swift; sourceTree = "<group>"; };
+		FBA9B1F325EA6DF8000DFCED /* ShakeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeView.swift; sourceTree = "<group>"; };
 		FBAD42DC257635B8007F020E /* UpdatedUserPrrofileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatedUserPrrofileVC.swift; sourceTree = "<group>"; };
 		FBAE19122542F56500EA86EA /* FullImageViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewVC.swift; sourceTree = "<group>"; };
 		FBB0CE802525C63F0065656C /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
@@ -7414,6 +7416,7 @@
 				FB693A9E25D55BC000491561 /* EndLiveDownloadPopUpVC.swift */,
 				FB693A9A25D542F700491561 /* EndLiveUserFollowPopUpVC.swift */,
 				FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */,
+				FBA9B1F325EA6DF8000DFCED /* ShakeView.swift */,
 				FB0EFC3125A0E43800922BF4 /* LiveTopicVC.swift */,
 				FB7D088925A3344800DD4249 /* JoinUserLiveVC.swift */,
 				FB7D07B425A245C300DD4249 /* LiveActionAlert.swift */,
@@ -9096,6 +9099,7 @@
 				940834E622BA280400323C14 /* CompanyReviewVC.swift in Sources */,
 				9410B543237440A40070CF39 /* PollClosePopupVC.swift in Sources */,
 				94F37E1F212E8E4B00B7D49D /* ListingFeedViewMoreButton.swift in Sources */,
+				FBA9B1F425EA6DF9000DFCED /* ShakeView.swift in Sources */,
 				94CD481E232F5B2100FCBD22 /* NVActivityIndicatorAnimationBallPulseSync.swift in Sources */,
 				22565C801F8CAF8300CCD749 /* ReportedFeedImageTextCell.swift in Sources */,
 				94ABE06321044FBD008299B6 /* AddListingExpiry.swift in Sources */,
@@ -10030,7 +10034,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.0;
+				CURRENT_PROJECT_VERSION = 5.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10125,7 +10129,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.0;
+				CURRENT_PROJECT_VERSION = 5.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
