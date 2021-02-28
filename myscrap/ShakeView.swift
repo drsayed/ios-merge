@@ -14,7 +14,17 @@ enum ShakeDirection {
 
 extension UIView {
     func shake(times: Int, direction: ShakeDirection) {
-        shake(times: times , iteration: 0, direction: 1.0 , shakeDirection: direction, delta: 6, speed: 0.1)
+       // shake(times: times , iteration: 0, direction: 1.0 , shakeDirection: direction, delta: 6, speed: 0.1)
+        self.transform = CGAffineTransform(scaleX: 1, y: 1)
+        UIView.animate(withDuration: 1.0, delay:0, options: [.repeat, .autoreverse], animations: {
+         //   UIView.setAnimationRepeatCount(3)
+            self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            //self.layoutSubviews()
+            self.layoutIfNeeded()
+            }, completion: {completion in
+                self.transform = CGAffineTransform(scaleX: 1, y: 1)
+             //   self.layoutIfNeeded()
+        })
     }
     private func shake(times: Int, iteration: Int, direction: CGFloat, shakeDirection: ShakeDirection, delta: CGFloat, speed: TimeInterval) {
         UIView.animate(withDuration: speed, animations: { () -> Void in

@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,9 +19,23 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kwg-8S-xrZ">
                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WyA-rd-rKM">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WyA-rd-rKM">
                                 <rect key="frame" x="5" y="5" width="60" height="60"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpP-YC-eEH">
+                                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3AL-zN-mJn"/>
+                                            <constraint firstAttribute="width" constant="40" id="g4D-M0-IUY"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="fpP-YC-eEH" firstAttribute="centerY" secondItem="WyA-rd-rKM" secondAttribute="centerY" id="dyp-4O-DxO"/>
+                                    <constraint firstItem="fpP-YC-eEH" firstAttribute="centerX" secondItem="WyA-rd-rKM" secondAttribute="centerX" id="mPQ-qj-sTD"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.41960784309999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -33,15 +46,15 @@
                             <constraint firstAttribute="trailing" secondItem="WyA-rd-rKM" secondAttribute="trailing" constant="5" id="SgI-MZ-zRP"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-vG-8eu">
-                        <rect key="frame" x="10" y="10" width="50" height="50"/>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-vG-8eu">
+                        <rect key="frame" x="15" y="15" width="40" height="40"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCL-Hc-lXe" customClass="ProfileView" customModule="myscrap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCL-Hc-lXe" customClass="ProfileView" customModule="myscrap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.4941176471" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="I3c-g4-TO1"/>
-                                    <constraint firstAttribute="width" constant="50" id="JGB-i4-bTw"/>
+                                    <constraint firstAttribute="height" constant="40" id="I3c-g4-TO1"/>
+                                    <constraint firstAttribute="width" constant="40" id="JGB-i4-bTw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2t-ha-mps" customClass="onlineView" customModule="myscrap" customModuleProvider="target">
@@ -58,8 +71,8 @@
                             <constraint firstAttribute="trailing" secondItem="oCL-Hc-lXe" secondAttribute="trailing" id="6Da-Oa-KTz"/>
                             <constraint firstItem="f2t-ha-mps" firstAttribute="top" secondItem="oCL-Hc-lXe" secondAttribute="top" id="Aza-3A-m2W"/>
                             <constraint firstItem="f2t-ha-mps" firstAttribute="leading" secondItem="oCL-Hc-lXe" secondAttribute="leading" id="K2E-6V-YEt"/>
-                            <constraint firstAttribute="width" constant="50" id="Pmc-QJ-aCx"/>
-                            <constraint firstAttribute="height" constant="50" id="TNV-AO-asA"/>
+                            <constraint firstAttribute="width" constant="40" id="Pmc-QJ-aCx"/>
+                            <constraint firstAttribute="height" constant="40" id="TNV-AO-asA"/>
                             <constraint firstItem="oCL-Hc-lXe" firstAttribute="top" secondItem="zQc-vG-8eu" secondAttribute="top" id="Ur3-y8-vCr"/>
                             <constraint firstItem="oCL-Hc-lXe" firstAttribute="leading" secondItem="zQc-vG-8eu" secondAttribute="leading" id="zqZ-OJ-Sow"/>
                         </constraints>
@@ -94,13 +107,12 @@
                 <outlet property="onlineView" destination="f2t-ha-mps" id="P0d-nB-TVR"/>
                 <outlet property="profileTypeView" destination="QTp-8U-nJe" id="GkT-iH-27v"/>
                 <outlet property="profileView" destination="oCL-Hc-lXe" id="cpS-IC-6K2"/>
+                <outlet property="profileViewWidth" destination="JGB-i4-bTw" id="hJx-e0-AoS"/>
+                <outlet property="profileViewhieght" destination="I3c-g4-TO1" id="VWO-gM-lFQ"/>
+                <outlet property="rippleView" destination="fpP-YC-eEH" id="0ZW-ju-Pe7"/>
+                <outlet property="vieweToAnimate" destination="zQc-vG-8eu" id="jrH-fB-uAS"/>
             </connections>
             <point key="canvasLocation" x="-152.17391304347828" y="34.821428571428569"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

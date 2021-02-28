@@ -100,7 +100,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     
     @IBOutlet weak var commentViewLeadingSpace: NSLayoutConstraint!
     @IBOutlet weak var UserCommentsBackground: UIView!
-    @IBOutlet weak var userCommentsCollectionView: UICollectionView!
+    @IBOutlet weak var userCommentsCollectionView: FadeScrollView!
     @IBOutlet weak var liveUserProfile: ProfileView!
     @IBOutlet weak var liveUserName: UILabel!
     @IBOutlet weak var liveUserImage: UIImageView!
@@ -701,9 +701,9 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.userCommentsCollectionView.delegate = self
         self.userCommentsCollectionView.dataSource = self
         
-        let layout = FadingLayout(scrollDirection: .vertical)
-      
-        self.userCommentsCollectionView.setCollectionViewLayout(layout, animated: false)
+//        let layout = FadingLayout(scrollDirection: .vertical)
+//
+//        self.userCommentsCollectionView.setCollectionViewLayout(layout, animated: false)
         
         self.userCommentsCollectionView.register(LiveUserCommentsCell.Nib, forCellWithReuseIdentifier: LiveUserCommentsCell.identifier)
         self.userCommentsCollectionView.register(ViewerJoinRequestCell.Nib, forCellWithReuseIdentifier: ViewerJoinRequestCell.identifier)
@@ -1767,8 +1767,9 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
         }
         }
 }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        userCommentsCollectionView.gradientLayer.colors = [userCommentsCollectionView.topOpacity, userCommentsCollectionView.opaqueColor, userCommentsCollectionView.opaqueColor, userCommentsCollectionView.bottomOpacity]
     }
 
 }

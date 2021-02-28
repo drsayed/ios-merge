@@ -208,9 +208,9 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         self.headerCell =  UINib(nibName: "FeedVCHeadeer", bundle: nil).instantiate(withOwner: nil, options: nil)[0]  as! FeedVCHeadeer
         self.headerCell!.datasource = self.memberDataSource
         self.headerCell!.delegate = self
-        UIView.performWithoutAnimation {
+    //    UIView.performWithoutAnimation {
             self.headerCell!.collectionView.reloadData()
-         }
+    //     }
         self.headerCell!.addAnimationIfNeeded()
         self.headerView.addSubview( self.headerCell!)
     }
@@ -440,7 +440,7 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         //Add observer for downloading video
         NotificationCenter.default.addObserver(self, selector: #selector(self.videoDownloadNotify(_:)), name: .videoDownloaded, object: nil)
         self.scrollViewDidEndScrolling()
-        headerCell?.collectionView.reloadData()
+      headerCell?.collectionView.reloadData()
        
     }
     @objc func ProfileBtnTap(tapGesture:UITapGestureRecognizer) {
@@ -1970,9 +1970,9 @@ extension FeedsVC: OnlineDelegate{
             {
                 self.headerCellHeight.constant = 100
                 self.headerCell!.datasource = self.memberDataSource
-                UIView.performWithoutAnimation {
+               // UIView.performWithoutAnimation {
                     self.headerCell!.collectionView.reloadData()
-                 }
+               //  }
                 self.headerCell!.addAnimationIfNeeded()
             }
             else

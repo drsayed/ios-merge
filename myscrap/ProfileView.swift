@@ -64,7 +64,7 @@ class ProfileView: CircleView {
         }
     
         self.backgroundColor = UIColor.init(hexString: colorCode)
-        
+        self.backgroundColor = UIColor.MyScrapGreen
     }
 
 }

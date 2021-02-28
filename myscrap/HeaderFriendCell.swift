@@ -17,10 +17,11 @@ final class HeaderFriendCell: BaseCell{
     
     override func awakeFromNib() {
            super.awakeFromNib()
-        
-    //    self.profileView.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
+        profileView.layer.cornerRadius = profileView.frame.size.height/2
+       // self.profileView.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
 
        }
+    
     func configCell(item: ActiveUsers){
         profileView.updateViews(name: item.name!, url: item.profilePic!, colorCode: item.colorCode!)
         if item.moderator == "1" {

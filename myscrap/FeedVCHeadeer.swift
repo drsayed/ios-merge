@@ -32,7 +32,7 @@ protocol FeedVCHeaderCellDelegate:class{
     func addAnimationIfNeeded()  {
         for videoParentCell in collectionView.visibleCells   {
             if let portrateCell = videoParentCell as? LiveFriendCell {
-             //   portrateCell.addAnimation()
+             portrateCell.addAnimation()
             }
         }
     }

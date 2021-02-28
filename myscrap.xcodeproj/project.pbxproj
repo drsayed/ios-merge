@@ -1509,6 +1509,8 @@
 		FB8EF4DF250C216300395E56 /* CommudityTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EF4DD250C216300395E56 /* CommudityTableHeader.swift */; };
 		FB8EF4E2250C269600395E56 /* CommudityFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB8EF4E0250C269200395E56 /* CommudityFooter.xib */; };
 		FB8EF4E3250C269600395E56 /* CommudityFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EF4E1250C269600395E56 /* CommudityFooter.swift */; };
+		FB8F036425EBB841009ADC4A /* FadeScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F036325EBB841009ADC4A /* FadeScrollView.swift */; };
+		FB8F036B25EBD2DF009ADC4A /* UIView+Ripple.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F036A25EBD2DF009ADC4A /* UIView+Ripple.swift */; };
 		FB9040482518860A00BAE2D2 /* UserFeedVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9040462518860100BAE2D2 /* UserFeedVideoCell.swift */; };
 		FB9040492518860A00BAE2D2 /* UserFeedVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9040472518860A00BAE2D2 /* UserFeedVideoCell.xib */; };
 		FB904050251887BB00BAE2D2 /* UserFeedVideoTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB90404E251887B100BAE2D2 /* UserFeedVideoTextCell.xib */; };
@@ -3204,6 +3206,8 @@
 		FB8EF4DD250C216300395E56 /* CommudityTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommudityTableHeader.swift; sourceTree = "<group>"; };
 		FB8EF4E0250C269200395E56 /* CommudityFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommudityFooter.xib; sourceTree = "<group>"; };
 		FB8EF4E1250C269600395E56 /* CommudityFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommudityFooter.swift; sourceTree = "<group>"; };
+		FB8F036325EBB841009ADC4A /* FadeScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeScrollView.swift; sourceTree = "<group>"; };
+		FB8F036A25EBD2DF009ADC4A /* UIView+Ripple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ripple.swift"; sourceTree = "<group>"; };
 		FB9040462518860100BAE2D2 /* UserFeedVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedVideoCell.swift; sourceTree = "<group>"; };
 		FB9040472518860A00BAE2D2 /* UserFeedVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserFeedVideoCell.xib; sourceTree = "<group>"; };
 		FB90404E251887B100BAE2D2 /* UserFeedVideoTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserFeedVideoTextCell.xib; sourceTree = "<group>"; };
@@ -7413,6 +7417,8 @@
 				FBE4412B25D2738500F00870 /* Conference Setup */,
 				FB7D07D025A2518200DD4249 /* liveSDK */,
 				FB7D088525A3179E00DD4249 /* UserLiveOperations.swift */,
+				FB8F036A25EBD2DF009ADC4A /* UIView+Ripple.swift */,
+				FB8F036325EBB841009ADC4A /* FadeScrollView.swift */,
 				FB693A9E25D55BC000491561 /* EndLiveDownloadPopUpVC.swift */,
 				FB693A9A25D542F700491561 /* EndLiveUserFollowPopUpVC.swift */,
 				FB7D07B025A2394D00DD4249 /* UserLiveVC.swift */,
@@ -9401,6 +9407,7 @@
 				22ED1DC81F961C06009E43B4 /* MemberCell.swift in Sources */,
 				94F0B9EB222BC50E0051B347 /* UserJoinedCell.swift in Sources */,
 				9419101E2388E7E6007E9308 /* AddCompanyListVC.swift in Sources */,
+				FB8F036B25EBD2DF009ADC4A /* UIView+Ripple.swift in Sources */,
 				94CA374321B7A11400F289E0 /* MemberUserCell.swift in Sources */,
 				FBB0CEAE2525C63F0065656C /* VideoInfo.swift in Sources */,
 				94F37E1C212E829C00B7D49D /* FeedListingCell.swift in Sources */,
@@ -9569,6 +9576,7 @@
 				94CDF2AA252AEE2100C879F1 /* APIUtils.swift in Sources */,
 				22C76C0C200C95A30004DCC7 /* DiscoverAnnotation.swift in Sources */,
 				94CD480A232F5B2100FCBD22 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
+				FB8F036425EBB841009ADC4A /* FadeScrollView.swift in Sources */,
 				9423B1BF20E3745A00BB335D /* Result.swift in Sources */,
 				9406648723CEEB2500138DD9 /* Land_Online_UsersCell.swift in Sources */,
 				948F3C5823D04EE0002632C6 /* Land_Menu_Scroll.swift in Sources */,
@@ -10034,7 +10042,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7.0;
+				CURRENT_PROJECT_VERSION = 8.0;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -10129,7 +10137,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7.0;
+				CURRENT_PROJECT_VERSION = 8.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K53FCL976W;
 				ENABLE_BITCODE = NO;

@@ -11,6 +11,10 @@ import UIKit
 
 final class LiveFriendCell: BaseCell{
     
+    @IBOutlet weak var vieweToAnimate: UIView!
+    @IBOutlet weak var rippleView: UIView!
+    @IBOutlet weak var profileViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var profileViewhieght: NSLayoutConstraint!
     @IBOutlet weak var greenCircle: UIView!
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var colorAnimationView: UIView!
@@ -23,15 +27,39 @@ final class LiveFriendCell: BaseCell{
     }
     override func awakeFromNib() {
            super.awakeFromNib()
+        profileView.layer.cornerRadius = profileView.frame.size.height/2
+       // profileView.image.layer.cornerRadius = profileView.image.frame.size.height/2
         colorAnimationView.layer.cornerRadius =  colorAnimationView.frame.size.height/2
+        vieweToAnimate.layer.cornerRadius =  vieweToAnimate.frame.size.height/2
+        vieweToAnimate.layer.borderWidth = 0.5
+        vieweToAnimate.layer.borderColor = UIColor.white.cgColor
         colorAnimationView.clipsToBounds = true
-        self.profileView.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
-
+        self.profileViewhieght.constant = 40
+        self.profileViewWidth.constant = 40
+        self.vieweToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.vieweToAnimate.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
+        self.vieweToAnimate.layer.masksToBounds = true
+        vieweToAnimate.isUserInteractionEnabled = true
+        colorAnimationView.isUserInteractionEnabled = true
+        profileView.image.isUserInteractionEnabled = true
+      //  self.profileView.masksToBounds = true
 //        colorAnimationView.stopBlink()
 //        colorAnimationView.animate()
         greenCircle.layer.cornerRadius =  greenCircle.frame.size.height/2
+        rippleView.layer.cornerRadius =  rippleView.frame.size.height/2
         greenCircle.clipsToBounds = true
+        rippleView.addRippleAnimation(color: UIColor.darkGray, duration: 1.5, rippleCount: 3, rippleDistance: nil, startReset: false, handler: { animation in
+        })
+        
        }
+    override func prepareForReuse() {
+        self.profileView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.colorAnimationView.alpha = 1.0
+        self.profileViewhieght.constant = 40
+        self.profileViewWidth.constant = 40
+      //  self.layoutIfNeeded()
+    }
+
     func configCell(item: ActiveUsers){
         profileView.updateViews(name: item.name!, url: item.profilePic!, colorCode: item.colorCode!)
         profileTypeView.isHidden = false
@@ -90,15 +118,18 @@ final class LiveFriendCell: BaseCell{
     func addAnimation()  {
        // colorAnimationView.layer.removeAllAnimations()
         colorAnimationView.alpha = 1.0
-        UIView.animate(withDuration: 0.5, //Time duration you want,
-            delay: 0.0,
-            options: [.curveEaseInOut, .autoreverse, .repeat],
-            animations: {  self.colorAnimationView.alpha = 0.0
-                
-            },
-            completion: { _ in  self.colorAnimationView.alpha = 1.0
-                
-            })
+        self.vieweToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)
+   //     self.vieweToAnimate.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
+
+//        UIView.animate(withDuration: 0.5, //Time duration you want,
+//            delay: 0.0,
+//            options: [.curveEaseInOut, .autoreverse, .repeat],
+//            animations: {  self.colorAnimationView.alpha = 0.0
+//                
+//            },
+//            completion: { _ in  self.colorAnimationView.alpha = 1.0
+//                
+//            })
     }
 }
 extension UIView {
