@@ -1388,24 +1388,24 @@ extension JoinUserLiveVC: EndLiveUserFollowDelegate {
     func endLiveFollowerCountPressed(FriendID : String)
     {
         if self.profileItem?.followersCount != nil {
-            if self.profileItem!.followersCount != 0 {
+        //    if self.profileItem!.followersCount != 0 {
                 var followerStr = "Followers"
                 if self.profileItem!.followersCount == 1 {
                     followerStr = "Follower"
                 }
                 self.redirectToFollowersView(title: String(format: "%d %@", self.profileItem!.followersCount,followerStr), isFromFollowers: true)
-            }
+         //   }
         }
     }
     func endLiveFollowingCountPressed(FriendID : String)
     {
-        if self.profileItem!.followingCount != 0 {
+      //  if self.profileItem!.followingCount != 0 {
             var followingsStr = "Following"
             if self.profileItem!.followersCount == 1 {
                 followingsStr = "Following"
             }
             self.redirectToFollowersView(title: String(format: "%d %@", self.profileItem!.followingCount,followingsStr), isFromFollowers: false)
-        }
+      //  }
     }
 
 }

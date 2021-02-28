@@ -605,26 +605,26 @@ extension FriendVC: MemberProfileCellDelegate{
     func DidPressFollowers(cell: MemberProfileCell) {
         
         if self.profileItem?.followersCount != nil {
-            if self.profileItem!.followersCount != 0 {
+           // if self.profileItem!.followersCount != 0 {
                 var followerStr = "Followers"
                 if self.profileItem!.followersCount == 1 {
                     followerStr = "Follower"
                 }
                 self.redirectToFollowersView(title: String(format: "%d %@", self.profileItem!.followersCount,followerStr), isFromFollowers: true)
-            }
+           // }
         }
     }
     
     func DidPressFollowings(cell: MemberProfileCell) {
         
         if self.profileItem?.followingCount != nil {
-            if self.profileItem!.followingCount != 0 {
+        //    if self.profileItem!.followingCount != 0 {
                 var followingsStr = "Following"
                 if self.profileItem!.followersCount == 1 {
                     followingsStr = "Following"
                 }
                 self.redirectToFollowersView(title: String(format: "%d %@", self.profileItem!.followingCount,followingsStr), isFromFollowers: false)
-            }
+        //    }
         }
     }
     
