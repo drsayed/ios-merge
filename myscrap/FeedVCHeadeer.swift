@@ -13,6 +13,7 @@ protocol FeedVCHeaderCellDelegate:class{
 
  class FeedVCHeadeer: UICollectionReusableView {
     
+    static var liveCount = 0
     weak var delegate: FeedVCHeaderCellDelegate?
     var datasource = [ActiveUsers]()
     @IBOutlet weak var collectionView: UICollectionView!
@@ -52,15 +53,22 @@ extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, U
         let item = datasource[indexPath.item]
         if item.live! {
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveFriendCell", for: indexPath) as? LiveFriendCell else { return UICollectionViewCell() }
+            let identifire = "LiveFriendCell"
+          
+     //       self.collectionView.register(LiveFriendCell.Nib, forCellWithReuseIdentifier: identifire)
+   
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifire, for: indexPath) as? LiveFriendCell else { return UICollectionViewCell() }
          
             
             cell.configFeedHeaderCell(item: datasource[indexPath.item])
 //            cell.addAnimation()
+            FeedVCHeadeer.liveCount += 1
             return cell
         }
         else
         {
+         
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeaderFriendCell", for: indexPath) as? HeaderFriendCell else { return UICollectionViewCell() }
          
             

@@ -1429,6 +1429,7 @@
                         <outlet property="sendCommentButton" destination="iau-Gk-5T6" id="jxU-AQ-Jeq"/>
                         <outlet property="smallCameraContainer" destination="fk5-PT-N3f" id="Oni-mp-IRt"/>
                         <outlet property="smallStreamView" destination="NpG-Lq-Kis" id="hGH-n2-387"/>
+                        <outlet property="timerTrailingDistance" destination="YHp-d6-DWZ" id="563-cP-dhm"/>
                         <outlet property="topicTtitle" destination="6zZ-fz-mxj" id="2tU-54-KXc"/>
                         <outlet property="topicValue" destination="X96-Gd-A3k" id="a8A-yg-nwM"/>
                         <outlet property="userCommentsCollectionView" destination="d20-Zp-Rwm" id="Zhb-HR-OQv"/>

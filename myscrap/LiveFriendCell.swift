@@ -30,12 +30,15 @@ final class LiveFriendCell: BaseCell{
         profileView.layer.cornerRadius = profileView.frame.size.height/2
        // profileView.image.layer.cornerRadius = profileView.image.frame.size.height/2
         colorAnimationView.layer.cornerRadius =  colorAnimationView.frame.size.height/2
+        colorAnimationView.layer.borderWidth = 2
+        colorAnimationView.layer.borderColor = UIColor.white.cgColor
+        
         vieweToAnimate.layer.cornerRadius =  vieweToAnimate.frame.size.height/2
         vieweToAnimate.layer.borderWidth = 0.5
         vieweToAnimate.layer.borderColor = UIColor.white.cgColor
         colorAnimationView.clipsToBounds = true
-        self.profileViewhieght.constant = 40
-        self.profileViewWidth.constant = 40
+        self.profileViewhieght.constant = 50
+        self.profileViewWidth.constant = 50
         self.vieweToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)
         self.vieweToAnimate.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
         self.vieweToAnimate.layer.masksToBounds = true
@@ -55,8 +58,8 @@ final class LiveFriendCell: BaseCell{
     override func prepareForReuse() {
         self.profileView.transform = CGAffineTransform(scaleX: 1, y: 1)
         self.colorAnimationView.alpha = 1.0
-        self.profileViewhieght.constant = 40
-        self.profileViewWidth.constant = 40
+        self.profileViewhieght.constant = 50
+        self.profileViewWidth.constant = 50
       //  self.layoutIfNeeded()
     }
 

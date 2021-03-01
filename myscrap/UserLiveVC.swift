@@ -19,7 +19,9 @@ struct CommentMessage {
     var colorCode : String = "Test"
     var messageId : String = "Test"
     var messageText : String = "Test"
+    var requesTitle : String = "View"
     var friendId : String = ""
+ 
     var OnlyForStreamer : String = "0"
     var isJoingingRequest : String = "0"
     var joingingRequestStatus : String = "0"
@@ -31,7 +33,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 
     var isEndLivePressed = false
     var liveID = "0"
+    var isShowingKeyboard = false
     var isFrontCam = true
+    var viewRequestTag = -1
     var liveComments = [CommentMessage]()
     {
         didSet
@@ -50,6 +54,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
       var viewFree:[Bool] = [true, true, true, true]
        var playerClients:[AntMediaClientConference] = [];
 
+    @IBOutlet weak var timerTrailingDistance: NSLayoutConstraint!
     @IBOutlet weak var smallStreamView: UIView!
     @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
     @IBOutlet weak var commentTraining: NSLayoutConstraint!
@@ -109,7 +114,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         } else {
             // Fallback on earlier versions
         }
-     
+        self.appDelegate.webRTCClient = AntMediaClient.init()
+        self.appDelegate.playerClient1 = AntMediaClient.init()
+        self.appDelegate.playerClient2 = AntMediaClient.init()
+        self.appDelegate.isDualLive = false
+        
         appDelegate.directionDelegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.likeCommentNotificationReciveLive), name: NSNotification.Name(rawValue: "LikeCommentNotificationReciveLive"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.followNotificationReciveLive), name: NSNotification.Name(rawValue: "FollowNotificationReciveLive"), object: nil)
@@ -909,13 +918,27 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @objc func keyboardWillAppear() {
         //Do something here
-        self.commentsViewHeight.constant = 200
+        self.isShowingKeyboard = true
+        if !smallCameraContainer.isHidden {
+            
+            timerTrailingDistance.constant = -smallCameraContainer.frame.size.width
+            self.commentsViewHeight.constant = 150
+        }
+        else
+        {
+            timerTrailingDistance.constant = 0
+            timerTrailingDistance.constant = 0
+            self.commentsViewHeight.constant = 200
+        }
+        
         self.reloadComentsView()
     }
 
     @objc func keyboardWillDisappear() {
         //Do something here
+        isShowingKeyboard = false
         self.commentsViewHeight.constant = 240
+        timerTrailingDistance.constant = 0
         self.reloadComentsView()
     }
     override func didReceiveMemoryWarning() {
@@ -977,15 +1000,52 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
        self.userCommentsCollectionView.reloadData()
        self.userCommentsCollectionView.performBatchUpdates(nil, completion: {
            (result) in
-        if self.userCommentsCollectionView.contentSize.height < 240
-        {
-            commentsViewHeight.constant =  self.userCommentsCollectionView.contentSize.height
+        
+        if isShowingKeyboard
+            {
+            
+            if !smallCameraContainer.isHidden
+                {
+                    if self.userCommentsCollectionView.contentSize.height < 150
+                    {
+                        commentsViewHeight.constant =  self.userCommentsCollectionView.contentSize.height
+                    }
+                    else
+                    {
+                        commentsViewHeight.constant = 150
+                        self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+                    }
+                    
+                }
+                else
+                {
+                    if self.userCommentsCollectionView.contentSize.height < 200
+                    {
+                        commentsViewHeight.constant =  self.userCommentsCollectionView.contentSize.height
+                    }
+                    else
+                    {
+                        commentsViewHeight.constant = 200
+                        self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+                    }
+                    
+                }
+            
         }
         else
         {
-            commentsViewHeight.constant = 240
-            self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+            if self.userCommentsCollectionView.contentSize.height < 240
+            {
+                commentsViewHeight.constant =  self.userCommentsCollectionView.contentSize.height
+            }
+            else
+            {
+                commentsViewHeight.constant = 240
+                self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
+            }
+            
         }
+        
          //  self.userCommentsCollectionView.contentOffset = CGPoint(x: 0, y: self.userCommentsCollectionView.contentSize.height - self.userCommentsCollectionView.bounds.size.height)
     
         
@@ -1112,6 +1172,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     }
     @objc func sendRequestPressed(sender : UIButton ) {
         var message  = self.liveComments[sender.tag]
+       // message.requesTitle = "Viewed"
+        viewRequestTag = sender.tag
+       
         if !appDelegate.webRTCViewerClient.isConnected() {
           
           
@@ -1210,8 +1273,8 @@ extension UserLiveVC: CustomAlertViewDelegate {
 //       appDelegate.liveID = liveID
 //        smallCameraContainer.isHidden = true
 
-        self.getConnectedWith(streamId: streamId)
-       // self.startConferenceCall(steamId: streamId)
+        
+      self.startConferenceCall(steamId: streamId)
    
     }
     func startConferenceCall(steamId : String)  {
@@ -1312,6 +1375,9 @@ extension UserLiveVC: EndLiveViewDelegate {
         if self.appDelegate.webRTCClient.isConnected() {
             self.appDelegate.isStreamerDisconeted = true
         self.appDelegate.webRTCClient.stop()
+        self.appDelegate.webRTCClient = AntMediaClient.init()
+        self.appDelegate.playerClient1 = AntMediaClient.init()
+        self.appDelegate.playerClient2 = AntMediaClient.init()
         }
         if let vc = downloadEndsLivePopup   {
             vc.modalPresentationStyle = .overFullScreen
@@ -1357,12 +1423,12 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
                 let item = self.liveComments[indexPath.row]
                 cell.configCell(item: item )
-                if item.userId ==  playingUserId {
-                    cell.requestButton.setTitle("Viewed", for: .normal)
-                }
-                else{
-                cell.requestButton.setTitle("View", for: .normal)
-                }
+           //     if item.userId ==  playingUserId {
+                cell.requestButton.setTitle(item.requesTitle ?? "View" , for: .normal)
+//                }
+//                else{
+//                cell.requestButton.setTitle("View", for: .normal)
+//                }
                 cell.requestButton.tag = indexPath.row
                 cell.profileView.isHidden = false
                 cell.imagePlaceholder.isHidden = true
@@ -1455,7 +1521,16 @@ extension UserLiveVC : StreamerSideJoinRequestDelegate
     func acceptJoinRequest(FriendID: String, controller: StreamerSideJoinRequestPopUp) {
         
         let dic = ["fullName": AuthService.instance.fullName,"isJoingingRequest": "1","joingingRequestStatus": "1","OnlyForStreamer": "0","StreamStarted": "0","SpecificUser": "1","friendId": FriendID , "profilePic": AuthService.instance.profilePic , "message": commentField.text!, "colorCode": AuthService.instance.colorCode, "userId": AuthService.instance.userId]
-        
+        self.playingUserId = FriendID
+        Run.onMainThread {
+            if  self.viewRequestTag != -1 {
+                var message  = self.liveComments[self.viewRequestTag]
+            message.requesTitle = "Viewed"
+            self.liveComments.remove(at: self.viewRequestTag)
+            self.liveComments.insert(message, at: self.viewRequestTag)
+            self.reloadComentsView()
+            }
+        }
         /* NSDictionary to NSData */
         let data = NSKeyedArchiver.archivedData(withRootObject: dic)
         appDelegate.webRTCClient.sendData(data: data, binary: false)
@@ -1618,6 +1693,7 @@ extension UserLiveVC: ConferenceClientDelegate
 {
     public func streamIdToPublish(streamId: String) {
         
+        self.getConnectedWith(streamId: streamId)
 //        Run.onMainThread {
 //        //
 //            //self.appDelegate.webRTCClient.setOptions(url: Endpoints.LiveUser , streamId: streamId , token: "", mode: .publish, enableDataChannel: true)

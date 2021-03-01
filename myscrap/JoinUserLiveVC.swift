@@ -1105,7 +1105,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
     @IBAction func EndLivepressed(_ sender: Any)
    {
         self.commentField.resignFirstResponder()
-        if appDelegate.playerClients.count == 2{
+        if self.appDelegate.playerClient2.isConnected(){
         
         self.addEndActionAlert()
     }
@@ -1655,11 +1655,11 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
                 
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
                 cell.configCell(item: self.liveComments[indexPath.row] )
-                if isStreaming {
-                    cell.requestButton.setTitle("Viewed", for: .normal)
-                }
-                else
-                {
+//                if isStreaming {
+//                    cell.requestButton.setTitle("Viewed", for: .normal)
+//                }
+//                else
+//                {
                 if isSentRequest {
                     cell.requestButton.setTitle("Requested", for: .normal)
                 }
@@ -1667,7 +1667,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
                 {
                     cell.requestButton.setTitle("Request", for: .normal)
                 }
-            }
+        //    }
                 cell.profileView.isHidden = true
                 cell.imagePlaceholder.isHidden = false
                

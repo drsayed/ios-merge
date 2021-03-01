@@ -76,7 +76,7 @@ class StreamerSideJoinRequestPopUp: BaseVC {
         
         userProfileVIew.updateViews(name:liveUserNameValue, url: liveUserImageValue , colorCode: liveUserProfileColor)
         streamerProfileView.updateViews(name:AuthService.instance.fullName, url: AuthService.instance.profilePic , colorCode: AuthService.instance.colorCode)
-        titleLable.text = "\(liveUserNameValue) wants to be in this video."
+        titleLable.text = "\(liveUserNameValue) wants to be in this live video."
         detailsLable.text = "People who can see \(liveUserNameValue)'s live videos will be able to watch"
         sendRequestButton.setTitle("Go Live with \(liveUserNameValue)", for: .normal)
 

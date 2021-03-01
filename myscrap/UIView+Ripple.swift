@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    open func addRippleAnimation(color: UIColor, rippleWidth: CGFloat = 2, duration: Double = 1.5, repeatCount: Int = 10000000000, rippleCount: Int = 3, rippleDistance: CGFloat? = nil, expandMaxRatio ratio: CGFloat = 1, startReset: Bool = true, handler:((CAAnimation)->Void)? = nil) {
+    open func addRippleAnimation(color: UIColor, rippleWidth: CGFloat = 1, duration: Double = 1.5, repeatCount: Int = 10000000000, rippleCount: Int = 3, rippleDistance: CGFloat? = nil, expandMaxRatio ratio: CGFloat = 1, startReset: Bool = true, handler:((CAAnimation)->Void)? = nil) {
         if startReset {
             removeRippleAnimation()
         } else {
