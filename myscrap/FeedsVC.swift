@@ -389,7 +389,15 @@ class FeedsVC: BaseRevealVC, FriendControllerDelegate{
         }
         
     }
-    
+    override func viewWillLayoutSubviews() {
+        
+        self.headerCell!.layoutIfNeeded()
+        self.headerCell!.collectionView.performBatchUpdates(nil, completion: {
+            (result) in
+       self.headerCell!.addAnimationIfNeeded()
+        })
+        
+    }
     func objectExist(id: String) -> Bool {
         return uiRealm.object(ofType: FeedLoadDB.self, forPrimaryKey: id) != nil
     }

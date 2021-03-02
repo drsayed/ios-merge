@@ -26,14 +26,20 @@ protocol FeedVCHeaderCellDelegate:class{
         collectionView.register(LiveFriendCell.Nib, forCellWithReuseIdentifier: LiveFriendCell.identifier)
 
     }
-    
+    @objc func sendRequestPressed(sender : UIButton ) {
+        let item = datasource[sender.tag]
+        UserDefaults.standard.set(item.userid, forKey: "friendId")
+        delegate?.tappedFriendSeelected(activeuser:item, isLive: item.live!)
+    }
     override func prepareForReuse() {
         collectionView.reloadData()
     }
     func addAnimationIfNeeded()  {
         for videoParentCell in collectionView.visibleCells   {
             if let portrateCell = videoParentCell as? LiveFriendCell {
-             portrateCell.addAnimation()
+           
+               portrateCell.addAnimation()
+                portrateCell.layoutIfNeeded()
             }
         }
     }
@@ -59,10 +65,15 @@ extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, U
    
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifire, for: indexPath) as? LiveFriendCell else { return UICollectionViewCell() }
          
-            
+            cell.openLiveButton.tag = indexPath.item
+            cell.openLiveButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
+
             cell.configFeedHeaderCell(item: datasource[indexPath.item])
 //            cell.addAnimation()
             FeedVCHeadeer.liveCount += 1
+            cell.layoutSubviews()
+            cell.layoutIfNeeded()
+         
             return cell
         }
         else
@@ -79,8 +90,8 @@ extension FeedVCHeadeer: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let delegate = self.delegate{
             let item = datasource[indexPath.item]
-            let vc = PhotosVC()
-            vc.friendId = item.userid
+//            let vc = PhotosVC()
+//            vc.friendId = item.userid
             UserDefaults.standard.set(item.userid, forKey: "friendId")
             delegate.tappedFriendSeelected(activeuser:item, isLive: item.live!)
         }

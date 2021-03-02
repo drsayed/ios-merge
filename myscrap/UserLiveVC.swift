@@ -114,9 +114,9 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         } else {
             // Fallback on earlier versions
         }
-        self.appDelegate.webRTCClient = AntMediaClient.init()
-        self.appDelegate.playerClient1 = AntMediaClient.init()
-        self.appDelegate.playerClient2 = AntMediaClient.init()
+//        self.appDelegate.webRTCClient = AntMediaClient.init()
+//        self.appDelegate.playerClient1 = AntMediaClient.init()
+//        self.appDelegate.playerClient2 = AntMediaClient.init()
         self.appDelegate.isDualLive = false
         
         appDelegate.directionDelegate = self
@@ -224,7 +224,11 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         announcementView.addGestureRecognizer(tapGestureRecognizer)
         layoutConstraintsToAdjust.append(constraintContentHeight)
         //https://34.207.130.236:5080/WebRTCAppEE/peer.html
-        self.setUpCamera()
+        cameraflipedView.backgroundColor = UIColor.black
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
+            self.setUpCamera()
+        }
+      
         self.setUpCommentViews()
         addKeyboardObservers()
     
@@ -681,6 +685,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         self.videoPreviewLayer.frame =  CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height+40)
         cameraflipedView.layer.addSublayer(videoPreviewLayer)
    //     cameraView.layer.addSublayer(cameraflipedView.layer)
+        
         cameraView.addSubview(cameraflipedView)
         DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
             self.captureSession.startRunning()
@@ -1424,7 +1429,16 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
                 let item = self.liveComments[indexPath.row]
                 cell.configCell(item: item )
            //     if item.userId ==  playingUserId {
-                cell.requestButton.setTitle(item.requesTitle ?? "View" , for: .normal)
+                cell.requestButton.setTitle(item.requesTitle , for: .normal)
+                
+                if item.requesTitle == "Viewed" {
+                    cell.requestButton.removeTarget(nil, action: nil, for: .allEvents)
+                }
+                else
+                {
+                    cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
+
+                }
 //                }
 //                else{
 //                cell.requestButton.setTitle("View", for: .normal)
@@ -1432,7 +1446,6 @@ extension UserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,UICol
                 cell.requestButton.tag = indexPath.row
                 cell.profileView.isHidden = false
                 cell.imagePlaceholder.isHidden = true
-                cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
                 
                     cell.setNeedsLayout()
                     cell.layoutIfNeeded()

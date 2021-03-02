@@ -88,16 +88,23 @@
                             <constraint firstAttribute="height" constant="20" id="t0V-c0-MCS"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwI-Zu-sMv">
+                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="hwI-Zu-sMv" firstAttribute="leading" secondItem="SSj-Qv-Qb6" secondAttribute="leading" id="5vB-sM-bdC"/>
                 <constraint firstItem="kwg-8S-xrZ" firstAttribute="leading" secondItem="SSj-Qv-Qb6" secondAttribute="leading" id="APN-Z3-5Dc"/>
+                <constraint firstItem="hwI-Zu-sMv" firstAttribute="top" secondItem="SSj-Qv-Qb6" secondAttribute="top" id="Bwa-fL-RaR"/>
                 <constraint firstItem="zQc-vG-8eu" firstAttribute="centerY" secondItem="SSj-Qv-Qb6" secondAttribute="centerY" id="HKY-bc-1Q9"/>
                 <constraint firstItem="kwg-8S-xrZ" firstAttribute="top" secondItem="SSj-Qv-Qb6" secondAttribute="top" id="HOT-gd-QUs"/>
                 <constraint firstAttribute="bottom" secondItem="kwg-8S-xrZ" secondAttribute="bottom" id="PHQ-OJ-crR"/>
                 <constraint firstItem="zQc-vG-8eu" firstAttribute="centerX" secondItem="SSj-Qv-Qb6" secondAttribute="centerX" id="Shy-7C-0E3"/>
+                <constraint firstAttribute="bottom" secondItem="hwI-Zu-sMv" secondAttribute="bottom" id="Sn4-YC-WRC"/>
                 <constraint firstItem="QTp-8U-nJe" firstAttribute="centerX" secondItem="oCL-Hc-lXe" secondAttribute="centerX" id="Xwo-rz-azh"/>
                 <constraint firstAttribute="trailing" secondItem="kwg-8S-xrZ" secondAttribute="trailing" id="esh-1m-PmP"/>
+                <constraint firstAttribute="trailing" secondItem="hwI-Zu-sMv" secondAttribute="trailing" id="nj1-Cb-Vxo"/>
                 <constraint firstItem="QTp-8U-nJe" firstAttribute="bottom" secondItem="kwg-8S-xrZ" secondAttribute="bottom" id="qwM-AV-yjl"/>
             </constraints>
             <size key="customSize" width="60" height="60"/>
@@ -105,11 +112,14 @@
                 <outlet property="colorAnimationView" destination="WyA-rd-rKM" id="inv-6i-zpx"/>
                 <outlet property="greenCircle" destination="kwg-8S-xrZ" id="zWQ-Sy-7DC"/>
                 <outlet property="onlineView" destination="f2t-ha-mps" id="P0d-nB-TVR"/>
+                <outlet property="openLiveButton" destination="hwI-Zu-sMv" id="VK6-Dp-o8S"/>
                 <outlet property="profileTypeView" destination="QTp-8U-nJe" id="GkT-iH-27v"/>
                 <outlet property="profileView" destination="oCL-Hc-lXe" id="cpS-IC-6K2"/>
-                <outlet property="profileViewWidth" destination="JGB-i4-bTw" id="hJx-e0-AoS"/>
-                <outlet property="profileViewhieght" destination="I3c-g4-TO1" id="VWO-gM-lFQ"/>
+                <outlet property="profileViewWidth" destination="Pmc-QJ-aCx" id="cze-Eh-fLn"/>
+                <outlet property="profileViewhieght" destination="TNV-AO-asA" id="tUq-eR-7Fx"/>
+                <outlet property="rippleHight" destination="3AL-zN-mJn" id="Noh-CR-a4I"/>
                 <outlet property="rippleView" destination="fpP-YC-eEH" id="0ZW-ju-Pe7"/>
+                <outlet property="rippleWidth" destination="g4D-M0-IUY" id="Zs7-Nw-JnQ"/>
                 <outlet property="vieweToAnimate" destination="zQc-vG-8eu" id="jrH-fB-uAS"/>
             </connections>
             <point key="canvasLocation" x="-152.17391304347828" y="34.821428571428569"/>

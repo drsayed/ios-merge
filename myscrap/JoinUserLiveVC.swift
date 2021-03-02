@@ -653,7 +653,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
 //            let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
 //            spinner.mode = MBProgressHUDMode.indeterminate
 //              spinner.label.text = "Connectivity issue try again..."
-//                self.setUserStatusEndLive()
+               self.setUserStatusEndLive()
 //
 //        }
     }
@@ -999,7 +999,7 @@ class JoinUserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
         }
         else
         {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.startLive()
             }
         }
@@ -1605,27 +1605,28 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
         }
         else
         {
-            return 2
+            return 1
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         if collectionView == suggessionCollectionView {
             print("Suggession Count : \(suggessionList.count)")
             return suggessionList.count
         }
         else{
-        if section == 0 {
+       if self.liveComments.count > 0 {
             guard let _ = profileItem else { return 0}
             if isNeedToShowFollowing == 1 {
-                return 1
+                return self.liveComments.count+1
             }
           else
             {
-                return 0
+                return self.liveComments.count
             }
         }
         else{
-        return self.liveComments.count
+        return 0
         }
         }
     }
@@ -1643,14 +1644,33 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             
         }
         else{
-        if indexPath.section == 0 {
+            
+            
+        if isNeedToShowFollowing == 1 && indexPath.item == 2 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserFollowCell.identifier, for: indexPath) as? LiveUserFollowCell else { return UICollectionViewCell()}
             cell.configCell(followStatus: followingStatus, name: liveUserNameValue , profilePic: liveUserImageUrl , colorCode: liveUserProfileColor )
             return cell
         }
         else{
-        
-          let message =   self.liveComments[indexPath.row]
+            var message = CommentMessage()
+            if isNeedToShowFollowing == 1 {
+                if indexPath.item < 2 {
+                    message =   self.liveComments[indexPath.row]
+                }
+                else
+                {
+                    message =   self.liveComments[indexPath.row-1]
+                }
+             
+            }
+            else
+            {
+                message =   self.liveComments[indexPath.row]
+            }
+                
+               
+            
+            
             if message.isJoingingRequest == "1" {
                 
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
@@ -1662,17 +1682,19 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
 //                {
                 if isSentRequest {
                     cell.requestButton.setTitle("Requested", for: .normal)
+                    cell.requestButton.removeTarget(nil, action: nil, for: .allEvents)
                 }
                 else
                 {
                     cell.requestButton.setTitle("Request", for: .normal)
+                    cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
+
                 }
         //    }
                 cell.profileView.isHidden = true
                 cell.imagePlaceholder.isHidden = false
                
                 cell.requestButton.tag = indexPath.row
-                cell.requestButton.addTarget(self, action:#selector(self.sendRequestPressed), for: .touchUpInside)
                 
                     cell.setNeedsLayout()
                     cell.layoutIfNeeded()
@@ -1698,9 +1720,56 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
         }
         else{
             
-        if indexPath.section == 0 {
-            return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 50)
-        }
+            if isNeedToShowFollowing == 1 {
+                if indexPath.item < 2 {
+                    //let width = self.frame.width
+                    let message =   self.liveComments[indexPath.row]
+                      if message.isJoingingRequest == "1" {
+                        return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 50)
+                      }
+                    else
+                      {
+                   
+                    let  textString = self.liveComments[indexPath.row].messageText
+                    var height = textString.height(constraintedWidth: self.userCommentsCollectionView.frame.size.width-38, font: UIFont.systemFont(ofSize: 13) )
+                    if height < 30
+                    {
+                        height = 30
+                    }
+                    else
+                    {
+                        height = height+10
+                    }
+                    return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: height)
+                      }
+                }
+              else  if indexPath.item == 2 {
+                    return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 50)
+                }
+                else
+                {
+                    //let width = self.frame.width
+                    let message =   self.liveComments[indexPath.row-1]
+                      if message.isJoingingRequest == "1" {
+                        return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: 50)
+                      }
+                    else
+                      {
+                   
+                    let  textString = self.liveComments[indexPath.row-1].messageText
+                    var height = textString.height(constraintedWidth: self.userCommentsCollectionView.frame.size.width-38, font: UIFont.systemFont(ofSize: 13) )
+                    if height < 30
+                    {
+                        height = 30
+                    }
+                    else
+                    {
+                        height = height+10
+                    }
+                    return CGSize(width:self.userCommentsCollectionView.frame.size.width, height: height)
+                      }
+                }
+            }
         else{
             //let width = self.frame.width
             let message =   self.liveComments[indexPath.row]
@@ -1749,7 +1818,9 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             suggessionCollectionView.layoutIfNeeded()
         }
         else{
-        if indexPath.section == 0 {
+        if isNeedToShowFollowing == 1 {
+            if indexPath.item == 2 {
+            
             if !followingStatus
             {
                 
@@ -1763,6 +1834,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             else
             {
                 self.showFollowingAlert()
+            }
             }
         }
         }
@@ -1932,7 +2004,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
             largeCameraContainer.layoutIfNeeded()
             appDelegate.playerClients.removeAll()
             smallCameraContainer.isHidden = true
-            isSentRequest = false
+          //  isSentRequest = false
             self.reloadComentsView()
             MBProgressHUD.hide(for: self.view , animated: true)
         }
@@ -1968,7 +2040,7 @@ extension JoinUserLiveVC : AntMediaClientDelegate
             largeCameraContainer.layoutIfNeeded()
             appDelegate.playerClients.removeAll()
             smallCameraContainer.isHidden = true
-            isSentRequest = false
+          //  isSentRequest = false
             self.reloadComentsView()
             MBProgressHUD.hide(for: self.view , animated: true)
         }

@@ -11,13 +11,16 @@ import UIKit
 
 final class LiveFriendCell: BaseCell{
     
+    @IBOutlet weak var rippleHight: NSLayoutConstraint!
     @IBOutlet weak var vieweToAnimate: UIView!
+    @IBOutlet weak var rippleWidth: NSLayoutConstraint!
     @IBOutlet weak var rippleView: UIView!
     @IBOutlet weak var profileViewWidth: NSLayoutConstraint!
     @IBOutlet weak var profileViewhieght: NSLayoutConstraint!
     @IBOutlet weak var greenCircle: UIView!
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var colorAnimationView: UIView!
+    @IBOutlet weak var openLiveButton: UIButton!
     @IBOutlet weak var profileTypeView: OnlineProfileTypeView!
     @IBOutlet weak var onlineView: onlineView!
     override func layoutSubviews() {
@@ -40,19 +43,16 @@ final class LiveFriendCell: BaseCell{
         self.profileViewhieght.constant = 50
         self.profileViewWidth.constant = 50
         self.vieweToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)
-        self.vieweToAnimate.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
+
         self.vieweToAnimate.layer.masksToBounds = true
         vieweToAnimate.isUserInteractionEnabled = true
         colorAnimationView.isUserInteractionEnabled = true
         profileView.image.isUserInteractionEnabled = true
-      //  self.profileView.masksToBounds = true
-//        colorAnimationView.stopBlink()
-//        colorAnimationView.animate()
+
         greenCircle.layer.cornerRadius =  greenCircle.frame.size.height/2
         rippleView.layer.cornerRadius =  rippleView.frame.size.height/2
         greenCircle.clipsToBounds = true
-        rippleView.addRippleAnimation(color: UIColor.darkGray, duration: 1.5, rippleCount: 3, rippleDistance: nil, startReset: false, handler: { animation in
-        })
+       
         
        }
     override func prepareForReuse() {
@@ -60,6 +60,8 @@ final class LiveFriendCell: BaseCell{
         self.colorAnimationView.alpha = 1.0
         self.profileViewhieght.constant = 50
         self.profileViewWidth.constant = 50
+        self.rippleHight.constant = 50
+        self.rippleWidth.constant = 50
       //  self.layoutIfNeeded()
     }
 
@@ -119,9 +121,19 @@ final class LiveFriendCell: BaseCell{
 //        colorAnimationView.animate()
     }
     func addAnimation()  {
-       // colorAnimationView.layer.removeAllAnimations()
-        colorAnimationView.alpha = 1.0
+       // rippleView.removeAllAnimations()
+        self.profileViewhieght.constant = 50
+        self.profileViewWidth.constant = 50
+        self.rippleHight.constant = 50
+        self.rippleWidth.constant = 50
+        rippleView.layer.removeAllAnimations()
+        vieweToAnimate.layer.removeAllAnimations()
+        self.layoutIfNeeded()
+        vieweToAnimate.alpha = 1.0
         self.vieweToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.vieweToAnimate.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
+        rippleView.addRippleAnimation(color: UIColor.darkGray, duration: 1.5, rippleCount: 3, rippleDistance: nil, startReset: false, handler: { animation in
+        })
    //     self.vieweToAnimate.shake(times: 300000000 , direction: ShakeDirection.Horizontal)
 
 //        UIView.animate(withDuration: 0.5, //Time duration you want,

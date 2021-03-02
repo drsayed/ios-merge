@@ -22,11 +22,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-vG-8eu">
                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgy-ke-Lxa">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                        <state key="normal" image="ic_emoge"/>
-                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCL-Hc-lXe" customClass="ProfileView" customModule="myscrap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,18 +30,25 @@
                                             <constraint firstAttribute="width" constant="30" id="JGB-i4-bTw"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgy-ke-Lxa">
+                                        <rect key="frame" x="2.5" y="2.5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Qp9-Zi-jYf"/>
+                                            <constraint firstAttribute="width" constant="25" id="q6e-bu-Ne5"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="1" minY="1" maxX="1" maxY="1"/>
+                                        <state key="normal" image="ic_emoge"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Lgy-ke-Lxa" secondAttribute="bottom" id="4lG-NO-q6X"/>
                                     <constraint firstAttribute="trailing" secondItem="oCL-Hc-lXe" secondAttribute="trailing" id="6Da-Oa-KTz"/>
                                     <constraint firstItem="oCL-Hc-lXe" firstAttribute="leading" secondItem="zQc-vG-8eu" secondAttribute="leading" id="8U3-oF-NJe"/>
+                                    <constraint firstItem="Lgy-ke-Lxa" firstAttribute="centerY" secondItem="zQc-vG-8eu" secondAttribute="centerY" id="Cih-sh-3iQ"/>
                                     <constraint firstAttribute="width" constant="30" id="Pmc-QJ-aCx"/>
-                                    <constraint firstItem="Lgy-ke-Lxa" firstAttribute="leading" secondItem="zQc-vG-8eu" secondAttribute="leading" id="T51-Qk-9Cc"/>
                                     <constraint firstAttribute="height" constant="30" id="TNV-AO-asA"/>
                                     <constraint firstItem="oCL-Hc-lXe" firstAttribute="top" secondItem="zQc-vG-8eu" secondAttribute="top" id="Ur3-y8-vCr"/>
-                                    <constraint firstItem="Lgy-ke-Lxa" firstAttribute="top" secondItem="zQc-vG-8eu" secondAttribute="top" id="bRL-lB-OVs"/>
-                                    <constraint firstAttribute="trailing" secondItem="Lgy-ke-Lxa" secondAttribute="trailing" id="ic5-3H-dMA"/>
+                                    <constraint firstItem="Lgy-ke-Lxa" firstAttribute="centerX" secondItem="zQc-vG-8eu" secondAttribute="centerX" id="udw-2B-WK7"/>
                                     <constraint firstItem="oCL-Hc-lXe" firstAttribute="leading" secondItem="zQc-vG-8eu" secondAttribute="leading" id="zqZ-OJ-Sow"/>
                                 </constraints>
                             </view>
