@@ -37,6 +37,8 @@ enum UnNotificationType: String{
     case number = "number"
     case bumped = "bumped"
     case doubleComment = "doubleComment"
+    case doubleCommentVideo = "doubleCommentVideo"
+    
     case missedActivity = "missedActivity"
     case event = "event"
     case live = "live"
@@ -544,7 +546,7 @@ extension AppDelegate:   UNUserNotificationCenterDelegate {
         
         
         switch notificationType {
-        case .post,.doubleComment:
+        case .post,.doubleComment,.doubleCommentVideo:
             if webRTCClient.isConnected()
             {
                 if let id = postId  {

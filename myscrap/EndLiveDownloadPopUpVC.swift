@@ -17,13 +17,20 @@ protocol EndLiveWithDownloadDelegate : class {
 class EndLiveDownloadPopUpVC: BaseVC {
     
     
+    @IBOutlet weak var viewerHeight: NSLayoutConstraint!
+    @IBOutlet weak var singleViewName: UILabel!
+    @IBOutlet weak var singleViewTitle: UILabel!
     var showCloseButton = false
     var profileItem:ProfileData?
     weak var delegate : EndLiveWithDownloadDelegate?
-
+    var userJoined = Array<[String:AnyObject]>()
+    @IBOutlet weak var profileViewsWidth: NSLayoutConstraint!
+    @IBOutlet weak var profile2View: ProfileView!
+    @IBOutlet weak var profile1View: ProfileView!
     @IBOutlet weak var roundCornerView: UIView!
     @IBOutlet weak var slideToDismiss: UIView!
-
+    @IBOutlet weak var whoViewedLable: UILabel!
+    
     @IBOutlet weak var downloadButtton: UIButton!
     @IBOutlet weak var dowloadTitleButton: UIButton!
     @IBOutlet weak var deleteButtton: UIButton!
@@ -75,18 +82,73 @@ class EndLiveDownloadPopUpVC: BaseVC {
     func setupViews()  {
         
         
-        
-        guard let item = profileItem else { return }
-
-//        if item.followStatusType != 2
-//        {
-//            followingStatus = false
-//        }
-//        else{
-//            followingStatus = true
-//        }
-        
-     
+        if userJoined.count > 0 &&   userJoined.count == 1 {
+            let item = userJoined[0]
+            let name =    item["name"]! as! String
+            let profilePic =    item["likeProfilePic"]! as! String
+            let colorCode =  item["colorCode"]! as! String
+//            let userId =  item["userId"]! as! String
+//            let designation =  item["designation"]! as! String
+//            let country =  item["country"]! as! String
+            profile1View.updateViews(name:name , url: profilePic, colorCode:colorCode)
+            whoViewedLable.text = "\(name) viewed your live video"
+            singleViewName.text = "\(name)"
+            singleViewTitle.text = "viewed your live video"
+            profile2View.isHidden = true
+            whoViewedLable.isHidden = true
+            profileViewsWidth.constant = 40
+            viewerHeight.constant = 40
+            singleViewName.isHidden = false
+            singleViewTitle.isHidden = false
+        }
+        else if userJoined.count > 0 &&   userJoined.count == 2 {
+            let item = userJoined[0]
+            let name =    item["name"]! as! String
+            let profilePic =    item["likeProfilePic"]! as! String
+            let colorCode =  item["colorCode"]! as! String
+            profile1View.updateViews(name:name , url: profilePic, colorCode:colorCode)
+            
+            let item1 = userJoined[1]
+            let name1 =    item1["name"]! as! String
+            let profilePic1 =    item1["likeProfilePic"]! as! String
+            let colorCode1 =  item1["colorCode"]! as! String
+            profile2View.updateViews(name:name1 , url: profilePic1, colorCode:colorCode1)
+            whoViewedLable.text = "\(name),\(name1) viewed your live video"
+            profile2View.isHidden = false
+            whoViewedLable.isHidden = false
+            singleViewName.isHidden = true
+            singleViewTitle.isHidden = true
+            profileViewsWidth.constant = 70
+            viewerHeight.constant = 40
+        }
+        else if userJoined.count > 0 &&   userJoined.count > 2 {
+            let item = userJoined[0]
+            let name =    item["name"]! as! String
+            let profilePic =    item["likeProfilePic"]! as! String
+            let colorCode =  item["colorCode"]! as! String
+            profile1View.updateViews(name:name , url: profilePic, colorCode:colorCode)
+            
+            let item1 = userJoined[1]
+            let name1 =    item1["name"]! as! String
+            let profilePic1 =    item1["likeProfilePic"]! as! String
+            let colorCode1 =  item1["colorCode"]! as! String
+            profile2View.updateViews(name:name1 , url: profilePic1, colorCode:colorCode1)
+            whoViewedLable.text = "\(name),\(name1),+\(userJoined.count-2) others viewed your live video"
+            profile2View.isHidden = false
+            whoViewedLable.isHidden = false
+            singleViewName.isHidden = true
+            singleViewTitle.isHidden = true
+            profileViewsWidth.constant = 70
+            viewerHeight.constant = 40
+        }
+     else
+        {
+            whoViewedLable.isHidden = true
+            singleViewName.isHidden = true
+            singleViewTitle.isHidden = true
+            profileViewsWidth.constant = 0
+            viewerHeight.constant = 0
+        }
     }
     //MARK:- ViewWillAppear
     override func viewWillAppear(_ animated: Bool) {

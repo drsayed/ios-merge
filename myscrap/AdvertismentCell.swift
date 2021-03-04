@@ -67,7 +67,8 @@ class AdvertismentCell: BaseCell {
         descLbl.attributedText = attributedString
         
         downloadUrl(withItem: item)
-        let urlLink = item.redirectURL.replacingOccurrences(of: "/", with: "")
+//        let urlLink = item.redirectURL.replacingOccurrences(of: "/", with: "")
+        let urlLink = item.redirectURL
         websiteLbl.text = urlLink
         sponserLogo(withItem: item)
         sponserbyLbl.text = item.sponserBy

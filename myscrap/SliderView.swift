@@ -504,8 +504,10 @@ class MSSliderViewAd: UIView, UICollectionViewDelegate, UICollectionViewDataSour
             for pgCount in pageControl.subviews {
                 pgCount.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             }
-            
-                    self.pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1, y: 1)
+            if self.pageControl.currentPage < self.pageControl.subviews.count {
+                self.pageControl.subviews[self.pageControl.currentPage].transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+                   
         }
     }
     

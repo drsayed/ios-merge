@@ -234,6 +234,8 @@ extension NotificationVC : UITableViewDataSource{
             switch data.postType {
             case .Post:
                 self.gotoPostVC(item: data)
+            case .video:
+                self.gotoPostVC(item: data)
             case .number:
                 self.gotoFriendView(item: data)
             case .card:

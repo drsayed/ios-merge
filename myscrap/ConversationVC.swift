@@ -185,7 +185,21 @@ class ConversationVC: UIViewController, FriendControllerDelegate  , UIImagePicke
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.post(name: Notification.Name("PauseAllVideos"), object: nil)
+        var components = profileName.components(separatedBy: " ")
+            if components.count > 1 {
+                components.removeLast()
+             let lastName = components.joined(separator: " ")
+                messageInputView.inputTextView.placeholder = "Message \(lastName)"
+            }
+        else
+            {
+                if components.count>0 {
+                    messageInputView.inputTextView.placeholder = "Message \(components[0])"
+                }
+            }
 
+        
+      
     //    self.navigationController?.navigationBar.frame  = CGRect(x: -20, y: (self.navigationController?.navigationBar.frame.origin.y)!, width: (self.navigationController?.navigationBar.frame.size.width)!, height: (self.navigationController?.navigationBar.frame.size.height)!)
         
         let homeButton = UIButton(frame: CGRect(x: 8, y: 0, width: 20, height: 15))

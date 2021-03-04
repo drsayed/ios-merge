@@ -408,6 +408,7 @@ class UserLiveVC: UIViewController,KeyboardAvoidable ,UITextFieldDelegate{
                         if let vc = downloadEndsLivePopup {
                             vc.modalPresentationStyle = .overFullScreen
                             vc.delegate = self
+                            vc.userJoined = userJoined
                             if !vc.isModal {
                                 self.present(vc, animated: true, completion: nil)
                             }
@@ -1388,6 +1389,7 @@ extension UserLiveVC: EndLiveViewDelegate {
             vc.modalPresentationStyle = .overFullScreen
             vc.delegate = self
             if !vc.isModal {
+                vc.userJoined = userJoined
                 self.present(vc, animated: true, completion: nil)
             }
        

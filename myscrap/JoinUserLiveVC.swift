@@ -1644,7 +1644,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             
         }
         else{
-            
+            var indexNumber = 0
             
         if isNeedToShowFollowing == 1 && indexPath.item == 2 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserFollowCell.identifier, for: indexPath) as? LiveUserFollowCell else { return UICollectionViewCell()}
@@ -1655,16 +1655,19 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             var message = CommentMessage()
             if isNeedToShowFollowing == 1 {
                 if indexPath.item < 2 {
+                    indexNumber = indexPath.row
                     message =   self.liveComments[indexPath.row]
                 }
                 else
                 {
+                    indexNumber = indexPath.row-1
                     message =   self.liveComments[indexPath.row-1]
                 }
              
             }
             else
             {
+                indexNumber = indexPath.row
                 message =   self.liveComments[indexPath.row]
             }
                 
@@ -1674,7 +1677,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             if message.isJoingingRequest == "1" {
                 
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewerJoinRequestCell.identifier, for: indexPath) as? ViewerJoinRequestCell else { return UICollectionViewCell()}
-                cell.configCell(item: self.liveComments[indexPath.row] )
+                cell.configCell(item: self.liveComments[indexNumber] )
 //                if isStreaming {
 //                    cell.requestButton.setTitle("Viewed", for: .normal)
 //                }
@@ -1694,7 +1697,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
                 cell.profileView.isHidden = true
                 cell.imagePlaceholder.isHidden = false
                
-                cell.requestButton.tag = indexPath.row
+                cell.requestButton.tag = indexNumber
                 
                     cell.setNeedsLayout()
                     cell.layoutIfNeeded()
@@ -1702,7 +1705,7 @@ extension JoinUserLiveVC : UICollectionViewDelegate,UICollectionViewDataSource,U
             }
             else{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveUserCommentsCell.identifier, for: indexPath) as? LiveUserCommentsCell else { return UICollectionViewCell()}
-        cell.configCell(item: self.liveComments[indexPath.row] )
+        cell.configCell(item: self.liveComments[indexNumber] )
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
         return cell

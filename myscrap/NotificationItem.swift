@@ -48,6 +48,7 @@ class NotificationItem{
         case numberreject
         case User
         case user
+        case video
         case live
         case other
     }
@@ -147,6 +148,12 @@ class NotificationItem{
             return .User
         //    return .other   //For time being redirecting to FEEDS
         }
+        else if _posttype == "video" {
+           //Redirects unknown waiting for backend dev
+           //Not implemented yet
+           return .video
+       //    return .other   //For time being redirecting to FEEDS
+       }
         else if _posttype == "user" {
            //Redirects unknown waiting for backend dev
            //Not implemented yet
